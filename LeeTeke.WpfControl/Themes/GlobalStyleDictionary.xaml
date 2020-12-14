@@ -1,0 +1,140 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:LeeTeke.WpfControl.Themes">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/LeeTeke.WpfControl;component/Themes/ConvertersDictionary.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    <Style TargetType="Grid">
+        <!--修改默认FocusVisualStyle-->
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <!--修改默认SnapsToDevicePixels-->
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+    </Style>
+
+    
+    <Style TargetType="ContentControl">
+        <!--修改默认FocusVisualStyle-->
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <!--修改默认FocusVisualStyle-->
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+    </Style>
+    <Style TargetType="Frame" >
+        <Setter Property="NavigationUIVisibility" Value="Hidden"/>
+        <!--修改默认FocusVisualStyle-->
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <!--修改默认FocusVisualStyle-->
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+    </Style>
+
+    <Style TargetType="StackPanel">
+        <!--修改默认FocusVisualStyle-->
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <!--修改默认SnapsToDevicePixels-->
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+    </Style>
+
+    <Style TargetType="TextBox">
+        <!--修改默认FocusVisualStyle-->
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <!--修改默认SnapsToDevicePixels-->
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+    </Style>
+
+    <Style TargetType="WrapPanel">
+        <!--修改默认FocusVisualStyle-->
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <!--修改默认SnapsToDevicePixels-->
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+    </Style>
+
+    <Style TargetType="Border">
+        <!--修改默认FocusVisualStyle-->
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <!--修改默认SnapsToDevicePixels-->
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+    </Style>
+
+    <Style TargetType="Rectangle">
+        <!--修改默认FocusVisualStyle-->
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <!--修改默认SnapsToDevicePixels-->
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+    </Style>
+
+    <Style TargetType="Canvas">
+        <!--修改默认FocusVisualStyle-->
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <!--修改默认SnapsToDevicePixels-->
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+    </Style>
+
+    <Style TargetType="DockPanel">
+        <!--修改默认FocusVisualStyle-->
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <!--修改默认SnapsToDevicePixels-->
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+    </Style>
+
+    <Style TargetType="Ellipse">
+        <!--修改默认FocusVisualStyle-->
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <!--修改默认SnapsToDevicePixels-->
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+    </Style>
+
+    <Style TargetType="Image">
+        <!--修改默认FocusVisualStyle-->
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <!--修改默认SnapsToDevicePixels-->
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+    </Style>
+
+    <Style TargetType="Viewbox">
+        <!--修改默认FocusVisualStyle-->
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <!--修改默认SnapsToDevicePixels-->
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+    </Style>
+
+    <Style TargetType="WebBrowser">
+        <!--修改默认FocusVisualStyle-->
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <!--修改默认SnapsToDevicePixels-->
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+    </Style>
+
+    <Style TargetType="DatePicker">
+        <!--修改默认FocusVisualStyle-->
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <!--修改默认SnapsToDevicePixels-->
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+    </Style>
+
+    <Style TargetType="DatePickerTextBox">
+        <!--修改默认FocusVisualStyle-->
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <!--修改默认SnapsToDevicePixels-->
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+    </Style>
+
+    <Style TargetType="RepeatButton">
+        <!--修改默认FocusVisualStyle-->
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <!--修改默认FocusVisualStyle-->
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+    </Style>
+
+    <Style TargetType="Track">
+        <!--修改默认FocusVisualStyle-->
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <!--修改默认FocusVisualStyle-->
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+    </Style>
+
+    <Style TargetType="TickBar">
+        <!--修改默认FocusVisualStyle-->
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <!--修改默认FocusVisualStyle-->
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+    </Style>
+</ResourceDictionary>

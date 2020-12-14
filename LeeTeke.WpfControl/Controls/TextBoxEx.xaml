@@ -1,0 +1,117 @@
+﻿<UserControl x:Class="LeeTeke.WpfControl.Controls.TextBoxEx"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:conver="clr-namespace:LeeTeke.WpfControl.Converters"
+              xmlns:controls="clr-namespace:LeeTeke.WpfControl.Controls"
+             xmlns:local="LeeTeke.WpfControl.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="25" d:DesignWidth="250"
+             MinHeight="25"
+             MinWidth="100"
+             x:Name="control"
+             GotFocus="UserControl_GotFocus"
+             LostFocus="UserControl_LostFocus"
+             MouseEnter="UserControl_MouseEnter"
+             MouseLeave="UserControl_MouseLeave"
+             BorderBrush="{DynamicResource LeeBrush_Gray153}"
+             Foreground="{DynamicResource LeeBrush_TextColor}"
+        
+             >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+         
+                <ResourceDictionary Source="/LeeTeke.WpfControl;component/Themes/ConvertersDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <UserControl.Clip>
+        <MultiBinding Converter="{StaticResource MultiValueToClipConverter }" Mode="OneWay">
+            <Binding ElementName="control" Path="ActualWidth"/>
+            <Binding ElementName="control" Path="ActualHeight"/>
+            <Binding ElementName="control" Path="CornerRadius"/>
+        </MultiBinding>
+    </UserControl.Clip>
+    <Border      x:Name="main"
+            BorderBrush="{Binding BorderBrush,Mode=TwoWay,ElementName=control}"
+            BorderThickness="{Binding BorderThickness,Mode=OneWay}"
+            CornerRadius="{Binding CornerRadius,Mode=OneWay}"
+            >
+        <DockPanel >
+            <Grid x:Name="iconGrid"
+              DockPanel.Dock="{Binding IconDock,Mode=OneWay}"
+              Background="Transparent"
+              MouseEnter="iconGrid_MouseEnter"
+              MouseLeave="iconGrid_MouseLeave"
+              MouseLeftButtonDown="iconGrid_MouseLeftButtonDown"
+              MouseLeftButtonUp="iconGrid_MouseLeftButtonUp">
+                <TextBlock x:Name="txtIcon"
+                  
+                   Text="{Binding Icon,Mode=TwoWay}"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   FontFamily="{StaticResource IconFontFamily}"
+                   Foreground="{DynamicResource LeeBrush_Gray102}"
+                   FontSize="{Binding ElementName=control,Path=FontSize,Converter={StaticResource  DoubleFollowConverter},ConverterParameter=-2}"              
+                   />
+            </Grid>
+         
+         
+            <Rectangle x:Name="separator"
+                   DockPanel.Dock="{Binding IconDock,Mode=OneWay}"
+                   Visibility="{Binding SeparatorShow}"
+                   Width="1"
+                   Margin="2,4"
+                   Fill="{DynamicResource LeeBrush_Gray204}"/>
+
+            <Grid Margin="{Binding Padding}"
+                  VerticalAlignment="{Binding VerticalContentAlignment}"
+                  HorizontalAlignment="{Binding HorizontalContentAlignment}">
+
+                <TextBox x:Name="textBox"
+                     Text="{Binding Content, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                     Grid.Column="1"
+                     FontSize="{Binding ElementName=control,Path=FontSize}"
+                     BorderThickness="0"
+                     Background="Transparent"
+                     Foreground="{Binding ElementName=control,Path=Foreground}"
+                    
+                     Padding="2,0"
+                     Visibility="Visible"
+                     KeyUp="textBox_KeyUp"
+                  />
+
+                <PasswordBox x:Name="passwordBox"
+                         Grid.Column="1"
+                         Password=""
+                         FontSize="{Binding ElementName=control,Path=FontSize}"
+                         Foreground="{Binding ElementName=control,Path=Foreground}"
+                         BorderThickness="0"
+                         Background="Transparent"
+              
+                         Padding="2,0"
+                         Visibility="Collapsed"
+                        PasswordChanged="PasswordBox_PasswordChanged"
+                         
+                       />
+
+                <TextBlock x:Name="txtPreview" 
+                       Text="{Binding PreviewText, Mode=TwoWay}"
+                       Visibility="Visible"
+                       Grid.Column="1"
+                       FontSize="{Binding ElementName=control,Path=FontSize}"
+                    
+                       Padding="2,0"
+                       Background="Transparent"
+                       Foreground="{Binding ElementName=control,Path=Foreground,Converter={StaticResource ColorDepthConverter},ConverterParameter=0.4}"    
+                       Cursor="IBeam"
+                       MouseLeftButtonUp="TxtPreview_MouseLeftButtonUp"
+                       />
+
+            </Grid>
+     
+        </DockPanel>
+    </Border>
+</UserControl>

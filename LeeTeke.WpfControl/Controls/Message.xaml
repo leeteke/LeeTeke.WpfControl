@@ -1,0 +1,87 @@
+﻿<Window x:Class="LeeTeke.WpfControl.Controls.Message"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies"
+        xmlns:local="clr-namespace:LeeTeke.WpfControl.Controls"
+        mc:Ignorable="d"
+        Width="320"
+        Height="200"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        leedep:WindowShaowManager.Open="True"
+        Closing="Window_Closing"
+        >
+
+    <Grid>
+        <Grid Margin="5,5,5,5"  >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="textTitle" 
+                   FontWeight="Bold" 
+                   Height="30"
+                   Grid.ColumnSpan="2"
+                   Foreground="{DynamicResource LeeBrush_TextColor}"
+                   FontSize="15"
+                   VerticalAlignment="Center"
+                   Margin="10,0,30,0"
+                   Visibility="Collapsed"
+                   />
+            <TextBlock x:Name="icon"
+                   Text=""
+                   FontSize="50"
+                   Margin="10"
+                   Foreground="{DynamicResource LeeBrush_YellowMicrosoft}"
+                   Grid.Row="1"
+                   FontFamily="{StaticResource IconFontFamily}"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Left"
+                   />
+            <TextBox x:Name="textConetnt" 
+                 Grid.Row="1"
+                 Grid.Column="1"
+                 Foreground="{DynamicResource LeeBrush_TextColor}"
+                 FontSize="13"
+                 Margin="10"
+                 VerticalAlignment="Center"
+                 BorderThickness="0"
+                 IsReadOnly="True"
+                 TextWrapping="Wrap"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+            <StackPanel x:Name="btnPanle"
+                        Orientation="Horizontal"
+                        Grid.Row="3"
+                        Grid.Column="2"
+                        HorizontalAlignment="Right"/>
+            <local:LodingBar x:Name="loding"
+                             Visibility="Collapsed"
+                             Margin="5,0"
+                             Height="8"
+                             CornerRadius="2"
+                             Mode="Wating"
+                             Grid.Row="2"
+                             Grid.ColumnSpan="2"
+                             />
+        </Grid>
+        <Button x:Name="btnClose"
+            HorizontalAlignment="Right"
+            Grid.Column="1"
+            Height="30"
+            Width="30"
+            Margin="0,5,5,5"
+            VerticalAlignment="Top"
+            Content="&#xE8BB;"
+            FontFamily="{StaticResource IconFontFamily}"
+            Style="{DynamicResource TextButton}"
+            Click="Button_Click" Cursor="Hand"/>
+    </Grid>
+</Window>

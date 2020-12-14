@@ -1,0 +1,36 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:LeeTeke.WpfControl">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/LeeTeke.WpfControl;component/Themes/GlobalStyleDictionary.xaml"/>
+        <ResourceDictionary Source="/LeeTeke.WpfControl;component/Themes/ButtonDictionary.xaml" />
+        <ResourceDictionary  Source="/LeeTeke.WpfControl;component/Themes/CheckBoxDictionary.xaml" />
+        <ResourceDictionary  Source="/LeeTeke.WpfControl;component/Themes/ListViewDictionary.xaml" />
+        <ResourceDictionary  Source="/LeeTeke.WpfControl;component/Themes/ScrollViewDictionary.xaml" />
+        <ResourceDictionary  Source="/LeeTeke.WpfControl;component/Themes/ContextMenuDictionary.xaml" />
+        <ResourceDictionary Source="/LeeTeke.WpfControl;component/Themes/ToggleButtonDictionary.xaml"/>
+        <ResourceDictionary Source="/LeeTeke.WpfControl;component/Themes/ComboBoxDictionary.xaml"/>
+        <ResourceDictionary Source="/LeeTeke.WpfControl;component/Themes/RadioButtonDictionary.xaml"/>
+        <ResourceDictionary Source="/LeeTeke.WpfControl;component/Themes/DataGridDictionary.xaml"/>
+        <ResourceDictionary Source="/LeeTeke.WpfControl;component/Themes/SliderDictionary.xaml"/>
+        <ResourceDictionary Source="/LeeTeke.WpfControl;component/Themes/GroupBoxDictionary.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style BasedOn="{StaticResource LeeButton}" TargetType="Button" />
+    <Style BasedOn="{StaticResource LeeCheckBox}" TargetType="CheckBox" />
+    <Style BasedOn="{StaticResource LeeScrollViewer}" TargetType="ScrollViewer" />
+    <Style BasedOn="{StaticResource LeeScrollBar }" TargetType="ScrollBar" />
+    <Style BasedOn="{StaticResource LeeContextMenu }" TargetType="ContextMenu"/>
+    <Style BasedOn="{StaticResource LeeToggleButton }" TargetType="ToggleButton"/>
+    <Style BasedOn="{StaticResource LeeComboBox}" TargetType="ComboBox"/>
+    <Style BasedOn="{StaticResource LeeRadioButton}" TargetType="RadioButton"/>
+    <Style BasedOn="{StaticResource LeetekeViewStyle}" TargetType="ListView"/>
+    <Style BasedOn="{StaticResource LeeDataGrid}" TargetType="DataGrid"/>
+    <Style BasedOn="{StaticResource LeeDataGridColumnHeader}" TargetType="DataGridColumnHeader"/>
+    <Style BasedOn="{StaticResource LeeDataGridCell}" TargetType="DataGridCell"/>
+    <Style BasedOn="{StaticResource LeeDataGridRow}" TargetType="DataGridRow"/>
+    <Style BasedOn="{StaticResource LeeDataGridRowHeader}" TargetType="DataGridRowHeader"/>
+    <Style BasedOn="{StaticResource LeeSlider}" TargetType="Slider"/>
+    <Style BasedOn="{StaticResource LeeGroupBox}" TargetType="GroupBox"/>
+
+</ResourceDictionary>

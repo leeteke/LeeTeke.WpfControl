@@ -1,0 +1,567 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies"
+                    xmlns:conver="clr-namespace:LeeTeke.WpfControl.Converters"
+                    xmlns:local="clr-namespace:LeeTeke.WpfControl.Themes">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/LeeTeke.WpfControl;component/Themes/ConvertersDictionary.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    <Style x:Key="LeeDataGrid" TargetType="{x:Type DataGrid}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="leedep:DataGridManager.DataGridHook"
+                Value="True" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="FontSize"
+                Value="13" />
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="BorderBrush"
+                Value="LightGray" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="HorizontalGridLinesBrush"
+                Value="LightGray" />
+        <Setter Property="VerticalGridLinesBrush"
+                Value="LightGray" />
+        <Setter Property="leedep:DataGridManager.CellPadding"
+                Value="10,0" />
+        <Setter Property="leedep:DataGridManager.HeaderPadding"
+                Value="10,0" />
+        <Setter Property="leedep:DataGridManager.RowMinHeight"
+                Value="35" />
+        <Setter Property="leedep:DataGridManager.HeaderMinHeight"
+                Value="40" />
+        <Setter Property="leedep:DataGridManager.ColumnVerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="leedep:DataGridManager.ColumnHorizontalContentAlignment"
+                Value="Stretch" />
+        <Setter Property="leedep:DataGridManager.ResizeThumbThickness"
+                Value="0.5" />
+        <Setter Property="leedep:DataGridManager.ResizeThumbBrush"
+                Value="LightGray" />
+        <Setter Property="leedep:DataGridManager.HoverBackground"
+                Value="#22DDDDDD" />
+        <Setter Property="leedep:DataGridManager.SelectedBackground"
+                Value="#44DDDDDD" />
+        <Setter Property="leedep:DataGridManager.SelectedForeground"
+                Value="{Binding Foreground,RelativeSource={RelativeSource Self}}" />
+        <Setter Property="leedep:DataGridManager.HeaderBackground"
+                Value="#FAFAFA" />
+        <Setter Property="leedep:DataGridManager.HeaderForeground"
+                Value="DimGray" />
+        <Setter Property="Foreground"
+                Value="#3E3E3E" />
+
+        <Setter Property="RowValidationErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid  Background="#EB3941"
+                           ToolTip="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}, Path=(Validation.Errors)[0].ErrorContent}">
+                        <TextBlock Text=" ! "
+                                   FontSize="{TemplateBinding FontSize}"
+                                   FontWeight="Bold"
+                                   Foreground="White"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Resources>
+            <Style TargetType="{x:Type ScrollViewer}"  BasedOn="{StaticResource LeeScrollViewer}">
+                <Style.Triggers>
+                    <Trigger Property="VerticalScrollBarVisibility" Value="Auto"/>
+                    <Trigger Property="HorizontalScrollBarVisibility" Value="Auto"/>
+                </Style.Triggers>
+                
+                <Style.Resources>
+                    <Style TargetType="ScrollBar"
+                           BasedOn="{StaticResource LeeScrollBar}">
+                        <Style.Triggers>
+                            <Trigger Property="Orientation"
+                                     Value="Horizontal">
+                                <Setter Property="Height"
+                                        Value="8" />
+                            </Trigger>
+                            <Trigger Property="Orientation"
+                                     Value="Vertical">
+                                <Setter Property="Width"
+                                        Value="8" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+
+                </Style.Resources>
+            </Style>
+        </Style.Resources>
+
+        <Style.Triggers>
+            <Trigger Property="IsEnabled"
+                     Value="False">
+                <Setter Property="Opacity"
+                        Value="0.4" />
+            </Trigger>
+            <Trigger Property="IsGrouping"
+                     Value="true">
+                <Setter Property="ScrollViewer.CanContentScroll"
+                        Value="False" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="LeeDataGridColumnHeader" 
+           TargetType="{x:Type DataGridColumnHeader}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="FontSize"
+                Value="{Binding FontSize,RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="FontWeight"
+                Value="500" />
+        <Setter Property="Background"
+                Value="{Binding Path=(leedep:DataGridManager.HeaderBackground),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="Foreground"
+                Value="{Binding Path=(leedep:DataGridManager.HeaderForeground),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="MinHeight"
+                Value="{Binding Path=(leedep:DataGridManager.HeaderMinHeight),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="leedep:DataGridManager.ColumnVerticalContentAlignment"
+                Value="{Binding Path=(leedep:DataGridManager.ColumnVerticalContentAlignment),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="leedep:DataGridManager.ColumnHorizontalContentAlignment"
+                Value="{Binding Path=(leedep:DataGridManager.ColumnHorizontalContentAlignment),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="leedep:DataGridManager.HeaderPadding"
+                Value="{Binding Path=(leedep:DataGridManager.HeaderPadding),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                    <Grid Background="{TemplateBinding Background}">
+                        <Border x:Name="BdrHover"
+                                Background="{Binding Path=(leedep:DataGridManager.HoverBackground),RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                BorderThickness="0"
+                                Opacity="0"
+                                SnapsToDevicePixels="True" />
+                        <Border x:Name="BdrPress"
+                                BorderThickness="0"
+                                Background="{Binding Path=(leedep:DataGridManager.SelectedBackground),RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                Opacity="0"
+                                SnapsToDevicePixels="True" />
+                        <Border BorderBrush="{Binding HorizontalGridLinesBrush,RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                VerticalAlignment="Bottom"
+                                BorderThickness="0,0,0,1" />
+                        <Thumb x:Name="PART_LeftHeaderGripper"
+                               HorizontalAlignment="Left"
+                               Background="{Binding Path=(leedep:DataGridManager.ResizeThumbBrush),RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                               Width="{Binding Path=(leedep:DataGridManager.ResizeThumbThickness),RelativeSource={RelativeSource AncestorType=DataGrid},Converter={StaticResource DoubleFollowConverter},ConverterParameter=5}"
+                               Cursor="SizeWE">
+                            <Thumb.Template>
+                                <ControlTemplate TargetType="Thumb">
+                                    <Border Background="Transparent">
+                                        <Rectangle Fill="{TemplateBinding Background}"
+                                                   Margin="0,0,5,0" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Thumb.Template>
+                        </Thumb>
+                        <Grid Margin="{Binding Path=(leedep:DataGridManager.HeaderPadding),RelativeSource={RelativeSource AncestorType=DataGridColumnHeader}}"
+                              VerticalAlignment="{Binding Path=(leedep:DataGridManager.ColumnVerticalContentAlignment),RelativeSource={RelativeSource AncestorType=DataGridColumnHeader}}"
+                              HorizontalAlignment="{Binding Path=(leedep:DataGridManager.ColumnHorizontalContentAlignment),RelativeSource={RelativeSource AncestorType=DataGridColumnHeader}}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            <Grid x:Name="GrdSort"
+                                  Grid.Column="1">
+                                <Path x:Name="PathDesc"
+                                      Visibility="Hidden"
+                                      Height="15"
+                                      Width="15"
+                                      Fill="{TemplateBinding Foreground}"
+                                      Data="M5,6 H14 L9.5,12 Z" />
+                                <Path x:Name="PathAsc"
+                                      Visibility="Hidden"
+                                      Height="15"
+                                      Width="15"
+                                      Fill="{TemplateBinding Foreground}"
+                                      Data="M5,10 H14 L9.5,4.5 Z" />
+                            </Grid>
+                        </Grid>
+                        <Thumb x:Name="PART_RightHeaderGripper"
+                               HorizontalAlignment="Right"
+                               Background="{Binding Path=(leedep:DataGridManager.ResizeThumbBrush),RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                               Width="{Binding Path=(leedep:DataGridManager.ResizeThumbThickness),RelativeSource={RelativeSource AncestorType=DataGrid},Converter={StaticResource DoubleFollowConverter},ConverterParameter=5}"
+                               Cursor="SizeWE">
+                            <Thumb.Template>
+                                <ControlTemplate TargetType="Thumb">
+                                    <Border  Background="Transparent">
+                                        <Rectangle Fill="{TemplateBinding Background}"
+                                                   Margin="5,0,0,0" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Thumb.Template>
+                        </Thumb>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="BdrHover"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1"
+                                                         Duration="0:0:0.2"></DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="BdrHover"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="0"
+                                                         Duration="0:0:0.2"></DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        <Trigger Property="IsPressed"
+                                 Value="True">
+                            <Setter TargetName="BdrPress"
+                                    Property="Opacity"
+                                    Value="1" />
+                        </Trigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(leedep:DataGridManager.ColumnHorizontalContentAlignment),RelativeSource={RelativeSource AncestorType=DataGrid},Mode=OneWay,Converter={StaticResource  NotAlignmentCenterConverter}}"
+                                           Value="False" />
+                                <Condition Binding="{Binding SortDirection,RelativeSource={RelativeSource Self}}"
+                                           Value="{x:Null}" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="PathAsc"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                            <Setter TargetName="PathDesc"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(leedep:DataGridManager.ColumnHorizontalContentAlignment),RelativeSource={RelativeSource AncestorType=DataGrid},Mode=OneWay,Converter={StaticResource NotAlignmentCenterConverter}}"
+                                           Value="False" />
+                                <Condition Binding="{Binding SortDirection,RelativeSource={RelativeSource Self}}"
+                                           Value="Descending" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="PathAsc"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                            <Setter TargetName="PathDesc"
+                                    Property="Visibility"
+                                    Value="Visible" />
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(leedep:DataGridManager.ColumnHorizontalContentAlignment),RelativeSource={RelativeSource AncestorType=DataGrid},Mode=OneWay,Converter={StaticResource NotAlignmentCenterConverter}}"
+                                           Value="False" />
+                                <Condition Binding="{Binding SortDirection,RelativeSource={RelativeSource Self}}"
+                                           Value="Ascending" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="PathAsc"
+                                    Property="Visibility"
+                                    Value="Visible" />
+                            <Setter TargetName="PathDesc"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                        </MultiDataTrigger>
+                        <DataTrigger Binding="{Binding CanUserSortColumns,RelativeSource={RelativeSource AncestorType=DataGrid},Mode=OneWay}"
+                                     Value="False">
+                            <Setter TargetName="GrdSort"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                        </DataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(leedep:DataGridManager.ColumnHorizontalContentAlignment),RelativeSource={RelativeSource AncestorType=DataGrid},Mode=OneWay,Converter={StaticResource NotAlignmentCenterConverter}}"
+                                           Value="True" />
+                                <Condition Binding="{Binding SortDirection,RelativeSource={RelativeSource Self}}"
+                                           Value="{x:Null}" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="PathAsc"
+                                    Property="Visibility"
+                                    Value="Hidden" />
+                            <Setter TargetName="PathDesc"
+                                    Property="Visibility"
+                                    Value="Hidden" />
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(leedep:DataGridManager.ColumnHorizontalContentAlignment),RelativeSource={RelativeSource AncestorType=DataGrid},Mode=OneWay,Converter={StaticResource NotAlignmentCenterConverter}}"
+                                           Value="True" />
+                                <Condition Binding="{Binding SortDirection,RelativeSource={RelativeSource Self}}"
+                                           Value="Descending" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="PathAsc"
+                                    Property="Visibility"
+                                    Value="Hidden" />
+                            <Setter TargetName="PathDesc"
+                                    Property="Visibility"
+                                    Value="Visible" />
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(leedep:DataGridManager.ColumnHorizontalContentAlignment),RelativeSource={RelativeSource AncestorType=DataGrid},Mode=OneWay,Converter={StaticResource NotAlignmentCenterConverter}}"
+                                           Value="True" />
+                                <Condition Binding="{Binding SortDirection,RelativeSource={RelativeSource Self}}"
+                                           Value="Ascending" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="PathAsc"
+                                    Property="Visibility"
+                                    Value="Visible" />
+                            <Setter TargetName="PathDesc"
+                                    Property="Visibility"
+                                    Value="Hidden" />
+                        </MultiDataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="LeeDataGridCell" TargetType="{x:Type DataGridCell}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="FontSize"
+                Value="{Binding FontSize,RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="Background"
+                Value="White" />
+        <Setter Property="leedep:DataGridManager.CellPadding"
+                Value="{Binding Path=(leedep:DataGridManager.CellPadding),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="leedep:DataGridManager.ColumnVerticalContentAlignment"
+                Value="{Binding Path=(leedep:DataGridManager.ColumnVerticalContentAlignment),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="leedep:DataGridManager.ColumnHorizontalContentAlignment"
+                Value="{Binding Path=(leedep:DataGridManager.ColumnHorizontalContentAlignment),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="leedep:DataGridManager.SelectedBackground"
+                Value="{Binding Path=(leedep:DataGridManager.SelectedBackground),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                    <Grid>
+                        <Border x:Name="BdrHover"
+                                BorderThickness="0"
+                                Background="{Binding Path=(leedep:DataGridManager.HoverBackground),RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                Opacity="0"
+                                SnapsToDevicePixels="True" />
+                        <Border x:Name="BdrSelected"
+                                BorderThickness="0"
+                                Background="{Binding Path=(leedep:DataGridManager.SelectedBackground),RelativeSource={RelativeSource AncestorType=DataGridCell}}"
+                                Opacity="0"
+                                SnapsToDevicePixels="True" />
+                        <ContentPresenter x:Name="Presenter"
+                                          HorizontalAlignment="{Binding Path=(leedep:DataGridManager.ColumnHorizontalContentAlignment),RelativeSource={RelativeSource AncestorType=DataGridCell}}"
+                                          VerticalAlignment="{Binding Path=(leedep:DataGridManager.ColumnVerticalContentAlignment),RelativeSource={RelativeSource AncestorType=DataGridCell}}"
+                                          Margin="{Binding Path=(leedep:DataGridManager.CellPadding),RelativeSource={RelativeSource AncestorType=DataGridCell}}"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsMouseOver,RelativeSource={RelativeSource Self}}"
+                                           Value="True" />
+                                <Condition Binding="{Binding SelectionUnit,RelativeSource={RelativeSource AncestorType=DataGrid},Mode=OneWay}"
+                                           Value="Cell" />
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="BdrHover"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1"
+                                                         Duration="0:0:0.2"></DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="BdrHover"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="0"
+                                                         Duration="0:0:0.2"></DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.ExitActions>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsMouseOver,RelativeSource={RelativeSource Self}}"
+                                           Value="True" />
+                                <Condition Binding="{Binding SelectionUnit,RelativeSource={RelativeSource AncestorType=DataGrid},Mode=OneWay}"
+                                           Value="CellOrRowHeader" />
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="BdrHover"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1"
+                                                         Duration="0:0:0.2"></DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="BdrHover"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="0"
+                                                         Duration="0:0:0.2"></DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.ExitActions>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsSelected,RelativeSource={RelativeSource Self}}"
+                                           Value="True"/>
+                                <Condition Binding="{Binding Path=(leedep:DataGridManager.SelectedForeground),RelativeSource={RelativeSource AncestorType=DataGrid},Converter={StaticResource IsNotNullConverter}}"
+                                           Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Foreground"
+                                    Value="{Binding Path=(leedep:DataGridManager.SelectedForeground),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                        </MultiDataTrigger>
+                        <Trigger  Property="IsSelected"
+                                  Value="True">
+                            <Setter TargetName="BdrSelected"
+                                    Property="Opacity"
+                                    Value="1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="LeeDataGridRow" TargetType="{x:Type DataGridRow}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="FontSize"
+                Value="{Binding FontSize,RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="MinHeight"
+                Value="{Binding Path=(leedep:DataGridManager.RowMinHeight),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridRow}">
+                    <Grid Background="{TemplateBinding Background}">
+                        <Border x:Name="BdrHover"
+                                Background="{Binding Path=(leedep:DataGridManager.HoverBackground),RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                Opacity="0"
+                                SnapsToDevicePixels="True" />
+                        <SelectiveScrollingGrid>
+                            <SelectiveScrollingGrid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </SelectiveScrollingGrid.ColumnDefinitions>
+                            <SelectiveScrollingGrid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </SelectiveScrollingGrid.RowDefinitions>
+                            <DataGridCellsPresenter Grid.Column="1"
+                                                    ItemsPanel="{TemplateBinding ItemsPanel}"
+                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            <DataGridDetailsPresenter Grid.Column="1"
+                                                      Grid.Row="1"
+                                                      Visibility="{TemplateBinding DetailsVisibility}"
+                                                      SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding AreRowDetailsFrozen,  ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical}, Converter={x:Static DataGrid.RowDetailsScrollingConverter},  RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                            <DataGridRowHeader Grid.RowSpan="2"
+                                               SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
+                                               Visibility="{Binding HeadersVisibility,  ConverterParameter={x:Static DataGridHeadersVisibility.Row},  Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                        </SelectiveScrollingGrid>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsMouseOver,RelativeSource={RelativeSource Self}}"
+                                           Value="True" />
+                                <Condition Binding="{Binding SelectionUnit,RelativeSource={RelativeSource AncestorType=DataGrid},Mode=OneWay}"
+                                           Value="FullRow" />
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="BdrHover"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1"
+                                                         Duration="0:0:0.2"></DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="BdrHover"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="0"
+                                                         Duration="0:0:0.2"></DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.ExitActions>
+                        </MultiDataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="LeeDataGridRowHeader" TargetType="{x:Type DataGridRowHeader}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridRowHeader}">
+                    <Grid>
+                        <Grid>
+                            <ContentPresenter />
+                            <Control SnapsToDevicePixels="false"
+                                     Template="{Binding ValidationErrorTemplate, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}"
+                                     Visibility="{Binding (Validation.HasError), Converter={StaticResource VisibilityForBoolConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" />
+                        </Grid>
+                        <Thumb x:Name="PART_TopHeaderGripper"
+                               VerticalAlignment="Top"
+                               Background="{Binding Path=(leedep:DataGridManager.ResizeThumbBrush),RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                               Height="{Binding Path=(leedep:DataGridManager.ResizeThumbThickness),RelativeSource={RelativeSource AncestorType=DataGrid},Converter={StaticResource DoubleFollowConverter},ConverterParameter=5}"
+                               Cursor="SizeNS">
+                            <Thumb.Template>
+                                <ControlTemplate TargetType="Thumb">
+                                    <Border Background="Transparent">
+                                        <Rectangle Fill="{TemplateBinding Background}"
+                                                   Margin="0,0,0,5" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Thumb.Template>
+                        </Thumb>
+                        <Thumb x:Name="PART_BottomHeaderGripper"
+                               VerticalAlignment="Bottom"
+                               Background="{Binding Path=(leedep:DataGridManager.ResizeThumbBrush),RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                               Height="{Binding Path=(leedep:DataGridManager.ResizeThumbThickness),RelativeSource={RelativeSource AncestorType=DataGrid},Converter={StaticResource DoubleFollowConverter},ConverterParameter=5}"
+                               Cursor="SizeNS">
+                            <Thumb.Template>
+                                <ControlTemplate TargetType="Thumb">
+                                    <Border Background="Transparent">
+                                        <Rectangle Fill="{TemplateBinding Background}"
+                                                   Margin="0,5,0,0" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Thumb.Template>
+                        </Thumb>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+</ResourceDictionary>

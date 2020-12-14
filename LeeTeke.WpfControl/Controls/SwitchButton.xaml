@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="LeeTeke.WpfControl.Controls.SwitchButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="LeeTeke.WpfControl.Controls"
+             xmlns:conver="clr-namespace:LeeTeke.WpfControl.Converters;assembly=LeeTeke.WpfControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" 
+             d:DesignWidth="100"
+             x:Name="me"
+             MouseDown="me_MouseDown" 
+           VerticalContentAlignment="Stretch"
+            HorizontalContentAlignment="Stretch"
+             >
+
+    <Grid x:Name="gridMain">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="columnleft" Width="auto"/>
+            <ColumnDefinition x:Name="columnContent" Width="*"/>
+            <ColumnDefinition x:Name="columnright" Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="rowTop" Height="auto"/>
+            <RowDefinition x:Name="rowContent" Height="*"/>
+            <RowDefinition x:Name="rowBottom" Height="auto"/>
+        </Grid.RowDefinitions>
+        
+        <Canvas x:Name="canvas" 
+                Grid.Column="1"
+                Grid.Row="1"
+                SizeChanged="me_SizeChanged">
+            <Border x:Name="boderTrue" 
+                Background="{DynamicResource LeeBrush_Main}"
+                BorderBrush="{DynamicResource LeeBrush_Gray204}"
+                BorderThickness="2"
+                Width="{Binding ElementName=canvas,Path=ActualWidth}"
+                Height="{Binding ElementName=canvas,Path=ActualHeight}"
+                CornerRadius="{Binding ElementName=canvas,Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/2}"/>
+
+            <Border x:Name="boderFalse"
+                Background="White"
+                Visibility="Visible"
+                Canvas.Top="2"
+                Canvas.Left="2"
+                Width="{Binding ElementName=canvas,Path=ActualWidth,Converter={StaticResource DoubleFollowConverter},ConverterParameter=-4}"
+                Height="{Binding ElementName=canvas,Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=-4}"
+                CornerRadius="{Binding RelativeSource={  RelativeSource Mode=Self}, Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/2}" 
+                RenderTransformOrigin="1,0.5">
+            </Border>
+
+            <Ellipse x:Name="ellipse"
+                 Canvas.Top="1"
+                Canvas.Left="1"
+                Width="{Binding ElementName=canvas,Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=-2}"
+                 Height="{Binding ElementName=canvas,Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=-2}"
+                 Fill="White"
+                >
+                <Ellipse.Effect>
+                    <DropShadowEffect BlurRadius="5" Direction="-90" ShadowDepth="1" Opacity="0.5"/>
+                </Ellipse.Effect>
+            </Ellipse>
+
+        </Canvas>
+
+        <ContentControl x:Name="contentControl" 
+                        Grid.Row="1"
+                        Grid.Column="2"/>
+    </Grid>
+</UserControl>
