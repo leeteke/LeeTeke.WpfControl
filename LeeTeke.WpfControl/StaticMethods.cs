@@ -467,6 +467,38 @@ namespace LeeTeke.WpfControl
             return roundedRectGeometry;
         }
 
+
+        /// <summary>
+        /// ImageSource转换成Bitmap
+        /// </summary>
+        /// <param name="imageSource"></param>
+        /// <returns></returns>
+        // ImageSource --> Bitmap
+        public static System.Drawing.Bitmap ImageSourceToBitmap(ImageSource imageSource)
+        {
+            try
+            {
+                var m = (System.Windows.Media.Imaging.BitmapSource)imageSource;
+
+                System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(m.PixelWidth, m.PixelHeight, System.Drawing.Imaging.PixelFormat.Format32bppPArgb); // 坑点：选Format32bppRgb将不带透明度
+
+                System.Drawing.Imaging.BitmapData data = bmp.LockBits(
+                new System.Drawing.Rectangle(System.Drawing.Point.Empty, bmp.Size), System.Drawing.Imaging.ImageLockMode.WriteOnly, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+
+                m.CopyPixels(Int32Rect.Empty, data.Scan0, data.Height * data.Stride, data.Stride);
+                bmp.UnlockBits(data);
+                return bmp;
+
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+        }
+
+
+      
         /// <summary>
         /// 寻找子控件
         /// </summary>

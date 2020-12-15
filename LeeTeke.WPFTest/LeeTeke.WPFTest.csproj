@@ -7,7 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Datas\test.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Prism.Wpf" Version="8.0.0.1909" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\LeeTeke.WpfControl\LeeTeke.WpfControl.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Datas\test.ico" />
   </ItemGroup>
 
 </Project>

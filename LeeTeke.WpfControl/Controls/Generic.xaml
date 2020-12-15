@@ -1,0 +1,73 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:LeeTeke.WpfControl.Controls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/LeeTeke.WpfControl;component/Themes/ConvertersDictionary.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
+    
+    <Style TargetType="{x:Type local:GridView}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ItemsControl}">
+                    <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Margin="{TemplateBinding Margin}"
+                    Padding="{TemplateBinding Padding}">
+                        <ScrollViewer   x:Name="PART_ScrollViewer"
+                                        VerticalScrollBarVisibility="{Binding RelativeSource={RelativeSource AncestorType=local:GridView}, Path=VerticalScrollBarVisibility,Mode=OneWay}"
+                                        HorizontalScrollBarVisibility="{Binding RelativeSource={RelativeSource AncestorType=local:GridView}, Path=HorizontalScrollBarVisibility,Mode=OneWay}"
+                                >
+                            <ItemsPresenter     />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <WrapPanel x:Name="PART_WrapPanell" 
+                               FocusVisualStyle="{x:Null}"
+                               Orientation="{Binding RelativeSource={RelativeSource AncestorType=local:GridView}, Path=Orientation,Mode=OneWay}"
+                        />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="{x:Type local:ImageEx}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ImageEx}">
+                    <Grid>
+                        <ContentPresenter x:Name="PART_DefaultContent"
+                                          Content="{Binding RelativeSource={RelativeSource AncestorType=local:ImageEx},Path=DefaultContent,Mode=OneWay}"
+                                          />
+                        <Image x:Name="PART_Image"
+                               Opacity="0"
+                               Source="{Binding RelativeSource={RelativeSource AncestorType=local:ImageEx},Path=Source,Mode=OneWay}"
+                               Stretch="{Binding RelativeSource={RelativeSource AncestorType=local:ImageEx},Path=Stretch,Mode=OneWay}"
+                                          />
+                        <ContentPresenter x:Name="PART_Watermark"
+                                          IsHitTestVisible="False"
+                                          Content="{Binding RelativeSource={RelativeSource AncestorType=local:ImageEx},Path=Watermark,Mode=OneWay}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type local:NotifyIconEx}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
+    </Style>
+
+</ResourceDictionary>

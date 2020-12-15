@@ -4,14 +4,7 @@
         <name>LeeTeke.WpfControl</name>
     </assembly>
     <members>
-        <member name="T:LeeTeke.WpfControl.Controls.GridView">
-            <summary>
-            GridView.xaml 的交互逻辑
-            </summary>
-            <summary>
-            GridView
-            </summary>
-        </member>
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.GridView" -->
         <member name="P:LeeTeke.WpfControl.Controls.GridView.Orientation">
             <summary>
             位置顺序
@@ -27,57 +20,35 @@
             请填写描述
             </summary>
         </member>
-        <member name="M:LeeTeke.WpfControl.Controls.GridView.InitializeComponent">
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.ImageEx" -->
+        <member name="P:LeeTeke.WpfControl.Controls.ImageEx.DefaultContent">
             <summary>
-            InitializeComponent
+            默认内容
             </summary>
         </member>
-        <member name="T:LeeTeke.WpfControl.Controls.ImageShowEx">
+        <member name="P:LeeTeke.WpfControl.Controls.ImageEx.Source">
             <summary>
-            ImageShowEx.xaml 的交互逻辑
-            </summary>
-            <summary>
-            ImageShowEx
+            ImageSource
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.ImageShowEx.DefaultContent">
-            <summary>
-            请填写描述
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.ImageShowEx.Image">
-            <summary>
-            图片
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.ImageShowEx.Duration">
-            <summary>
-            缓动时间
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.ImageShowEx.Stretch">
+        <member name="P:LeeTeke.WpfControl.Controls.ImageEx.Stretch">
             <summary>
             Stretch
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.ImageShowEx.Content">
+        <member name="P:LeeTeke.WpfControl.Controls.ImageEx.Watermark">
             <summary>
-            内容
+            水印系列
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.ImageShowEx.ContentVerticalAlignment">
+        <member name="P:LeeTeke.WpfControl.Controls.ImageEx.ShowDuration">
             <summary>
-            内容位置
+            显示动作持续事件
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.ImageShowEx.ContentHorizontalAlignment">
+        <member name="M:LeeTeke.WpfControl.Controls.ImageEx.ChangeShowImageAsync">
             <summary>
-            内容位置
-            </summary>
-        </member>
-        <member name="M:LeeTeke.WpfControl.Controls.ImageShowEx.InitializeComponent">
-            <summary>
-            InitializeComponent
+            改变显示图片
             </summary>
         </member>
         <member name="T:LeeTeke.WpfControl.Controls.LeeNotifyIcon">
@@ -88,7 +59,7 @@
             LeeNotifyIcon
             </summary>
         </member>
-        <member name="M:LeeTeke.WpfControl.Controls.LeeNotifyIcon.ShowBalloonTip(System.Int32,System.String,System.String,LeeTeke.WpfControl.Models.ToolTipIcon)">
+        <member name="M:LeeTeke.WpfControl.Controls.LeeNotifyIcon.ShowBalloonTip(System.Int32,System.String,System.String,LeeTeke.WpfControl.ToolTipIcon)">
             <summary>
             冒泡显示
             </summary>
@@ -248,6 +219,92 @@
             <summary>
             InitializeComponent
             </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.NotifyIconEx" -->
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyIconEx.Icon">
+            <summary>
+            Icon
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyIconEx.ContentMinHeight">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyIconEx.ContentMinWidth">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyIconEx.CornerRadius">
+            <summary>
+            CornerRadius
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyIconEx.Content">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyIconEx.BalloonTipData">
+            <summary>
+            BalloonTipModel
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyIconEx.ClickedThenClosing">
+            <summary>
+            点击后关闭
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.NotifyIconEx.ShowBalloonTip(System.Int32,System.String,System.String,LeeTeke.WpfControl.ToolTipIcon)">
+            <summary>
+            冒泡显示
+            </summary>
+            <param name="timeout">毫秒</param>
+            <param name="tipTitle">标题</param>
+            <param name="tipText">内容</param>
+            <param name="tipIcon">Icon</param>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyIconEx.MouseMoveCommand">
+            <summary>
+            MouseMoveCommand
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyIconEx.MouseLeftButtonClickCommand">
+            <summary>
+            MouseLeftButtonClickCommand
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyIconEx.MouseRightButtonClickCommand">
+            <summary>
+            MouseRightButtonClickCommand
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyIconEx.MouseDoubleClickCommand">
+            <summary>
+            MouseDoubleClickCommand
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyIconEx.BalloonTipClickedCommand">
+            <summary>
+            BalloonTipClickedCommand
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.NotifyIconEx.Finalize">
+            <summary>
+            析构
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.NotifyIconEx.Dispose">
+            <summary>
+            IDisposable接口
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.NotifyIconEx.Dispose(System.Boolean)">
+            <summary>
+            释放
+            </summary>
+            <param name="disposing">是否需要释放那些实现IDisposable接口的托管对象</param>
         </member>
         <member name="T:LeeTeke.WpfControl.Controls.RippleMask">
             <summary>
@@ -821,22 +878,22 @@
             <param name="width"></param>
             <param name="height"></param>
         </member>
-        <member name="P:LeeTeke.WpfControl.Models.BalloonTipModel.Time">
+        <member name="P:LeeTeke.WpfControl.BalloonTipModel.Time">
             <summary>
             毫秒
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Models.BalloonTipModel.Title">
+        <member name="P:LeeTeke.WpfControl.BalloonTipModel.Title">
             <summary>
             标题
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Models.BalloonTipModel.Content">
+        <member name="P:LeeTeke.WpfControl.BalloonTipModel.Content">
             <summary>
             内容
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Models.BalloonTipModel.Icon">
+        <member name="P:LeeTeke.WpfControl.BalloonTipModel.Icon">
             <summary>
             Icon
             </summary>
@@ -914,6 +971,13 @@
             <param name="cornerRadius"></param>
             <returns></returns>
         </member>
+        <member name="M:LeeTeke.WpfControl.StaticMethods.ImageSourceToBitmap(System.Windows.Media.ImageSource)">
+            <summary>
+            ImageSource转换成Bitmap
+            </summary>
+            <param name="imageSource"></param>
+            <returns></returns>
+        </member>
         <member name="M:LeeTeke.WpfControl.StaticMethods.FindVisualChild``1(System.Windows.DependencyObject)">
             <summary>
             寻找子控件
@@ -921,6 +985,36 @@
             <typeparam name="childItem"></typeparam>
             <param name="obj"></param>
             <returns></returns>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
+            </summary>
         </member>
     </members>
 </doc>

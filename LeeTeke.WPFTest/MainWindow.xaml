@@ -4,11 +4,24 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:leecontrol="clr-namespace:LeeTeke.WpfControl.Controls;assembly=LeeTeke.WpfControl"
+        xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies;assembly=LeeTeke.WpfControl"
         xmlns:local="clr-namespace:LeeTeke.WPFTest"
         mc:Ignorable="d"
         Title="WpfControl测试 窗口"
-        Height="450" Width="800">
+        Height="450"
+        Width="800"
+        Background="White"
+        >
     <StackPanel>
-        
+        <leecontrol:NotifyIconEx Icon="/Datas/test.ico"  ClickedThenClosing="False" Flashing="True">
+            <Grid Background="Red" 
+                  Width="100" 
+                  Height="100" >
+                <Button x:Name="asd"
+                        Content="test"/>
+            </Grid>
+                  
+        </leecontrol:NotifyIconEx>
     </StackPanel>
+        
 </Window>

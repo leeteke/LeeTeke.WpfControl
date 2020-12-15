@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LeeTeke.WpfControl.Models
+namespace LeeTeke.WpfControl
 {
     public class BalloonTipModel
     {

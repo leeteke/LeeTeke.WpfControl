@@ -12,11 +12,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Datas\segmdl2.ttf" />
+    <None Remove="LeeTekeDatas\segmdl2.ttf" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Datas\segmdl2.ttf" />
+    <Resource Include="LeeTekeDatas\segmdl2.ttf" />
   </ItemGroup>
 
   <ItemGroup>
