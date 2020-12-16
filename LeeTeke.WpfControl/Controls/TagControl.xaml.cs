@@ -730,7 +730,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private static void OrientationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is SlidePanel control && e.OldValue != e.NewValue)
+            if (d is TagItem control && e.OldValue != e.NewValue)
             {
                 control.Orientation = (Orientation)e.NewValue;
                 switch (control.Orientation)

@@ -51,127 +51,7 @@
             改变显示图片
             </summary>
         </member>
-        <member name="T:LeeTeke.WpfControl.Controls.LeeNotifyIcon">
-            <summary>
-            LeeNotifyIcon.xaml 的交互逻辑
-            </summary>
-            <summary>
-            LeeNotifyIcon
-            </summary>
-        </member>
-        <member name="M:LeeTeke.WpfControl.Controls.LeeNotifyIcon.ShowBalloonTip(System.Int32,System.String,System.String,LeeTeke.WpfControl.ToolTipIcon)">
-            <summary>
-            冒泡显示
-            </summary>
-            <param name="timeout">毫秒</param>
-            <param name="tipTitle">标题</param>
-            <param name="tipText">内容</param>
-            <param name="tipIcon">Icon</param>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.LeeNotifyIcon.CornerRadius">
-            <summary>
-            CornerRadius
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.LeeNotifyIcon.Background">
-            <summary>
-            Background
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.LeeNotifyIcon.BorderThickness">
-            <summary>
-            BorderThickness
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.LeeNotifyIcon.BorderBrush">
-            <summary>
-            BorderBrush
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.LeeNotifyIcon.Padding">
-            <summary>
-            Padding
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.LeeNotifyIcon.BalloonTipData">
-            <summary>
-            BalloonTipModel
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.LeeNotifyIcon.IconUri">
-            <summary>
-            图标地址
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.LeeNotifyIcon.Content">
-            <summary>
-            请填写描述
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.LeeNotifyIcon.MouseMoveCommand">
-            <summary>
-            MouseMoveCommand
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.LeeNotifyIcon.MouseLeftButtonClickCommand">
-            <summary>
-            MouseLeftButtonClickCommand
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.LeeNotifyIcon.MouseRightButtonClickCommand">
-            <summary>
-            MouseRightButtonClickCommand
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.LeeNotifyIcon.MouseDoubleClickCommand">
-            <summary>
-            MouseDoubleClickCommand
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.LeeNotifyIcon.BalloonTipClickedCommand">
-            <summary>
-            BalloonTipClickedCommand
-            </summary>
-        </member>
-        <member name="M:LeeTeke.WpfControl.Controls.LeeNotifyIcon.AddRightContent(System.Windows.FrameworkElement)">
-            <summary>
-            添加内容
-            </summary>
-            <param name="element"></param>
-        </member>
-        <member name="M:LeeTeke.WpfControl.Controls.LeeNotifyIcon.InitializeComponent">
-            <summary>
-            InitializeComponent
-            </summary>
-        </member>
-        <member name="T:LeeTeke.WpfControl.Controls.LodingBar">
-            <summary>
-            LodingBar.xaml 的交互逻辑
-            </summary>
-            <summary>
-            LodingBar
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.LodingBar.Background">
-            <summary>
-            请填写描述
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.LodingBar.BorderBrush">
-            <summary>
-            BorderBrush
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.LodingBar.Padding">
-            <summary>
-            请填写描述
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.LodingBar.BorderThickness">
-            <summary>
-            BorderThickness
-            </summary>
-        </member>
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.LodingBar" -->
         <member name="P:LeeTeke.WpfControl.Controls.LodingBar.CornerRadius">
             <summary>
             CornerRadius
@@ -200,11 +80,6 @@
         <member name="P:LeeTeke.WpfControl.Controls.LodingBar.Orientation">
             <summary>
             Orientation
-            </summary>
-        </member>
-        <member name="M:LeeTeke.WpfControl.Controls.LodingBar.InitializeComponent">
-            <summary>
-            InitializeComponent
             </summary>
         </member>
         <member name="T:LeeTeke.WpfControl.Controls.Message">
@@ -306,25 +181,18 @@
             </summary>
             <param name="disposing">是否需要释放那些实现IDisposable接口的托管对象</param>
         </member>
-        <member name="T:LeeTeke.WpfControl.Controls.RippleMask">
-            <summary>
-            RippleMask.xaml 的交互逻辑
-            </summary>
-            <summary>
-            RippleMask
-            </summary>
-        </member>
-        <member name="F:LeeTeke.WpfControl.Controls.RippleMask.mouseSite">
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.RippleMask" -->
+        <member name="F:LeeTeke.WpfControl.Controls.RippleMask._mouseSite">
             <summary>
             鼠标当前再控件中的位置
             </summary>
         </member>
-        <member name="F:LeeTeke.WpfControl.Controls.RippleMask.maxRadius">
+        <member name="F:LeeTeke.WpfControl.Controls.RippleMask._maxRadius">
             <summary>
             最大半径
             </summary>
         </member>
-        <member name="F:LeeTeke.WpfControl.Controls.RippleMask.clickStates">
+        <member name="F:LeeTeke.WpfControl.Controls.RippleMask._clickStates">
             <summary>
             点击状态 0-未点击 1按下 2-按下并松开
             </summary>
@@ -362,81 +230,53 @@
             默认 0,0
             </summary>
         </member>
-        <member name="M:LeeTeke.WpfControl.Controls.RippleMask.InitializeComponent">
-            <summary>
-            InitializeComponent
-            </summary>
-        </member>
-        <member name="T:LeeTeke.WpfControl.Controls.SlidePanel">
-            <summary>
-            SlidePanel.xaml 的交互逻辑
-            </summary>
-            <summary>
-            SlidePanel
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.SlidePanel.Count">
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.SlideView" -->
+        <member name="P:LeeTeke.WpfControl.Controls.SlideView.Count">
             <summary>
             总数量
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.SlidePanel.Orientation">
+        <member name="P:LeeTeke.WpfControl.Controls.SlideView.Orientation">
             <summary>
             方向
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.SlidePanel.CurrentValue">
+        <member name="P:LeeTeke.WpfControl.Controls.SlideView.CurrentValue">
             <summary>
             当前值
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.SlidePanel.CurrentIndex">
+        <member name="P:LeeTeke.WpfControl.Controls.SlideView.CurrentIndex">
             <summary>
             当前值下表
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.SlidePanel.Interval">
+        <member name="P:LeeTeke.WpfControl.Controls.SlideView.Interval">
             <summary>
             自动轮播间隔时间
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.SlidePanel.TransitionDuration">
+        <member name="P:LeeTeke.WpfControl.Controls.SlideView.TransitionDuration">
             <summary>
             过渡动画延迟
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.SlidePanel.TransitionEasing">
+        <member name="P:LeeTeke.WpfControl.Controls.SlideView.TransitionEasing">
             <summary>
             过度动画
             </summary>
         </member>
-        <member name="M:LeeTeke.WpfControl.Controls.SlidePanel.ToIndex(System.Int32)">
+        <member name="M:LeeTeke.WpfControl.Controls.SlideView.ToIndex(System.Int32)">
             <summary>
             去选项
             </summary>
             <param name="index"></param>
         </member>
-        <member name="M:LeeTeke.WpfControl.Controls.SlidePanel.InitializeComponent">
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.SlideViewItem" -->
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.SwitchButton" -->
+        <member name="P:LeeTeke.WpfControl.Controls.SwitchButton.HasContent">
             <summary>
-            InitializeComponent
-            </summary>
-        </member>
-        <member name="T:LeeTeke.WpfControl.Controls.SwitchButton">
-            <summary>
-            SwitchButton.xaml 的交互逻辑
-            </summary>
-            <summary>
-            SwitchButton
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.SwitchButton.VerticalContentAlignment">
-            <summary>
-            VerticalContentAlignment
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.SwitchButton.HorizontalContentAlignment">
-            <summary>
-            HorizontalContentAlignment
+            请填写描述
             </summary>
         </member>
         <member name="P:LeeTeke.WpfControl.Controls.SwitchButton.ButtonWidth">
@@ -451,7 +291,7 @@
         </member>
         <member name="P:LeeTeke.WpfControl.Controls.SwitchButton.Content">
             <summary>
-            内容
+            请填写描述
             </summary>
         </member>
         <member name="P:LeeTeke.WpfControl.Controls.SwitchButton.CloseContent">
@@ -462,11 +302,6 @@
         <member name="P:LeeTeke.WpfControl.Controls.SwitchButton.ContentDock">
             <summary>
             内容位置
-            </summary>
-        </member>
-        <member name="M:LeeTeke.WpfControl.Controls.SwitchButton.InitializeComponent">
-            <summary>
-            InitializeComponent
             </summary>
         </member>
         <member name="T:LeeTeke.WpfControl.Controls.TagControl">
@@ -570,14 +405,7 @@
             InitializeComponent
             </summary>
         </member>
-        <member name="T:LeeTeke.WpfControl.Controls.ToggleGroup">
-            <summary>
-            ToggleGroup.xaml 的交互逻辑
-            </summary>
-            <summary>
-            ToggleGroup
-            </summary>
-        </member>
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.ToggleGroup" -->
         <member name="P:LeeTeke.WpfControl.Controls.ToggleGroup.ItemPadding">
             <summary>
             ItemPadding
@@ -636,21 +464,6 @@
         <member name="P:LeeTeke.WpfControl.Controls.ToggleGroup.ItemCheckedForeground">
             <summary>
             Item被选中的字体颜色
-            </summary>
-        </member>
-        <member name="M:LeeTeke.WpfControl.Controls.ToggleGroup.InitializeComponent">
-            <summary>
-            InitializeComponent
-            </summary>
-        </member>
-        <member name="F:LeeTeke.WpfControl.Controls.ToggleGroupSelectMode.Single">
-            <summary>
-            单个
-            </summary>
-        </member>
-        <member name="F:LeeTeke.WpfControl.Controls.ToggleGroupSelectMode.Multiple">
-            <summary>
-            多个
             </summary>
         </member>
         <member name="M:LeeTeke.WpfControl.Dependencies.CheckBoxManager.GetCheckBoxSize(System.Windows.DependencyObject)">
@@ -896,6 +709,16 @@
         <member name="P:LeeTeke.WpfControl.BalloonTipModel.Icon">
             <summary>
             Icon
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.ToggleGroupMode.Single">
+            <summary>
+            单个
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.ToggleGroupMode.Multiple">
+            <summary>
+            多个
             </summary>
         </member>
         <member name="M:LeeTeke.WpfControl.StaticMethods.SetThemeColor(System.Windows.Media.Brush)">

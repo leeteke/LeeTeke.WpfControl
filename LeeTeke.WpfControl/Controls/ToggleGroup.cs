@@ -1,9 +1,9 @@
-﻿
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -18,25 +18,48 @@ using System.Windows.Shapes;
 namespace LeeTeke.WpfControl.Controls
 {
     /// <summary>
-    /// ToggleGroup.xaml 的交互逻辑
+    /// 按照步骤 1a 或 1b 操作，然后执行步骤 2 以在 XAML 文件中使用此自定义控件。
+    ///
+    /// 步骤 1a) 在当前项目中存在的 XAML 文件中使用该自定义控件。
+    /// 将此 XmlNamespace 特性添加到要使用该特性的标记文件的根
+    /// 元素中:
+    ///
+    ///     xmlns:MyNamespace="clr-namespace:LeeTeke.WpfControl.Controls"
+    ///
+    ///
+    /// 步骤 1b) 在其他项目中存在的 XAML 文件中使用该自定义控件。
+    /// 将此 XmlNamespace 特性添加到要使用该特性的标记文件的根
+    /// 元素中:
+    ///
+    ///     xmlns:MyNamespace="clr-namespace:LeeTeke.WpfControl.Controls;assembly=LeeTeke.WpfControl.Controls"
+    ///
+    /// 您还需要添加一个从 XAML 文件所在的项目到此项目的项目引用，
+    /// 并重新生成以避免编译错误:
+    ///
+    ///     在解决方案资源管理器中右击目标项目，然后依次单击
+    ///     “添加引用”->“项目”->[浏览查找并选择此项目]
+    ///
+    ///
+    /// 步骤 2)
+    /// 继续操作并在 XAML 文件中使用控件。
+    ///
+    ///     <MyNamespace:ToggleGroup/>
+    ///
     /// </summary>
     [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(ToggleButton))]
-    public partial class ToggleGroup : ItemsControl
+    public class ToggleGroup : ItemsControl
     {
         private WrapPanel _wrapPanel;
+        static ToggleGroup()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ToggleGroup), new FrameworkPropertyMetadata(typeof(ToggleGroup)));
+        }
+
         public ToggleGroup()
         {
-            InitializeComponent();
-
-            ItemMouseOverBackground = StaticMethods.ChangeBrushDepth(Background, -0.3f);
-            ItemMouseOverBorderBrush = StaticMethods.ChangeBrushDepth(BorderBrush, -0.3f);
-            this.SetResourceReference(ToggleGroup.FocusVisualStyleProperty, "LeeFocusVisual");
-            this.SetResourceReference(ToggleGroup.SnapsToDevicePixelsProperty, "LeeSnapsToDevicePixels");
-            this.SetResourceReference(ToggleGroup.ItemBorderBrushProperty, "LeeBrush_Gray204");
-            this.SetResourceReference(ToggleGroup.ItemRippleBrushProperty, "LeeBrush_RippleDefault");
-            this.SetResourceReference(ToggleGroup.ItemCheckedBackgroundProperty, "LeeBrush_Main");
-            this.SetResourceReference(ToggleGroup.ItemCheckedBorderBrushProperty, "LeeBrush_Main");
-            this.SetResourceReference(ToggleGroup.ItemCheckedForegroundProperty, "LeeBrush_TextColor");
+            EventManager.RegisterClassHandler(typeof(ToggleButton), ToggleButton.CheckedEvent, new RoutedEventHandler(ToggleButton_Checked));
+            EventManager.RegisterClassHandler(typeof(ToggleButton), ToggleButton.UncheckedEvent, new RoutedEventHandler(ToggleButton_UnChecked));
+            EventManager.RegisterClassHandler(typeof(WrapPanel), WrapPanel.LoadedEvent, new RoutedEventHandler(PART_WrapPanel_Loaded));
         }
 
         #region override
@@ -153,15 +176,15 @@ namespace LeeTeke.WpfControl.Controls
 
 
 
-        public ToggleGroupSelectMode SelectMode
+        public ToggleGroupMode SelectMode
         {
-            get { return (ToggleGroupSelectMode)GetValue(SelectModeProperty); }
+            get { return (ToggleGroupMode)GetValue(SelectModeProperty); }
             set { SetValue(SelectModeProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for SelectMode.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectModeProperty =
-            DependencyProperty.Register("SelectMode", typeof(ToggleGroupSelectMode), typeof(ToggleGroup), new PropertyMetadata(ToggleGroupSelectMode.Single, new PropertyChangedCallback(SelectModeChanged)));
+            DependencyProperty.Register("SelectMode", typeof(ToggleGroupMode), typeof(ToggleGroup), new PropertyMetadata(ToggleGroupMode.Single, new PropertyChangedCallback(SelectModeChanged)));
 
         private static void SelectModeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -396,18 +419,25 @@ namespace LeeTeke.WpfControl.Controls
         #region 内部逻辑
         private void me_Loaded(object sender, RoutedEventArgs e)
         {
-      
+
         }
 
         private void PART_WrapPanel_Loaded(object sender, RoutedEventArgs e)
         {
-            _wrapPanel = (WrapPanel)sender;
+            if (sender is WrapPanel wrap)
+            {
+                if (wrap.Name== "PART_WrapPanel")
+                {
+                    _wrapPanel = wrap;
+
+                }
+            }
         }
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)
         {
             if (sender is ToggleButton button)
             {
-                if (SelectMode == ToggleGroupSelectMode.Single)
+                if (SelectMode == ToggleGroupMode.Single)
                 {
                     SelectedValue = button.DataContext;
                     if (_wrapPanel != null)
@@ -433,7 +463,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (sender is ToggleButton button)
             {
-                if (SelectMode == ToggleGroupSelectMode.Single)
+                if (SelectMode == ToggleGroupMode.Single)
                 {
                     SelectedValue = null;
                 }
@@ -448,19 +478,5 @@ namespace LeeTeke.WpfControl.Controls
         }
         #endregion
 
-
-
-
-    }
-
-    public enum ToggleGroupSelectMode
-    {/// <summary>
-     /// 单个
-     /// </summary>
-        Single,
-        /// <summary>
-        /// 多个
-        /// </summary>
-        Multiple,
     }
 }

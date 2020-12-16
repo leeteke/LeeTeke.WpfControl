@@ -17,45 +17,78 @@ using System.Windows.Shapes;
 namespace LeeTeke.WpfControl.Controls
 {
     /// <summary>
-    /// RippleMask.xaml 的交互逻辑
+    /// 按照步骤 1a 或 1b 操作，然后执行步骤 2 以在 XAML 文件中使用此自定义控件。
+    ///
+    /// 步骤 1a) 在当前项目中存在的 XAML 文件中使用该自定义控件。
+    /// 将此 XmlNamespace 特性添加到要使用该特性的标记文件的根
+    /// 元素中:
+    ///
+    ///     xmlns:MyNamespace="clr-namespace:LeeTeke.WpfControl.Controls"
+    ///
+    ///
+    /// 步骤 1b) 在其他项目中存在的 XAML 文件中使用该自定义控件。
+    /// 将此 XmlNamespace 特性添加到要使用该特性的标记文件的根
+    /// 元素中:
+    ///
+    ///     xmlns:MyNamespace="clr-namespace:LeeTeke.WpfControl.Controls;assembly=LeeTeke.WpfControl.Controls"
+    ///
+    /// 您还需要添加一个从 XAML 文件所在的项目到此项目的项目引用，
+    /// 并重新生成以避免编译错误:
+    ///
+    ///     在解决方案资源管理器中右击目标项目，然后依次单击
+    ///     “添加引用”->“项目”->[浏览查找并选择此项目]
+    ///
+    ///
+    /// 步骤 2)
+    /// 继续操作并在 XAML 文件中使用控件。
+    ///
+    ///     <MyNamespace:RippleMask/>
+    ///
     /// </summary>
-    public partial class RippleMask : UserControl
+    public class RippleMask : Control
     {
+        static RippleMask()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(RippleMask), new FrameworkPropertyMetadata(typeof(RippleMask)));
+        }
+
         /// <summary>
         /// 鼠标当前再控件中的位置
         /// </summary>
-        private Point mouseSite;
+        private Point _mouseSite;
         /// <summary>
         /// 最大半径
         /// </summary>
-        public double maxRadius;
+        public double _maxRadius;
 
-        private Storyboard sbOpen;
-        private Storyboard sbClose;
-        private Path ripplePath;
-
-        private RoutedEventHandler routedLeftUpEvent;
-        private RoutedEventHandler routedLeftDownEvent;
-        private RoutedEventHandler routedLeftLevelEvent;
-        private RoutedEventHandler routedMoveEvent;
+        private Storyboard _sbOpen;
+        private Storyboard _sbClose;
+        private Path _ripplePath;
         /// <summary>
         /// 点击状态 0-未点击 1按下 2-按下并松开
         /// </summary>
-        private int clickStates = 0;
+        private int _clickStates = 0;
+        private RoutedEventHandler _routedLeftUpEvent;
+        private RoutedEventHandler _routedLeftDownEvent;
+        private RoutedEventHandler _routedLeftLevelEvent;
+        private RoutedEventHandler _routedMoveEvent;
+
+        private Canvas _canvas;
+        private Canvas _overflowCanvas;
+
         public RippleMask()
         {
-            InitializeComponent();
-  
-            routedLeftUpEvent = new RoutedEventHandler(MouseLeftButtonUpEventHandler);
-            routedLeftDownEvent = new RoutedEventHandler(MouseLeftButtonDownEventHandler);
-            routedLeftLevelEvent = new RoutedEventHandler(MouseLeaveEventHandler);
-            routedMoveEvent=new RoutedEventHandler(RoutedMoveEventHandler);
-
-            this.SetResourceReference(RippleMask.RippleBrushProperty, "LeeBrush_RippleDefault");
-
+            _routedLeftUpEvent = new RoutedEventHandler(MouseLeftButtonUpEventHandler);
+            _routedLeftDownEvent = new RoutedEventHandler(MouseLeftButtonDownEventHandler);
+            _routedLeftLevelEvent = new RoutedEventHandler(MouseLeaveEventHandler);
+            _routedMoveEvent = new RoutedEventHandler(RoutedMoveEventHandler);
+            SizeChanged += RippleMask_SizeChanged;
+            MouseLeave += RippleMask_MouseLeave;
+            Loaded += RippleMask_Loaded;
         }
 
-  
+   
+
 
         #region CornerRadius
 
@@ -143,15 +176,15 @@ namespace LeeTeke.WpfControl.Controls
             if (d is RippleMask mask)
             {
                 var old = (FrameworkElement)e.OldValue;
-                old?.RemoveHandler(MouseLeftButtonUpEvent, mask.routedLeftUpEvent);
-                old?.RemoveHandler(MouseLeftButtonDownEvent, mask.routedLeftDownEvent);
-                old?.RemoveHandler(MouseLeaveEvent, mask.routedLeftLevelEvent);
-                old?.RemoveHandler(MouseMoveEvent, mask.routedMoveEvent);
-           
-                mask.ParentElement.AddHandler(MouseLeftButtonUpEvent, mask.routedLeftUpEvent, true);
-                mask.ParentElement.AddHandler(MouseLeftButtonDownEvent, mask.routedLeftDownEvent, true);
-                mask.ParentElement.AddHandler(MouseLeaveEvent, mask.routedLeftLevelEvent, true);
-                mask.ParentElement.AddHandler(MouseMoveEvent, mask.routedMoveEvent, true);
+                old?.RemoveHandler(MouseLeftButtonUpEvent, mask._routedLeftUpEvent);
+                old?.RemoveHandler(MouseLeftButtonDownEvent, mask._routedLeftDownEvent);
+                old?.RemoveHandler(MouseLeaveEvent, mask._routedLeftLevelEvent);
+                old?.RemoveHandler(MouseMoveEvent, mask._routedMoveEvent);
+
+                mask.ParentElement.AddHandler(MouseLeftButtonUpEvent, mask._routedLeftUpEvent, true);
+                mask.ParentElement.AddHandler(MouseLeftButtonDownEvent, mask._routedLeftDownEvent, true);
+                mask.ParentElement.AddHandler(MouseLeaveEvent, mask._routedLeftLevelEvent, true);
+                mask.ParentElement.AddHandler(MouseMoveEvent, mask._routedMoveEvent, true);
             }
         }
 
@@ -181,13 +214,13 @@ namespace LeeTeke.WpfControl.Controls
                 var value = (bool)e.NewValue;
                 if (value)
                 {
-                    mask.canvas.Visibility = Visibility.Collapsed;
-                    mask.canvasOverflow.Visibility = Visibility.Visible;
+                    mask._canvas.Visibility = Visibility.Collapsed;
+                    mask._overflowCanvas.Visibility = Visibility.Visible;
                 }
                 else
                 {
-                    mask.canvas.Visibility = Visibility.Visible;
-                    mask.canvasOverflow.Visibility = Visibility.Collapsed;
+                    mask._canvas.Visibility = Visibility.Visible;
+                    mask._overflowCanvas.Visibility = Visibility.Collapsed;
                 }
             }
         }
@@ -234,89 +267,19 @@ namespace LeeTeke.WpfControl.Controls
         public static readonly DependencyProperty CustomSiteProperty =
             DependencyProperty.Register("CustomSite", typeof(Point), typeof(RippleMask), new PropertyMetadata(new Point(0, 0)));
 
-   
+
 
 
         #endregion
 
-        private void OpenSB_Completed(object sender, EventArgs e)
+
+        #region 私有逻辑
+        private void RippleMask_Loaded(object sender, RoutedEventArgs e)
         {
-            if (clickStates == 3)
-            {
-                clickStates = 2;
-                if (ripplePath.Visibility == Visibility.Visible)
-                {
-                    DoubleAnimation exit = new DoubleAnimation()
-                    {
-                        To = 0,
-                        Duration = new Duration(TimeSpan.FromMilliseconds(150)),
-                    };
-                    ripplePath.BeginAnimation(Path.OpacityProperty, exit);
-                }
-            }
+            _canvas = this.Template.FindName("PART_Canvas",this) as Canvas;
+            _overflowCanvas = this.Template.FindName("PART_OverflowCanvas", this) as Canvas;
         }
 
-        private void Control_MouseLeave(object sender, MouseEventArgs e)
-        {
-            if (clickStates == 1)
-            {
-                if (ripplePath?.RenderTransform is ScaleTransform scale)
-                {
-                    if (scale.ScaleX > 1)
-                    {
-                        sbClose = new Storyboard();
-                        DoubleAnimation xCDA = new DoubleAnimation()
-                        {
-
-                            To = 1,
-                            Duration = new Duration(TimeSpan.FromMilliseconds(100)),
-                        };
-                        DoubleAnimation yCDA = new DoubleAnimation()
-                        {
-
-                            To = 1,
-                            Duration = new Duration(TimeSpan.FromMilliseconds(100)),
-                        };
-
-                        sbClose.Children.Add(xCDA);
-                        sbClose.Children.Add(yCDA);
-
-                        Storyboard.SetTarget(xCDA, ripplePath);
-                        Storyboard.SetTargetProperty(xCDA, new PropertyPath("(0).(1)", new DependencyProperty[] { Path.RenderTransformProperty, ScaleTransform.ScaleXProperty }));
-
-                        Storyboard.SetTarget(yCDA, ripplePath);
-                        Storyboard.SetTargetProperty(yCDA, new PropertyPath("(0).(1)", new DependencyProperty[] { Path.RenderTransformProperty, ScaleTransform.ScaleYProperty }));
-                        sbClose.Completed += (ds, de) =>
-                        {
-                            canvas.Children.Clear();
-
-                        };
-                        sbClose.Begin();
-                    }
-                }
-            }
-            else if (clickStates == 2 || clickStates == 3)
-            {
-
-            }
-            else
-            {
-                canvas.Children.Clear();
-            }
-        }
-
-        private void Control_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            ///如果为溢出模式 则取最小值的1.25呗
-            if (IsOverflow)
-            {
-                maxRadius = Math.Min(this.ActualWidth, this.ActualHeight) * 1.05;
-            }
-            else
-            {
-                maxRadius = this.ActualWidth + this.ActualHeight;
-            }
-        }
 
         private void RoutedMoveEventHandler(object sender, RoutedEventArgs e)
         {
@@ -324,34 +287,33 @@ namespace LeeTeke.WpfControl.Controls
             ///如果为自定义点位
             if (IsCustomSite)
             {
-                mouseSite = CustomSite;
+                _mouseSite = CustomSite;
             }
             else
             {
                 ///如果为溢出模式则固定中心
                 if (IsOverflow)
                 {
-                    mouseSite = new Point(this.ActualWidth / 2, this.ActualHeight / 2);
+                    _mouseSite = new Point(this.ActualWidth / 2, this.ActualHeight / 2);
                 }
                 else
                 {
-                    mouseSite = Mouse.GetPosition(this);
+                    _mouseSite = Mouse.GetPosition(this);
                 }
             }
         }
 
-    
 
         private void MouseLeaveEventHandler(object sender, RoutedEventArgs e)
         {
-            if (clickStates == 1)
+            if (_clickStates == 1)
             {
-                if (ripplePath?.RenderTransform is ScaleTransform scale)
+                if (_ripplePath?.RenderTransform is ScaleTransform scale)
                 {
                     if (scale.ScaleX > 1)
                     {
-                        clickStates = 4;
-                        sbClose = new Storyboard();
+                        _clickStates = 4;
+                        _sbClose = new Storyboard();
                         DoubleAnimation xCDA = new DoubleAnimation()
                         {
 
@@ -365,41 +327,41 @@ namespace LeeTeke.WpfControl.Controls
                             Duration = new Duration(TimeSpan.FromMilliseconds(150)),
                         };
 
-                        sbClose.Children.Add(xCDA);
-                        sbClose.Children.Add(yCDA);
+                        _sbClose.Children.Add(xCDA);
+                        _sbClose.Children.Add(yCDA);
 
-                        Storyboard.SetTarget(xCDA, ripplePath);
+                        Storyboard.SetTarget(xCDA, _ripplePath);
                         Storyboard.SetTargetProperty(xCDA, new PropertyPath("(0).(1)", new DependencyProperty[] { Path.RenderTransformProperty, ScaleTransform.ScaleXProperty }));
 
-                        Storyboard.SetTarget(yCDA, ripplePath);
+                        Storyboard.SetTarget(yCDA, _ripplePath);
                         Storyboard.SetTargetProperty(yCDA, new PropertyPath("(0).(1)", new DependencyProperty[] { Path.RenderTransformProperty, ScaleTransform.ScaleYProperty }));
-                        sbClose.Completed += (ds, de) =>
+                        _sbClose.Completed += (ds, de) =>
                         {
-                            canvas.Children.Clear();
+                            _canvas.Children.Clear();
 
                         };
-                        sbClose.Begin();
+                        _sbClose.Begin();
                     }
                 }
             }
-            else if (clickStates == 2 || clickStates == 3 || clickStates == 4)
+            else if (_clickStates == 2 || _clickStates == 3 || _clickStates == 4)
             {
 
             }
             else
             {
-                canvas.Children.Clear();
+                _canvas.Children.Clear();
             }
         }
 
         private void MouseLeftButtonDownEventHandler(object sender, RoutedEventArgs e)
         {
-            clickStates = 1;
-            if (sbOpen != null)
-                sbOpen.Stop();
-            canvas.Children.Clear();
-            canvasOverflow.Children.Clear();
-            ripplePath = new Path
+            _clickStates = 1;
+            if (_sbOpen != null)
+                _sbOpen.Stop();
+            _canvas.Children.Clear();
+            _overflowCanvas.Children.Clear();
+            _ripplePath = new Path
             {
                 Name = "yuan",
                 RenderTransform = new ScaleTransform() { ScaleX = 1, ScaleY = 1 },
@@ -411,55 +373,134 @@ namespace LeeTeke.WpfControl.Controls
             };
             if (IsOverflow)
             {
-                canvasOverflow.Children.Add(ripplePath);
+                _overflowCanvas.Children.Add(_ripplePath);
             }
             else
             {
-                canvas.Children.Add(ripplePath);
+                _canvas.Children.Add(_ripplePath);
             }
 
-            Canvas.SetLeft(ripplePath, mouseSite.X - 4);
-            Canvas.SetTop(ripplePath, mouseSite.Y - 4);
-            sbOpen = new Storyboard() { FillBehavior = FillBehavior.HoldEnd };
+            Canvas.SetLeft(_ripplePath, _mouseSite.X - 4);
+            Canvas.SetTop(_ripplePath, _mouseSite.Y - 4);
+            _sbOpen = new Storyboard() { FillBehavior = FillBehavior.HoldEnd };
             DoubleAnimation xDA = new DoubleAnimation()
             {
 
-                To = maxRadius / 4,
+                To = _maxRadius / 4,
                 Duration = Duration,
             };
             DoubleAnimation yDA = new DoubleAnimation()
             {
 
-                To = maxRadius / 4,
+                To = _maxRadius / 4,
                 Duration = Duration,
             };
 
-            sbOpen.Children.Add(xDA);
-            sbOpen.Children.Add(yDA);
-            Storyboard.SetTarget(xDA, ripplePath);
+            _sbOpen.Children.Add(xDA);
+            _sbOpen.Children.Add(yDA);
+            Storyboard.SetTarget(xDA, _ripplePath);
             Storyboard.SetTargetProperty(xDA, new PropertyPath("(0).(1)", new DependencyProperty[] { Path.RenderTransformProperty, ScaleTransform.ScaleXProperty }));
 
-            Storyboard.SetTarget(yDA, ripplePath);
+            Storyboard.SetTarget(yDA, _ripplePath);
             Storyboard.SetTargetProperty(yDA, new PropertyPath("(0).(1)", new DependencyProperty[] { Path.RenderTransformProperty, ScaleTransform.ScaleYProperty }));
-            sbOpen.Completed += OpenSB_Completed;
-            sbOpen.Begin();
+            _sbOpen.Completed += OpenSB_Completed;
+            _sbOpen.Begin();
 
         }
 
         private void MouseLeftButtonUpEventHandler(object sender, RoutedEventArgs e)
         {
-            if (clickStates == 1)
+            if (_clickStates == 1)
             {
-                clickStates = 3;
-                sbOpen.Pause();
-                sbOpen.SpeedRatio = 10;
-                sbOpen.Begin();
+                _clickStates = 3;
+                _sbOpen.Pause();
+                _sbOpen.SpeedRatio = 10;
+                _sbOpen.Begin();
             }
         }
 
-        private void control_Loaded(object sender, RoutedEventArgs e)
-        {
 
+        private void OpenSB_Completed(object sender, EventArgs e)
+        {
+            if (_clickStates == 3)
+            {
+                _clickStates = 2;
+                if (_ripplePath.Visibility == Visibility.Visible)
+                {
+                    DoubleAnimation exit = new DoubleAnimation()
+                    {
+                        To = 0,
+                        Duration = new Duration(TimeSpan.FromMilliseconds(150)),
+                    };
+                    _ripplePath.BeginAnimation(Path.OpacityProperty, exit);
+                }
+            }
         }
+
+        private void RippleMask_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (_clickStates == 1)
+            {
+                if (_ripplePath?.RenderTransform is ScaleTransform scale)
+                {
+                    if (scale.ScaleX > 1)
+                    {
+                        _sbClose = new Storyboard();
+                        DoubleAnimation xCDA = new DoubleAnimation()
+                        {
+
+                            To = 1,
+                            Duration = new Duration(TimeSpan.FromMilliseconds(100)),
+                        };
+                        DoubleAnimation yCDA = new DoubleAnimation()
+                        {
+
+                            To = 1,
+                            Duration = new Duration(TimeSpan.FromMilliseconds(100)),
+                        };
+
+                        _sbClose.Children.Add(xCDA);
+                        _sbClose.Children.Add(yCDA);
+
+                        Storyboard.SetTarget(xCDA, _ripplePath);
+                        Storyboard.SetTargetProperty(xCDA, new PropertyPath("(0).(1)", new DependencyProperty[] { Path.RenderTransformProperty, ScaleTransform.ScaleXProperty }));
+
+                        Storyboard.SetTarget(yCDA, _ripplePath);
+                        Storyboard.SetTargetProperty(yCDA, new PropertyPath("(0).(1)", new DependencyProperty[] { Path.RenderTransformProperty, ScaleTransform.ScaleYProperty }));
+                        _sbClose.Completed += (ds, de) =>
+                        {
+                            _canvas.Children.Clear();
+
+                        };
+                        _sbClose.Begin();
+                    }
+                }
+            }
+            else if (_clickStates == 2 || _clickStates == 3)
+            {
+
+            }
+            else
+            {
+                _canvas.Children.Clear();
+            }
+        }
+
+
+        private void RippleMask_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            ///如果为溢出模式 则取最小值的1.25呗
+            if (IsOverflow)
+            {
+                _maxRadius = Math.Min(this.ActualWidth, this.ActualHeight) * 1.05;
+            }
+            else
+            {
+                _maxRadius = this.ActualWidth + this.ActualHeight;
+            }
+        }
+        #endregion
+
+
     }
 }

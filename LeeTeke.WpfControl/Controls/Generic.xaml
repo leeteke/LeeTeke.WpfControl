@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies"
                     xmlns:local="clr-namespace:LeeTeke.WpfControl.Controls">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/LeeTeke.WpfControl;component/Themes/ConvertersDictionary.xaml" />
@@ -11,15 +12,15 @@
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ItemsControl}">
+                <ControlTemplate TargetType="{x:Type local:GridView}">
                     <Border Background="{TemplateBinding Background}"
                     BorderBrush="{TemplateBinding BorderBrush}"
                     BorderThickness="{TemplateBinding BorderThickness}"
                     Margin="{TemplateBinding Margin}"
                     Padding="{TemplateBinding Padding}">
                         <ScrollViewer   x:Name="PART_ScrollViewer"
-                                        VerticalScrollBarVisibility="{Binding RelativeSource={RelativeSource AncestorType=local:GridView}, Path=VerticalScrollBarVisibility,Mode=OneWay}"
-                                        HorizontalScrollBarVisibility="{Binding RelativeSource={RelativeSource AncestorType=local:GridView}, Path=HorizontalScrollBarVisibility,Mode=OneWay}"
+                                        VerticalScrollBarVisibility="{TemplateBinding  VerticalScrollBarVisibility}"
+                                        HorizontalScrollBarVisibility="{TemplateBinding HorizontalScrollBarVisibility}"
                                 >
                             <ItemsPresenter     />
                         </ScrollViewer>
@@ -39,7 +40,6 @@
         </Setter>
     </Style>
 
-
     <Style TargetType="{x:Type local:ImageEx}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
@@ -48,16 +48,16 @@
                 <ControlTemplate TargetType="{x:Type local:ImageEx}">
                     <Grid>
                         <ContentPresenter x:Name="PART_DefaultContent"
-                                          Content="{Binding RelativeSource={RelativeSource AncestorType=local:ImageEx},Path=DefaultContent,Mode=OneWay}"
+                                          Content="{TemplateBinding DefaultContent}"
                                           />
                         <Image x:Name="PART_Image"
                                Opacity="0"
-                               Source="{Binding RelativeSource={RelativeSource AncestorType=local:ImageEx},Path=Source,Mode=OneWay}"
-                               Stretch="{Binding RelativeSource={RelativeSource AncestorType=local:ImageEx},Path=Stretch,Mode=OneWay}"
+                               Source="{TemplateBinding Source}"
+                               Stretch="{TemplateBinding Stretch}"
                                           />
                         <ContentPresenter x:Name="PART_Watermark"
                                           IsHitTestVisible="False"
-                                          Content="{Binding RelativeSource={RelativeSource AncestorType=local:ImageEx},Path=Watermark,Mode=OneWay}"/>
+                                          Content="{TemplateBinding Watermark}"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -70,4 +70,416 @@
         <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
     </Style>
 
+    <Style TargetType="{x:Type local:LodingBar}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="FillBrush" Value="{DynamicResource LeeBrush_Main}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:LodingBar}">
+                    <Border x:Name="PART_Border"  Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Padding="{TemplateBinding Padding}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}"      >
+                        <Canvas x:Name="PART_Canvas"
+                                >
+                            <Canvas.Clip>
+                                <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                    <Binding  ElementName="PART_Border" Path="ActualWidth"/>
+                                    <Binding  ElementName="PART_Border" Path="ActualHeight"/>
+                                    <Binding ElementName="PART_Border" Path="CornerRadius"/>
+                                </MultiBinding>
+                            </Canvas.Clip>
+                            <Rectangle x:Name="PART_HRect"
+                                       Visibility="Visible"
+                                       Height="{Binding ElementName=PART_Canvas,Path=ActualHeight,Mode=OneWay}"
+                                      Fill="{TemplateBinding FillBrush}"
+                                       Width="0"/>
+
+                            <Rectangle x:Name="PART_VRect"
+                                       Fill="{TemplateBinding FillBrush}"
+                                       Width="{Binding ElementName=PART_Canvas,Path=ActualWidth,Mode=OneWay}"
+                                       Visibility="Collapsed"
+                                       Canvas.Bottom="0"
+                                       Height="0"/>
+
+                            <Rectangle x:Name="PART_WHRect"
+                                       Height="{Binding ElementName=PART_Canvas,Path=ActualHeight,Mode=OneWay}"
+                                       Width="{Binding ElementName=PART_Canvas,Path=ActualWidth,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/4,Mode=OneWay}"
+                                       Fill="{TemplateBinding FillBrush}"
+                                       Visibility="Collapsed" 
+                                       Canvas.Left="{Binding ElementName=PART_WHRect,Path=Width,Converter={StaticResource DoubleFollowConverter},ConverterParameter=*-1,Mode=OneWay}" >
+                                <Rectangle.Clip>
+                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                        <Binding  ElementName="PART_WHRect" Path="ActualWidth"/>
+                                        <Binding  ElementName="PART_WHRect" Path="ActualHeight"/>
+                                        <Binding ElementName="PART_Border" Path="CornerRadius"/>
+                                    </MultiBinding>
+                                </Rectangle.Clip>
+
+                            </Rectangle>
+                            
+                            <Rectangle x:Name="PART_WVRect"
+                                       Height="{Binding ElementName=PART_Canvas,Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/4,Mode=OneWay}"
+                                       Width="{Binding ElementName=PART_Canvas,Path=ActualWidth,Mode=OneWay}"
+                                       Fill="{TemplateBinding FillBrush}"
+                                       Visibility="Collapsed"
+                                       Canvas.Top="{Binding ElementName=PART_WVRect,Path=Height,Converter={StaticResource DoubleFollowConverter},ConverterParameter=*-1,Mode=OneWay}" >
+                                <Rectangle.Clip>
+                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                        <Binding  ElementName="PART_WVRect" Path="ActualWidth"/>
+                                        <Binding  ElementName="PART_WVRect" Path="ActualHeight"/>
+                                        <Binding ElementName="PART_Border" Path="CornerRadius"/>
+                                    </MultiBinding>
+                                </Rectangle.Clip>
+
+                            </Rectangle>
+                        </Canvas>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type local:RippleMask}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:RippleMask}">
+                    <Grid >
+                        <Canvas  x:Name="PART_Canvas" 
+                                 Visibility="Visible" 
+                                 >
+                            <Canvas.Clip>
+                                <MultiBinding  Converter="{StaticResource  MultiValueToClipConverter}" Mode="OneWay">
+                                    <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualWidth"/>
+                                    <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualHeight"/>
+                                    <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}"  Path="CornerRadius"/>
+                                    <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}"  Path="BorderThickness"/>
+                                </MultiBinding>
+                            </Canvas.Clip>
+                        </Canvas>
+                        <Canvas x:Name="PART_OverflowCanvas" 
+                                Visibility="Collapsed"
+                                >
+                        </Canvas>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type local:SlideViewItem}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="Width" 
+                    Value="{Binding RelativeSource={ RelativeSource Mode=FindAncestor,AncestorType={x:Type local:SlideView},AncestorLevel=1},Path=ActualWidth,Mode=OneWay}"/>
+        <Setter Property="Height" 
+                    Value="{Binding RelativeSource={ RelativeSource Mode=FindAncestor,AncestorType={x:Type local:SlideView},AncestorLevel=1},Path=ActualHeight,Mode=OneWay}"/>
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_TextColor}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SlideViewItem}" >
+                    <Border x:Name="contentBorder" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}"
+                                Padding="{TemplateBinding Padding}">
+                        <ContentPresenter x:Name="contentPresenter" 
+                                              TextElement.Foreground="{TemplateBinding Foreground}"
+                                              />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="{x:Type local:SlideView}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SlideView}">
+                    <Grid>
+                        <ScrollViewer x:Name="PART_ScrollViewer"   
+                                HorizontalScrollBarVisibility="Hidden" 
+                                VerticalScrollBarVisibility="Hidden"
+                                Style="{x:Null}">
+                            <Border >
+                                <ItemsPresenter   />
+                            </Border>
+                        </ScrollViewer>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="{Binding Orientation,  RelativeSource={ RelativeSource Mode=FindAncestor,AncestorType={x:Type local:SlideView},AncestorLevel=1},Mode=OneWay}"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+    <Style TargetType="{x:Type local:SwitchButton}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="Switch" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SwitchButton}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition x:Name="columnLeft" Width="*"/>
+                            <ColumnDefinition x:Name="columnRight" Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition x:Name="rowTop" Height="*"/>
+                            <RowDefinition x:Name="rowBottom" Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Canvas x:Name="PART_Canvas"
+                                Grid.Row="0"
+                                MinHeight="{TemplateBinding ButtonHeight}"
+                                MinWidth="{TemplateBinding ButtonWidth}"
+                                Grid.Column="0">
+                            <Border x:Name="PART_OpenBorder" 
+                                    Background="{DynamicResource LeeBrush_Main}"
+                                    BorderBrush="{DynamicResource LeeBrush_Gray204}"
+                                    BorderThickness="2"
+                                    Width="{Binding ElementName=PART_Canvas,Path=ActualWidth,Mode=OneWay}"
+                                    Height="{Binding ElementName=PART_Canvas,Path=ActualHeight,Mode=OneWay}"
+                                    CornerRadius="{Binding ElementName=PART_Canvas,Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/2}"/>
+
+                            <Border x:Name="PART_CloseBorder"
+                                    Background="White"
+                                    Visibility="Visible"
+                                    Canvas.Top="2"
+                                    Canvas.Left="2"
+                                    Width="{Binding ElementName=PART_Canvas,Path=ActualWidth,Converter={StaticResource DoubleFollowConverter},ConverterParameter=-4,Mode=OneWay}"
+                                    Height="{Binding ElementName=PART_Canvas,Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=-4,Mode=OneWay}"
+                                    CornerRadius="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/2}" 
+                                    RenderTransformOrigin="1,0.5">
+                            </Border>
+
+                            <Ellipse x:Name="PART_Ellipse"
+                                     Canvas.Top="1"
+                                     Canvas.Left="1"
+                                     Width="{Binding ElementName=PART_Canvas,Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=-2,Mode=OneWay}"
+                                     Height="{Binding ElementName=PART_Canvas,Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=-2,Mode=OneWay}"
+                                     Fill="White"
+                                     >
+                                <Ellipse.Effect>
+                                    <DropShadowEffect BlurRadius="5" Direction="-90" ShadowDepth="1" Opacity="0.5"/>
+                                </Ellipse.Effect>
+                            </Ellipse>
+
+                        </Canvas>
+                        
+                        <ContentControl x:Name="openContent" 
+                                        Content="{TemplateBinding Content}"
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Switch,Converter={StaticResource VisibilityForBoolConverter},Mode=OneWay}"/>
+                        <ContentControl x:Name="closeContent" 
+                                        Content="{TemplateBinding CloseContent}"
+                                        Visibility="{Binding ElementName=openContent,Path=Visibility, Converter={StaticResource VisibilityReverseConverter},Mode=OneWay}"
+                                        Grid.Row="0"
+                                        Grid.Column="1"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="HasContent" Value="False">
+                            
+                            <Setter TargetName="columnLeft" Property="Width" Value="*" />
+                            <Setter TargetName="columnRight" Property="Width" Value="auto" />
+                            
+                            <Setter TargetName="rowTop" Property="Height" Value="*" />
+                            <Setter TargetName="rowBottom" Property="Height" Value="auto" />
+                            
+                            <Setter TargetName="PART_Canvas" Property="Grid.Row" Value="0"/>
+                            <Setter TargetName="PART_Canvas" Property="Grid.Column" Value="0"/>
+          
+                            <Setter TargetName="PART_Canvas" Property="HorizontalAlignment" Value="Stretch"/>
+                            <Setter TargetName="PART_Canvas" Property="VerticalAlignment" Value="Stretch"/>
+
+                            <Setter TargetName="openContent" Property="Grid.Row" Value="0"/>
+                            <Setter TargetName="openContent" Property="Grid.Column" Value="1"/>
+
+                            <Setter TargetName="closeContent" Property="Grid.Row" Value="0"/>
+                            <Setter TargetName="closeContent" Property="Grid.Column" Value="1"/>
+                        </Trigger>
+                        
+       
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="HasContent" Value="True"/>
+                                <Condition  Property="ContentDock" Value="Right"/>
+                            </MultiTrigger.Conditions>
+
+                            <Setter TargetName="columnLeft" Property="Width" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=ButtonWidth,Mode=OneWay}" />
+                            <Setter TargetName="columnRight" Property="Width" Value="*" />
+
+                            <Setter TargetName="rowTop" Property="Height" Value="*" />
+                            <Setter TargetName="rowBottom" Property="Height" Value="auto" />
+
+                            <Setter TargetName="PART_Canvas" Property="Grid.Row" Value="0"/>
+                            <Setter TargetName="PART_Canvas" Property="Grid.Column" Value="0"/>
+                            <Setter TargetName="PART_Canvas" Property="HorizontalAlignment" Value="Center"/>
+                            <Setter TargetName="PART_Canvas" Property="VerticalAlignment" Value="Top"/>
+
+                            <Setter TargetName="openContent" Property="Grid.Row" Value="0"/>
+                            <Setter TargetName="openContent" Property="Grid.Column" Value="1"/>
+
+                            <Setter TargetName="closeContent" Property="Grid.Row" Value="0"/>
+                            <Setter TargetName="closeContent" Property="Grid.Column" Value="1"/>
+                        </MultiTrigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="HasContent" Value="True"/>
+                                <Condition  Property="ContentDock" Value="Left"/>
+                            </MultiTrigger.Conditions>
+
+                            <Setter TargetName="columnLeft" Property="Width" Value="*" />
+                            <Setter TargetName="columnRight" Property="Width" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=ButtonWidth,Mode=OneWay}" />
+
+                            <Setter TargetName="rowTop" Property="Height" Value="*" />
+                            <Setter TargetName="rowBottom" Property="Height" Value="auto" />
+
+                            <Setter TargetName="PART_Canvas" Property="Grid.Row" Value="0"/>
+                            <Setter TargetName="PART_Canvas" Property="Grid.Column" Value="1"/>
+                            
+                            <Setter TargetName="PART_Canvas" Property="HorizontalAlignment" Value="Center"/>
+                            <Setter TargetName="PART_Canvas" Property="VerticalAlignment" Value="Top"/>
+
+                            <Setter TargetName="openContent" Property="Grid.Row" Value="0"/>
+                            <Setter TargetName="openContent" Property="Grid.Column" Value="0"/>
+
+                            <Setter TargetName="closeContent" Property="Grid.Row" Value="0"/>
+                            <Setter TargetName="closeContent" Property="Grid.Column" Value="0"/>
+                        </MultiTrigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="HasContent" Value="True"/>
+                                <Condition  Property="ContentDock" Value="Top"/>
+                            </MultiTrigger.Conditions>
+
+                            <Setter TargetName="columnLeft" Property="Width" Value="*" />
+                            <Setter TargetName="columnRight" Property="Width" Value="auto" />
+
+                            <Setter TargetName="rowTop" Property="Height" Value="*" />
+                            <Setter TargetName="rowBottom" Property="Height" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=ButtonHeight,Mode=OneWay}" />
+
+                            <Setter TargetName="PART_Canvas" Property="Grid.Row" Value="1"/>
+                            <Setter TargetName="PART_Canvas" Property="Grid.Column" Value="0"/>
+                            <Setter TargetName="PART_Canvas" Property="HorizontalAlignment" Value="Left"/>
+                            <Setter TargetName="PART_Canvas" Property="VerticalAlignment" Value="Stretch"/>
+
+                            <Setter TargetName="openContent" Property="Grid.Row" Value="0"/>
+                            <Setter TargetName="openContent" Property="Grid.Column" Value="0"/>
+
+                            <Setter TargetName="closeContent" Property="Grid.Row" Value="0"/>
+                            <Setter TargetName="closeContent" Property="Grid.Column" Value="0"/>
+                        </MultiTrigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="HasContent" Value="True"/>
+                                <Condition  Property="ContentDock" Value="Bottom"/>
+                            </MultiTrigger.Conditions>
+
+                            <Setter TargetName="columnLeft" Property="Width" Value="*" />
+                            <Setter TargetName="columnRight" Property="Width" Value="auto" />
+
+                            <Setter TargetName="rowTop" Property="Height" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=ButtonHeight,Mode=OneWay}" />
+                            <Setter TargetName="rowBottom" Property="Height" Value="auto" />
+
+                            <Setter TargetName="PART_Canvas" Property="Grid.Row" Value="0"/>
+                            <Setter TargetName="PART_Canvas" Property="Grid.Column" Value="0"/>
+                            
+                            <Setter TargetName="PART_Canvas" Property="HorizontalAlignment" Value="Left"/>
+                            <Setter TargetName="PART_Canvas" Property="VerticalAlignment" Value="Stretch"/>
+
+                            <Setter TargetName="openContent" Property="Grid.Row" Value="1"/>
+                            <Setter TargetName="openContent" Property="Grid.Column" Value="0"/>
+
+                            <Setter TargetName="closeContent" Property="Grid.Row" Value="1"/>
+                            <Setter TargetName="closeContent" Property="Grid.Column" Value="0"/>
+                        </MultiTrigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type local:ToggleGroup}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="IsTabStop" Value="True"/>
+        <Setter Property="ItemBorderBrush" Value="{DynamicResource LeeBrush_Gray204}"/>
+        <Setter Property="ItemRippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}"/>
+        <Setter Property="ItemCheckedBackground" Value="{DynamicResource LeeBrush_Main}"/>
+        <Setter Property="ItemCheckedBorderBrush" Value="{DynamicResource LeeBrush_Main}"/>
+        <Setter Property="ItemCheckedForeground" Value="{DynamicResource LeeBrush_TextColor}"/>
+        <Setter Property="ItemMouseOverBackground" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=Background,Converter={StaticResource ColorDepthConverter},ConverterParameter=-0.3}"/>
+        <Setter Property="ItemMouseOverBorderBrush" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=BorderBrush,Converter={StaticResource ColorDepthConverter},ConverterParameter=-0.3}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ToggleGroup}">
+                    <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Margin="{TemplateBinding Margin}"
+                    Padding="{TemplateBinding Padding}">
+                        <ScrollViewer   x:Name="PART_ScrollViewer"   
+                                HorizontalScrollBarVisibility="Hidden" 
+                                VerticalScrollBarVisibility="Hidden"
+                                Style="{x:Null}"
+                                >
+                            <ItemsPresenter/>
+                        </ScrollViewer>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <WrapPanel x:Name="PART_WrapPanel" 
+                       FocusVisualStyle="{x:Null}"      
+                        Orientation="{Binding Orientation,  RelativeSource={ RelativeSource Mode=FindAncestor,AncestorType={x:Type local:ToggleGroup},AncestorLevel=1},Mode=OneWay}"
+                        />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style BasedOn="{StaticResource  LeeToggleButton}" TargetType="ToggleButton">
+                    <Setter Property="Margin" Value="{Binding Path=ItemMargin, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
+                    <Setter Property="Padding" Value="{Binding Path=ItemPadding, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
+                    <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="{Binding Path=ItemBorderThickness, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
+                    <Setter Property="BorderBrush" Value="{Binding Path=ItemBorderBrush, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
+                    <Setter Property="Background" Value="{Binding Path=ItemBackground, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
+                    <Setter Property="leedep:ToggleButtonManager.CornerRadius" Value="{Binding Path=ItemCorenerRadius, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
+                    <Setter Property="leedep:ToggleButtonManager.RippleBrush" Value="{Binding Path=ItemRippleBrush, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
+                    <Setter Property="leedep:ToggleButtonManager.CheckedBackground" Value="{Binding Path=ItemCheckedBackground, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
+                    <Setter Property="leedep:ToggleButtonManager.CheckedBorderBrush" Value="{Binding Path=ItemCheckedBorderBrush, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
+                    <Setter Property="leedep:ToggleButtonManager.MouseOverBackground" Value="{Binding Path=ItemMouseOverBackground, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
+                    <Setter Property="leedep:ToggleButtonManager.MouseOverBorderBrush" Value="{Binding Path=ItemBorderBrush, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
+                    <Setter Property="leedep:ToggleButtonManager.CheckedForeground" Value="{Binding Path=ItemCheckedForeground, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
 </ResourceDictionary>

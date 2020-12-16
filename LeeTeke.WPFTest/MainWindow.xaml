@@ -13,15 +13,7 @@
         Background="White"
         >
     <StackPanel>
-        <leecontrol:NotifyIconEx Icon="/Datas/test.ico"  ClickedThenClosing="False" Flashing="True">
-            <Grid Background="Red" 
-                  Width="100" 
-                  Height="100" >
-                <Button x:Name="asd"
-                        Content="test"/>
-            </Grid>
-                  
-        </leecontrol:NotifyIconEx>
+     
     </StackPanel>
         
 </Window>
