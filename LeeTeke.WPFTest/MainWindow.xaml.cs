@@ -26,5 +26,10 @@ namespace LeeTeke.WPFTest
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();
         }
+
+        private void test_SelectionChanged(object sender, object e)
+        {
+
+        }
     }
 }

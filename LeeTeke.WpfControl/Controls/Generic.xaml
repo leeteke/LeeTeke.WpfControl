@@ -4,6 +4,7 @@
                     xmlns:local="clr-namespace:LeeTeke.WpfControl.Controls">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/LeeTeke.WpfControl;component/Themes/ConvertersDictionary.xaml" />
+        <ResourceDictionary Source="/LeeTeke.WpfControl;component/Themes/ToggleButtonDictionary.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     
     
@@ -463,7 +464,7 @@
         </Setter>
         <Setter Property="ItemContainerStyle">
             <Setter.Value>
-                <Style BasedOn="{StaticResource  LeeToggleButton}" TargetType="ToggleButton">
+                <Style BasedOn="{StaticResource LeeToggleButton}"  TargetType="ToggleButton">
                     <Setter Property="Margin" Value="{Binding Path=ItemMargin, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
                     <Setter Property="Padding" Value="{Binding Path=ItemPadding, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
                     <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
@@ -477,6 +478,7 @@
                     <Setter Property="leedep:ToggleButtonManager.MouseOverBackground" Value="{Binding Path=ItemMouseOverBackground, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
                     <Setter Property="leedep:ToggleButtonManager.MouseOverBorderBrush" Value="{Binding Path=ItemBorderBrush, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
                     <Setter Property="leedep:ToggleButtonManager.CheckedForeground" Value="{Binding Path=ItemCheckedForeground, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
+              
                 </Style>
             </Setter.Value>
         </Setter>

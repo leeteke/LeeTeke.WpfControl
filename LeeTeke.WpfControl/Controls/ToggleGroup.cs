@@ -49,17 +49,23 @@ namespace LeeTeke.WpfControl.Controls
     [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(ToggleButton))]
     public class ToggleGroup : ItemsControl
     {
-        private WrapPanel _wrapPanel;
         static ToggleGroup()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ToggleGroup), new FrameworkPropertyMetadata(typeof(ToggleGroup)));
         }
+
+        private WrapPanel _wrapPanel;
+        private object _selectedValue;
+        private object _selectedItem;
+        private object _selectedIndex;
 
         public ToggleGroup()
         {
             EventManager.RegisterClassHandler(typeof(ToggleButton), ToggleButton.CheckedEvent, new RoutedEventHandler(ToggleButton_Checked));
             EventManager.RegisterClassHandler(typeof(ToggleButton), ToggleButton.UncheckedEvent, new RoutedEventHandler(ToggleButton_UnChecked));
             EventManager.RegisterClassHandler(typeof(WrapPanel), WrapPanel.LoadedEvent, new RoutedEventHandler(PART_WrapPanel_Loaded));
+
+           
         }
 
         #region override
@@ -74,32 +80,7 @@ namespace LeeTeke.WpfControl.Controls
             return new ToggleButton();
         }
 
-        protected override void PrepareContainerForItemOverride(DependencyObject element, object item)
-        {
-            base.PrepareContainerForItemOverride(element, item);
-        }
 
-        public new IList ItemsSource
-        {
-            get { return (IList)GetValue(ItemsSourceProperty); }
-            set
-            {
-                SetValue(ItemsSourceProperty, value);
-                base.ItemsSource = value;
-            }
-        }
-
-        // Using a DependencyProperty as the backing store for ItemsSource.  This enables animation, styling, binding, etc...
-        public static new readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register("ItemsSource", typeof(IList), typeof(ToggleGroup), new PropertyMetadata(null, new PropertyChangedCallback(ItemsSourceChanged)));
-
-        private static void ItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is ToggleGroup control && e.OldValue != e.NewValue)
-            {
-                control.ItemsSource = (IList)e.NewValue;
-            }
-        }
 
 
         #endregion
@@ -121,8 +102,58 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-        #region SelectedValue
+        #region SelectedItem
+        /// <summary>
+        /// 选择的Item
+        /// </summary>
+        public object SelectedItem
+        {
+            get { return (object)GetValue(SelectedItemProperty); }
+            set { SetValue(SelectedItemProperty, value); }
+        }
 
+        // Using a DependencyProperty as the backing store for SelectedItem.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedItemProperty =
+            DependencyProperty.Register("SelectedItem", typeof(object), typeof(ToggleGroup), new PropertyMetadata(null, new PropertyChangedCallback(SelectedItemChanged)));
+
+        private static void SelectedItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is ToggleGroup group && e.NewValue != e.OldValue)
+            {
+                if (e.NewValue != group._selectedItem)
+                {
+                    switch (group.SelectionMode)
+                    {
+                        case ToggleGroupMode.Single:
+                            if (e.NewValue is ToggleButton)
+                            {
+                                group.ItemChangedAsync(e.NewValue);
+                            }
+                            break;
+                        case ToggleGroupMode.Multiple:
+                            if (e.NewValue is not IList)
+                            {
+                                if (e.NewValue is ToggleButton)
+                                {
+                                    group.ItemChangedAsync(new List<ToggleButton>() { (ToggleButton)e.NewValue });
+                                }
+                            }
+                            else
+                            {
+                                group.ItemChangedAsync(e.NewValue);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+
+                }
+            }
+        }
+
+        #endregion
+
+        #region SelectedValue
 
 
         public object SelectedValue
@@ -137,33 +168,29 @@ namespace LeeTeke.WpfControl.Controls
 
         private static void SelectedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is ToggleGroup group && e.NewValue != e.OldValue)
+            if (d is ToggleGroup group)
             {
-                if (e.NewValue != null)
+                if (e.NewValue != group._selectedValue)
                 {
-                    if (e.NewValue is IList listsValue)
+                    switch (group.SelectionMode)
                     {
-                        foreach (var value in listsValue)
-                        {
-                            foreach (ToggleButton item in group._wrapPanel.Children)
+                        case ToggleGroupMode.Single:
+                            group.ValueChangedAsync(e.NewValue);
+                            break;
+                        case ToggleGroupMode.Multiple:
+                            if (e.NewValue is not IList)
                             {
-                                if (item.DataContext == value)
-                                {
-                                    item.IsChecked = true;
-                                }
+                                group.ValueChangedAsync(new List<object>() { e.NewValue });
                             }
-                        }
-                    }
-                    else
-                    {
-                        foreach (ToggleButton item in group._wrapPanel.Children)
-                        {
-                            if (item.DataContext == e.NewValue)
+                            else
                             {
-                                item.IsChecked = true;
+                                group.ValueChangedAsync(e.NewValue);
                             }
-                        }
+                            break;
+                        default:
+                            break;
                     }
+
                 }
             }
         }
@@ -172,33 +199,81 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-        #region SelectMode
-
-
-
-        public ToggleGroupMode SelectMode
+        #region SelectedIndex
+        /// <summary>
+        /// 请填写描述
+        /// </summary>
+        public object SelectedIndex
         {
-            get { return (ToggleGroupMode)GetValue(SelectModeProperty); }
-            set { SetValue(SelectModeProperty, value); }
+            get { return (object)GetValue(SelectedIndexProperty); }
+            set { SetValue(SelectedIndexProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for SelectMode.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SelectModeProperty =
-            DependencyProperty.Register("SelectMode", typeof(ToggleGroupMode), typeof(ToggleGroup), new PropertyMetadata(ToggleGroupMode.Single, new PropertyChangedCallback(SelectModeChanged)));
+        // Using a DependencyProperty as the backing store for SelectedIndex.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedIndexProperty =
+            DependencyProperty.Register("SelectedIndex", typeof(object), typeof(ToggleGroup), new PropertyMetadata(null, new PropertyChangedCallback(SelectedIndexChanged)));
 
-        private static void SelectModeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void SelectedIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is ToggleGroup group && e.NewValue != e.OldValue)
             {
-                group.SelectedValue = null;
+                if (e.NewValue != group._selectedIndex)
+                {
+
+                    switch (group.SelectionMode)
+                    {
+                        case ToggleGroupMode.Single:
+                            if (int.TryParse(e.NewValue.ToString(), out int value))
+                            {
+                                group.IndexChangedAsync(value);
+                            }
+                            break;
+                        case ToggleGroupMode.Multiple:
+                            if (e.NewValue is not IList)
+                            {
+                                if (int.TryParse(e.NewValue.ToString(), out int value2))
+                                {
+                                    group.IndexChangedAsync(new List<int>() { value2 });
+                                }
+                            }
+                            else
+                            {
+                                group.IndexChangedAsync(e.NewValue);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+
+                }
             }
         }
 
-
-
         #endregion
 
+        #region SelectionMode
+        /// <summary>
+        /// 请填写描述
+        /// </summary>
+        public ToggleGroupMode SelectionMode
+        {
+            get { return (ToggleGroupMode)GetValue(SelectionModeProperty); }
+            set { SetValue(SelectionModeProperty, value); }
+        }
 
+        // Using a DependencyProperty as the backing store for SelectionMode.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectionModeProperty =
+            DependencyProperty.Register("SelectionMode", typeof(ToggleGroupMode), typeof(ToggleGroup), new PropertyMetadata(ToggleGroupMode.Single, new PropertyChangedCallback(SelectionModeChanged)));
+
+        private static void SelectionModeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is ToggleGroup group)
+            {
+                group.ValueChangedAsync(null);
+            }
+        }
+
+        #endregion
 
         #region Item功能
 
@@ -414,19 +489,43 @@ namespace LeeTeke.WpfControl.Controls
 
 
 
+        #region SelectionChangedCommand
+        /// <summary>
+        /// 请填写描述
+        /// </summary>
+        public ICommand SelectionChangedCommand
+        {
+            get { return (ICommand)GetValue(SelectionChangedCommandProperty); }
+            set { SetValue(SelectionChangedCommandProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SelectionChangedCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectionChangedCommandProperty =
+            DependencyProperty.Register("SelectionChangedCommand", typeof(ICommand), typeof(ToggleGroup));
+
+        #endregion
+
+
+
+        #endregion
+
+
+        #region 路由
+
+        /// <summary>
+        /// 选择改变
+        /// </summary>
+        public event EventHandler<object> SelectionChanged;
         #endregion
 
         #region 内部逻辑
-        private void me_Loaded(object sender, RoutedEventArgs e)
-        {
 
-        }
 
         private void PART_WrapPanel_Loaded(object sender, RoutedEventArgs e)
         {
             if (sender is WrapPanel wrap)
             {
-                if (wrap.Name== "PART_WrapPanel")
+                if (wrap.Name == "PART_WrapPanel")
                 {
                     _wrapPanel = wrap;
 
@@ -435,47 +534,397 @@ namespace LeeTeke.WpfControl.Controls
         }
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)
         {
+
             if (sender is ToggleButton button)
             {
-                if (SelectMode == ToggleGroupMode.Single)
+
+                if (ItemsSource == null)
                 {
-                    SelectedValue = button.DataContext;
-                    if (_wrapPanel != null)
+                    switch (SelectionMode)
                     {
-                        foreach (ToggleButton item in _wrapPanel.Children)
-                        {
-                            if (item != button)
+                        case ToggleGroupMode.Single:
+                            SelectedItem = button;
+                            break;
+                        case ToggleGroupMode.Multiple:
+                            if (SelectedItem == null)
                             {
-                                item.IsChecked = false;
+                                SelectedItem = new List<ToggleButton>() { button };
                             }
-                        }
+                            else if (((List<ToggleButton>)SelectedItem).IndexOf(button) < 0)
+                            {
+                                var newValue = (List<ToggleButton>)SelectedValue;
+                                newValue.Add(button);
+                                ItemChangedAsync(newValue);
+
+                            }
+                            break;
+                        default:
+                            break;
                     }
+
                 }
                 else
                 {
-                    if (SelectedValue == null || !(SelectedValue is IList))
-                        SelectedValue = new List<object>();
-                    (SelectedValue as List<object>).Add(button.DataContext);
+                    switch (SelectionMode)
+                    {
+                        case ToggleGroupMode.Single:
+                            SelectedValue = button.DataContext;
+                            break;
+                        case ToggleGroupMode.Multiple:
+                            if (SelectedValue == null)
+                            {
+                                SelectedValue = new List<object>() { button.DataContext };
+                            }
+                            else if (((List<object>)SelectedValue).IndexOf(button.DataContext) < 0)
+                            {
+                                var newValue = (List<object>)SelectedValue;
+                                newValue.Add(button.DataContext);
+                                ValueChangedAsync(newValue);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
                 }
+
+
             }
         }
         private void ToggleButton_UnChecked(object sender, RoutedEventArgs e)
         {
             if (sender is ToggleButton button)
             {
-                if (SelectMode == ToggleGroupMode.Single)
+
+                if (ItemsSource == null)
                 {
-                    SelectedValue = null;
+
+                    switch (SelectionMode)
+                    {
+                        case ToggleGroupMode.Single:
+                            SelectedItem = null;
+                            break;
+                        case ToggleGroupMode.Multiple:
+
+                            if (SelectedItem != null && SelectedItem is IList list)
+                            {
+                                list.Remove(button);
+                                if (list.Count < 1)
+                                {
+                                    SelectedItem = null;
+                                    ItemChangedAsync(null);
+                                }
+                                else
+                                {
+                                    ItemChangedAsync(list);
+                                }
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+
+
+
                 }
                 else
                 {
-                    if (SelectedValue != null && SelectedValue is IList list)
+                    switch (SelectionMode)
                     {
-                        list.Remove(button.DataContext);
+
+
+                        case ToggleGroupMode.Single:
+                            SelectedValue = null;
+                            break;
+                        case ToggleGroupMode.Multiple:
+                            if (SelectedValue != null && SelectedValue is IList list)
+                            {
+                                list.Remove(button.DataContext);
+                                if (list.Count < 1)
+                                {
+                                    SelectedValue = null;
+                                    ValueChangedAsync(null);
+                                }
+                                else
+                                {
+                                    ValueChangedAsync(list);
+                                }
+                            }
+                            break;
+                        default:
+                            break;
                     }
                 }
+
+
             }
         }
+
+
+        private async void ValueChangedAsync(object value)
+        {
+
+            if (ItemsSource == null)
+            {
+                ItemChangedAsync(value);
+                return;
+            }
+
+            if (!await SelectedInitAsync(value))
+                return;
+
+
+            //单选项
+            if (SelectionMode == ToggleGroupMode.Single)
+            {
+                foreach (ToggleButton chlid in _wrapPanel.Children)
+                {
+                    if (value == chlid.DataContext)
+                    {
+                        _selectedIndex = _wrapPanel.Children.IndexOf(chlid);
+                        _selectedItem = chlid;
+                        _selectedValue = chlid.DataContext;
+                        SelectedIndex = _selectedIndex;
+                        SelectedValue = _selectedValue;
+                        SelectedItem = _selectedItem;
+                        chlid.IsChecked = true;
+                    }
+                    else
+                    {
+                        SelectedIndex = _selectedIndex;
+                        SelectedValue = _selectedValue;
+                        SelectedItem = _selectedItem;
+                        chlid.IsChecked = false;
+                    }
+                }
+
+                EventGO();
+                return;
+            }
+
+            //多选项
+            if (SelectionMode == ToggleGroupMode.Multiple && value is IList valueList)
+            {
+                foreach (var singleList in valueList)
+                {
+                    foreach (ToggleButton child in _wrapPanel.Children)
+                    {
+                        if (child.DataContext == singleList)
+                        {
+                            #region 如果没有初始化Value值
+                            if (_selectedValue == null)
+                            {
+                                _selectedValue = new List<object>();
+                                _selectedItem = new List<ToggleButton>();
+                                _selectedIndex = new List<int>();
+                            }
+                            #endregion
+                                ((List<object>)_selectedValue).Add(child.DataContext);
+                            ((List<ToggleButton>)_selectedItem).Add(child);
+                            ((List<int>)_selectedIndex).Add(_wrapPanel.Children.IndexOf(child));
+                            SelectedIndex = _selectedIndex;
+                            SelectedValue = _selectedValue;
+                            SelectedItem = _selectedItem;
+                            child.IsChecked = true;
+                        }
+
+                    }
+                }
+
+
+                EventGO();
+                return;
+            }
+
+        }
+
+        private async void ItemChangedAsync(object item)
+        {
+
+
+            if (!await SelectedInitAsync(item))
+                return;
+
+
+            //单选项
+            if (SelectionMode == ToggleGroupMode.Single && item is ToggleButton toggle)
+            {
+
+                foreach (ToggleButton chlid in _wrapPanel.Children)
+                {
+                    if (toggle == chlid)
+                    {
+                        _selectedIndex = _wrapPanel.Children.IndexOf(chlid);
+                        _selectedItem = chlid;
+                        _selectedValue = chlid;
+                        SelectedIndex = _selectedIndex;
+                        SelectedValue = _selectedValue;
+                        SelectedItem = _selectedItem;
+                        chlid.IsChecked = true;
+                    }
+                    else
+                    {
+                        SelectedIndex = _selectedIndex;
+                        SelectedValue = _selectedValue;
+                        SelectedItem = _selectedItem;
+                        chlid.IsChecked = false;
+                    }
+                }
+                EventGO();
+                return;
+            }
+
+            //多选项
+            if (SelectionMode == ToggleGroupMode.Multiple && item is List<ToggleButton> toogleList)
+            {
+
+                foreach (var singleList in toogleList)
+                {
+                    foreach (ToggleButton child in _wrapPanel.Children)
+                    {
+                        if (child == singleList)
+                        {
+                            #region 如果没有初始化Value值
+                            if (_selectedValue == null)
+                            {
+                                _selectedValue = new List<ToggleButton>();
+                                _selectedItem = new List<ToggleButton>();
+                                _selectedIndex = new List<int>();
+                            }
+                            #endregion
+                                ((List<ToggleButton>)_selectedValue).Add(child);
+                            ((List<ToggleButton>)_selectedItem).Add(child);
+                            ((List<int>)_selectedIndex).Add(_wrapPanel.Children.IndexOf(child));
+
+                            SelectedIndex = _selectedIndex;
+                            SelectedValue = _selectedValue;
+                            SelectedItem = _selectedItem;
+                            child.IsChecked = true;
+                        }
+                    }
+                }
+
+
+                EventGO();
+                return;
+            }
+
+         
+        }
+
+        private async void IndexChangedAsync(object value)
+        {
+
+            if (!await SelectedInitAsync(value))
+                return;
+
+            //单选项
+            if (SelectionMode == ToggleGroupMode.Single && value is int index)
+            {
+
+
+
+                foreach (ToggleButton chlid in _wrapPanel.Children)
+                {
+                    if (_wrapPanel.Children.IndexOf(chlid) == index)
+                    {
+                        _selectedIndex = _wrapPanel.Children.IndexOf(chlid);
+                        _selectedItem = chlid;
+                        _selectedValue = chlid;
+                        SelectedIndex = _selectedIndex;
+                        SelectedValue = _selectedValue;
+                        SelectedItem = _selectedItem;
+                        chlid.IsChecked = true;
+                    }
+                    else
+                    {
+                        SelectedIndex = _selectedIndex;
+                        SelectedValue = _selectedValue;
+                        SelectedItem = _selectedItem;
+                        chlid.IsChecked = false;
+                    }
+                }
+                EventGO();
+                return;
+            }
+
+            //多选项
+            if (SelectionMode == ToggleGroupMode.Multiple && value is List<int> valueList)
+            {
+
+                foreach (var singleList in valueList)
+                {
+                    foreach (ToggleButton child in _wrapPanel.Children)
+                    {
+                        if (_wrapPanel.Children.IndexOf(child) == singleList)
+                        {
+                            #region 如果没有初始化Value值
+                            if (_selectedValue == null)
+                            {
+                                _selectedValue = new List<ToggleButton>();
+                                _selectedItem = new List<ToggleButton>();
+                                _selectedIndex = new List<int>();
+                            }
+                            #endregion
+                                ((List<ToggleButton>)_selectedValue).Add(child);
+                            ((List<ToggleButton>)_selectedItem).Add(child);
+                            ((List<int>)_selectedIndex).Add(_wrapPanel.Children.IndexOf(child));
+
+                            SelectedIndex = _selectedIndex;
+                            SelectedValue = _selectedValue;
+                            SelectedItem = _selectedItem;
+                            child.IsChecked = true;
+                        }
+                    }
+                }
+
+
+                EventGO();
+                return;
+            }
+
+
+        }
+
+        /// <summary>
+        /// 清理选择
+        /// </summary>
+        private async Task<bool> SelectedInitAsync(object args)
+        {
+            while (!IsLoaded)
+            {
+                await Task.Delay(1);
+            }
+            _selectedIndex = null;
+            _selectedItem = null;
+            _selectedValue = null;
+            if (args == null)
+            {
+                SelectedIndex = _selectedIndex;
+                SelectedValue = _selectedValue;
+                SelectedItem = _selectedItem;
+                foreach (ToggleButton chlid in _wrapPanel.Children)
+                {
+                    chlid.IsChecked = false;
+                }
+                EventGO();
+                return false;
+            }
+
+            return true;
+        }
+
+        private void EventGO()
+        {
+            SelectionChanged?.Invoke(this, SelectedValue);
+            try
+            {
+                SelectionChangedCommand?.Execute(SelectedValue);
+            }
+            catch 
+            {
+            }
+        }
+
         #endregion
 
     }

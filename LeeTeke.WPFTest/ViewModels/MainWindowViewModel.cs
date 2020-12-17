@@ -46,6 +46,22 @@ namespace LeeTeke.WPFTest.ViewModels
             }
         }
 
+
+        private List<object> _SelectedList;
+        /// <summary>
+        /// 请填写属性名
+        /// </summary>
+        public List<object> SelectedList
+        {
+            get { return _SelectedList; }
+            set
+            {
+                _SelectedList = value;
+                this.RaisePropertyChanged("SelectedList");
+            }
+        }
+
+
         #endregion
 
 
@@ -76,6 +92,10 @@ namespace LeeTeke.WPFTest.ViewModels
                 new TestListModel(){  Title="测试3", Boolen=true, Image=new BitmapImage(new Uri("https://nie.res.netease.com/r/pic/20200317/16005c2f-d749-465f-a05d-3dcbba024f22.jpg"))},
             };
 
+            SelectedList = new List<object>()
+            {
+                TestList[0],TestList[2]
+            };
         }
 
 
