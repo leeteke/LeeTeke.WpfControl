@@ -31,5 +31,10 @@ namespace LeeTeke.WPFTest
         {
 
         }
+
+        private void Test_IconCliecked(object sender, string e)
+        {
+
+        }
     }
 }

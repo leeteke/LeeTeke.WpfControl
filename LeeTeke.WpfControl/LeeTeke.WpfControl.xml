@@ -347,12 +347,20 @@
             关闭Item
             </summary>
         </member>
-        <member name="T:LeeTeke.WpfControl.Controls.TextBoxEx">
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.TextBoxEx" -->
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.Mode">
             <summary>
-            TextBoxEx.xaml 的交互逻辑
+            请填写描述
             </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.Text">
             <summary>
-            TextBoxEx
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.TextAlignment">
+            <summary>
+            请填写描述
             </summary>
         </member>
         <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.CornerRadius">
@@ -360,49 +368,89 @@
             CornerRadius
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.BorderThickness">
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.PasswordChar">
             <summary>
-            BorderThickness
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.PreviewText">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.AcceptsReturn">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.Icon">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.IconOutSize">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.IconSize">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.IconFill">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.IconVisible">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.IconCanClick">
+            <summary>
+            请填写描述
             </summary>
         </member>
         <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.IconDock">
             <summary>
-            Icon的位置
+            IconDock
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.IconCanClick">
-            <summary>           
-            Icon可以点击
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.SeparatorShow">
-            <summary>
-            分割线显示
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.Content">
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.SplitterVisible">
             <summary>
             请填写描述
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.Padding">
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.SplitterFill">
             <summary>
             请填写描述
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.VerticalContentAlignment">
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.SplitterMargin">
             <summary>
             请填写描述
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.HorizontalContentAlignment">
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.SplitterSize">
             <summary>
             请填写描述
             </summary>
         </member>
-        <member name="M:LeeTeke.WpfControl.Controls.TextBoxEx.InitializeComponent">
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.EnterCommand">
             <summary>
-            InitializeComponent
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.IconCommand">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="E:LeeTeke.WpfControl.Controls.TextBoxEx.EnterEvent">
+            <summary>
+            回车事件
             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.ToggleGroup" -->
@@ -739,6 +787,26 @@
         <member name="P:LeeTeke.WpfControl.BalloonTipModel.Icon">
             <summary>
             Icon
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.TextMode.General">
+            <summary>
+            常规
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.TextMode.Password">
+            <summary>
+            密码行为
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.TextMode.Number">
+            <summary>
+            数字行为
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.TextMode.IMEDispaly">
+            <summary>
+            禁止IME
             </summary>
         </member>
         <member name="F:LeeTeke.WpfControl.ToggleGroupMode.Single">

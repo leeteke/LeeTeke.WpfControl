@@ -7,8 +7,8 @@
         <ResourceDictionary Source="/LeeTeke.WpfControl;component/Themes/ConvertersDictionary.xaml" />
         <ResourceDictionary Source="/LeeTeke.WpfControl;component/Themes/ToggleButtonDictionary.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-    
-    
+
+
     <Style TargetType="{x:Type local:GridView}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
@@ -121,7 +121,7 @@
                                 </Rectangle.Clip>
 
                             </Rectangle>
-                            
+
                             <Rectangle x:Name="PART_WVRect"
                                        Height="{Binding ElementName=PART_Canvas,Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/4,Mode=OneWay}"
                                        Width="{Binding ElementName=PART_Canvas,Path=ActualWidth,Mode=OneWay}"
@@ -199,7 +199,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <Style TargetType="{x:Type local:SlideView}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
@@ -282,7 +282,7 @@
                             </Ellipse>
 
                         </Canvas>
-                        
+
                         <ContentControl x:Name="openContent" 
                                         Content="{TemplateBinding Content}"
                                         Grid.Row="0"
@@ -296,16 +296,16 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="HasContent" Value="False">
-                            
+
                             <Setter TargetName="columnLeft" Property="Width" Value="*" />
                             <Setter TargetName="columnRight" Property="Width" Value="auto" />
-                            
+
                             <Setter TargetName="rowTop" Property="Height" Value="*" />
                             <Setter TargetName="rowBottom" Property="Height" Value="auto" />
-                            
+
                             <Setter TargetName="PART_Canvas" Property="Grid.Row" Value="0"/>
                             <Setter TargetName="PART_Canvas" Property="Grid.Column" Value="0"/>
-          
+
                             <Setter TargetName="PART_Canvas" Property="HorizontalAlignment" Value="Stretch"/>
                             <Setter TargetName="PART_Canvas" Property="VerticalAlignment" Value="Stretch"/>
 
@@ -315,8 +315,8 @@
                             <Setter TargetName="closeContent" Property="Grid.Row" Value="0"/>
                             <Setter TargetName="closeContent" Property="Grid.Column" Value="1"/>
                         </Trigger>
-                        
-       
+
+
 
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -356,7 +356,7 @@
 
                             <Setter TargetName="PART_Canvas" Property="Grid.Row" Value="0"/>
                             <Setter TargetName="PART_Canvas" Property="Grid.Column" Value="1"/>
-                            
+
                             <Setter TargetName="PART_Canvas" Property="HorizontalAlignment" Value="Center"/>
                             <Setter TargetName="PART_Canvas" Property="VerticalAlignment" Value="Top"/>
 
@@ -405,7 +405,7 @@
 
                             <Setter TargetName="PART_Canvas" Property="Grid.Row" Value="0"/>
                             <Setter TargetName="PART_Canvas" Property="Grid.Column" Value="0"/>
-                            
+
                             <Setter TargetName="PART_Canvas" Property="HorizontalAlignment" Value="Left"/>
                             <Setter TargetName="PART_Canvas" Property="VerticalAlignment" Value="Stretch"/>
 
@@ -479,10 +479,139 @@
                     <Setter Property="leedep:ToggleButtonManager.MouseOverBackground" Value="{Binding Path=ItemMouseOverBackground, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
                     <Setter Property="leedep:ToggleButtonManager.MouseOverBorderBrush" Value="{Binding Path=ItemBorderBrush, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
                     <Setter Property="leedep:ToggleButtonManager.CheckedForeground" Value="{Binding Path=ItemCheckedForeground, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
-              
+
                 </Style>
             </Setter.Value>
         </Setter>
     </Style>
-    
+
+    <Style TargetType="{x:Type local:TextBoxEx}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="Mode" Value="General"/>
+        <Setter Property="PreviewText" Value="请输入"/>
+        <Setter Property="PasswordChar" Value="●"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_TextColor}"/>
+        <Setter Property="MinHeight" Value="20"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource  LeeBrush_Gray153}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="IconDock" Value="Left"/>
+        <Setter Property="Icon" Value="&#xE74C;"/>
+        <Setter Property="IconOutSize" Value="20"/>
+        <Setter Property="IconSize" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=FontSize}"/>
+        <Setter Property="IconCanClick" Value="False"/>
+        <Setter Property="IconVisible" Value="False"/>
+        <Setter Property="IconFill" Value="{DynamicResource  LeeBrush_Main}"/>
+        <Setter Property="SplitterFill" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=BorderBrush}"/>
+        <Setter Property="SplitterMargin" Value="2"/>
+        <Setter Property="SplitterVisible" Value="False"/>
+        <Setter Property="SplitterSize" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:TextBoxEx}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="{TemplateBinding Padding}">
+                        <Border.Clip>
+                            <MultiBinding  Converter="{StaticResource  MultiValueToClipConverter}" Mode="OneWay">
+                                <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualWidth"/>
+                                <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualHeight"/>
+                                <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="CornerRadius"/>
+                            </MultiBinding>
+                        </Border.Clip>
+                        <DockPanel>
+
+                            <Border x:Name="PART_ICON"
+                                    Background="Transparent"
+                                    Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=IconVisible,Mode=OneWay,Converter={StaticResource VisibilityForBoolConverter}}"
+                                    MinHeight="{TemplateBinding IconOutSize}"
+                                    MinWidth="{TemplateBinding IconOutSize}"
+                                    >
+                                <TextBlock  IsHitTestVisible="True"
+                                       Text="{TemplateBinding Icon}"
+                                       FontFamily="{DynamicResource IconFontFamily}"
+                                       DockPanel.Dock="{TemplateBinding IconDock}"
+                                       Foreground="{TemplateBinding IconFill}"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                            Background="Transparent"
+                                           />
+
+                            </Border>
+                            <Rectangle   MinHeight="{TemplateBinding SplitterSize}"
+                                         MinWidth="{TemplateBinding SplitterSize}"
+                                         Fill="{TemplateBinding SplitterFill}"
+                                         Margin="{TemplateBinding SplitterMargin}"
+                                         Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=SplitterVisible,Mode=OneWay,Converter={StaticResource VisibilityForBoolConverter}}"
+                                         DockPanel.Dock="{TemplateBinding IconDock}"/>
+
+                            <Grid >
+                                <TextBox x:Name="PART_Main" 
+                                         Text="{TemplateBinding Text}"
+                                         Background="Transparent"
+                                         FocusVisualStyle="{x:Null}"
+                                         Foreground="{TemplateBinding Foreground}"
+                                         FontFamily="{TemplateBinding FontFamily}"
+                                         FontSize="{TemplateBinding FontSize}"
+                                         FontStretch="{TemplateBinding FontStretch}"
+                                         TextAlignment="{TemplateBinding TextAlignment}"
+                                         leedep:FocusFromEventManager.Element="{Binding ElementName=PART_PreviewText}"
+                                         leedep:FocusFromEventManager.EventName="MouseDown"
+                                         BorderThickness="0"
+                                         VerticalAlignment="Center"
+                                         />
+                                <TextBlock x:Name="PART_PreviewText"
+                                           Foreground="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Foreground,Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.5,Mode=OneWay}"
+                                           Text="{TemplateBinding PreviewText}"
+                                           Background="Transparent"
+                                            VerticalAlignment="Center"
+                                           TextAlignment="{TemplateBinding TextAlignment}"
+                                      
+                                           />
+
+                            </Grid>
+                        </DockPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=PART_ICON,Path=IsMouseOver,Mode=OneWay}" Value="True"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=IconCanClick}"  Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="PART_ICON" Property="Background" Value="Red"/>
+                        </MultiDataTrigger>
+
+
+                        <DataTrigger Binding="{Binding ElementName=PART_Main,Path=IsFocused,Mode=OneWay}" Value="True">
+                            <Setter TargetName="PART_PreviewText" Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=PART_Main,Path=IsFocused,Mode=OneWay}" Value="False"/>
+                                <Condition Binding="{Binding ElementName=PART_Main,Path=Text,Mode=OneWay,Converter={StaticResource StringIsNullConverter}}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="PART_PreviewText" Property="Visibility" Value="Visible"/>
+                        </MultiDataTrigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=PART_Main,Path=IsFocused,Mode=OneWay}" Value="False"/>
+                                <Condition Binding="{Binding ElementName=PART_Main,Path=Text,Mode=OneWay,Converter={StaticResource StringIsNullConverter}}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+
+                            <Setter TargetName="PART_PreviewText" Property="Visibility" Value="Collapsed"/>
+                        </MultiDataTrigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
 </ResourceDictionary>

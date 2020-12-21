@@ -12,9 +12,17 @@
         Width="800"
         Background="White"
         >
+
     <StackPanel>
 
+        <leecontrol:TextBoxEx x:Name="Test"  
+                              IconCliecked="Test_IconCliecked"
+                              Margin="5" IconVisible="True" SplitterVisible="True"  IconCanClick="True"/>
 
+        <leecontrol:TextBoxEx Margin="5" />
+        <Button Content="你好"/>
     </StackPanel>
+
+
         
 </Window>

@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-    public class EventToBoolManager : DependencyObject
+    public class FocusFromEventManager : DependencyObject
     {
         #region Element
 
@@ -23,7 +25,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for Element.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ElementProperty =
-            DependencyProperty.RegisterAttached("Element", typeof(UIElement), typeof(EventToBoolManager), new PropertyMetadata(null, new PropertyChangedCallback(ElementChanged)));
+            DependencyProperty.RegisterAttached("Element", typeof(UIElement), typeof(FocusFromEventManager), new PropertyMetadata(null, new PropertyChangedCallback(ElementChanged)));
 
         private static void ElementChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -31,9 +33,9 @@ namespace LeeTeke.WpfControl.Dependencies
             {
                 if (e.NewValue is UIElement element)
                 {
-                    if (GetEventName(d)!=null&& GetBoolValue(d) != null)
+                    if (GetEventName(d) != null)
                     {
-                        new EventToBoolClass(GetBoolValue(d), em, element, GetEventName(d));
+                        new EventToFocusClass(em, element, GetEventName(d));
                     }
                 }
             }
@@ -55,38 +57,15 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for EventName.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty EventNameProperty =
-            DependencyProperty.RegisterAttached("EventName", typeof(string), typeof(EventToBoolManager));
+            DependencyProperty.RegisterAttached("EventName", typeof(string), typeof(FocusFromEventManager));
         #endregion
-
-
-        #region BoolValue
-
-
-        public static DependencyProperty GetBoolValue(DependencyObject obj)
-        {
-            return (DependencyProperty)obj.GetValue(BoolValueProperty);
-        }
-
-        public static void SetBoolValue(DependencyObject obj, DependencyProperty value)
-        {
-            obj.SetValue(BoolValueProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for BoolValue.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty BoolValueProperty =
-            DependencyProperty.RegisterAttached("BoolValue", typeof(DependencyProperty), typeof(EventToBoolManager));
-
-        #endregion
-
     }
 
-    class EventToBoolClass
+    class EventToFocusClass
     {
-        private DependencyProperty _value;
         private UIElement _em;
-        public EventToBoolClass(DependencyProperty value, UIElement em, UIElement obj, string eventName)
+        public EventToFocusClass(UIElement em, UIElement obj, string eventName)
         {
-            _value = value;
             _em = em;
             EventHandler clickHandler = Test;
             Type type = obj.GetType();
@@ -100,12 +79,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         private void Test(object send, EventArgs e)
         {
-            
-            if (_em.GetValue(_value) is bool result)
-            {
-                _em.SetValue(_value, !result);
-            }
-
+            _em.Focus();
         }
 
     }
