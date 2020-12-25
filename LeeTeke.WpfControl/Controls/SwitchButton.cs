@@ -81,11 +81,36 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
 
-        public event EventHandler<SwitchChangedEventArgs> SwitchChangedEvent;
+        #region RouteEvent
+
+        #region SwitchChanged
+        /// <summary>
+        /// 开关发生
+        /// </summary>
+        public event SwitchChangedEventHandler SwitchChanged
+        {
+            add { AddHandler(SwitchChangedEvent, value); }
+            remove { RemoveHandler(SwitchChangedEvent, value); }
+        }
+
+        public static readonly RoutedEvent SwitchChangedEvent = EventManager.RegisterRoutedEvent(
+        "SwitchChanged", RoutingStrategy.Bubble, typeof(EventHandler<SwitchChangedEventHandler>), typeof(SwitchButton));
+
+
+        private void RaiseSwitchChanged(bool newValue)
+        {
+            var arg = new SwitchChangedEventArgs(newValue, SwitchChangedEvent);
+            RaiseEvent(arg);
+        }
+
+        #endregion
+
+        #endregion
+
+
 
 
         #region 依赖属性
-
 
         #region HasContent
         /// <summary>
@@ -102,9 +127,6 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("HasContent", typeof(bool), typeof(SwitchButton));
 
         #endregion
-
-
-
 
         #region Switch
 
@@ -133,7 +155,6 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-
         #region ButtonWidth
         /// <summary>
         /// 开关的宽度啊
@@ -150,7 +171,6 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-
         #region ButtonHeight
         /// <summary>
         /// 开关的高度
@@ -166,8 +186,6 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("ButtonHeight", typeof(double), typeof(SwitchButton), new PropertyMetadata(30.0));
 
         #endregion
-
-
 
         #region Content
         /// <summary>
@@ -206,7 +224,6 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         #endregion
-
 
         #region CloseContent
         /// <summary>
@@ -247,7 +264,6 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-
         #region ContentDock
         /// <summary>
         /// 内容位置
@@ -268,19 +284,13 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-
-
-
-
-
         #endregion
 
         #region 内部逻辑
         private void SwitchButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
             Switch = !Switch;
-            SwitchChangedEvent?.Invoke(this, new SwitchChangedEventArgs(Switch));
+            RaiseSwitchChanged(Switch);
         }
 
         private async void ControlStoryBoardAsync(bool _switch)

@@ -79,7 +79,10 @@ namespace LeeTeke.WpfControl.Dependencies
 
         private void Test(object send, EventArgs e)
         {
-            _em.Focus();
+            if (_em.Visibility==Visibility.Visible)
+            {
+                _em.Focus();
+            }
         }
 
     }

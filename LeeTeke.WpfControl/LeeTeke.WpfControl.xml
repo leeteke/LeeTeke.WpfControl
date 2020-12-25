@@ -266,6 +266,11 @@
             过度动画
             </summary>
         </member>
+        <member name="E:LeeTeke.WpfControl.Controls.SlideView.ItemClicked">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
         <member name="M:LeeTeke.WpfControl.Controls.SlideView.ToIndex(System.Int32)">
             <summary>
             去选项
@@ -274,6 +279,11 @@
         </member>
         <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.SlideViewItem" -->
         <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.SwitchButton" -->
+        <member name="E:LeeTeke.WpfControl.Controls.SwitchButton.SwitchChanged">
+            <summary>
+            开关发生
+            </summary>
+        </member>
         <member name="P:LeeTeke.WpfControl.Controls.SwitchButton.HasContent">
             <summary>
             请填写描述
@@ -304,30 +314,110 @@
             内容位置
             </summary>
         </member>
-        <member name="T:LeeTeke.WpfControl.Controls.TagControl">
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.TagControl" -->
+        <member name="E:LeeTeke.WpfControl.Controls.TagControl.ItemClosed">
             <summary>
-            TagControl.xaml 的交互逻辑
-            </summary>
-            <summary>
-            TagControl
+            请填写描述
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TagControl.Changing">
+        <member name="E:LeeTeke.WpfControl.Controls.TagControl.ItemSelected">
             <summary>
-            正在改变选择
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TagControl.ItemsSource">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TagControl.SelectedIndex">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TagControl.SelectedItem">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TagControl.SelectedValue">
+            <summary>
+            请填写描述
             </summary>
         </member>
         <member name="P:LeeTeke.WpfControl.Controls.TagControl.Orientation">
             <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TagControl.ItemCornerRadius">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TagControl.SelectedBrush">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TagControl.ItemClosedCommand">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TagControl.ItemSelectedCommand">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.TagControl.CloseItemAsync(LeeTeke.WpfControl.Controls.TagControlItem)">
+            <summary>
+            关闭
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.TagControl.ItemValueChanged(LeeTeke.WpfControl.Controls.TagControlItem)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.TagControl.ItemRemoveChanged(LeeTeke.WpfControl.Controls.TagControlItem)">
+            <summary>
+            Item移动事件发生
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.TagControl.ItemSelectedChanged(LeeTeke.WpfControl.Controls.TagControlItem)">
+            <summary>
+            Item选择事件发生
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="T:LeeTeke.WpfControl.Controls.TagControlEx">
+            <summary>
+            TagControlEx.xaml 的交互逻辑
+            </summary>
+            <summary>
+            TagControlEx
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TagControlEx.Changing">
+            <summary>
+            正在改变选择
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TagControlEx.Orientation">
+            <summary>
             方向
             </summary>
         </member>
-        <member name="E:LeeTeke.WpfControl.Controls.TagControl.ItemClosedEvent">
+        <member name="E:LeeTeke.WpfControl.Controls.TagControlEx.ItemClosedEvent">
             <summary>
             item关闭事件
             </summary>
         </member>
-        <member name="M:LeeTeke.WpfControl.Controls.TagControl.InitializeComponent">
+        <member name="M:LeeTeke.WpfControl.Controls.TagControlEx.InitializeComponent">
             <summary>
             InitializeComponent
             </summary>
@@ -343,6 +433,46 @@
             </summary>
         </member>
         <member name="M:LeeTeke.WpfControl.Controls.TagItem.CloseAsync">
+            <summary>
+            关闭Item
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TagControlItem.IsClosed">
+            <summary>
+            是否执行了关闭
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TagControlItem.CanClosed">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TagControlItem.IsSelected">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TagControlItem.CornerRadius">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TagControlItem.Orientation">
+            <summary>
+            Orientation
+            </summary>
+        </member>
+        <member name="E:LeeTeke.WpfControl.Controls.TagControlItem.Closed">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="E:LeeTeke.WpfControl.Controls.TagControlItem.Selected">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.TagControlItem.CloseAsync">
             <summary>
             关闭Item
             </summary>
@@ -789,6 +919,21 @@
             Icon
             </summary>
         </member>
+        <member name="F:LeeTeke.WpfControl.TagControlItemClosedMode.Self">
+            <summary>
+            关闭自己
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.TagControlItemClosedMode.Other">
+            <summary>
+            关闭其他
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.TagControlItemClosedMode.All">
+            <summary>
+            关闭全部
+            </summary>
+        </member>
         <member name="F:LeeTeke.WpfControl.TextMode.General">
             <summary>
             常规
@@ -905,6 +1050,15 @@
             </summary>
             <typeparam name="childItem"></typeparam>
             <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LeeTeke.WpfControl.StaticMethods.IsInControl(System.Windows.DependencyObject,System.Windows.DependencyObject,System.Int32)">
+            <summary>
+            是否在控件里面
+            </summary>
+            <param name="pardent"></param>
+            <param name="child"></param>
+            <param name="outLevel"></param>
             <returns></returns>
         </member>
         <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">

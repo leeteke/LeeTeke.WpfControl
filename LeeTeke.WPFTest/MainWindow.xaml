@@ -14,15 +14,11 @@
         >
 
     <StackPanel>
+        <leecontrol:TagControl x:Name="test" >
+            <leecontrol:TagControlItem x:Name="t1" Content="Nihao" />
+            <leecontrol:TagControlItem x:Name="t2" Content="Nihao1"/>
+            <leecontrol:TagControlItem x:Name="t3" Content="Nihao2"  />
+        </leecontrol:TagControl>
 
-        <leecontrol:TextBoxEx x:Name="Test"  
-                              IconCliecked="Test_IconCliecked"
-                              Margin="5" IconVisible="True" SplitterVisible="True"  IconCanClick="True"/>
-
-        <leecontrol:TextBoxEx Margin="5" />
-        <Button Content="你好"/>
     </StackPanel>
-
-
-        
 </Window>

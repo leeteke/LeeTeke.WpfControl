@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -52,25 +53,89 @@ namespace LeeTeke.WpfControl.Controls
         }
 
 
+        private PasswordBox _password;
+        private TextBox _textBox;
+        private Border _border;
         public TextBoxEx()
         {
-            EventManager.RegisterClassHandler(typeof(Border), Border.MouseDownEvent, new RoutedEventHandler(Icon_MouseDownEvent));
+            Loaded += TextBoxEx_Loaded;
         }
 
-        private void Icon_MouseDownEvent(object sender, RoutedEventArgs e)
+        private void TextBoxEx_Loaded(object sender, RoutedEventArgs e)
         {
-            if (sender is Border icon&&icon.Name=="PART_ICON"&&IconCanClick)
+            _password = this.Template.FindName("PART_Password", this) as PasswordBox;
+            _textBox = this.Template.FindName("PART_Main", this) as TextBox;
+            _border = this.Template.FindName("PART_ICON", this) as Border;
+            if (_password != null)
+            {
+                _password.PasswordChanged += _password_PasswordChanged;
+            }
+
+            if (_textBox != null)
+            {
+                _textBox.PreviewTextInput += _textBox_PreviewTextInput;
+                _textBox.TextChanged += _textBox_TextChanged;
+            }
+
+            if (_border!=null)
+            {
+                _border.MouseDown += _border_MouseDown;
+            }
+        }
+
+        private void _textBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+           switch (Mode)
+            {
+            
+                case TextMode.Number:
+                case TextMode.IMEDispaly:
+                    _password.Password = Text;
+                    break;
+                default:
+                    break;
+            }
+          
+        }
+
+        private void _textBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+         
+            switch (Mode)
+            {
+                case TextMode.Number:
+                    e.Handled = new Regex("[^0-9.-]+").IsMatch(e.Text);
+                    return;
+                default:
+                    return;
+            }
+
+        }
+
+        private void _border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (IconCanClick)
             {
                 try
                 {
                     IconCommand?.Execute(Text);
                 }
-                catch 
+                catch
                 {
                 }
                 IconCliecked?.Invoke(this, Text);
             }
         }
+
+        private void _password_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (Text != _password.Password&&Mode== TextMode.Password)
+            {
+                Text = _password.Password;
+            }
+        }
+
+                
 
 
         #region 依赖属性

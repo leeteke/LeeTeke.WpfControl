@@ -22,16 +22,16 @@ using System.Windows.Shapes;
 namespace LeeTeke.WpfControl.Controls
 {
     /// <summary>
-    /// TagControl.xaml 的交互逻辑
+    /// TagControlEx.xaml 的交互逻辑
     /// </summary>
     [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(TagItem))]
-    public partial class TagControl : ItemsControl
+    public partial class TagControlEx : ItemsControl
     {
         private ScrollViewer _scrollViewer;
         private StackPanel _stackPanel;
 
 
-        public TagControl()
+        public TagControlEx()
         {
             InitializeComponent();
             this.SetResourceReference(ToggleGroup.FocusVisualStyleProperty, "LeeFocusVisual");
@@ -78,11 +78,11 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemsSource.  This enables animation, styling, binding, etc...
         public static new readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register("ItemsSource", typeof(IList), typeof(TagControl), new PropertyMetadata(null, new PropertyChangedCallback(ItemsSourceChanged)));
+            DependencyProperty.Register("ItemsSource", typeof(IList), typeof(TagControlEx), new PropertyMetadata(null, new PropertyChangedCallback(ItemsSourceChanged)));
 
         private static void ItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is TagControl control && e.OldValue != e.NewValue)
+            if (d is TagControlEx control && e.OldValue != e.NewValue)
             {
                 control.ItemsSource = (IList)e.NewValue;
             }
@@ -106,7 +106,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for Orientation.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty OrientationProperty =
-            DependencyProperty.Register("Orientation", typeof(Orientation), typeof(TagControl), new PropertyMetadata(Orientation.Horizontal));
+            DependencyProperty.Register("Orientation", typeof(Orientation), typeof(TagControlEx), new PropertyMetadata(Orientation.Horizontal));
 
         #endregion
 
@@ -134,11 +134,11 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for SelectedItem.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedItemProperty =
-            DependencyProperty.Register("SelectedItem", typeof(object), typeof(TagControl), new PropertyMetadata(null, new PropertyChangedCallback(SelectedItemChanged)));
+            DependencyProperty.Register("SelectedItem", typeof(object), typeof(TagControlEx), new PropertyMetadata(null, new PropertyChangedCallback(SelectedItemChanged)));
 
         private static void SelectedItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is TagControl control && e.NewValue != e.OldValue && e.NewValue is TagItem item)
+            if (d is TagControlEx control && e.NewValue != e.OldValue && e.NewValue is TagItem item)
             {
                 if (control._stackPanel != null)
                     control.SelectedThisItem(item);
@@ -157,11 +157,11 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for SelectedValue.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedValueProperty =
-            DependencyProperty.Register("SelectedValue", typeof(object), typeof(TagControl), new PropertyMetadata(null, new PropertyChangedCallback(SelectedValueChanged)));
+            DependencyProperty.Register("SelectedValue", typeof(object), typeof(TagControlEx), new PropertyMetadata(null, new PropertyChangedCallback(SelectedValueChanged)));
 
         private static void SelectedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is TagControl control && e.NewValue != e.OldValue)
+            if (d is TagControlEx control && e.NewValue != e.OldValue)
             {
                 if (control._stackPanel != null)
                     control.SelectedThisItem(e.NewValue);
@@ -181,11 +181,11 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for SelectedIndex.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedIndexProperty =
-            DependencyProperty.Register("SelectedIndex", typeof(int), typeof(TagControl), new PropertyMetadata(-1, new PropertyChangedCallback(SelectedIndexChanged)));
+            DependencyProperty.Register("SelectedIndex", typeof(int), typeof(TagControlEx), new PropertyMetadata(-1, new PropertyChangedCallback(SelectedIndexChanged)));
 
         private static void SelectedIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is TagControl control && e.NewValue != e.OldValue && e.NewValue is int index)
+            if (d is TagControlEx control && e.NewValue != e.OldValue && e.NewValue is int index)
             {
                 if (control._stackPanel != null)
                     control.SelectedThisItem(index);
@@ -205,7 +205,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for SelectedBrush.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedBrushProperty =
-            DependencyProperty.Register("SelectedBrush", typeof(Brush), typeof(TagControl), new PropertyMetadata(new SolidColorBrush(Colors.White)));
+            DependencyProperty.Register("SelectedBrush", typeof(Brush), typeof(TagControlEx), new PropertyMetadata(new SolidColorBrush(Colors.White)));
 
         #endregion
 
@@ -220,7 +220,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemClosedCommand.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemClosedCommandProperty =
-            DependencyProperty.Register("ItemClosedCommand", typeof(ICommand), typeof(TagControl));
+            DependencyProperty.Register("ItemClosedCommand", typeof(ICommand), typeof(TagControlEx));
 
 
 
@@ -237,12 +237,13 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemSelectedCommand.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemSelectedCommandProperty =
-            DependencyProperty.Register("ItemSelectedCommand", typeof(ICommand), typeof(TagControl));
+            DependencyProperty.Register("ItemSelectedCommand", typeof(ICommand), typeof(TagControlEx));
 
 
 
 
         #endregion
+
         #endregion
 
         #region Event

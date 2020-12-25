@@ -1,11 +1,14 @@
-﻿using System;
+﻿using LeeTeke.WpfControl.Controls;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Data;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-  public   class TagControlManager: DependencyObject
+    public class TagControlManager : DependencyObject
     {
 
         public static bool GetItemCanClose(DependencyObject obj)
@@ -20,11 +23,6 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for ItemCanClose.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemCanCloseProperty =
-            DependencyProperty.RegisterAttached("ItemCanClose", typeof(bool), typeof(TagControlManager),new PropertyMetadata(true,new PropertyChangedCallback(ItemCanCloseChanged)));
-
-        private static void ItemCanCloseChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-        
-        }
+            DependencyProperty.RegisterAttached("ItemCanClose", typeof(bool), typeof(TagControlManager), new PropertyMetadata(true));        
     }
 }

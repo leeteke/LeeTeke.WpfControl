@@ -340,7 +340,31 @@ namespace LeeTeke.WpfControl.Controls
 
         #region 事件
 
-        public event EventHandler<SlideViewItemClickEventArgs> ItemClickEvent;
+        public event EventHandler<SlideViewItemClickedEventArgs> ItemClickEvent;
+
+
+        #region ItemClicked
+        /// <summary>
+        /// 请填写描述
+        /// </summary>
+        public event SlideViewItemClickedEventHandler ItemClicked
+        {
+            add { AddHandler(ItemClickedEvent, value); }
+            remove { RemoveHandler(ItemClickedEvent, value); }
+        }
+
+        public static readonly RoutedEvent ItemClickedEvent = EventManager.RegisterRoutedEvent(
+        "ItemClicked", RoutingStrategy.Bubble, typeof(EventHandler<SlideViewItemClickedEventHandler>), typeof(SlideView));
+
+
+        private void RaiseItemClicked(object newValue)
+        {
+            var arg = new SlideViewItemClickedEventArgs(newValue, ItemClickedEvent);
+            RaiseEvent(arg);
+        }
+
+        #endregion
+
 
         #endregion
 
@@ -443,19 +467,18 @@ namespace LeeTeke.WpfControl.Controls
 
         private void ItemMouseLeftButtonUpEvent(object sender, RoutedEventArgs e)
         {
-            if (sender is SlideViewItem content)
+            if (sender is SlideViewItem content&&StaticMethods.IsInControl(this,content))
             {
                 try
                 {
                     ItemClickCommand?.Execute(content.DataContext);
-
                 }
                 catch (Exception)
                 {
 
                 }
 
-                ItemClickEvent?.Invoke(this, new SlideViewItemClickEventArgs(content));
+                RaiseItemClicked(content);
             }
         }
     }

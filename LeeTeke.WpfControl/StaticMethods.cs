@@ -498,7 +498,7 @@ namespace LeeTeke.WpfControl
         }
 
 
-      
+
         /// <summary>
         /// 寻找子控件
         /// </summary>
@@ -520,6 +520,46 @@ namespace LeeTeke.WpfControl
                 }
             }
             return null;
+        }
+
+        /// <summary>
+        /// 是否在控件里面
+        /// </summary>
+        /// <param name="pardent"></param>
+        /// <param name="child"></param>
+        /// <param name="outLevel"></param>
+        /// <returns></returns>
+        public static bool IsInControl(DependencyObject pardent, DependencyObject child, int outLevel = 1)
+        {
+            var _p = VisualTreeHelper.GetParent(child);
+            if (_p == null)
+            {
+                return false;
+            }
+
+            if (_p == pardent)
+            {
+                return true;
+            }
+            else
+            {
+                if (_p.GetType() == pardent.GetType())
+                {
+                    if (outLevel < 2)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return IsInControl(pardent, _p, outLevel - 1);
+                    }
+                }
+                else
+                {
+                    return IsInControl(pardent, _p,outLevel);
+                }
+
+            }
         }
     }
 }

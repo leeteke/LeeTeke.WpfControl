@@ -15,4 +15,5 @@
     <conver:IsNullConverter x:Key="IsNullConverter" />
     <conver:NotAlignmentCenterConverter x:Key="NotAlignmentCenterConverter" />
     <conver:StringIsNullConverter x:Key="StringIsNullConverter"/>
+    <conver:EnumBoolReverseConverter x:Key="EnumBoolReverseConverter"/>
 </ResourceDictionary>

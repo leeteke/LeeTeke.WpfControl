@@ -65,7 +65,6 @@ namespace LeeTeke.WpfControl.Controls
             EventManager.RegisterClassHandler(typeof(ToggleButton), ToggleButton.UncheckedEvent, new RoutedEventHandler(ToggleButton_UnChecked));
             EventManager.RegisterClassHandler(typeof(WrapPanel), WrapPanel.LoadedEvent, new RoutedEventHandler(PART_WrapPanel_Loaded));
 
-           
         }
 
         #region override
@@ -523,7 +522,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private void PART_WrapPanel_Loaded(object sender, RoutedEventArgs e)
         {
-            if (sender is WrapPanel wrap)
+            if (sender is WrapPanel wrap && StaticMethods.IsInControl(this, wrap))
             {
                 if (wrap.Name == "PART_WrapPanel")
                 {
@@ -535,7 +534,7 @@ namespace LeeTeke.WpfControl.Controls
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)
         {
 
-            if (sender is ToggleButton button)
+            if (sender is ToggleButton button && StaticMethods.IsInControl(this, button))
             {
 
                 if (ItemsSource == null)
@@ -592,7 +591,7 @@ namespace LeeTeke.WpfControl.Controls
         }
         private void ToggleButton_UnChecked(object sender, RoutedEventArgs e)
         {
-            if (sender is ToggleButton button)
+            if (sender is ToggleButton button && StaticMethods.IsInControl(this, button))
             {
 
                 if (ItemsSource == null)
@@ -808,7 +807,7 @@ namespace LeeTeke.WpfControl.Controls
                 return;
             }
 
-         
+
         }
 
         private async void IndexChangedAsync(object value)
@@ -920,7 +919,7 @@ namespace LeeTeke.WpfControl.Controls
             {
                 SelectionChangedCommand?.Execute(SelectedValue);
             }
-            catch 
+            catch
             {
             }
         }
