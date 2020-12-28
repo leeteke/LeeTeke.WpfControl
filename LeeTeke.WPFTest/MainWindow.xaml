@@ -14,10 +14,8 @@
         >
 
     <StackPanel>
-        <leecontrol:TagControl x:Name="test" >
-            <leecontrol:TagControlItem x:Name="t1" Content="Nihao" />
-            <leecontrol:TagControlItem x:Name="t2" Content="Nihao1"/>
-            <leecontrol:TagControlItem x:Name="t3" Content="Nihao2"  />
+        <leecontrol:TagControl x:Name="test"  ItemsSource="{Binding TestList}">
+            
         </leecontrol:TagControl>
 
     </StackPanel>

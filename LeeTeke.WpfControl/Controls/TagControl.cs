@@ -59,6 +59,10 @@ namespace LeeTeke.WpfControl.Controls
 
         private IList _ilist;
 
+        private int _selectedIndex;
+        private object _selectedItem;
+        private object _seletedValue;
+
         private IList ItemList
         {
             get { return _ilist; }
@@ -71,7 +75,7 @@ namespace LeeTeke.WpfControl.Controls
 
         public TagControl()
         {
-            EventManager.RegisterClassHandler(typeof(TagControlItem), TagControlItem.ClosedEvent, new RoutedEventHandler(TagControlItemClosedEvent));
+            EventManager.RegisterClassHandler(typeof(TagControlItem), TagControlItem.ClosedEvent, new RoutedEventHandler(TagControlItemClosedEventAsync));
             EventManager.RegisterClassHandler(typeof(TagControlItem), TagControlItem.SelectedEvent, new RoutedEventHandler(TagControlItemSelectedEvent));
             EventManager.RegisterClassHandler(typeof(StackPanel), StackPanel.LoadedEvent, new RoutedEventHandler(StackPanelLoadedEvent));
 
@@ -81,7 +85,7 @@ namespace LeeTeke.WpfControl.Controls
 
         }
 
-     
+
 
 
 
@@ -198,16 +202,14 @@ namespace LeeTeke.WpfControl.Controls
 
         private static void SelectedIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is TagControl tag && e.NewValue != e.OldValue)
+            if (d is TagControl tag && e.NewValue != e.OldValue && tag.Items != null &&e.NewValue is int newValue && tag._selectedIndex != newValue)
             {
-                if (tag.Items != null)
+
+                if (newValue > -1 && newValue < tag._stackPanel.Children.Count)
                 {
-                    var newValue = (int)e.NewValue;
-                    if (newValue > -1 && newValue < tag._stackPanel.Children.Count)
-                    {
-                        tag.SelectedItesmAsync(tag.Items[newValue] as TagControlItem);
-                    }
+                    tag.SelectedItesmAsync(tag.Items[newValue] as TagControlItem);
                 }
+
             }
         }
 
@@ -231,7 +233,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (d is TagControl tag && e.NewValue != e.OldValue)
             {
-                if (e.NewValue is TagControlItem item && tag._stackPanel.Children != null)
+                if (e.NewValue is TagControlItem item && tag._stackPanel.Children != null && tag._selectedItem != item)
                 {
                     tag.SelectedItesmAsync(item);
                 }
@@ -252,7 +254,32 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for SelectedValue.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedValueProperty =
-            DependencyProperty.Register("SelectedValue", typeof(object), typeof(TagControl));
+            DependencyProperty.Register("SelectedValue", typeof(object), typeof(TagControl), new PropertyMetadata(null, SelectedValueChanged));
+
+        private static void SelectedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is TagControl tag && e.NewValue != e.OldValue)
+            {
+                if (tag._stackPanel.Children != null && tag._seletedValue != e.NewValue)
+                {
+                    if (tag.ItemsSource == null)
+                    {
+                        tag.SelectedItesmAsync(e.NewValue as TagControlItem);
+                    }
+                    else
+                    {
+                        foreach (TagControlItem item in tag.Items)
+                        {
+                            if (item.DataContext == e.NewValue)
+                            {
+                                tag.SelectedItesmAsync(item);
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         #endregion
 
@@ -346,47 +373,86 @@ namespace LeeTeke.WpfControl.Controls
 
         private void TagControl_Loaded(object sender, RoutedEventArgs e)
         {
-            _scrollViewer = this.Template.FindName("PART_ScrollViewer", this) as ScrollViewer;
+            try
+            {
+                _scrollViewer = this.Template.FindName("PART_ScrollViewer", this) as ScrollViewer;
+            }
+            catch (Exception)
+            {
+            }
         }
 
         private void StackPanelLoadedEvent(object sender, RoutedEventArgs e)
         {
-            if (sender is StackPanel stackPanel&&stackPanel.Name== "PART_StackPanel"&&StaticMethods.IsInControl(this, stackPanel))
+            if (sender is StackPanel stackPanel && stackPanel.Name == "PART_StackPanel" && StaticMethods.IsInControl(this, stackPanel))
             {
                 _stackPanel = stackPanel;
             }
         }
 
 
-        private void TagControlItemClosedEvent(object sender, RoutedEventArgs e)
+        private async void TagControlItemClosedEventAsync(object sender, RoutedEventArgs e)
         {
 
             switch ((e as TagControlItemClosedEventArgs).ClosedMode)
             {
                 case TagControlItemClosedMode.Self:
-                    CloseItemAsync(sender as TagControlItem);
+                    var index = Items.IndexOf(sender);
+                    await CloseItemAsync(sender as TagControlItem);
+                    if ((sender as TagControlItem).IsSelected)
+                    {
+                        if (index > 0)
+                        {
+                            SelectedItesmAsync(Items[index - 1] as TagControlItem);
+                        }
+                        else if (Items != null && Items.Count > 0)
+                        {
+                            SelectedItesmAsync(Items[0] as TagControlItem);
+                        }
+                    }
+                    else
+                    {
+                        SelectedItesmAsync(null);
+                    }
                     break;
                 case TagControlItemClosedMode.Other:
 
+                    List<object> needCloseItem = new List<object>();
                     for (int i = 0; i < _stackPanel.Children.Count; i++)
                     {
                         ///关闭全部
                         if (sender != _stackPanel.Children[i])
                         {
-                            ItemRemoveChanged(_stackPanel.Children[i] as TagControlItem);
+                            needCloseItem.Add(_stackPanel.Children[i]);
                         }
+                    }
+                    foreach (TagControlItem item in needCloseItem)
+                    {
+                        CloseItemAsync(item);
+                        ItemRemoveChanged(item);
                     }
 
                     break;
                 case TagControlItemClosedMode.All:
+                    List<object> allItem = new List<object>();
                     for (int i = 0; i < _stackPanel.Children.Count; i++)
                     {
-                        ItemRemoveChanged(_stackPanel.Children[i] as TagControlItem);
+                        allItem.Add(_stackPanel.Children[i]);
                     }
+                    foreach (TagControlItem item in allItem)
+                    {
+                        CloseItemAsync(item);
+                        ItemRemoveChanged(item);
+                    }
+
                     if (_stackPanel.Children.Count > 0)
                     {
                         ///选择首个
                         SelectedItesmAsync(_stackPanel.Children[0] as TagControlItem);
+                    }
+                    else
+                    {
+                        SelectedItesmAsync(null);
                     }
                     break;
                 default:
@@ -415,9 +481,9 @@ namespace LeeTeke.WpfControl.Controls
         }
         private void TagControlItemSelectedEvent(object sender, RoutedEventArgs e)
         {
-            if (sender is TagControlItem item&& StaticMethods.IsInControl(this,item))
+            if (sender is TagControlItem item && StaticMethods.IsInControl(this, item))
             {
-                if (SelectedItem!=item)
+                if (SelectedItem != item)
                 {
                     SelectedItesmAsync(item);
                 }
@@ -428,7 +494,7 @@ namespace LeeTeke.WpfControl.Controls
         /// 关闭
         /// </summary>
         /// <param name="item"></param>
-        private async void CloseItemAsync(TagControlItem item)
+        private async Task CloseItemAsync(TagControlItem item)
         {
             ///如果不能关闭
             if (!item.CanClosed)
@@ -436,20 +502,29 @@ namespace LeeTeke.WpfControl.Controls
 
             await item.CloseAsync();
 
+            var index = Items.IndexOf(item);
             if (ItemsSource == null)
             {
-                _stackPanel.Children.Remove(item);
+                Items.Remove(item);
             }
             else
             {
                 ItemList.Remove(item.DataContext);
             }
             ItemRemoveChanged(item);
+
+
+
         }
 
 
         private async void SelectedItesmAsync(TagControlItem item)
         {
+            if (item == null)
+            {
+                ItemSelectedChanged(null);
+                return;
+            }
             for (int i = 0; i < Items.Count; i++)
             {
 
@@ -472,20 +547,14 @@ namespace LeeTeke.WpfControl.Controls
         /// <param name="item"></param>
         private void ItemValueChanged(TagControlItem item)
         {
-            var _value = ItemsSource == null ? item : item.DataContext;
-            var _index = _stackPanel.Children.IndexOf(item);
-            if (SelectedValue != _value)
-            {
-                SelectedValue = _value;
-            }
-            if (SelectedIndex != _index)
-            {
-                SelectedIndex = _index;
-            }
-            if (SelectedItem != item)
-            {
-                SelectedItem = item;
-            }
+            _seletedValue = ItemsSource == null ? item : item?.DataContext;
+            _selectedIndex = _stackPanel.Children.IndexOf(item);
+            _selectedItem = item;
+
+            SelectedValue = _seletedValue;
+            SelectedIndex = _selectedIndex;
+            SelectedItem = _selectedItem;
+
         }
 
 

@@ -36,39 +36,45 @@ namespace LeeTeke.WpfControl.Controls
 
         private void TagControlItem_Loaded(object sender, RoutedEventArgs e)
         {
-
-            if (this.ContentTemplate?.HasContent == true)
+            try
             {
-
-                var contentPresenter = StaticMethods.FindVisualChild<ContentPresenter>(this);
-                if (contentPresenter != null)
+                if (this.ContentTemplate?.HasContent == true)
                 {
-                    var chlid = VisualTreeHelper.GetChild(contentPresenter, 0);
-                    BindingOperations.SetBinding(this, TagControlItem.CanClosedProperty, new Binding()
+
+                    var contentPresenter = StaticMethods.FindVisualChild<ContentPresenter>(this);
+                    if (contentPresenter != null)
                     {
-                        Source = chlid,
-                        Path = new PropertyPath("(0)", new DependencyProperty[] { LeeTeke.WpfControl.Dependencies.TagControlManager.ItemCanCloseProperty }),
-                        Mode = BindingMode.OneWay
-                    });
+                        var chlid = VisualTreeHelper.GetChild(contentPresenter, 0);
+                        BindingOperations.SetBinding(this, TagControlItem.CanClosedProperty, new Binding()
+                        {
+                            Source = chlid,
+                            Path = new PropertyPath("(0)", new DependencyProperty[] { LeeTeke.WpfControl.Dependencies.TagControlManager.ItemCanCloseProperty }),
+                            Mode = BindingMode.OneWay
+                        });
+                    }
                 }
-            }
 
-            if (this.Template.FindName("PART_MenuItem_CloseAll", this) is MenuItem allItem)
-            {
-                allItem.Checked += (es, ex) => RaiseClosed(TagControlItemClosedMode.All);
-            }
-            if (this.Template.FindName("PART_MenuItem_CloseOther", this) is MenuItem otherItem)
-            {
-                otherItem.Checked += (es, ex) => RaiseClosed(TagControlItemClosedMode.Other);
-            }
-            if (this.Template.FindName("PART_MenuItem_CloseSelf", this) is MenuItem selftItem)
-            {
-                selftItem.Checked += (es, ex) => RaiseClosed(TagControlItemClosedMode.Self);
-            }
+                if (this.Template.FindName("PART_MenuItem_CloseAll", this) is MenuItem allItem)
+                {
+                    allItem.Click += (es, ex) => RaiseClosed(TagControlItemClosedMode.All);
+                }
+                if (this.Template.FindName("PART_MenuItem_CloseOther", this) is MenuItem otherItem)
+                {
+                    otherItem.Click += (es, ex) => RaiseClosed(TagControlItemClosedMode.Other);
+                }
+                if (this.Template.FindName("PART_MenuItem_CloseSelf", this) is MenuItem selftItem)
+                {
+                    selftItem.Click += (es, ex) => RaiseClosed(TagControlItemClosedMode.Self);
+                }
 
-            if (this.Template.FindName("PART_CloseButton", this) is Button button)
+                if (this.Template.FindName("PART_CloseButton", this) is Button button)
+                {
+                    button.Click += (es, ex) => RaiseClosed(TagControlItemClosedMode.Self);
+                }
+
+            }
+            catch 
             {
-                button.Click += (es, ex) => RaiseClosed(TagControlItemClosedMode.Self);
             }
         }
 
@@ -112,13 +118,13 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for IsSelected.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsSelectedProperty =
-            DependencyProperty.Register("IsSelected", typeof(bool), typeof(TagControlItem),new PropertyMetadata(false,IsSelectedChanged));
+            DependencyProperty.Register("IsSelected", typeof(bool), typeof(TagControlItem), new PropertyMetadata(false, IsSelectedChanged));
 
         private static void IsSelectedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is TagControlItem item&&e.NewValue!=e.OldValue)
+            if (d is TagControlItem item && e.NewValue != e.OldValue)
             {
-                if ((bool)e.NewValue==true)
+                if ((bool)e.NewValue == true)
                 {
                     item.RaiseSelected();
                 }
