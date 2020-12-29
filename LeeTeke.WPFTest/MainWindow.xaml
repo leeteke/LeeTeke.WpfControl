@@ -14,9 +14,14 @@
         >
 
     <StackPanel>
-        <leecontrol:TagControl x:Name="test"  ItemsSource="{Binding TestList}">
-            
+        <leecontrol:TagControl x:Name="test"  
+                               ItemsSource="{Binding TestList}"
+                               ItemSelectedCommand="{Binding TestCommand}">
+            <leecontrol:TagControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock leedep:TagControlManager.ItemCanClose="{Binding Boolen}" Text="{Binding Title}"/>
+                </DataTemplate>
+            </leecontrol:TagControl.ItemTemplate>
         </leecontrol:TagControl>
-
     </StackPanel>
 </Window>

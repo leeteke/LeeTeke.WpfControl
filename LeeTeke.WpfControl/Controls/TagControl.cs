@@ -397,23 +397,23 @@ namespace LeeTeke.WpfControl.Controls
             switch ((e as TagControlItemClosedEventArgs).ClosedMode)
             {
                 case TagControlItemClosedMode.Self:
-                    var index = Items.IndexOf(sender);
+                    var index = _stackPanel.Children.IndexOf(sender as TagControlItem);
                     await CloseItemAsync(sender as TagControlItem);
                     if ((sender as TagControlItem).IsSelected)
                     {
                         if (index > 0)
                         {
-                            SelectedItesmAsync(Items[index - 1] as TagControlItem);
+                            SelectedItesmAsync(_stackPanel.Children[index - 1] as TagControlItem);
                         }
-                        else if (Items != null && Items.Count > 0)
+                        else if (_stackPanel.Children != null && _stackPanel.Children.Count > 0)
                         {
-                            SelectedItesmAsync(Items[0] as TagControlItem);
+                            SelectedItesmAsync(_stackPanel.Children[0] as TagControlItem);
                         }
-                    }
-                    else
+                    }else if (_stackPanel.Children.Count < 1)
                     {
                         SelectedItesmAsync(null);
                     }
+                    
                     break;
                 case TagControlItemClosedMode.Other:
 
@@ -520,11 +520,16 @@ namespace LeeTeke.WpfControl.Controls
 
         private async void SelectedItesmAsync(TagControlItem item)
         {
+      
             if (item == null)
             {
                 ItemSelectedChanged(null);
                 return;
             }
+
+            if (item.IsSelected)
+                return;
+
             for (int i = 0; i < Items.Count; i++)
             {
 
@@ -584,7 +589,7 @@ namespace LeeTeke.WpfControl.Controls
             RaiseItemSelected(item);
             try
             {
-                ItemSelectedCommand?.Execute(ItemsSource == null ? item : item.DataContext);
+                ItemSelectedCommand?.Execute(ItemsSource == null ? item : item?.DataContext);
             }
             catch
             {

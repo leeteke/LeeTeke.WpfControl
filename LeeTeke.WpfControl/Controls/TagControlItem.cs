@@ -31,7 +31,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private void TagControlItem_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            RaiseSelected();
+            IsSelected = true;
         }
 
         private void TagControlItem_Loaded(object sender, RoutedEventArgs e)

@@ -102,6 +102,7 @@ namespace LeeTeke.WPFTest.ViewModels
 
         private void TestCommandExecute(object obj)
         {
+
         }
 
     }
