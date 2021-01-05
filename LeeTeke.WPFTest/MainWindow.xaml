@@ -13,35 +13,16 @@
         Background="White"
         >
 
-    <leecontrol:TagControl ItemsSource="{Binding TestList}" >
-        <leecontrol:TagControl.ItemTemplate>
-            <DataTemplate>
-                <Grid Height="300" 
-                      Width="400"
-                      Background="Transparent"
-                      Margin="5">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition Height="30"/>
-                    </Grid.RowDefinitions>
-                    <leecontrol:ImageEx 
-                        Source="{Binding Image}" 
-                        CornerRadius="5">
-                    </leecontrol:ImageEx>
+    <StackPanel>
+        <leecontrol:TextBoxEx Mode="Password"
+                              Text="{Binding Text}" 
+                              VerticalAlignment="Center"
+                              />
 
-                
-                   
-                    <leecontrol:SwitchButton Switch="{Binding Boolen}"
-                                           Grid.Row="1"  
-                                             VerticalAlignment="Center" >
-                        <leecontrol:SwitchButton.Content>
-                            <Button Content="{Binding Title}" />
-                        </leecontrol:SwitchButton.Content>
-                    </leecontrol:SwitchButton>
-
-                </Grid>
-            </DataTemplate>
-        </leecontrol:TagControl.ItemTemplate>
-    </leecontrol:TagControl>
+        <leecontrol:TextBoxEx 
+                              Text="{Binding Text}" 
+                              VerticalAlignment="Center"
+                              />
+    </StackPanel>
 
 </Window>

@@ -255,7 +255,6 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
-
         #region EasingFunction
         /// <summary>
         /// 请填写描述

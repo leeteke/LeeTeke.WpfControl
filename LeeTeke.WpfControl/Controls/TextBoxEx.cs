@@ -93,7 +93,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private void TextBoxEx_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key== Key.Enter)
+            if (e.Key == Key.Enter)
             {
                 RaiseEntered(Text);
                 try
@@ -109,22 +109,26 @@ namespace LeeTeke.WpfControl.Controls
 
         private void _textBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-           switch (Mode)
+            switch (Mode)
             {
-            
+
+                case TextMode.Password:
                 case TextMode.Number:
                 case TextMode.IMEDispaly:
-                    _password.Password = Text;
+                    if (_password.Password != Text)
+                    {
+                        _password.Password = Text;
+                    }
                     break;
                 default:
                     break;
             }
-          
+
         }
 
         private void _textBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-         
+
             switch (Mode)
             {
                 case TextMode.Number:
@@ -153,16 +157,17 @@ namespace LeeTeke.WpfControl.Controls
 
         private void _password_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if (Text != _password.Password&&Mode== TextMode.Password)
+            if (Text != _password.Password && Mode == TextMode.Password)
             {
                 Text = _password.Password;
             }
         }
 
-                
+
 
 
         #region 依赖属性
+
 
 
         #region Mode
@@ -177,7 +182,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for Mode.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ModeProperty =
-            DependencyProperty.Register("Mode", typeof(TextMode), typeof(TextBoxEx), new PropertyMetadata(TextMode.General));
+            DependencyProperty.Register("Mode", typeof(TextMode), typeof(TextBoxEx));
 
         #endregion
 
@@ -194,7 +199,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for Text.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register("Text", typeof(string), typeof(TextBoxEx));
+            DependencyProperty.Register("Text", typeof(string), typeof(TextBoxEx), new FrameworkPropertyMetadata(default, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault) { DefaultUpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
 
         #endregion
 
@@ -295,7 +300,6 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-
         #region IconMargin
         /// <summary>
         /// 请填写描述
@@ -311,7 +315,6 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("IconMargin", typeof(Thickness), typeof(TextBoxEx));
 
         #endregion
-
 
         #region IconSize
         /// <summary>
@@ -458,7 +461,6 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
-
         #endregion
 
         #region Command
@@ -552,6 +554,6 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
-     
+
     }
 }

@@ -150,7 +150,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for Switch.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SwitchProperty =
-            DependencyProperty.Register("Switch", typeof(bool), typeof(SwitchButton), new PropertyMetadata(false, new PropertyChangedCallback(SwitchButtonChanged)));
+            DependencyProperty.Register("Switch", typeof(bool), typeof(SwitchButton), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(SwitchButtonChanged)));
 
         private static void SwitchButtonChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
