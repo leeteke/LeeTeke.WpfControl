@@ -46,12 +46,23 @@
             显示动作持续事件
             </summary>
         </member>
-        <member name="M:LeeTeke.WpfControl.Controls.ImageEx.ChangeShowImageAsync">
+        <member name="P:LeeTeke.WpfControl.Controls.ImageEx.AnimationValue">
             <summary>
-            改变显示图片
+            请填写描述
             </summary>
         </member>
+        <!-- Badly formed XML comment ignored for member "M:LeeTeke.WpfControl.Controls.ImageEx.ChangeShowImage" -->
         <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.LodingBar" -->
+        <member name="P:LeeTeke.WpfControl.Controls.LodingBar.ProgressLength">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.LodingBar.RectangleSite">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
         <member name="P:LeeTeke.WpfControl.Controls.LodingBar.CornerRadius">
             <summary>
             CornerRadius
@@ -80,6 +91,16 @@
         <member name="P:LeeTeke.WpfControl.Controls.LodingBar.Orientation">
             <summary>
             Orientation
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.LodingBar.EasingFunction">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="E:LeeTeke.WpfControl.Controls.LodingBar.ValueChanged">
+            <summary>
+            请填写描述
             </summary>
         </member>
         <member name="T:LeeTeke.WpfControl.Controls.Message">
@@ -129,6 +150,26 @@
         <member name="P:LeeTeke.WpfControl.Controls.NotifyIconEx.ClickedThenClosing">
             <summary>
             点击后关闭
+            </summary>
+        </member>
+        <member name="E:LeeTeke.WpfControl.Controls.NotifyIconEx.MouseLeftClick">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="E:LeeTeke.WpfControl.Controls.NotifyIconEx.MouseRightClick">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="E:LeeTeke.WpfControl.Controls.NotifyIconEx.MouseDoubleClick">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="E:LeeTeke.WpfControl.Controls.NotifyIconEx.BalloonTipClicked">
+            <summary>
+            请填写描述
             </summary>
         </member>
         <member name="M:LeeTeke.WpfControl.Controls.NotifyIconEx.ShowBalloonTip(System.Int32,System.String,System.String,LeeTeke.WpfControl.ToolTipIcon)">
@@ -314,6 +355,16 @@
             内容位置
             </summary>
         </member>
+        <member name="P:LeeTeke.WpfControl.Controls.SwitchButton.SwitchSite">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.SwitchButton.EasingFunction">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
         <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.TagControl" -->
         <member name="E:LeeTeke.WpfControl.Controls.TagControl.ItemClosed">
             <summary>
@@ -394,47 +445,9 @@
             </summary>
             <param name="item"></param>
         </member>
-        <member name="T:LeeTeke.WpfControl.Controls.TagControlEx">
+        <member name="M:LeeTeke.WpfControl.Controls.TagControl.SelectedInit(System.Object)">
             <summary>
-            TagControlEx.xaml 的交互逻辑
-            </summary>
-            <summary>
-            TagControlEx
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TagControlEx.Changing">
-            <summary>
-            正在改变选择
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TagControlEx.Orientation">
-            <summary>
-            方向
-            </summary>
-        </member>
-        <member name="E:LeeTeke.WpfControl.Controls.TagControlEx.ItemClosedEvent">
-            <summary>
-            item关闭事件
-            </summary>
-        </member>
-        <member name="M:LeeTeke.WpfControl.Controls.TagControlEx.InitializeComponent">
-            <summary>
-            InitializeComponent
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TagItem.Closed">
-            <summary>
-            是否执行了关闭
-            </summary>
-        </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TagItem.Orientation">
-            <summary>
-            方向
-            </summary>
-        </member>
-        <member name="M:LeeTeke.WpfControl.Controls.TagItem.CloseAsync">
-            <summary>
-            关闭Item
+            清理选择
             </summary>
         </member>
         <member name="P:LeeTeke.WpfControl.Controls.TagControlItem.IsClosed">
@@ -518,7 +531,7 @@
             请填写描述
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.IconOutSize">
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.IconMargin">
             <summary>
             请填写描述
             </summary>
@@ -578,9 +591,14 @@
             请填写描述
             </summary>
         </member>
-        <member name="E:LeeTeke.WpfControl.Controls.TextBoxEx.EnterEvent">
+        <member name="E:LeeTeke.WpfControl.Controls.TextBoxEx.Entered">
             <summary>
-            回车事件
+            请填写描述
+            </summary>
+        </member>
+        <member name="E:LeeTeke.WpfControl.Controls.TextBoxEx.IconClicked">
+            <summary>
+            请填写描述
             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.ToggleGroup" -->
@@ -666,10 +684,10 @@
         </member>
         <member name="E:LeeTeke.WpfControl.Controls.ToggleGroup.SelectionChanged">
             <summary>
-            选择改变
+            请填写描述
             </summary>
         </member>
-        <member name="M:LeeTeke.WpfControl.Controls.ToggleGroup.SelectedInitAsync(System.Object)">
+        <member name="M:LeeTeke.WpfControl.Controls.ToggleGroup.SelectedInit(System.Object)">
             <summary>
             清理选择
             </summary>

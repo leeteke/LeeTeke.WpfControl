@@ -63,23 +63,35 @@ namespace LeeTeke.WpfControl.Controls
 
         public SwitchButton()
         {
-            Loaded += SwitchButton_Loaded;
             MouseDown += SwitchButton_MouseDown;
         }
 
 
 
-        private void SwitchButton_Loaded(object sender, RoutedEventArgs e)
+        #region override
+
+        public override void OnApplyTemplate()
         {
-            _canvas = this.Template.FindName("PART_Canvas", this) as Canvas;
+            base.OnApplyTemplate();
+
             _closeBorder = this.Template.FindName("PART_CloseBorder", this) as Border;
             _openBorder = this.Template.FindName("PART_OpenBorder", this) as Border;
             _ellipse = this.Template.FindName("PART_Ellipse", this) as Ellipse;
+            _canvas = this.Template.FindName("PART_Canvas", this) as Canvas;
             if (_canvas != null)
             {
                 _canvas.SizeChanged += me_SizeChanged;
             }
+            if (_ellipse!=null)
+            {
+                _ellipse.Loaded += _ellipse_Loaded;
+            }
+
         }
+
+     
+        #endregion
+
 
         #region RouteEvent
 
@@ -144,7 +156,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (d is SwitchButton @switch)
             {
-                @switch.ControlStoryBoardAsync(@switch.Switch);
+                @switch.ControlStoryBoard(@switch.Switch);
             }
         }
 
@@ -167,7 +179,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ButtonWidth.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ButtonWidthProperty =
-            DependencyProperty.Register("ButtonWidth", typeof(double), typeof(SwitchButton), new PropertyMetadata(60.0));
+            DependencyProperty.Register("ButtonWidth", typeof(double), typeof(SwitchButton));
 
         #endregion
 
@@ -183,7 +195,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ButtonHeight.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ButtonHeightProperty =
-            DependencyProperty.Register("ButtonHeight", typeof(double), typeof(SwitchButton), new PropertyMetadata(30.0));
+            DependencyProperty.Register("ButtonHeight", typeof(double), typeof(SwitchButton));
 
         #endregion
 
@@ -205,7 +217,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (d is SwitchButton @switch && e.NewValue != e.OldValue)
             {
-                if (e.NewValue== null && @switch.CloseContent == null)
+                if (e.NewValue == null && @switch.CloseContent == null)
                 {
                     @switch.HasContent = false;
                     return;
@@ -243,7 +255,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (d is SwitchButton @switch && e.NewValue != e.OldValue)
             {
-                if (e.NewValue== null && @switch.CloseContent == null)
+                if (e.NewValue == null && @switch.CloseContent == null)
                 {
                     @switch.HasContent = false;
                     return;
@@ -284,6 +296,44 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
+
+
+        #region SwitchSite
+        /// <summary>
+        /// 请填写描述
+        /// </summary>
+        public double SwitchSite
+        {
+            get { return (double)GetValue(SwitchSiteProperty); }
+            private set { SetValue(SwitchSiteProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SwitchSite.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SwitchSiteProperty =
+            DependencyProperty.Register("SwitchSite", typeof(double), typeof(SwitchButton), new PropertyMetadata(1.0));
+
+
+        #endregion
+
+
+        #region EasingFunction
+        /// <summary>
+        /// 请填写描述
+        /// </summary>
+        public IEasingFunction EasingFunction
+        {
+            get { return (IEasingFunction)GetValue(EasingFunctionProperty); }
+            set { SetValue(EasingFunctionProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for EasingFunction.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EasingFunctionProperty =
+            DependencyProperty.Register("EasingFunction", typeof(IEasingFunction), typeof(SwitchButton));
+
+        #endregion
+
+
+
         #endregion
 
         #region 内部逻辑
@@ -293,12 +343,11 @@ namespace LeeTeke.WpfControl.Controls
             RaiseSwitchChanged(Switch);
         }
 
-        private async void ControlStoryBoardAsync(bool _switch)
+        private void ControlStoryBoard(bool _switch)
         {
-
-            while (!IsLoaded)
+            if (_closeBorder == null || _ellipse == null)
             {
-                await Task.Delay(1);
+                return;
             }
 
             if (!(_closeBorder.RenderTransform is ScaleTransform scale))
@@ -310,25 +359,36 @@ namespace LeeTeke.WpfControl.Controls
                     sbClose.Stop();
                 if (sbOpen != null)
                     sbOpen.Stop();
-                sbOpen = new Storyboard();
-                sbOpen.FillBehavior = FillBehavior.Stop;
-                DoubleAnimation xDA = new DoubleAnimation()
+                sbOpen = new Storyboard
                 {
-                    To = 0,
-                    Duration = new Duration(TimeSpan.FromMilliseconds(200)),
+                    FillBehavior = FillBehavior.Stop
                 };
-                DoubleAnimation yDA = new DoubleAnimation()
+
+                DoubleAnimationUsingKeyFrames xDA = new DoubleAnimationUsingKeyFrames();
+                xDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                 {
-                    To = 0,
-                    Duration = new Duration(TimeSpan.FromMilliseconds(200)),
-                };
+
+                    Value = 0,
+                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(400)),
+                    EasingFunction = this.EasingFunction,
+                });
+
+                DoubleAnimationUsingKeyFrames yDA = new DoubleAnimationUsingKeyFrames();
+                yDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+                {
+
+                    Value = 0,
+                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(400)),
+                    EasingFunction = this.EasingFunction,
+                });
+
                 DoubleAnimationUsingKeyFrames eDA = new DoubleAnimationUsingKeyFrames();
                 eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                 {
 
                     Value = _canvas.ActualWidth - _ellipse.ActualWidth - 1,
-                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(500)),
-                    EasingFunction = new BackEase() { EasingMode = EasingMode.EaseOut, Amplitude = 0.2 },
+                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(400)),
+                    EasingFunction = this.EasingFunction,
                 });
 
                 sbOpen.Children.Add(xDA);
@@ -342,12 +402,12 @@ namespace LeeTeke.WpfControl.Controls
                 Storyboard.SetTargetProperty(yDA, new PropertyPath("(0).(1)", new DependencyProperty[] { Border.RenderTransformProperty, ScaleTransform.ScaleYProperty }));
 
 
-                Storyboard.SetTarget(eDA, _ellipse);
-                Storyboard.SetTargetProperty(eDA, new PropertyPath(Canvas.LeftProperty));
+                Storyboard.SetTarget(eDA, this);
+                Storyboard.SetTargetProperty(eDA, new PropertyPath(SwitchButton.SwitchSiteProperty));
                 _openBorder.BorderThickness = new Thickness(0);
                 sbOpen.Completed += (e, s) =>
                 {
-                    Canvas.SetLeft(_ellipse, _canvas.ActualWidth - _ellipse.ActualWidth - 1);
+                    SwitchSite = _canvas.ActualWidth - _ellipse.ActualWidth - 1;
                     (_closeBorder.RenderTransform as ScaleTransform).ScaleX = 0;
                     (_closeBorder.RenderTransform as ScaleTransform).ScaleY = 0;
                 };
@@ -359,24 +419,32 @@ namespace LeeTeke.WpfControl.Controls
                     sbOpen.Stop();
                 sbClose = new Storyboard();
 
-                DoubleAnimation xDA = new DoubleAnimation()
+                DoubleAnimationUsingKeyFrames xDA = new DoubleAnimationUsingKeyFrames();
+                xDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                 {
-                    To = 1,
-                    Duration = new Duration(TimeSpan.FromMilliseconds(200)),
-                };
-                DoubleAnimation yDA = new DoubleAnimation()
+
+                    Value = 1,
+                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(400)),
+                    EasingFunction = this.EasingFunction,
+                });
+
+                DoubleAnimationUsingKeyFrames yDA = new DoubleAnimationUsingKeyFrames();
+                yDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                 {
-                    To = 1,
-                    Duration = new Duration(TimeSpan.FromMilliseconds(200)),
-                };
+
+                    Value = 1,
+                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(400)),
+                    EasingFunction = this.EasingFunction,
+                });
+
 
                 DoubleAnimationUsingKeyFrames eDA = new DoubleAnimationUsingKeyFrames();
                 eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                 {
 
                     Value = 1,
-                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(500)),
-                    EasingFunction = new BackEase() { EasingMode = EasingMode.EaseOut, Amplitude = 0.2 },
+                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(400)),
+                    EasingFunction = this.EasingFunction,
                 });
 
                 sbClose.Children.Add(xDA);
@@ -390,8 +458,8 @@ namespace LeeTeke.WpfControl.Controls
                 Storyboard.SetTargetProperty(yDA, new PropertyPath("(0).(1)", new DependencyProperty[] { Border.RenderTransformProperty, ScaleTransform.ScaleYProperty }));
 
 
-                Storyboard.SetTarget(eDA, _ellipse);
-                Storyboard.SetTargetProperty(eDA, new PropertyPath(Canvas.LeftProperty));
+                Storyboard.SetTarget(eDA, this);
+                Storyboard.SetTargetProperty(eDA, new PropertyPath(SwitchButton.SwitchSiteProperty));
 
 
                 _openBorder.BorderThickness = new Thickness(2);
@@ -402,12 +470,27 @@ namespace LeeTeke.WpfControl.Controls
 
         private void me_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (Canvas.GetLeft(_ellipse) > 3)
+            if (sbClose != null)
+                sbClose.Stop();
+            if (sbOpen != null)
+                sbOpen.Stop();
+
+
+            if (Switch&&_ellipse.IsLoaded)
             {
-                Canvas.SetLeft(_ellipse, _canvas.ActualWidth - _ellipse.ActualWidth - 1);
+                SwitchSite = _canvas.ActualWidth - _ellipse.ActualWidth - 1;
             }
+
         }
 
+
+        private void _ellipse_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Switch)
+            {
+                ControlStoryBoard(Switch);
+            }
+        }
 
         #endregion
 

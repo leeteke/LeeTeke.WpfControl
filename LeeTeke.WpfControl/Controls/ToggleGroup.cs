@@ -61,10 +61,10 @@ namespace LeeTeke.WpfControl.Controls
 
         public ToggleGroup()
         {
+            EventManager.RegisterClassHandler(typeof(WrapPanel), WrapPanel.SizeChangedEvent, new RoutedEventHandler(PART_WrapPanel_Loaded));
+
             EventManager.RegisterClassHandler(typeof(ToggleButton), ToggleButton.CheckedEvent, new RoutedEventHandler(ToggleButton_Checked));
             EventManager.RegisterClassHandler(typeof(ToggleButton), ToggleButton.UncheckedEvent, new RoutedEventHandler(ToggleButton_UnChecked));
-            EventManager.RegisterClassHandler(typeof(WrapPanel), WrapPanel.LoadedEvent, new RoutedEventHandler(PART_WrapPanel_Loaded));
-
         }
 
         #region override
@@ -117,35 +117,12 @@ namespace LeeTeke.WpfControl.Controls
 
         private static void SelectedItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is ToggleGroup group && e.NewValue != e.OldValue)
+            if (d is ToggleGroup group)
             {
                 if (e.NewValue != group._selectedItem)
                 {
-                    switch (group.SelectionMode)
-                    {
-                        case ToggleGroupMode.Single:
-                            if (e.NewValue is ToggleButton)
-                            {
-                                group.ItemChangedAsync(e.NewValue);
-                            }
-                            break;
-                        case ToggleGroupMode.Multiple:
-                            if (e.NewValue is not IList)
-                            {
-                                if (e.NewValue is ToggleButton)
-                                {
-                                    group.ItemChangedAsync(new List<ToggleButton>() { (ToggleButton)e.NewValue });
-                                }
-                            }
-                            else
-                            {
-                                group.ItemChangedAsync(e.NewValue);
-                            }
-                            break;
-                        default:
-                            break;
-                    }
 
+                    group.SelectedItemChanged();
                 }
             }
         }
@@ -171,24 +148,7 @@ namespace LeeTeke.WpfControl.Controls
             {
                 if (e.NewValue != group._selectedValue)
                 {
-                    switch (group.SelectionMode)
-                    {
-                        case ToggleGroupMode.Single:
-                            group.ValueChangedAsync(e.NewValue);
-                            break;
-                        case ToggleGroupMode.Multiple:
-                            if (e.NewValue is not IList)
-                            {
-                                group.ValueChangedAsync(new List<object>() { e.NewValue });
-                            }
-                            else
-                            {
-                                group.ValueChangedAsync(e.NewValue);
-                            }
-                            break;
-                        default:
-                            break;
-                    }
+                    group.SelectedValueChanged();
 
                 }
             }
@@ -214,35 +174,11 @@ namespace LeeTeke.WpfControl.Controls
 
         private static void SelectedIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is ToggleGroup group && e.NewValue != e.OldValue)
+            if (d is ToggleGroup group)
             {
                 if (e.NewValue != group._selectedIndex)
                 {
-
-                    switch (group.SelectionMode)
-                    {
-                        case ToggleGroupMode.Single:
-                            if (int.TryParse(e.NewValue.ToString(), out int value))
-                            {
-                                group.IndexChangedAsync(value);
-                            }
-                            break;
-                        case ToggleGroupMode.Multiple:
-                            if (e.NewValue is not IList)
-                            {
-                                if (int.TryParse(e.NewValue.ToString(), out int value2))
-                                {
-                                    group.IndexChangedAsync(new List<int>() { value2 });
-                                }
-                            }
-                            else
-                            {
-                                group.IndexChangedAsync(e.NewValue);
-                            }
-                            break;
-                        default:
-                            break;
-                    }
+                    group.SelectedIndexChanged();
 
                 }
             }
@@ -268,7 +204,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (d is ToggleGroup group)
             {
-                group.ValueChangedAsync(null);
+                group.ValueChanged(null);
             }
         }
 
@@ -486,8 +422,6 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
-
-
         #region SelectionChangedCommand
         /// <summary>
         /// 请填写描述
@@ -509,15 +443,130 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
-        #region 路由
+        #region RouteEvent
 
+
+
+
+        #region SelectionChanged
         /// <summary>
-        /// 选择改变
+        /// 请填写描述
         /// </summary>
-        public event EventHandler<object> SelectionChanged;
+        public event ToggleSelectionChangedEventHandler SelectionChanged
+        {
+            add { AddHandler(SelectionChangedEvent, value); }
+            remove { RemoveHandler(SelectionChangedEvent, value); }
+        }
+
+        public static readonly RoutedEvent SelectionChangedEvent = EventManager.RegisterRoutedEvent(
+        "SelectionChanged", RoutingStrategy.Bubble, typeof(EventHandler<SelectionChangedEventHandler>), typeof(ToggleGroup));
+
+
+        private void RaiseSelectionChanged(object newValue)
+        {
+            try
+            {
+                SelectionChangedCommand?.Execute(SelectedValue);
+            }
+            catch
+            {
+
+            }
+
+            var arg = new ToggleSelectionChangedEventArgs(newValue, SelectionChangedEvent);
+            RaiseEvent(arg);
+        }
+
         #endregion
 
+
+        #endregion
+
+
         #region 内部逻辑
+
+        #region Selected私有
+
+        private void SelectedIndexChanged()
+        {
+            switch (SelectionMode)
+            {
+                case ToggleGroupMode.Single:
+                    if (int.TryParse(SelectedIndex.ToString(), out int value))
+                    {
+                        IndexChanged(value);
+                    }
+                    break;
+                case ToggleGroupMode.Multiple:
+                    if (SelectedIndex is not IList)
+                    {
+                        if (int.TryParse(SelectedIndex.ToString(), out int value2))
+                        {
+                            IndexChanged(new List<int>() { value2 });
+                        }
+                    }
+                    else
+                    {
+                        IndexChanged(SelectedIndex);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void SelectedValueChanged()
+        {
+            switch (SelectionMode)
+            {
+                case ToggleGroupMode.Single:
+                    ValueChanged(SelectedValue);
+                    break;
+                case ToggleGroupMode.Multiple:
+                    if (SelectedValue is not IList)
+                    {
+                        ValueChanged(new List<object>() { SelectedValue });
+                    }
+                    else
+                    {
+                        ValueChanged(SelectedValue);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+
+        private void SelectedItemChanged()
+        {
+            switch (SelectionMode)
+            {
+                case ToggleGroupMode.Single:
+                    if (SelectedItem is ToggleButton)
+                    {
+                        ItemChanged(SelectedItem);
+                    }
+                    break;
+                case ToggleGroupMode.Multiple:
+                    if (SelectedItem is not IList)
+                    {
+                        if (SelectedItem is ToggleButton)
+                        {
+                            ItemChanged(new List<ToggleButton>() { (ToggleButton)SelectedItem });
+                        }
+                    }
+                    else
+                    {
+                        ItemChanged(SelectedItem);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        #endregion
 
 
         private void PART_WrapPanel_Loaded(object sender, RoutedEventArgs e)
@@ -527,9 +576,26 @@ namespace LeeTeke.WpfControl.Controls
                 if (wrap.Name == "PART_WrapPanel")
                 {
                     _wrapPanel = wrap;
+                    if (SelectedIndex != null)
+                    {
+                        SelectedIndexChanged();
+                        return;
+                    }
 
+                    if (SelectedValue != null)
+                    {
+                        SelectedValueChanged();
+                        return;
+                    }
+
+                    if (SelectedItem != null)
+                    {
+                        SelectedItemChanged();
+                        return;
+                    }
                 }
             }
+
         }
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)
         {
@@ -553,7 +619,7 @@ namespace LeeTeke.WpfControl.Controls
                             {
                                 var newValue = (List<ToggleButton>)SelectedValue;
                                 newValue.Add(button);
-                                ItemChangedAsync(newValue);
+                                ItemChanged(newValue);
 
                             }
                             break;
@@ -578,7 +644,7 @@ namespace LeeTeke.WpfControl.Controls
                             {
                                 var newValue = (List<object>)SelectedValue;
                                 newValue.Add(button.DataContext);
-                                ValueChangedAsync(newValue);
+                                ValueChanged(newValue);
                             }
                             break;
                         default:
@@ -610,11 +676,11 @@ namespace LeeTeke.WpfControl.Controls
                                 if (list.Count < 1)
                                 {
                                     SelectedItem = null;
-                                    ItemChangedAsync(null);
+                                    ItemChanged(null);
                                 }
                                 else
                                 {
-                                    ItemChangedAsync(list);
+                                    ItemChanged(list);
                                 }
                             }
                             break;
@@ -641,11 +707,11 @@ namespace LeeTeke.WpfControl.Controls
                                 if (list.Count < 1)
                                 {
                                     SelectedValue = null;
-                                    ValueChangedAsync(null);
+                                    ValueChanged(null);
                                 }
                                 else
                                 {
-                                    ValueChangedAsync(list);
+                                    ValueChanged(list);
                                 }
                             }
                             break;
@@ -659,16 +725,16 @@ namespace LeeTeke.WpfControl.Controls
         }
 
 
-        private async void ValueChangedAsync(object value)
+        private  void ValueChanged(object value)
         {
 
             if (ItemsSource == null)
             {
-                ItemChangedAsync(value);
+                ItemChanged(value);
                 return;
             }
 
-            if (!await SelectedInitAsync(value))
+            if (!SelectedInit(value))
                 return;
 
 
@@ -696,7 +762,7 @@ namespace LeeTeke.WpfControl.Controls
                     }
                 }
 
-                EventGO();
+                RaiseSelectionChanged(SelectedValue);
                 return;
             }
 
@@ -730,17 +796,17 @@ namespace LeeTeke.WpfControl.Controls
                 }
 
 
-                EventGO();
+                RaiseSelectionChanged(SelectedValue);
                 return;
             }
 
         }
 
-        private async void ItemChangedAsync(object item)
+        private async void ItemChanged(object item)
         {
 
 
-            if (!await SelectedInitAsync(item))
+            if (!SelectedInit(item))
                 return;
 
 
@@ -768,7 +834,7 @@ namespace LeeTeke.WpfControl.Controls
                         chlid.IsChecked = false;
                     }
                 }
-                EventGO();
+                RaiseSelectionChanged(SelectedValue);
                 return;
             }
 
@@ -803,17 +869,17 @@ namespace LeeTeke.WpfControl.Controls
                 }
 
 
-                EventGO();
+                RaiseSelectionChanged(SelectedValue);
                 return;
             }
 
 
         }
 
-        private async void IndexChangedAsync(object value)
+        private void IndexChanged(object value)
         {
 
-            if (!await SelectedInitAsync(value))
+            if (!SelectedInit(value))
                 return;
 
             //单选项
@@ -842,7 +908,7 @@ namespace LeeTeke.WpfControl.Controls
                         chlid.IsChecked = false;
                     }
                 }
-                EventGO();
+                RaiseSelectionChanged(SelectedValue);
                 return;
             }
 
@@ -877,22 +943,26 @@ namespace LeeTeke.WpfControl.Controls
                 }
 
 
-                EventGO();
+                RaiseSelectionChanged(SelectedValue);
                 return;
             }
 
 
         }
 
+
+
+
         /// <summary>
         /// 清理选择
         /// </summary>
-        private async Task<bool> SelectedInitAsync(object args)
+        private bool SelectedInit(object args)
         {
-            while (!IsLoaded)
+            if (_wrapPanel == null)
             {
-                await Task.Delay(1);
+                return false;
             }
+
             _selectedIndex = null;
             _selectedItem = null;
             _selectedValue = null;
@@ -905,24 +975,16 @@ namespace LeeTeke.WpfControl.Controls
                 {
                     chlid.IsChecked = false;
                 }
-                EventGO();
+                RaiseSelectionChanged(SelectedValue);
                 return false;
             }
 
             return true;
         }
 
-        private void EventGO()
-        {
-            SelectionChanged?.Invoke(this, SelectedValue);
-            try
-            {
-                SelectionChangedCommand?.Execute(SelectedValue);
-            }
-            catch
-            {
-            }
-        }
+
+
+
 
         #endregion
 

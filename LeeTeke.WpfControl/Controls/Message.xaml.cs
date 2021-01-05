@@ -20,6 +20,7 @@ namespace LeeTeke.WpfControl.Controls
     {
         public object Value { get; set; }
         private bool _canClose;
+        private bool _isDialog = false;
 
         public bool CanClose
         {
@@ -40,7 +41,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-                this.Close();
+            this.Close();
         }
 
         public void AddButton(string name, object value)
@@ -57,12 +58,33 @@ namespace LeeTeke.WpfControl.Controls
             btnPanle.Children.Add(theButton);
         }
 
+        private new void Show()
+        {
+            _isDialog = false;
+            base.Show();
+        }
+        private new bool? ShowDialog()
+        {
+            _isDialog = true;
+            return base.ShowDialog();
+        }
+
         private void TheButton_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button button)
             {
                 Value = button.DataContext;
-                DialogResult = true;
+
+                if (Value is Action action)
+                {
+                    action.Invoke();
+                }
+
+                if (_isDialog)
+                {
+                    DialogResult = true;
+                }
+
             }
         }
 

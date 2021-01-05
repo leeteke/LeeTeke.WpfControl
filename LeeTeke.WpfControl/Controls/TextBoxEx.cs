@@ -58,17 +58,22 @@ namespace LeeTeke.WpfControl.Controls
         private Border _border;
         public TextBoxEx()
         {
-            Loaded += TextBoxEx_Loaded;
+            KeyDown += TextBoxEx_KeyDown;
         }
 
-        private void TextBoxEx_Loaded(object sender, RoutedEventArgs e)
+
+        #region 
+
+        public override void OnApplyTemplate()
         {
+            base.OnApplyTemplate();
             _password = this.Template.FindName("PART_Password", this) as PasswordBox;
             _textBox = this.Template.FindName("PART_Main", this) as TextBox;
             _border = this.Template.FindName("PART_ICON", this) as Border;
             if (_password != null)
             {
                 _password.PasswordChanged += _password_PasswordChanged;
+                _password.Password = Text;
             }
 
             if (_textBox != null)
@@ -77,9 +82,28 @@ namespace LeeTeke.WpfControl.Controls
                 _textBox.TextChanged += _textBox_TextChanged;
             }
 
-            if (_border!=null)
+            if (_border != null)
             {
                 _border.MouseDown += _border_MouseDown;
+            }
+
+        }
+
+        #endregion
+
+        private void TextBoxEx_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key== Key.Enter)
+            {
+                RaiseEntered(Text);
+                try
+                {
+                    EnterCommand?.Execute(Text);
+                }
+                catch
+                {
+
+                }
             }
         }
 
@@ -116,6 +140,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (IconCanClick)
             {
+                RaiseIconClicked(Text);
                 try
                 {
                     IconCommand?.Execute(Text);
@@ -123,7 +148,6 @@ namespace LeeTeke.WpfControl.Controls
                 catch
                 {
                 }
-                IconCliecked?.Invoke(this, Text);
             }
         }
 
@@ -272,19 +296,19 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
-        #region IconOutSize
+        #region IconMargin
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public double IconOutSize
+        public Thickness IconMargin
         {
-            get { return (double)GetValue(IconOutSizeProperty); }
-            set { SetValue(IconOutSizeProperty, value); }
+            get { return (Thickness)GetValue(IconMarginProperty); }
+            set { SetValue(IconMarginProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for IconOutSize.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IconOutSizeProperty =
-            DependencyProperty.Register("IconOutSize", typeof(double), typeof(TextBoxEx));
+        // Using a DependencyProperty as the backing store for IconMargin.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IconMarginProperty =
+            DependencyProperty.Register("IconMargin", typeof(Thickness), typeof(TextBoxEx));
 
         #endregion
 
@@ -476,19 +500,58 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-        #region Event
+        #region RouteEvent
+
+
+        #region Entered
         /// <summary>
-        /// 回车事件
+        /// 请填写描述
         /// </summary>
-        public event EventHandler<string> EnterEvent;
+        public event TextBoxExEventHandler Entered
+        {
+            add { AddHandler(EnteredEvent, value); }
+            remove { RemoveHandler(EnteredEvent, value); }
+        }
 
-        public event EventHandler<string> IconCliecked;
+        public static readonly RoutedEvent EnteredEvent = EventManager.RegisterRoutedEvent(
+        "Entered", RoutingStrategy.Bubble, typeof(EventHandler<TextBoxExEventHandler>), typeof(TextBoxEx));
+
+
+        private void RaiseEntered(string newValue)
+        {
+            var arg = new TextBoxExEventArgs(newValue, EnteredEvent);
+            RaiseEvent(arg);
+        }
 
         #endregion
 
 
-        #region 私有逻辑
+        #region IconClicked
+        /// <summary>
+        /// 请填写描述
+        /// </summary>
+        public event TextBoxExEventHandler IconClicked
+        {
+            add { AddHandler(IconClickedEvent, value); }
+            remove { RemoveHandler(IconClickedEvent, value); }
+        }
+
+        public static readonly RoutedEvent IconClickedEvent = EventManager.RegisterRoutedEvent(
+        "IconClicked", RoutingStrategy.Bubble, typeof(EventHandler<TextBoxExEventHandler>), typeof(TextBoxEx));
+
+
+        private void RaiseIconClicked(string newValue)
+        {
+            var arg = new TextBoxExEventArgs(newValue, IconClickedEvent);
+            RaiseEvent(arg);
+        }
 
         #endregion
+
+
+        #endregion
+
+
+     
     }
 }

@@ -13,15 +13,23 @@
         Background="White"
         >
 
-    <StackPanel>
-        <leecontrol:TagControl x:Name="test"  
-                               ItemsSource="{Binding TestList}"
-                               ItemSelectedCommand="{Binding TestCommand}">
+    <StackPanel >
+
+        <leecontrol:TagControl    ItemsSource="{Binding TestList}"
+                                SelectedBrush="Red"
+                                Visibility="Visible"
+                                  SelectedValue="{Binding SelectedData}"
+                                  ItemSelectedCommand="{Binding TestCommand}">
             <leecontrol:TagControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock leedep:TagControlManager.ItemCanClose="{Binding Boolen}" Text="{Binding Title}"/>
+                    <TextBlock Text="{Binding Title}"/>
                 </DataTemplate>
             </leecontrol:TagControl.ItemTemplate>
         </leecontrol:TagControl>
+
+
+
     </StackPanel>
+
+
 </Window>

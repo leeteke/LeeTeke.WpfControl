@@ -74,7 +74,6 @@ namespace LeeTeke.WpfControl.Controls
         private RoutedEventHandler _routedMoveEvent;
 
         private Canvas _canvas;
-        private Canvas _overflowCanvas;
 
         public RippleMask()
         {
@@ -84,10 +83,9 @@ namespace LeeTeke.WpfControl.Controls
             _routedMoveEvent = new RoutedEventHandler(RoutedMoveEventHandler);
             SizeChanged += RippleMask_SizeChanged;
             MouseLeave += RippleMask_MouseLeave;
-            Loaded += RippleMask_Loaded;
         }
 
-   
+
 
 
         #region CornerRadius
@@ -115,7 +113,6 @@ namespace LeeTeke.WpfControl.Controls
 
 
         #endregion
-
 
         #region RippleBrush
 
@@ -205,25 +202,8 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for IsOverflow.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsOverflowProperty =
-            DependencyProperty.Register("IsOverflow", typeof(bool), typeof(RippleMask), new PropertyMetadata(false, new PropertyChangedCallback(IsOverflowChanged)));
+            DependencyProperty.Register("IsOverflow", typeof(bool), typeof(RippleMask));
 
-        private static void IsOverflowChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is RippleMask mask)
-            {
-                var value = (bool)e.NewValue;
-                if (value)
-                {
-                    mask._canvas.Visibility = Visibility.Collapsed;
-                    mask._overflowCanvas.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    mask._canvas.Visibility = Visibility.Visible;
-                    mask._overflowCanvas.Visibility = Visibility.Collapsed;
-                }
-            }
-        }
 
 
         #endregion
@@ -274,11 +254,14 @@ namespace LeeTeke.WpfControl.Controls
 
 
         #region 私有逻辑
-        private void RippleMask_Loaded(object sender, RoutedEventArgs e)
+
+        public override void OnApplyTemplate()
         {
-            _canvas = this.Template.FindName("PART_Canvas",this) as Canvas;
-            _overflowCanvas = this.Template.FindName("PART_OverflowCanvas", this) as Canvas;
+            base.OnApplyTemplate();
+            _canvas = this.Template.FindName("PART_Canvas", this) as Canvas;
         }
+
+     
 
 
         private void RoutedMoveEventHandler(object sender, RoutedEventArgs e)
@@ -360,7 +343,6 @@ namespace LeeTeke.WpfControl.Controls
             if (_sbOpen != null)
                 _sbOpen.Stop();
             _canvas.Children.Clear();
-            _overflowCanvas.Children.Clear();
             _ripplePath = new Path
             {
                 Name = "yuan",
@@ -371,14 +353,8 @@ namespace LeeTeke.WpfControl.Controls
                 RenderTransformOrigin = new Point(0.5, 0.5),
                 Data = StaticMethods.GetRoundRectangle(new Rect(0, 0, 8, 8), new Thickness(0), new CornerRadius(4))
             };
-            if (IsOverflow)
-            {
-                _overflowCanvas.Children.Add(_ripplePath);
-            }
-            else
-            {
-                _canvas.Children.Add(_ripplePath);
-            }
+
+            _canvas.Children.Add(_ripplePath);
 
             Canvas.SetLeft(_ripplePath, _mouseSite.X - 4);
             Canvas.SetTop(_ripplePath, _mouseSite.Y - 4);

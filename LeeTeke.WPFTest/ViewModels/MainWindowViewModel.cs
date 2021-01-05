@@ -61,6 +61,21 @@ namespace LeeTeke.WPFTest.ViewModels
             }
         }
 
+        private string _text;
+        /// <summary>
+        /// 请填写属性名
+        /// </summary>
+        public string Text
+        {
+            get { return _text; }
+            set
+            {
+                _text = value;
+                this.RaisePropertyChanged("Text");
+            }
+        }
+
+
 
         #endregion
 
@@ -92,16 +107,36 @@ namespace LeeTeke.WPFTest.ViewModels
                 new TestListModel(){  Title="测试3", Boolen=true, Image=new BitmapImage(new Uri("https://nie.res.netease.com/r/pic/20200317/16005c2f-d749-465f-a05d-3dcbba024f22.jpg"))},
             };
 
+            SelectedData = TestList[1];
+
             SelectedList = new List<object>()
             {
                 TestList[0],TestList[2]
             };
+
+            Text = "123123123";
         }
 
 
 
         private void TestCommandExecute(object obj)
         {
+
+            var cango = new LeeTeke.WpfControl.MessageBoxEx();
+
+            cango.Title = "你好";
+            cango.Content = "asdasd";
+            cango.LodingBarModel = WpfControl.LodingBarMode.Wating;
+            cango.LodingBarValue = 10;
+            cango.ShowLoding = false;
+            cango.AddOptions("是的", new Action(()=> {
+
+
+                cango.ShowLoding = true;
+
+
+            }));
+            cango.Show();
 
         }
 

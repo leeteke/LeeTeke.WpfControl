@@ -75,7 +75,7 @@ namespace LeeTeke.WpfControl.Controls
             #region 初始化组件
             Background = new SolidColorBrush(Colors.White);
             BorderThickness = new Thickness(0);
-        
+
             _border = new Border();
             BindingOperations.SetBinding(_border, Border.MinHeightProperty, new Binding() { Source = this, Path = new PropertyPath("ContentMinHeight"), Mode = BindingMode.OneWay });
             BindingOperations.SetBinding(_border, Border.MinWidthProperty, new Binding() { Source = this, Path = new PropertyPath("ContentMinWidth"), Mode = BindingMode.OneWay });
@@ -91,7 +91,7 @@ namespace LeeTeke.WpfControl.Controls
                 Placement = PlacementMode.MousePoint,
                 StaysOpen = false,
                 PopupAnimation = PopupAnimation.Fade,
-                Child=_border,
+                Child = _border,
             };
             _border.PreviewMouseUp += _border_PreviewMouseUp; ;
             #endregion
@@ -108,7 +108,6 @@ namespace LeeTeke.WpfControl.Controls
             };
             _notify.ContextMenuStrip.Items.Add("");
             _notify.ContextMenuStrip.Closed += ContextMenuStrip_Closed;
-            _notify.MouseMove += NotifyIcon_MouseMove;
             _flashTimer = new DispatcherTimer
             {
                 Interval = TimeSpan.FromMilliseconds(400)
@@ -119,9 +118,9 @@ namespace LeeTeke.WpfControl.Controls
             #endregion
         }
 
-   
 
-    
+
+
 
         #region 依赖属性
 
@@ -367,7 +366,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ClickedThenClosing.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ClickedThenClosingProperty =
-            DependencyProperty.Register("ClickedThenClosing", typeof(bool), typeof(NotifyIconEx),new PropertyMetadata(true));
+            DependencyProperty.Register("ClickedThenClosing", typeof(bool), typeof(NotifyIconEx), new PropertyMetadata(true));
 
         #endregion
 
@@ -377,11 +376,97 @@ namespace LeeTeke.WpfControl.Controls
 
 
         #region Event
-        public new event EventHandler<MousePoint> MouseMoveEvent;
-        public event EventHandler<MousePoint> MouseLeftButtonClickEvent;
-        public event EventHandler<MousePoint> MouseRightButtonClickEvent;
-        public new event EventHandler MouseDoubleClickEvent;
-        public event EventHandler BalloonTipClicked;
+
+
+
+        #region MouseLeftClick
+        /// <summary>
+        /// 请填写描述
+        /// </summary>
+        public event RoutedEventHandler MouseLeftClick
+        {
+            add { AddHandler(MouseLeftClickEvent, value); }
+            remove { RemoveHandler(MouseLeftClickEvent, value); }
+        }
+
+        public static readonly RoutedEvent MouseLeftClickEvent = EventManager.RegisterRoutedEvent(
+        "MouseLeftClick", RoutingStrategy.Bubble, typeof(EventHandler<RoutedEventHandler>), typeof(NotifyIconEx));
+
+
+        private void RaiseMouseLeftClick()
+        {
+            var arg = new RoutedEventArgs(MouseLeftClickEvent);
+            RaiseEvent(arg);
+        }
+
+        #endregion
+
+        #region MouseRightClick
+        /// <summary>
+        /// 请填写描述
+        /// </summary>
+        public event RoutedEventHandler MouseRightClick
+        {
+            add { AddHandler(MouseRightClickEvent, value); }
+            remove { RemoveHandler(MouseRightClickEvent, value); }
+        }
+
+        public static readonly RoutedEvent MouseRightClickEvent = EventManager.RegisterRoutedEvent(
+        "MouseRightClick", RoutingStrategy.Bubble, typeof(EventHandler<RoutedEventHandler>), typeof(NotifyIconEx));
+
+
+        private void RaiseMouseRightClick()
+        {
+            var arg = new RoutedEventArgs( MouseRightClickEvent);
+            RaiseEvent(arg);
+        }
+
+        #endregion
+
+        #region MouseDoubleClick
+        /// <summary>
+        /// 请填写描述
+        /// </summary>
+        public event RoutedEventHandler MouseDoubleClick
+        {
+            add { AddHandler(MouseDoubleClickEvent, value); }
+            remove { RemoveHandler(MouseDoubleClickEvent, value); }
+        }
+
+        public static new readonly RoutedEvent MouseDoubleClickEvent = EventManager.RegisterRoutedEvent(
+        "MouseDoubleClick", RoutingStrategy.Bubble, typeof(EventHandler<RoutedEventHandler>), typeof(NotifyIconEx));
+
+
+        private void RaiseMouseDoubleClick()
+        {
+            var arg = new RoutedEventArgs( MouseDoubleClickEvent);
+            RaiseEvent(arg);
+        }
+
+        #endregion
+
+
+        #region BalloonTipClicked
+        /// <summary>
+        /// 请填写描述
+        /// </summary>
+        public event RoutedEventHandler BalloonTipClicked
+        {
+            add { AddHandler(BalloonTipClickedEvent, value); }
+            remove { RemoveHandler(BalloonTipClickedEvent, value); }
+        }
+
+        public static readonly RoutedEvent BalloonTipClickedEvent = EventManager.RegisterRoutedEvent(
+        "BalloonTipClicked", RoutingStrategy.Bubble, typeof(EventHandler<RoutedEventHandler>), typeof(NotifyIconEx));
+
+
+        private void RaiseBalloonTipClicked()
+        {
+            var arg = new RoutedEventArgs( BalloonTipClickedEvent);
+            RaiseEvent(arg);
+        }
+
+        #endregion
         #endregion
 
         #region 公共方法
@@ -510,17 +595,6 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
 
-        private void NotifyIcon_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            MouseMoveEvent?.Invoke(this, new MousePoint() { X = System.Windows.Forms.Control.MousePosition.X, Y = System.Windows.Forms.Control.MousePosition.Y });
-            try
-            {
-                MouseMoveCommand?.Execute(new MousePoint() { X = System.Windows.Forms.Control.MousePosition.X, Y = System.Windows.Forms.Control.MousePosition.Y });
-            }
-            catch
-            {
-            }
-        }
 
         private void ContextMenuStrip_Closed(object sender, System.Windows.Forms.ToolStripDropDownClosedEventArgs e)
         {
@@ -532,7 +606,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (sender is NotifyIconEx notify)
             {
-                BalloonTipClicked?.Invoke(this, new EventArgs());
+                RaiseBalloonTipClicked();
                 try
                 {
                     MouseDoubleClickCommand?.Execute(null);
@@ -548,20 +622,20 @@ namespace LeeTeke.WpfControl.Controls
             switch (e.Button)
             {
                 case System.Windows.Forms.MouseButtons.Left:
-                    MouseLeftButtonClickEvent?.Invoke(this, new MousePoint() { X = System.Windows.Forms.Control.MousePosition.X, Y = System.Windows.Forms.Control.MousePosition.Y });
+                    RaiseMouseLeftClick();
                     try
                     {
-                        MouseLeftButtonClickCommand?.Execute(new MousePoint() { X = System.Windows.Forms.Control.MousePosition.X, Y = System.Windows.Forms.Control.MousePosition.Y });
+                        MouseLeftButtonClickCommand?.Execute(null);
                     }
                     catch
                     {
                     }
                     break;
                 case System.Windows.Forms.MouseButtons.Right:
-                    MouseRightButtonClickEvent?.Invoke(this, new MousePoint() { X = System.Windows.Forms.Control.MousePosition.X, Y = System.Windows.Forms.Control.MousePosition.Y });
+                    RaiseMouseRightClick();
                     try
                     {
-                        MouseRightButtonClickCommand?.Execute(new MousePoint() { X = System.Windows.Forms.Control.MousePosition.X, Y = System.Windows.Forms.Control.MousePosition.Y });
+                        MouseRightButtonClickCommand?.Execute(null);
                     }
                     catch
                     {
@@ -576,7 +650,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private void NotifyIcon_DoubleClick(object sender, EventArgs e)
         {
-            MouseDoubleClickEvent?.Invoke(this, new EventArgs());
+            RaiseMouseDoubleClick();
             try
             {
                 MouseDoubleClickCommand?.Execute(null);
@@ -585,7 +659,7 @@ namespace LeeTeke.WpfControl.Controls
             {
             }
         }
-   
+
 
 
         private void AddRightContent(FrameworkElement element)
@@ -596,7 +670,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private void _border_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
-            if (_popup.IsOpen&& ClickedThenClosing)
+            if (_popup.IsOpen && ClickedThenClosing)
             {
                 _popup.IsOpen = false;
             }

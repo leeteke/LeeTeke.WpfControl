@@ -60,18 +60,15 @@ namespace LeeTeke.WpfControl.Controls
         public SlideView()
         {
             EventManager.RegisterClassHandler(typeof(SlideViewItem), SlideViewItem.MouseLeftButtonUpEvent, new RoutedEventHandler(ItemMouseLeftButtonUpEvent));
-            Loaded += SlideView_Loaded;
             PreviewMouseWheel += SlideView_PreviewMouseWheel;
-
         }
 
      
 
-        private void SlideView_Loaded(object sender, RoutedEventArgs e)
-        {
-            _scrollViewer = this.Template.FindName("PART_ScrollViewer", this) as ScrollViewer;
-            ToIndex(0);
-        }
+   
+
+
+
 
         #region 属性
         /// <summary>
@@ -97,6 +94,14 @@ namespace LeeTeke.WpfControl.Controls
         {
             return new SlideViewItem();
         }
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            _scrollViewer = this.Template.FindName("PART_ScrollViewer", this) as ScrollViewer;
+            ToIndex(0);
+        }
+
         #endregion
 
         #region 依赖属性
@@ -384,6 +389,9 @@ namespace LeeTeke.WpfControl.Controls
         {
             try
             {
+                if (_scrollViewer==null )
+                    return;
+
                 if (Items.Count > 1)
                 {
                     if (index < Count && index > -1)

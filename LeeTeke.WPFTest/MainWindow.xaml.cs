@@ -37,8 +37,9 @@ namespace LeeTeke.WPFTest
 
         }
 
-     
+        private void WrapPanel_Loaded(object sender, RoutedEventArgs e)
+        {
 
-    
+        }
     }
 }

@@ -13,7 +13,13 @@
         leedep:WindowShaowManager.Open="True"
         Closing="Window_Closing"
         >
-
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid Margin="5,5,5,5"  >
             <Grid.RowDefinitions>
@@ -67,7 +73,7 @@
                              Margin="5,0"
                              Height="8"
                              CornerRadius="2"
-                             Mode="Wating"
+                             Mode="Loding"
                              Grid.Row="2"
                              Grid.ColumnSpan="2"
                              />
@@ -77,7 +83,6 @@
             Grid.Column="1"
             Height="30"
             Width="30"
-            Margin="0,5,5,5"
             VerticalAlignment="Top"
             Content="&#xE8BB;"
             FontFamily="{StaticResource IconFontFamily}"

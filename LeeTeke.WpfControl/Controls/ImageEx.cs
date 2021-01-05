@@ -49,24 +49,19 @@ namespace LeeTeke.WpfControl.Controls
     {
         #region 字段
 
-        private Image _image;
 
         #endregion
         public ImageEx()
         {
-           Loaded += ImageEx_Loaded;
-        }
-
-        private void ImageEx_Loaded(object sender, RoutedEventArgs e)
-        {
-            _image = this.Template.FindName("PART_Image", this) as Image;
 
         }
+
 
         static ImageEx()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ImageEx), new FrameworkPropertyMetadata(typeof(ImageEx)));
         }
+
 
 
         #region 依赖属性
@@ -106,7 +101,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (d is ImageEx imageEX && e.OldValue != e.NewValue)
             {
-                imageEX.ChangeShowImageAsync();
+                imageEX.ChangeShowImage();
             }
         }
 
@@ -146,7 +141,6 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-
         #region ShowDuration
         /// <summary>
         /// 显示动作持续事件
@@ -164,30 +158,42 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
+
+
+        #region AnimationValue
+        /// <summary>
+        /// 请填写描述
+        /// </summary>
+        public double AnimationValue
+        {
+            get { return (double)GetValue(AnimationValueProperty); }
+            private set { SetValue(AnimationValueProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for AnimationValue.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty AnimationValueProperty =
+            DependencyProperty.Register("AnimationValue", typeof(double), typeof(ImageEx),new PropertyMetadata(0));
+
         #endregion
 
+
+
+        #endregion
 
         #region 私有逻辑
 
-        /// <summary>
+
+        /// </summary>
         /// 改变显示图片
         /// </summary>
-        private async void ChangeShowImageAsync()
+        private  void ChangeShowImage()
         {
-            ///等待加载结束
-            while (!IsLoaded)
-            {
-                await Task.Delay(1);
-            }
-            if (_image != null)
-            {
-                DoubleAnimation daV = new DoubleAnimation(0, 1, ShowDuration) { FillBehavior = FillBehavior.HoldEnd };
-                _image.BeginAnimation(OpacityProperty, daV);
-            }
+            DoubleAnimation daV = new DoubleAnimation(0, 1, ShowDuration) { FillBehavior = FillBehavior.HoldEnd };
+            this.BeginAnimation(AnimationValueProperty, daV);
         }
 
-        #endregion
 
+        #endregion
 
     }
 }

@@ -52,25 +52,57 @@ namespace LeeTeke.WpfControl.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(LodingBar), new FrameworkPropertyMetadata(typeof(LodingBar)));
         }
 
-        private Storyboard valueSB;
-        private Storyboard vWatingSB;
-        private Storyboard hWatingSB;
 
-        private Canvas _canvas;
-        private Rectangle _horizontalRect;
-        private Rectangle _verticalRect;
-        private Rectangle _watingVerticalRect;
-        private Rectangle _watingHorizontalRect;
+        private Storyboard _lodingSB;
 
-        private bool lodingGo = false;
-        private bool goTwoSB = true;
         public LodingBar()
         {
-            Loaded += LodingBar_Loaded;
+            this.SizeChanged += LodingBar_SizeChanged;
         }
 
+        private void LodingBar_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            LodingStoryboard(true);
+        }
+
+        #region 属性
+
+        #region ProgressLength
+        /// <summary>
+        /// 请填写描述
+        /// </summary>
+        public double ProgressLength
+        {
+            get { return (double)GetValue(ProgressLengthProperty); }
+            private set { SetValue(ProgressLengthProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ProgressLength.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ProgressLengthProperty =
+            DependencyProperty.Register("ProgressLength", typeof(double), typeof(LodingBar));
+
+        #endregion
 
 
+
+        #region RectangleSite
+        /// <summary>
+        /// 请填写描述
+        /// </summary>
+        public double RectangleSite
+        {
+            get { return (double)GetValue(RectangleSiteProperty); }
+            private set { SetValue(RectangleSiteProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for RectangleSite.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RectangleSiteProperty =
+            DependencyProperty.Register("RectangleSite", typeof(double), typeof(LodingBar));
+
+        #endregion
+
+
+        #endregion
 
         #region 依赖
 
@@ -86,7 +118,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for CornerRadius.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CornerRadiusProperty =
-            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(LodingBar), new PropertyMetadata(new CornerRadius(2)));
+            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(LodingBar));
 
 
 
@@ -112,7 +144,11 @@ namespace LeeTeke.WpfControl.Controls
             {
                 if (e.NewValue is double value && value >= 0)
                 {
-                    loding.ValueChangedAsync();
+
+                }
+                else
+                {
+                    loding.Maximum = 1;
                 }
             }
         }
@@ -131,13 +167,29 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(double), typeof(LodingBar), new PropertyMetadata(0.0, new PropertyChangedCallback(ValueChanged)));
+            DependencyProperty.Register("Value", typeof(double), typeof(LodingBar), new PropertyMetadata(0.0, new PropertyChangedCallback(ValuePropertyChanged)));
 
-        private static void ValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void ValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is LodingBar loding && e.NewValue != e.OldValue)
+            if (d is LodingBar loding && e.NewValue != e.OldValue && e.NewValue is double value)
             {
-                loding.ValueChangedAsync();
+                if (value < 0)
+                {
+                    loding.Value = 0;
+                    return;
+                }
+                if (value > loding.Maximum)
+                {
+                    loding.Value = loding.Maximum;
+                    return;
+                }
+
+                loding.RaiseValueChanged(value);
+                if (loding.Mode== LodingBarMode.Loding)
+                {
+                    loding.LodingStoryboard();
+                }
+
             }
         }
 
@@ -172,15 +224,16 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for Mode.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ModeProperty =
-            DependencyProperty.Register("Mode", typeof(LodingBarMode), typeof(LodingBar), new PropertyMetadata(LodingBarMode.Loding, new PropertyChangedCallback(ModeChanged)));
+            DependencyProperty.Register("Mode", typeof(LodingBarMode), typeof(LodingBar),new PropertyMetadata(LodingBarMode.Loding, ModeChanged));
 
         private static void ModeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is LodingBar loding && e.NewValue != e.OldValue)
+            if (d is LodingBar loding)
             {
-                loding.FormChangedAsync();
+                loding.LodingStoryboard();
             }
         }
+
 
         #endregion
 
@@ -196,285 +249,141 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for Orientation.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty OrientationProperty =
-            DependencyProperty.Register("Orientation", typeof(Orientation), typeof(LodingBar), new PropertyMetadata(Orientation.Horizontal, new PropertyChangedCallback(OrientationChanged)));
+            DependencyProperty.Register("Orientation", typeof(Orientation), typeof(LodingBar));
 
-        private static void OrientationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+
+        #endregion
+
+
+
+        #region EasingFunction
+        /// <summary>
+        /// 请填写描述
+        /// </summary>
+        public IEasingFunction EasingFunction
         {
-            if (d is LodingBar loding && e.NewValue != e.OldValue)
-            {
-                loding.FormChangedAsync();
-            }
+            get { return (IEasingFunction)GetValue(EasingFunctionProperty); }
+            set { SetValue(EasingFunctionProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for EasingFunction.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EasingFunctionProperty =
+            DependencyProperty.Register("EasingFunction", typeof(IEasingFunction), typeof(LodingBar));
+
+        #endregion
+
+
+        #endregion
+
+        #region RouteEvent
+
+
+        #region ValueChanged
+        /// <summary>
+        /// 请填写描述
+        /// </summary>
+        public event LodingBarValueChangedEventHandler ValueChanged
+        {
+            add { AddHandler(ValueChangedEvent, value); }
+            remove { RemoveHandler(ValueChangedEvent, value); }
+        }
+
+        public static readonly RoutedEvent ValueChangedEvent = EventManager.RegisterRoutedEvent(
+        "ValueChanged", RoutingStrategy.Bubble, typeof(EventHandler<LodingBarValueChangedEventHandler>), typeof(LodingBar));
+
+
+        private void RaiseValueChanged(double newValue)
+        {
+            var arg = new LodingBarValueChangedEventArgs(newValue, ValueChangedEvent);
+            RaiseEvent(arg);
         }
 
         #endregion
 
-        #endregion
 
+        #endregion
 
         #region 私有逻辑
 
-        private void LodingBar_Loaded(object sender, RoutedEventArgs e)
-        {
 
-            _canvas = this.Template.FindName("PART_Canvas", this) as Canvas;
-            _horizontalRect = this.Template.FindName("PART_HRect", this) as Rectangle;
-            _verticalRect = this.Template.FindName("PART_VRect", this) as Rectangle;
-            _watingVerticalRect = this.Template.FindName("PART_WVRect", this) as Rectangle;
-            _watingHorizontalRect = this.Template.FindName("PART_WHRect", this) as Rectangle;
 
-            if (lodingGo)
-                ValueChangedAsync();
-
-            if (Mode == LodingBarMode.Wating)
-            {
-                WatingStoryboardLodingAsync();
-            }
-        }
-
-        private async void WatingStoryboardLodingAsync()
+        private double ProgressGenCalculation()
         {
             try
             {
-                while (!IsLoaded)
+                return Orientation switch
                 {
-                    await Task.Delay(1);
-                }
-                if (vWatingSB != null)
-                    vWatingSB.Pause();
-
-                if (hWatingSB != null)
-                    hWatingSB.Pause();
-
-                vWatingSB = new Storyboard()
-                {
-                    FillBehavior = FillBehavior.Stop
+                    Orientation.Horizontal => this.ActualWidth - BorderThickness.Left - BorderThickness.Right - Padding.Left - Padding.Right,
+                    Orientation.Vertical => this.ActualHeight - BorderThickness.Top - BorderThickness.Bottom - Padding.Top - Padding.Bottom,
+                    _ => 0,
                 };
-                DoubleAnimationUsingKeyFrames vDA = new DoubleAnimationUsingKeyFrames();
-                vDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+
+        private void LodingStoryboard(bool size = false)
+        {
+            if (size)
+            {
+
+            }
+            else if (!IsLoaded)
+            {
+                return;
+            }
+
+
+            if (_lodingSB != null)
+                _lodingSB.Pause();
+
+            if (Mode==LodingBarMode.Loding)
+            {
+            _lodingSB = new Storyboard() { FillBehavior = FillBehavior.Stop };
+            var plc = Value * (ProgressGenCalculation() / Maximum) ;
+            DoubleAnimationUsingKeyFrames eDA = new DoubleAnimationUsingKeyFrames();
+            eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+            {
+                Value = plc,
+                KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(200)),
+                EasingFunction = this.EasingFunction,
+            });
+            _lodingSB.Children.Add(eDA);
+            Storyboard.SetTarget(eDA, this);
+            Storyboard.SetTargetProperty(eDA, new PropertyPath(LodingBar.ProgressLengthProperty));
+            _lodingSB.Completed += (e, s) =>
+            {
+                this.ProgressLength = plc;
+            };
+            _lodingSB.Begin();
+            }
+            else
+            {
+                _lodingSB = new Storyboard() { RepeatBehavior= RepeatBehavior.Forever  };
+                DoubleAnimationUsingKeyFrames eDA = new DoubleAnimationUsingKeyFrames();
+                eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                 {
-                    Value = _canvas.ActualHeight,
-                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(1000)),
-                    EasingFunction = new QuadraticEase() { EasingMode = EasingMode.EaseInOut, },
+                    Value = -(ProgressGenCalculation() *0.4),
+                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(0)),
                 });
-                vWatingSB.Children.Add(vDA);
-                Storyboard.SetTarget(vDA, _watingVerticalRect);
-                Storyboard.SetTargetProperty(vDA, new PropertyPath(Canvas.TopProperty));
-                vWatingSB.Completed += async (e, s) =>
+                eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                 {
-                    if (Mode == LodingBarMode.Wating && Orientation == Orientation.Vertical)
-                    {
-                        if (!goTwoSB)
-                            await Task.Delay(500);
-                        Canvas.SetTop(_watingVerticalRect, _watingVerticalRect.Height * -1);
-                        if (vWatingSB.Children[0] is DoubleAnimationUsingKeyFrames vdu)
-                        {
-                            vdu.KeyFrames[0].Value = _canvas.ActualHeight;
-                        }
-                        goTwoSB = !goTwoSB;
-                        vWatingSB.Begin();
-                    }
-                };
-
-
-                hWatingSB = new Storyboard()
-                {
-                    FillBehavior = FillBehavior.Stop
-                };
-                DoubleAnimationUsingKeyFrames hDA = new DoubleAnimationUsingKeyFrames();
-                hDA.KeyFrames.Add(new EasingDoubleKeyFrame()
-                {
-                    Value = _canvas.ActualWidth,
-                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(1000)),
-                    EasingFunction = new QuadraticEase() { EasingMode = EasingMode.EaseInOut, },
+                    Value = ProgressGenCalculation(),
+                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(1500)),
+                    EasingFunction = this.EasingFunction,
                 });
-                hWatingSB.Children.Add(hDA);
-                Storyboard.SetTarget(hDA, _watingHorizontalRect);
-                Storyboard.SetTargetProperty(hDA, new PropertyPath(Canvas.LeftProperty));
-
-                hWatingSB.Completed += async (e, s) =>
-                {
-                    if (Mode == LodingBarMode.Wating && Orientation == Orientation.Horizontal)
-                    {
-                        if (!goTwoSB)
-                            await Task.Delay(500);
-                        Canvas.SetLeft(_watingHorizontalRect, _watingHorizontalRect.Width * -1);
-                        if (hWatingSB.Children[0] is DoubleAnimationUsingKeyFrames hdu)
-                        {
-                            hdu.KeyFrames[0].Value = _canvas.ActualWidth;
-                        }
-                        goTwoSB = !goTwoSB;
-                        hWatingSB.Begin();
-                    }
-                };
-
-                if (Mode == LodingBarMode.Wating)
-                {
-                    switch (Orientation)
-                    {
-                        case Orientation.Horizontal:
-                            hWatingSB.Begin();
-                            break;
-                        case Orientation.Vertical:
-                            vWatingSB.Begin();
-                            break;
-                        default:
-                            break;
-                    }
-                }
-
-
-            }
-            catch (Exception)
-            {
-
-            }
-
-        }
-
-        private async void ValueChangedAsync()
-        {
-            try
-            {
-                while (!IsLoaded)
-                {
-                    await Task.Delay(1);
-                }
-                if (Mode == LodingBarMode.Loding)
-                {
-                    if (Maximum == 0)
-                    {
-                        switch (Orientation)
-                        {
-                            case Orientation.Horizontal:
-                                _horizontalRect.Width = 0;
-                                break;
-                            case Orientation.Vertical:
-                                _verticalRect.Width = 0;
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                    else if (Maximum > 0)
-                    {
-                        if (Value >= 0)
-                        {
-                            if (valueSB != null)
-                                valueSB.Pause();
-                            valueSB = new Storyboard();
-
-                            double max = Orientation switch
-                            {
-                                Orientation.Vertical => _canvas.ActualHeight,
-                                Orientation.Horizontal => _canvas.ActualWidth,
-                                _ => -1
-                            };
-                            if (max < 0)
-                                return;
-                            if (max == 0 && Value > 0)
-                            {
-                                lodingGo = true;
-                                return;
-                            }
-
-                            double to = (this.Value / this.Maximum) * max;
-                            DoubleAnimationUsingKeyFrames eDA = new DoubleAnimationUsingKeyFrames();
-                            eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
-                            {
-                                Value = to,
-                                KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(300)),
-                                EasingFunction = new PowerEase() { EasingMode = EasingMode.EaseOut, },
-                            });
-
-                            switch (Orientation)
-                            {
-                                case Orientation.Horizontal:
-                                    Storyboard.SetTarget(eDA, _horizontalRect);
-                                    Storyboard.SetTargetProperty(eDA, new PropertyPath("Width"));
-                                    break;
-                                case Orientation.Vertical:
-                                    Storyboard.SetTarget(eDA, _verticalRect);
-                                    Storyboard.SetTargetProperty(eDA, new PropertyPath("Height"));
-                                    break;
-                                default:
-                                    break;
-                            }
-
-                            valueSB.Children.Add(eDA);
-                            valueSB.Begin();
-                        }
-                    }
-                }
-            }
-            catch (Exception)
-            {
-
+                _lodingSB.Children.Add(eDA);
+                Storyboard.SetTarget(eDA, this);
+                Storyboard.SetTargetProperty(eDA, new PropertyPath(LodingBar.RectangleSiteProperty));
+                _lodingSB.Begin();
             }
         }
-
-        private async void FormChangedAsync()
-        {
-            try
-            {
-                while (!IsLoaded)
-                {
-                   await Task.Delay(1);
-                }
-
-                switch (Orientation)
-                {
-                    case Orientation.Horizontal:
-                        switch (Mode)
-                        {
-                            case LodingBarMode.Loding:
-                                _watingHorizontalRect.Visibility = Visibility.Collapsed;
-                                _watingVerticalRect.Visibility = Visibility.Collapsed;
-                                _verticalRect.Visibility = Visibility.Collapsed;
-                                _horizontalRect.Visibility = Visibility.Visible;
-                                ValueChangedAsync();
-                                break;
-                            case LodingBarMode.Wating:
-                                _watingHorizontalRect.Visibility = Visibility.Visible;
-                                _watingVerticalRect.Visibility = Visibility.Collapsed;
-                                _verticalRect.Visibility = Visibility.Collapsed;
-                                _horizontalRect.Visibility = Visibility.Collapsed;
-                                WatingStoryboardLodingAsync(); break;
-                            default:
-                                break;
-                        }
-                        break;
-                    case Orientation.Vertical:
-                        switch (Mode)
-                        {
-                            case LodingBarMode.Loding:
-                                _watingHorizontalRect.Visibility = Visibility.Collapsed;
-                                _watingVerticalRect.Visibility = Visibility.Collapsed;
-                                _verticalRect.Visibility = Visibility.Visible;
-                                _horizontalRect.Visibility = Visibility.Collapsed;
-                                ValueChangedAsync();
-                                break;
-                            case LodingBarMode.Wating:
-                                _watingHorizontalRect.Visibility = Visibility.Collapsed;
-                                _watingVerticalRect.Visibility = Visibility.Visible;
-                                _verticalRect.Visibility = Visibility.Collapsed;
-                                _horizontalRect.Visibility = Visibility.Collapsed;
-                                WatingStoryboardLodingAsync();
-                                break;
-                            default:
-                                break;
-                        }
-                        break;
-                    default:
-                        break;
-                }
-            }
-            catch (Exception)
-            {
-
-            }
-
-        }
-
         #endregion
+
+
+
     }
 }
