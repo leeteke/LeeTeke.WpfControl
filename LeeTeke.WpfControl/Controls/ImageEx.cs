@@ -53,7 +53,7 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
         public ImageEx()
         {
-
+        
         }
 
 
@@ -159,6 +159,24 @@ namespace LeeTeke.WpfControl.Controls
 
 
 
+        #region CornerRadius
+        /// <summary>
+        /// CornerRadius
+        /// </summary>
+        public CornerRadius CornerRadius
+        {
+            get { return (CornerRadius)GetValue(CornerRadiusProperty); }
+            set { SetValue(CornerRadiusProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CornerRadius.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CornerRadiusProperty =
+            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(ImageEx));
+
+        #endregion
+
+
+
 
         #region AnimationValue
         /// <summary>
@@ -172,7 +190,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for AnimationValue.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty AnimationValueProperty =
-            DependencyProperty.Register("AnimationValue", typeof(double), typeof(ImageEx),new PropertyMetadata(0));
+            DependencyProperty.Register("AnimationValue", typeof(double), typeof(ImageEx),new PropertyMetadata(0.0));
 
         #endregion
 

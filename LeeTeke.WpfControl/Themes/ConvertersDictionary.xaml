@@ -16,4 +16,5 @@
     <conver:NotAlignmentCenterConverter x:Key="NotAlignmentCenterConverter" />
     <conver:StringIsNullConverter x:Key="StringIsNullConverter"/>
     <conver:EnumBoolReverseConverter x:Key="EnumBoolReverseConverter"/>
+    <conver:CornerRadiusIsZeroConverter x:Key="CornerRadiusIsZeroConverter"/>
 </ResourceDictionary>

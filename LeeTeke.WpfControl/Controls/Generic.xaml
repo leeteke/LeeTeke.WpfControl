@@ -106,6 +106,7 @@
     <Style TargetType="{x:Type local:ImageEx}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="CornerRadius" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ImageEx}">
@@ -125,6 +126,19 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=CornerRadius,Converter={StaticResource CornerRadiusIsZeroConverter}}" Value="False">
+                <Setter Property="Clip">
+                    <Setter.Value>
+                        <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                            <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
+                            <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
+                            <Binding   RelativeSource="{RelativeSource Mode=Self}"  Path="CornerRadius" Mode="OneWay"/>
+                        </MultiBinding>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
 
     <Style TargetType="{x:Type local:NotifyIconEx}">
@@ -842,8 +856,8 @@
         <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="Orientation" Value="Horizontal"/>
         <Setter Property="ItemCornerRadius" Value="2,2,0,0"/>
-        <Setter Property="SelectedBrush" Value="Red"/>
-        <Setter Property="Height" Value="30"/>
+        <Setter Property="SelectedBrush" Value="{DynamicResource LeeBrush_Main}"/>
+        <Setter Property="MinHeight" Value="30"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:TagControl}">
