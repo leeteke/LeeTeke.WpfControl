@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-    public class FocusFromEventManager : DependencyObject
+    public class FocusFromEventManager 
     {
         #region Element
 

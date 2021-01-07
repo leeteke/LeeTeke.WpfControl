@@ -120,7 +120,6 @@ namespace LeeTeke.WpfControl
                 default:
                     break;
             }
-
             _ = message.ShowDialog();
             return message.Value == null ? false : (bool)message.Value;
         }

@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-    public class ListViewManager: DependencyObject
+    public class ListViewManager
     {
         #region SelectedItemBackground
 

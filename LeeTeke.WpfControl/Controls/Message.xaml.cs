@@ -58,12 +58,12 @@ namespace LeeTeke.WpfControl.Controls
             btnPanle.Children.Add(theButton);
         }
 
-        private new void Show()
+        public new void Show()
         {
             _isDialog = false;
             base.Show();
         }
-        private new bool? ShowDialog()
+        public new bool? ShowDialog()
         {
             _isDialog = true;
             return base.ShowDialog();
@@ -91,6 +91,25 @@ namespace LeeTeke.WpfControl.Controls
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = !CanClose;
+        }
+
+
+
+        private void Rectangle_MouseMove(object sender, MouseEventArgs e)
+        {
+            try
+            {
+
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    this.DragMove();
+                }
+
+            }
+            catch
+            {
+
+            }
         }
     }
 }

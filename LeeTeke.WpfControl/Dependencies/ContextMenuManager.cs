@@ -7,7 +7,7 @@ using System.Windows.Media.Effects;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-    public class ContextMenuManager: DependencyObject
+    public class ContextMenuManager
     {
         #region CornerRadius
 

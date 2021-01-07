@@ -5,7 +5,7 @@ using System.Windows;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-    public class ObjectForBoolManager : DependencyObject
+    public class ObjectForBoolManager 
     {
 
 

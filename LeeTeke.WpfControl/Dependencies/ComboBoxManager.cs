@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-    public class ComboBoxManager : DependencyObject
+    public class ComboBoxManager 
     {
         #region CornerRadius
 

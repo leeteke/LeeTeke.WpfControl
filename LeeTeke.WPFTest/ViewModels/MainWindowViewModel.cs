@@ -122,21 +122,7 @@ namespace LeeTeke.WPFTest.ViewModels
         private void TestCommandExecute(object obj)
         {
 
-            var cango = new LeeTeke.WpfControl.MessageBoxEx();
-
-            cango.Title = "你好";
-            cango.Content = "asdasd";
-            cango.LodingBarModel = WpfControl.LodingBarMode.Wating;
-            cango.LodingBarValue = 10;
-            cango.ShowLoding = false;
-            cango.AddOptions("是的", new Action(()=> {
-
-
-                cango.ShowLoding = true;
-
-
-            }));
-            cango.Show();
+            LeeTeke.WpfControl.MessageBoxEx.Show("未知界面异常", "2", LeeTeke.WpfControl.MessageBoxExEnum.Erro);
 
         }
 

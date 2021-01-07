@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-   public class CheckBoxManager: DependencyObject
+   public class CheckBoxManager
     {
         #region RippleBrush
         public static Brush GetRippleBrush(DependencyObject obj)

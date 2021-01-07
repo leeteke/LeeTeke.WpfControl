@@ -6,7 +6,7 @@ using System.Windows;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-    public class EventToBoolManager : DependencyObject
+    public class EventToBoolManager 
     {
         #region Element
 

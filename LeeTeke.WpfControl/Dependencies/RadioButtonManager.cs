@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-    public class RadioButtonManager : DependencyObject
+    public class RadioButtonManager 
     {
         #region RippleBrush
         /// <summary>

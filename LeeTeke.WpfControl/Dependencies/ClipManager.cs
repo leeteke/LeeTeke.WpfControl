@@ -7,7 +7,7 @@ using System.Windows.Data;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-    public class ClipManager : DependencyObject
+    public class ClipManager 
     {
 
         public static object GetCornerRadius(DependencyObject obj)

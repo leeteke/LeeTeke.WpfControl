@@ -9,7 +9,7 @@ using System.Windows.Media.Animation;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-   public class TimelineManager : DependencyObject
+   public class TimelineManager 
     {
         #region EventName
 

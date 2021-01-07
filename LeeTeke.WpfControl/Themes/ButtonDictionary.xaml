@@ -4,7 +4,7 @@
                     xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies"
                     xmlns:local="clr-namespace:LeeTeke.WpfControl.Themes">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/LeeTeke.WpfControl;component/Themes/ConvertersDictionary.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ConvertersDictionary.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <Style x:Key="LeeButton"  TargetType="{x:Type  Button}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
@@ -27,18 +27,18 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 Background="{TemplateBinding Background}" 
-                                 CornerRadius="{Binding Path=(leedep:ButtonManager.CornerRadius),RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}},Mode=TwoWay}"
+                                 CornerRadius="{Binding Path=(leedep:ButtonManager.CornerRadius),RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}},Mode=OneWay}"
                            />
                         <Border x:Name="borderMask" 
                                  Background="Transparent"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}" 
-                                CornerRadius="{Binding Path=(leedep:ButtonManager.CornerRadius),RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}},Mode=TwoWay}"
+                                CornerRadius="{Binding Path=(leedep:ButtonManager.CornerRadius),RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}},Mode=OneWay}"
                            />
-                        <controls:RippleMask ParentElement="{Binding RelativeSource={RelativeSource  Mode=TemplatedParent}}"
-                                            RippleBrush="{Binding Path=(leedep:ButtonManager.RippleBrush),RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}},Mode=TwoWay}"
-                                        CornerRadius="{Binding Path=(leedep:ButtonManager.CornerRadius),RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}},Mode=TwoWay}"
-                                       IsOverflow="False"/>
+                        <controls:RippleMask ParentElement="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}},Mode=OneWay}"
+                                             RippleBrush="{Binding Path=(leedep:ButtonManager.RippleBrush),RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}},Mode=OneWay}"
+                                             CornerRadius="{Binding Path=(leedep:ButtonManager.CornerRadius),RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}},Mode=OneWay}"
+                                             IsOverflow="False"/>
                         <ContentPresenter x:Name="contentPresenter" 
                                           Focusable="False" 
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"

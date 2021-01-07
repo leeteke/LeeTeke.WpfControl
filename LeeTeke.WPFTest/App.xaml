@@ -8,6 +8,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/LeeTeke.WpfControl;component/Controls.xaml"/>
                 <ResourceDictionary Source="/LeeTeke.WpfControl;component/Colors.xaml"/>
+                <ResourceDictionary Source="/LeeTeke.WpfControl;component/Themes.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

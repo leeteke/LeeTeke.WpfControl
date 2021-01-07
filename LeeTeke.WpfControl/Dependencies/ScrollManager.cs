@@ -8,7 +8,7 @@ using System.Windows.Media.Effects;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-    public class ScrollManager : DependencyObject
+    public class ScrollManager 
     {
         #region TrackBrush
         public static Brush GetTrackBrush(DependencyObject obj)

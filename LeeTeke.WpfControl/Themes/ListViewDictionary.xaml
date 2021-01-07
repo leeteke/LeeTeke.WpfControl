@@ -4,7 +4,7 @@
                     xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies"
                     xmlns:local="clr-namespace:LeeTeke.WpfControl.Themes">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/LeeTeke.WpfControl;component/Themes/ConvertersDictionary.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ConvertersDictionary.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <Style x:Key="LeetekeListViewItem" TargetType="{x:Type ListViewItem}">
         <Setter Property="MinHeight"  Value="0"/>
@@ -94,7 +94,7 @@
         </Setter>
     </Style>
     <!--更改了滚动条的istview-->
-    <Style x:Key="LeetekeViewStyle" TargetType="{x:Type ListView}">
+    <Style x:Key="LeetekeView" TargetType="{x:Type ListView}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="Background" Value="Transparent"/>
@@ -112,11 +112,9 @@
         <Setter Property="leedep:ListViewManager.SelectedItemBackground" Value="Transparent"/>
         <Setter Property="leedep:ListViewManager.SelectedItemBorderBrush" Value="Transparent"/>
         <Setter Property="leedep:ListViewManager.SelectedItemBorderThickness" Value="0"/>
-
         <Setter Property="leedep:ListViewManager.SelectedItemForeground" Value="{DynamicResource LeeBrush_TextColor}"/>
         <Setter Property="leedep:ListViewManager.SelectedItemFontSize" Value="12"/>
         <Setter Property="leedep:ListViewManager.SelectedItemFontWeight" Value="Normal"/>
-
         <Setter Property="leedep:ListViewManager.MarkBrush" Value="{DynamicResource LeeBrush_Main}"/>
         <Setter Property="leedep:ListViewManager.MarkMargin" Value="0"/>
         <Setter Property="leedep:ListViewManager.MarkSite" Value="Left"/>
@@ -125,9 +123,8 @@
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
-                    <StackPanel x:Name="PART_StackPanel" 
-                              FocusVisualStyle="{x:Null}"
-                                Orientation="{Binding Path=(leedep:ListViewManager.Orientation),  RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"
+                    <StackPanel  FocusVisualStyle="{x:Null}"
+                                Orientation="{Binding Path=(leedep:ListViewManager.Orientation),  RelativeSource={RelativeSource AncestorType={x:Type ListView},AncestorLevel=1},Mode=OneWay}"
                        />
                 </ItemsPanelTemplate>
             </Setter.Value>

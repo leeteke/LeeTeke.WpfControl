@@ -5,7 +5,7 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                    >
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/LeeTeke.WpfControl;component/Themes/ConvertersDictionary.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ConvertersDictionary.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <!--#region 主SV-->
 

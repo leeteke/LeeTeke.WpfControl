@@ -9,7 +9,7 @@ using System.Windows.Media;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-    public class SliderManager : DependencyObject
+    public class SliderManager 
     {
 
 

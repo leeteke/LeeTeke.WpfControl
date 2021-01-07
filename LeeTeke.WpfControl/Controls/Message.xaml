@@ -13,15 +13,13 @@
         leedep:WindowShaowManager.Open="True"
         Closing="Window_Closing"
         >
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
-    <Grid>
-        <Grid Margin="5,5,5,5"  >
+
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="259*"/>
+            <ColumnDefinition Width="61*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Margin="5,5,5,5" Grid.ColumnSpan="2"  >
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
@@ -78,6 +76,10 @@
                              Grid.ColumnSpan="2"
                              />
         </Grid>
+        <Rectangle Fill="Transparent" Height="30"
+                   VerticalAlignment="Top"
+                   Grid.ColumnSpan="2"
+                   MouseMove="Rectangle_MouseMove"/>
         <Button x:Name="btnClose"
             HorizontalAlignment="Right"
             Grid.Column="1"

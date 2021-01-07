@@ -14,15 +14,37 @@
         >
 
     <StackPanel>
-        <leecontrol:TextBoxEx Mode="Password"
-                              Text="{Binding Text}" 
-                              VerticalAlignment="Center"
-                              />
+        <ListView x:Name="classifyList"
+                  BorderThickness="0"
+                  Margin="0,10"
+                  Grid.Row="1"
+                  FontSize="14"
+                  leedep:ListViewManager.SelectedItemFontSize="15"
+                  ItemsSource="{Binding TestList}"
+                  HorizontalContentAlignment="Stretch"
+                  leedep:ListViewManager.Orientation="Vertical"
+                  leedep:ListViewManager.SelectedItemBackground="{DynamicResource LeeBrush_Main}"
+                  >
+            <ListView.ItemTemplate>
+                <DataTemplate >
+                    <Grid Height="25" Margin="5">
+                        <TextBlock   VerticalAlignment="Center"
+                                     HorizontalAlignment="Left"
+                                  >
+                            <Run x:Name="runTag" Text=" ● " Foreground="{DynamicResource LeeBrush_Gray153}"/>
+                            <Run x:Name="runContent" Text="{Binding Title}"  Foreground="{DynamicResource LeeBrush_TextColor}"/>
+                        </TextBlock>
 
-        <leecontrol:TextBoxEx 
-                              Text="{Binding Text}" 
-                              VerticalAlignment="Center"
-                              />
+                    </Grid>
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem},Path=IsSelected}" Value="True">
+                            <Setter TargetName="runTag" Property="Foreground" Value="White"/>
+                            <Setter TargetName="runContent" Property="Foreground" Value="White"/>
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </StackPanel>
 
 </Window>

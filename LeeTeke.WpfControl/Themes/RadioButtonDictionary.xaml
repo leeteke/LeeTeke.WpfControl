@@ -4,7 +4,7 @@
                     xmlns:controls="clr-namespace:LeeTeke.WpfControl.Controls"
                     xmlns:local="clr-namespace:LeeTeke.WpfControl.Themes">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/LeeTeke.WpfControl;component/Themes/ConvertersDictionary.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ConvertersDictionary.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <Style x:Key="LeeRadioButton" TargetType="{x:Type RadioButton}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
@@ -29,7 +29,7 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <controls:RippleMask  RippleBrush="{Binding Path=(leedep:RadioButtonManager.RippleBrush),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"
+                        <controls:RippleMask  RippleBrush="{Binding Path=(leedep:RadioButtonManager.RippleBrush),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"
                             ParentElement="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}}"
                             IsOverflow="True"
                             />

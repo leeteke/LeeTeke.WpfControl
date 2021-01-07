@@ -13,7 +13,7 @@ using System.Windows.Media;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-    public class DataGridManager : DependencyObject
+    public class DataGridManager 
 
     {
         #region HeaderPadding

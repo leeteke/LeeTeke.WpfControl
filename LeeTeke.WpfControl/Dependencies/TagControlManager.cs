@@ -8,7 +8,7 @@ using System.Windows.Data;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-    public class TagControlManager : DependencyObject
+    public class TagControlManager 
     {
 
         public static bool GetItemCanClose(DependencyObject obj)

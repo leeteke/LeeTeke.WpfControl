@@ -7,12 +7,10 @@ using System.Windows.Media;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-   public class ButtonManager: DependencyObject
+   public class ButtonManager
     {
 
         #region CornerRadius
-
-
         public static CornerRadius GetCornerRadius(DependencyObject obj)
         {
             return (CornerRadius)obj.GetValue(CornerRadiusProperty);

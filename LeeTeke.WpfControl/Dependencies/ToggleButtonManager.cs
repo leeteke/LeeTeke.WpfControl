@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-    public class ToggleButtonManager: DependencyObject
+    public class ToggleButtonManager
     {
 
         #region CornerRadius

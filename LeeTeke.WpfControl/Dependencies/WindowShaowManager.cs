@@ -9,7 +9,7 @@ using System.Windows.Shell;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-    public class WindowShaowManager : DependencyObject
+    public class WindowShaowManager 
     {
 
         #region Open

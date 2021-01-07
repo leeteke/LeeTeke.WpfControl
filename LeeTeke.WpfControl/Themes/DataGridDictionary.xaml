@@ -5,7 +5,8 @@
                     xmlns:local="clr-namespace:LeeTeke.WpfControl.Themes">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/LeeTeke.WpfControl;component/Themes/ConvertersDictionary.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ConvertersDictionary.xaml" />
+        <ResourceDictionary  Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ScrollViewDictionary.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <Style x:Key="LeeDataGrid" TargetType="{x:Type DataGrid}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
