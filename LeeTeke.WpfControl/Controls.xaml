@@ -586,6 +586,7 @@
                                     Background="Transparent"
                                     Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=IconVisible,Mode=OneWay,Converter={StaticResource VisibilityForBoolConverter}}"
                                     DockPanel.Dock="{TemplateBinding IconDock}"
+                                  
                                     >
                                 <TextBlock  IsHitTestVisible="True"
                                             Text="{TemplateBinding Icon}"
@@ -659,16 +660,15 @@
                             <Setter TargetName="PART_Main" Property="Visibility" Value="Hidden"/>
                             <Setter TargetName="PART_Password" Property="Visibility" Value="Visible"/>
                         </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IconCanClick" Value="True"/>
+                                <Condition SourceName="PART_ICON"  Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_ICON" Property="Cursor" Value="Hand"/>
 
+                        </MultiTrigger>
 
-
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding ElementName=PART_ICON,Path=IsMouseOver,Mode=OneWay}" Value="True"/>
-                                <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=IconCanClick}"  Value="True"/>
-                            </MultiDataTrigger.Conditions>
-                            <Setter TargetName="PART_ICON" Property="Background" Value="Red"/>
-                        </MultiDataTrigger>
 
                         <DataTrigger Binding="{Binding ElementName=PART_Main,Path=IsFocused,Mode=OneWay}" Value="True">
                             <Setter TargetName="PART_PreviewText" Property="Visibility" Value="Collapsed"/>
