@@ -3,7 +3,7 @@
                     xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies"
                     xmlns:local="clr-namespace:LeeTeke.WpfControl.Themes">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ConvertersDictionary.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <Style x:Key="LeeGroupBox" TargetType="{x:Type GroupBox}">
         <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />

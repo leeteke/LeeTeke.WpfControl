@@ -4,7 +4,7 @@
                     xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies"
                     xmlns:local="clr-namespace:LeeTeke.WpfControl.Themes">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ConvertersDictionary.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <Style x:Key="LeeButton"  TargetType="{x:Type  Button}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>

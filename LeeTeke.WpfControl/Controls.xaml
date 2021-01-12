@@ -5,8 +5,8 @@
                     xmlns:data="clr-namespace:LeeTeke.WpfControl"
                     xmlns:local="clr-namespace:LeeTeke.WpfControl.Controls">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ConvertersDictionary.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ToggleButtonDictionary.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ToggleButton.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
 

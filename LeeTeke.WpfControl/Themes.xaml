@@ -2,18 +2,18 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:LeeTeke.WpfControl">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/GlobalStyleDictionary.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ButtonDictionary.xaml" />
-        <ResourceDictionary  Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/CheckBoxDictionary.xaml" />
-        <ResourceDictionary  Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ListViewDictionary.xaml" />
-        <ResourceDictionary  Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ScrollViewDictionary.xaml" />
-        <ResourceDictionary  Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ContextMenuDictionary.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ToggleButtonDictionary.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ComboBoxDictionary.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/RadioButtonDictionary.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/DataGridDictionary.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/SliderDictionary.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/GroupBoxDictionary.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/GlobalStyle.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/Button.xaml" />
+        <ResourceDictionary  Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/CheckBox.xaml" />
+        <ResourceDictionary  Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ListView.xaml" />
+        <ResourceDictionary  Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ScrollView.xaml" />
+        <ResourceDictionary  Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ContextMenu.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ToggleButton.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ComboBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/RadioButton.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/DataGrid.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/Slider.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/GroupBox.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <Style BasedOn="{StaticResource LeeButton}" TargetType="Button" />
