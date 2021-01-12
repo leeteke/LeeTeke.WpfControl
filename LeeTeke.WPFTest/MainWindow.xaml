@@ -20,7 +20,7 @@
                        HorizontalAlignment="Right"
                        IconVisible="True"
                        IconDock="Right"
-                              IconCommand="{Binding TestCommand}"
+                       IconCommand="{Binding TestCommand}"
                        IconCanClick="True"
                        SplitterVisible="True"
                        BorderThickness="1"

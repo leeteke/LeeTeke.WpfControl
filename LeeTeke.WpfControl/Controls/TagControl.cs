@@ -77,7 +77,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             EventManager.RegisterClassHandler(typeof(TagControlItem), TagControlItem.ClosedEvent, new RoutedEventHandler(TagControlItemClosedEventAsync));
             EventManager.RegisterClassHandler(typeof(TagControlItem), TagControlItem.SelectedEvent, new RoutedEventHandler(TagControlItemSelectedEvent));
-            EventManager.RegisterClassHandler(typeof(StackPanel), StackPanel.LoadedEvent, new RoutedEventHandler(StackPanelLoadedEvent));
+            EventManager.RegisterClassHandler(typeof(StackPanel), StackPanel.SizeChangedEvent, new RoutedEventHandler(StackPanelLoadedEvent));
             PreviewMouseWheel += TagControl_PreviewMouseWheel;
         }
 
@@ -353,7 +353,7 @@ namespace LeeTeke.WpfControl.Controls
             if (!SelectedInit(SelectedIndex))
                 return;
 
-            SelectedItesmAsync(_stackPanel.Children[SelectedIndex] as TagControlItem);
+            SelectedItemsAsync(_stackPanel.Children[SelectedIndex] as TagControlItem);
 
         }
 
@@ -364,7 +364,7 @@ namespace LeeTeke.WpfControl.Controls
 
             if (ItemsSource == null)
             {
-                SelectedItesmAsync(SelectedValue as TagControlItem);
+                SelectedItemsAsync(SelectedValue as TagControlItem);
             }
             else
             {
@@ -372,7 +372,7 @@ namespace LeeTeke.WpfControl.Controls
                 {
                     if (item.DataContext == SelectedValue)
                     {
-                        SelectedItesmAsync(item);
+                        SelectedItemsAsync(item);
                         return;
                     }
                 }
@@ -387,7 +387,7 @@ namespace LeeTeke.WpfControl.Controls
             if (!SelectedInit(SelectedItem))
                 return;
 
-            SelectedItesmAsync(SelectedItem as TagControlItem);
+            SelectedItemsAsync(SelectedItem as TagControlItem);
 
         }
 
@@ -441,16 +441,16 @@ namespace LeeTeke.WpfControl.Controls
                     {
                         if (index > 0)
                         {
-                            SelectedItesmAsync(_stackPanel.Children[index - 1] as TagControlItem);
+                            SelectedItem = _stackPanel.Children[index - 1] as TagControlItem;
                         }
                         else if (_stackPanel.Children != null && _stackPanel.Children.Count > 0)
                         {
-                            SelectedItesmAsync(_stackPanel.Children[0] as TagControlItem);
+                            SelectedItem = _stackPanel.Children[0] as TagControlItem;
                         }
                     }
                     else if (_stackPanel.Children.Count < 1)
                     {
-                        SelectedItesmAsync(null);
+                        SelectedItem = null;
                     }
 
                     break;
@@ -487,11 +487,11 @@ namespace LeeTeke.WpfControl.Controls
                     if (_stackPanel.Children.Count > 0)
                     {
                         ///选择首个
-                        SelectedItesmAsync(_stackPanel.Children[0] as TagControlItem);
+                        SelectedItem = _stackPanel.Children[0] as TagControlItem;
                     }
                     else
                     {
-                        SelectedItesmAsync(null);
+                        SelectedItemsAsync(null);
                     }
                     break;
                 default:
@@ -524,7 +524,7 @@ namespace LeeTeke.WpfControl.Controls
             {
                 if (SelectedItem != item)
                 {
-                    SelectedItesmAsync(item);
+                    SelectedItem = item;
                 }
             }
         }
@@ -556,7 +556,7 @@ namespace LeeTeke.WpfControl.Controls
 
         }
 
-        private async void SelectedItesmAsync(TagControlItem item)
+        private async void SelectedItemsAsync(TagControlItem item)
         {
             if (item == null)
             {
@@ -570,8 +570,8 @@ namespace LeeTeke.WpfControl.Controls
 
                 if (_stackPanel.Children[i] == item)
                 {
-                    item.IsSelected = true;
                     ItemSelectedChanged(item);
+                    item.IsSelected = true;
                 }
                 else
                 {
