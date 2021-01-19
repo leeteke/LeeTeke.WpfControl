@@ -556,6 +556,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="IconDock" Value="Left"/>
         <Setter Property="Icon" Value="&#xE74C;"/>
+        <Setter Property="IsReadOnly" Value="False"/>
         <Setter Property="IconSize" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=FontSize}"/>
         <Setter Property="IconCanClick" Value="False"/>
         <Setter Property="IconVisible" Value="False"/>
@@ -622,6 +623,7 @@
                                          input:InputMethod.IsInputMethodEnabled="False"
                                          BorderThickness="0"
                                          VerticalAlignment="Center"
+                                         IsReadOnly="{TemplateBinding IsReadOnly}"
                                          />
                                 <PasswordBox x:Name="PART_Password"
                                              Visibility="Collapsed"
@@ -637,6 +639,7 @@
                                              FontStretch="{TemplateBinding FontStretch}"
                                              TextBlock.TextAlignment="{TemplateBinding TextAlignment}"
                                              PasswordChar="{TemplateBinding PasswordChar}"
+                                             IsEnabled="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=IsReadOnly,Mode=OneWay,Converter={StaticResource BoolReverseConverter}}"
                                              />
                                 <TextBlock x:Name="PART_PreviewText"
                                            Foreground="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Foreground,Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.5,Mode=OneWay}"

@@ -169,6 +169,25 @@ namespace LeeTeke.WpfControl.Controls
         #region 依赖属性
 
 
+        #region IsReadOnly
+        /// <summary>
+        /// 请填写描述
+        /// </summary>
+        public bool IsReadOnly
+        {
+            get { return (bool)GetValue(IsReadOnlyProperty); }
+            set { SetValue(IsReadOnlyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsReadOnly.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsReadOnlyProperty =
+            DependencyProperty.Register("IsReadOnly", typeof(bool), typeof(TextBoxEx));
+
+        #endregion
+
+
+
+
 
         #region Mode
         /// <summary>

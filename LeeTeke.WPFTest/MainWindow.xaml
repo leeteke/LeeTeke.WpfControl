@@ -26,7 +26,11 @@
                        BorderThickness="1"
                        CornerRadius="2"
                        Width="240"
+                              Mode="Password"
                        Padding="5,0"
+                           Height="50"
+                           Text="123456"
+                         IsReadOnly="True"
                        EnterCommand="{Binding TestCommand}"/>
     </StackPanel>
 
