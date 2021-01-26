@@ -223,7 +223,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private static void SelectedItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is TagControl tag && e.NewValue != e.OldValue&& e.NewValue is TagControlItem item && tag._selectedItem != item)
+            if (d is TagControl tag && e.NewValue != e.OldValue && e.NewValue is TagControlItem item && tag._selectedItem != item)
             {
                 tag.SelectedItemChanged();
             }
@@ -408,7 +408,7 @@ namespace LeeTeke.WpfControl.Controls
             if (sender is StackPanel stackPanel && stackPanel.Name == "PART_StackPanel" && StaticMethods.IsInControl(this, stackPanel))
             {
                 _stackPanel = stackPanel;
-                if (SelectedIndex >-1)
+                if (SelectedIndex > -1)
                 {
                     SelectedIndexChanged();
                     return;
@@ -431,72 +431,82 @@ namespace LeeTeke.WpfControl.Controls
 
         private async void TagControlItemClosedEventAsync(object sender, RoutedEventArgs e)
         {
+            if (sender is TagControlItem self)
+                switch ((e as TagControlItemClosedEventArgs).ClosedMode)
+                {
+                    case TagControlItemClosedMode.Self:
+                        if (self.CanClosed)
+                        {
 
-            switch ((e as TagControlItemClosedEventArgs).ClosedMode)
-            {
-                case TagControlItemClosedMode.Self:
-                    var index = _stackPanel.Children.IndexOf(sender as TagControlItem);
-                    await CloseItemAsync(sender as TagControlItem);
-                    if ((sender as TagControlItem).IsSelected)
-                    {
-                        if (index > 0)
-                        {
-                            SelectedItem = _stackPanel.Children[index - 1] as TagControlItem;
+                            var index = _stackPanel.Children.IndexOf(self);
+                            ItemRemoveChanged(self);
+                            await CloseItemAsync(self);
+                            if (self.IsSelected)
+                            {
+                                if (index > 0)
+                                {
+                                    SelectedItem = _stackPanel.Children[index - 1] as TagControlItem;
+                                }
+                                else if (_stackPanel.Children != null && _stackPanel.Children.Count > 0)
+                                {
+                                    SelectedItem = _stackPanel.Children[0] as TagControlItem;
+                                }
+                            }
+                            else if (_stackPanel.Children.Count < 1)
+                            {
+                                SelectedItem = null;
+                            }
                         }
-                        else if (_stackPanel.Children != null && _stackPanel.Children.Count > 0)
+                        break;
+                    case TagControlItemClosedMode.Other:
+
+                        List<object> needCloseItem = new List<object>();
+                        for (int i = 0; i < _stackPanel.Children.Count; i++)
                         {
+                            ///关闭全部
+                            if (sender != _stackPanel.Children[i])
+                            {
+                                needCloseItem.Add(_stackPanel.Children[i]);
+                            }
+                        }
+                        foreach (TagControlItem item in needCloseItem)
+                        {
+                            if (item.CanClosed)
+                            {
+                                CloseItemAsync(item);
+                                ItemRemoveChanged(item);
+                            }
+                        }
+
+                        break;
+                    case TagControlItemClosedMode.All:
+                        List<object> allItem = new List<object>();
+                        for (int i = 0; i < _stackPanel.Children.Count; i++)
+                        {
+                            allItem.Add(_stackPanel.Children[i]);
+                        }
+                        foreach (TagControlItem item in allItem)
+                        {
+                            if (item.CanClosed)
+                            {
+                                CloseItemAsync(item);
+                                ItemRemoveChanged(item);
+                            }
+                        }
+
+                        if (_stackPanel.Children.Count > 0)
+                        {
+                            ///选择首个
                             SelectedItem = _stackPanel.Children[0] as TagControlItem;
                         }
-                    }
-                    else if (_stackPanel.Children.Count < 1)
-                    {
-                        SelectedItem = null;
-                    }
-
-                    break;
-                case TagControlItemClosedMode.Other:
-
-                    List<object> needCloseItem = new List<object>();
-                    for (int i = 0; i < _stackPanel.Children.Count; i++)
-                    {
-                        ///关闭全部
-                        if (sender != _stackPanel.Children[i])
+                        else
                         {
-                            needCloseItem.Add(_stackPanel.Children[i]);
+                            SelectedItemsAsync(null);
                         }
-                    }
-                    foreach (TagControlItem item in needCloseItem)
-                    {
-                        CloseItemAsync(item);
-                        ItemRemoveChanged(item);
-                    }
-
-                    break;
-                case TagControlItemClosedMode.All:
-                    List<object> allItem = new List<object>();
-                    for (int i = 0; i < _stackPanel.Children.Count; i++)
-                    {
-                        allItem.Add(_stackPanel.Children[i]);
-                    }
-                    foreach (TagControlItem item in allItem)
-                    {
-                        CloseItemAsync(item);
-                        ItemRemoveChanged(item);
-                    }
-
-                    if (_stackPanel.Children.Count > 0)
-                    {
-                        ///选择首个
-                        SelectedItem = _stackPanel.Children[0] as TagControlItem;
-                    }
-                    else
-                    {
-                        SelectedItemsAsync(null);
-                    }
-                    break;
-                default:
-                    break;
-            }
+                        break;
+                    default:
+                        break;
+                }
 
         }
 
@@ -535,13 +545,10 @@ namespace LeeTeke.WpfControl.Controls
         /// <param name="item"></param>
         private async Task CloseItemAsync(TagControlItem item)
         {
-            ///如果不能关闭
-            if (!item.CanClosed)
-                return;
 
             await item.CloseAsync();
 
-         
+
             if (ItemsSource == null)
             {
                 Items.Remove(item);
@@ -563,7 +570,7 @@ namespace LeeTeke.WpfControl.Controls
                 ItemSelectedChanged(null);
                 return;
             }
-          
+
 
             for (int i = 0; i < _stackPanel.Children.Count; i++)
             {

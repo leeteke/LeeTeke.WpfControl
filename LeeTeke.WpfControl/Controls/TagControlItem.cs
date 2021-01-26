@@ -25,8 +25,27 @@ namespace LeeTeke.WpfControl.Controls
 
         public TagControlItem()
         {
-            Loaded += TagControlItem_Loaded;
             MouseDown += TagControlItem_MouseDown;
+            Loaded += TagControlItem_Loaded;
+        }
+
+        private void TagControlItem_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (this.ContentTemplate?.HasContent == true)
+            {
+
+                var contentPresenter = StaticMethods.FindVisualChild<ContentPresenter>(this);
+                if (contentPresenter != null)
+                {
+                    var chlid = VisualTreeHelper.GetChild(contentPresenter, 0);
+                    BindingOperations.SetBinding(this, TagControlItem.CanClosedProperty, new Binding()
+                    {
+                        Source = chlid,
+                        Path = new PropertyPath("(0)", new DependencyProperty[] { LeeTeke.WpfControl.Dependencies.TagControlManager.ItemCanCloseProperty }),
+                        Mode = BindingMode.OneWay
+                    });
+                }
+            }
         }
 
         private void TagControlItem_MouseDown(object sender, MouseButtonEventArgs e)
@@ -34,25 +53,12 @@ namespace LeeTeke.WpfControl.Controls
             IsSelected = true;
         }
 
-        private void TagControlItem_Loaded(object sender, RoutedEventArgs e)
+        public override void OnApplyTemplate()
         {
+            base.OnApplyTemplate();
             try
             {
-                if (this.ContentTemplate?.HasContent == true)
-                {
-
-                    var contentPresenter = StaticMethods.FindVisualChild<ContentPresenter>(this);
-                    if (contentPresenter != null)
-                    {
-                        var chlid = VisualTreeHelper.GetChild(contentPresenter, 0);
-                        BindingOperations.SetBinding(this, TagControlItem.CanClosedProperty, new Binding()
-                        {
-                            Source = chlid,
-                            Path = new PropertyPath("(0)", new DependencyProperty[] { LeeTeke.WpfControl.Dependencies.TagControlManager.ItemCanCloseProperty }),
-                            Mode = BindingMode.OneWay
-                        });
-                    }
-                }
+         
 
                 if (this.Template.FindName("PART_MenuItem_CloseAll", this) is MenuItem allItem)
                 {
@@ -73,10 +79,13 @@ namespace LeeTeke.WpfControl.Controls
                 }
 
             }
-            catch 
+            catch
             {
             }
+
         }
+
+       
 
         #region 属性
         /// <summary>
