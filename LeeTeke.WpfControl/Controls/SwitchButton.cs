@@ -63,7 +63,6 @@ namespace LeeTeke.WpfControl.Controls
 
         public SwitchButton()
         {
-            MouseDown += SwitchButton_MouseDown;
         }
 
 
@@ -81,6 +80,7 @@ namespace LeeTeke.WpfControl.Controls
             if (_canvas != null)
             {
                 _canvas.SizeChanged += me_SizeChanged;
+                _canvas.MouseDown += _canvas_MouseDown;
             }
             if (_ellipse!=null)
             {
@@ -89,7 +89,13 @@ namespace LeeTeke.WpfControl.Controls
 
         }
 
-     
+        private void _canvas_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Switch = !Switch;
+            RaiseSwitchChanged(Switch);
+        }
+
+
         #endregion
 
 
@@ -164,6 +170,22 @@ namespace LeeTeke.WpfControl.Controls
 
 
 
+
+        #endregion
+
+        #region ButtonSite
+        /// <summary>
+        /// 请填写描述
+        /// </summary>
+        public SiteMode ButtonSite
+        {
+            get { return (SiteMode)GetValue(ButtonSiteProperty); }
+            set { SetValue(ButtonSiteProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ButtonSite.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ButtonSiteProperty =
+            DependencyProperty.Register("ButtonSite", typeof(SiteMode), typeof(SwitchButton));
 
         #endregion
 
@@ -296,8 +318,6 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-
-
         #region SwitchSite
         /// <summary>
         /// 请填写描述
@@ -337,11 +357,7 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
         #region 内部逻辑
-        private void SwitchButton_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Switch = !Switch;
-            RaiseSwitchChanged(Switch);
-        }
+   
 
         private void ControlStoryBoard(bool _switch)
         {

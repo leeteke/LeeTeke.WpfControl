@@ -285,6 +285,7 @@
         <Setter Property="MinWidth" Value="40"/>
         <Setter Property="ButtonHeight" Value="20"/>
         <Setter Property="ButtonWidth" Value="40"/>
+        <Setter Property="ButtonSite" Value="Start"/>
         <Setter Property="EasingFunction">
             <Setter.Value>
                 <QuarticEase EasingMode="EaseOut"/>
@@ -306,14 +307,16 @@
                                 Grid.Row="0"
                                 MinHeight="{TemplateBinding ButtonHeight}"
                                 MinWidth="{TemplateBinding ButtonWidth}"
-                                Grid.Column="0">
+                                Grid.Column="0"
+                                Background="Transparent">
                             <Border x:Name="PART_OpenBorder" 
                                     Background="{DynamicResource LeeBrush_Main}"
                                     BorderBrush="{DynamicResource LeeBrush_Gray204}"
                                     BorderThickness="2"
                                     Width="{Binding ElementName=PART_Canvas,Path=ActualWidth,Mode=OneWay}"
                                     Height="{Binding ElementName=PART_Canvas,Path=ActualHeight,Mode=OneWay}"
-                                    CornerRadius="{Binding ElementName=PART_Canvas,Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/2,Mode=OneWay}"/>
+                                    CornerRadius="{Binding ElementName=PART_Canvas,Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/2,Mode=OneWay}"
+                                    IsHitTestVisible="False"/>
 
                             <Border x:Name="PART_CloseBorder"
                                     Background="White"
@@ -323,7 +326,8 @@
                                     Width="{Binding ElementName=PART_Canvas,Path=ActualWidth,Converter={StaticResource DoubleFollowConverter},ConverterParameter=-4,Mode=OneWay}"
                                     Height="{Binding ElementName=PART_Canvas,Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=-4,Mode=OneWay}"
                                     CornerRadius="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/2,Mode=OneWay}" 
-                                    RenderTransformOrigin="1,0.5">
+                                    RenderTransformOrigin="1,0.5"
+                                    IsHitTestVisible="False">
                             </Border>
 
                             <Ellipse x:Name="PART_Ellipse"
@@ -332,6 +336,7 @@
                                      Width="{Binding ElementName=PART_Canvas,Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=-2,Mode=OneWay}"
                                      Height="{Binding ElementName=PART_Canvas,Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=-2,Mode=OneWay}"
                                      Fill="White"
+                                     IsHitTestVisible="False"
                                      >
                                 <Ellipse.Effect>
                                     <DropShadowEffect BlurRadius="5" Direction="-90" ShadowDepth="1" Opacity="0.5"/>
@@ -339,7 +344,6 @@
                             </Ellipse>
 
                         </Canvas>
-
                         <ContentControl x:Name="openContent" 
                                         Content="{TemplateBinding Content}"
                                         Grid.Row="0"
@@ -390,7 +394,7 @@
                             <Setter TargetName="PART_Canvas" Property="Grid.Row" Value="0"/>
                             <Setter TargetName="PART_Canvas" Property="Grid.Column" Value="0"/>
                             <Setter TargetName="PART_Canvas" Property="HorizontalAlignment" Value="Center"/>
-                            <Setter TargetName="PART_Canvas" Property="VerticalAlignment" Value="Top"/>
+                            <Setter TargetName="PART_Canvas" Property="VerticalAlignment" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=ButtonSite,Mode=OneWay,Converter={StaticResource SiteToVerticalAlignmentConverter}}"/>
 
                             <Setter TargetName="openContent" Property="Grid.Row" Value="0"/>
                             <Setter TargetName="openContent" Property="Grid.Column" Value="1"/>
@@ -415,7 +419,7 @@
                             <Setter TargetName="PART_Canvas" Property="Grid.Column" Value="1"/>
 
                             <Setter TargetName="PART_Canvas" Property="HorizontalAlignment" Value="Center"/>
-                            <Setter TargetName="PART_Canvas" Property="VerticalAlignment" Value="Top"/>
+                            <Setter TargetName="PART_Canvas" Property="VerticalAlignment" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=ButtonSite,Mode=OneWay,Converter={StaticResource SiteToVerticalAlignmentConverter}}"/>
 
                             <Setter TargetName="openContent" Property="Grid.Row" Value="0"/>
                             <Setter TargetName="openContent" Property="Grid.Column" Value="0"/>
@@ -438,7 +442,7 @@
 
                             <Setter TargetName="PART_Canvas" Property="Grid.Row" Value="1"/>
                             <Setter TargetName="PART_Canvas" Property="Grid.Column" Value="0"/>
-                            <Setter TargetName="PART_Canvas" Property="HorizontalAlignment" Value="Left"/>
+                            <Setter TargetName="PART_Canvas" Property="HorizontalAlignment" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=ButtonSite,Mode=OneWay,Converter={StaticResource SiteToHorizontalAlignmentConverter}}"/>
                             <Setter TargetName="PART_Canvas" Property="VerticalAlignment" Value="Stretch"/>
 
                             <Setter TargetName="openContent" Property="Grid.Row" Value="0"/>
@@ -463,7 +467,7 @@
                             <Setter TargetName="PART_Canvas" Property="Grid.Row" Value="0"/>
                             <Setter TargetName="PART_Canvas" Property="Grid.Column" Value="0"/>
 
-                            <Setter TargetName="PART_Canvas" Property="HorizontalAlignment" Value="Left"/>
+                            <Setter TargetName="PART_Canvas" Property="HorizontalAlignment" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=ButtonSite,Mode=OneWay,Converter={StaticResource SiteToHorizontalAlignmentConverter}}"/>
                             <Setter TargetName="PART_Canvas" Property="VerticalAlignment" Value="Stretch"/>
 
                             <Setter TargetName="openContent" Property="Grid.Row" Value="1"/>

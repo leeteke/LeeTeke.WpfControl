@@ -17,4 +17,6 @@
     <conver:StringIsNullConverter x:Key="StringIsNullConverter"/>
     <conver:EnumBoolReverseConverter x:Key="EnumBoolReverseConverter"/>
     <conver:CornerRadiusIsZeroConverter x:Key="CornerRadiusIsZeroConverter"/>
+    <conver:SiteToHorizontalAlignmentConverter x:Key="SiteToHorizontalAlignmentConverter"/>
+    <conver:SiteToVerticalAlignmentConverter x:Key="SiteToVerticalAlignmentConverter"/>
 </ResourceDictionary>

@@ -11,27 +11,19 @@
         Height="450"
         Width="800"
         Background="White"
+        x:Name="windows"
         >
 
-    <StackPanel>
-        <leecontrol:TextBoxEx Icon="&#xE721;" 
-                       Grid.Column="2"
-                       Margin="10,5,10,0"
-                       HorizontalAlignment="Right"
-                       IconVisible="True"
-                       IconDock="Right"
-                       IconCommand="{Binding TestCommand}"
-                       IconCanClick="True"
-                       SplitterVisible="True"
-                       BorderThickness="1"
-                       CornerRadius="2"
-                       Width="240"
-                              Mode="Password"
-                       Padding="5,0"
-                           Height="50"
-                           Text="123456"
-                         IsReadOnly="True"
-                       EnterCommand="{Binding TestCommand}"/>
-    </StackPanel>
+    <Grid  Background="Transparent"  >
+
+        <leecontrol:SwitchButton Grid.Column="5"
+                              Switch="True"
+                              >
+    
+        </leecontrol:SwitchButton>
+
+
+
+    </Grid>
 
 </Window>
