@@ -799,6 +799,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    
     <Style TargetType="{x:Type local:TagControl}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
@@ -835,6 +836,30 @@
             </Setter.Value>
         </Setter>
 
+    </Style>
+
+    <Style TargetType="{x:Type local:NotifyBanner}">
+        <Setter  Property="BannerPath" Value="RightToLeft"/>
+        <Setter Property="EasingFunction" >
+            <Setter.Value>
+                <ExponentialEase  EasingMode="EaseOut"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="EasingDuration" Value="0:0:0.300"/>
+        <Setter Property="IsKeepShow" Value="False"/>
+        <Setter Property="ShowDuration" Value="3000"/>
+        <Setter Property="Effect" Value="{DynamicResource LeeShadow}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:NotifyBanner}">
+                    <Canvas x:Name="PART_Canvas"
+                            Background="{x:Null}"
+                            IsHitTestVisible="False">
+                        
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 </ResourceDictionary>

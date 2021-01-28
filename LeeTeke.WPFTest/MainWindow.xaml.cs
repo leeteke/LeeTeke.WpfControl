@@ -29,7 +29,7 @@ namespace LeeTeke.WPFTest
 
         private void test_SelectionChanged(object sender, object e)
         {
-             
+
         }
 
         private void Test_IconCliecked(object sender, string e)
@@ -41,5 +41,10 @@ namespace LeeTeke.WPFTest
         {
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            test.Content = new WpfControl.NotifyBannerShowModel("你好");
     }
+}
 }

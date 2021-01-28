@@ -16,11 +16,14 @@
 
     <Grid  Background="Transparent"  >
 
-        <leecontrol:SwitchButton Grid.Column="5"
-                              Switch="True"
-                              >
-    
-        </leecontrol:SwitchButton>
+        <Button Content="测试"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Height="100"
+                Width="200"
+                Click="Button_Click" />
+
+        <leecontrol:NotifyBanner x:Name="test" />
 
 
 

@@ -121,6 +121,54 @@
             InitializeComponent
             </summary>
         </member>
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.NotifyBanner" -->
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.BannerPath">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.EasingFunction">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.EasingDuration">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.IsKeepShow">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.ShowDuration">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.Effect">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="E:LeeTeke.WpfControl.Controls.NotifyBanner.NotifyBannerClicked">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.NotifyBanner.GenerateSB(LeeTeke.WpfControl.Controls.NotifybannerDataContext)">
+            <summary>
+            生成动画
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
         <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.NotifyIconEx" -->
         <member name="P:LeeTeke.WpfControl.Controls.NotifyIconEx.Icon">
             <summary>
@@ -952,6 +1000,56 @@
             Icon
             </summary>
         </member>
+        <member name="F:LeeTeke.WpfControl.BannerPathMode.RightToLeft">
+            <summary>
+            从右到左
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.BannerPathMode.LeftToRight">
+            <summary>
+            从左到右
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.BannerPathMode.TopToBottom">
+            <summary>
+            从上到下
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.BannerPathMode.BottomToTop">
+            <summary>
+            从下到上
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.BannerPathMode.Bloom">
+            <summary>
+            中心绽放
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.NotifyBannerShowModel.Value">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.NotifyBannerShowModel.Background">
+            <summary>
+            背景色无则使用控件默认
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.NotifyBannerShowModel.Content">
+            <summary>
+            内容，默认文本可以是FE
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.NotifyBannerShowModel.Sound">
+            <summary>
+            背景音，默认没有
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.NotifyBannerShowModel.Duration">
+            <summary>
+            持续时间，可为空，毫秒
+            </summary>
+        </member>
         <member name="T:LeeTeke.WpfControl.SiteMode">
             <summary>
             位置模式
@@ -1118,6 +1216,36 @@
             <param name="child"></param>
             <param name="outLevel"></param>
             <returns></returns>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
+            </summary>
         </member>
     </members>
 </doc>
