@@ -390,7 +390,7 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         public static readonly RoutedEvent MouseLeftClickEvent = EventManager.RegisterRoutedEvent(
-        "MouseLeftClick", RoutingStrategy.Bubble, typeof(EventHandler<RoutedEventHandler>), typeof(NotifyIconEx));
+        "MouseLeftClick", RoutingStrategy.Bubble, typeof( RoutedEventHandler), typeof(NotifyIconEx));
 
 
         private void RaiseMouseLeftClick()
@@ -412,7 +412,7 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         public static readonly RoutedEvent MouseRightClickEvent = EventManager.RegisterRoutedEvent(
-        "MouseRightClick", RoutingStrategy.Bubble, typeof(EventHandler<RoutedEventHandler>), typeof(NotifyIconEx));
+        "MouseRightClick", RoutingStrategy.Bubble, typeof( RoutedEventHandler), typeof(NotifyIconEx));
 
 
         private void RaiseMouseRightClick()
@@ -434,7 +434,7 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         public static new readonly RoutedEvent MouseDoubleClickEvent = EventManager.RegisterRoutedEvent(
-        "MouseDoubleClick", RoutingStrategy.Bubble, typeof(EventHandler<RoutedEventHandler>), typeof(NotifyIconEx));
+        "MouseDoubleClick", RoutingStrategy.Bubble, typeof( RoutedEventHandler), typeof(NotifyIconEx));
 
 
         private void RaiseMouseDoubleClick()
@@ -457,7 +457,7 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         public static readonly RoutedEvent BalloonTipClickedEvent = EventManager.RegisterRoutedEvent(
-        "BalloonTipClicked", RoutingStrategy.Bubble, typeof(EventHandler<RoutedEventHandler>), typeof(NotifyIconEx));
+        "BalloonTipClicked", RoutingStrategy.Bubble, typeof( RoutedEventHandler), typeof(NotifyIconEx));
 
 
         private void RaiseBalloonTipClicked()
@@ -604,7 +604,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private void NotifyIcon_BalloonTipClicked(object sender, EventArgs e)
         {
-            if (sender is NotifyIconEx notify)
+            if (sender is NotifyIconEx)
             {
                 RaiseBalloonTipClicked();
                 try

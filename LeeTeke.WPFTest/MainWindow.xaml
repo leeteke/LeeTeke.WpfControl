@@ -23,8 +23,8 @@
                 Width="200"
                 Click="Button_Click" />
 
-        <leecontrol:NotifyBanner x:Name="test" />
-
+        <leecontrol:NotifyBanner x:Name="test"
+                                  Clicked="test_NotifyBannerClicked"/>
 
 
     </Grid>

@@ -122,6 +122,11 @@
             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.NotifyBanner" -->
+        <member name="F:LeeTeke.WpfControl.Controls.NotifyBanner._displacement">
+            <summary>
+            位移距离
+            </summary>
+        </member>
         <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.BannerPath">
             <summary>
             请填写描述
@@ -153,6 +158,16 @@
             </summary>
         </member>
         <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.Effect">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.CornerRadius">
+            <summary>
+            CornerRadius
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.ClickedCommand">
             <summary>
             请填写描述
             </summary>

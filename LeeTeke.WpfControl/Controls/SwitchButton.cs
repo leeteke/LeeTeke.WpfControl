@@ -101,6 +101,7 @@ namespace LeeTeke.WpfControl.Controls
 
         #region RouteEvent
 
+
         #region SwitchChanged
         /// <summary>
         /// 开关发生
@@ -112,7 +113,7 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         public static readonly RoutedEvent SwitchChangedEvent = EventManager.RegisterRoutedEvent(
-        "SwitchChanged", RoutingStrategy.Bubble, typeof(EventHandler<SwitchChangedEventHandler>), typeof(SwitchButton));
+        "SwitchChanged", RoutingStrategy.Bubble, typeof(SwitchChangedEventHandler), typeof(SwitchButton));
 
 
         private void RaiseSwitchChanged(bool newValue)
@@ -366,7 +367,7 @@ namespace LeeTeke.WpfControl.Controls
                 return;
             }
 
-            if (!(_closeBorder.RenderTransform is ScaleTransform scale))
+            if (_closeBorder.RenderTransform is not ScaleTransform scale)
                 _closeBorder.RenderTransform = new ScaleTransform();
 
             if (_switch)

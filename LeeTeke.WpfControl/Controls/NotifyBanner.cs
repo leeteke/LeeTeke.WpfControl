@@ -52,12 +52,15 @@ namespace LeeTeke.WpfControl.Controls
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(NotifyBanner), new FrameworkPropertyMetadata(typeof(NotifyBanner)));
         }
-
+        /// <summary>
+        /// 位移距离
+        /// </summary>
+        private double _displacement = 100;
         private Canvas _canvas;
         private bool _isLoded = false;
         public NotifyBanner()
         {
-
+              
         }
 
         public override void OnApplyTemplate()
@@ -121,7 +124,6 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-
         #region IsKeepShow
         /// <summary>
         /// 请填写描述
@@ -137,7 +139,6 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("IsKeepShow", typeof(bool), typeof(NotifyBanner));
 
         #endregion
-
 
         #region ShowDuration
         /// <summary>
@@ -196,6 +197,40 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
+        #region CornerRadius
+        /// <summary>
+        /// CornerRadius
+        /// </summary>
+        public CornerRadius CornerRadius
+        {
+            get { return (CornerRadius)GetValue(CornerRadiusProperty); }
+            set { SetValue(CornerRadiusProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CornerRadius.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CornerRadiusProperty =
+            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(NotifyBanner));
+
+        #endregion
+
+
+        #region ClickedCommand
+        /// <summary>
+        /// 请填写描述
+        /// </summary>
+        public ICommand ClickedCommand
+        {
+            get { return (ICommand)GetValue(ClickedCommandProperty); }
+            set { SetValue(ClickedCommandProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ClickedCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ClickedCommandProperty =
+            DependencyProperty.Register("ClickedCommand", typeof(ICommand), typeof(NotifyBanner));
+
+        #endregion
+
+
         #endregion
 
         #region RouteEvent
@@ -205,14 +240,14 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public event NotifyBannerClickedEventHandler NotifyBannerClicked
+        public event NotifyBannerClickedEventHandler Clicked
         {
             add { AddHandler(NotifyBannerClickedEvent, value); }
             remove { RemoveHandler(NotifyBannerClickedEvent, value); }
         }
 
         public static readonly RoutedEvent NotifyBannerClickedEvent = EventManager.RegisterRoutedEvent(
-        "NotifyBannerClicked", RoutingStrategy.Bubble, typeof(EventHandler<NotifyBannerClickedEventHandler>), typeof(NotifyBanner));
+        "Clicked", RoutingStrategy.Bubble, typeof(NotifyBannerClickedEventHandler), typeof(NotifyBanner));
 
 
         private void RaiseNotifyBannerClicked(object newValue)
@@ -222,6 +257,7 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         #endregion
+
 
         #endregion
 
@@ -247,17 +283,12 @@ namespace LeeTeke.WpfControl.Controls
                 return;
 
             ///等待持续时间
-            await Task.Delay(model.Duration??this.ShowDuration);
+            await Task.Delay(model.Duration ?? this.ShowDuration);
             if (data.IsClicked)
                 return;
 
-            sb.BeginTime = TimeSpan.FromMilliseconds(ShowDuration * -1);
-            sb.AutoReverse = true;
-            sb.Completed += (e, s) =>
-            {
-                _canvas.Children.Remove(data.Control);
-            };
-            sb.Begin();
+             BackSB(data);
+         
         }
         /// <summary>
         /// 生成动画
@@ -286,25 +317,30 @@ namespace LeeTeke.WpfControl.Controls
                 };
             }
 
-            var show = new ContentControl()
+            var show = new Border()
             {
                 Padding = this.Padding,
                 Background = data.Data.Background ?? this.Background,
-                Effect = this.Effect
+                Effect = this.Effect,
+                MinHeight=this.MinHeight,
+                MinWidth=this.MinWidth,
+                CornerRadius=this.CornerRadius
             };
 
             data.Control = show;
 
-            show.Content = element;
+            show.Child = element;
+            show.Child.IsHitTestVisible = false;
             show.Opacity = 0;
             show.DataContext = data;
+            show.MouseUp += Show_MouseUp;
             switch (BannerPath)
             {
                 case BannerPathMode.RightToLeft:
                     if (_isLoded)
                     {
                         _canvas.Children.Add(show);
-                        Canvas.SetRight(show, -100);
+                        Canvas.SetRight(show, -_displacement);
 
                         var sb = new Storyboard() { FillBehavior = FillBehavior.HoldEnd };
                         DoubleAnimationUsingKeyFrames xDA = new DoubleAnimationUsingKeyFrames();
@@ -351,6 +387,56 @@ namespace LeeTeke.WpfControl.Controls
             return null;
         }
 
+        private void Show_MouseEnter(object sender, MouseEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Show_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Border border&&border.DataContext is NotifybannerDataContext data&&!data.IsClicked)
+            {
+                data.IsClicked = true;
+                BackSB(data);
+                RaiseNotifyBannerClicked(data.Data.Value);
+            }
+        }
+
+        private void BackSB(NotifybannerDataContext data)
+        {
+            var sb = new Storyboard() { FillBehavior = FillBehavior.Stop };
+            DoubleAnimationUsingKeyFrames xDA = new DoubleAnimationUsingKeyFrames();
+            xDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+            {
+
+                Value = -_displacement,
+                KeyTime = KeyTime.FromTimeSpan(this.EasingDuration.TimeSpan),
+                EasingFunction = this.EasingFunction,
+            });
+
+            DoubleAnimationUsingKeyFrames yDA = new DoubleAnimationUsingKeyFrames();
+            yDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+            {
+
+                Value = 0,
+                KeyTime = KeyTime.FromTimeSpan(this.EasingDuration.TimeSpan),
+                EasingFunction = this.EasingFunction,
+            });
+            sb.Children.Add(xDA);
+            sb.Children.Add(yDA);
+
+            Storyboard.SetTarget(xDA, data.Control);
+            Storyboard.SetTargetProperty(xDA, new PropertyPath(Canvas.RightProperty));
+
+            Storyboard.SetTarget(yDA, data.Control);
+            Storyboard.SetTargetProperty(yDA, new PropertyPath(ContentControl.OpacityProperty));
+
+            sb.Completed += (e, s) =>
+            {
+                _canvas.Children.Remove(data.Control);
+            };
+            sb.Begin();
+        }
 
         #endregion
 
@@ -364,6 +450,6 @@ namespace LeeTeke.WpfControl.Controls
 
         public NotifyBannerShowModel Data { get; set; }
 
-        public ContentControl Control { get; set; }
+        public Border Control { get; set; }
     }
 }

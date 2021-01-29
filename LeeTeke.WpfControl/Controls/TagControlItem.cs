@@ -189,7 +189,7 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent(
-        "Closed", RoutingStrategy.Bubble, typeof(EventHandler<TagControlItemClosedEventHandler>), typeof(TagControlItem));
+        "Closed", RoutingStrategy.Bubble, typeof(TagControlItemClosedEventHandler), typeof(TagControlItem));
 
 
         private void RaiseClosed(TagControlItemClosedMode newValue)
@@ -212,7 +212,7 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         public static readonly RoutedEvent SelectedEvent = EventManager.RegisterRoutedEvent(
-        "Selected", RoutingStrategy.Bubble, typeof(EventHandler<TagControlItemSelectedEventHandler>), typeof(TagControlItem));
+        "Selected", RoutingStrategy.Bubble, typeof(TagControlItemSelectedEventHandler), typeof(TagControlItem));
 
 
         private void RaiseSelected()

@@ -288,7 +288,7 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         public static readonly RoutedEvent ValueChangedEvent = EventManager.RegisterRoutedEvent(
-        "ValueChanged", RoutingStrategy.Bubble, typeof(EventHandler<LodingBarValueChangedEventHandler>), typeof(LodingBar));
+        "ValueChanged", RoutingStrategy.Bubble, typeof(LodingBarValueChangedEventHandler), typeof(LodingBar));
 
 
         private void RaiseValueChanged(double newValue)

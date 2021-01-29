@@ -535,7 +535,7 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         public static readonly RoutedEvent EnteredEvent = EventManager.RegisterRoutedEvent(
-        "Entered", RoutingStrategy.Bubble, typeof(EventHandler<TextBoxExEventHandler>), typeof(TextBoxEx));
+        "Entered", RoutingStrategy.Bubble, typeof(TextBoxExEventHandler), typeof(TextBoxEx));
 
 
         private void RaiseEntered(string newValue)
@@ -558,7 +558,7 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         public static readonly RoutedEvent IconClickedEvent = EventManager.RegisterRoutedEvent(
-        "IconClicked", RoutingStrategy.Bubble, typeof(EventHandler<TextBoxExEventHandler>), typeof(TextBoxEx));
+        "IconClicked", RoutingStrategy.Bubble, typeof(TextBoxExEventHandler), typeof(TextBoxEx));
 
 
         private void RaiseIconClicked(string newValue)

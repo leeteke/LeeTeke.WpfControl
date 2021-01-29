@@ -343,12 +343,7 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
-        #region 事件
 
-        public event EventHandler<SlideViewItemClickedEventArgs> ItemClickEvent;
-
-
-        #region ItemClicked
         /// <summary>
         /// 请填写描述
         /// </summary>
@@ -359,7 +354,7 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         public static readonly RoutedEvent ItemClickedEvent = EventManager.RegisterRoutedEvent(
-        "ItemClicked", RoutingStrategy.Bubble, typeof(EventHandler<SlideViewItemClickedEventHandler>), typeof(SlideView));
+        "ItemClicked", RoutingStrategy.Bubble, typeof(SlideViewItemClickedEventHandler), typeof(SlideView));
 
 
         private void RaiseItemClicked(object newValue)
@@ -368,10 +363,7 @@ namespace LeeTeke.WpfControl.Controls
             RaiseEvent(arg);
         }
 
-        #endregion
 
-
-        #endregion
 
         #region 私有逻辑
 

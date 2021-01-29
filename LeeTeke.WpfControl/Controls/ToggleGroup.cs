@@ -459,7 +459,7 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         public static readonly RoutedEvent SelectionChangedEvent = EventManager.RegisterRoutedEvent(
-        "SelectionChanged", RoutingStrategy.Bubble, typeof(EventHandler<SelectionChangedEventHandler>), typeof(ToggleGroup));
+        "SelectionChanged", RoutingStrategy.Bubble, typeof(SelectionChangedEventHandler), typeof(ToggleGroup));
 
 
         private void RaiseSelectionChanged(object newValue)
