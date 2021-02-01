@@ -44,7 +44,8 @@ namespace LeeTeke.WpfControl.Controls
             this.Close();
         }
 
-        public void AddButton(string name, object value)
+
+        public void AddButton(string name, object value,CornerRadius cornerRadius=default)
         {
             var theButton = new Button()
             {
@@ -54,6 +55,16 @@ namespace LeeTeke.WpfControl.Controls
                 Margin = new Thickness(5, 5, 5, 0),
                 Height = 30,
             };
+
+            if (StaticMethods.MessageBoxExBtnCR!=default)
+            {
+                Dependencies.ButtonManager.SetCornerRadius(theButton, StaticMethods.MessageBoxExBtnCR);
+            }
+
+            if (cornerRadius!=default)
+            {
+                Dependencies.ButtonManager.SetCornerRadius(theButton, cornerRadius);
+            }
             theButton.Click += TheButton_Click;
             btnPanle.Children.Add(theButton);
         }

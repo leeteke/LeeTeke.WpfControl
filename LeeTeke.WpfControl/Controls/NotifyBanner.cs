@@ -55,20 +55,23 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 位移距离
         /// </summary>
-        private double _displacement = 100;
-        private Canvas _canvas;
+        private double _displacement = 200;
+
+        private StackPanel _stackPanel;
         private bool _isLoded = false;
+
+        private ResourceDictionary _buttonResource;
         public NotifyBanner()
         {
-              
+            _buttonResource= new ResourceDictionary() { Source = new Uri("pack://application:,,,/LeeTeke.WpfControl;component/Themes/Button.xaml") };
         }
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
-            _canvas = this.Template.FindName("PART_Canvas", this) as Canvas;
-            if (_canvas != null)
+            _stackPanel = this.Template.FindName("PART_StackPanel", this) as StackPanel;
+            if (_stackPanel != null)
             {
                 _isLoded = true;
             }
@@ -268,11 +271,8 @@ namespace LeeTeke.WpfControl.Controls
         private async void HaveContentAsync(NotifyBannerShowModel model)
         {
             var data = new NotifybannerDataContext() { Data = model };
-            var sb = GenerateSB(data);
-            if (sb == null)
-                return;
+            GenerateSB(data);
 
-            sb.Begin();
             if (model.Sound != null)
             {
                 model.Sound.Play();
@@ -287,20 +287,20 @@ namespace LeeTeke.WpfControl.Controls
             if (data.IsClicked)
                 return;
 
-             BackSB(data);
-         
+            BackSB(data);
+
         }
         /// <summary>
         /// 生成动画
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        private Storyboard GenerateSB(NotifybannerDataContext data)
+        private void GenerateSB(NotifybannerDataContext data)
         {
 
 
             if (data.Data == null)
-                return null;
+                return;
 
             if (data.Data.Content is not FrameworkElement element)
             {
@@ -314,89 +314,107 @@ namespace LeeTeke.WpfControl.Controls
                     FontStretch = this.FontStretch,
                     VerticalAlignment = this.VerticalContentAlignment,
                     HorizontalAlignment = this.HorizontalContentAlignment,
+                    TextWrapping = TextWrapping.Wrap
                 };
             }
 
-            var show = new Border()
+
+
+            var show = new Grid() { Background = new SolidColorBrush(Colors.Transparent) };
+
+            show.Children.Add(new Border()
             {
                 Padding = this.Padding,
                 Background = data.Data.Background ?? this.Background,
                 Effect = this.Effect,
-                MinHeight=this.MinHeight,
-                MinWidth=this.MinWidth,
-                CornerRadius=this.CornerRadius
+                MinHeight = this.MinHeight,
+                MinWidth = this.MinWidth,
+                CornerRadius = this.CornerRadius,
+                Child = element,
+                IsHitTestVisible = false,
+            });
+
+            var closeButton = new Button()
+            {
+                VerticalAlignment = VerticalAlignment.Top,
+                HorizontalAlignment = HorizontalAlignment.Right,
+                Content = "╳",
+                Width = 20,
+                Height = 20,
+                Style =_buttonResource["TextButton"] as Style
             };
-
+            closeButton.Click += CloseButton_Click;
+            show.Children.Add(closeButton);
             data.Control = show;
-
-            show.Child = element;
-            show.Child.IsHitTestVisible = false;
-            show.Opacity = 0;
+            show.Opacity = 1;
             show.DataContext = data;
             show.MouseUp += Show_MouseUp;
+            show.Margin = new Thickness(0, 0, 0, 5);
             switch (BannerPath)
             {
                 case BannerPathMode.RightToLeft:
-                    if (_isLoded)
-                    {
-                        _canvas.Children.Add(show);
-                        Canvas.SetRight(show, -_displacement);
-
-                        var sb = new Storyboard() { FillBehavior = FillBehavior.HoldEnd };
-                        DoubleAnimationUsingKeyFrames xDA = new DoubleAnimationUsingKeyFrames();
-                        xDA.KeyFrames.Add(new EasingDoubleKeyFrame()
-                        {
-
-                            Value = 0,
-                            KeyTime = KeyTime.FromTimeSpan(this.EasingDuration.TimeSpan),
-                            EasingFunction = this.EasingFunction,
-                        });
-
-                        DoubleAnimationUsingKeyFrames yDA = new DoubleAnimationUsingKeyFrames();
-                        yDA.KeyFrames.Add(new EasingDoubleKeyFrame()
-                        {
-
-                            Value = 1,
-                            KeyTime = KeyTime.FromTimeSpan(this.EasingDuration.TimeSpan),
-                            EasingFunction = this.EasingFunction,
-                        });
-                        sb.Children.Add(xDA);
-                        sb.Children.Add(yDA);
-
-                        Storyboard.SetTarget(xDA, show);
-                        Storyboard.SetTargetProperty(xDA, new PropertyPath(Canvas.RightProperty));
-
-                        Storyboard.SetTarget(yDA, show);
-                        Storyboard.SetTargetProperty(yDA, new PropertyPath(ContentControl.OpacityProperty));
-                        return sb;
-                    }
-                    return null;
+                    show.RenderTransform = new TranslateTransform() { X = _displacement };
+                    show.HorizontalAlignment = HorizontalAlignment.Right;
+                    data.BannerPath = BannerPathMode.RightToLeft;
+                    break;
                 case BannerPathMode.LeftToRight:
-                    break;
-                case BannerPathMode.TopToBottom:
-                    break;
-                case BannerPathMode.BottomToTop:
-                    break;
-                case BannerPathMode.Bloom:
+                    show.RenderTransform = new TranslateTransform() { X = -_displacement };
+                    show.HorizontalAlignment = HorizontalAlignment.Left;
+                    data.BannerPath = BannerPathMode.LeftToRight;
                     break;
                 default:
                     break;
             }
 
+            var sb = new Storyboard() { FillBehavior = FillBehavior.HoldEnd };
 
-            return null;
+            DoubleAnimationUsingKeyFrames xDA = new DoubleAnimationUsingKeyFrames();
+            xDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+            {
+                Value = 0,
+                KeyTime = KeyTime.FromTimeSpan(this.EasingDuration.TimeSpan),
+                EasingFunction = this.EasingFunction,
+            });
+
+            DoubleAnimationUsingKeyFrames oDA = new DoubleAnimationUsingKeyFrames();
+            oDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+            {
+
+                Value = 1,
+                KeyTime = KeyTime.FromTimeSpan(this.EasingDuration.TimeSpan),
+                EasingFunction = this.EasingFunction,
+            });
+            sb.Children.Add(xDA);
+
+            sb.Children.Add(oDA);
+
+
+            Storyboard.SetTarget(xDA, show);
+            Storyboard.SetTargetProperty(xDA, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.X)"));
+
+            Storyboard.SetTarget(oDA, show);
+            Storyboard.SetTargetProperty(oDA, new PropertyPath(Border.OpacityProperty));
+
+            _stackPanel.Children.Insert(0, show);
+
+            sb.Begin();
         }
 
-        private void Show_MouseEnter(object sender, MouseEventArgs e)
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (sender is Button button && button.DataContext is NotifybannerDataContext data && !data.IsClicked)
+            {
+                BackSB(data);
+            }
+
         }
+
+
 
         private void Show_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            if (sender is Border border&&border.DataContext is NotifybannerDataContext data&&!data.IsClicked)
+            if (sender is Border border && border.DataContext is NotifybannerDataContext data && !data.IsClicked)
             {
-                data.IsClicked = true;
                 BackSB(data);
                 RaiseNotifyBannerClicked(data.Data.Value);
             }
@@ -404,36 +422,42 @@ namespace LeeTeke.WpfControl.Controls
 
         private void BackSB(NotifybannerDataContext data)
         {
+            data.IsClicked = true;
             var sb = new Storyboard() { FillBehavior = FillBehavior.Stop };
             DoubleAnimationUsingKeyFrames xDA = new DoubleAnimationUsingKeyFrames();
             xDA.KeyFrames.Add(new EasingDoubleKeyFrame()
             {
 
-                Value = -_displacement,
+                Value = data.BannerPath switch
+                {
+                    BannerPathMode.RightToLeft => _displacement,
+                    BannerPathMode.LeftToRight => -_displacement,
+                    _ => 0,
+                },
                 KeyTime = KeyTime.FromTimeSpan(this.EasingDuration.TimeSpan),
-                EasingFunction = this.EasingFunction,
+                EasingFunction = new ExponentialEase() { EasingMode = EasingMode.EaseOut },
             });
 
-            DoubleAnimationUsingKeyFrames yDA = new DoubleAnimationUsingKeyFrames();
-            yDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+            DoubleAnimationUsingKeyFrames oDA = new DoubleAnimationUsingKeyFrames();
+            oDA.KeyFrames.Add(new EasingDoubleKeyFrame()
             {
 
                 Value = 0,
                 KeyTime = KeyTime.FromTimeSpan(this.EasingDuration.TimeSpan),
-                EasingFunction = this.EasingFunction,
+                EasingFunction = new ExponentialEase() { EasingMode = EasingMode.EaseOut },
             });
             sb.Children.Add(xDA);
-            sb.Children.Add(yDA);
+            sb.Children.Add(oDA);
 
             Storyboard.SetTarget(xDA, data.Control);
-            Storyboard.SetTargetProperty(xDA, new PropertyPath(Canvas.RightProperty));
+            Storyboard.SetTargetProperty(xDA, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.X)"));
 
-            Storyboard.SetTarget(yDA, data.Control);
-            Storyboard.SetTargetProperty(yDA, new PropertyPath(ContentControl.OpacityProperty));
+            Storyboard.SetTarget(oDA, data.Control);
+            Storyboard.SetTargetProperty(oDA, new PropertyPath(Border.OpacityProperty));
 
             sb.Completed += (e, s) =>
             {
-                _canvas.Children.Remove(data.Control);
+                _stackPanel.Children.Remove(data.Control);
             };
             sb.Begin();
         }
@@ -450,6 +474,9 @@ namespace LeeTeke.WpfControl.Controls
 
         public NotifyBannerShowModel Data { get; set; }
 
-        public Border Control { get; set; }
+        public Grid Control { get; set; }
+
+        public BannerPathMode BannerPath { get; set; }
+
     }
 }

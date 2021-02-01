@@ -21,11 +21,15 @@
                 HorizontalAlignment="Center"
                 Height="100"
                 Width="200"
-                Click="Button_Click" />
+                Click="Button_Click" 
+                RenderTransformOrigin="0.5,0" 
+                Command="{Binding TestCommand}">
+        
+        </Button>
+
 
         <leecontrol:NotifyBanner x:Name="test"
-                                  Clicked="test_NotifyBannerClicked"/>
-
+                                  BannerPath="RightToLeft"/>
 
     </Grid>
 

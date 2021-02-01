@@ -845,7 +845,7 @@
                 <ExponentialEase  EasingMode="EaseOut"/>
             </Setter.Value>
         </Setter>
-        <Setter Property="EasingDuration" Value="0:0:0.300"/>
+        <Setter Property="EasingDuration" Value="0:0:0.200"/>
         <Setter Property="IsKeepShow" Value="False"/>
         <Setter Property="ShowDuration" Value="5000"/>
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Main}"/>
@@ -860,11 +860,11 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:NotifyBanner}">
-                    <Canvas x:Name="PART_Canvas"
+                    <StackPanel x:Name="PART_StackPanel"
                             Background="{x:Null}"
                             >
                         
-                    </Canvas>
+                    </StackPanel>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

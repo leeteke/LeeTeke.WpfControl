@@ -16,17 +16,6 @@ namespace LeeTeke.WpfControl
         /// 从左到右
         /// </summary>
         LeftToRight,
-        /// <summary>
-        /// 从上到下
-        /// </summary>
-        TopToBottom,
-        /// <summary>
-        /// 从下到上
-        /// </summary>
-        BottomToTop,
-        /// <summary>
-        /// 中心绽放
-        /// </summary>
-        Bloom,
+
     }
 }

@@ -556,10 +556,19 @@ namespace LeeTeke.WpfControl
                 }
                 else
                 {
-                    return IsInControl(pardent, _p,outLevel);
+                    return IsInControl(pardent, _p, outLevel);
                 }
 
             }
         }
+
+
+        internal static CornerRadius MessageBoxExBtnCR { get; private set; } = default;
+        /// <summary>
+        /// 设置MessageBox全局按钮
+        /// </summary>
+        /// <param name="cornerRadius"></param>
+        public static void SetMessageboxExButtonCornerRadius(CornerRadius cornerRadius) => MessageBoxExBtnCR = cornerRadius;
+
     }
 }

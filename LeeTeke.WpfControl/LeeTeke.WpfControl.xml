@@ -172,7 +172,7 @@
             请填写描述
             </summary>
         </member>
-        <member name="E:LeeTeke.WpfControl.Controls.NotifyBanner.NotifyBannerClicked">
+        <member name="E:LeeTeke.WpfControl.Controls.NotifyBanner.Clicked">
             <summary>
             请填写描述
             </summary>
@@ -981,12 +981,13 @@
             </summary>
             <param name="icon"></param>
         </member>
-        <member name="M:LeeTeke.WpfControl.MessageBoxEx.AddOptions(System.String,System.Object)">
+        <member name="M:LeeTeke.WpfControl.MessageBoxEx.AddOptions(System.String,System.Object,System.Windows.CornerRadius)">
             <summary>
             设置选项
             </summary>
             <param name="name"></param>
-            <param name="value"></param>
+            <param name="vale"></param>
+            <param name="btnCornerRadius">圆角值</param>
         </member>
         <member name="M:LeeTeke.WpfControl.MessageBoxEx.SetSize(System.Double,System.Double)">
             <summary>
@@ -1023,21 +1024,6 @@
         <member name="F:LeeTeke.WpfControl.BannerPathMode.LeftToRight">
             <summary>
             从左到右
-            </summary>
-        </member>
-        <member name="F:LeeTeke.WpfControl.BannerPathMode.TopToBottom">
-            <summary>
-            从上到下
-            </summary>
-        </member>
-        <member name="F:LeeTeke.WpfControl.BannerPathMode.BottomToTop">
-            <summary>
-            从下到上
-            </summary>
-        </member>
-        <member name="F:LeeTeke.WpfControl.BannerPathMode.Bloom">
-            <summary>
-            中心绽放
             </summary>
         </member>
         <member name="P:LeeTeke.WpfControl.NotifyBannerShowModel.Value">
@@ -1231,6 +1217,12 @@
             <param name="child"></param>
             <param name="outLevel"></param>
             <returns></returns>
+        </member>
+        <member name="M:LeeTeke.WpfControl.StaticMethods.SetMessageboxExButtonCornerRadius(System.Windows.CornerRadius)">
+            <summary>
+            设置MessageBox全局按钮
+            </summary>
+            <param name="cornerRadius"></param>
         </member>
         <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
             <summary>

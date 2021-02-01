@@ -59,7 +59,7 @@ namespace LeeTeke.WpfControl
             Background = background;
         }
 
-        public NotifyBannerShowModel(object content, object value, Brush background, int duration, SoundPlayer sound)
+        public NotifyBannerShowModel(object content, object value, Brush background, int? duration, SoundPlayer sound)
         {
             Content = content;
             Value = value;
