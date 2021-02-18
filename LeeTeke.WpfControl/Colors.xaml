@@ -4,7 +4,7 @@
                     xmlns:local="clr-namespace:LeeTeke.WpfControl">
 
     <!--默认阴影主题-->
-    <DropShadowEffect x:Key="LeeShadow" BlurRadius="8" Direction="0" ShadowDepth="0" Opacity="1" Color="#CFD1D1D1"/>
+    <DropShadowEffect x:Key="LeeShadow" BlurRadius="8" Direction="0" ShadowDepth="0" Opacity="0.7" Color="LightGray"/>
     <!--默认阴影主题-->
     <sys:Boolean x:Key="LeeSnapsToDevicePixels">True</sys:Boolean>
     <Style x:Key="LeeFocusVisual">

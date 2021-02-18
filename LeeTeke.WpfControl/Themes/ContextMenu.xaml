@@ -15,6 +15,7 @@
         <Setter Property="Background" Value="White"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="leedep:ContextMenuManager.Shadow" Value="{DynamicResource LeeShadow}"/>
+        <Setter Property="Padding" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ContextMenu}">
@@ -26,6 +27,13 @@
                             Effect="{Binding Path=(leedep:ContextMenuManager.Shadow),RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}"
                             CornerRadius="{Binding Path=(leedep:ContextMenuManager.CornerRadius),RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}">
                         <ScrollViewer  Margin="{TemplateBinding Padding}">
+                            <ScrollViewer.Clip>
+                                <MultiBinding  Converter="{StaticResource  MultiValueToClipConverter}" Mode="OneWay">
+                                    <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualWidth"/>
+                                    <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualHeight"/>
+                                    <Binding ElementName="border"  Path="CornerRadius"/>
+                                </MultiBinding>
+                            </ScrollViewer.Clip>
                             <StackPanel IsItemsHost="True"
                                         KeyboardNavigation.DirectionalNavigation="Cycle" />
                         </ScrollViewer>
@@ -106,16 +114,20 @@
                                        PopupAnimation="Fade">
                                         <Grid x:Name="GrdSubmenu"
                                           Margin="10">
+
+                     
+
                                             <Border x:Name="BdrSubmenu"
                                                 SnapsToDevicePixels="True"
-                                                BorderThickness="{Binding BorderThickness,RelativeSource={RelativeSource AncestorType=ContextMenu}}"
-                                                BorderBrush="{Binding BorderBrush,RelativeSource={RelativeSource AncestorType=ContextMenu}}"
-                                                Background="{Binding Background,RelativeSource={RelativeSource AncestorType=ContextMenu}}"
-                                               MinWidth="{Binding MinWidth,RelativeSource={RelativeSource AncestorType=ContextMenu}}"
-                                                Effect="{Binding Path=(leedep:ContextMenuManager.Shadow),RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}"
-                                                CornerRadius="{Binding Path=(leedep:MenuItemManager.CornerRadius),RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}">
+                                                BorderThickness="{Binding BorderThickness,RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}"
+                                                BorderBrush="{Binding BorderBrush,RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}"
+                                                Background="{Binding Background,RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}"
+                                               MinWidth="{Binding MinWidth,RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}"
+                                                Effect="{Binding Path=(leedep:ContextMenuManager.Shadow),RelativeSource={RelativeSource AncestorType=ContextMenu,Mode=FindAncestor},Mode=OneWay}"
+                                                CornerRadius="{Binding Path=(leedep:MenuItemManager.CornerRadius),RelativeSource={RelativeSource AncestorType=ContextMenu,Mode=FindAncestor},Mode=OneWay}">
                                             </Border>
                                             <ScrollViewer Margin="{Binding Padding,RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}">
+                                                
                                                 <StackPanel IsItemsHost="True"
                                                         KeyboardNavigation.DirectionalNavigation="Cycle" />
                                             </ScrollViewer>
