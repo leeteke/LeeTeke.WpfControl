@@ -1,6 +1,6 @@
 # WpfControl
 WPF控件
-引用使用方法
+资源引用使用方法
 
     <Application.Resources>
         <ResourceDictionary>
@@ -14,3 +14,9 @@ WPF控件
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
+自定义控件引用方法
+
+   xmlns:lee="clr-namespace:LeeTeke.WpfControl.Controls;assembly=LeeTeke.WpfControl"
+   
+   
+
