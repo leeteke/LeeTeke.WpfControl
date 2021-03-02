@@ -176,6 +176,19 @@ namespace LeeTeke.WpfControl
         }
 
         /// <summary>
+        /// 设置自定义内容
+        /// </summary>
+        /// <param name="element"></param>
+        public void SetContent(UIElement element)
+        {
+            message. textConetnt.Visibility = Visibility.Collapsed;
+            message.gridMain.Children.Add(element);
+            System.Windows.Controls.Grid.SetColumn(element, 1);
+            System.Windows.Controls.Grid.SetRow(element, 1);
+        }
+
+
+        /// <summary>
         /// lodingbar模式
         /// </summary>
         public LodingBarMode LodingBarModel
@@ -187,7 +200,7 @@ namespace LeeTeke.WpfControl
         /// <summary>
         /// 设置lodingVale 范围0-100;
         /// </summary>
-        public double LodingBarValue { get => message.loding.Value; set => message.loding.Value=value; }
+        public double LodingBarValue { get => message.loding.Value; set => message.loding.Value = value; }
         /// <summary>
         /// 设置图标
         /// </summary>
@@ -197,32 +210,40 @@ namespace LeeTeke.WpfControl
             switch (icon)
             {
                 case MessageBoxExEnum.None:
+                    message.icon.Visibility = Visibility.Collapsed;
                     break;
                 case MessageBoxExEnum.OK:
+                    message.icon.Visibility = Visibility.Visible;
                     message.icon.Text = "\xEC61";
                     message.icon.Foreground = new SolidColorBrush(Color.FromArgb(255, 124, 187, 0));
                     break;
                 case MessageBoxExEnum.Warning:
+                    message.icon.Visibility = Visibility.Visible;
                     message.icon.Text = "\xE814";
                     message.icon.Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 153, 51));
                     break;
                 case MessageBoxExEnum.Information:
+                    message.icon.Visibility = Visibility.Visible;
                     message.icon.Text = "\xF167";
                     message.icon.Foreground = new SolidColorBrush(Color.FromArgb(255, 1, 119, 215));
                     break;
                 case MessageBoxExEnum.Question:
+                    message.icon.Visibility = Visibility.Visible;
                     message.icon.Text = "\xE9CE";
                     message.icon.Foreground = new SolidColorBrush(Color.FromArgb(255, 1, 119, 215));
                     break;
                 case MessageBoxExEnum.Erro:
+                    message.icon.Visibility = Visibility.Visible;
                     message.icon.Text = "\xEB90";
                     message.icon.Foreground = new SolidColorBrush(Color.FromArgb(255, 246, 83, 20));
                     break;
                 case MessageBoxExEnum.Stop:
+                    message.icon.Visibility = Visibility.Visible;
                     message.icon.Text = "\xF140";
                     message.icon.Foreground = new SolidColorBrush(Color.FromArgb(255, 235, 60, 0));
                     break;
                 case MessageBoxExEnum.Wating:
+                    message.icon.Visibility = Visibility.Visible;
                     message.icon.Text = "\xEC32";
                     message.icon.Foreground = new SolidColorBrush(Color.FromArgb(255, 165, 103, 63));
                     break;
@@ -238,7 +259,7 @@ namespace LeeTeke.WpfControl
         /// <param name="name"></param>
         /// <param name="vale"></param>
         /// <param name="btnCornerRadius">圆角值</param>
-        public void AddOptions(string name, object vale, CornerRadius btnCornerRadius=default)=>message.AddButton(name,vale,btnCornerRadius);
+        public void AddOptions(string name, object vale, CornerRadius btnCornerRadius = default) => message.AddButton(name, vale, btnCornerRadius);
 
         /// <summary>
         /// 设置大小

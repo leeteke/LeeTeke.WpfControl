@@ -44,6 +44,7 @@ namespace LeeTeke.WpfControl.Controls
             this.Close();
         }
 
+     
 
         public void AddButton(string name, object value,CornerRadius cornerRadius=default)
         {

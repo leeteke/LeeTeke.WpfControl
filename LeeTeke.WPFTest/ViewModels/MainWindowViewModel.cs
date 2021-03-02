@@ -122,7 +122,10 @@ namespace LeeTeke.WPFTest.ViewModels
         private void TestCommandExecute(object obj)
         {
 
-            LeeTeke.WpfControl.MessageBoxEx.Show("未知界面异常", "2", LeeTeke.WpfControl.MessageBoxExEnum.Erro);
+            var msgEx = new LeeTeke.WpfControl.MessageBoxEx() {  Title="测试"};
+            msgEx.SetContent(new System.Windows.Controls.Button() { Content = "你好" });
+
+            msgEx.Show();
 
         }
 
