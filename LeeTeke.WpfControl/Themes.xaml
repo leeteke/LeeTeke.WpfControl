@@ -14,6 +14,7 @@
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/DataGrid.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/Slider.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/GroupBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/TextBox.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <Style BasedOn="{StaticResource LeeButton}" TargetType="Button" />
@@ -33,5 +34,6 @@
     <Style BasedOn="{StaticResource LeeDataGridRowHeader}" TargetType="DataGridRowHeader"/>
     <Style BasedOn="{StaticResource LeeSlider}" TargetType="Slider"/>
     <Style BasedOn="{StaticResource LeeGroupBox}" TargetType="GroupBox"/>
+    <Style BasedOn="{StaticResource LeeTextBox}" TargetType="TextBox"/>
 
 </ResourceDictionary>

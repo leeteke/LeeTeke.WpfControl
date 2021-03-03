@@ -25,19 +25,10 @@
                 <MenuItem Header="你好2"/>
             </ContextMenu>
         </Grid.ContextMenu>
-        <Button Content="测试"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                Height="100"
-                Foreground="Black"
-                Background="White"
-                Width="200"
-                Click="Button_Click" 
-                RenderTransformOrigin="0.5,0" 
-                Effect="{DynamicResource LeeShadow}"
-                Command="{Binding TestCommand}">
-       
-        </Button>
+        <TextBox Height="50" Width="100"
+                 BorderThickness="2"
+                 leedep:TextBoxManager.CornerRadius="20"
+                 />
 
 
         <leecontrol:NotifyBanner x:Name="test"
