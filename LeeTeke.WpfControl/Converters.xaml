@@ -15,6 +15,7 @@
     <conver:IsNullConverter x:Key="IsNullConverter" />
     <conver:NotAlignmentCenterConverter x:Key="NotAlignmentCenterConverter" />
     <conver:StringIsNullConverter x:Key="StringIsNullConverter"/>
+    <conver:StringIsNotNullConverter x:Key="StringIsNotNullConverter"/>
     <conver:EnumBoolReverseConverter x:Key="EnumBoolReverseConverter"/>
     <conver:CornerRadiusIsZeroConverter x:Key="CornerRadiusIsZeroConverter"/>
     <conver:SiteToHorizontalAlignmentConverter x:Key="SiteToHorizontalAlignmentConverter"/>
