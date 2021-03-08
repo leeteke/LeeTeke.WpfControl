@@ -54,6 +54,7 @@ namespace LeeTeke.WpfControl.Controls
 
 
         private Storyboard _lodingSB;
+        private long _lastLodingTime = 0;
 
         public LodingBar()
         {
@@ -185,7 +186,7 @@ namespace LeeTeke.WpfControl.Controls
                 }
 
                 loding.RaiseValueChanged(value);
-                if (loding.Mode== LodingBarMode.Loding)
+                if (loding.Mode == LodingBarMode.Loding)
                 {
                     loding.LodingStoryboard();
                 }
@@ -224,7 +225,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for Mode.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ModeProperty =
-            DependencyProperty.Register("Mode", typeof(LodingBarMode), typeof(LodingBar),new PropertyMetadata(LodingBarMode.Loding, ModeChanged));
+            DependencyProperty.Register("Mode", typeof(LodingBarMode), typeof(LodingBar), new PropertyMetadata(LodingBarMode.Loding, ModeChanged));
 
         private static void ModeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -304,8 +305,6 @@ namespace LeeTeke.WpfControl.Controls
 
         #region 私有逻辑
 
-
-
         private double ProgressGenCalculation()
         {
             try
@@ -339,33 +338,41 @@ namespace LeeTeke.WpfControl.Controls
             if (_lodingSB != null)
                 _lodingSB.Pause();
 
-            if (Mode==LodingBarMode.Loding)
+            if (Mode == LodingBarMode.Loding)
             {
-            _lodingSB = new Storyboard() { FillBehavior = FillBehavior.Stop };
-            var plc = Value * (ProgressGenCalculation() / Maximum) ;
-            DoubleAnimationUsingKeyFrames eDA = new DoubleAnimationUsingKeyFrames();
-            eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
-            {
-                Value = plc,
-                KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(200)),
-                EasingFunction = this.EasingFunction,
-            });
-            _lodingSB.Children.Add(eDA);
-            Storyboard.SetTarget(eDA, this);
-            Storyboard.SetTargetProperty(eDA, new PropertyPath(LodingBar.ProgressLengthProperty));
-            _lodingSB.Completed += (e, s) =>
-            {
-                this.ProgressLength = plc;
-            };
-            _lodingSB.Begin();
-            }
-            else
-            {
-                _lodingSB = new Storyboard() { RepeatBehavior= RepeatBehavior.Forever  };
+                var plc = Value * (ProgressGenCalculation() / Maximum);
+                if ((DateTime.Now.ToFileTime() - _lastLodingTime) < 2000000)
+                {
+                    _lodingSB?.Stop();
+                    _lastLodingTime = DateTime.Now.ToFileTime();
+                    this.ProgressLength = plc;
+                    return;
+                }
+                _lastLodingTime = DateTime.Now.ToFileTime();
+                _lodingSB = new Storyboard() { FillBehavior = FillBehavior.Stop };
                 DoubleAnimationUsingKeyFrames eDA = new DoubleAnimationUsingKeyFrames();
                 eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                 {
-                    Value = -(ProgressGenCalculation() *0.4),
+                    Value = plc,
+                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(200)),
+                    EasingFunction = this.EasingFunction,
+                });
+                _lodingSB.Children.Add(eDA);
+                Storyboard.SetTarget(eDA, this);
+                Storyboard.SetTargetProperty(eDA, new PropertyPath(LodingBar.ProgressLengthProperty));
+                _lodingSB.Completed += (e, s) =>
+                {
+                    this.ProgressLength = plc;
+                };
+                _lodingSB.Begin();
+            }
+            else
+            {
+                _lodingSB = new Storyboard() { RepeatBehavior = RepeatBehavior.Forever };
+                DoubleAnimationUsingKeyFrames eDA = new DoubleAnimationUsingKeyFrames();
+                eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+                {
+                    Value = -(ProgressGenCalculation() * 0.4),
                     KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(0)),
                 });
                 eDA.KeyFrames.Add(new EasingDoubleKeyFrame()

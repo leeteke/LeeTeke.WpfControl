@@ -76,6 +76,22 @@ namespace LeeTeke.WPFTest.ViewModels
         }
 
 
+        private double _testDouble;
+        /// <summary>
+        /// 请填写属性名
+        /// </summary>
+        public double TestDoubel
+        {
+            get { return _testDouble; }
+            set
+            {
+                _testDouble = value;
+                this.RaisePropertyChanged("TestDoubel");
+            }
+        }
+
+
+
 
         #endregion
 
@@ -119,13 +135,16 @@ namespace LeeTeke.WPFTest.ViewModels
 
 
 
-        private void TestCommandExecute(object obj)
+        private async void TestCommandExecute(object obj)
         {
 
-            var msgEx = new LeeTeke.WpfControl.MessageBoxEx() {  Title="测试"};
-            msgEx.SetContent(new System.Windows.Controls.Button() { Content = "你好" });
-
-            msgEx.Show();
+            double ad= 0;
+            while (ad<100)
+            {
+                await Task.Delay(10);
+                ad += 0.1;
+                TestDoubel = ad;
+            }
 
         }
 

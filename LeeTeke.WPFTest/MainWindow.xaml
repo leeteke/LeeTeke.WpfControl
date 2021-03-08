@@ -25,11 +25,18 @@
                 <MenuItem Header="你好2"/>
             </ContextMenu>
         </Grid.ContextMenu>
-        <TextBox Height="50" Width="100"
-                 BorderThickness="2"
-                 leedep:TextBoxManager.CornerRadius="20"
-                 />
 
+        <StackPanel>
+            <Button Content="开始"
+                    Command="{Binding TestCommand}"
+                    />
+            <leecontrol:LodingBar Mode="Loding"
+                                  x:Name="loding"
+                                  Value="{Binding TestDoubel}"
+                                  Height="20"
+                                  Maximum="100"
+                                  />
+        </StackPanel>
 
         <leecontrol:NotifyBanner x:Name="test"
                                   BannerPath="RightToLeft"/>
