@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
@@ -570,5 +571,39 @@ namespace LeeTeke.WpfControl
         /// <param name="cornerRadius"></param>
         public static void SetMessageboxExButtonCornerRadius(CornerRadius cornerRadius) => MessageBoxExBtnCR = cornerRadius;
 
+
+
+        ///建议使用此方法
+        [DllImport("psapi.dll")]
+        private static extern bool EmptyWorkingSet(IntPtr hProcess);
+        /// <summary>      
+        /// 释放内存      
+        /// </summary>      
+        public static void ClearMemory()
+        {
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+            {
+                EmptyWorkingSet(System.Diagnostics.Process.GetCurrentProcess().Handle);
+            }
+        }
+
+        /// <summary>      
+        /// 优化其它程序内存内存      
+        /// </summary>      
+        public static void ClearMemory(IntPtr handel)
+        {
+            try
+            {
+                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+                {
+                    EmptyWorkingSet(handel);
+                }
+            }
+            catch
+            {
+            }
+        }
     }
 }

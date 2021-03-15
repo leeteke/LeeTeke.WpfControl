@@ -138,13 +138,7 @@ namespace LeeTeke.WPFTest.ViewModels
         private async void TestCommandExecute(object obj)
         {
 
-            double ad= 0;
-            while (ad<100)
-            {
-                await Task.Delay(10);
-                ad += 0.1;
-                TestDoubel = ad;
-            }
+            LeeTeke.WpfControl.StaticMethods.ClearMemory();
 
         }
 
