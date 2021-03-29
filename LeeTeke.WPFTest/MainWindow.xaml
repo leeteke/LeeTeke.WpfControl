@@ -26,20 +26,9 @@
             </ContextMenu>
         </Grid.ContextMenu>
 
-        <StackPanel>
-            <Button Content="开始"
-                    Command="{Binding TestCommand}"
-                    />
-            <leecontrol:LodingBar Mode="Loding"
-                                  x:Name="loding"
-                                  Value="{Binding TestDoubel}"
-                                  Height="20"
-                                  Maximum="100"
-                                  />
-        </StackPanel>
-
-        <leecontrol:NotifyBanner x:Name="test"
-                                  BannerPath="RightToLeft"/>
+        <leecontrol:TagControl ItemsSource="{Binding TestList}">
+            
+        </leecontrol:TagControl>
 
     </Grid>
 

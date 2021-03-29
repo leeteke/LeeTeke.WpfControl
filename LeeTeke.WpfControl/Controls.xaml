@@ -737,15 +737,24 @@
                                 <Grid >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
-                                        <ColumnDefinition Width="30"/>
+                                        <ColumnDefinition Width="20"/>
+                                        <ColumnDefinition Width="20"/>
                                     </Grid.ColumnDefinitions>
                                     <ContentPresenter x:Name="PART_ContentPresenter" 
                                               ContentTemplate="{TemplateBinding ContentTemplate}"
                                               TextElement.Foreground="{TemplateBinding  Foreground}"
                                               />
-                                    <Button x:Name="PART_CloseButton" 
+                                    <Button x:Name="PART_PinButton" 
                                                 Grid.Column="1"
+                                                Content="&#xE718;"
+                                                FontFamily="{DynamicResource IconFontFamily}"
+                                                Style="{DynamicResource TextButton}"
+                                                Visibility="{TemplateBinding  CanClosed,Converter={StaticResource VisibilityForBoolConverter}}"
+                                                />
+                                    <Button x:Name="PART_CloseButton" 
+                                                Grid.Column="2"
                                                 Content="&#xE8BB;"
+                                                FontSize="11"
                                                 FontFamily="{DynamicResource IconFontFamily}"
                                                 Style="{DynamicResource TextButton}"
                                                 Visibility="{TemplateBinding  CanClosed,Converter={StaticResource VisibilityForBoolConverter}}"
@@ -754,14 +763,22 @@
                                 </Grid>
                                 <Border.ContextMenu>
                                     <ContextMenu>
-                                        <MenuItem x:Name="PART_MenuItem_CloseAll" Header="关闭所有标签"/>
-                                        <MenuItem x:Name="PART_MenuItem_CloseOther" Header="关闭除此之外的标签"/>
-                                        <MenuItem x:Name="PART_MenuItem_CloseSelf"    Visibility="{TemplateBinding  CanClosed,Converter={StaticResource VisibilityForBoolConverter}}" 
+                                        <MenuItem x:Name="PART_MenuItem_CloseAll" 
+                                                  Header="关闭所有标签"/>
+                                        <MenuItem x:Name="PART_MenuItem_CloseOther" 
+                                                  Header="关闭除此之外的标签"/>
+                                        <MenuItem x:Name="PART_MenuItem_CloseSelf"  
+                                                  Visibility="{TemplateBinding  CanClosed,Converter={StaticResource VisibilityForBoolConverter}}" 
                                                           Header="关闭"/>
+                                       
                                     </ContextMenu>
                                 </Border.ContextMenu>
                             </Border>
                             <ControlTemplate.Triggers>
+                                <Trigger Property="IsFixed" Value="True">
+                                    <Setter Property="Content"  TargetName="PART_PinButton"
+                                            Value="&#xE840;"/>
+                                </Trigger>
                                 <Trigger Property="IsSelected" Value="True">
                                     <Setter Property="Background" 
                                             Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TagControl}},Path=SelectedBrush,Mode=OneWay}"/>

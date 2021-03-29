@@ -471,7 +471,7 @@ namespace LeeTeke.WpfControl.Controls
                         }
                         foreach (TagControlItem item in needCloseItem)
                         {
-                            if (item.CanClosed)
+                            if (item.CanClosed&&!item.IsFixed)
                             {
                                 CloseItemAsync(item);
                                 ItemRemoveChanged(item);
@@ -487,7 +487,7 @@ namespace LeeTeke.WpfControl.Controls
                         }
                         foreach (TagControlItem item in allItem)
                         {
-                            if (item.CanClosed)
+                            if (item.CanClosed&&!item.IsFixed)
                             {
                                 CloseItemAsync(item);
                                 ItemRemoveChanged(item);

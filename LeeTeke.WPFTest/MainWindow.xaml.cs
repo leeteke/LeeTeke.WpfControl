@@ -44,7 +44,7 @@ namespace LeeTeke.WPFTest
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            test.Content = new WpfControl.NotifyBannerShowModel("你好", "1", new SolidColorBrush(Colors.Red), null, new System.Media.SoundPlayer(Properties.Resources._8400));
+            //test.Content = new WpfControl.NotifyBannerShowModel("你好", "1", new SolidColorBrush(Colors.Red), null, new System.Media.SoundPlayer(Properties.Resources._8400));
         }
 
         private void test_NotifyBannerClicked(object sender, RoutedEventArgs e)

@@ -78,6 +78,11 @@ namespace LeeTeke.WpfControl.Controls
                     button.Click += (es, ex) => RaiseClosed(TagControlItemClosedMode.Self);
                 }
 
+                if (this.Template.FindName("PART_PinButton",this) is Button btnPin)
+                {
+                    btnPin.Click += (es, ex) => IsFixed = !IsFixed;
+                }
+
             }
             catch
             {
@@ -160,6 +165,8 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
+
+
         #region Orientation
         /// <summary>
         /// Orientation
@@ -176,7 +183,30 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MyPropertyProperty =
+            DependencyProperty.Register("MyProperty", typeof(int), typeof(TagControlItem));
         #endregion
+
+
+        #region IsFixed
+        /// <summary>
+        /// 是否固定
+        /// </summary>
+        public bool IsFixed
+        {
+            get { return (bool)GetValue(IsFixedProperty); }
+            set { SetValue(IsFixedProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsFixed.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsFixedProperty =
+            DependencyProperty.Register("IsFixed", typeof(bool), typeof(TagControlItem));
+
+        #endregion
+
+
 
         #region Closed
         /// <summary>
