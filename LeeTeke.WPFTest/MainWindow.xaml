@@ -14,26 +14,14 @@
         leedep:WindowShaowManager.Open="True"
         >
 
-    <Grid  Background="Red"  >
+    <Grid  Background="White" >
+        <Button Content="最大化"
+                Width="100"
+                Height="100"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                Click="Button_Click"/>
 
-        <leecontrol:TagControl x:Name="tage" 
-                               ItemsSource="{Binding TestList}" 
-                               Height="300"
-                               Orientation="Vertical"
-                               ItemContentMiniWidth="35"
-                               ItemMargin="5,5,5,0"
-                               SelectedBrush="White"
-                               Background="#FF004CA2"
-                               MouseEnter="tage_MouseEnter"
-                               MouseLeave="tage_MouseLeave">
-            <leecontrol:TagControl.ItemTemplate>
-                <DataTemplate>
-                    <Grid Margin="5" leedep:TagControlManager.ItemCanClose="{Binding Boolen}">
-                        <Image Source="{Binding Image}" Height="50"/>
-                    </Grid>
-                </DataTemplate>
-            </leecontrol:TagControl.ItemTemplate>            
-        </leecontrol:TagControl>
 
 
     </Grid>

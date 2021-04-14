@@ -121,7 +121,43 @@ namespace LeeTeke.WpfControl.Dependencies
                         {
                             ((DropShadowEffect)shaow.Effect).Opacity = 0.2;
                         };
+                        window.StateChanged += (we, ws) =>
+                        {
+                            if (window.WindowState== WindowState.Maximized)
+                            {
+                                var bounds = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
+                                var taskbarRect = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea;
+                                var mar = new Thickness();
+                                if (taskbarRect.X==0)
+                                {
+                                    mar.Left = 7;
+                                    mar.Right = bounds.Width-taskbarRect.Width+7;
+                                }
+                                else
+                                {
+                                    mar.Left = taskbarRect.X+7;
+                                    mar.Right =  7;
+                                }
+                                if (taskbarRect.Y==0)
+                                {
+                                    mar.Top = 7;
+                                    mar.Bottom = bounds.Height - taskbarRect.Height + 7;
+                                }
+                                else
+                                {
+                                    mar.Top = taskbarRect.Y + 7;
+                                    mar.Bottom = 7;
+                                }
+                                shaow.Margin = mar;
+                            }
+                            if(window.WindowState == WindowState.Normal)
+                            {
+                                shaow.Margin = new Thickness(8);
+                            }
+                        
+                            
 
+                        };
 
                     }
 
