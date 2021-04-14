@@ -40,7 +40,7 @@ namespace LeeTeke.WpfControl.Dependencies
                 {
                     var noCor = (CornerRadius)window.GetValue(WindowShaowManager.CornerRadiusProperty) == default;
 
-                    if (Environment.OSVersion.Version.Major > 11 && noCor)
+                    if (Environment.OSVersion.Version.Major > 7 && noCor)
                     {
                         WindowChrome windowChrome = new WindowChrome
                         {
@@ -53,8 +53,16 @@ namespace LeeTeke.WpfControl.Dependencies
                     }
                     else
                     {
-                        window.Background = null;
+                        WindowChrome windowChrome = new WindowChrome
+                        {
+                            ResizeBorderThickness = new Thickness(11),
+                            CornerRadius = new CornerRadius(0),
+                            CaptionHeight = 0,
+                            GlassFrameThickness = new Thickness(1)
+                        };
+                        window.SetValue(WindowChrome.WindowChromeProperty, windowChrome);
                         window.AllowsTransparency = true;
+                        window.Background = null;
                         window.WindowStyle = WindowStyle.None;
                         var shaow = new Border
                         {

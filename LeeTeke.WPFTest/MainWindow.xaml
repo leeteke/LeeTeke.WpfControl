@@ -10,12 +10,11 @@
         Title="WpfControl测试 窗口"
         Height="450"
         Width="800"
-        Background="White"
         x:Name="windows"
-        ResizeMode="NoResize"
+        leedep:WindowShaowManager.Open="True"
         >
 
-    <Grid   >
+    <Grid  Background="Red"  >
 
         <leecontrol:TagControl x:Name="tage" 
                                ItemsSource="{Binding TestList}" 
