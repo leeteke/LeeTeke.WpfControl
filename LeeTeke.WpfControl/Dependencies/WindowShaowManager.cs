@@ -50,6 +50,22 @@ namespace LeeTeke.WpfControl.Dependencies
                             GlassFrameThickness = new Thickness(1)
                         };
                         window.SetValue(WindowChrome.WindowChromeProperty, windowChrome);
+                        window.StateChanged += (we, ws) =>
+                        {
+                            if (window.WindowState == WindowState.Maximized)
+                            {
+                                if (window.Content is FrameworkElement  ui){
+                                    ui.Margin = new Thickness(8);
+                                }
+                            }
+                            if (window.WindowState == WindowState.Normal)
+                            {
+                                if (window.Content is FrameworkElement ui)
+                                {
+                                    ui.Margin = new Thickness(0);
+                                }
+                            }
+                        };
                     }
                     else
                     {
@@ -67,11 +83,11 @@ namespace LeeTeke.WpfControl.Dependencies
                         var shaow = new Border
                         {
                             Name = "shaowborder",
-                            Margin=new Thickness(8),
+                            Margin = new Thickness(8),
                             Effect = new DropShadowEffect() { BlurRadius = 8, Direction = 0, ShadowDepth = 0, Color = Colors.Black, Opacity = 0.4 }
                         };
-                     
-                       
+
+
                         window.Loaded += (we, ws) =>
                         {
                             ///获取之前的元素
@@ -123,22 +139,22 @@ namespace LeeTeke.WpfControl.Dependencies
                         };
                         window.StateChanged += (we, ws) =>
                         {
-                            if (window.WindowState== WindowState.Maximized)
+                            if (window.WindowState == WindowState.Maximized)
                             {
                                 var bounds = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
                                 var taskbarRect = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea;
                                 var mar = new Thickness();
-                                if (taskbarRect.X==0)
+                                if (taskbarRect.X == 0)
                                 {
                                     mar.Left = 7;
-                                    mar.Right = bounds.Width-taskbarRect.Width+7;
+                                    mar.Right = bounds.Width - taskbarRect.Width + 7;
                                 }
                                 else
                                 {
-                                    mar.Left = taskbarRect.X+7;
-                                    mar.Right =  7;
+                                    mar.Left = taskbarRect.X + 7;
+                                    mar.Right = 7;
                                 }
-                                if (taskbarRect.Y==0)
+                                if (taskbarRect.Y == 0)
                                 {
                                     mar.Top = 7;
                                     mar.Bottom = bounds.Height - taskbarRect.Height + 7;
@@ -150,12 +166,12 @@ namespace LeeTeke.WpfControl.Dependencies
                                 }
                                 shaow.Margin = mar;
                             }
-                            if(window.WindowState == WindowState.Normal)
+                            if (window.WindowState == WindowState.Normal)
                             {
                                 shaow.Margin = new Thickness(8);
                             }
-                        
-                            
+
+
 
                         };
 

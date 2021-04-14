@@ -17,6 +17,7 @@
     <Grid  Background="White" >
         <Button Content="最大化"
                 Width="100"
+                VerticalContentAlignment="Top"
                 Height="100"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Right"
