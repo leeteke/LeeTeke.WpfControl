@@ -571,7 +571,13 @@ namespace LeeTeke.WpfControl
         /// <param name="cornerRadius"></param>
         public static void SetMessageboxExButtonCornerRadius(CornerRadius cornerRadius) => MessageBoxExBtnCR = cornerRadius;
 
+        internal static CornerRadius MessageBoxExCR { get; private set; } = default;
 
+        /// <summary>
+        /// 设置MessageBox全局CR
+        /// </summary>
+        /// <param name="cornerRadius"></param>
+        public static void SetMessageboxExCornerRadius(CornerRadius cornerRadius) => MessageBoxExCR = cornerRadius;
 
         ///建议使用此方法
         [DllImport("psapi.dll")]

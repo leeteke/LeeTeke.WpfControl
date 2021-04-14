@@ -479,6 +479,21 @@
             请填写描述
             </summary>
         </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TagControl.ItemPinVisibly">
+            <summary>
+            固定显示
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TagControl.ItemMargin">
+            <summary>
+            请添加描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TagControl.ItemContentMiniWidth">
+            <summary>
+            请添加描述
+            </summary>
+        </member>
         <member name="P:LeeTeke.WpfControl.Controls.TagControl.SelectedBrush">
             <summary>
             请填写描述
@@ -541,6 +556,11 @@
         <member name="P:LeeTeke.WpfControl.Controls.TagControlItem.CornerRadius">
             <summary>
             请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TagControlItem.PinVisibly">
+            <summary>
+            是否显示固定按钮
             </summary>
         </member>
         <member name="P:LeeTeke.WpfControl.Controls.TagControlItem.Orientation">
@@ -937,11 +957,6 @@
             开关
             </summary>
         </member>
-        <member name="M:LeeTeke.WpfControl.Dependencies.WindowShaowManager.GetUsingCornerRadius(System.Windows.DependencyObject)">
-            <summary>
-            是否使用圆角
-            </summary>
-        </member>
         <member name="M:LeeTeke.WpfControl.MessageBoxEx.Show(System.String,LeeTeke.WpfControl.MessageBoxExEnum)">
             <summary>
             显示并返回
@@ -1232,6 +1247,12 @@
         <member name="M:LeeTeke.WpfControl.StaticMethods.SetMessageboxExButtonCornerRadius(System.Windows.CornerRadius)">
             <summary>
             设置MessageBox全局按钮
+            </summary>
+            <param name="cornerRadius"></param>
+        </member>
+        <member name="M:LeeTeke.WpfControl.StaticMethods.SetMessageboxExCornerRadius(System.Windows.CornerRadius)">
+            <summary>
+            设置MessageBox全局CR
             </summary>
             <param name="cornerRadius"></param>
         </member>

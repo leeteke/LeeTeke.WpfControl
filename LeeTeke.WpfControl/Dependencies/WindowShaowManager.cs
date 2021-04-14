@@ -1,15 +1,17 @@
-﻿using System;
+﻿using LeeTeke.WpfControl.Converters;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Shell;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-    public class WindowShaowManager 
+    public class WindowShaowManager
     {
 
         #region Open
@@ -36,7 +38,9 @@ namespace LeeTeke.WpfControl.Dependencies
             {
                 if ((bool)e.NewValue)
                 {
-                    if (Environment.OSVersion.Version.Major > 7 && !(bool)window.GetValue(WindowShaowManager.UsingCornerRadiusProperty))
+                    var noCor = (CornerRadius)window.GetValue(WindowShaowManager.CornerRadiusProperty) == default;
+
+                    if (Environment.OSVersion.Version.Major > 11 && noCor)
                     {
                         WindowChrome windowChrome = new WindowChrome
                         {
@@ -52,32 +56,77 @@ namespace LeeTeke.WpfControl.Dependencies
                         window.Background = null;
                         window.AllowsTransparency = true;
                         window.WindowStyle = WindowStyle.None;
+                        var shaow = new Border
+                        {
+                            Name = "shaowborder",
+                            Margin=new Thickness(8),
+                            Effect = new DropShadowEffect() { BlurRadius = 8, Direction = 0, ShadowDepth = 0, Color = Colors.Black, Opacity = 0.4 }
+                        };
+                     
+                       
                         window.Loaded += (we, ws) =>
                         {
-                            var border = new Border
-                            {
-                                Name="shaowborder",
-                                Margin = new Thickness(5),
-                                Effect = new DropShadowEffect() { BlurRadius = 3, Direction = 0, ShadowDepth = 0, Color = (Color)ColorConverter.ConvertFromString("#7F1B1B1B") }
-                            };
-                            var last = window.Content as UIElement;
+                            ///获取之前的元素
+                            var lastContent = window.Content as UIElement;
+                            ///断开与之前元素的链接
                             window.Content = null;
-                            border.Child = last;
-                            window.Content = border;
+                            if (noCor)
+                            {
+                                shaow.Child = lastContent;
+                            }
+                            else
+                            {
+                                var content = new ContentControl();
+                                content.Content = lastContent;
+                                MultiBinding multiBinding = new MultiBinding()
+                                {
+                                    Converter = new MultiValueToClipConverter(),
+                                    Mode = BindingMode.OneWay
+                                };
+                                multiBinding.Bindings.Add(new Binding()
+                                {
+                                    Source = content,
+                                    Path = new PropertyPath("ActualWidth")
+                                });
+                                multiBinding.Bindings.Add(new Binding()
+                                {
+                                    Source = content,
+                                    Path = new PropertyPath("ActualHeight")
+                                });
+                                multiBinding.Bindings.Add(new Binding()
+                                {
+                                    Source = window,
+                                    Path = new PropertyPath("(0)", new DependencyProperty[] { LeeTeke.WpfControl.Dependencies.WindowShaowManager.CornerRadiusProperty, }),
+                                    Mode = BindingMode.OneWay
+                                });
+                                BindingOperations.SetBinding(content, ContentControl.ClipProperty, multiBinding);
+                                shaow.CornerRadius = (CornerRadius)window.GetValue(WindowShaowManager.CornerRadiusProperty);
+                                shaow.Child = content;
+                            }
+                            window.Content = shaow;
+                        };
+                        window.Activated += (we, ws) =>
+                        {
+                            ((DropShadowEffect)shaow.Effect).Opacity = 0.4;
+                        };
+                        window.Deactivated += (we, ws) =>
+                        {
+                            ((DropShadowEffect)shaow.Effect).Opacity = 0.2;
                         };
 
+
                     }
-                   
+
                 }
                 else
                 {
-                    if (Environment.OSVersion.Version.Major > 7 && !(bool)window.GetValue(WindowShaowManager.UsingCornerRadiusProperty))
+                    if (Environment.OSVersion.Version.Major > 7 && (CornerRadius)window.GetValue(WindowShaowManager.CornerRadiusProperty) == default)
                     {
                         window.ClearValue(WindowChrome.WindowChromeProperty);
                     }
                     else
                     {
-                        if (window.IsLoaded&&window.Content is Border border&&border.Name== "shaowborder")
+                        if (window.IsLoaded && window.Content is Border border && border.Name == "shaowborder")
                         {
                             var last = border.Child;
                             window.Content = null;
@@ -90,24 +139,25 @@ namespace LeeTeke.WpfControl.Dependencies
         }
         #endregion
 
-        #region UsingCornerRadius
-        /// <summary>
-        /// 是否使用圆角
-        /// </summary>
-        public static bool GetUsingCornerRadius(DependencyObject obj)
+
+        #region CornerRadius
+        public static CornerRadius GetCornerRadius(DependencyObject obj)
         {
-            return (bool)obj.GetValue(UsingCornerRadiusProperty);
+            return (CornerRadius)obj.GetValue(CornerRadiusProperty);
         }
 
-        public static void SetUsingCornerRadius(DependencyObject obj, bool value)
+        public static void SetCornerRadius(DependencyObject obj, CornerRadius value)
         {
-            obj.SetValue(UsingCornerRadiusProperty, value);
+            obj.SetValue(CornerRadiusProperty, value);
         }
 
-        // Using a DependencyProperty as the backing store for UsingCornerRadius.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty UsingCornerRadiusProperty =
-            DependencyProperty.RegisterAttached("UsingCornerRadius", typeof(bool), typeof(WindowShaowManager));
+        // Using a DependencyProperty as the backing store for CornerRadius.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CornerRadiusProperty =
+            DependencyProperty.RegisterAttached("CornerRadius", typeof(CornerRadius), typeof(WindowShaowManager));
+
         #endregion
+
+
 
     }
 }

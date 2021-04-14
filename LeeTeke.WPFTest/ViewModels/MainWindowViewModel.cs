@@ -131,6 +131,10 @@ namespace LeeTeke.WPFTest.ViewModels
             };
 
             Text = "123123123";
+
+
+
+
         }
 
 
@@ -138,7 +142,7 @@ namespace LeeTeke.WPFTest.ViewModels
         private async void TestCommandExecute(object obj)
         {
 
-            LeeTeke.WpfControl.StaticMethods.ClearMemory();
+            LeeTeke.WpfControl.MessageBoxEx.Show("你好", WpfControl.MessageBoxExEnum.Erro);
 
         }
 

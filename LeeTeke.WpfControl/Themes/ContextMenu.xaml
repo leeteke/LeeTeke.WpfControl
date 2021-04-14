@@ -22,8 +22,8 @@
                     <Border x:Name="border"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
                             Margin="8"
+                            BorderThickness="{TemplateBinding BorderThickness}"
                             Effect="{Binding Path=(leedep:ContextMenuManager.Shadow),RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}"
                             CornerRadius="{Binding Path=(leedep:ContextMenuManager.CornerRadius),RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}">
                         <ScrollViewer  Margin="{TemplateBinding Padding}">

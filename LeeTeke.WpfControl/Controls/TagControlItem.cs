@@ -26,26 +26,21 @@ namespace LeeTeke.WpfControl.Controls
         public TagControlItem()
         {
             MouseDown += TagControlItem_MouseDown;
-            Loaded += TagControlItem_Loaded;
+            KeyDown += TagControlItem_KeyDown;
         }
 
-        private void TagControlItem_Loaded(object sender, RoutedEventArgs e)
+        private void TagControlItem_KeyDown(object sender, KeyEventArgs e)
         {
-            if (this.ContentTemplate?.HasContent == true)
+            switch (e.Key)
             {
-
-                var contentPresenter = StaticMethods.FindVisualChild<ContentPresenter>(this);
-                if (contentPresenter != null)
-                {
-                    var chlid = VisualTreeHelper.GetChild(contentPresenter, 0);
-                    BindingOperations.SetBinding(this, TagControlItem.CanClosedProperty, new Binding()
-                    {
-                        Source = chlid,
-                        Path = new PropertyPath("(0)", new DependencyProperty[] { LeeTeke.WpfControl.Dependencies.TagControlManager.ItemCanCloseProperty }),
-                        Mode = BindingMode.OneWay
-                    });
-                }
+                case Key.Enter:
+                    IsSelected = true;
+                    break;
+                default:
+                    break;
             }
+        
+
         }
 
         private void TagControlItem_MouseDown(object sender, MouseButtonEventArgs e)
@@ -58,7 +53,10 @@ namespace LeeTeke.WpfControl.Controls
             base.OnApplyTemplate();
             try
             {
-         
+                if (this.Template.FindName("PART_ContextMenu", this) is ContextMenu contextMenu)
+                {
+                    this.ContextMenu = contextMenu;
+                }
 
                 if (this.Template.FindName("PART_MenuItem_CloseAll", this) is MenuItem allItem)
                 {
@@ -73,15 +71,30 @@ namespace LeeTeke.WpfControl.Controls
                     selftItem.Click += (es, ex) => RaiseClosed(TagControlItemClosedMode.Self);
                 }
 
+                if (this.Template.FindName("PART_MenuItem_Pin", this) is MenuItem btnPin)
+                {
+                    btnPin.Click += (es, ex) => IsFixed = !IsFixed;
+                }
+
                 if (this.Template.FindName("PART_CloseButton", this) is Button button)
                 {
                     button.Click += (es, ex) => RaiseClosed(TagControlItemClosedMode.Self);
                 }
 
-                if (this.Template.FindName("PART_PinButton",this) is Button btnPin)
+                if (this.Template.FindName("PART_ContentPresenter",this) is ContentPresenter contentPresenter)
                 {
-                    btnPin.Click += (es, ex) => IsFixed = !IsFixed;
+                    contentPresenter.Loaded += (es, ex) =>
+                    {
+                        var chlid = VisualTreeHelper.GetChild(contentPresenter, 0);
+                        BindingOperations.SetBinding(this, TagControlItem.CanClosedProperty, new Binding()
+                        {
+                            Source = chlid,
+                            Path = new PropertyPath("(0)", new DependencyProperty[] { LeeTeke.WpfControl.Dependencies.TagControlManager.ItemCanCloseProperty }),
+                            Mode = BindingMode.OneWay
+                        });
+                    };
                 }
+             
 
             }
             catch
@@ -98,6 +111,7 @@ namespace LeeTeke.WpfControl.Controls
         /// </summary>
         public bool IsClosed { get; private set; }
 
+        public new ContextMenu ContextMenu { get; private set; }
         #endregion
 
 
@@ -165,7 +179,20 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
+        #region PinVisibly
+        /// <summary>
+        /// 是否显示固定按钮
+        /// </summary>
+        public bool PinVisibly
+        {
+            get { return (bool)GetValue(PinVisiblyProperty); }
+            set { SetValue(PinVisiblyProperty, value); }
+        }
 
+        // Using a DependencyProperty as the backing store for PinVisibly.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PinVisiblyProperty =
+            DependencyProperty.Register("PinVisibly", typeof(bool), typeof(TagControlItem));
+        #endregion
 
         #region Orientation
         /// <summary>

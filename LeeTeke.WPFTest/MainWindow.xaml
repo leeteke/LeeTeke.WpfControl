@@ -12,23 +12,30 @@
         Width="800"
         Background="White"
         x:Name="windows"
+        ResizeMode="NoResize"
         >
 
-    <Grid  Background="Transparent"  >
-        <Grid.ContextMenu>
-            <ContextMenu>
-                <MenuItem Header="你好">
-                    <MenuItem Header="什么1"/>
-                    <MenuItem Header="什么2"/>
-                </MenuItem>
-                <MenuItem Header="你好1"/>
-                <MenuItem Header="你好2"/>
-            </ContextMenu>
-        </Grid.ContextMenu>
+    <Grid   >
 
-        <leecontrol:TagControl ItemsSource="{Binding TestList}">
-            
+        <leecontrol:TagControl x:Name="tage" 
+                               ItemsSource="{Binding TestList}" 
+                               Height="300"
+                               Orientation="Vertical"
+                               ItemContentMiniWidth="35"
+                               ItemMargin="5,5,5,0"
+                               SelectedBrush="White"
+                               Background="#FF004CA2"
+                               MouseEnter="tage_MouseEnter"
+                               MouseLeave="tage_MouseLeave">
+            <leecontrol:TagControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="5" leedep:TagControlManager.ItemCanClose="{Binding Boolen}">
+                        <Image Source="{Binding Image}" Height="50"/>
+                    </Grid>
+                </DataTemplate>
+            </leecontrol:TagControl.ItemTemplate>            
         </leecontrol:TagControl>
+
 
     </Grid>
 

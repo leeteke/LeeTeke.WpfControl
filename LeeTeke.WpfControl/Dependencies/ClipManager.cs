@@ -29,8 +29,6 @@ namespace LeeTeke.WpfControl.Dependencies
             if (d is FrameworkElement element)
             {
 
-
-
                 if (e.NewValue is not CornerRadius cornerRadius)
                 {
                     cornerRadius = new CornerRadius(0);

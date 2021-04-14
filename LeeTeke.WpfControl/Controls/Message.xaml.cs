@@ -32,8 +32,17 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
 
-        public Message()
+        public Message(CornerRadius cornerRadius = default)
         {
+            if (StaticMethods.MessageBoxExCR != default)
+            {
+                Dependencies.WindowShaowManager.SetCornerRadius(this, StaticMethods.MessageBoxExCR);
+            }
+            if (cornerRadius != default)
+            {
+                Dependencies.WindowShaowManager.SetCornerRadius(this, cornerRadius);
+            }
+
             InitializeComponent();
             Owner = Application.Current.MainWindow;
             CanClose = true;
@@ -44,9 +53,9 @@ namespace LeeTeke.WpfControl.Controls
             this.Close();
         }
 
-     
 
-        public void AddButton(string name, object value,CornerRadius cornerRadius=default)
+
+        public void AddButton(string name, object value, CornerRadius cornerRadius = default)
         {
             var theButton = new Button()
             {
@@ -57,12 +66,12 @@ namespace LeeTeke.WpfControl.Controls
                 Height = 30,
             };
 
-            if (StaticMethods.MessageBoxExBtnCR!=default)
+            if (StaticMethods.MessageBoxExBtnCR != default)
             {
                 Dependencies.ButtonManager.SetCornerRadius(theButton, StaticMethods.MessageBoxExBtnCR);
             }
 
-            if (cornerRadius!=default)
+            if (cornerRadius != default)
             {
                 Dependencies.ButtonManager.SetCornerRadius(theButton, cornerRadius);
             }

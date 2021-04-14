@@ -65,7 +65,7 @@ namespace LeeTeke.WpfControl
                 default:
                     break;
             }
-
+         
             _ = message.ShowDialog();
             return message.Value == null ? false : (bool)message.Value;
         }
@@ -125,9 +125,9 @@ namespace LeeTeke.WpfControl
         }
 
         private Message message;
-        public MessageBoxEx()
+        public MessageBoxEx(CornerRadius cornerRadius =default)
         {
-            message = new Message();
+            message = new Message(cornerRadius);
         }
         /// <summary>
         /// 是否可以关闭
@@ -181,7 +181,7 @@ namespace LeeTeke.WpfControl
         /// <param name="element"></param>
         public void SetContent(UIElement element)
         {
-            message. textConetnt.Visibility = Visibility.Collapsed;
+            message.textConetnt.Visibility = Visibility.Collapsed;
             message.gridMain.Children.Add(element);
             System.Windows.Controls.Grid.SetColumn(element, 1);
             System.Windows.Controls.Grid.SetRow(element, 1);
@@ -252,7 +252,6 @@ namespace LeeTeke.WpfControl
             }
         }
 
-
         /// <summary>
         /// 设置选项
         /// </summary>
@@ -275,6 +274,7 @@ namespace LeeTeke.WpfControl
 
         public async Task<object> ShowDialog()
         {
+        
             var task = Task<object>.Factory.StartNew(() =>
              {
                  message.Dispatcher.Invoke(() =>

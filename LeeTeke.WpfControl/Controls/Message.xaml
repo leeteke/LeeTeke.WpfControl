@@ -10,11 +10,11 @@
         Height="200"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
-        leedep:WindowShaowManager.Open="True"
         Closing="Window_Closing"
+        leedep:WindowShaowManager.Open="True"
         >
 
-    <Grid >
+    <Grid  Background="{DynamicResource LeePage_Background}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="259*"/>
             <ColumnDefinition Width="61*"/>
@@ -93,4 +93,5 @@
             Style="{DynamicResource TextButton}"
             Click="Button_Click" Cursor="Hand"/>
     </Grid>
+
 </Window>

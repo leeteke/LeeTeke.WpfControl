@@ -4,7 +4,7 @@
                     xmlns:local="clr-namespace:LeeTeke.WpfControl">
 
     <!--默认阴影主题-->
-    <DropShadowEffect x:Key="LeeShadow" BlurRadius="8" Direction="0" ShadowDepth="0" Opacity="0.7" Color="LightGray"/>
+    <DropShadowEffect x:Key="LeeShadow" BlurRadius="8" Direction="0" ShadowDepth="0" Opacity="0.4" Color="Black"/>
     <!--默认阴影主题-->
     <sys:Boolean x:Key="LeeSnapsToDevicePixels">True</sys:Boolean>
     <Style x:Key="LeeFocusVisual">
@@ -13,7 +13,7 @@
                 <ControlTemplate>
                     <Rectangle  Margin="0" StrokeThickness="1" Stroke="{DynamicResource LeeBrush_Gray153}" >
                         <Rectangle.Effect>
-                            <DropShadowEffect BlurRadius="10" Direction="0" ShadowDepth="0" Color="{DynamicResource  LeeColor_Gray153}"/>
+                            <DropShadowEffect BlurRadius="8" Direction="0" ShadowDepth="0" Color="Black" Opacity="0.4"/>
                         </Rectangle.Effect>
                     </Rectangle>
                 </ControlTemplate>

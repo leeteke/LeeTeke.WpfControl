@@ -75,6 +75,7 @@ namespace LeeTeke.WpfControl.Controls
 
         public TagControl()
         {
+            
             EventManager.RegisterClassHandler(typeof(TagControlItem), TagControlItem.ClosedEvent, new RoutedEventHandler(TagControlItemClosedEventAsync));
             EventManager.RegisterClassHandler(typeof(TagControlItem), TagControlItem.SelectedEvent, new RoutedEventHandler(TagControlItemSelectedEvent));
             EventManager.RegisterClassHandler(typeof(StackPanel), StackPanel.SizeChangedEvent, new RoutedEventHandler(StackPanelLoadedEvent));
@@ -286,6 +287,55 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("ItemCornerRadius", typeof(CornerRadius), typeof(TagControl));
 
         #endregion
+
+
+        #region ItemPinVisibly
+        /// <summary>
+        /// 固定显示
+        /// </summary>
+        public bool ItemPinVisibly
+        {
+            get { return (bool)GetValue(ItemPinVisiblyProperty); }
+            set { SetValue(ItemPinVisiblyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ItemPinVisibly.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemPinVisiblyProperty =
+            DependencyProperty.Register("ItemPinVisibly", typeof(bool), typeof(TagControl));
+        #endregion
+
+
+        #region ItemMargin
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Thickness ItemMargin
+        {
+            get { return (Thickness)GetValue(ItemMarginProperty); }
+            set { SetValue(ItemMarginProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ItemMargin.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemMarginProperty =
+            DependencyProperty.Register("ItemMargin", typeof(Thickness), typeof(TagControl));
+        #endregion
+
+
+        #region ItemContentMiniWidth
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public double ItemContentMiniWidth
+        {
+            get { return (double)GetValue(ItemContentMiniWidthProperty); }
+            set { SetValue(ItemContentMiniWidthProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ItemContentMiniWidth.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemContentMiniWidthProperty =
+            DependencyProperty.Register("ItemContentMiniWidth", typeof(double), typeof(TagControl));
+        #endregion
+
 
         #region SelectedBrush
         /// <summary>
@@ -518,10 +568,10 @@ namespace LeeTeke.WpfControl.Controls
                 switch (Orientation)
                 {
                     case Orientation.Horizontal:
-                        _scrollViewer.ScrollToHorizontalOffset(e.Delta);
+                        _scrollViewer.ScrollToHorizontalOffset( _scrollViewer.HorizontalOffset- e.Delta);
                         break;
                     case Orientation.Vertical:
-                        _scrollViewer.ScrollToVerticalOffset(e.Delta);
+                        _scrollViewer.ScrollToVerticalOffset(_scrollViewer.VerticalOffset - e.Delta);
                         break;
                     default:
                         break;

@@ -61,5 +61,15 @@ namespace LeeTeke.WPFTest
         {
 
         }
+
+        private void tage_MouseEnter(object sender, MouseEventArgs e)
+        {
+    //        tage.Width = 300;
+        }
+
+        private void tage_MouseLeave(object sender, MouseEventArgs e)
+        {
+         //   tage.Width = 45;
+        }
     }
 }
