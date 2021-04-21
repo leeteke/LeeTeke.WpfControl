@@ -59,6 +59,28 @@ namespace LeeTeke.WpfControl.Controls
         public LodingBar()
         {
             this.SizeChanged += LodingBar_SizeChanged;
+            this.IsVisibleChanged += LodingBar_IsVisibleChanged;
+        }
+
+        private void LodingBar_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (IsVisible)
+            {
+                switch (Mode)
+                {
+                    case LodingBarMode.Wating:
+                        LodingStoryboard(true);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                if (_lodingSB != null)
+                    _lodingSB.Stop();
+            }
+
         }
 
         private void LodingBar_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -106,6 +128,41 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
         #region 依赖
+
+
+        #region WatingStop
+        /// <summary>
+        /// WatingStop
+        /// </summary>
+        public bool WatingStop
+        {
+            get { return (bool)GetValue(WatingStopProperty); }
+            set { SetValue(WatingStopProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for WatingStop.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty WatingStopProperty =
+            DependencyProperty.Register("WatingStop", typeof(bool), typeof(LodingBar), new PropertyMetadata(false, new PropertyChangedCallback(WatinStopChanged)));
+
+        private static void WatinStopChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is LodingBar loding && e.NewValue is bool isStop)
+            {
+                if (loding.Mode == LodingBarMode.Wating)
+                {
+                    if (isStop)
+                    {
+                        loding._lodingSB?.Stop();
+                    }
+                    else
+                    {
+                        loding.LodingStoryboard();
+                    }
+                }
+            }
+        }
+        #endregion
+
 
         #region CornerRadius
         /// <summary>
@@ -368,6 +425,8 @@ namespace LeeTeke.WpfControl.Controls
             }
             else
             {
+                if (WatingStop)
+                    return;
                 _lodingSB = new Storyboard() { RepeatBehavior = RepeatBehavior.Forever };
                 DoubleAnimationUsingKeyFrames eDA = new DoubleAnimationUsingKeyFrames();
                 eDA.KeyFrames.Add(new EasingDoubleKeyFrame()

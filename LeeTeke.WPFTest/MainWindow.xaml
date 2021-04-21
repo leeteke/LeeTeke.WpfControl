@@ -14,15 +14,12 @@
         leedep:WindowShaowManager.Open="True"
         >
 
-    <Grid  Background="White" >
-        <Button Content="最大化"
-                Width="100"
-                VerticalContentAlignment="Top"
-                Height="100"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Right"
-                Click="Button_Click"/>
+    <Grid  Background="White" Visibility="Visible">
 
+        <leecontrol:LodingBar Mode="Wating"
+                              WatingStop="False"
+                              Value="10"
+                              />
 
 
     </Grid>
