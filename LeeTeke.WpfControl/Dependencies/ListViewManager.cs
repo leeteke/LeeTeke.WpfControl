@@ -10,75 +10,6 @@ namespace LeeTeke.WpfControl.Dependencies
 {
     public class ListViewManager
     {
-        #region SelectedItemBackground
-
-
-
-        public static Brush GetSelectedItemBackground(DependencyObject obj)
-        {
-            return (Brush)obj.GetValue(SelectedItemBackgroundProperty);
-        }
-
-        public static void SetSelectedItemBackground(DependencyObject obj, Brush value)
-        {
-            obj.SetValue(SelectedItemBackgroundProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for SelectedItemBackground.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SelectedItemBackgroundProperty =
-            DependencyProperty.RegisterAttached("SelectedItemBackground", typeof(Brush), typeof(ListViewManager));
-
-
-
-
-
-
-
-
-        #endregion
-
-        #region  SelectedItemBorderBrush
-
-
-
-        public static Brush GetSelectedItemBorderBrush(DependencyObject obj)
-        {
-            return (Brush)obj.GetValue(SelectedItemBorderBrushProperty);
-        }
-
-        public static void SetSelectedItemBorderBrush(DependencyObject obj, Brush value)
-        {
-            obj.SetValue(SelectedItemBorderBrushProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for SelectedItemBorderBrush.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SelectedItemBorderBrushProperty =
-            DependencyProperty.RegisterAttached("SelectedItemBorderBrush", typeof(Brush), typeof(ListViewManager));
-
-
-
-        #endregion
-
-        #region SelectedItemBorderThickness
-
-
-        public static Thickness GetSelectedItemBorderThickness(DependencyObject obj)
-        {
-            return (Thickness)obj.GetValue(SelectedItemBorderThicknessProperty);
-        }
-
-        public static void SetSelectedItemBorderThickness(DependencyObject obj, Thickness value)
-        {
-            obj.SetValue(SelectedItemBorderThicknessProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for SelectedItemBorderThickness.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SelectedItemBorderThicknessProperty =
-            DependencyProperty.RegisterAttached("SelectedItemBorderThickness", typeof(Thickness), typeof(ListViewManager));
-
-
-
-        #endregion
 
         #region Orientation
 
@@ -101,157 +32,55 @@ namespace LeeTeke.WpfControl.Dependencies
 
         #endregion
 
-
-        #region MarkSite
-
-
-        public static ListViewItemMarkSite GetMarkSite(DependencyObject obj)
+        #region NoItemsContent
+        public static object GetNoItemsContent(DependencyObject obj)
         {
-            return (ListViewItemMarkSite)obj.GetValue(MarkSiteProperty);
+            return (object)obj.GetValue(NoItemsContentProperty);
         }
 
-        public static void SetMarkSite(DependencyObject obj, ListViewItemMarkSite value)
+        public static void SetNoItemsContent(DependencyObject obj, object value)
         {
-            obj.SetValue(MarkSiteProperty, value);
+            obj.SetValue(NoItemsContentProperty, value);
         }
 
-        // Using a DependencyProperty as the backing store for MarkSite.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty MarkSiteProperty =
-            DependencyProperty.RegisterAttached("MarkSite", typeof(ListViewItemMarkSite), typeof(ListViewManager), new PropertyMetadata(ListViewItemMarkSite.Left));
-
-
-
+        // Using a DependencyProperty as the backing store for NoItemsContent.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty NoItemsContentProperty =
+            DependencyProperty.RegisterAttached("NoItemsContent", typeof(object), typeof(ListViewManager));
 
         #endregion
 
-        #region MarkSize
-
-
-
-        public static double GetMarkSize(DependencyObject obj)
+        #region ListEndContent
+        public static object GetListEndContent(DependencyObject obj)
         {
-            return (double)obj.GetValue(MarkSizeProperty);
+            return (object)obj.GetValue(ListEndContentProperty);
         }
 
-        public static void SetMarkSize(DependencyObject obj, double value)
+        public static void SetListEndContent(DependencyObject obj, object value)
         {
-            obj.SetValue(MarkSizeProperty, value);
+            obj.SetValue(ListEndContentProperty, value);
         }
 
-        // Using a DependencyProperty as the backing store for MarkSize.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty MarkSizeProperty =
-            DependencyProperty.RegisterAttached("MarkSize", typeof(double), typeof(ListViewManager), new PropertyMetadata(3.0));
-
-
-
+        // Using a DependencyProperty as the backing store for ListEndContent.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ListEndContentProperty =
+            DependencyProperty.RegisterAttached("ListEndContent", typeof(object), typeof(ListViewManager));
         #endregion
 
-        #region MarkMargin
-
-
-
-        public static Thickness GetMarkMargin(DependencyObject obj)
+        #region ShowHeadShadow
+        public static bool GetShowHeadShadow(DependencyObject obj)
         {
-            return (Thickness)obj.GetValue(MarkMarginProperty);
+            return (bool)obj.GetValue(ShowHeadShadowProperty);
         }
 
-        public static void SetMarkMargin(DependencyObject obj, Thickness value)
+        public static void SetShowHeadShadow(DependencyObject obj, bool value)
         {
-            obj.SetValue(MarkMarginProperty, value);
+            obj.SetValue(ShowHeadShadowProperty, value);
         }
 
-        // Using a DependencyProperty as the backing store for MarkMargin.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty MarkMarginProperty =
-            DependencyProperty.RegisterAttached("MarkMargin", typeof(Thickness), typeof(ListViewManager), new PropertyMetadata(new Thickness(0)));
-        #endregion
-
-        #region MarkBrush
-
-
-        public static Brush GetMarkBrush(DependencyObject obj)
-        {
-            return (Brush)obj.GetValue(MarkBrushProperty);
-        }
-
-        public static void SetMarkBrush(DependencyObject obj, Brush value)
-        {
-            obj.SetValue(MarkBrushProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for MarkBrush.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty MarkBrushProperty =
-            DependencyProperty.RegisterAttached("MarkBrush", typeof(Brush), typeof(ListViewManager));
-
-
-
-        #endregion
-
-
-
-        #region SelectedItemForeground
-        /// <summary>
-        /// 请填写描述
-        /// </summary>
-        public static Brush GetSelectedItemForeground(DependencyObject obj)
-        {
-            return (Brush)obj.GetValue(SelectedItemForegroundProperty);
-        }
-
-        public static void SetSelectedItemForeground(DependencyObject obj, Brush value)
-        {
-            obj.SetValue(SelectedItemForegroundProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for SelectedItemForeground.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SelectedItemForegroundProperty =
-            DependencyProperty.RegisterAttached("SelectedItemForeground", typeof(Brush), typeof(ListViewManager));
-        #endregion
-
-        #region SelectedItemFontSize
-        /// <summary>
-        /// 请填写描述
-        /// </summary>
-        public static double GetSelectedItemFontSize(DependencyObject obj)
-        {
-            return (double)obj.GetValue(SelectedItemFontSizeProperty);
-        }
-
-        public static void SetSelectedItemFontSize(DependencyObject obj, double value)
-        {
-            obj.SetValue(SelectedItemFontSizeProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for SelectedItemFontSize.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SelectedItemFontSizeProperty =
-            DependencyProperty.RegisterAttached("SelectedItemFontSize", typeof(double), typeof(ListViewManager));
-        #endregion
-
-        #region SelectedItemFontWeight
-        /// <summary>
-        /// 请填写描述
-        /// </summary>
-        public static FontWeight GetSelectedItemFontWeight(DependencyObject obj)
-        {   
-            return (FontWeight)obj.GetValue(SelectedItemFontWeightProperty);
-        }
-
-        public static void SetSelectedItemFontWeight(DependencyObject obj, FontWeight value)
-        {
-            obj.SetValue(SelectedItemFontWeightProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for SelectedItemFontWeight.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SelectedItemFontWeightProperty =
-            DependencyProperty.RegisterAttached("SelectedItemFontWeight", typeof(FontWeight), typeof(ListViewManager));
+        // Using a DependencyProperty as the backing store for ShowHeadShadow.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ShowHeadShadowProperty =
+            DependencyProperty.RegisterAttached("ShowHeadShadow", typeof(bool), typeof(ListViewManager));
         #endregion
 
     }
-    public enum ListViewItemMarkSite
-    {
-        Null,
-        Top,
-        Bottom,
-        Left,
-        Right
-    }
+   
 }

@@ -7,16 +7,15 @@
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <Style x:Key="LeetekeListViewItem" TargetType="{x:Type ListViewItem}">
-        <Setter Property="MinHeight"  Value="0"/>
-        <Setter Property="MinWidth" Value="0"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Background" Value="{Binding Path=(leedep:ListViewItemManager.Background), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="BorderBrush" Value="{Binding Path=(leedep:ListViewItemManager.BorderBrush), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="BorderBrush" Value="{Binding Path=(leedep:ListViewItemManager.BorderBrush), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="BorderThickness" Value="{Binding Path=(leedep:ListViewItemManager.BorderThickness), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="Margin" Value="{Binding Path=(leedep:ListViewItemManager.Marigin), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_TextColor}"/>
-        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Padding" Value="{Binding Path=(leedep:ListViewItemManager.Padding), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <Setter Property="Effect" Value="{Binding Path=(leedep:ListViewItemManager.Effect), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -25,7 +24,9 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Background="{TemplateBinding Background}"
-                            Margin="{TemplateBinding Margin}">
+                            Margin="{TemplateBinding Margin}"
+                            CornerRadius="{Binding Path=(leedep:ListViewItemManager.CornerRadius), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"
+                            Effect="{TemplateBinding Effect}">
                         <Grid  Margin="{TemplateBinding Padding}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
@@ -38,7 +39,7 @@
                                 <RowDefinition Height="auto" />
                             </Grid.RowDefinitions>
                             <Rectangle x:Name="rectangle" 
-                                       Margin="{Binding Path=(leedep:ListViewManager.MarkMargin), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}">
+                                       Margin="{Binding Path=(leedep:ListViewItemManager.MarkMargin), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}">
                                 <Rectangle.Fill >
                                     <SolidColorBrush x:Name="rectBrush" Color="Transparent"/>
                                 </Rectangle.Fill>
@@ -52,47 +53,54 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Path=(leedep:ListViewManager.MarkSite),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"   Value="Left">
+                        <DataTrigger Binding="{Binding Path=(leedep:ListViewItemManager.MarkSite),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"   Value="Left">
                             <Setter TargetName="rectangle"  Property="Grid.Row" Value="1"/>
                             <Setter TargetName="rectangle" Property="Grid.Column"  Value="0"/>
-                            <Setter TargetName="rectangle" Property="Width" Value="{Binding Path=(leedep:ListViewManager.MarkSize),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+                            <Setter TargetName="rectangle" Property="Width" Value="{Binding Path=(leedep:ListViewItemManager.MarkSize),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
                         </DataTrigger>
 
-                        <DataTrigger Binding="{Binding Path=(leedep:ListViewManager.MarkSite),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"   Value="Right">
+                        <DataTrigger Binding="{Binding Path=(leedep:ListViewItemManager.MarkSite),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"   Value="Right">
                             <Setter TargetName="rectangle"  Property="Grid.Row" Value="1"/>
                             <Setter TargetName="rectangle" Property="Grid.Column"  Value="2"/>
-                            <Setter TargetName="rectangle" Property="Width" Value="{Binding Path=(leedep:ListViewManager.MarkSize),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+                            <Setter TargetName="rectangle" Property="Width" Value="{Binding Path=(leedep:ListViewItemManager.MarkSize),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
                         </DataTrigger>
 
-                        <DataTrigger Binding="{Binding Path=(leedep:ListViewManager.MarkSite),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"   Value="Top">
+                        <DataTrigger Binding="{Binding Path=(leedep:ListViewItemManager.MarkSite),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"   Value="Top">
                             <Setter TargetName="rectangle"  Property="Grid.Row" Value="0"/>
                             <Setter TargetName="rectangle" Property="Grid.Column"  Value="1"/>
-                            <Setter TargetName="rectangle" Property="Height" Value="{Binding Path=(leedep:ListViewManager.MarkSize),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+                            <Setter TargetName="rectangle" Property="Height" Value="{Binding Path=(leedep:ListViewItemManager.MarkSize),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
                         </DataTrigger>
 
-                        <DataTrigger Binding="{Binding Path=(leedep:ListViewManager.MarkSite),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"   Value="Bottom">
+                        <DataTrigger Binding="{Binding Path=(leedep:ListViewItemManager.MarkSite),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"   Value="Bottom">
                             <Setter TargetName="rectangle"  Property="Grid.Row" Value="2"/>
                             <Setter TargetName="rectangle" Property="Grid.Column"  Value="1"/>
-                            <Setter TargetName="rectangle" Property="Height" Value="{Binding Path=(leedep:ListViewManager.MarkSize),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+                            <Setter TargetName="rectangle" Property="Height" Value="{Binding Path=(leedep:ListViewItemManager.MarkSize),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
                         </DataTrigger>
 
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="rectangle" Property="Fill" Value="{Binding Path=(leedep:ListViewManager.MarkBrush),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay,Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.5}"/>
+                            <Setter TargetName="rectangle" Property="Fill" Value="{Binding Path=(leedep:ListViewItemManager.MarkMouseOverBrush),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+                            <Setter Property="Background" Value="{Binding Path=(leedep:ListViewItemManager.MouseOverBackground),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}" />
+                            <Setter  Property="BorderBrush" Value="{Binding Path=(leedep:ListViewItemManager.MouseOverBorderBrush),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+                            <Setter  Property="BorderThickness" Value="{Binding Path=(leedep:ListViewItemManager.MouseOverBorderThickness),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+                            <Setter Property="Effect" Value="{Binding Path=(leedep:ListViewItemManager.MouseOverEffect), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="rectangle" Property="Fill" Value="{Binding Path=(leedep:ListViewManager.MarkBrush),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
-                            <Setter Property="Background" Value="{Binding Path=(leedep:ListViewManager.SelectedItemBackground),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}" />
-                            <Setter  Property="BorderBrush" Value="{Binding Path=(leedep:ListViewManager.SelectedItemBorderBrush),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
-                            <Setter  Property="BorderThickness" Value="{Binding Path=(leedep:ListViewManager.SelectedItemBorderThickness),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
-                            <Setter Property="Foreground" Value="{Binding Path=(leedep:ListViewManager.SelectedItemForeground),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}" />
-                            <Setter  Property="FontSize" Value="{Binding Path=(leedep:ListViewManager.SelectedItemFontSize),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
-                            <Setter  Property="FontWeight" Value="{Binding Path=(leedep:ListViewManager.SelectedItemFontWeight),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+                            <Setter TargetName="rectangle" Property="Fill" Value="{Binding Path=(leedep:ListViewItemManager.MarkSelectedBrush),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+                            <Setter Property="Background" Value="{Binding Path=(leedep:ListViewItemManager.SelectedBackground),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}" />
+                            <Setter  Property="BorderBrush" Value="{Binding Path=(leedep:ListViewItemManager.SelectedBorderBrush),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+                            <Setter  Property="BorderThickness" Value="{Binding Path=(leedep:ListViewItemManager.SelectedBorderThickness),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+                            <Setter Property="Foreground" Value="{Binding Path=(leedep:ListViewItemManager.SelectedForeground),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}" />
+                            <Setter  Property="FontSize" Value="{Binding Path=(leedep:ListViewItemManager.SelectedFontSize),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+                            <Setter  Property="FontWeight" Value="{Binding Path=(leedep:ListViewItemManager.SelectedFontWeight),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+                            <Setter Property="Effect" Value="{Binding Path=(leedep:ListViewItemManager.SelectedEffect), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+
+
     <!--更改了滚动条的istview-->
     <Style x:Key="LeetekeView" TargetType="{x:Type ListView}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
@@ -102,23 +110,21 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_TextColor}"/>
-        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
-        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
         <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="leedep:ListViewManager.ShowHeadShadow" Value="False"/>
         <Setter Property="leedep:ListViewManager.Orientation" Value="Vertical"/>
-        <Setter Property="leedep:ListViewManager.SelectedItemBackground" Value="Transparent"/>
-        <Setter Property="leedep:ListViewManager.SelectedItemBorderBrush" Value="Transparent"/>
-        <Setter Property="leedep:ListViewManager.SelectedItemBorderThickness" Value="0"/>
-        <Setter Property="leedep:ListViewManager.SelectedItemForeground" Value="{DynamicResource LeeBrush_TextColor}"/>
-        <Setter Property="leedep:ListViewManager.SelectedItemFontSize" Value="12"/>
-        <Setter Property="leedep:ListViewManager.SelectedItemFontWeight" Value="Normal"/>
-        <Setter Property="leedep:ListViewManager.MarkBrush" Value="{DynamicResource LeeBrush_Main}"/>
-        <Setter Property="leedep:ListViewManager.MarkMargin" Value="0"/>
-        <Setter Property="leedep:ListViewManager.MarkSite" Value="Left"/>
-        <Setter Property="leedep:ListViewManager.MarkSize" Value="3"/>
+        <Setter Property="leedep:ListViewItemManager.MarkSite" Value="Null"/>
+        <Setter Property="leedep:ListViewItemManager.Background" Value="Transparent"/>
+        <Setter Property="leedep:ListViewItemManager.SelectedForeground" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=Foreground,Mode=OneWay}"/>
+        <Setter Property="leedep:ListViewItemManager.SelectedFontSize" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=FontSize,Mode=OneWay}"/>
+        <Setter Property="leedep:ListViewItemManager.SelectedFontWeight" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=FontWeight,Mode=OneWay}"/>
+        <Setter Property="leedep:ListViewItemManager.MarkMouseOverBrush" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(leedep:ListViewItemManager.MarkSelectedBrush),Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.5,Mode=OneWay}"/>
+        <Setter Property="leedep:ListViewItemManager.SelectedBackground" Value="{DynamicResource LeeBrush_ItemSelectedBackground}"/>
+        <Setter Property="leedep:ListViewItemManager.MouseOverBackground" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(leedep:ListViewItemManager.SelectedBackground),Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.5,Mode=OneWay}"/>
         <Setter Property="ItemContainerStyle"  Value="{StaticResource LeetekeListViewItem}" />
         <Setter Property="ItemsPanel">
             <Setter.Value>
@@ -129,6 +135,104 @@
                 </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate  TargetType="{x:Type ListView}">
+                    <Grid  x:Name="PART_Grid">
+                        <Grid.Clip>
+                            <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                <Binding  ElementName="PART_Grid" Path="ActualWidth"/>
+                                <Binding  ElementName="PART_Grid" Path="ActualHeight"/>
+                            </MultiBinding>
+                        </Grid.Clip>
+                        <ScrollViewer x:Name="scrollviewer" 
+                                      HorizontalScrollBarVisibility="{Binding  RelativeSource={ RelativeSource  Mode=FindAncestor,AncestorType=ListView},Path=(ScrollViewer.HorizontalScrollBarVisibility),Mode=OneWay}" 
+                                      VerticalScrollBarVisibility="{Binding  RelativeSource={ RelativeSource  Mode=FindAncestor,AncestorType=ListView},Path=(ScrollViewer.VerticalScrollBarVisibility),Mode=OneWay}"
+                                      CanContentScroll="{Binding  RelativeSource={ RelativeSource  Mode=FindAncestor,AncestorType=ListView},Path=(ScrollViewer.CanContentScroll),Mode=OneWay}"
+                                      PanningMode="{Binding  RelativeSource={ RelativeSource  Mode=FindAncestor,AncestorType=ListView},Path=(ScrollViewer.PanningMode),Mode=OneWay}"
+                                      >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <!--背景-->
+                                <ContentControl Grid.Row="0" Grid.Column="0"
+                                                Content="{Binding Path=(leedep:ListViewManager.NoItemsContent),  RelativeSource={RelativeSource AncestorType={x:Type ListView},AncestorLevel=1},Mode=OneWay}"
+                                                Visibility="{TemplateBinding  HasItems,Converter={StaticResource VisibilityForBoolReverseConverter}}"/>
+
+                                <ItemsPresenter Grid.Row="0" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+
+
+                                <!--尾部-->
+                                <ContentControl x:Name="PART_ListEnd" Grid.Row="1" Grid.Column="0"
+                                                Content="{Binding Path=(leedep:ListViewManager.ListEndContent),  RelativeSource={RelativeSource AncestorType={x:Type ListView},AncestorLevel=1},Mode=OneWay}"
+                                                Visibility="{TemplateBinding  HasItems,Converter={StaticResource VisibilityForBoolConverter}}"/>
+
+                            </Grid>
+                        </ScrollViewer>
+
+                        <Ellipse VerticalAlignment="Top"
+                                 Height="10"
+                                 Fill="Black"
+                                Visibility="{Binding Path=(leedep:ListViewManager.ShowHeadShadow),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Converter={StaticResource VisibilityForBoolConverter},Mode=OneWay}" 
+                                Opacity="{Binding ElementName=scrollviewer,Path=VerticalOffset,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/50,Mode=OneWay}"
+                                 Margin="0,-12">
+                            <Ellipse.Effect>
+                                <DropShadowEffect Direction="270" 
+                                                  ShadowDepth="5" 
+                                                  RenderingBias="Performance"
+                                                  BlurRadius="10" 
+                                                  Opacity="0.3"
+                                                  />
+                            </Ellipse.Effect>
+                        </Ellipse>
+
+
+                        <Ellipse HorizontalAlignment="Left"
+                                 Visibility="{Binding Path=(leedep:ListViewManager.ShowHeadShadow),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Converter={StaticResource VisibilityForBoolConverter},Mode=OneWay}" 
+                                Opacity="{Binding ElementName=scrollviewer,Path=HorizontalOffset,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/50,Mode=OneWay}"
+                                 Width="10"
+                                 Fill="Black"
+                                 Margin="-12,0">
+                            <Ellipse.Effect>
+                                <DropShadowEffect Direction="0" 
+                                                  ShadowDepth="5" 
+                                                  RenderingBias="Performance"
+                                                  BlurRadius="10" 
+                                                  Opacity="0.3"
+                                                  />
+                            </Ellipse.Effect>
+                        </Ellipse>
+
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="leedep:ListViewManager.Orientation" Value="Vertical">
+                            <Setter TargetName="PART_ListEnd" Property="Grid.Row" Value="1" />
+                            <Setter TargetName="PART_ListEnd" Property="Grid.Column" Value="0" />
+                        </Trigger>
+                        <Trigger Property="leedep:ListViewManager.Orientation" Value="Horizontal">
+                            <Setter TargetName="PART_ListEnd" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="PART_ListEnd" Property="Grid.Column" Value="1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="leedep:ListViewManager.Orientation" Value="Vertical">
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            </Trigger>
+            <Trigger Property="leedep:ListViewManager.Orientation" Value="Horizontal">
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
 </ResourceDictionary>

@@ -26,6 +26,11 @@
     <SolidColorBrush x:Key="LeeBrush_Main" Color="{DynamicResource LeeColor_BlueMicrosoft}"/>
     <!--默认颜色-->
     <SolidColorBrush x:Key="LeeBrush_TextColor" Color="{DynamicResource LeeColor_Gray51}" />
+
+    <!--Item选择背景色-->
+    <SolidColorBrush x:Key="LeeBrush_ItemSelectedBackground" Color="{DynamicResource LeeColor_ItemSelectedBackground}" />
+    <Color x:Key="LeeColor_ItemSelectedBackground"  R="0" G="0" B="0" A="48"   />
+
     <!--Icon-->
     <FontFamily x:Key="IconFontFamily">/LeeTeke.WpfControl;component/LeeTekeDatas/#Segoe MDL2 Assets</FontFamily>
     <!--微软黄-->
