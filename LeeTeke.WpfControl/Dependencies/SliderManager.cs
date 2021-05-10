@@ -9,7 +9,7 @@ using System.Windows.Media;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-    public class SliderManager 
+    public class SliderManager
     {
 
 
@@ -53,12 +53,11 @@ namespace LeeTeke.WpfControl.Dependencies
         #endregion
 
 
-
         #region TrackThumb
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public static object  GetTrackThumb(DependencyObject obj)
+        public static object GetTrackThumb(DependencyObject obj)
         {
             return (object)obj.GetValue(TrackThumbProperty);
         }
@@ -132,6 +131,70 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty TrackBrushProperty =
             DependencyProperty.RegisterAttached("TrackBrush", typeof(Brush), typeof(SliderManager));
         #endregion
+
+
+
+        #region RegisterMouseWheel
+        public static bool GetRegisterMouseWheel(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(RegisterMouseWheelProperty);
+        }
+
+        public static void SetRegisterMouseWheel(DependencyObject obj, bool value)
+        {
+            obj.SetValue(RegisterMouseWheelProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for RegisterMouseWheel.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RegisterMouseWheelProperty =
+            DependencyProperty.RegisterAttached("RegisterMouseWheel", typeof(bool), typeof(SliderManager), new PropertyMetadata(RegisterMouseWheelChanged));
+
+        private static void RegisterMouseWheelChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is Slider slider)
+            {
+                if (e.NewValue is bool _isRegister)
+                {
+                    slider.MouseWheel += (ex, es) =>
+                    {
+                        if ( !_isRegister)
+                            return;
+
+                        if (es.Delta>0)
+                        {
+                            slider.Value += GetMouseWheelValue(d);
+                        }
+                        else
+                        {
+                            slider.Value -= GetMouseWheelValue(d);
+                        }
+
+                    };
+                }
+
+            }
+
+        }
+        #endregion
+
+
+        #region MouseWheelValue
+        public static double GetMouseWheelValue(DependencyObject obj)
+        {
+            return (double)obj.GetValue(MouseWheelValueProperty);
+        }
+
+        public static void SetMouseWheelValue(DependencyObject obj, double value)
+        {
+            obj.SetValue(MouseWheelValueProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MouseWheelValue.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MouseWheelValueProperty =
+            DependencyProperty.RegisterAttached("MouseWheelValue", typeof(double), typeof(SliderManager),new PropertyMetadata(1.0));
+        #endregion
+
+
 
     }
 }

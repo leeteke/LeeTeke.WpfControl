@@ -15,21 +15,24 @@
         <Setter Property="Foreground"   Value="{DynamicResource LeeBrush_TextColor}" />
         <Setter Property="TickPlacement"  Value="None" />
         <Setter Property="FontSize" Value="12" />
+        <Setter Property="AutoToolTipPlacement" Value="None"/>
+        <Setter Property="AutoToolTipPrecision" Value="0"/>
         <Setter Property="leedep:SliderManager.Header" Value="{x:Null}"/>
         <Setter Property="leedep:SliderManager.HeaderDock" Value="Top"/>
         <Setter Property="Orientation" Value="Horizontal"/>
         <Setter Property="leedep:SliderManager.CornerRadius" Value="2"/>
         <Setter Property="leedep:SliderManager.TrackSize" Value="5"/>
+        <Setter Property="leedep:SliderManager.RegisterMouseWheel" Value="True"/>
         <Setter Property="leedep:SliderManager.TrackBrush" Value="{DynamicResource LeeBrush_Main}"/>
         <Setter Property="leedep:SliderManager.TrackThumb" 
                 >
             <Setter.Value>
-                <Ellipse
-                    Width="13"
-                    Height="13"
-                    VerticalAlignment="Center"
-                    Fill="{DynamicResource LeeBrush_Main}"
-                    Effect="{DynamicResource LeeShadow}"/>
+                <Ellipse x:Name="ellipse" Width="15"
+                         Height="15"
+                         VerticalAlignment="Center"
+                         Fill="White"
+                         Effect="{DynamicResource LeeShadow}"
+                         />
             </Setter.Value>
         </Setter>
 
@@ -38,7 +41,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Slider}">
-                            <DockPanel>
+                            <DockPanel Background="Transparent">
                                 <ContentControl x:Name="ContentHeader"
                                                 DockPanel.Dock="{Binding Path=(leedep:SliderManager.HeaderDock), RelativeSource={ RelativeSource AncestorType=Slider},Mode=OneWay}"
                                                 Content="{Binding Path=(leedep:SliderManager.Header), RelativeSource={ RelativeSource AncestorType=Slider},Mode=OneWay}"/>
@@ -97,25 +100,11 @@
                                                                 Height="{Binding ElementName=show,Path=ActualHeight}">
                                                             <ContentControl 
                                                                 x:Name="show"
-                                                                Content="{Binding Path=(leedep:SliderManager.TrackThumb),RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"/>
-
-                                                            <TextBlock x:Name="TxtValue"
-                                                                       Grid.Row="1"
-                                                                       VerticalAlignment="Bottom"
-                                                                       HorizontalAlignment="Center"
-                                                                       Canvas.Top="{Binding ElementName=show,Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=2}"
-                                                                       Foreground="{TemplateBinding Foreground}"
-                                                                       Text="{Binding Value,RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay,StringFormat=N1}" />
-
+                                                                Content="{Binding Path=(leedep:SliderManager.TrackThumb),RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
+                                                                />
+                                                       
                                                         </Canvas>
-                                                        <ControlTemplate.Triggers>
-                                                            <DataTrigger Binding="{Binding Path=IsTickValueVisible, RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
-                                                                         Value="False">
-                                                                <Setter TargetName="TxtValue"
-                                                                        Property="Visibility"
-                                                                        Value="Collapsed" />
-                                                            </DataTrigger>
-                                                        </ControlTemplate.Triggers>
+                                                     
                                                     </ControlTemplate>
                                                 </Thumb.Template>
                                             </Thumb>
@@ -193,7 +182,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Slider}">
-                            <DockPanel>
+                            <DockPanel Background="Transparent">
                                 <ContentControl x:Name="ContentHeader"
                                                 DockPanel.Dock="{Binding Path=(leedep:SliderManager.HeaderDock), RelativeSource={ RelativeSource AncestorType=Slider},Mode=OneWay}"
                                                 Content="{Binding Path=(leedep:SliderManager.Header), RelativeSource={ RelativeSource AncestorType=Slider},Mode=OneWay}"/>
@@ -249,25 +238,10 @@
                                                                 Height="{Binding ElementName=show,Path=ActualHeight}">
                                                             <ContentControl 
                                                                 x:Name="show"
-                                                  FocusVisualStyle="{DynamicResource LeeFocusVisual}"
+                                                                FocusVisualStyle="{DynamicResource LeeFocusVisual}"
                                                                 Content="{Binding Path=(leedep:SliderManager.TrackThumb),RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"/>
-
-                                                            <TextBlock x:Name="TxtValue"
-                                                                       VerticalAlignment="Center"
-                                                                       HorizontalAlignment="Right"
-                                                                       Canvas.Left="{Binding ElementName=show,Path=ActualWidth,Converter={StaticResource DoubleFollowConverter},ConverterParameter=2,Mode=OneWay}"
-                                                                       Foreground="{TemplateBinding Foreground}"
-                                                                       Text="{Binding Value,RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay,StringFormat=N1}" />
-
-                                                        </Canvas>
-                                                        <ControlTemplate.Triggers>
-                                                            <DataTrigger Binding="{Binding Path=IsTickValueVisible, RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
-                                                                         Value="False">
-                                                                <Setter TargetName="TxtValue"
-                                                                        Property="Visibility"
-                                                                        Value="Collapsed" />
-                                                            </DataTrigger>
-                                                        </ControlTemplate.Triggers>
+                                                            </Canvas>
+                                                  
                                                     </ControlTemplate>
                                                 </Thumb.Template>
                                             </Thumb>
