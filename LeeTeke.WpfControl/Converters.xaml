@@ -21,4 +21,5 @@
     <conver:SiteToHorizontalAlignmentConverter x:Key="SiteToHorizontalAlignmentConverter"/>
     <conver:SiteToVerticalAlignmentConverter x:Key="SiteToVerticalAlignmentConverter"/>
     <conver:VisibilityForBoolReverseConverter x:Key="VisibilityForBoolReverseConverter"/>
+  
 </ResourceDictionary>

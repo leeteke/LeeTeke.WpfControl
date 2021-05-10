@@ -12,32 +12,11 @@
         Width="800"
         x:Name="windows"
         >
+   
 
-    <Grid  Background="AntiqueWhite" Visibility="Visible">
+    <Grid  Background="White" Visibility="Visible">
 
-        <ListView ItemsSource="{Binding TestList}"
-                  VerticalContentAlignment="Center"
-                  Height="200"
-                  leedep:ListViewManager.ShowHeadShadow="True"
-                  leedep:ListViewManager.Orientation="Vertical"
-                  leedep:ListViewItemManager.Marigin="5"
-                  leedep:ListViewItemManager.SelectedEffect="{DynamicResource LeeShadow}"
-                  leedep:ListViewItemManager.CornerRadius="5"
-                  Margin="20"
-                  >
-            <leedep:ListViewManager.ListEndContent>
-                没有东西
-            </leedep:ListViewManager.ListEndContent>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                        <Grid Margin="10">
-                            <Image Source="{Binding Image}"
-                               Stretch="UniformToFill"
-                               Height="80"  Width="300"/>
-                        </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <Slider   AutoToolTipPrecision="10" AutoToolTipPlacement="TopLeft"/>
 
 
     </Grid>
