@@ -10,7 +10,7 @@ namespace LeeTeke.WpfControl.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is double lord)
+            if (double.TryParse($"{value}",out double lord))
             {
                 if (double.TryParse(parameter.ToString(), out double change))
                 {
@@ -31,7 +31,7 @@ namespace LeeTeke.WpfControl.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is double lord)
+            if (double.TryParse($"{value}", out double lord))
             {
                 if (double.TryParse(parameter.ToString(), out double change))
                 {
