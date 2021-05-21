@@ -610,7 +610,7 @@
                                          Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=SplitterVisible,Mode=OneWay,Converter={StaticResource VisibilityForBoolConverter}}"
                                          DockPanel.Dock="{TemplateBinding IconDock}"/>
 
-                            <Grid >
+                            <Grid Cursor="IBeam" >
                                 <TextBox x:Name="PART_Main" 
                                          Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Text,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                          Background="Transparent"
@@ -620,8 +620,7 @@
                                          FontSize="{TemplateBinding FontSize}"
                                          FontStretch="{TemplateBinding FontStretch}"
                                          TextAlignment="{TemplateBinding TextAlignment}"
-                                         leedep:FocusFromEventManager.Element="{Binding ElementName=PART_PreviewText}"
-                                         leedep:FocusFromEventManager.EventName="MouseDown"
+                                       
                                          input:InputMethod.IsInputMethodEnabled="False"
                                          BorderThickness="0"
                                          VerticalAlignment="Center"
@@ -633,8 +632,6 @@
                                              BorderThickness="0"
                                              VerticalAlignment="Center"
                                              FocusVisualStyle="{x:Null}"
-                                             leedep:FocusFromEventManager.Element="{Binding ElementName=PART_PreviewText}"
-                                             leedep:FocusFromEventManager.EventName="MouseDown"
                                              Foreground="{TemplateBinding Foreground}"
                                              FontFamily="{TemplateBinding FontFamily}"
                                              FontSize="{TemplateBinding FontSize}"
@@ -646,10 +643,11 @@
                                 <TextBlock x:Name="PART_PreviewText"
                                            Foreground="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Foreground,Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.5,Mode=OneWay}"
                                            Text="{TemplateBinding PreviewText}"
-                                           Background="Transparent"
-                                            VerticalAlignment="Center"
+                                           Background="{x:Null}"
+                                           VerticalAlignment="Center"
+                                           IsHitTestVisible="False"
+                                           Visibility="Visible"
                                            TextAlignment="{TemplateBinding TextAlignment}"
-                                      
                                            />
 
                             </Grid>

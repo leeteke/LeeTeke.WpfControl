@@ -12,12 +12,40 @@
         Width="800"
         x:Name="windows"
         >
+    <Window.Resources>
+        
+
+    </Window.Resources>
    
 
     <Grid  Background="White" Visibility="Visible">
 
         <Slider    AutoToolTipPrecision="10" AutoToolTipPlacement="TopLeft"/>
 
+        <leecontrol:TextBoxEx  Text="{Binding Title}"
+                                Margin="5,0"
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Height="30"
+                                HorizontalAlignment="Left"
+                                MinWidth="150"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                />
+
+        <leecontrol:TextBoxEx  Text="{Binding Title}"
+                                Margin="5,0"
+                                Grid.Row="2"
+                               Mode="Password"
+                                Grid.Column="1"
+                                Height="30"
+                                HorizontalAlignment="Right"
+                                MinWidth="150"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                />
+        
+        
 
     </Grid>
 

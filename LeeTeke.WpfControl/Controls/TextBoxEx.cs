@@ -70,6 +70,7 @@ namespace LeeTeke.WpfControl.Controls
             _password = this.Template.FindName("PART_Password", this) as PasswordBox;
             _textBox = this.Template.FindName("PART_Main", this) as TextBox;
             _border = this.Template.FindName("PART_ICON", this) as Border;
+      
             if (_password != null)
             {
                 _password.PasswordChanged += _password_PasswordChanged;
@@ -87,6 +88,7 @@ namespace LeeTeke.WpfControl.Controls
                 _border.MouseDown += _border_MouseDown;
             }
 
+      
         }
 
         #endregion
