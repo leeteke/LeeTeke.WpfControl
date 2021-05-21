@@ -593,6 +593,7 @@
                                     >
                                 <TextBlock  IsHitTestVisible="True"
                                             Text="{TemplateBinding Icon}"
+                                            FontSize="{TemplateBinding IconSize}"
                                             FontFamily="{DynamicResource IconFontFamily}"
                                             DockPanel.Dock="{TemplateBinding IconDock}"
                                             Foreground="{TemplateBinding IconFill}"
