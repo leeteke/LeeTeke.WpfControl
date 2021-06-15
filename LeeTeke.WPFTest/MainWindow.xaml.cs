@@ -1,4 +1,5 @@
-﻿using LeeTeke.WPFTest.ViewModels;
+﻿using LeeTeke.WPFTest.Models;
+using LeeTeke.WPFTest.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,12 +73,29 @@ namespace LeeTeke.WPFTest
 
         private void tage_MouseEnter(object sender, MouseEventArgs e)
         {
-    //        tage.Width = 300;
+            //        tage.Width = 300;
         }
 
         private void tage_MouseLeave(object sender, MouseEventArgs e)
         {
-         //   tage.Width = 45;
+            //   tage.Width = 45;
+        }
+
+        private void lee_ItemSelected(object sender, WpfControl.TagControlSelectedEventArgs e)
+        {
+            if (e.Value  is WpfControl.Controls.TagControlItem item)
+            {
+          
+            frame.Navigate(
+                new Page()
+                {
+                    Content = new Image()
+                    {
+                        Source = ((TestListModel)item.DataContext).Image
+                    }
+
+                });
+            }
         }
     }
 }
