@@ -83,19 +83,7 @@ namespace LeeTeke.WPFTest
 
         private void lee_ItemSelected(object sender, WpfControl.TagControlSelectedEventArgs e)
         {
-            if (e.Value  is WpfControl.Controls.TagControlItem item)
-            {
-          
-            frame.Navigate(
-                new Page()
-                {
-                    Content = new Image()
-                    {
-                        Source = ((TestListModel)item.DataContext).Image
-                    }
-
-                });
-            }
+            
         }
     }
 }

@@ -11,12 +11,12 @@ using System.Windows.Media.Imaging;
 
 namespace LeeTeke.WPFTest.ViewModels
 {
-    class MainWindowViewModel:BindableBase
+    class MainWindowViewModel : BindableBase
     {
 
         #region 属性
 
-  
+
 
         private ObservableCollection<TestListModel> _TestList;
         /// <summary>
@@ -91,6 +91,20 @@ namespace LeeTeke.WPFTest.ViewModels
         }
 
 
+        private LeeTeke.WpfControl.NotifyBannerShowModel _NotifyData;
+        /// <summary>
+        /// 请填写属性名
+        /// </summary>
+        public LeeTeke.WpfControl.NotifyBannerShowModel NotifyData
+        {
+            get { return _NotifyData; }
+            set
+            {
+                _NotifyData = value;
+                this.RaisePropertyChanged("NotifyData");
+            }
+        }
+
 
 
         #endregion
@@ -111,7 +125,7 @@ namespace LeeTeke.WPFTest.ViewModels
             TestCommand = new DelegateCommand<object>(TestCommandExecute);
         }
 
-   
+
 
         private void Init()
         {
@@ -142,7 +156,8 @@ namespace LeeTeke.WPFTest.ViewModels
         private async void TestCommandExecute(object obj)
         {
 
-            LeeTeke.WpfControl.MessageBoxEx.Show("你好", WpfControl.MessageBoxExEnum.Erro);
+            NotifyData = new WpfControl.NotifyBannerShowModel("你好");
+
 
         }
 

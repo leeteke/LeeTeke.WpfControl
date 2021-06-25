@@ -132,6 +132,16 @@
             位移距离
             </summary>
         </member>
+        <member name="F:LeeTeke.WpfControl.Controls.NotifyBanner._stackPanel">
+            <summary>
+            界面的stackpanel
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.Controls.NotifyBanner._notifyWindow">
+            <summary>
+            通知窗口
+            </summary>
+        </member>
         <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.BannerPath">
             <summary>
             请填写描述
@@ -150,6 +160,16 @@
         <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.IsKeepShow">
             <summary>
             请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.ShowMode">
+            <summary>
+            展示模式
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.OnDesktopMargin">
+            <summary>
+            桌面模式下的Margin
             </summary>
         </member>
         <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.ShowDuration">
@@ -187,6 +207,32 @@
             生成动画
             </summary>
             <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.NotifyBanner.CloseButton_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            关闭按钮
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.NotifyBanner.UXAdd(System.Windows.UIElement)">
+            <summary>
+            通知添加UI
+            </summary>
+            <param name="element"></param>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.NotifyBanner.UXRemove(System.Windows.UIElement)">
+            <summary>
+            
+            </summary>
+            <param name="element"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.NotifyBanner.GenerateWindow">
+            <summary>
+            生成通知
+            </summary>
             <returns></returns>
         </member>
         <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.NotifyIconEx" -->
@@ -1032,14 +1078,49 @@
             Icon
             </summary>
         </member>
-        <member name="F:LeeTeke.WpfControl.BannerPathMode.RightToLeft">
+        <member name="F:LeeTeke.WpfControl.BannerPathMode.RightTop">
             <summary>
-            从右到左
+            右上角
             </summary>
         </member>
-        <member name="F:LeeTeke.WpfControl.BannerPathMode.LeftToRight">
+        <member name="F:LeeTeke.WpfControl.BannerPathMode.RightCenter">
             <summary>
-            从左到右
+            右中间
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.BannerPathMode.RightBottom">
+            <summary>
+            右下角
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.BannerPathMode.LeftTop">
+            <summary>
+            左上角
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.BannerPathMode.LeftCenter">
+            <summary>
+            左中间
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.BannerPathMode.LeftBottom">
+            <summary>
+            左下角
+            </summary>
+        </member>
+        <member name="T:LeeTeke.WpfControl.NotifyBannerShowMode">
+            <summary>
+            通知显示模式
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.NotifyBannerShowMode.InApp">
+            <summary>
+            在App里
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.NotifyBannerShowMode.OnDesktop">
+            <summary>
+            在桌面上
             </summary>
         </member>
         <member name="P:LeeTeke.WpfControl.NotifyBannerShowModel.Value">
@@ -1258,36 +1339,6 @@
             <summary>      
             优化其它程序内存内存      
             </summary>      
-        </member>
-        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
-            <summary>
-            GeneratedInternalTypeHelper
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
-            <summary>
-            CreateInstance
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            GetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            SetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
-            <summary>
-            CreateDelegate
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
-            <summary>
-            AddEventHandler
-            </summary>
         </member>
     </members>
 </doc>

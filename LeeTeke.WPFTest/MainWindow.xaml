@@ -37,13 +37,15 @@
 
 
         
-        
-        <Frame  x:Name="frame" Grid.Row="1" >
-         
-        </Frame>
+      
 
+        <Button Grid.Row="1" Height="30" Width="80" Command="{Binding TestCommand}"/>
 
-        <Button Grid.Row="1" Height="30" Width="80"/>
+        <leecontrol:NotifyBanner Content="{Binding NotifyData}"
+                                 ShowMode="OnDesktop"
+                                 BannerPath="RightCenter"
+                                 OnDesktopMargin="8"
+                                 Grid.RowSpan="2"/>
 
     </Grid>
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LeeTeke.WpfControl.Converters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -57,18 +58,29 @@ namespace LeeTeke.WpfControl.Controls
         /// </summary>
         private double _displacement = 200;
 
+        /// <summary>
+        /// 界面的stackpanel
+        /// </summary>
         private StackPanel _stackPanel;
+
+
+        /// <summary>
+        /// 通知窗口
+        /// </summary>
+        private Window _notifyWindow;
+
         private bool _isLoded = false;
 
         private ResourceDictionary _buttonResource;
         public NotifyBanner()
         {
-            _buttonResource= new ResourceDictionary() { Source = new Uri("pack://application:,,,/LeeTeke.WpfControl;component/Themes/Button.xaml") };
+            _buttonResource = new ResourceDictionary() { Source = new Uri("pack://application:,,,/LeeTeke.WpfControl;component/Themes/Button.xaml") };
         }
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+
 
             _stackPanel = this.Template.FindName("PART_StackPanel", this) as StackPanel;
             if (_stackPanel != null)
@@ -92,6 +104,8 @@ namespace LeeTeke.WpfControl.Controls
         // Using a DependencyProperty as the backing store for BannerPath.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty BannerPathProperty =
             DependencyProperty.Register("BannerPath", typeof(BannerPathMode), typeof(NotifyBanner));
+
+
 
         #endregion
 
@@ -142,6 +156,38 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("IsKeepShow", typeof(bool), typeof(NotifyBanner));
 
         #endregion
+
+        #region ShowMode
+        /// <summary>
+        /// 展示模式
+        /// </summary>
+        public NotifyBannerShowMode ShowMode
+        {
+            get { return (NotifyBannerShowMode)GetValue(ShowModeProperty); }
+            set { SetValue(ShowModeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ShowMode.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ShowModeProperty =
+            DependencyProperty.Register("ShowMode", typeof(NotifyBannerShowMode), typeof(NotifyBanner));
+        #endregion
+
+
+        #region OnDesktopMargin
+        /// <summary>
+        /// 桌面模式下的Margin
+        /// </summary>
+        public Thickness OnDesktopMargin
+        {
+            get { return (Thickness)GetValue(OnDesktopMarginProperty); }
+            set { SetValue(OnDesktopMarginProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for OnDesktopMargin.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty OnDesktopMarginProperty =
+            DependencyProperty.Register("OnDesktopMargin", typeof(Thickness), typeof(NotifyBanner));
+        #endregion
+
 
         #region ShowDuration
         /// <summary>
@@ -199,7 +245,6 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-
         #region CornerRadius
         /// <summary>
         /// CornerRadius
@@ -216,7 +261,6 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-
         #region ClickedCommand
         /// <summary>
         /// 请填写描述
@@ -232,7 +276,6 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("ClickedCommand", typeof(ICommand), typeof(NotifyBanner));
 
         #endregion
-
 
         #endregion
 
@@ -341,26 +384,30 @@ namespace LeeTeke.WpfControl.Controls
                 Content = "╳",
                 Width = 20,
                 Height = 20,
-                Style =_buttonResource["TextButton"] as Style
+                Style = _buttonResource["TextButton"] as Style
             };
             closeButton.Click += CloseButton_Click;
             show.Children.Add(closeButton);
             data.Control = show;
+            data.BannerPath = this.BannerPath;
             show.Opacity = 1;
             show.DataContext = data;
             show.MouseUp += Show_MouseUp;
             show.Margin = new Thickness(0, 0, 0, 5);
+
             switch (BannerPath)
             {
-                case BannerPathMode.RightToLeft:
+                case BannerPathMode.RightBottom:
+                case BannerPathMode.RightCenter:
+                case BannerPathMode.RightTop:
                     show.RenderTransform = new TranslateTransform() { X = _displacement };
                     show.HorizontalAlignment = HorizontalAlignment.Right;
-                    data.BannerPath = BannerPathMode.RightToLeft;
                     break;
-                case BannerPathMode.LeftToRight:
+                case BannerPathMode.LeftBottom:
+                case BannerPathMode.LeftCenter:
+                case BannerPathMode.LeftTop:
                     show.RenderTransform = new TranslateTransform() { X = -_displacement };
                     show.HorizontalAlignment = HorizontalAlignment.Left;
-                    data.BannerPath = BannerPathMode.LeftToRight;
                     break;
                 default:
                     break;
@@ -395,11 +442,15 @@ namespace LeeTeke.WpfControl.Controls
             Storyboard.SetTarget(oDA, show);
             Storyboard.SetTargetProperty(oDA, new PropertyPath(Border.OpacityProperty));
 
-            _stackPanel.Children.Insert(0, show);
-
-            sb.Begin();
+            ///添加
+            if (UXAdd(show))
+                sb.Begin();
         }
-
+        /// <summary>
+        /// 关闭按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button button && button.DataContext is NotifybannerDataContext data && !data.IsClicked)
@@ -408,8 +459,6 @@ namespace LeeTeke.WpfControl.Controls
             }
 
         }
-
-
 
         private void Show_MouseUp(object sender, MouseButtonEventArgs e)
         {
@@ -428,11 +477,10 @@ namespace LeeTeke.WpfControl.Controls
             xDA.KeyFrames.Add(new EasingDoubleKeyFrame()
             {
 
-                Value = data.BannerPath switch
+                Value = BannerPath switch
                 {
-                    BannerPathMode.RightToLeft => _displacement,
-                    BannerPathMode.LeftToRight => -_displacement,
-                    _ => 0,
+                    BannerPathMode.LeftTop or BannerPathMode.LeftCenter or BannerPathMode.LeftBottom => -_displacement,
+                    _ => _displacement
                 },
                 KeyTime = KeyTime.FromTimeSpan(this.EasingDuration.TimeSpan),
                 EasingFunction = new ExponentialEase() { EasingMode = EasingMode.EaseOut },
@@ -457,11 +505,148 @@ namespace LeeTeke.WpfControl.Controls
 
             sb.Completed += (e, s) =>
             {
-                _stackPanel.Children.Remove(data.Control);
+                UXRemove(data.Control);
             };
             sb.Begin();
         }
 
+
+        /// <summary>
+        /// 通知添加UI
+        /// </summary>
+        /// <param name="element"></param>
+        private bool UXAdd(UIElement element)
+        {
+            switch (ShowMode)
+            {
+                case NotifyBannerShowMode.InApp:
+                    ///这是 
+                    if (_stackPanel == null)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        switch (BannerPath)
+                        {
+                            case BannerPathMode.RightTop:
+                            case BannerPathMode.RightCenter:
+                            case BannerPathMode.LeftTop:
+                            case BannerPathMode.LeftCenter:
+                                _stackPanel?.Children.Insert(0, element);
+                                break;
+                            case BannerPathMode.RightBottom:
+                            case BannerPathMode.LeftBottom:
+                            default:
+                                _stackPanel.Children.Add(element);
+                                break;
+                        }
+
+                        return true;
+                    }
+                case NotifyBannerShowMode.OnDesktop:
+                    var win = GenerateWindow();
+                    if (win.Content is StackPanel stack)
+                    {
+
+                        switch (BannerPath)
+                        {
+                            case BannerPathMode.RightTop:
+                            case BannerPathMode.RightCenter:
+                            case BannerPathMode.LeftTop:
+                            case BannerPathMode.LeftCenter:
+                                stack.Children.Insert(0, element);
+                                break;
+                            case BannerPathMode.RightBottom:
+                            case BannerPathMode.LeftBottom:
+                            default:
+                                stack.Children.Add(element);
+                                break;
+                        }
+
+                        win.Show();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+                default:
+                    return false;
+            }
+
+
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="element"></param>
+        /// <returns></returns>
+        private bool UXRemove(UIElement element)
+        {
+            if (VisualTreeHelper.GetParent(element) is StackPanel sp)
+            {
+                sp.Children.Remove(element);
+                if (sp.Children.Count < 1 && ShowMode == NotifyBannerShowMode.OnDesktop)
+                {
+                    _notifyWindow.Close();
+                }
+                return true;
+            }
+            return false;
+        }
+
+
+        /// <summary>
+        /// 生成通知
+        /// </summary>
+        /// <returns></returns>
+        private Window GenerateWindow()
+        {
+            if (_notifyWindow == null)
+            {
+
+                var spE = new StackPanel()
+                {
+                    Background = null
+                };
+                spE.SetBinding(StackPanel.MarginProperty, new Binding
+                {
+                    Source = this,
+                    Path = new PropertyPath(NotifyBanner.OnDesktopMarginProperty),
+                    Mode = BindingMode.OneWay
+                });
+
+                spE.SetBinding(StackPanel.VerticalAlignmentProperty, new Binding
+                {
+                    Source = this,
+                    Path = new PropertyPath(NotifyBanner.BannerPathProperty),
+                    Mode = BindingMode.OneWay,
+                    Converter= new NotifyConverter()
+                });
+                _notifyWindow = new()
+                {
+                    Title = "notifyWindowService",
+                    AllowsTransparency = true,
+                    WindowStyle = WindowStyle.None,
+                    Background = null,
+                    WindowState = WindowState.Maximized,
+                    Topmost = true,
+                    ShowInTaskbar = false,
+                    Content = spE
+                };
+                _notifyWindow.Closed += (cx, ce) =>
+                {
+                    _notifyWindow = null;
+                };
+            }
+
+            return _notifyWindow;
+
+        }
         #endregion
 
 

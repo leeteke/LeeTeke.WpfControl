@@ -9,13 +9,32 @@ namespace LeeTeke.WpfControl
     public enum BannerPathMode
     {
         /// <summary>
-        /// 从右到左
+        /// 右上角
         /// </summary>
-        RightToLeft,
+        RightTop,
+
         /// <summary>
-        /// 从左到右
+        /// 右中间
         /// </summary>
-        LeftToRight,
+        RightCenter,
+
+        /// <summary>
+        /// 右下角
+        /// </summary>
+        RightBottom,
+        /// <summary>
+        /// 左上角
+        /// </summary>
+        LeftTop,
+        /// <summary>
+        /// 左中间
+        /// </summary>
+        LeftCenter,
+
+        /// <summary>
+        /// 左下角
+        /// </summary>
+        LeftBottom
 
     }
 }
