@@ -115,7 +115,7 @@
                             Padding="{TemplateBinding Padding}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}"   
-                            Height="8">
+                            >
                         <Canvas x:Name="PART_Canvas">
                             <Canvas.Clip>
                                 <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
@@ -126,7 +126,7 @@
                             </Canvas.Clip>
                             <Rectangle x:Name="PART_Rectangle"
                                        Canvas.Left="0"
-                                Fill="{TemplateBinding FillBrush}">
+                                       Fill="{TemplateBinding FillBrush}">
                                 <Rectangle.Clip>
                                     <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
                                         <Binding  ElementName="PART_Rectangle" Path="ActualWidth"/>
@@ -152,7 +152,7 @@
                                 <Condition Property="Orientation" Value="Vertical"/>
                             </MultiTrigger.Conditions>
                             <Setter TargetName="PART_Rectangle" Property="Height" Value="{Binding  RelativeSource={RelativeSource Mode=TemplatedParent},Path=ProgressLength,Mode=OneWay}" />
-                            <Setter TargetName="PART_Rectangle" Property="Width" Value="{Binding ElementName=PART_Canvas,Path=ActualHeight,Mode=OneWay}" />
+                            <Setter TargetName="PART_Rectangle" Property="Width" Value="{Binding ElementName=PART_Canvas,Path=ActualWidth,Mode=OneWay}" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
