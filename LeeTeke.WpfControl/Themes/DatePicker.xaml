@@ -60,7 +60,7 @@
     </ControlTemplate>
     
     <Style x:Key="LeeDatePicker" TargetType="{x:Type DatePicker}">
-        <Setter Property="leedep:DatePickerManager.CornerRadius" Value="4"/>
+        <Setter Property="leedep:DatePickerManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="leedep:DatePickerManager.PopupAnimation" Value="Fade"/>
         <Setter Property="leedep:DatePickerManager.ButtonWidth" Value="35"/>
         <Setter Property="leedep:DatePickerManager.ButtonFontSize" Value="16"/>
@@ -68,7 +68,7 @@
         <Setter Property="IsTodayHighlighted" Value="True"/>
         <Setter Property="SelectedDateFormat" Value="Short"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource  LeeBrush_Gray153}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource  LeeBrush_BorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>

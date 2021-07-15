@@ -13,7 +13,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_Main}"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="leedep:ButtonManager.CornerRadius" Value="0"/>
+        <Setter Property="leedep:ButtonManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="leedep:ButtonManager.RippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -73,7 +73,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="leedep:ButtonManager.RippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}"/>
-        <Setter Property="leedep:ButtonManager.CornerRadius" Value="0"/>
+        <Setter Property="leedep:ButtonManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="leedep:ButtonManager.MouseOverBackground" Value="{DynamicResource LeeBrush_RedOffice}"/>
         <Setter Property="leedep:ButtonManager.MouseOverBorderBrush" Value="{DynamicResource LeeBrush_RedOffice}"/>
         <Setter Property="leedep:ButtonManager.MouseOverForeground" Value="White"/>

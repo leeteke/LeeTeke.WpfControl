@@ -2,20 +2,21 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:local="clr-namespace:LeeTeke.WpfControl">
+    <DropShadowEffect x:Key="LeeShadow" BlurRadius="8" ShadowDepth="1.5" Direction="270" Color="#88000000" Opacity=".2" RenderingBias="Performance" />
+    <DropShadowEffect x:Key="LeeShadow1"  BlurRadius="5" ShadowDepth="1" Direction="270" Color="#88000000" Opacity=".2" RenderingBias="Performance" />
+    <DropShadowEffect x:Key="LeeShadow2" BlurRadius="8" ShadowDepth="1.5" Direction="270" Color="#88000000" Opacity=".2" RenderingBias="Performance" />
+    <DropShadowEffect x:Key="LeeShadow3"  BlurRadius="14" ShadowDepth="4.5" Direction="270" Color="#88000000" Opacity=".2" RenderingBias="Performance" />
+    <DropShadowEffect x:Key="LeeShadow4" BlurRadius="25" ShadowDepth="8" Direction="270" Color="#88000000" Opacity=".2" RenderingBias="Performance" />
+    <DropShadowEffect x:Key="LeeShadow5" BlurRadius="35" ShadowDepth="13" Direction="270" Color="#88000000" Opacity=".2" RenderingBias="Performance" />
 
-    <!--默认阴影主题-->
-    <DropShadowEffect x:Key="LeeShadow" BlurRadius="8" Direction="0" ShadowDepth="0" Opacity="0.4" Color="Black"/>
+
     <!--默认阴影主题-->
     <sys:Boolean x:Key="LeeSnapsToDevicePixels">True</sys:Boolean>
     <Style x:Key="LeeFocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Rectangle  Margin="0" StrokeThickness="1" Stroke="{DynamicResource LeeBrush_Gray153}" >
-                        <Rectangle.Effect>
-                            <DropShadowEffect BlurRadius="8" Direction="0" ShadowDepth="0" Color="Black" Opacity="0.4"/>
-                        </Rectangle.Effect>
-                    </Rectangle>
+                    <Rectangle  Margin="0" StrokeThickness="1" Stroke="{DynamicResource LeeBrush_Gray224}"  Effect="{DynamicResource  LeeShadow2}"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -26,7 +27,10 @@
     <SolidColorBrush x:Key="LeeBrush_Main" Color="{DynamicResource LeeColor_BlueMicrosoft}"/>
     <!--默认颜色-->
     <SolidColorBrush x:Key="LeeBrush_TextColor" Color="{DynamicResource LeeColor_Gray51}" />
-
+    <!--默认原边-->
+    <CornerRadius x:Key="LeeCornerRadius">4</CornerRadius>
+    
+    <SolidColorBrush x:Key="LeeBrush_BorderBrush"  Color="{DynamicResource LeeColor_Gray224}" />
     <!--Item选择背景色-->
     <SolidColorBrush x:Key="LeeBrush_ItemSelectedBackground" Color="{DynamicResource LeeColor_ItemSelectedBackground}" />
     <Color x:Key="LeeColor_ItemSelectedBackground"  R="0" G="0" B="0" A="48"   />
@@ -132,6 +136,10 @@
     <!--242灰-->
     <SolidColorBrush x:Key="LeeBrush_Gray242" Color="{DynamicResource LeeColor_Gray242}"/>
     <Color x:Key="LeeColor_Gray242"  R="242" G="242" B="245" A="255"  />
+
+    <!--224灰-->
+    <SolidColorBrush x:Key="LeeBrush_Gray224" Color="{DynamicResource LeeColor_Gray224}"/>
+    <Color x:Key="LeeColor_Gray224"  R="224" G="224" B="224" A="255"  />
     <!--204灰-->
     <SolidColorBrush x:Key="LeeBrush_Gray204" Color="{DynamicResource LeeColor_Gray204}"/>
     <Color x:Key="LeeColor_Gray204"  R="204" G="204" B="204" A="255"  />

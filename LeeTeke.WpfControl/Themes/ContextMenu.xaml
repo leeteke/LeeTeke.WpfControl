@@ -10,7 +10,7 @@
     <Style x:Key="LeeContextMenu" TargetType="{x:Type ContextMenu}" >
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="leedep:ContextMenuManager.CornerRadius" Value="3"/>
+        <Setter Property="leedep:ContextMenuManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="MinWidth" Value="180"/>
         <Setter Property="Background" Value="White"/>
         <Setter Property="BorderThickness" Value="0"/>
@@ -52,7 +52,7 @@
             <Style TargetType="{x:Type MenuItem}">
                 <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
                 <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
-                <Setter Property="leedep:MenuItemManager.CornerRadius" Value="0"/>
+                <Setter Property="leedep:MenuItemManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
                 <Setter Property="leedep:MenuItemManager.RippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}"/>
                 <Setter Property="Foreground" Value="{DynamicResource LeeBrush_TextColor}"/>
                 <Setter Property="MinHeight" Value="30"/>

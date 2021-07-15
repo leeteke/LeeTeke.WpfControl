@@ -12,12 +12,12 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="Background"  Value="Transparent"/>
-        <Setter Property="leedep:ToggleButtonManager.CornerRadius" Value="5"/>
+        <Setter Property="leedep:ToggleButtonManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="leedep:ToggleButtonManager.RippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}"/>
         <Setter Property="leedep:ToggleButtonManager.CheckedBackground" Value="{DynamicResource LeeBrush_Main}"/>
         <Setter Property="leedep:ToggleButtonManager.CheckedBorderBrush" Value="{DynamicResource LeeBrush_Main}"/>
         <Setter Property="leedep:ToggleButtonManager.CheckedForeground" Value="White"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_Gray204}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="Foreground"  Value="{DynamicResource LeeBrush_TextColor}"/>
         <Setter Property="leedep:ToggleButtonManager.MouseOverBackground" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=Background,Converter={StaticResource ColorDepthConverter},ConverterParameter=-0.3,Mode=TwoWay}"/>
         <Setter Property="leedep:ToggleButtonManager.MouseOverBorderBrush" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path= BorderBrush,Converter={StaticResource ColorDepthConverter},ConverterParameter=-0.3,Mode=TwoWay}"/>
@@ -67,7 +67,7 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Background" TargetName="border" Value="LightGray"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="LightGray"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{x:Null}"/>
                             <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="White"/>
                         </Trigger>
                     </ControlTemplate.Triggers>

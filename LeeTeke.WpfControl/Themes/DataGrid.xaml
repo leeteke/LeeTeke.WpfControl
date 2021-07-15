@@ -20,7 +20,7 @@
         <Setter Property="Background"
                 Value="Transparent" />
         <Setter Property="BorderBrush"
-                Value="LightGray" />
+                Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="BorderThickness"
                 Value="1" />
         <Setter Property="HorizontalGridLinesBrush"

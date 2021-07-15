@@ -87,7 +87,7 @@
         <Setter Property="HorizontalContentAlignment"  Value="Stretch" />
         <Setter Property="leedep:ScrollManager.TrackBrush"   Value="Transparent" />
         <Setter Property="leedep:ScrollManager.ThumbBrush"   Value="{DynamicResource LeeBrush_Main}" />
-        <Setter Property="leedep:ScrollManager.ScrollBarCornerRadius"  Value="4" />
+        <Setter Property="leedep:ScrollManager.ScrollBarCornerRadius"  Value="{DynamicResource LeeCornerRadius}" />
         <Setter Property="leedep:ScrollManager.ScrollViewerHook"  Value="True" />
         <Setter Property="Template">
             <Setter.Value>

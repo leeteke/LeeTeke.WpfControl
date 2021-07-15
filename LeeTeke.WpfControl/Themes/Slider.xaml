@@ -20,7 +20,7 @@
         <Setter Property="leedep:SliderManager.Header" Value="{x:Null}"/>
         <Setter Property="leedep:SliderManager.HeaderDock" Value="Top"/>
         <Setter Property="Orientation" Value="Horizontal"/>
-        <Setter Property="leedep:SliderManager.CornerRadius" Value="2"/>
+        <Setter Property="leedep:SliderManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="leedep:SliderManager.TrackSize" Value="5"/>
         <Setter Property="leedep:SliderManager.RegisterMouseWheel" Value="True"/>
         <Setter Property="leedep:SliderManager.TrackBrush" Value="{DynamicResource LeeBrush_Main}"/>

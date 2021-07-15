@@ -12,6 +12,7 @@
         WindowStartupLocation="CenterOwner"
         Closing="Window_Closing"
         leedep:WindowShaowManager.Open="True"
+        leedep:WindowShaowManager.CornerRadius="{DynamicResource LeeCornerRadius}"
         >
 
     <Grid  Background="{DynamicResource LeePage_Background}">

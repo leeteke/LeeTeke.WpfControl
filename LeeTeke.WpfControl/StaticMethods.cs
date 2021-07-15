@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 
@@ -36,6 +39,15 @@ namespace LeeTeke.WpfControl
 
             Application.Current.Resources["LeeBrush_TextColor"] = new SolidColorBrush(color);
 
+        }
+
+        /// <summary>
+        /// 改变圆角
+        /// </summary>
+        /// <param name="color"></param>
+        public static void SetDefaultCornerRadius(CornerRadius cr)
+        {
+            Application.Current.Resources["LeeCornerRadius"] = cr;
         }
 
         /// <summary>
@@ -523,14 +535,17 @@ namespace LeeTeke.WpfControl
             return null;
         }
 
-        /// <summary>
-        /// 是否在控件里面
-        /// </summary>
-        /// <param name="pardent"></param>
-        /// <param name="child"></param>
-        /// <param name="outLevel"></param>
-        /// <returns></returns>
-        public static bool IsInControl(DependencyObject pardent, DependencyObject child, int outLevel = 1)
+     
+
+       
+    /// <summary>
+    /// 是否在控件里面
+    /// </summary>
+    /// <param name="pardent"></param>
+    /// <param name="child"></param>
+    /// <param name="outLevel"></param>
+    /// <returns></returns>
+    public static bool IsInControl(DependencyObject pardent, DependencyObject child, int outLevel = 1)
         {
             var _p = VisualTreeHelper.GetParent(child);
             if (_p == null)

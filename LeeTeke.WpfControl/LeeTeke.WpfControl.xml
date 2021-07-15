@@ -390,6 +390,42 @@
             默认 0,0
             </summary>
         </member>
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.RollingPanel" -->
+        <member name="P:LeeTeke.WpfControl.Controls.RollingPanel.Orientation">
+            <summary>
+            请添加描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.RollingPanel.CornerRadius">
+            <summary>
+            请添加描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.RollingPanel.Rolling">
+            <summary>
+            请添加描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.RollingPanel.IsRolling">
+            <summary>
+            请添加描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.RollingPanel.Duration">
+            <summary>
+            请添加描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.RollingPanel.Speed">
+            <summary>
+            请添加描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.RollingPanel.TransitionEasing">
+            <summary>
+            过度动画
+            </summary>
+        </member>
         <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.SlideView" -->
         <member name="P:LeeTeke.WpfControl.Controls.SlideView.Count">
             <summary>
@@ -1236,6 +1272,12 @@
             </summary>
             <param name="color"></param>
         </member>
+        <member name="M:LeeTeke.WpfControl.StaticMethods.SetDefaultCornerRadius(System.Windows.CornerRadius)">
+            <summary>
+            改变圆角
+            </summary>
+            <param name="color"></param>
+        </member>
         <member name="M:LeeTeke.WpfControl.StaticMethods.SetDefaultTextColorDefault">
             <summary>
             改变默认文字颜色
@@ -1339,6 +1381,36 @@
             <summary>      
             优化其它程序内存内存      
             </summary>      
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
+            </summary>
         </member>
     </members>
 </doc>

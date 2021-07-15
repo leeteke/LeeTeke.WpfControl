@@ -54,18 +54,18 @@ namespace LeeTeke.WpfControl.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(SlideView), new FrameworkPropertyMetadata(typeof(SlideView)));
         }
 
-        private Storyboard sbMovew;
+        private Storyboard _sbMove;
         private ScrollViewer _scrollViewer;
-        private DispatcherTimer autoPalyTime;
+        private DispatcherTimer _autoPalyTime;
         public SlideView()
         {
             EventManager.RegisterClassHandler(typeof(SlideViewItem), SlideViewItem.MouseLeftButtonUpEvent, new RoutedEventHandler(ItemMouseLeftButtonUpEvent));
             PreviewMouseWheel += SlideView_PreviewMouseWheel;
         }
 
-     
 
-   
+
+
 
 
 
@@ -125,8 +125,8 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (d is SlideView control && e.OldValue != e.NewValue)
             {
-                if (control.sbMovew != null)
-                    control.sbMovew.Stop();
+                if (control._sbMove != null)
+                    control._sbMove.Stop();
             }
         }
         #endregion
@@ -203,16 +203,16 @@ namespace LeeTeke.WpfControl.Controls
                 control.AutoPaly = (bool)e.NewValue;
                 if (control.AutoPaly)
                 {
-                    if (control.autoPalyTime == null)
-                        control.autoPalyTime = new DispatcherTimer();
-                    control.autoPalyTime.Interval = TimeSpan.FromMilliseconds(control.Interval);
-                    control.autoPalyTime.Tick += control.AutoPalyTime_Tick;
-                    control.autoPalyTime.Start();
+                    if (control._autoPalyTime == null)
+                        control._autoPalyTime = new DispatcherTimer();
+                    control._autoPalyTime.Interval = TimeSpan.FromMilliseconds(control.Interval);
+                    control._autoPalyTime.Tick += control.AutoPalyTime_Tick;
+                    control._autoPalyTime.Start();
                 }
                 else
                 {
-                    if (control.autoPalyTime != null)
-                        control.autoPalyTime.Stop();
+                    if (control._autoPalyTime != null)
+                        control._autoPalyTime.Stop();
                 }
             }
         }
@@ -381,7 +381,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             try
             {
-                if (_scrollViewer==null )
+                if (_scrollViewer == null)
                     return;
 
                 if (Items.Count > 1)
@@ -390,14 +390,13 @@ namespace LeeTeke.WpfControl.Controls
                     {
                         CurrentValue = Items[index];
                         CurrentIndex = index;
+
+                        _sbMove?.Stop();
                         switch (Orientation)
                         {
                             case Orientation.Horizontal:
 
-                                if (sbMovew != null)
-                                    sbMovew.Stop();
-
-                                sbMovew = new Storyboard() { FillBehavior = FillBehavior.HoldEnd };
+                                _sbMove = new Storyboard() { FillBehavior = FillBehavior.HoldEnd };
                                 DoubleAnimationUsingKeyFrames xDA = new DoubleAnimationUsingKeyFrames();
                                 xDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                                 {
@@ -406,13 +405,14 @@ namespace LeeTeke.WpfControl.Controls
                                     KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(TransitionDuration)),
                                     EasingFunction = TransitionEasing,
                                 });
-                                sbMovew.Children.Add(xDA);
+                                _sbMove.Children.Add(xDA);
                                 Storyboard.SetTarget(xDA, this);
                                 Storyboard.SetTargetProperty(xDA, new PropertyPath(SlideView.HorizontalOffsetProperty));
-                                sbMovew.Begin();
+                                _sbMove.Begin();
                                 break;
                             case Orientation.Vertical:
-                                sbMovew = new Storyboard() { FillBehavior = FillBehavior.HoldEnd };
+
+                                _sbMove = new Storyboard() { FillBehavior = FillBehavior.HoldEnd };
                                 DoubleAnimationUsingKeyFrames yDA = new DoubleAnimationUsingKeyFrames();
                                 yDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                                 {
@@ -421,10 +421,10 @@ namespace LeeTeke.WpfControl.Controls
                                     KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(TransitionDuration)),
                                     EasingFunction = TransitionEasing,
                                 });
-                                sbMovew.Children.Add(yDA);
+                                _sbMove.Children.Add(yDA);
                                 Storyboard.SetTarget(yDA, this);
                                 Storyboard.SetTargetProperty(yDA, new PropertyPath(SlideView.VerticalOffsetProperty));
-                                sbMovew.Begin();
+                                _sbMove.Begin();
 
                                 break;
                             default:
@@ -467,7 +467,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private void ItemMouseLeftButtonUpEvent(object sender, RoutedEventArgs e)
         {
-            if (sender is SlideViewItem content&&StaticMethods.IsInControl(this,content))
+            if (sender is SlideViewItem content && StaticMethods.IsInControl(this, content))
             {
                 try
                 {

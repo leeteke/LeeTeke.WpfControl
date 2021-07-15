@@ -6,9 +6,10 @@
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <Style x:Key="LeeTextBox" TargetType="{x:Type TextBox}">
-        <Setter Property="leedep:TextBoxManager.CornerRadius" Value="0"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_Main}"/>
+        <Setter Property="leedep:TextBoxManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_TextColor}"/>
+        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -41,8 +42,8 @@
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="BorderBrush" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path= BorderBrush,Converter={StaticResource ColorDepthConverter},ConverterParameter=-0.1}"/>
                         </Trigger>
-                        <Trigger Property="IsKeyboardFocused" Value="False">
-                            <Setter Property="BorderBrush" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path= BorderBrush,Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.8}"/>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource LeeBrush_Main}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

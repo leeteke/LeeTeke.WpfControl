@@ -43,6 +43,7 @@ namespace LeeTeke.WpfControl.Controls
                 Dependencies.WindowShaowManager.SetCornerRadius(this, cornerRadius);
             }
 
+
             InitializeComponent();
             Owner = Application.Current.MainWindow;
             CanClose = true;

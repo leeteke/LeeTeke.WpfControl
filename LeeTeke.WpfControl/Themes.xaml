@@ -26,7 +26,7 @@
     <Style BasedOn="{StaticResource LeeToggleButton }" TargetType="ToggleButton"/>
     <Style BasedOn="{StaticResource LeeComboBox}" TargetType="ComboBox"/>
     <Style BasedOn="{StaticResource LeeRadioButton}" TargetType="RadioButton"/>
-    <Style BasedOn="{StaticResource LeetekeView}" TargetType="ListView"/>
+    <Style BasedOn="{StaticResource LeetekeListView}" TargetType="ListView"/>
     <Style BasedOn="{StaticResource LeetekeListViewItem}" TargetType="ListViewItem"/>
     <Style BasedOn="{StaticResource LeeDataGrid}" TargetType="DataGrid"/>
     <Style BasedOn="{StaticResource LeeDataGridColumnHeader}" TargetType="DataGridColumnHeader"/>

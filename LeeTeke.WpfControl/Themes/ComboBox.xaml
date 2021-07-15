@@ -108,11 +108,11 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="Background" Value="{DynamicResource LeePage_Background}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_Main}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_TextColor}"/>
-        <Setter Property="leedep:ComboBoxManager.CornerRadius" Value="0"/>
+        <Setter Property="leedep:ComboBoxManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="leedep:ComboBoxManager.SelectedForeground" Value="{DynamicResource LeeBrush_Main}"/>
-        <Setter Property="BorderThickness" Value="0,0,0,2"/>
+        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="Padding" Value="6,3,5,3"/>
@@ -132,39 +132,39 @@
                                 <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="0"/>
                             </Grid.ColumnDefinitions>
                             <Popup x:Name="PART_Popup" 
-                                   AllowsTransparency="true" 
+                                   AllowsTransparency="True" 
                                    Grid.ColumnSpan="2"
                                    IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
                                    Placement="Bottom" 
-                                   PopupAnimation="Slide">
+                                   PopupAnimation="Slide"
+                                   >
+                        
                                 <Border x:Name="dropDownBorder"
                                         MinWidth="{Binding ActualWidth, ElementName=templateRoot}" 
                                         MaxHeight="{TemplateBinding MaxDropDownHeight}"
-                                        Background="{DynamicResource LeePage_Background}" 
-                                        CornerRadius="10"
+                                        Background="White"
+                                        CornerRadius="{DynamicResource LeeCornerRadius}"
+                                        BorderBrush="{DynamicResource LeeBrush_BorderBrush}"
+                                        BorderThickness="1"
+                                        Margin="1,0,8,8"
                                         Effect="{DynamicResource LeeShadow}"
-                                        Margin="8,0,8,8"
                                         >
-                                    <ScrollViewer x:Name="DropDownScrollViewer">
-                                        <Grid x:Name="grid" 
-                                              RenderOptions.ClearTypeHint="Enabled">
-                                            <Canvas x:Name="canvas" 
-                                                    HorizontalAlignment="Left" 
-                                                    Height="0" 
-                                                    VerticalAlignment="Top"
-                                                    Width="0">
-                                                <Rectangle x:Name="opaqueRect" 
-                                                           Fill="{Binding Background, ElementName=dropDownBorder,Mode=OneWay}" 
-                                                           Height="{Binding ActualHeight, ElementName=dropDownBorder,Mode=OneWay}" 
-                                                           Width="{Binding ActualWidth, ElementName=dropDownBorder,Mode=OneWay}"/>
-                                            </Canvas>
-                                            <ItemsPresenter x:Name="ItemsPresenter"
+                                    <ScrollViewer x:Name="DropDownScrollViewer" >
+                                        <ScrollViewer.Clip>
+                                            <MultiBinding  Converter="{StaticResource  MultiValueToClipConverter}" Mode="OneWay">
+                                                <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualWidth"/>
+                                                <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualHeight"/>
+                                                <Binding  ElementName="dropDownBorder"  Path="CornerRadius"/>
+                                            </MultiBinding>
+                                        </ScrollViewer.Clip>
+                                        <ItemsPresenter x:Name="ItemsPresenter"
                                                             KeyboardNavigation.DirectionalNavigation="Contained"
                                                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                        </Grid>
                                     </ScrollViewer>
-                                </Border>
+                                    
 
+                                </Border>
+                             
                             </Popup>
                             <ToggleButton x:Name="toggleButton" 
                                           Background="Transparent"
@@ -182,13 +182,13 @@
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                             <TextBox
                                 x:Name="PART_EditableTextBox" 
-                                         Visibility="Collapsed"
-                                     BorderThickness="0"
-                                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                     IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent},Mode=OneWay}" 
-                                         Margin="{TemplateBinding Padding}" 
-                                         Style="{StaticResource ComboBoxEditableTextBox}"
-                                         VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                Visibility="Collapsed"
+                                BorderThickness="0"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent},Mode=OneWay}" 
+                                Margin="{TemplateBinding Padding}" 
+                                Style="{StaticResource ComboBoxEditableTextBox}"
+                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
              
 
                         </Grid>
@@ -208,10 +208,7 @@
                             </MultiTrigger.Conditions>
                             <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
                         </MultiTrigger>
-                        <Trigger Property="ScrollViewer.CanContentScroll" SourceName="DropDownScrollViewer" Value="false">
-                            <Setter Property="Canvas.Top" TargetName="opaqueRect" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}"/>
-                            <Setter Property="Canvas.Left" TargetName="opaqueRect" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}"/>
-                        </Trigger>
+                     
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

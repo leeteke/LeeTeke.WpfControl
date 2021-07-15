@@ -9,14 +9,17 @@
         mc:Ignorable="d"
         Title="WpfControl测试 窗口"
         Height="450"
-        Width="800"
+        Width="600"
         x:Name="windows"
+      
         >
     <Window.Resources>
-        
+
+   
 
     </Window.Resources>
-   
+
+    
 
     <Grid  Background="White" Visibility="Visible">
 
@@ -25,27 +28,32 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <leecontrol:TagControl x:Name="lee" 
-                               ItemsSource="{Binding TestList}"
-                               ItemSelected="lee_ItemSelected">
-            <leecontrol:TagControl.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Title}"/>
-                </DataTemplate>
-            </leecontrol:TagControl.ItemTemplate>
-        </leecontrol:TagControl>
+        <ScrollViewer Grid.Row="1" >
+
+            <StackPanel Margin="2">
+                <TextBlock Text="测试"/>
+                <TextBox Text="测试"/>
+                <Button Content="测试"/>
+                <CheckBox Content="test"/>
+                <GroupBox Header="text"/>
+                <RadioButton Content="a"/>
+                <ComboBox  >
+                    <ComboBoxItem Content="1"/>
+                    <ComboBoxItem Content="12"/>
+                </ComboBox>
 
 
-        
-      
-
-        <Button Grid.Row="1" Height="30" Width="80" Command="{Binding TestCommand}"/>
-
-        <leecontrol:NotifyBanner Content="{Binding NotifyData}"
-                                 ShowMode="OnDesktop"
-                                 BannerPath="RightCenter"
-                                 OnDesktopMargin="8"
-                                 Grid.RowSpan="2"/>
+                <leecontrol:LodingBar Height="20" Value="20"/>
+                <leecontrol:RollingPanel Height="20"
+                                         Content="你好"
+                                         Width="200"
+                                         Rolling="True"/>
+                <leecontrol:SwitchButton Width="200"/>
+            </StackPanel>
+            
+            
+        </ScrollViewer>
+    
 
     </Grid>
 

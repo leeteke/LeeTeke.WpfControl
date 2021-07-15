@@ -13,7 +13,7 @@
         <Setter Property="leedep:CheckBoxManager.RippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}"/>
         <Setter Property="leedep:CheckBoxManager.CheckBoxSize" Value="13"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Gray153}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_Gray153}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Template">
             <Setter.Value>
