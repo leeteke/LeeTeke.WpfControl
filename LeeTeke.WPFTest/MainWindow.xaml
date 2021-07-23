@@ -11,7 +11,7 @@
         Height="450"
         Width="600"
         x:Name="windows"
-      
+        Background="{DynamicResource LeeBrush_Background}"
         >
     <Window.Resources>
 
@@ -21,7 +21,7 @@
 
     
 
-    <Grid  Background="White" Visibility="Visible">
+    <Grid   Visibility="Visible">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -30,30 +30,62 @@
 
         <ScrollViewer Grid.Row="1" >
 
-            <StackPanel Margin="2">
-                <TextBlock Text="测试"/>
-                <TextBox Text="测试"/>
-                <Button Content="测试"/>
-                <CheckBox Content="test"/>
-                <GroupBox Header="text"/>
-                <RadioButton Content="a"/>
-                <ComboBox  >
-                    <ComboBoxItem Content="1"/>
-                    <ComboBoxItem Content="12"/>
+            <StackPanel  
+                         >
+
+                <Button Width="100" 
+                        Height="30" 
+                        Content="Nihao " 
+                        Command="{Binding TestCommand}"
+                        />
+                <TextBlock Text="你好"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"/>
+
+                <TextBox x:Name="txt"
+                         leedep:TextBoxManager.EnterCommand="{Binding   TestCommand}"
+                         />
+                
+
+                <PasswordBox  
+                    leedep:PasswordManager.EnterCommand="{Binding TestCommand}"
+                    leedep:PasswordManager.EscToEmpty="True"
+                              leedep:PasswordManager.Attach="True"
+                              leedep:PasswordManager.Password="{Binding ElementName=txt,Path=Text,Mode=TwoWay}"/>
+
+                <leecontrol:TextBoxEx Mode="General"     Text="2"/>
+
+                <CheckBox  Content="你好"
+                      
+                            />
+                <ComboBox IsEditable="True"  
+                           >
+                    <ComboBoxItem>
+                        <Rectangle  Fill="Red" 
+                                    Width="100"
+                                    Height="20"
+                                    />
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <Rectangle  Fill="Beige" Width="100" Height="20" />
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <Rectangle  Fill="Aqua"  Width="100" Height="20"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <Rectangle  Fill="Azure" Width="100" Height="20" />
+                    </ComboBoxItem>
                 </ComboBox>
 
 
-                <leecontrol:LodingBar Height="20" Value="20"/>
-                <leecontrol:RollingPanel Height="20"
-                                         Content="你好"
-                                         Width="200"
-                                         Rolling="True"/>
-                <leecontrol:SwitchButton Width="200"/>
             </StackPanel>
             
             
         </ScrollViewer>
-    
+
+   
+        
+        
 
     </Grid>
 

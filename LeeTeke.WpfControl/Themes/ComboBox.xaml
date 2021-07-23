@@ -18,11 +18,14 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
+                    
                     <ScrollViewer x:Name="PART_ContentHost" 
                                   Background="Transparent"
                                   Focusable="false" 
                                   HorizontalScrollBarVisibility="Hidden" 
                                   VerticalScrollBarVisibility="Hidden"/>
+                                          
+                    
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -38,31 +41,31 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Border Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}">
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid Background="Transparent">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="30" />
                             </Grid.ColumnDefinitions>
                             <Path x:Name="arrow1"
-                                                              Opacity="1"
-                                                              VerticalAlignment="Center"
-                                                              Grid.Column="1"
-                                                              HorizontalAlignment="Center"
-                                                              Data="M5,4 H14 L9.5,10 Z"
-                                                              Width="15"
-                                                              Height="15"
-                                                              Fill="{TemplateBinding Foreground}" />
+                                  Opacity="1"
+                                  VerticalAlignment="Center"
+                                  Grid.Column="1"
+                                  HorizontalAlignment="Center"
+                                  Data="M5,4 H14 L9.5,10 Z"
+                                  Width="15"
+                                  Height="15"
+                                  Fill="{TemplateBinding Foreground}" />
                             <Path x:Name="arrow2"
-                                                              Opacity="0"
-                                                              VerticalAlignment="Center"
-                                                              Grid.Column="1"
-                                                              HorizontalAlignment="Center"
-                                                              Data="M5,10 H14 L9.5,4.5 Z"
-                                                              Width="15"
-                                                              Height="15"
-                                                              Fill="{TemplateBinding Foreground}" />
+                                  Opacity="0"
+                                  VerticalAlignment="Center"
+                                  Grid.Column="1"
+                                  HorizontalAlignment="Center"
+                                  Data="M5,10 H14 L9.5,4.5 Z"
+                                  Width="15"
+                                  Height="15"
+                                  Fill="{TemplateBinding Foreground}" />
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -107,18 +110,22 @@
     <Style x:Key="LeeComboBox" TargetType="{x:Type ComboBox}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="Background" Value="{DynamicResource LeePage_Background}"/>
+        <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
-        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_TextColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
+        <Setter Property="Height" Value="{DynamicResource LeeControlHeight}"/>
+        <Setter Property="Width" Value="{DynamicResource LeeControlWidth}"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="leedep:ComboBoxManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
-        <Setter Property="leedep:ComboBoxManager.SelectedForeground" Value="{DynamicResource LeeBrush_Main}"/>
+        <Setter Property="leedep:ComboBoxManager.EscToEmpty" Value="True"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-        <Setter Property="Padding" Value="6,3,5,3"/>
+        <Setter Property="Padding" Value="6,3"/>
         <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
         <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="ItemContainerStyle" Value="{DynamicResource  LeeComboBoxItem}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBox}">
@@ -142,7 +149,7 @@
                                 <Border x:Name="dropDownBorder"
                                         MinWidth="{Binding ActualWidth, ElementName=templateRoot}" 
                                         MaxHeight="{TemplateBinding MaxDropDownHeight}"
-                                        Background="White"
+                                        Background="{TemplateBinding Background}"
                                         CornerRadius="{DynamicResource LeeCornerRadius}"
                                         BorderBrush="{DynamicResource LeeBrush_BorderBrush}"
                                         BorderThickness="1"
@@ -180,20 +187,41 @@
                                               IsHitTestVisible="false" Margin="{TemplateBinding Padding}" 
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                            <TextBox
-                                x:Name="PART_EditableTextBox" 
-                                Visibility="Collapsed"
-                                BorderThickness="0"
-                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent},Mode=OneWay}" 
-                                Margin="{TemplateBinding Padding}" 
-                                Style="{StaticResource ComboBoxEditableTextBox}"
-                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
-             
+                            <TextBox x:Name="PART_EditableTextBox" 
+                                     Visibility="Collapsed"
+                                     BorderThickness="0"
+                                     Foreground="{TemplateBinding Foreground}"
+                                     FontSize="{TemplateBinding FontSize}"
+                                     FontWeight="{TemplateBinding FontWeight}"
+                                     leedep:TextBoxManager.EscToEmpty="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ComboBoxManager.EscToEmpty),Mode=OneWay}"
+                                     leedep:TextBoxManager.EnterCommand="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ComboBoxManager.EnterCommand),Mode=OneWay}"
+                                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                     IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent},Mode=OneWay}" 
+                                     Margin="{TemplateBinding Padding}" 
+                                     Style="{StaticResource ComboBoxEditableTextBox}"
+                                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                            <TextBlock x:Name="prviewText" 
+                                       Visibility="Collapsed"
+                                       Text="--请选择--"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"/>
 
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="SelectedItem" 
+                                 Value="{x:Null}">
+                            <Setter TargetName="prviewText" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+
+                        <Trigger SourceName="PART_EditableTextBox" 
+                                 Property="IsFocused" 
+                                 Value="False">
+                            <Setter TargetName="prviewText" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                      
+                        
                         <Trigger Property="HasItems" Value="false">
                             <Setter Property="Height" TargetName="dropDownBorder" Value="95"/>
                         </Trigger>
@@ -216,30 +244,46 @@
    
     </Style>
 
-    <Style TargetType="{x:Type ComboBoxItem}">
+    <Style x:Key="LeeComboBoxItem" TargetType="{x:Type ComboBoxItem}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="Foreground"  Value="{Binding Foreground,RelativeSource={RelativeSource AncestorType=ComboBox},Mode=OneWay}" />
-        <Setter Property="Background" Value="{DynamicResource LeeBrush_Main}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Height" Value="{DynamicResource LeeItemHeight}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBoxItem}">
                     <Border x:Name="border"
-                                Background="Transparent" >
+                            BorderThickness="0"
+                            Background="{TemplateBinding Background}" >
 
+                        <Grid>
                         <ContentPresenter x:Name="Presenter"
                                           Margin="{TemplateBinding Padding}"
                                           TextElement.Foreground="{TemplateBinding Foreground}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           ContentSource="Content" />
+
+                            <TextBlock x:Name="PART_SelectedText" 
+                                       Text="✔"
+                                       Visibility="Collapsed"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Center"
+                                       Foreground="{DynamicResource LeeBrush_Theme}"
+                                       Margin="5,0"/>
+                        </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected"  Value="True">
-                            <Setter  Property="Foreground"   Value="{Binding Path=(leedep:ComboBoxManager.SelectedForeground), RelativeSource={RelativeSource AncestorType={x:Type ComboBox}},Mode=OneWay}" />
+                            <Setter Property="Visibility"  
+                                    TargetName="PART_SelectedText"
+                                    Value="Visible" />
                         </Trigger>
                         <Trigger Property="IsMouseOver"  Value="True">
-                            <Setter TargetName="border"  Property="Background"  Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ComboBoxItem}}, Path=Background,Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.3,Mode=OneWay}" />
+                            <Setter Property="Background"  
+                                    TargetName="border"
+                                    Value="{DynamicResource LeeBrush_Mark}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
 

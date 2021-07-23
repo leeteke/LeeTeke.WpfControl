@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace LeeTeke.WpfControl.Dependencies
@@ -26,27 +27,44 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("CornerRadius", typeof(CornerRadius), typeof(ComboBoxManager));
         #endregion
 
-
-        #region SelectedForeground
-        /// <summary>
-        /// x选择的字体颜色
-        /// </summary>
-        public static Brush GetSelectedForeground(DependencyObject obj)
+        #region EscToEmpty
+        public static bool GetEscToEmpty(DependencyObject obj)
         {
-            return (Brush)obj.GetValue(SelectedForegroundProperty);
+            return (bool)obj.GetValue(EscToEmptyProperty);
         }
 
-        public static void SetSelectedForeground(DependencyObject obj, int value)
+        public static void SetEscToEmpty(DependencyObject obj, bool value)
         {
-            obj.SetValue(SelectedForegroundProperty, value);
+            obj.SetValue(EscToEmptyProperty, value);
         }
 
-        // Using a DependencyProperty as the backing store for SelectedForeground.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SelectedForegroundProperty =
-            DependencyProperty.RegisterAttached("SelectedForeground", typeof(Brush), typeof(ComboBoxManager));
+        // Using a DependencyProperty as the backing store for EscToEmpty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EscToEmptyProperty =
+            DependencyProperty.RegisterAttached("EscToEmpty", typeof(bool), typeof(ComboBoxManager));
+
+
+   
         #endregion
 
+        #region EnterCommand
+        public static ICommand GetEnterCommand(DependencyObject obj)
+        {
+            return (ICommand)obj.GetValue(EnterCommandProperty);
+        }
 
+        public static void SetEnterCommand(DependencyObject obj, ICommand value)
+        {
+            obj.SetValue(EnterCommandProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for EnterCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EnterCommandProperty =
+            DependencyProperty.RegisterAttached("EnterCommand", typeof(ICommand), typeof(ComboBoxManager));
+
+  
+
+     
+        #endregion
 
     }
 }

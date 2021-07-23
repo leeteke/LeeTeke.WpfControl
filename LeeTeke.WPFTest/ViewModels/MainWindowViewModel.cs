@@ -8,6 +8,7 @@ using Prism.Mvvm;
 using Prism.Commands;
 using LeeTeke.WPFTest.Models;
 using System.Windows.Media.Imaging;
+using LeeTeke.WpfControl;
 
 namespace LeeTeke.WPFTest.ViewModels
 {
@@ -117,7 +118,7 @@ namespace LeeTeke.WPFTest.ViewModels
 
         #endregion
 
-
+        private bool _switch = false;
         public MainWindowViewModel()
         {
             Init();
@@ -156,7 +157,8 @@ namespace LeeTeke.WPFTest.ViewModels
         private async void TestCommandExecute(object obj)
         {
 
-            NotifyData = new WpfControl.NotifyBannerShowModel("你好");
+            _switch = !_switch;
+            StaticMethods.SetLightOrDark(_switch);
 
 
         }

@@ -5,6 +5,15 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
     </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="TextBlock">
+        <!--修改默认FocusVisualStyle-->
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <!--修改默认SnapsToDevicePixels-->
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
+    </Style>
+
     <Style TargetType="Grid">
         <!--修改默认FocusVisualStyle-->
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
@@ -54,6 +63,8 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <!--修改默认SnapsToDevicePixels-->
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
     </Style>
 
     <Style TargetType="Rectangle">

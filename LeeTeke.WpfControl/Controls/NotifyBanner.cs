@@ -384,7 +384,6 @@ namespace LeeTeke.WpfControl.Controls
                 Content = "╳",
                 Width = 20,
                 Height = 20,
-                Style = _buttonResource["TextButton"] as Style
             };
             closeButton.Click += CloseButton_Click;
             show.Children.Add(closeButton);

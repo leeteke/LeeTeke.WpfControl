@@ -482,6 +482,46 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
+
+        #region EscToClear
+        /// <summary>
+        /// 清理
+        /// </summary>
+        public bool EscToClear
+        {
+            get { return (bool)GetValue(EscToClearProperty); }
+            set { SetValue(EscToClearProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for EscToClear.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EscToClearProperty =
+            DependencyProperty.Register("EscToClear", typeof(bool), typeof(TextBoxEx),new PropertyMetadata(EscToClearChanged));
+
+        private static void EscToClearChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is TextBoxEx box && e.NewValue is bool @bool)
+            {
+                if (@bool)
+                {
+                    box.KeyDown += Box_EscKeyDown;
+                }
+                else
+                {
+                    box.KeyDown -= Box_EscKeyDown;
+                }
+            }
+        }
+
+        private static void Box_EscKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Escape && sender is TextBoxEx box)
+            {
+                box.Text = string.Empty;
+            }
+        }
+        #endregion
+
+
         #endregion
 
         #region Command

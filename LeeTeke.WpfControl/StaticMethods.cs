@@ -13,13 +13,39 @@ namespace LeeTeke.WpfControl
 {
     public class StaticMethods
     {
+
+        public static void SetLightOrDark(bool isLight)
+        {
+            if (isLight)
+            {
+                Application.Current.Resources["LeeBrush_Background"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Background"]);
+                Application.Current.Resources["LeeBrush_Forground"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_White"]);
+               Application.Current.Resources["LeeBrush_Text"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Black"]);
+                Application.Current.Resources["LeeBrush_BorderBrush"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Gray"]);
+                Application.Current.Resources["LeeBrush_BorderBrushMouseOver"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Gray191"]);
+
+                Application.Current.Resources["LeeBrush_Mark"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Mark"]);
+
+            }
+            else
+            {
+               Application.Current.Resources["LeeBrush_Background"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_BackgroundDark"]);
+               Application.Current.Resources["LeeBrush_Forground"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Black"]);
+                Application.Current.Resources["LeeBrush_Text"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_White"]);
+                Application.Current.Resources["LeeBrush_BorderBrush"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Black"]);
+                Application.Current.Resources["LeeBrush_BorderBrushMouseOver"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Gray51"]);
+
+                Application.Current.Resources["LeeBrush_Mark"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_MarkDark"]);
+            }
+        }
+
         /// <summary>
         /// 改变主题色
         /// </summary>
         /// <param name="color"></param>
         public static void SetThemeColor(Brush color)
         {
-            Application.Current.Resources["LeeBrush_Main"] = color;
+            Application.Current.Resources["LeeBrush_Theme"] = color;
         }
 
         /// <summary>
@@ -28,19 +54,24 @@ namespace LeeTeke.WpfControl
         /// <param name="color"></param>
         public static void SetThemeColorDefault()
         {
-            Application.Current.Resources["LeeBrush_Main"] = new SolidColorBrush(Color.FromRgb(1, 119, 25));
+            Application.Current.Resources["LeeBrush_Theme"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Theme"]);
         }
         /// <summary>
         /// 改变默认文字颜色
         /// </summary>
         /// <param name="color"></param>
-        public static void SetDefaultTextColor(Color color)
+        public static void SetDefaultTextBrush(Color color)
         {
-
-            Application.Current.Resources["LeeBrush_TextColor"] = new SolidColorBrush(color);
-
+            Application.Current.Resources["LeeBrush_Text"] = new SolidColorBrush(color);
         }
-
+        /// <summary>
+        /// 改变默认文字颜色
+        /// </summary>
+        /// <param name="color"></param>
+        public static void SetDefaultTextBrushDefault()
+        {
+            Application.Current.Resources["LeeBrush_Text"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Black"]);
+        }
         /// <summary>
         /// 改变圆角
         /// </summary>
@@ -51,28 +82,17 @@ namespace LeeTeke.WpfControl
         }
 
         /// <summary>
-        /// 改变默认文字颜色
-        /// </summary>
-        /// <param name="color"></param>
-        public static void SetDefaultTextColorDefault()
-        {
-
-            Application.Current.Resources["LeeBrush_TextColor"] = new SolidColorBrush(Color.FromRgb(51, 51, 51));
-
-        }
-
-        /// <summary>
         /// 改变页面背景色
         /// </summary>
         /// <param name="color"></param>
-        public static void SetPageBackground(Brush color)
+        public static void SetBackground(Brush color)
         {
-            Application.Current.Resources["LeePage_Background"] = color;
+            Application.Current.Resources["LeeBrush_Background"] = color;
         }
 
-        public static void SetPageBackgroundDefault()
+        public static void SetBackgroundDefault()
         {
-            Application.Current.Resources["LeePage_Background"] = new SolidColorBrush(Colors.White);
+            Application.Current.Resources["LeeBrush_Background"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Background"]);
         }
 
 
@@ -115,7 +135,6 @@ namespace LeeTeke.WpfControl
                 _ => depth > 0 ? new SolidColorBrush(Color.FromArgb((byte)(255 * depth), (byte)255, (byte)255, (byte)255)) : new SolidColorBrush(Color.FromArgb((byte)(255 * Math.Abs(depth)), (byte)0, (byte)0, (byte)0)),
             };
         }
-
 
         /// <summary>
         /// 颜色加深或者变浅
@@ -510,8 +529,6 @@ namespace LeeTeke.WpfControl
             }
         }
 
-
-
         /// <summary>
         /// 寻找子控件
         /// </summary>
@@ -535,17 +552,15 @@ namespace LeeTeke.WpfControl
             return null;
         }
 
-     
 
-       
-    /// <summary>
-    /// 是否在控件里面
-    /// </summary>
-    /// <param name="pardent"></param>
-    /// <param name="child"></param>
-    /// <param name="outLevel"></param>
-    /// <returns></returns>
-    public static bool IsInControl(DependencyObject pardent, DependencyObject child, int outLevel = 1)
+        /// <summary>
+        /// 是否在控件里面
+        /// </summary>
+        /// <param name="pardent"></param>
+        /// <param name="child"></param>
+        /// <param name="outLevel"></param>
+        /// <returns></returns>
+        public static bool IsInControl(DependencyObject pardent, DependencyObject child, int outLevel = 1)
         {
             var _p = VisualTreeHelper.GetParent(child);
             if (_p == null)

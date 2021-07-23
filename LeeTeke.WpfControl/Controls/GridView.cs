@@ -68,7 +68,6 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-
         #region HorizontalScrollBarVisibility
         /// <summary>
         /// 请填写描述

@@ -12,7 +12,7 @@
         <Setter Property="BorderBrush" Value="{Binding Path=(leedep:ListViewItemManager.BorderBrush), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
         <Setter Property="BorderThickness" Value="{Binding Path=(leedep:ListViewItemManager.BorderThickness), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
         <Setter Property="Margin" Value="{Binding Path=(leedep:ListViewItemManager.Marigin), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
-        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_TextColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="Padding" Value="{Binding Path=(leedep:ListViewItemManager.Padding), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="Effect" Value="{Binding Path=(leedep:ListViewItemManager.Effect), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
@@ -109,7 +109,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="FontSize" Value="12"/>
-        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_TextColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
         <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>

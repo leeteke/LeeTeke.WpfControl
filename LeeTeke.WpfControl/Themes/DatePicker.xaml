@@ -64,7 +64,7 @@
         <Setter Property="leedep:DatePickerManager.PopupAnimation" Value="Fade"/>
         <Setter Property="leedep:DatePickerManager.ButtonWidth" Value="35"/>
         <Setter Property="leedep:DatePickerManager.ButtonFontSize" Value="16"/>
-        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_TextColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="IsTodayHighlighted" Value="True"/>
         <Setter Property="SelectedDateFormat" Value="Short"/>
         <Setter Property="Background" Value="Transparent"/>

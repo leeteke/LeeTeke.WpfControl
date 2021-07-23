@@ -48,38 +48,43 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ImageEx}">
-                    <Grid>
-                        <ContentPresenter x:Name="PART_DefaultContent"
+                    <Border Effect="{TemplateBinding Effect}"
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            CornerRadius="{TemplateBinding   CornerRadius}"
+                            Padding="{TemplateBinding Padding}"
+                            >
+                        <Grid x:Name="PART_Grid" >
+                            <Grid.Clip>
+                                <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                    <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
+                                    <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
+                                    <Binding   RelativeSource="{RelativeSource Mode=TemplatedParent}"  Path="CornerRadius" Mode="OneWay"/>
+                                </MultiBinding>
+                            </Grid.Clip>
+                            <ContentPresenter x:Name="PART_DefaultContent"
                                           Content="{TemplateBinding DefaultContent}"
                                           />
-                        <Image x:Name="PART_Image"
+                            <Image x:Name="PART_Image"
                                Opacity="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=AnimationValue,Mode=OneWay}"
                                Source="{TemplateBinding Source}"
                                Stretch="{TemplateBinding Stretch}"
                                           />
-                        <ContentPresenter x:Name="PART_Watermark"
+                            <ContentPresenter x:Name="PART_Watermark"
                                           IsHitTestVisible="False"
                                           Content="{TemplateBinding Watermark}"/>
-                    </Grid>
+                        </Grid>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=CornerRadius,Converter={StaticResource CornerRadiusIsZeroConverter}}" Value="False">
-                <Setter Property="Clip">
-                    <Setter.Value>
-                        <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
-                            <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
-                            <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
-                            <Binding   RelativeSource="{RelativeSource Mode=Self}"  Path="CornerRadius" Mode="OneWay"/>
-                        </MultiBinding>
-                    </Setter.Value>
-                </Setter>
-            </DataTrigger>
-        </Style.Triggers>
+    
     </Style>
 
     <Style TargetType="{x:Type local:NotifyIconEx}">
@@ -91,7 +96,7 @@
     <Style TargetType="{x:Type local:LodingBar}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="FillBrush" Value="{DynamicResource LeeBrush_Main}"/>
+        <Setter Property="FillBrush" Value="{DynamicResource LeeBrush_Theme}"/>
         <Setter Property="MinHeight" Value="8"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Value" Value="0"/>
@@ -230,7 +235,7 @@
                     Value="{Binding RelativeSource={ RelativeSource Mode=FindAncestor,AncestorType={x:Type local:SlideView},AncestorLevel=1},Path=ActualWidth,Mode=OneWay}"/>
         <Setter Property="Height" 
                     Value="{Binding RelativeSource={ RelativeSource Mode=FindAncestor,AncestorType={x:Type local:SlideView},AncestorLevel=1},Path=ActualHeight,Mode=OneWay}"/>
-        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_TextColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:SlideViewItem}" >
@@ -310,7 +315,7 @@
                                 Grid.Column="0"
                                 Background="Transparent">
                             <Border x:Name="PART_OpenBorder" 
-                                    Background="{DynamicResource LeeBrush_Main}"
+                                    Background="{DynamicResource LeeBrush_Theme}"
                                     BorderBrush="{DynamicResource LeeBrush_Gray204}"
                                     BorderThickness="2"
                                     Width="{Binding ElementName=PART_Canvas,Path=ActualWidth,Mode=OneWay}"
@@ -339,7 +344,7 @@
                                      IsHitTestVisible="False"
                                      Effect="{DynamicResource LeeShadow2}"
                                      >
-                               
+
                             </Ellipse>
 
                         </Canvas>
@@ -488,9 +493,9 @@
         <Setter Property="IsTabStop" Value="True"/>
         <Setter Property="ItemBorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="ItemRippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}"/>
-        <Setter Property="ItemCheckedBackground" Value="{DynamicResource LeeBrush_Main}"/>
-        <Setter Property="ItemCheckedBorderBrush" Value="{DynamicResource LeeBrush_Main}"/>
-        <Setter Property="ItemCheckedForeground" Value="{DynamicResource LeeBrush_TextColor}"/>
+        <Setter Property="ItemCheckedBackground" Value="{DynamicResource LeeBrush_Theme}"/>
+        <Setter Property="ItemCheckedBorderBrush" Value="{DynamicResource LeeBrush_Theme}"/>
+        <Setter Property="ItemCheckedForeground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="ItemMouseOverBackground" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=Background,Converter={StaticResource ColorDepthConverter},ConverterParameter=-0.3}"/>
         <Setter Property="ItemMouseOverBorderBrush" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=BorderBrush,Converter={StaticResource ColorDepthConverter},ConverterParameter=-0.3}"/>
         <Setter Property="Template">
@@ -554,8 +559,9 @@
         <Setter Property="PasswordChar" Value="●"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
-        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_TextColor}"/>
-        <Setter Property="MinHeight" Value="20"/>
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
+        <Setter Property="Width" Value="{DynamicResource LeeControlWidth}"/>
+        <Setter Property="Height" Value="{DynamicResource LeeControlHeight}"/>
         <Setter Property="Padding" Value="2"/>
         <Setter Property="BorderBrush" Value="{DynamicResource  LeeBrush_BorderBrush}"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -566,7 +572,7 @@
         <Setter Property="IconCanClick" Value="False"/>
         <Setter Property="IconVisible" Value="False"/>
         <Setter Property="IconMargin" Value="2,0"/>
-        <Setter Property="IconFill" Value="{DynamicResource  LeeBrush_Main}"/>
+        <Setter Property="IconFill" Value="{DynamicResource  LeeBrush_Theme}"/>
         <Setter Property="SplitterFill" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=BorderBrush}"/>
         <Setter Property="SplitterMargin" Value="2"/>
         <Setter Property="SplitterVisible" Value="False"/>
@@ -624,7 +630,6 @@
                                          FontSize="{TemplateBinding FontSize}"
                                          FontStretch="{TemplateBinding FontStretch}"
                                          TextAlignment="{TemplateBinding TextAlignment}"
-                                       
                                          input:InputMethod.IsInputMethodEnabled="False"
                                          BorderThickness="0"
                                          VerticalAlignment="Center"
@@ -675,8 +680,6 @@
                             <Setter TargetName="PART_ICON" Property="Cursor" Value="Hand"/>
 
                         </MultiTrigger>
-
-
                         <DataTrigger Binding="{Binding ElementName=PART_Main,Path=IsFocused,Mode=OneWay}" Value="True">
                             <Setter TargetName="PART_PreviewText" Property="Visibility" Value="Collapsed"/>
                         </DataTrigger>
@@ -717,7 +720,7 @@
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="Margin" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TagControl}},Path=ItemMargin,Mode=OneWay}"/>
         <Setter Property="PinVisibly" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TagControl}},Path=ItemPinVisibly,Mode=OneWay}"/>
-        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_TextColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="CanClosed" Value="True"/>
         <Setter Property="CornerRadius" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TagControl}},Path=ItemCornerRadius,Mode=OneWay}"/>
@@ -918,7 +921,7 @@
         <Setter Property="Orientation" Value="Horizontal"/>
         <Setter Property="ItemCornerRadius" Value="2,2,0,0"/>
         <Setter Property="ItemPinVisibly" Value="True"/>
-        <Setter Property="SelectedBrush" Value="{DynamicResource LeeBrush_Main}"/>
+        <Setter Property="SelectedBrush" Value="{DynamicResource LeeBrush_Theme}"/>
         <Setter Property="MinHeight" Value="30"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -986,7 +989,7 @@
         <Setter Property="EasingDuration" Value="0:0:0.200"/>
         <Setter Property="IsKeepShow" Value="False"/>
         <Setter Property="ShowDuration" Value="5000"/>
-        <Setter Property="Background" Value="{DynamicResource LeeBrush_Main}"/>
+        <Setter Property="Background" Value="{DynamicResource LeeBrush_Theme}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter  Property="Foreground" Value="White"/>
@@ -1067,8 +1070,8 @@
                             </ScrollViewer>
                             <Grid Background="Transparent"/>
                         </Grid>
-                       
-                        
+
+
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Orientation" Value="Horizontal">
@@ -1096,4 +1099,55 @@
         </Setter>
     </Style>
 
+    <Style TargetType="{x:Type local:ScrollBanner}">
+        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource LeeBrush_YellowLight}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="Orientation" Value="Horizontal"/>
+        <Setter Property="MinHeight" Value="35"/>
+        <Setter Property="MinWidth" Value="100"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ScrollBanner}">
+                    <Border BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Effect="{TemplateBinding Effect}">
+                        <Grid>
+                         <StackPanel Orientation="{TemplateBinding Orientation}">
+                            <StackPanel.Clip>
+                                <MultiBinding Converter="{StaticResource MultiValueToClipConverter}">
+                                    <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
+                                    <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
+                                    <Binding   RelativeSource="{RelativeSource Mode=TemplatedParent}"  Path="CornerRadius" Mode="OneWay"/>
+                                </MultiBinding>
+                            </StackPanel.Clip>
+                            <ContentPresenter  x:Name="PART_Content"  />
+                        </StackPanel>
+                            <Button VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Width="20"
+                                    Height="20"
+                                    leedep:ButtonManager.CornerRadius="10"/>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Orientation" Value="Horizontal">
+                            <Setter  TargetName="PART_Content" Property="HorizontalAlignment" Value="Left"/>
+                            <Setter  TargetName="PART_Content" Property="VerticalAlignment" Value="Center"/>
+                        </Trigger>
+                        <Trigger Property="Orientation" Value="Vertical">
+                            <Setter  TargetName="PART_Content" Property="VerticalAlignment" Value="Bottom"/>
+                            <Setter  TargetName="PART_Content" Property="HorizontalAlignment" Value="Center"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

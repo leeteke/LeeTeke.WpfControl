@@ -12,7 +12,7 @@
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="Background" Value="LightGray" />
-        <Setter Property="Foreground"   Value="{DynamicResource LeeBrush_TextColor}" />
+        <Setter Property="Foreground"   Value="{DynamicResource LeeBrush_Text}" />
         <Setter Property="TickPlacement"  Value="None" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="AutoToolTipPlacement" Value="None"/>
@@ -23,7 +23,7 @@
         <Setter Property="leedep:SliderManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="leedep:SliderManager.TrackSize" Value="5"/>
         <Setter Property="leedep:SliderManager.RegisterMouseWheel" Value="True"/>
-        <Setter Property="leedep:SliderManager.TrackBrush" Value="{DynamicResource LeeBrush_Main}"/>
+        <Setter Property="leedep:SliderManager.TrackBrush" Value="{DynamicResource LeeBrush_Theme}"/>
         <Setter Property="leedep:SliderManager.TrackThumb" 
                 >
             <Setter.Value>

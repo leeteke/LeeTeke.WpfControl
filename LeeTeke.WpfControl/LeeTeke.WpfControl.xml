@@ -426,6 +426,32 @@
             过度动画
             </summary>
         </member>
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.ScrollBanner" -->
+        <member name="P:LeeTeke.WpfControl.Controls.ScrollBanner.IsScrolling">
+            <summary>
+            是否正在滚动
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ScrollBanner.AutoScrolling">
+            <summary>
+            请添加描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ScrollBanner.Orientation">
+            <summary>
+            Orientation
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ScrollBanner.CornerRadius">
+            <summary>
+            CornerRadius
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ScrollBanner.IsEnabled">
+            <summary>
+            请添加描述
+            </summary>
+        </member>
         <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.SlideView" -->
         <member name="P:LeeTeke.WpfControl.Controls.SlideView.Count">
             <summary>
@@ -771,6 +797,11 @@
             请填写描述
             </summary>
         </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.EscToClear">
+            <summary>
+            清理
+            </summary>
+        </member>
         <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.EnterCommand">
             <summary>
             请填写描述
@@ -885,11 +916,6 @@
         <member name="M:LeeTeke.WpfControl.Dependencies.CheckBoxManager.GetCheckBoxSize(System.Windows.DependencyObject)">
             <summary>
             选择框大小
-            </summary>
-        </member>
-        <member name="M:LeeTeke.WpfControl.Dependencies.ComboBoxManager.GetSelectedForeground(System.Windows.DependencyObject)">
-            <summary>
-            x选择的字体颜色
             </summary>
         </member>
         <member name="M:LeeTeke.WpfControl.Dependencies.GroupBoxManager.GetHeaderPadding(System.Windows.DependencyObject)">
@@ -1266,7 +1292,13 @@
             </summary>
             <param name="color"></param>
         </member>
-        <member name="M:LeeTeke.WpfControl.StaticMethods.SetDefaultTextColor(System.Windows.Media.Color)">
+        <member name="M:LeeTeke.WpfControl.StaticMethods.SetDefaultTextBrush(System.Windows.Media.Color)">
+            <summary>
+            改变默认文字颜色
+            </summary>
+            <param name="color"></param>
+        </member>
+        <member name="M:LeeTeke.WpfControl.StaticMethods.SetDefaultTextBrushDefault">
             <summary>
             改变默认文字颜色
             </summary>
@@ -1278,13 +1310,7 @@
             </summary>
             <param name="color"></param>
         </member>
-        <member name="M:LeeTeke.WpfControl.StaticMethods.SetDefaultTextColorDefault">
-            <summary>
-            改变默认文字颜色
-            </summary>
-            <param name="color"></param>
-        </member>
-        <member name="M:LeeTeke.WpfControl.StaticMethods.SetPageBackground(System.Windows.Media.Brush)">
+        <member name="M:LeeTeke.WpfControl.StaticMethods.SetBackground(System.Windows.Media.Brush)">
             <summary>
             改变页面背景色
             </summary>

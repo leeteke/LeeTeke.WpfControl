@@ -11,10 +11,10 @@
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
-        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_TextColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
-        <Setter Property="leedep:RadioButtonManager.MarkBrush" Value="{DynamicResource LeeBrush_Main}"/>
+        <Setter Property="leedep:RadioButtonManager.MarkBrush" Value="{DynamicResource LeeBrush_Theme}"/>
         <Setter Property="leedep:RadioButtonManager.RippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}"/>
         <Setter Property="leedep:RadioButtonManager.MarkSize" Value="13"/>
         <Setter Property="leedep:RadioButtonManager.MarkMargin" Value="2"/>

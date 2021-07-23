@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -52,8 +51,6 @@ namespace LeeTeke.WpfControl.Controls
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(RollingPanel), new FrameworkPropertyMetadata(typeof(RollingPanel)));
         }
-
-
         private ContentPresenter _contentPresenter;
         private ScrollViewer _scrollViewer;
         private Storyboard _sbMove;
@@ -400,7 +397,7 @@ namespace LeeTeke.WpfControl.Controls
                     {
 
                         Value = vPath,
-                        KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(10 * vPath/600)),
+                        KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(10 * vPath / 600)),
                         EasingFunction = TransitionEasing,
                     });
                     _sbMove.Children.Add(xDA);
@@ -439,6 +436,5 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         #endregion
-
     }
 }
