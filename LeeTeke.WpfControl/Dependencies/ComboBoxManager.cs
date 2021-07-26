@@ -61,9 +61,41 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty EnterCommandProperty =
             DependencyProperty.RegisterAttached("EnterCommand", typeof(ICommand), typeof(ComboBoxManager));
 
-  
 
-     
+
+
+        #endregion
+
+        #region ShowPreviewText
+        public static bool GetShowPreviewText(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(ShowPreviewTextProperty);
+        }
+
+        public static void SetShowPreviewText(DependencyObject obj, bool value)
+        {
+            obj.SetValue(ShowPreviewTextProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for ShowPreviewText.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ShowPreviewTextProperty =
+            DependencyProperty.RegisterAttached("ShowPreviewText", typeof(bool), typeof(ComboBoxManager));
+        #endregion
+
+        #region PreviewText
+        public static string GetPreviewText(DependencyObject obj)
+        {
+            return (string)obj.GetValue(PreviewTextProperty);
+        }
+
+        public static void SetPreviewText(DependencyObject obj, string value)
+        {
+            obj.SetValue(PreviewTextProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for PreviewText.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PreviewTextProperty =
+            DependencyProperty.RegisterAttached("PreviewText", typeof(string), typeof(ComboBoxManager));
         #endregion
 
     }

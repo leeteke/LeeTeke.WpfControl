@@ -682,6 +682,7 @@
                         </MultiTrigger>
                         <DataTrigger Binding="{Binding ElementName=PART_Main,Path=IsFocused,Mode=OneWay}" Value="True">
                             <Setter TargetName="PART_PreviewText" Property="Visibility" Value="Collapsed"/>
+                            <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_Theme}"/>
                         </DataTrigger>
 
                         <DataTrigger Binding="{Binding ElementName=PART_Password,Path=IsFocused,Mode=OneWay}" Value="True">

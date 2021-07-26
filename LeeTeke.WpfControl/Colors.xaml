@@ -15,7 +15,7 @@
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Rectangle  Margin="0" StrokeThickness="1" Stroke="{DynamicResource LeeBrush_Gray224}"  Effect="{DynamicResource  LeeShadow2}"/>
+                    <Rectangle  Margin="0"  StrokeDashArray="4 4" StrokeThickness="1" Stroke="{DynamicResource LeeBrush_Theme}"  />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

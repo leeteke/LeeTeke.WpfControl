@@ -4,14 +4,12 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <Description>LeeTeke出品的Wpf控件系列</Description>
-    <Version>1.3.2.1</Version>
-    <AssemblyVersion>1.3.2.0</AssemblyVersion>
-    <FileVersion>1.3.2.0</FileVersion>
+    <Version>1.4.0.0</Version>
+    <AssemblyVersion>1.4.0.0</AssemblyVersion>
+    <FileVersion>1.4.0.0</FileVersion>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>E:\VSProjects\GitHubLibrary\LeeTeke.WpfControl\LeeTeke.WpfControl\LeeTeke.WpfControl.xml</DocumentationFile>
-  </PropertyGroup>
+
 
   <ItemGroup>
     <None Remove="LeeTekeDatas\segmdl2.ttf" />

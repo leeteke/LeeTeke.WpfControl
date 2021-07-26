@@ -11,8 +11,9 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <!--修改默认SnapsToDevicePixels-->
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
+       
     </Style>
+    
 
     <Style TargetType="Grid">
         <!--修改默认FocusVisualStyle-->

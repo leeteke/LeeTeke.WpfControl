@@ -7,7 +7,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    
+
     <Style x:Key="LeeToggleButton" TargetType="{x:Type ToggleButton}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
@@ -19,61 +19,153 @@
         <Setter Property="leedep:ToggleButtonManager.CheckedForeground" Value="White"/>
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="Foreground"  Value="{DynamicResource LeeBrush_Text}"/>
-        <Setter Property="leedep:ToggleButtonManager.MouseOverBackground" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=Background,Converter={StaticResource ColorDepthConverter},ConverterParameter=-0.3,Mode=TwoWay}"/>
-        <Setter Property="leedep:ToggleButtonManager.MouseOverBorderBrush" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path= BorderBrush,Converter={StaticResource ColorDepthConverter},ConverterParameter=-0.3,Mode=TwoWay}"/>
-        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="leedep:ToggleButtonManager.MouseOverBorderBrush" Value="{DynamicResource LeeBrush_BorderBrushMouseOver}"/>
+        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Padding" Value="2"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Grid>
-                        <Border x:Name="border" 
-                                BorderBrush="{TemplateBinding BorderBrush}"
+                    <Border x:Name="PART_Border" 
+                            BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 Background="{TemplateBinding Background}" 
-                                CornerRadius="{Binding Path=(leedep:ToggleButtonManager.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"
-                           />
-                        <Border x:Name="borderMask" 
-                                Background="Transparent"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}" 
-                                CornerRadius="{Binding Path=(leedep:ToggleButtonManager.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"
-                           />
-                        <controls:RippleMask ParentElement="{Binding RelativeSource={RelativeSource  Mode=TemplatedParent}}"
-                                            RippleBrush="{Binding Path=(leedep:ToggleButtonManager.RippleBrush),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"
-                                        CornerRadius="{Binding Path=(leedep:ToggleButtonManager.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"
-                                       IsOverflow="False"/>
-                        <ContentPresenter x:Name="contentPresenter" 
-                                          Focusable="False" 
-                                          TextElement.Foreground="{TemplateBinding Foreground}"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          Margin="{TemplateBinding Padding}" 
-                                          RecognizesAccessKey="True"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                    </Grid>
+                                CornerRadius="{Binding Path=(leedep:ToggleButtonManager.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}">
+                        <Grid Background="Transparent">
+                            <controls:RippleMask ParentElement="{Binding RelativeSource={RelativeSource  Mode=TemplatedParent}}"
+                                                 RippleBrush="{Binding Path=(leedep:ToggleButtonManager.RippleBrush),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"
+                                                 CornerRadius="{Binding Path=(leedep:ToggleButtonManager.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"
+                                                 IsOverflow="False"/>
+                            <ContentPresenter x:Name="contentPresenter"
+                                              Focusable="False" 
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}" 
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                            <ContentPresenter x:Name="Checked_ContentPresenter"
+                                              Focusable="False" 
+                                              RecognizesAccessKey="True"
+                                              Content="{Binding RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}},Path=(leedep:ToggleButtonManager.CheckedContent)}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}" 
+                                              TextElement.Foreground="{Binding ElementName=contentPresenter,Path=(TextElement.Foreground)}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Visibility="Collapsed"/>
+                        </Grid>
+                    </Border>
                     <ControlTemplate.Triggers>
-           
+
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" TargetName="borderMask" Value="{Binding Path=(leedep:ToggleButtonManager.MouseOverBackground),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"/>
-                            <Setter Property="BorderBrush" TargetName="borderMask" Value="{Binding Path=(leedep:ToggleButtonManager.MouseOverBorderBrush),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"/>
+                            <Setter Property="Background" TargetName="PART_Border"  Value="{Binding Path=(leedep:ToggleButtonManager.MouseOverBackground),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"/>
+                            <Setter Property="BorderBrush" TargetName="PART_Border" Value="{Binding Path=(leedep:ToggleButtonManager.MouseOverBorderBrush),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"/>
                         </Trigger>
+
+                        <MultiTrigger >
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True"/>
+                                <Condition Property="leedep:ToggleButtonManager.HaveCheckedContent" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter  TargetName="contentPresenter" Property="Visibility" Value="Collapsed"/>
+                            <Setter  TargetName="Checked_ContentPresenter" Property="Visibility" Value="Visible"/>
+                        </MultiTrigger>
+
                         <Trigger Property="IsChecked" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="{Binding Path=(leedep:ToggleButtonManager.CheckedBackground),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"/>
-                            <Setter Property="BorderThickness"  Value="0"/>
-                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{Binding Path=(leedep:ToggleButtonManager.CheckedForeground),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"/>
+                            <Setter Property="Background" TargetName="PART_Border"  Value="{Binding Path=(leedep:ToggleButtonManager.CheckedBackground),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"/>
+                            <Setter Property="BorderThickness" TargetName="PART_Border"  Value="0"/>
+                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{Binding Path=(leedep:ToggleButtonManager.CheckedForeground),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"/>
                         </Trigger>
+
+
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Background" TargetName="border" Value="LightGray"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="{x:Null}"/>
+                            <Setter Property="Background" Value="LightGray"/>
+                            <Setter Property="BorderBrush" Value="{x:Null}"/>
                             <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="White"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-      
+
+    </Style>
+
+    <Style x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="IsTabStop" Value="false"/>
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="ClickMode" Value="Press"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid Background="Transparent">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="30" />
+                            </Grid.ColumnDefinitions>
+                            <Path x:Name="arrow1"
+                                  Opacity="1"
+                                  VerticalAlignment="Center"
+                                  Grid.Column="1"
+                                  HorizontalAlignment="Center"
+                                  Data="M5,4 H14 L9.5,10 Z"
+                                  Width="15"
+                                  Height="15"
+                                  Fill="{TemplateBinding Foreground}" />
+                            <Path x:Name="arrow2"
+                                  Opacity="0"
+                                  VerticalAlignment="Center"
+                                  Grid.Column="1"
+                                  HorizontalAlignment="Center"
+                                  Data="M5,10 H14 L9.5,4.5 Z"
+                                  Width="15"
+                                  Height="15"
+                                  Fill="{TemplateBinding Foreground}" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked"
+                                                                 Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="arrow1"
+                                                                                         Storyboard.TargetProperty="Opacity"
+                                                                                         To="0"
+                                                                                         Duration="0:0:0.2"></DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="arrow2"
+                                                                                         Storyboard.TargetProperty="Opacity"
+                                                                                         To="1"
+                                                                                         Duration="0:0:0.2"></DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="arrow1"
+                                                                                         Storyboard.TargetProperty="Opacity"
+                                                                                         To="1"
+                                                                                         Duration="0:0:0.2"></DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="arrow2"
+                                                                                         Storyboard.TargetProperty="Opacity"
+                                                                                         To="0"
+                                                                                         Duration="0:0:0.2"></DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>

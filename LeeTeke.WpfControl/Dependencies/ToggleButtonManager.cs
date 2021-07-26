@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 
 namespace LeeTeke.WpfControl.Dependencies
@@ -140,6 +141,52 @@ namespace LeeTeke.WpfControl.Dependencies
 
 
         #endregion
+
+
+        #region CheckedContent
+        public static object GetCheckedContent(DependencyObject obj)
+        {
+            return (object)obj.GetValue(CheckedContentProperty);
+        }
+
+        public static void SetCheckedContent(DependencyObject obj, object value)
+        {
+            obj.SetValue(CheckedContentProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for CheckedContent.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CheckedContentProperty =
+            DependencyProperty.RegisterAttached("CheckedContent", typeof(object), typeof(ToggleButtonManager),new PropertyMetadata(CheckedContentChanged));
+
+        private static void CheckedContentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is ToggleButton toggle)
+            {
+                SetHaveCheckedContent(toggle, e.NewValue != null);
+            }
+        }
+        #endregion
+
+
+
+
+        #region HaveCheckedContent
+        public static bool GetHaveCheckedContent(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(HaveCheckedContentProperty);
+        }
+
+        private static void SetHaveCheckedContent(DependencyObject obj, bool value)
+        {
+            obj.SetValue(HaveCheckedContentProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for HaveCheckedContent.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HaveCheckedContentProperty =
+            DependencyProperty.RegisterAttached("HaveCheckedContent", typeof(bool), typeof(ToggleButtonManager));
+        #endregion
+
+
 
 
     }

@@ -14,9 +14,9 @@
         Background="{DynamicResource LeeBrush_Background}"
         >
     <Window.Resources>
-
-   
-
+              
+        
+        
     </Window.Resources>
 
     
@@ -31,8 +31,17 @@
         <ScrollViewer Grid.Row="1" >
 
             <StackPanel  
-                         >
-
+                       Background="Transparent"   >
+                <StackPanel.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="ceshi"/>
+                        <MenuItem Header="ceshi"/>
+                        <MenuItem Header="ceshi"/>
+                        <MenuItem Header="ceshi"/>
+                    </ContextMenu>
+                        
+                </StackPanel.ContextMenu>
+                
                 <Button Width="100" 
                         Height="30" 
                         Content="Nihao " 
@@ -40,7 +49,8 @@
                         />
                 <TextBlock Text="你好"
                            VerticalAlignment="Center"
-                           HorizontalAlignment="Center"/>
+                           HorizontalAlignment="Center"
+                           Foreground="{DynamicResource LeeBrush_Text}"/>
 
                 <TextBox x:Name="txt"
                          leedep:TextBoxManager.EnterCommand="{Binding   TestCommand}"
@@ -58,8 +68,8 @@
                 <CheckBox  Content="你好"
                       
                             />
-                <ComboBox IsEditable="True"  
-                           >
+                <ComboBox IsEditable="False"  
+                          >
                     <ComboBoxItem>
                         <Rectangle  Fill="Red" 
                                     Width="100"
@@ -76,7 +86,15 @@
                         <Rectangle  Fill="Azure" Width="100" Height="20" />
                     </ComboBoxItem>
                 </ComboBox>
-
+                
+      
+                <ToggleButton 
+                              Content="你好" 
+                              Width="100" 
+                              Height="35"
+                    leedep:ToggleButtonManager.CheckedContent="你好1"
+                                 />
+              
 
             </StackPanel>
             

@@ -30,82 +30,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
-        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="OverridesDefaultStyle" Value="true"/>
-        <Setter Property="IsTabStop" Value="false"/>
-        <Setter Property="Focusable" Value="false"/>
-        <Setter Property="ClickMode" Value="Press"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                        <Grid Background="Transparent">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="30" />
-                            </Grid.ColumnDefinitions>
-                            <Path x:Name="arrow1"
-                                  Opacity="1"
-                                  VerticalAlignment="Center"
-                                  Grid.Column="1"
-                                  HorizontalAlignment="Center"
-                                  Data="M5,4 H14 L9.5,10 Z"
-                                  Width="15"
-                                  Height="15"
-                                  Fill="{TemplateBinding Foreground}" />
-                            <Path x:Name="arrow2"
-                                  Opacity="0"
-                                  VerticalAlignment="Center"
-                                  Grid.Column="1"
-                                  HorizontalAlignment="Center"
-                                  Data="M5,10 H14 L9.5,4.5 Z"
-                                  Width="15"
-                                  Height="15"
-                                  Fill="{TemplateBinding Foreground}" />
-                        </Grid>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsChecked"
-                                                                 Value="True">
-                            <Trigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="arrow1"
-                                                                                         Storyboard.TargetProperty="Opacity"
-                                                                                         To="0"
-                                                                                         Duration="0:0:0.2"></DoubleAnimation>
-                                        <DoubleAnimation Storyboard.TargetName="arrow2"
-                                                                                         Storyboard.TargetProperty="Opacity"
-                                                                                         To="1"
-                                                                                         Duration="0:0:0.2"></DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="arrow1"
-                                                                                         Storyboard.TargetProperty="Opacity"
-                                                                                         To="1"
-                                                                                         Duration="0:0:0.2"></DoubleAnimation>
-                                        <DoubleAnimation Storyboard.TargetName="arrow2"
-                                                                                         Storyboard.TargetProperty="Opacity"
-                                                                                         To="0"
-                                                                                         Duration="0:0:0.2"></DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.ExitActions>
-                        </Trigger>
 
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
 
     <Style x:Key="LeeComboBox" TargetType="{x:Type ComboBox}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
@@ -118,6 +43,8 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="leedep:ComboBoxManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="leedep:ComboBoxManager.EscToEmpty" Value="True"/>
+        <Setter Property="leedep:ComboBoxManager.ShowPreviewText" Value="True"/>
+        <Setter Property="leedep:ComboBoxManager.PreviewText" Value="--请选择--"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
@@ -203,25 +130,27 @@
 
                             <TextBlock x:Name="prviewText" 
                                        Visibility="Collapsed"
-                                       Text="--请选择--"
+                                       Text="{Binding Path=(leedep:ComboBoxManager.PreviewText),RelativeSource={RelativeSource AncestorType={x:Type ComboBox}},Mode=OneWay}"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"/>
 
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="SelectedItem" 
-                                 Value="{x:Null}">
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition SourceName="PART_EditableTextBox" Property="IsFocused" Value="False"/>
+                                <Condition Property="SelectedItem" Value="{x:Null}"/>
+                                <Condition Property="leedep:ComboBoxManager.ShowPreviewText" Value="True"/>
+                            </MultiTrigger.Conditions>
                             <Setter TargetName="prviewText" Property="Visibility" Value="Visible"/>
+                        </MultiTrigger>
+
+                        <Trigger SourceName="PART_EditableTextBox" Property="IsFocused" Value="True">
+                            <Setter TargetName="prviewText" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
 
-                        <Trigger SourceName="PART_EditableTextBox" 
-                                 Property="IsFocused" 
-                                 Value="False">
-                            <Setter TargetName="prviewText" Property="Visibility" Value="Visible"/>
-                        </Trigger>
-                      
-                        
                         <Trigger Property="HasItems" Value="false">
                             <Setter Property="Height" TargetName="dropDownBorder" Value="95"/>
                         </Trigger>
