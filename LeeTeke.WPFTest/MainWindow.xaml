@@ -31,7 +31,9 @@
         <ScrollViewer Grid.Row="1" >
 
             <StackPanel  
-                       Background="Transparent"   >
+                Width="200"
+                Background="Transparent" 
+                >
                 <StackPanel.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="ceshi"/>
@@ -42,7 +44,7 @@
                         
                 </StackPanel.ContextMenu>
                 
-                <Button Width="100" 
+                <Button 
                         Height="30" 
                         Content="Nihao " 
                         Command="{Binding TestCommand}"
@@ -66,7 +68,6 @@
                 <leecontrol:TextBoxEx Mode="General"     Text="2"/>
 
                 <CheckBox  Content="你好"
-                      
                             />
                 <ComboBox IsEditable="False"  
                           >
@@ -90,11 +91,23 @@
       
                 <ToggleButton 
                               Content="你好" 
-                              Width="100" 
                               Height="35"
                     leedep:ToggleButtonManager.CheckedContent="你好1"
                                  />
-              
+                <RadioButton Content="RadioButton"
+                             />
+                <RadioButton Content="RadioButton" />
+                <TabControl Height="100"
+                             TabStripPlacement="Right">
+                    <TabItem Header="TabItem">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                    <TabItem Header="TabItem">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                </TabControl>
+
+
 
             </StackPanel>
             

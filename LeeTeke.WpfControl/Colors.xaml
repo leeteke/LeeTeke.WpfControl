@@ -24,8 +24,9 @@
     <sys:Double x:Key="LeeControlHeight">35</sys:Double>
     <sys:Double x:Key="LeeItemHeight">28</sys:Double>
     <sys:Double x:Key="LeeItemWidth">80</sys:Double>
-    <sys:Double x:Key="LeeControlWidth">100</sys:Double>
-    
+    <sys:Double x:Key="LeeControlWidth">NaN</sys:Double>
+    <Thickness x:Key="LeeControlPadding">2</Thickness>
+
     <!--默认主背景色-->
     <SolidColorBrush x:Key="LeeBrush_Background" Color="{DynamicResource LeeColor_Background}"/>
     <Color x:Key="LeeColor_Background" R="243" G="243" B="243" A="255"/>
