@@ -595,6 +595,7 @@
                         <DockPanel>
 
                             <Border x:Name="PART_ICON"
+                                    BorderThickness="0"
                                     Background="Transparent"
                                     Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=IconVisible,Mode=OneWay,Converter={StaticResource VisibilityForBoolConverter}}"
                                     DockPanel.Dock="{TemplateBinding IconDock}"
