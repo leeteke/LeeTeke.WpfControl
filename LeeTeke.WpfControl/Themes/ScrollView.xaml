@@ -40,9 +40,7 @@
                                             <DataTrigger Binding="{Binding ElementName=PART_Border,Path=ActualWidth,Converter={StaticResource DoubleComparisonConverter},ConverterParameter=Less_4}" Value="True">
                                                 <Setter TargetName="PART_Border" Property="CornerRadius" Value="2"/>
                                             </DataTrigger>
-                                            <DataTrigger Binding="{Binding ElementName=PART_Border,Path=ActualHeight,Converter={StaticResource DoubleComparisonConverter},ConverterParameter=Less_4}" Value="True">
-                                                <Setter TargetName="PART_Border" Property="CornerRadius" Value="2"/>
-                                            </DataTrigger>
+                              
                                         </ControlTemplate.Triggers>
                                         </ControlTemplate>
                                     </Thumb.Template>
@@ -61,23 +59,28 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ScrollBar}">
-                            <Border Background="{Binding Path=(leedep:ScrollManager.TrackBrush),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}"
-                                    CornerRadius="{Binding Path=(leedep:ScrollManager.ScrollBarCornerRadius),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}">
-                                <Track x:Name="PART_Track"
+                                   <Track x:Name="PART_Track"
                                        IsEnabled="{TemplateBinding IsMouseOver}">
                                     <Track.Thumb>
                                         <Thumb>
                                             <Thumb.Template>
                                                 <ControlTemplate TargetType="Thumb">
-                                                    <Border  Background="{Binding Path=(leedep:ScrollManager.ThumbBrush),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}"
+                                                    <Border x:Name="PART_Border" 
+                                                            BorderThickness="0"
+                                                            Background="{Binding Path=(leedep:ScrollManager.ThumbBrush),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}"
                                                      CornerRadius="{Binding Path=(leedep:ScrollManager.ScrollBarCornerRadius),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}" 
                                                      Effect="{Binding Path=(leedep:ScrollManager.ScrollBarShadow),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}"        />
+                                                <ControlTemplate.Triggers>
+                                                    <DataTrigger Binding="{Binding ElementName=PART_Border,Path=ActualHeight,Converter={StaticResource DoubleComparisonConverter},ConverterParameter=Less_4}" Value="True">
+                                                        <Setter TargetName="PART_Border" Property="CornerRadius" Value="2"/>
+                                                    </DataTrigger>
+                                                </ControlTemplate.Triggers>
                                                 </ControlTemplate>
                                             </Thumb.Template>
                                         </Thumb>
                                     </Track.Thumb>
                                 </Track>
-                            </Border>
+                         
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>

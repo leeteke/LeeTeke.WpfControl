@@ -33,7 +33,7 @@
                       Margin="10">
 
             
-            <StackPanel   Width="300"
+            <StackPanel   Width="500"
                 >
                 <StackPanel.ContextMenu>
                     <ContextMenu>
@@ -113,7 +113,10 @@
 
                 </GroupBox>
 
-                <Slider/>
+           
+
+                <Slider Orientation="Vertical"
+                        Height="100"/>
 
             </StackPanel>
             
