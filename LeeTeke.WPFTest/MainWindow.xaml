@@ -12,6 +12,7 @@
         Width="600"
         x:Name="windows"
         Background="{DynamicResource LeeBrush_Background}"
+        d:Height="1000"
         >
     <Window.Resources>
               
@@ -28,11 +29,11 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ScrollViewer Grid.Row="1" >
+        <ScrollViewer Grid.Row="1" 
+                      Margin="10">
 
-            <StackPanel  
-                Width="200"
-                Background="Transparent" 
+            
+            <StackPanel   Width="300"
                 >
                 <StackPanel.ContextMenu>
                     <ContextMenu>
@@ -43,6 +44,8 @@
                     </ContextMenu>
                         
                 </StackPanel.ContextMenu>
+
+           
                 
                 <Button 
                         Height="30" 
@@ -65,9 +68,12 @@
                               leedep:PasswordManager.Attach="True"
                               leedep:PasswordManager.Password="{Binding ElementName=txt,Path=Text,Mode=TwoWay}"/>
 
-                <leecontrol:TextBoxEx Mode="General"     Text="2"/>
+                <leecontrol:TextBoxEx Mode="Password" 
+                                      Text="2"
+                                      />
 
                 <CheckBox  Content="你好"
+                           leedep:CheckBoxManager.CheckedContent="你选中了我"
                             />
                 <ComboBox IsEditable="False"  
                           >
@@ -97,17 +103,17 @@
                 <RadioButton Content="RadioButton"
                              />
                 <RadioButton Content="RadioButton" />
-                <TabControl Height="100"
-                             TabStripPlacement="Right">
-                    <TabItem Header="TabItem">
-                        <Grid Background="#FFE5E5E5"/>
-                    </TabItem>
-                    <TabItem Header="TabItem">
-                        <Grid Background="#FFE5E5E5"/>
-                    </TabItem>
-                </TabControl>
+        
 
 
+                <GroupBox Height="200"  
+                          leedep:GroupBoxManager.BorderMode="External"
+                          leedep:GroupBoxManager.SplitLineVisibility="Visible"
+                          Header="00">
+
+                </GroupBox>
+
+                <Slider/>
 
             </StackPanel>
             

@@ -15,14 +15,14 @@
         <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
         <Setter Property="Background" Value="Transparent" />
+      
         <Setter Property="MinWidth" Value="0"/>
         <Setter Property="Height" Value="Auto"/>
         <Setter Property="Cursor" Value="Arrow"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ScrollBar}">
-                    <Border Background="{Binding Path=(leedep:ScrollManager.TrackBrush),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}"
-                            CornerRadius="{Binding Path=(leedep:ScrollManager.ScrollBarCornerRadius),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}">
+              
                         <Track x:Name="PART_Track"
                                IsEnabled="{TemplateBinding IsMouseOver}"
                                IsDirectionReversed="true">
@@ -30,16 +30,26 @@
                                 <Thumb>
                                     <Thumb.Template>
                                         <ControlTemplate TargetType="Thumb">
-                                            <Border  Background="{Binding Path=(leedep:ScrollManager.ThumbBrush),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}"
-                                                     CornerRadius="{Binding Path=(leedep:ScrollManager.ScrollBarCornerRadius),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}" 
-                                                     Effect="{Binding Path=(leedep:ScrollManager.ScrollBarShadow),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}"
+                                        <Border x:Name="PART_Border"  
+                                                BorderThickness="0"
+                                                Background="{Binding Path=(leedep:ScrollManager.ThumbBrush),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}"
+                                                CornerRadius="{Binding Path=(leedep:ScrollManager.ScrollBarCornerRadius),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}" 
+                                                Effect="{Binding Path=(leedep:ScrollManager.ScrollBarShadow),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}"
                                                        />
+                                            <ControlTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=PART_Border,Path=ActualWidth,Converter={StaticResource DoubleComparisonConverter},ConverterParameter=Less_4}" Value="True">
+                                                <Setter TargetName="PART_Border" Property="CornerRadius" Value="2"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ElementName=PART_Border,Path=ActualHeight,Converter={StaticResource DoubleComparisonConverter},ConverterParameter=Less_4}" Value="True">
+                                                <Setter TargetName="PART_Border" Property="CornerRadius" Value="2"/>
+                                            </DataTrigger>
+                                        </ControlTemplate.Triggers>
                                         </ControlTemplate>
                                     </Thumb.Template>
                                 </Thumb>
                             </Track.Thumb>
                         </Track>
-                    </Border>
+                  
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -76,6 +86,7 @@
     </Style>
     <!--默认scrollviewbar的大小-->
     <sys:Double x:Key="ScrollViewerBarSize">8</sys:Double>
+    <sys:Double x:Key="ScrollViewerMiniBarSize">2</sys:Double>
     <Style x:Key="LeeScrollViewer" TargetType="{x:Type ScrollViewer}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
@@ -87,7 +98,7 @@
         <Setter Property="HorizontalContentAlignment"  Value="Stretch" />
         <Setter Property="leedep:ScrollManager.TrackBrush"   Value="Transparent" />
         <Setter Property="leedep:ScrollManager.ThumbBrush"   Value="{DynamicResource LeeBrush_Theme}" />
-        <Setter Property="leedep:ScrollManager.ScrollBarCornerRadius"  Value="{DynamicResource LeeCornerRadius}" />
+        <Setter Property="leedep:ScrollManager.ScrollBarCornerRadius"  Value="{DynamicResource  LeeCornerRadius}" />
         <Setter Property="leedep:ScrollManager.ScrollViewerHook"  Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -121,7 +132,7 @@
                                        Maximum="{TemplateBinding ScrollableHeight}"
                                        ViewportSize="{TemplateBinding ViewportHeight}"
                                        Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
-                                       Width="2"
+                                       Width="{DynamicResource ScrollViewerMiniBarSize}"
                                         />
                             </Grid>
                             <Grid Grid.RowSpan="2"
@@ -131,7 +142,7 @@
                                   Height="{StaticResource ScrollViewerBarSize}"
                                   Background="Transparent">
                                 <ScrollBar x:Name="PART_HorizontalScrollBar"
-                                        Height="2"
+                                        Height="{DynamicResource ScrollViewerMiniBarSize}"
                                        Orientation="Horizontal"
                                        VerticalAlignment="Bottom"
                                        Value="{TemplateBinding HorizontalOffset}"
@@ -212,10 +223,9 @@
                                 <Storyboard>
                                     <DoubleAnimation  Storyboard.TargetName="PART_VerticalScrollBar"
                                                       Storyboard.TargetProperty="Width"
-                                                      To="2"
+                                                      To="{StaticResource ScrollViewerMiniBarSize}"
                                                       BeginTime="0:0:2"
                                                       Duration="0:0:0.15" />
-                               
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
@@ -237,7 +247,7 @@
                                 <Storyboard>
                                     <DoubleAnimation Storyboard.TargetName="PART_HorizontalScrollBar"
                                                      Storyboard.TargetProperty="Height"
-                                                     To="2"
+                                                     To="{StaticResource ScrollViewerMiniBarSize}"
                                                     BeginTime="0:0:2"
                                                      Duration="0:0:0.15" />
                                   

@@ -10,16 +10,15 @@
         <Setter Property="FocusVisualStyle"  Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
         <Setter Property="Background"  Value="Transparent" />
-        <Setter Property="Padding"  Value="2" />
+        <Setter Property="Padding"  Value="{DynamicResource LeeControlPadding}" />
         <Setter Property="BorderBrush"  Value="{DynamicResource LeeBrush_BorderBrush}" />
-        <Setter Property="BorderThickness"   Value="1" />
-        <Setter Property="leedep:GroupBoxManager.HeaderPadding"  Value="2" />
+        <Setter Property="leedep:GroupBoxManager.HeaderPadding"  Value="{DynamicResource LeeControlPadding}" />
         <Setter Property="leedep:GroupBoxManager.HeaderForeground"   Value="{Binding Foreground,RelativeSource={RelativeSource Self},Mode=OneWay}" />
-        <Setter Property="leedep:GroupBoxManager.HeaderFontWeight"   Value="Bold" />
+        <Setter Property="leedep:GroupBoxManager.HeaderFontWeight"   Value="Medium" />
         <Setter Property="leedep:GroupBoxManager.HeaderFontSize"   Value="{Binding FontSize,RelativeSource={RelativeSource Self},Converter={StaticResource DoubleFollowConverter}, ConverterParameter=3,Mode=OneWay}" />
         <Setter Property="leedep:GroupBoxManager.BorderMode" Value="Internal"/>
         <Setter Property="leedep:GroupBoxManager.SplitLineSize" Value="1"/>
-        <Setter Property="leedep:GroupBoxManager.SplitLineBrush" Value="{DynamicResource LeeBrush_Gray242}"/>
+        <Setter Property="leedep:GroupBoxManager.SplitLineBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="leedep:GroupBoxManager.SplitLineMargin" Value="1"/>
         <Setter Property="leedep:GroupBoxManager.SplitLineVisibility" Value="Collapsed"/>
         <Setter Property="leedep:GroupBoxManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>

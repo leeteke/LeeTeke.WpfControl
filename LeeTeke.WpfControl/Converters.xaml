@@ -22,5 +22,6 @@
     <conver:SiteToVerticalAlignmentConverter x:Key="SiteToVerticalAlignmentConverter"/>
     <conver:VisibilityForBoolReverseConverter x:Key="VisibilityForBoolReverseConverter"/>
     <conver:DoubleComparisonConverter x:Key="DoubleComparisonConverter"/>
-  
+    <conver:ThicknessForDoubleConverter x:Key="ThicknessForDoubleConverter"/>
+
 </ResourceDictionary>

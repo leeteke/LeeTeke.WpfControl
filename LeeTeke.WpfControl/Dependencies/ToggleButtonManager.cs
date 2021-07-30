@@ -167,9 +167,6 @@ namespace LeeTeke.WpfControl.Dependencies
         }
         #endregion
 
-
-
-
         #region HaveCheckedContent
         public static bool GetHaveCheckedContent(DependencyObject obj)
         {
