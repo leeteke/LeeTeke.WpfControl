@@ -57,8 +57,6 @@ namespace LeeTeke.WpfControl.Controls
         private Storyboard sbClose;
 
         private Canvas _canvas;
-        private Border _openBorder;
-        private Border _closeBorder;
         private Ellipse _ellipse;
 
         public SwitchButton()
@@ -72,27 +70,50 @@ namespace LeeTeke.WpfControl.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-
-            _closeBorder = this.Template.FindName("PART_CloseBorder", this) as Border;
-            _openBorder = this.Template.FindName("PART_OpenBorder", this) as Border;
-            _ellipse = this.Template.FindName("PART_Ellipse", this) as Ellipse;
-            _canvas = this.Template.FindName("PART_Canvas", this) as Canvas;
-            if (_canvas != null)
+            if (this.Template.FindName("PART_Border", this) is Border border)
             {
-                _canvas.SizeChanged += me_SizeChanged;
-                _canvas.MouseDown += _canvas_MouseDown;
+                border.MouseDown += (es, ed) =>
+                {
+                    Switch = !Switch;
+                    RaiseSwitchChanged(Switch);
+                };
             }
-            if (_ellipse!=null)
+
+            if (this.Template.FindName("PART_Canvas", this) is Canvas canvas)
             {
-                _ellipse.Loaded += _ellipse_Loaded;
+                _canvas = canvas;
+                _canvas.SizeChanged += me_SizeChanged;
+            }
+
+            if (this.Template.FindName("PART_Ellipse", this) is Ellipse ellipse)
+            {
+                _ellipse = ellipse;
+                _ellipse.Loaded += (es, ex) =>
+                {
+                    if (Switch)
+                        ControlStoryBoard(Switch);
+                };
             }
 
         }
 
-        private void _canvas_MouseDown(object sender, MouseButtonEventArgs e)
+        protected override void OnContentChanged(object oldContent, object newContent)
         {
-            Switch = !Switch;
-            RaiseSwitchChanged(Switch);
+            base.OnContentChanged(oldContent, newContent);
+
+            if (newContent == null && CloseContent == null)
+            {
+                HasContent = false;
+                return;
+            }
+
+            if (newContent == null)
+            {
+                return;
+            }
+
+            HasContent = true;
+
         }
 
 
@@ -127,22 +148,35 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
-
-
         #region 依赖属性
+
+        #region CornerRadius
+        /// <summary>
+        /// CornerRadius
+        /// </summary>
+        public CornerRadius CornerRadius
+        {
+            get { return (CornerRadius)GetValue(CornerRadiusProperty); }
+            set { SetValue(CornerRadiusProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CornerRadius.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CornerRadiusProperty =
+            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(SwitchButton));
+        #endregion
 
         #region HasContent
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public bool HasContent
+        public new bool HasContent
         {
             get { return (bool)GetValue(HasContentProperty); }
             private set { SetValue(HasContentProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for HasContent.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty HasContentProperty =
+        public static new readonly DependencyProperty HasContentProperty =
             DependencyProperty.Register("HasContent", typeof(bool), typeof(SwitchButton));
 
         #endregion
@@ -171,22 +205,6 @@ namespace LeeTeke.WpfControl.Controls
 
 
 
-
-        #endregion
-
-        #region ButtonSite
-        /// <summary>
-        /// 请填写描述
-        /// </summary>
-        public SiteMode ButtonSite
-        {
-            get { return (SiteMode)GetValue(ButtonSiteProperty); }
-            set { SetValue(ButtonSiteProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for ButtonSite.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ButtonSiteProperty =
-            DependencyProperty.Register("ButtonSite", typeof(SiteMode), typeof(SwitchButton));
 
         #endregion
 
@@ -222,43 +240,7 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-        #region Content
-        /// <summary>
-        /// 请填写描述
-        /// </summary>
-        public new object Content
-        {
-            get { return (object)GetValue(ContentProperty); }
-            set { SetValue(ContentProperty, value); }
-        }
 
-        // Using a DependencyProperty as the backing store for Content.  This enables animation, styling, binding, etc...
-        public new static readonly DependencyProperty ContentProperty =
-            DependencyProperty.Register("Content", typeof(object), typeof(SwitchButton), new PropertyMetadata(null, new PropertyChangedCallback(ContentChanged)));
-
-        private static void ContentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is SwitchButton @switch && e.NewValue != e.OldValue)
-            {
-                if (e.NewValue == null && @switch.CloseContent == null)
-                {
-                    @switch.HasContent = false;
-                    return;
-                }
-
-                if (e.NewValue == null)
-                {
-                    return;
-                }
-                if (e.NewValue is not FrameworkElement)
-                {
-                    @switch.Content = new TextBlock() { Text = e.NewValue.ToString() };
-                }
-                @switch.HasContent = true;
-            }
-        }
-
-        #endregion
 
         #region CloseContent
         /// <summary>
@@ -287,11 +269,6 @@ namespace LeeTeke.WpfControl.Controls
                 if (e.NewValue == null)
                 {
                     return;
-                }
-
-                if (e.NewValue is not FrameworkElement)
-                {
-                    @switch.CloseContent = new TextBlock() { Text = e.NewValue.ToString() };
                 }
                 @switch.HasContent = true;
             }
@@ -336,7 +313,6 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-
         #region EasingFunction
         /// <summary>
         /// 请填写描述
@@ -354,21 +330,17 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
-
         #endregion
 
         #region 内部逻辑
-   
+
 
         private void ControlStoryBoard(bool _switch)
         {
-            if (_closeBorder == null || _ellipse == null)
+            if (_ellipse == null)
             {
                 return;
             }
-
-            if (_closeBorder.RenderTransform is not ScaleTransform scale)
-                _closeBorder.RenderTransform = new ScaleTransform();
 
             if (_switch)
             {
@@ -381,52 +353,26 @@ namespace LeeTeke.WpfControl.Controls
                     FillBehavior = FillBehavior.Stop
                 };
 
-                DoubleAnimationUsingKeyFrames xDA = new DoubleAnimationUsingKeyFrames();
-                xDA.KeyFrames.Add(new EasingDoubleKeyFrame()
-                {
 
-                    Value = 0,
-                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(400)),
-                    EasingFunction = this.EasingFunction,
-                });
-
-                DoubleAnimationUsingKeyFrames yDA = new DoubleAnimationUsingKeyFrames();
-                yDA.KeyFrames.Add(new EasingDoubleKeyFrame()
-                {
-
-                    Value = 0,
-                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(400)),
-                    EasingFunction = this.EasingFunction,
-                });
 
                 DoubleAnimationUsingKeyFrames eDA = new DoubleAnimationUsingKeyFrames();
                 eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                 {
 
-                    Value = _canvas.ActualWidth - _ellipse.ActualWidth - 1,
+                    Value = _canvas.ActualWidth - _ellipse.ActualWidth,
                     KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(400)),
                     EasingFunction = this.EasingFunction,
                 });
 
-                sbOpen.Children.Add(xDA);
-                sbOpen.Children.Add(yDA);
+
                 sbOpen.Children.Add(eDA);
-
-                Storyboard.SetTarget(xDA, _closeBorder);
-                Storyboard.SetTargetProperty(xDA, new PropertyPath("(0).(1)", new DependencyProperty[] { Border.RenderTransformProperty, ScaleTransform.ScaleXProperty }));
-
-                Storyboard.SetTarget(yDA, _closeBorder);
-                Storyboard.SetTargetProperty(yDA, new PropertyPath("(0).(1)", new DependencyProperty[] { Border.RenderTransformProperty, ScaleTransform.ScaleYProperty }));
-
 
                 Storyboard.SetTarget(eDA, this);
                 Storyboard.SetTargetProperty(eDA, new PropertyPath(SwitchButton.SwitchSiteProperty));
-                _openBorder.BorderThickness = new Thickness(0);
+
                 sbOpen.Completed += (e, s) =>
                 {
-                    SwitchSite = _canvas.ActualWidth - _ellipse.ActualWidth - 1;
-                    (_closeBorder.RenderTransform as ScaleTransform).ScaleX = 0;
-                    (_closeBorder.RenderTransform as ScaleTransform).ScaleY = 0;
+                    SwitchSite = _canvas.ActualWidth - _ellipse.ActualWidth;
                 };
                 sbOpen.Begin();
             }
@@ -436,50 +382,23 @@ namespace LeeTeke.WpfControl.Controls
                     sbOpen.Stop();
                 sbClose = new Storyboard();
 
-                DoubleAnimationUsingKeyFrames xDA = new DoubleAnimationUsingKeyFrames();
-                xDA.KeyFrames.Add(new EasingDoubleKeyFrame()
-                {
-
-                    Value = 1,
-                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(400)),
-                    EasingFunction = this.EasingFunction,
-                });
-
-                DoubleAnimationUsingKeyFrames yDA = new DoubleAnimationUsingKeyFrames();
-                yDA.KeyFrames.Add(new EasingDoubleKeyFrame()
-                {
-
-                    Value = 1,
-                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(400)),
-                    EasingFunction = this.EasingFunction,
-                });
 
 
                 DoubleAnimationUsingKeyFrames eDA = new DoubleAnimationUsingKeyFrames();
                 eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                 {
 
-                    Value = 1,
+                    Value = 0,
                     KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(400)),
                     EasingFunction = this.EasingFunction,
                 });
 
-                sbClose.Children.Add(xDA);
-                sbClose.Children.Add(yDA);
+
                 sbClose.Children.Add(eDA);
-
-                Storyboard.SetTarget(xDA, _closeBorder);
-                Storyboard.SetTargetProperty(xDA, new PropertyPath("(0).(1)", new DependencyProperty[] { Border.RenderTransformProperty, ScaleTransform.ScaleXProperty }));
-
-                Storyboard.SetTarget(yDA, _closeBorder);
-                Storyboard.SetTargetProperty(yDA, new PropertyPath("(0).(1)", new DependencyProperty[] { Border.RenderTransformProperty, ScaleTransform.ScaleYProperty }));
-
 
                 Storyboard.SetTarget(eDA, this);
                 Storyboard.SetTargetProperty(eDA, new PropertyPath(SwitchButton.SwitchSiteProperty));
 
-
-                _openBorder.BorderThickness = new Thickness(2);
 
                 sbClose.Begin();
             }
@@ -489,25 +408,20 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (sbClose != null)
                 sbClose.Stop();
+
             if (sbOpen != null)
                 sbOpen.Stop();
 
 
-            if (Switch&&_ellipse.IsLoaded)
+            if (_ellipse.IsLoaded)
             {
-                SwitchSite = _canvas.ActualWidth - _ellipse.ActualWidth - 1;
+                SwitchSite = Switch ? _canvas.ActualWidth - _ellipse.ActualWidth : 0;
             }
 
         }
 
 
-        private void _ellipse_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (Switch)
-            {
-                ControlStoryBoard(Switch);
-            }
-        }
+
 
         #endregion
 

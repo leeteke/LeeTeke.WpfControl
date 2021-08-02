@@ -17,6 +17,7 @@
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/TextBox.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/DatePicker.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/PasswordBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ToolTip.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <Style BasedOn="{StaticResource LeeButton}" TargetType="Button" />
@@ -39,5 +40,7 @@
     <Style BasedOn="{StaticResource LeeTextBox}" TargetType="TextBox"/>
     <Style BasedOn="{StaticResource LeePasswordBox}" TargetType="PasswordBox"/>
     <Style BasedOn="{StaticResource LeeDatePicker}" TargetType="DatePicker"/>
+    <Style BasedOn="{StaticResource LeeToolTip}" TargetType="ToolTip"/>
+
 
 </ResourceDictionary>

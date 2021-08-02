@@ -61,7 +61,12 @@ namespace LeeTeke.WpfControl.Controls
         {
             EventManager.RegisterClassHandler(typeof(SlideViewItem), SlideViewItem.MouseLeftButtonUpEvent, new RoutedEventHandler(ItemMouseLeftButtonUpEvent));
             PreviewMouseWheel += SlideView_PreviewMouseWheel;
+            PreviewKeyDown += SlideView_PreviewKeyDown;
         }
+
+     
+
+
 
 
 
@@ -105,6 +110,23 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
         #region 依赖属性
+
+
+        #region CornerRadius
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public CornerRadius CornerRadius
+        {
+            get { return (CornerRadius)GetValue(CornerRadiusProperty); }
+            set { SetValue(CornerRadiusProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CornerRadius.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CornerRadiusProperty =
+            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(SlideView));
+        #endregion
+
 
         #region Orientation
 
@@ -463,6 +485,28 @@ namespace LeeTeke.WpfControl.Controls
             {
                 ToIndex(CurrentIndex + 1);
             }
+        }
+
+        private void SlideView_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+
+            switch (e.Key)
+            {
+                case Key.Left:
+                case Key.Up:
+                    e.Handled = true;
+                    ToIndex(CurrentIndex - 1);
+                    break;
+
+                case Key.Right:
+                case Key.Down:
+                    e.Handled = true;
+                    ToIndex(CurrentIndex +1);
+                    break;
+                default:
+                    break;
+            }
+      
         }
 
         private void ItemMouseLeftButtonUpEvent(object sender, RoutedEventArgs e)

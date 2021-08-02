@@ -84,7 +84,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    
+
     </Style>
 
     <Style TargetType="{x:Type local:NotifyIconEx}">
@@ -146,6 +146,7 @@
                                 <Condition Property="Mode" Value="Loding"/>
                                 <Condition Property="Orientation" Value="Horizontal"/>
                             </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_Rectangle" Property="Clip" Value="{x:Null}"/>
                             <Setter TargetName="PART_Rectangle" Property="Height" Value="{Binding ElementName=PART_Canvas,Path=ActualHeight,Mode=OneWay}" />
                             <Setter TargetName="PART_Rectangle" Property="Width" Value="{Binding RelativeSource={RelativeSource  Mode=TemplatedParent},Path=ProgressLength,Mode=OneWay}"/>
                         </MultiTrigger>
@@ -154,6 +155,7 @@
                                 <Condition Property="Mode" Value="Loding"/>
                                 <Condition Property="Orientation" Value="Vertical"/>
                             </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_Rectangle" Property="Clip" Value="{x:Null}"/>
                             <Setter TargetName="PART_Rectangle" Property="Height" Value="{Binding  RelativeSource={RelativeSource Mode=TemplatedParent},Path=ProgressLength,Mode=OneWay}" />
                             <Setter TargetName="PART_Rectangle" Property="Width" Value="{Binding ElementName=PART_Canvas,Path=ActualWidth,Mode=OneWay}" />
                         </MultiTrigger>
@@ -232,9 +234,9 @@
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="Width" 
-                    Value="{Binding RelativeSource={ RelativeSource Mode=FindAncestor,AncestorType={x:Type local:SlideView},AncestorLevel=1},Path=ActualWidth,Mode=OneWay}"/>
+                    Value="{Binding RelativeSource={ RelativeSource Mode=FindAncestor,AncestorType={x:Type ScrollViewer},AncestorLevel=1},Path=ActualWidth,Mode=OneWay}"/>
         <Setter Property="Height" 
-                    Value="{Binding RelativeSource={ RelativeSource Mode=FindAncestor,AncestorType={x:Type local:SlideView},AncestorLevel=1},Path=ActualHeight,Mode=OneWay}"/>
+                    Value="{Binding RelativeSource={ RelativeSource Mode=FindAncestor,AncestorType={x:Type ScrollViewer},AncestorLevel=1},Path=ActualHeight,Mode=OneWay}"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -256,19 +258,36 @@
     <Style TargetType="{x:Type local:SlideView}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Orientation" Value="Horizontal"/>
+        <Setter Property="Padding" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:SlideView}">
-                    <Grid>
+                    <Border  Background="{TemplateBinding Background}"
+                             BorderBrush="{TemplateBinding BorderBrush}"
+                             BorderThickness="{TemplateBinding BorderThickness}"
+                             CornerRadius="{TemplateBinding CornerRadius}"
+                             Padding="{TemplateBinding Padding}">
                         <ScrollViewer x:Name="PART_ScrollViewer"   
                                 HorizontalScrollBarVisibility="Hidden" 
                                 VerticalScrollBarVisibility="Hidden"
-                                Style="{x:Null}">
-                            <Border >
-                                <ItemsPresenter   />
-                            </Border>
+                                Style="{x:Null}"
+                                  FocusVisualStyle="{DynamicResource LeeFocusVisual}"
+                                IsTabStop="False">
+                            <ScrollViewer.Clip>
+                                <MultiBinding  Converter="{StaticResource  MultiValueToClipConverter}" Mode="OneWay">
+                                    <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualWidth"/>
+                                    <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualHeight"/>
+                                    <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}"  Path="CornerRadius"/>
+                                </MultiBinding>
+                            </ScrollViewer.Clip>
+                            <ItemsPresenter />
                         </ScrollViewer>
-                    </Grid>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -285,12 +304,17 @@
     <Style TargetType="{x:Type local:SwitchButton}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
+        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Switch" Value="False"/>
-        <Setter Property="MinHeight" Value="20"/>
-        <Setter Property="MinWidth" Value="40"/>
-        <Setter Property="ButtonHeight" Value="20"/>
-        <Setter Property="ButtonWidth" Value="40"/>
-        <Setter Property="ButtonSite" Value="Start"/>
+        <Setter Property="Height" Value="{DynamicResource LeeControlHeight}"/>
+        <Setter Property="ButtonHeight" Value="21"/>
+        <Setter Property="ButtonWidth" Value="43"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="Padding" Value="{DynamicResource LeeControlPadding}"/>
         <Setter Property="EasingFunction">
             <Setter.Value>
                 <QuarticEase EasingMode="EaseOut"/>
@@ -299,189 +323,129 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:SwitchButton}">
-                    <Grid>
+
+                    <Grid Margin="{TemplateBinding Margin}">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition x:Name="columnLeft" Width="*"/>
-                            <ColumnDefinition x:Name="columnRight" Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition x:Name="rowTop" Height="*"/>
-                            <RowDefinition x:Name="rowBottom" Height="auto"/>
-                        </Grid.RowDefinitions>
+                        <Border x:Name="PART_Border" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Background="Transparent"
+                                 Width="{TemplateBinding ButtonWidth}"
+                                Height="{TemplateBinding ButtonHeight}"
+                                 BorderThickness="{TemplateBinding BorderThickness}"
+                                 CornerRadius="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/2,Mode=OneWay}">
+
+                            <Grid IsHitTestVisible="True" >
+                                <Grid.Clip>
+                                    <MultiBinding  Converter="{StaticResource  MultiValueToClipConverter}" Mode="OneWay">
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualWidth"/>
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualHeight"/>
+                                        <Binding ElementName="PART_OpenBorder"  Path="CornerRadius"/>
+                                    </MultiBinding>
+                                </Grid.Clip>
+                                <Border x:Name="PART_OpenBorder" 
+                                        Background="{DynamicResource LeeBrush_Theme}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        CornerRadius="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/2,Mode=OneWay}"
+                               />
+                                <Border x:Name="PART_CloseBorder" Width="{Binding ElementName=PART_Grid,Path=ActualWidth,Converter={StaticResource DoubleFollowConverter},ConverterParameter=1}"
+                                           Height="{Binding ElementName=PART_Grid,Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=1}"
+                                           Background="{TemplateBinding Background}"
+                                           BorderThickness="0"
+                                           IsHitTestVisible="False"
+                                          
+                                           CornerRadius="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/2,Mode=OneWay}"
+                                            RenderTransformOrigin="1,0.5"
+                                          >
+                                    <Border.RenderTransform>
+                                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                    </Border.RenderTransform>
+                                </Border>
+
+                            </Grid>
+                        </Border>
                         <Canvas x:Name="PART_Canvas"
-                                Grid.Row="0"
-                                MinHeight="{TemplateBinding ButtonHeight}"
-                                MinWidth="{TemplateBinding ButtonWidth}"
-                                Grid.Column="0"
-                                Background="Transparent">
-                            <Border x:Name="PART_OpenBorder" 
-                                    Background="{DynamicResource LeeBrush_Theme}"
-                                    BorderBrush="{DynamicResource LeeBrush_Gray204}"
-                                    BorderThickness="2"
-                                    Width="{Binding ElementName=PART_Canvas,Path=ActualWidth,Mode=OneWay}"
-                                    Height="{Binding ElementName=PART_Canvas,Path=ActualHeight,Mode=OneWay}"
-                                    CornerRadius="{Binding ElementName=PART_Canvas,Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/2,Mode=OneWay}"
-                                    IsHitTestVisible="False"/>
-
-                            <Border x:Name="PART_CloseBorder"
-                                    Background="White"
-                                    Visibility="Visible"
-                                    Canvas.Top="2"
-                                    Canvas.Left="2"
-                                    Width="{Binding ElementName=PART_Canvas,Path=ActualWidth,Converter={StaticResource DoubleFollowConverter},ConverterParameter=-4,Mode=OneWay}"
-                                    Height="{Binding ElementName=PART_Canvas,Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=-4,Mode=OneWay}"
-                                    CornerRadius="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/2,Mode=OneWay}" 
-                                    RenderTransformOrigin="1,0.5"
-                                    IsHitTestVisible="False">
-                            </Border>
-
+                                Width="{TemplateBinding ButtonWidth}"
+                                Height="{TemplateBinding ButtonHeight}"
+                                IsHitTestVisible="False">
                             <Ellipse x:Name="PART_Ellipse"
-                                     Canvas.Top="1"
-                                     Canvas.Left="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=SwitchSite,Mode=OneWay}"
-                                     Width="{Binding ElementName=PART_Canvas,Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=-2,Mode=OneWay}"
-                                     Height="{Binding ElementName=PART_Canvas,Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=-2,Mode=OneWay}"
-                                     Fill="White"
-                                     IsHitTestVisible="False"
-                                     Effect="{DynamicResource LeeShadow2}"
-                                     >
-
+                                             Canvas.Left="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=SwitchSite,Mode=OneWay}"
+                                             Width="{Binding ElementName=PART_Canvas,Path=ActualHeight,Mode=OneWay}"
+                                             Height="{Binding ElementName=PART_Canvas,Path=ActualHeight,Mode=OneWay}"
+                                             Fill="{DynamicResource LeeBrush_Forground}"
+                                             IsHitTestVisible="False"
+                                             Effect="{DynamicResource LeeShadow1}"
+                                             >
                             </Ellipse>
 
                         </Canvas>
-                        <ContentControl x:Name="openContent" 
-                                        Content="{TemplateBinding Content}"
-                                        Grid.Row="0"
-                                        Grid.Column="1"
-                                        Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Switch,Converter={StaticResource VisibilityForBoolConverter},Mode=OneWay}"/>
-                        <ContentControl x:Name="closeContent" 
-                                        Content="{TemplateBinding CloseContent}"
-                                        Visibility="{Binding ElementName=openContent,Path=Visibility, Converter={StaticResource VisibilityReverseConverter},Mode=OneWay}"
-                                        Grid.Row="0"
-                                        Grid.Column="1"/>
+                        <ContentPresenter x:Name="openContent" 
+                                          Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                          Content="{TemplateBinding Content}"
+                                          Grid.Column="1"
+                                          Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Switch,Converter={StaticResource VisibilityForBoolConverter},Mode=OneWay}"/>
+                        <ContentPresenter x:Name="closeContent" 
+                                          Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                          Content="{TemplateBinding CloseContent}"
+                                          Visibility="{Binding ElementName=openContent,Path=Visibility, Converter={StaticResource VisibilityReverseConverter},Mode=OneWay}"
+                                          Grid.Column="1"/>
                     </Grid>
+
                     <ControlTemplate.Triggers>
-                        <Trigger Property="HasContent" Value="False">
-
-                            <Setter TargetName="columnLeft" Property="Width" Value="*" />
-                            <Setter TargetName="columnRight" Property="Width" Value="auto" />
-
-                            <Setter TargetName="rowTop" Property="Height" Value="*" />
-                            <Setter TargetName="rowBottom" Property="Height" Value="auto" />
-
-                            <Setter TargetName="PART_Canvas" Property="Grid.Row" Value="0"/>
-                            <Setter TargetName="PART_Canvas" Property="Grid.Column" Value="0"/>
-
-                            <Setter TargetName="PART_Canvas" Property="HorizontalAlignment" Value="Stretch"/>
-                            <Setter TargetName="PART_Canvas" Property="VerticalAlignment" Value="Stretch"/>
-
-                            <Setter TargetName="openContent" Property="Grid.Row" Value="0"/>
-                            <Setter TargetName="openContent" Property="Grid.Column" Value="1"/>
-
-                            <Setter TargetName="closeContent" Property="Grid.Row" Value="0"/>
-                            <Setter TargetName="closeContent" Property="Grid.Column" Value="1"/>
+                        <Trigger Property="Switch" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_CloseBorder" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.300"
+                                                                  Value="0" >
+                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                    <QuarticEase EasingMode="EaseOut"/>
+                                                </EasingDoubleKeyFrame.EasingFunction>
+                                            </EasingDoubleKeyFrame>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_CloseBorder" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.300"
+                                                                  Value="0" >
+                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                    <QuarticEase EasingMode="EaseOut"/>
+                                                </EasingDoubleKeyFrame.EasingFunction>
+                                            </EasingDoubleKeyFrame>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_CloseBorder" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.300"
+                                                                  Value="1" >
+                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                    <QuarticEase EasingMode="EaseOut"/>
+                                                </EasingDoubleKeyFrame.EasingFunction>
+                                            </EasingDoubleKeyFrame>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_CloseBorder" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.300"
+                                                                  Value="1" >
+                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                    <QuarticEase EasingMode="EaseOut"/>
+                                                </EasingDoubleKeyFrame.EasingFunction>
+                                            </EasingDoubleKeyFrame>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
                         </Trigger>
-
-
-
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="HasContent" Value="True"/>
-                                <Condition  Property="ContentDock" Value="Right"/>
-                            </MultiTrigger.Conditions>
-
-                            <Setter TargetName="columnLeft" Property="Width" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=ButtonWidth,Mode=OneWay}" />
-                            <Setter TargetName="columnRight" Property="Width" Value="*" />
-
-                            <Setter TargetName="rowTop" Property="Height" Value="*" />
-                            <Setter TargetName="rowBottom" Property="Height" Value="auto" />
-
-                            <Setter TargetName="PART_Canvas" Property="Grid.Row" Value="0"/>
-                            <Setter TargetName="PART_Canvas" Property="Grid.Column" Value="0"/>
-                            <Setter TargetName="PART_Canvas" Property="HorizontalAlignment" Value="Center"/>
-                            <Setter TargetName="PART_Canvas" Property="VerticalAlignment" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=ButtonSite,Mode=OneWay,Converter={StaticResource SiteToVerticalAlignmentConverter}}"/>
-
-                            <Setter TargetName="openContent" Property="Grid.Row" Value="0"/>
-                            <Setter TargetName="openContent" Property="Grid.Column" Value="1"/>
-
-                            <Setter TargetName="closeContent" Property="Grid.Row" Value="0"/>
-                            <Setter TargetName="closeContent" Property="Grid.Column" Value="1"/>
-                        </MultiTrigger>
-
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="HasContent" Value="True"/>
-                                <Condition  Property="ContentDock" Value="Left"/>
-                            </MultiTrigger.Conditions>
-
-                            <Setter TargetName="columnLeft" Property="Width" Value="*" />
-                            <Setter TargetName="columnRight" Property="Width" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=ButtonWidth,Mode=OneWay}" />
-
-                            <Setter TargetName="rowTop" Property="Height" Value="*" />
-                            <Setter TargetName="rowBottom" Property="Height" Value="auto" />
-
-                            <Setter TargetName="PART_Canvas" Property="Grid.Row" Value="0"/>
-                            <Setter TargetName="PART_Canvas" Property="Grid.Column" Value="1"/>
-
-                            <Setter TargetName="PART_Canvas" Property="HorizontalAlignment" Value="Center"/>
-                            <Setter TargetName="PART_Canvas" Property="VerticalAlignment" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=ButtonSite,Mode=OneWay,Converter={StaticResource SiteToVerticalAlignmentConverter}}"/>
-
-                            <Setter TargetName="openContent" Property="Grid.Row" Value="0"/>
-                            <Setter TargetName="openContent" Property="Grid.Column" Value="0"/>
-
-                            <Setter TargetName="closeContent" Property="Grid.Row" Value="0"/>
-                            <Setter TargetName="closeContent" Property="Grid.Column" Value="0"/>
-                        </MultiTrigger>
-
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="HasContent" Value="True"/>
-                                <Condition  Property="ContentDock" Value="Top"/>
-                            </MultiTrigger.Conditions>
-
-                            <Setter TargetName="columnLeft" Property="Width" Value="*" />
-                            <Setter TargetName="columnRight" Property="Width" Value="auto" />
-
-                            <Setter TargetName="rowTop" Property="Height" Value="*" />
-                            <Setter TargetName="rowBottom" Property="Height" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=ButtonHeight,Mode=OneWay}" />
-
-                            <Setter TargetName="PART_Canvas" Property="Grid.Row" Value="1"/>
-                            <Setter TargetName="PART_Canvas" Property="Grid.Column" Value="0"/>
-                            <Setter TargetName="PART_Canvas" Property="HorizontalAlignment" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=ButtonSite,Mode=OneWay,Converter={StaticResource SiteToHorizontalAlignmentConverter}}"/>
-                            <Setter TargetName="PART_Canvas" Property="VerticalAlignment" Value="Stretch"/>
-
-                            <Setter TargetName="openContent" Property="Grid.Row" Value="0"/>
-                            <Setter TargetName="openContent" Property="Grid.Column" Value="0"/>
-
-                            <Setter TargetName="closeContent" Property="Grid.Row" Value="0"/>
-                            <Setter TargetName="closeContent" Property="Grid.Column" Value="0"/>
-                        </MultiTrigger>
-
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="HasContent" Value="True"/>
-                                <Condition  Property="ContentDock" Value="Bottom"/>
-                            </MultiTrigger.Conditions>
-
-                            <Setter TargetName="columnLeft" Property="Width" Value="*" />
-                            <Setter TargetName="columnRight" Property="Width" Value="auto" />
-
-                            <Setter TargetName="rowTop" Property="Height" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=ButtonHeight,Mode=OneWay}" />
-                            <Setter TargetName="rowBottom" Property="Height" Value="auto" />
-
-                            <Setter TargetName="PART_Canvas" Property="Grid.Row" Value="0"/>
-                            <Setter TargetName="PART_Canvas" Property="Grid.Column" Value="0"/>
-
-                            <Setter TargetName="PART_Canvas" Property="HorizontalAlignment" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=ButtonSite,Mode=OneWay,Converter={StaticResource SiteToHorizontalAlignmentConverter}}"/>
-                            <Setter TargetName="PART_Canvas" Property="VerticalAlignment" Value="Stretch"/>
-
-                            <Setter TargetName="openContent" Property="Grid.Row" Value="1"/>
-                            <Setter TargetName="openContent" Property="Grid.Column" Value="0"/>
-
-                            <Setter TargetName="closeContent" Property="Grid.Row" Value="1"/>
-                            <Setter TargetName="closeContent" Property="Grid.Column" Value="0"/>
-                        </MultiTrigger>
-
                     </ControlTemplate.Triggers>
+
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -685,8 +649,8 @@
                             <Setter TargetName="PART_PreviewText" Property="Visibility" Value="Collapsed"/>
                             <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_Theme}"/>
                         </DataTrigger>
-                        
-                        
+
+
 
                         <DataTrigger Binding="{Binding ElementName=PART_Password,Path=IsFocused,Mode=OneWay}" Value="True">
                             <Setter TargetName="PART_PreviewText" Property="Visibility" Value="Collapsed"/>
@@ -1019,90 +983,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type local:RollingPanel}">
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-        <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="Orientation" Value="Horizontal"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
-        <Setter Property="Padding" Value="0"/>
-        <Setter Property="Duration" Value="10"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Orientation" Value="Horizontal"/>
-        <Setter Property="Speed" Value="1"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:RollingPanel}">
-                    <Border x:Name="PART_Border"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{TemplateBinding CornerRadius}">
-                        <Border.Clip>
-                            <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
-                                <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
-                                <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
-                                <Binding  RelativeSource="{RelativeSource Mode=Self}"  Path="CornerRadius" Mode="OneWay"/>
-                                <Binding  RelativeSource="{RelativeSource Mode=Self}"  Path="BorderThickness" Mode="OneWay"/>
-                            </MultiBinding>
-                        </Border.Clip>
-                        <Grid>
-                            <ScrollViewer x:Name="PART_ScrollViewer"  
-                                      HorizontalScrollBarVisibility="Hidden"
-                                      VerticalScrollBarVisibility="Disabled"
-                                      FocusVisualStyle="{x:Null}"
-                                      >
-                                <StackPanel Orientation="{TemplateBinding Orientation}"
-                                         >
-                                    <Rectangle 
-                                           Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=IsRolling,Converter={StaticResource VisibilityForBoolConverter},Mode=OneWay}"
-                                           Width="{Binding ElementName=PART_Border,Path=ActualWidth}"
-                                           Height="{Binding ElementName=PART_Border,Path=ActualHeight}"/>
-                                    <ContentPresenter x:Name="PART_Content" 
-                                          Margin="{TemplateBinding Padding}"
-                                          TextElement.FontSize="{TemplateBinding FontSize}"
-                                          TextElement.Foreground="{TemplateBinding Foreground}"
-                                          TextElement.FontFamily="{TemplateBinding FontFamily}"
-                                          TextElement.FontStretch="{TemplateBinding FontStretch}"
-                                          TextElement.FontWeight="{TemplateBinding FontWeight}"
-                                          TextElement.FontStyle="{TemplateBinding FontStyle}" />
-                                    <Rectangle 
-                                           Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=IsRolling,Converter={StaticResource VisibilityForBoolConverter},Mode=OneWay}"
-                                           Width="{Binding ElementName=PART_Border,Path=ActualWidth}"
-                                           Height="{Binding ElementName=PART_Border,Path=ActualHeight}"/>
-                                </StackPanel>
-                            </ScrollViewer>
-                            <Grid Background="Transparent"/>
-                        </Grid>
 
-
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="Orientation" Value="Horizontal">
-                            <Setter TargetName="PART_ScrollViewer"  Property="HorizontalScrollBarVisibility" Value="Hidden"/>
-                            <Setter TargetName="PART_ScrollViewer"  Property="VerticalScrollBarVisibility" Value="Disabled "/>
-                            <Setter TargetName="PART_Content" Property="VerticalAlignment" Value="Center"/>
-                        </Trigger>
-                        <Trigger Property="Orientation" Value="Vertical">
-                            <Setter TargetName="PART_ScrollViewer"  Property="HorizontalScrollBarVisibility" Value="Disabled "/>
-                            <Setter TargetName="PART_ScrollViewer"  Property="VerticalScrollBarVisibility" Value="Hidden "/>
-                            <Setter TargetName="PART_Content" Property="HorizontalAlignment" Value="Center"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="ContextMenu">
-            <Setter.Value>
-                <ContextMenu>
-                    <MenuItem x:Name="PART_HideMenuItem"
-                              Header="隐藏本次滚动内容"
-                              />
-                </ContextMenu>
-            </Setter.Value>
-        </Setter>
-    </Style>
 
     <Style TargetType="{x:Type local:ScrollBanner}">
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
@@ -1123,16 +1004,16 @@
                             CornerRadius="{TemplateBinding CornerRadius}"
                             Effect="{TemplateBinding Effect}">
                         <Grid>
-                         <StackPanel Orientation="{TemplateBinding Orientation}">
-                            <StackPanel.Clip>
-                                <MultiBinding Converter="{StaticResource MultiValueToClipConverter}">
-                                    <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
-                                    <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
-                                    <Binding   RelativeSource="{RelativeSource Mode=TemplatedParent}"  Path="CornerRadius" Mode="OneWay"/>
-                                </MultiBinding>
-                            </StackPanel.Clip>
-                            <ContentPresenter  x:Name="PART_Content"  />
-                        </StackPanel>
+                            <StackPanel Orientation="{TemplateBinding Orientation}">
+                                <StackPanel.Clip>
+                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}">
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
+                                        <Binding   RelativeSource="{RelativeSource Mode=TemplatedParent}"  Path="CornerRadius" Mode="OneWay"/>
+                                    </MultiBinding>
+                                </StackPanel.Clip>
+                                <ContentPresenter  x:Name="PART_Content"  />
+                            </StackPanel>
                             <Button VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
                                     Width="20"

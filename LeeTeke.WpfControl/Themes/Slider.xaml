@@ -11,9 +11,10 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="FontSize" Value="12" />
-        <Setter Property="Background" Value="LightGray" />
+        <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}" />
         <Setter Property="Foreground"   Value="{DynamicResource LeeBrush_Text}" />
         <Setter Property="TickPlacement"  Value="None" />
+        <Setter Property="IsMoveToPointEnabled" Value="True"/>
         <Setter Property="FontSize" Value="12" />
         <Setter Property="AutoToolTipPlacement" Value="None"/>
         <Setter Property="AutoToolTipPrecision" Value="0"/>
@@ -25,8 +26,7 @@
         <Setter Property="leedep:SliderManager.TrackSize" Value="8"/>
         <Setter Property="leedep:SliderManager.RegisterMouseWheel" Value="True"/>
         <Setter Property="leedep:SliderManager.TrackBrush" Value="{DynamicResource LeeBrush_Theme}"/>
-        <Setter Property="leedep:SliderManager.TrackThumb" 
-                >
+        <Setter Property="leedep:SliderManager.TrackThumb" >
             <Setter.Value>
                 <Ellipse x:Name="ellipse" Width="15"
                          Height="15"
@@ -72,9 +72,10 @@
                                            Margin="0,0,0,0"
                                            FocusVisualStyle="{TemplateBinding FocusVisualStyle}"
                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                                        <Track.DecreaseRepeatButton>
+                                        <Track.DecreaseRepeatButton >
                                             <RepeatButton Command="Slider.DecreaseLarge"
-                                                               FocusVisualStyle="{TemplateBinding FocusVisualStyle}"
+                                                         
+                                                          IsTabStop="False"
                                                           Background="{Binding Path=(leedep:SliderManager.TrackBrush), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}">
                                                 <RepeatButton.Template>
                                                     <ControlTemplate TargetType="{x:Type RepeatButton}">
@@ -98,20 +99,20 @@
                                                 <Thumb.Template>
                                                     <ControlTemplate TargetType="{x:Type Thumb}">
                                                         <ContentPresenter 
-                                                                x:Name="show"
+                                                                x:Name="PART_SelectionRange"
                                                                 Content="{Binding Path=(leedep:SliderManager.TrackThumb),RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
-                                                            Margin="{Binding ElementName=show,Path=ActualWidth,Converter={StaticResource ThicknessForDoubleConverter},ConverterParameter=H_*-0.5,Mode=OneWay}"
+                                                                Margin="{Binding ElementName=PART_SelectionRange,Path=ActualWidth,Converter={StaticResource ThicknessForDoubleConverter},ConverterParameter=H_*-0.5,Mode=OneWay}"
                                                                 />
 
-
-
                                                     </ControlTemplate>
+                                                    
                                                 </Thumb.Template>
                                             </Thumb>
                                         </Track.Thumb>
                                         <Track.IncreaseRepeatButton>
                                             <RepeatButton Command="Slider.IncreaseLarge"
-                                                          Background="Transparent">
+                                                          Background="Transparent"
+                                                          IsTabStop="False">
                                                 <RepeatButton.Template>
                                                     <ControlTemplate TargetType="{x:Type RepeatButton}">
                                                         <Grid Background="Transparent">
@@ -124,9 +125,8 @@
 
                                             </RepeatButton>
                                         </Track.IncreaseRepeatButton>
+                            
                                     </Track>
-
-
                                     <TickBar  x:Name="BottomTick"
                                               Grid.Row="2"
                                               Margin="0,1,0,0"

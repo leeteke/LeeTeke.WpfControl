@@ -56,8 +56,6 @@
                             </Ellipse>
                         </Border>
 
-
-
                         <ContentPresenter x:Name="contentPresenter" 
                                           Grid.Column="1" 
                                           Focusable="False" 

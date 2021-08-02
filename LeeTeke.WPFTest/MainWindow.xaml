@@ -15,9 +15,8 @@
         d:Height="1000"
         >
     <Window.Resources>
-              
         
-        
+      
     </Window.Resources>
 
     
@@ -30,7 +29,8 @@
         </Grid.RowDefinitions>
 
         <ScrollViewer Grid.Row="1" 
-                      Margin="10">
+                      Margin="10"
+                       >
 
             
             <StackPanel   Width="300"
@@ -45,13 +45,68 @@
                         
                 </StackPanel.ContextMenu>
 
-           
-                
+
                 <Button 
                         Height="30" 
                         Content="Nihao " 
                         Command="{Binding TestCommand}"
-                        />
+                        ToolTip="黑白切换" />
+
+                
+                
+                <leecontrol:SwitchButton>
+                       你好
+                    <leecontrol:SwitchButton.CloseContent>
+                        Nihao
+                    </leecontrol:SwitchButton.CloseContent>
+                </leecontrol:SwitchButton>
+
+                <leecontrol:GridView>
+                    <Rectangle Width="100" Height="20" Fill="Red"
+                               Margin="5"/>
+                    <Rectangle Width="100" Height="20" Fill="Aqua"
+                               Margin="5"/>
+                    <Rectangle Width="100" Height="20" Fill="DarkGreen"
+                               Margin="5"/>
+                </leecontrol:GridView>
+
+                <leecontrol:ImageEx Source="/Datas/myicon.jpg"  
+                                    Width="100"
+                                    Height="100"
+                                    CornerRadius="50"
+                                    Effect="{DynamicResource LeeShadow}">
+                    <leecontrol:ImageEx.DefaultContent>
+                        <Image Source="/Datas/test.ico"/>
+                    </leecontrol:ImageEx.DefaultContent>
+                </leecontrol:ImageEx>
+
+                <leecontrol:LodingBar  Height="10"
+                                       Mode="Wating"
+                                       Effect="{DynamicResource LeeShadow}"/>
+
+                <leecontrol:LodingBar  Height="10"
+                                       Mode="Loding"
+                                       Value="30"
+                                       BorderThickness="1"
+                                       BorderBrush="{DynamicResource LeeBrush_BorderBrush}"
+                                       />
+
+
+                <leecontrol:SlideView
+                    Height="100"
+                    IsCycle="True"
+                    AutoPaly="True"
+                   >
+                    <Rectangle Width="100" Height="20" Fill="Red"
+                               Margin="5"/>
+                    <Rectangle Width="100" Height="20" Fill="Aqua"
+                               Margin="5"/>
+                    <Rectangle Width="100" Height="20" Fill="DarkGreen"
+                               Margin="5"/>
+                </leecontrol:SlideView>
+
+
+
                 <TextBlock Text="你好"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
@@ -113,7 +168,7 @@
 
                 </GroupBox>
 
-                <Slider/>
+                <Slider  />
 
             </StackPanel>
             
