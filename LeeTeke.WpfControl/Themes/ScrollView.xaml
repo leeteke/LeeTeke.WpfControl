@@ -39,9 +39,7 @@
                                             <DataTrigger Binding="{Binding ElementName=PART_Border,Path=ActualWidth,Converter={StaticResource DoubleComparisonConverter},ConverterParameter=Less_4}" Value="True">
                                                 <Setter TargetName="PART_Border" Property="CornerRadius" Value="2"/>
                                             </DataTrigger>
-                                            <DataTrigger Binding="{Binding ElementName=PART_Border,Path=ActualHeight,Converter={StaticResource DoubleComparisonConverter},ConverterParameter=Less_4}" Value="True">
-                                                <Setter TargetName="PART_Border" Property="CornerRadius" Value="2"/>
-                                            </DataTrigger>
+                                  
                                         </ControlTemplate.Triggers>
                                         </ControlTemplate>
                                     </Thumb.Template>
