@@ -33,7 +33,7 @@
                        >
 
             
-            <StackPanel   Width="300"
+            <StackPanel   Width="500"
                 >
                 <StackPanel.ContextMenu>
                     <ContextMenu>

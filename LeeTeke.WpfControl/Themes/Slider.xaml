@@ -28,7 +28,8 @@
         <Setter Property="leedep:SliderManager.TrackBrush" Value="{DynamicResource LeeBrush_Theme}"/>
         <Setter Property="leedep:SliderManager.TrackThumb" >
             <Setter.Value>
-                <Ellipse x:Name="ellipse" Width="15"
+                <Ellipse x:Name="ellipse"
+                         Width="15"
                          Height="15"
                          VerticalAlignment="Center"
                          Fill="White"
@@ -103,6 +104,20 @@
                                                                 Content="{Binding Path=(leedep:SliderManager.TrackThumb),RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
                                                                 Margin="{Binding ElementName=PART_SelectionRange,Path=ActualWidth,Converter={StaticResource ThicknessForDoubleConverter},ConverterParameter=H_*-0.5,Mode=OneWay}"
                                                                 />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                                                     </ControlTemplate>
                                                     
@@ -185,14 +200,13 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Slider}">
                             <DockPanel Background="Transparent">
-                                <ContentControl x:Name="ContentHeader"
+                                <ContentPresenter x:Name="ContentHeader"
                                                 DockPanel.Dock="{Binding Path=(leedep:SliderManager.HeaderDock), RelativeSource={ RelativeSource AncestorType=Slider},Mode=OneWay}"
                                                 Content="{Binding Path=(leedep:SliderManager.Header), RelativeSource={ RelativeSource AncestorType=Slider},Mode=OneWay}"/>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto"
-                                                       MinWidth="{TemplateBinding MinWidth}" />
+                                        <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
                                     <TickBar  x:Name="TopTick"
@@ -205,12 +219,14 @@
                                               />
                                     <Border Width="{Binding Path=(leedep:SliderManager.TrackSize), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
                                             Grid.Column="1"
+                                            HorizontalAlignment="Center"
                                             Background="{TemplateBinding Background}"
                                             Margin="{TemplateBinding Padding}"
                                             CornerRadius="{Binding Path=(leedep:SliderManager.CornerRadius), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"/>
                                     <Track x:Name="PART_Track"
                                            Grid.Column="1"
                                            Margin="0,0,0,0"
+                                           
                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                                         <Track.DecreaseRepeatButton>
                                             <RepeatButton Command="Slider.DecreaseLarge"
@@ -235,15 +251,14 @@
                                                    Background="Transparent">
                                                 <Thumb.Template>
                                                     <ControlTemplate TargetType="{x:Type Thumb}">
-                                                        <Canvas Background="Transparent"
-                                                                Width="{Binding ElementName=show,Path=ActualWidth}"
-                                                                Height="{Binding ElementName=show,Path=ActualHeight}">
-                                                            <ContentControl 
+
+                                                        <ContentPresenter 
                                                                 x:Name="show"
-                                                                FocusVisualStyle="{DynamicResource LeeFocusVisual}"
-                                                                Content="{Binding Path=(leedep:SliderManager.TrackThumb),RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"/>
-                                                            </Canvas>
-                                                  
+                                                                Content="{Binding Path=(leedep:SliderManager.TrackThumb),RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
+                                                               Margin="{Binding ElementName=show,Path=ActualHeight,Converter={StaticResource ThicknessForDoubleConverter},ConverterParameter=V_*-0.5,Mode=OneWay}"
+                                                                />
+
+
                                                     </ControlTemplate>
                                                 </Thumb.Template>
                                             </Thumb>
