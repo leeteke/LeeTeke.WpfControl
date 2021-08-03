@@ -423,7 +423,7 @@ namespace LeeTeke.WpfControl.Controls
                                 xDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                                 {
 
-                                    Value = this.ActualWidth * CurrentIndex,
+                                    Value = (this.ActualWidth-this.BorderThickness.Left-this.BorderThickness.Right) * CurrentIndex,
                                     KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(TransitionDuration)),
                                     EasingFunction = TransitionEasing,
                                 });
@@ -439,7 +439,7 @@ namespace LeeTeke.WpfControl.Controls
                                 yDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                                 {
 
-                                    Value = this.ActualHeight * CurrentIndex,
+                                    Value = (this.ActualHeight-this.BorderThickness.Top-this.BorderThickness.Bottom) * CurrentIndex,
                                     KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(TransitionDuration)),
                                     EasingFunction = TransitionEasing,
                                 });

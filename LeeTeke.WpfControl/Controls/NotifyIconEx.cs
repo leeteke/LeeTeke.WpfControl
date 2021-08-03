@@ -18,6 +18,7 @@ using ContextMenuStrip = System.Windows.Forms.ContextMenuStrip;
 using System.Windows.Threading;
 using System.IO;
 using System.Windows.Controls.Primitives;
+using LeeTeke.WpfControl.Converters;
 
 namespace LeeTeke.WpfControl.Controls
 {
@@ -71,19 +72,23 @@ namespace LeeTeke.WpfControl.Controls
 
         public NotifyIconEx()
         {
-
+            Application.Current.Exit += (es,ec)=>this.Dispose();
+            AppDomain.CurrentDomain.ProcessExit += (es, ec) => this.Dispose();
             #region 初始化组件
-            Background = new SolidColorBrush(Colors.White);
-            BorderThickness = new Thickness(0);
-
             _border = new Border();
-            BindingOperations.SetBinding(_border, Border.MinHeightProperty, new Binding() { Source = this, Path = new PropertyPath("ContentMinHeight"), Mode = BindingMode.OneWay });
-            BindingOperations.SetBinding(_border, Border.MinWidthProperty, new Binding() { Source = this, Path = new PropertyPath("ContentMinWidth"), Mode = BindingMode.OneWay });
+            {
+                _border.Resources = Application.Current.Resources;
+            }
+           
+            BindingOperations.SetBinding(_border, Border.MinHeightProperty, new Binding() { Source = this, Path = new PropertyPath("MinHeight"), Mode = BindingMode.OneWay });
+            BindingOperations.SetBinding(_border, Border.MinWidthProperty, new Binding() { Source = this, Path = new PropertyPath("MinWidth"), Mode = BindingMode.OneWay });
             BindingOperations.SetBinding(_border, Border.CornerRadiusProperty, new Binding() { Source = this, Path = new PropertyPath("CornerRadius"), Mode = BindingMode.OneWay });
             BindingOperations.SetBinding(_border, Border.BackgroundProperty, new Binding() { Source = this, Path = new PropertyPath("Background"), Mode = BindingMode.OneWay });
             BindingOperations.SetBinding(_border, Border.BorderBrushProperty, new Binding() { Source = this, Path = new PropertyPath("BorderBrush"), Mode = BindingMode.OneWay });
             BindingOperations.SetBinding(_border, Border.BorderThicknessProperty, new Binding() { Source = this, Path = new PropertyPath("BorderThickness"), Mode = BindingMode.OneWay });
             BindingOperations.SetBinding(_border, Border.PaddingProperty, new Binding() { Source = this, Path = new PropertyPath("Padding"), Mode = BindingMode.OneWay });
+            BindingOperations.SetBinding(_border, Border.MarginProperty, new Binding() { Source = this, Path = new PropertyPath("Margin"), Mode = BindingMode.OneWay });
+            BindingOperations.SetBinding(_border, Border.EffectProperty, new Binding() { Source = this, Path = new PropertyPath("Effect"), Mode = BindingMode.OneWay });
             BindingOperations.SetBinding(_border, Border.DataContextProperty, new Binding() { Source = this, Path = new PropertyPath("DataContext"), Mode = BindingMode.OneWay });
             _popup = new Popup()
             {
@@ -93,7 +98,7 @@ namespace LeeTeke.WpfControl.Controls
                 PopupAnimation = PopupAnimation.Fade,
                 Child = _border,
             };
-            _border.PreviewMouseUp += _border_PreviewMouseUp; ;
+            _border.PreviewMouseUp += _border_PreviewMouseUp; 
             #endregion
 
             #region 初始化图片
@@ -118,9 +123,26 @@ namespace LeeTeke.WpfControl.Controls
             #endregion
         }
 
+     
 
+        protected override void OnContentChanged(object oldContent, object newContent)
+        {
+           
 
-
+            if (newContent == null)
+            {
+                _border.Child = null;
+                return;
+            }
+            else if (newContent is FrameworkElement element)
+            {
+                AddRightContent(element);
+            }
+            else
+            {
+                AddRightContent(new TextBlock() { Text = newContent.ToString() });
+            }
+        }
 
         #region 依赖属性
 
@@ -157,37 +179,6 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-        #region ContentMinHeight
-        /// <summary>
-        /// 请填写描述
-        /// </summary>
-        public double ContentMinHeight
-        {
-            get { return (double)GetValue(ContentMinHeightProperty); }
-            set { SetValue(ContentMinHeightProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for ContentMinHeight.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ContentMinHeightProperty =
-            DependencyProperty.Register("ContentMinHeight", typeof(double), typeof(NotifyIconEx), new PropertyMetadata(35.0));
-
-        #endregion
-
-        #region ContentMinWidth
-        /// <summary>
-        /// 请填写描述
-        /// </summary>
-        public double ContentMinWidth
-        {
-            get { return (double)GetValue(ContentMinWidthProperty); }
-            set { SetValue(ContentMinWidthProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for ContentMinWidth.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ContentMinWidthProperty =
-            DependencyProperty.Register("ContentMinWidth", typeof(double), typeof(NotifyIconEx), new PropertyMetadata(100.0));
-
-        #endregion
 
         #region CornerRadius
         /// <summary>
@@ -205,44 +196,7 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-
-        #region Content
-        /// <summary>
-        /// 请填写描述
-        /// </summary>
-        public new object Content
-        {
-            get { return (object)GetValue(ContentProperty); }
-            set { SetValue(ContentProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Content.  This enables animation, styling, binding, etc...
-        public static new readonly DependencyProperty ContentProperty =
-            DependencyProperty.Register("Content", typeof(object), typeof(NotifyIconEx), new PropertyMetadata(null, new PropertyChangedCallback(ContentChanged)));
-
-        private static void ContentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is NotifyIconEx notifyIconEx && e.NewValue != e.OldValue)
-            {
-                if (e.NewValue == null)
-                {
-                    notifyIconEx._popup = null;
-                }
-                else if (e.NewValue is FrameworkElement element)
-                {
-                    notifyIconEx.AddRightContent(element);
-                }
-                else
-                {
-                    notifyIconEx.AddRightContent(new TextBlock() { Text = e.NewValue.ToString() });
-                }
-            }
-        }
-
-
-
-        #endregion
-
+     
 
         #region BalloonTipData
         /// <summary>
@@ -267,7 +221,6 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         #endregion
-
 
         #region Visible
 
@@ -296,7 +249,6 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-
         #region Text
         public string Text
         {
@@ -316,7 +268,6 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
         #endregion
-
 
         #region Flashing
 
@@ -353,7 +304,6 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-
         #region ClickedThenClosing
         /// <summary>
         /// 点击后关闭
@@ -369,8 +319,6 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("ClickedThenClosing", typeof(bool), typeof(NotifyIconEx), new PropertyMetadata(true));
 
         #endregion
-
-
 
         #endregion
 
@@ -664,7 +612,16 @@ namespace LeeTeke.WpfControl.Controls
 
         private void AddRightContent(FrameworkElement element)
         {
-            _border.Child = null;
+            MultiBinding multiBinding = new() { 
+             Converter=new MultiValueToClipConverter(),
+            };
+            multiBinding.Bindings.Add(new Binding() { Source = _border, Path = new PropertyPath("ActualWidth"), Mode = BindingMode.OneWay });
+            multiBinding.Bindings.Add(new Binding() { Source = _border, Path = new PropertyPath("ActualHeight"), Mode = BindingMode.OneWay });
+            multiBinding.Bindings.Add(new Binding() { Source = _border, Path = new PropertyPath("CornerRadius"), Mode = BindingMode.OneWay });
+            multiBinding.Bindings.Add(new Binding() { Source = _border, Path = new PropertyPath("BorderThickness"), Mode = BindingMode.OneWay });
+
+            BindingOperations.SetBinding(element, FrameworkElement.ClipProperty, multiBinding);
+             _border.Child = null;
             _border.Child = element;
         }
 

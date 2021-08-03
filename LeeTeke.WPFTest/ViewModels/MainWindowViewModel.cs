@@ -160,7 +160,7 @@ namespace LeeTeke.WPFTest.ViewModels
             _switch = !_switch;
             StaticMethods.SetLightOrDark(_switch);
 
-
+            NotifyData = new NotifyBannerShowModel("切换" +( _switch ? "普通主题" : "暗黑主题"));
         }
 
     }

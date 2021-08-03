@@ -40,6 +40,8 @@
 
         <Style.Triggers>
             <DataTrigger Binding="{Binding Orientation,RelativeSource={RelativeSource Mode=Self}}" Value="Horizontal">
+                <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}"/>
+                <Setter Property="MinWidth" Value="{DynamicResource LeeControlMinWidth}"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Slider}">
@@ -104,20 +106,6 @@
                                                                 Content="{Binding Path=(leedep:SliderManager.TrackThumb),RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
                                                                 Margin="{Binding ElementName=PART_SelectionRange,Path=ActualWidth,Converter={StaticResource ThicknessForDoubleConverter},ConverterParameter=H_*-0.5,Mode=OneWay}"
                                                                 />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                                                     </ControlTemplate>
                                                     
@@ -196,6 +184,8 @@
                 </Setter>
             </DataTrigger>
             <DataTrigger Binding="{Binding Orientation,RelativeSource={RelativeSource Mode=Self}}" Value="Vertical">
+                <Setter Property="MinWidth" Value="{DynamicResource LeeControlMinHeight}"/>
+                <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinWidth}"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Slider}">
@@ -230,6 +220,7 @@
                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                                         <Track.DecreaseRepeatButton>
                                             <RepeatButton Command="Slider.DecreaseLarge"
+                                                          IsTabStop="True"
                                                           Background="{Binding Path=(leedep:SliderManager.TrackBrush), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}">
                                                 <RepeatButton.Template>
                                                     <ControlTemplate TargetType="{x:Type RepeatButton}">
@@ -253,9 +244,9 @@
                                                     <ControlTemplate TargetType="{x:Type Thumb}">
 
                                                         <ContentPresenter 
-                                                                x:Name="show"
+                                                                x:Name="PART_SelectionRange"
                                                                 Content="{Binding Path=(leedep:SliderManager.TrackThumb),RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
-                                                               Margin="{Binding ElementName=show,Path=ActualHeight,Converter={StaticResource ThicknessForDoubleConverter},ConverterParameter=V_*-0.5,Mode=OneWay}"
+                                                               Margin="{Binding ElementName=PART_SelectionRange,Path=ActualHeight,Converter={StaticResource ThicknessForDoubleConverter},ConverterParameter=V_*-0.5,Mode=OneWay}"
                                                                 />
 
 
@@ -265,6 +256,7 @@
                                         </Track.Thumb>
                                         <Track.IncreaseRepeatButton>
                                             <RepeatButton Command="Slider.IncreaseLarge"
+                                                          IsTabStop="True"
                                                           Background="Transparent">
                                                 <RepeatButton.Template>
                                                     <ControlTemplate TargetType="{x:Type RepeatButton}">

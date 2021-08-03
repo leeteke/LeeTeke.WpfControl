@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:leecontrol="clr-namespace:LeeTeke.WpfControl.Controls;assembly=LeeTeke.WpfControl"
         xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies;assembly=LeeTeke.WpfControl"
+        xmlns:leedata="clr-namespace:LeeTeke.WpfControl;assembly=LeeTeke.WpfControl"
         xmlns:local="clr-namespace:LeeTeke.WPFTest"
         mc:Ignorable="d"
         Title="WpfControl测试 窗口"
@@ -30,10 +31,12 @@
 
         <ScrollViewer Grid.Row="1" 
                       Margin="10"
+                      HorizontalScrollBarVisibility="Disabled"
                        >
 
-            
-            <StackPanel   Width="500"
+   
+
+            <StackPanel  x:Name="stack"
                 >
                 <StackPanel.ContextMenu>
                     <ContextMenu>
@@ -42,33 +45,34 @@
                         <MenuItem Header="ceshi"/>
                         <MenuItem Header="ceshi"/>
                     </ContextMenu>
-                        
                 </StackPanel.ContextMenu>
 
+       
 
-                <Button 
-                        Height="30" 
-                        Content="Nihao " 
+                <Button   Height="30" 
+                        Content="黑白切换" 
                         Command="{Binding TestCommand}"
                         ToolTip="黑白切换" />
 
                 
-                
+                <leecontrol:TabView >
+                    <leecontrol:TabViewItem Content="你好22222222222222222222222"/>
+                    <leecontrol:TabViewItem Content="你好2"/>
+                    <leecontrol:TabViewItem Content="你好2"/>
+                    <leecontrol:TabViewItem Content="你好2"/>
+                    <leecontrol:TabViewItem Content="你好2"/>
+                    <leecontrol:TabViewItem Content="你好2"/>
+                    <leecontrol:TabViewItem Content="你好2"/>
+                    <leecontrol:TabViewItem Content="你好3"
+                                            IsSelected="True"/>
+                </leecontrol:TabView>
+
                 <leecontrol:SwitchButton>
                        你好
                     <leecontrol:SwitchButton.CloseContent>
                         Nihao
                     </leecontrol:SwitchButton.CloseContent>
                 </leecontrol:SwitchButton>
-
-                <leecontrol:GridView>
-                    <Rectangle Width="100" Height="20" Fill="Red"
-                               Margin="5"/>
-                    <Rectangle Width="100" Height="20" Fill="Aqua"
-                               Margin="5"/>
-                    <Rectangle Width="100" Height="20" Fill="DarkGreen"
-                               Margin="5"/>
-                </leecontrol:GridView>
 
                 <leecontrol:ImageEx Source="/Datas/myicon.jpg"  
                                     Width="100"
@@ -83,26 +87,41 @@
                 <leecontrol:LodingBar  Height="10"
                                        Mode="Wating"
                                        Effect="{DynamicResource LeeShadow}"/>
-
+                <Slider  x:Name="slider"
+                         Maximum="100"
+                         AutoToolTipPrecision="2" AutoToolTipPlacement="TopLeft" />
                 <leecontrol:LodingBar  Height="10"
                                        Mode="Loding"
-                                       Value="30"
+                                       Value="{Binding ElementName=slider,Path=Value}"
                                        BorderThickness="1"
                                        BorderBrush="{DynamicResource LeeBrush_BorderBrush}"
                                        />
 
 
                 <leecontrol:SlideView
-                    Height="100"
+                    Height="200"
                     IsCycle="True"
                     AutoPaly="True"
                    >
-                    <Rectangle Width="100" Height="20" Fill="Red"
-                               Margin="5"/>
-                    <Rectangle Width="100" Height="20" Fill="Aqua"
-                               Margin="5"/>
-                    <Rectangle Width="100" Height="20" Fill="DarkGreen"
-                               Margin="5"/>
+           
+                        <Rectangle  Fill="Red"
+                                    Height="100"
+                                    Width="900"
+                               />
+
+
+
+                    <Rectangle  Fill="Fuchsia"
+                                    Height="100"
+                                    Width="900"
+                         />
+
+     
+                        <Rectangle  Fill="DarkSlateBlue"
+                                    Height="100"
+                                    Width="900"
+                               />
+     
                 </leecontrol:SlideView>
 
 
@@ -168,16 +187,32 @@
 
                 </GroupBox>
 
-                <Slider  />
+                
 
             </StackPanel>
             
             
         </ScrollViewer>
 
-   
-        
-        
+
+        <leecontrol:NotifyIconEx  Icon="/Datas/test.ico"
+                                  Flashing="False"
+                                  >
+            <Grid Height="300" Width="200" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel  Grid.Row="1"  >
+                    <Button Content="测试按钮1" Command="{Binding TestCommand}" />
+                    <Button Content="测试按钮2"/>
+                </StackPanel>
+            </Grid>
+        </leecontrol:NotifyIconEx>
+
+        <leecontrol:NotifyBanner Grid.RowSpan="3"
+                                 Content="{Binding NotifyData}"/>
 
     </Grid>
 

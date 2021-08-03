@@ -81,9 +81,6 @@ namespace LeeTeke.WPFTest
             //   tage.Width = 45;
         }
 
-        private void lee_ItemSelected(object sender, WpfControl.TagControlSelectedEventArgs e)
-        {
-            
-        }
+    
     }
 }

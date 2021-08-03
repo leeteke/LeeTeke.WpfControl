@@ -7,14 +7,14 @@ using System.Windows;
 
 namespace LeeTeke.WpfControl
 {
-    public class TagControlItemClosedEventArgs : RoutedEventArgs
+    public class TabViewItemClosedEventArgs : RoutedEventArgs
     {
-        public TagControlItemClosedMode ClosedMode { get; private set; }
-        public TagControlItemClosedEventArgs(TagControlItemClosedMode mode,RoutedEvent routedEvent):base(routedEvent)
+        public TabViewItemClosedMode ClosedMode { get; private set; }
+        public TabViewItemClosedEventArgs(TabViewItemClosedMode mode,RoutedEvent routedEvent):base(routedEvent)
         {
             ClosedMode = mode;
         }
     }
 
-    public delegate void TagControlItemClosedEventHandler(object sender, TagControlItemClosedEventArgs e);
+    public delegate void TabViewItemClosedEventHandler(object sender, TabViewItemClosedEventArgs e);
 }

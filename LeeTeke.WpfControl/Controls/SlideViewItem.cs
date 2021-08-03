@@ -51,6 +51,5 @@ namespace LeeTeke.WpfControl.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(SlideViewItem), new FrameworkPropertyMetadata(typeof(SlideViewItem)));
         }
 
-
     }
 }

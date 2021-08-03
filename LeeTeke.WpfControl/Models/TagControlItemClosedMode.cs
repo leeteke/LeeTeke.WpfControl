@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LeeTeke.WpfControl
 {
-    public enum TagControlItemClosedMode
+    public enum TabViewItemClosedMode
     {
         /// <summary>
         /// 关闭自己

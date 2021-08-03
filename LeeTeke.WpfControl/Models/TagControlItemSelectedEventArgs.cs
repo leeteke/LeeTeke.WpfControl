@@ -7,9 +7,9 @@ using System.Windows;
 
 namespace LeeTeke.WpfControl
 {
-   public  class TagControlItemSelectedEventArgs: RoutedEventArgs
+   public  class TabViewItemSelectedEventArgs: RoutedEventArgs
     {
-        public TagControlItemSelectedEventArgs(RoutedEvent routedEvent) : base(routedEvent)
+        public TabViewItemSelectedEventArgs(RoutedEvent routedEvent) : base(routedEvent)
         {
         
         }
@@ -17,5 +17,5 @@ namespace LeeTeke.WpfControl
 
     }
 
-    public delegate void TagControlItemSelectedEventHandler(object sender, TagControlItemSelectedEventArgs e);
+    public delegate void TabViewItemSelectedEventHandler(object sender, TabViewItemSelectedEventArgs e);
 }

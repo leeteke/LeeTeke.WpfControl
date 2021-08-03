@@ -551,152 +551,152 @@
             请填写描述
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.TagControl" -->
-        <member name="E:LeeTeke.WpfControl.Controls.TagControl.ItemClosed">
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.TabView" -->
+        <member name="E:LeeTeke.WpfControl.Controls.TabView.ItemClosed">
             <summary>
             请填写描述
             </summary>
         </member>
-        <member name="E:LeeTeke.WpfControl.Controls.TagControl.ItemSelected">
+        <member name="E:LeeTeke.WpfControl.Controls.TabView.ItemSelected">
             <summary>
             请填写描述
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TagControl.ItemsSource">
+        <member name="P:LeeTeke.WpfControl.Controls.TabView.ItemsSource">
             <summary>
             请填写描述
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TagControl.SelectedIndex">
+        <member name="P:LeeTeke.WpfControl.Controls.TabView.SelectedIndex">
             <summary>
             请填写描述
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TagControl.SelectedItem">
+        <member name="P:LeeTeke.WpfControl.Controls.TabView.SelectedItem">
             <summary>
             请填写描述
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TagControl.SelectedValue">
+        <member name="P:LeeTeke.WpfControl.Controls.TabView.SelectedValue">
             <summary>
             请填写描述
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TagControl.Orientation">
+        <member name="P:LeeTeke.WpfControl.Controls.TabView.Orientation">
             <summary>
             请填写描述
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TagControl.ItemCornerRadius">
+        <member name="P:LeeTeke.WpfControl.Controls.TabView.ItemCornerRadius">
             <summary>
             请填写描述
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TagControl.ItemPinVisibly">
+        <member name="P:LeeTeke.WpfControl.Controls.TabView.ItemPinVisibly">
             <summary>
             固定显示
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TagControl.ItemMargin">
+        <member name="P:LeeTeke.WpfControl.Controls.TabView.ItemMargin">
             <summary>
             请添加描述
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TagControl.ItemContentMiniWidth">
+        <member name="P:LeeTeke.WpfControl.Controls.TabView.ItemContentMiniWidth">
             <summary>
             请添加描述
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TagControl.SelectedBrush">
+        <member name="P:LeeTeke.WpfControl.Controls.TabView.SelectedBrush">
             <summary>
             请填写描述
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TagControl.ItemClosedCommand">
+        <member name="P:LeeTeke.WpfControl.Controls.TabView.ItemClosedCommand">
             <summary>
             请填写描述
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TagControl.ItemSelectedCommand">
+        <member name="P:LeeTeke.WpfControl.Controls.TabView.ItemSelectedCommand">
             <summary>
             请填写描述
             </summary>
         </member>
-        <member name="M:LeeTeke.WpfControl.Controls.TagControl.CloseItemAsync(LeeTeke.WpfControl.Controls.TagControlItem)">
+        <member name="M:LeeTeke.WpfControl.Controls.TabView.CloseItemAsync(LeeTeke.WpfControl.Controls.TabViewItem)">
             <summary>
             关闭
             </summary>
             <param name="item"></param>
         </member>
-        <member name="M:LeeTeke.WpfControl.Controls.TagControl.ItemValueChanged(LeeTeke.WpfControl.Controls.TagControlItem)">
+        <member name="M:LeeTeke.WpfControl.Controls.TabView.ItemValueChanged(LeeTeke.WpfControl.Controls.TabViewItem)">
             <summary>
             
             </summary>
             <param name="item"></param>
         </member>
-        <member name="M:LeeTeke.WpfControl.Controls.TagControl.ItemRemoveChanged(LeeTeke.WpfControl.Controls.TagControlItem)">
+        <member name="M:LeeTeke.WpfControl.Controls.TabView.ItemRemoveChanged(LeeTeke.WpfControl.Controls.TabViewItem)">
             <summary>
             Item移动事件发生
             </summary>
             <param name="item"></param>
         </member>
-        <member name="M:LeeTeke.WpfControl.Controls.TagControl.ItemSelectedChanged(LeeTeke.WpfControl.Controls.TagControlItem)">
+        <member name="M:LeeTeke.WpfControl.Controls.TabView.ItemSelectedChanged(LeeTeke.WpfControl.Controls.TabViewItem)">
             <summary>
             Item选择事件发生
             </summary>
             <param name="item"></param>
         </member>
-        <member name="M:LeeTeke.WpfControl.Controls.TagControl.SelectedInit(System.Object)">
+        <member name="M:LeeTeke.WpfControl.Controls.TabView.SelectedInit(System.Object)">
             <summary>
             清理选择
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TagControlItem.IsClosed">
+        <member name="P:LeeTeke.WpfControl.Controls.TabViewItem.IsClosed">
             <summary>
             是否执行了关闭
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TagControlItem.CanClosed">
+        <member name="P:LeeTeke.WpfControl.Controls.TabViewItem.CanClosed">
             <summary>
             请填写描述
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TagControlItem.IsSelected">
+        <member name="P:LeeTeke.WpfControl.Controls.TabViewItem.IsSelected">
             <summary>
             请填写描述
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TagControlItem.CornerRadius">
+        <member name="P:LeeTeke.WpfControl.Controls.TabViewItem.CornerRadius">
             <summary>
             请填写描述
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TagControlItem.PinVisibly">
+        <member name="P:LeeTeke.WpfControl.Controls.TabViewItem.PinVisibly">
             <summary>
             是否显示固定按钮
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TagControlItem.Orientation">
+        <member name="P:LeeTeke.WpfControl.Controls.TabViewItem.Orientation">
             <summary>
             Orientation
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.TagControlItem.IsFixed">
+        <member name="P:LeeTeke.WpfControl.Controls.TabViewItem.IsFixed">
             <summary>
             是否固定
             </summary>
         </member>
-        <member name="E:LeeTeke.WpfControl.Controls.TagControlItem.Closed">
+        <member name="E:LeeTeke.WpfControl.Controls.TabViewItem.Closed">
             <summary>
             请填写描述
             </summary>
         </member>
-        <member name="E:LeeTeke.WpfControl.Controls.TagControlItem.Selected">
+        <member name="E:LeeTeke.WpfControl.Controls.TabViewItem.Selected">
             <summary>
             请填写描述
             </summary>
         </member>
-        <member name="M:LeeTeke.WpfControl.Controls.TagControlItem.CloseAsync">
+        <member name="M:LeeTeke.WpfControl.Controls.TabViewItem.CloseAsync">
             <summary>
             关闭Item
             </summary>
@@ -1235,17 +1235,17 @@
             尾部
             </summary>
         </member>
-        <member name="F:LeeTeke.WpfControl.TagControlItemClosedMode.Self">
+        <member name="F:LeeTeke.WpfControl.TabViewItemClosedMode.Self">
             <summary>
             关闭自己
             </summary>
         </member>
-        <member name="F:LeeTeke.WpfControl.TagControlItemClosedMode.Other">
+        <member name="F:LeeTeke.WpfControl.TabViewItemClosedMode.Other">
             <summary>
             关闭其他
             </summary>
         </member>
-        <member name="F:LeeTeke.WpfControl.TagControlItemClosedMode.All">
+        <member name="F:LeeTeke.WpfControl.TabViewItemClosedMode.All">
             <summary>
             关闭全部
             </summary>

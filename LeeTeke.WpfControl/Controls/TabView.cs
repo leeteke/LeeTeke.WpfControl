@@ -42,16 +42,16 @@ namespace LeeTeke.WpfControl.Controls
     /// 步骤 2)
     /// 继续操作并在 XAML 文件中使用控件。
     ///
-    ///     <MyNamespace:TagControl/>
+    ///     <MyNamespace:TabView/>
     ///
     /// </summary>
 
-    [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(TagControlItem))]
-    public class TagControl : ItemsControl
+    [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(TabViewItem))]
+    public class TabView : ItemsControl
     {
-        static TagControl()
+        static TabView()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(TagControl), new FrameworkPropertyMetadata(typeof(TagControl)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(TabView), new FrameworkPropertyMetadata(typeof(TabView)));
         }
 
         private ScrollViewer _scrollViewer;
@@ -73,13 +73,13 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
 
-        public TagControl()
+        public TabView()
         {
             
-            EventManager.RegisterClassHandler(typeof(TagControlItem), TagControlItem.ClosedEvent, new RoutedEventHandler(TagControlItemClosedEventAsync));
-            EventManager.RegisterClassHandler(typeof(TagControlItem), TagControlItem.SelectedEvent, new RoutedEventHandler(TagControlItemSelectedEvent));
+            EventManager.RegisterClassHandler(typeof(TabViewItem), TabViewItem.ClosedEvent, new RoutedEventHandler(TabViewItemClosedEventAsync));
+            EventManager.RegisterClassHandler(typeof(TabViewItem), TabViewItem.SelectedEvent, new RoutedEventHandler(TabViewItemSelectedEvent));
             EventManager.RegisterClassHandler(typeof(StackPanel), StackPanel.SizeChangedEvent, new RoutedEventHandler(StackPanelLoadedEvent));
-            PreviewMouseWheel += TagControl_PreviewMouseWheel;
+            PreviewMouseWheel += TabView_PreviewMouseWheel;
         }
 
 
@@ -91,15 +91,17 @@ namespace LeeTeke.WpfControl.Controls
 
         protected override bool IsItemItsOwnContainerOverride(object item)
         {
-            return item is TagControlItem;
+            return item is TabViewItem;
         }
 
         protected override DependencyObject GetContainerForItemOverride()
         {
-            return new TagControlItem();
+            return new TabViewItem();
         }
 
+     
 
+   
 
 
         #endregion
@@ -113,19 +115,19 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public event TagControlColsedEventHandler ItemClosed
+        public event TabViewColsedEventHandler ItemClosed
         {
             add { AddHandler(ItemClosedEvent, value); }
             remove { RemoveHandler(ItemClosedEvent, value); }
         }
 
         public static readonly RoutedEvent ItemClosedEvent = EventManager.RegisterRoutedEvent(
-        "ItemClosed", RoutingStrategy.Bubble, typeof( TagControlColsedEventHandler), typeof(TagControl));
+        "ItemClosed", RoutingStrategy.Bubble, typeof( TabViewColsedEventHandler), typeof(TabView));
 
 
         private void RaiseItemClosed(object newValue)
         {
-            var arg = new TagControlColsedEventArgs(newValue, ItemClosedEvent);
+            var arg = new TabViewColsedEventArgs(newValue, ItemClosedEvent);
             RaiseEvent(arg);
         }
 
@@ -136,19 +138,19 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public event TagControlSelectedEventHandler ItemSelected
+        public event TabViewSelectedEventHandler ItemSelected
         {
             add { AddHandler(ItemSelectedEvent, value); }
             remove { RemoveHandler(ItemSelectedEvent, value); }
         }
 
         public static readonly RoutedEvent ItemSelectedEvent = EventManager.RegisterRoutedEvent(
-        "ItemSelected", RoutingStrategy.Bubble, typeof( TagControlSelectedEventHandler), typeof(TagControl));
+        "ItemSelected", RoutingStrategy.Bubble, typeof( TabViewSelectedEventHandler), typeof(TabView));
 
 
         private void RaiseItemSelected(object newValue)
         {
-            var arg = new TagControlSelectedEventArgs(newValue, ItemSelectedEvent);
+            var arg = new TabViewSelectedEventArgs(newValue, ItemSelectedEvent);
             RaiseEvent(arg);
         }
 
@@ -171,11 +173,11 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemSource.  This enables animation, styling, binding, etc...
         public new static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(TagControl), new PropertyMetadata(null, new PropertyChangedCallback(ItemsSourceChanged)));
+            DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(TabView), new PropertyMetadata(null, new PropertyChangedCallback(ItemsSourceChanged)));
 
         private static void ItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is TagControl tag)
+            if (d is TabView tag)
             {
                 tag.ItemList = e.NewValue as IList;
             }
@@ -195,11 +197,11 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for SelectedIndex.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedIndexProperty =
-            DependencyProperty.Register("SelectedIndex", typeof(int), typeof(TagControl), new PropertyMetadata(-1, SelectedIndexChanged));
+            DependencyProperty.Register("SelectedIndex", typeof(int), typeof(TabView), new PropertyMetadata(-1, SelectedIndexChanged));
 
         private static void SelectedIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is TagControl tag && e.NewValue != e.OldValue && e.NewValue is int newValue && tag._selectedIndex != newValue)
+            if (d is TabView tag && e.NewValue != e.OldValue && e.NewValue is int newValue && tag._selectedIndex != newValue)
             {
                 tag.SelectedIndexChanged();
 
@@ -220,11 +222,11 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for SelectedItem.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedItemProperty =
-            DependencyProperty.Register("SelectedItem", typeof(object), typeof(TagControl), new PropertyMetadata(null, SelectedItemChanged));
+            DependencyProperty.Register("SelectedItem", typeof(object), typeof(TabView), new PropertyMetadata(null, SelectedItemChanged));
 
         private static void SelectedItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is TagControl tag && e.NewValue != e.OldValue && e.NewValue is TagControlItem item && tag._selectedItem != item)
+            if (d is TabView tag && e.NewValue != e.OldValue && e.NewValue is TabViewItem item && tag._selectedItem != item)
             {
                 tag.SelectedItemChanged();
             }
@@ -244,11 +246,11 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for SelectedValue.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedValueProperty =
-            DependencyProperty.Register("SelectedValue", typeof(object), typeof(TagControl), new PropertyMetadata(null, SelectedValueChanged));
+            DependencyProperty.Register("SelectedValue", typeof(object), typeof(TabView), new PropertyMetadata(null, SelectedValueChanged));
 
         private static void SelectedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is TagControl tag && e.NewValue != e.OldValue && tag._selectedValue != e.NewValue)
+            if (d is TabView tag && e.NewValue != e.OldValue && tag._selectedValue != e.NewValue)
             {
                 tag.SelectedValueChanged();
             }
@@ -268,7 +270,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for Orientation.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty OrientationProperty =
-            DependencyProperty.Register("Orientation", typeof(Orientation), typeof(TagControl));
+            DependencyProperty.Register("Orientation", typeof(Orientation), typeof(TabView));
 
         #endregion
 
@@ -284,7 +286,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemCornerRadius.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemCornerRadiusProperty =
-            DependencyProperty.Register("ItemCornerRadius", typeof(CornerRadius), typeof(TagControl));
+            DependencyProperty.Register("ItemCornerRadius", typeof(CornerRadius), typeof(TabView));
 
         #endregion
 
@@ -301,7 +303,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemPinVisibly.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemPinVisiblyProperty =
-            DependencyProperty.Register("ItemPinVisibly", typeof(bool), typeof(TagControl));
+            DependencyProperty.Register("ItemPinVisibly", typeof(bool), typeof(TabView));
         #endregion
 
 
@@ -317,8 +319,26 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemMargin.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemMarginProperty =
-            DependencyProperty.Register("ItemMargin", typeof(Thickness), typeof(TagControl));
+            DependencyProperty.Register("ItemMargin", typeof(Thickness), typeof(TabView));
         #endregion
+
+
+
+        #region ItemPadding
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Thickness ItemPadding
+        {
+            get { return (Thickness)GetValue(ItemPaddingProperty); }
+            set { SetValue(ItemPaddingProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ItemPadding.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemPaddingProperty =
+            DependencyProperty.Register("ItemPadding", typeof(Thickness), typeof(TabView));
+        #endregion
+
 
 
         #region ItemContentMiniWidth
@@ -333,7 +353,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemContentMiniWidth.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemContentMiniWidthProperty =
-            DependencyProperty.Register("ItemContentMiniWidth", typeof(double), typeof(TagControl));
+            DependencyProperty.Register("ItemContentMiniWidth", typeof(double), typeof(TabView));
         #endregion
 
 
@@ -349,8 +369,24 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for SelectedBrush.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedBrushProperty =
-            DependencyProperty.Register("SelectedBrush", typeof(Brush), typeof(TagControl));
+            DependencyProperty.Register("SelectedBrush", typeof(Brush), typeof(TabView));
 
+        #endregion
+
+
+        #region SelectedForeground
+        /// <summary>
+        /// 选择的前景色
+        /// </summary>
+        public Brush SelectedForeground
+        {
+            get { return (Brush)GetValue(SelectedForegroundProperty); }
+            set { SetValue(SelectedForegroundProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SelectedForeground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedForegroundProperty =
+            DependencyProperty.Register("SelectedForeground", typeof(Brush), typeof(TabView));
         #endregion
 
 
@@ -366,7 +402,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemClosedCommand.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemClosedCommandProperty =
-            DependencyProperty.Register("ItemClosedCommand", typeof(ICommand), typeof(TagControl));
+            DependencyProperty.Register("ItemClosedCommand", typeof(ICommand), typeof(TabView));
 
         #endregion
 
@@ -382,7 +418,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemSelectedCommand.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemSelectedCommandProperty =
-            DependencyProperty.Register("ItemSelectedCommand", typeof(ICommand), typeof(TagControl));
+            DependencyProperty.Register("ItemSelectedCommand", typeof(ICommand), typeof(TabView));
 
         #endregion
 
@@ -403,7 +439,7 @@ namespace LeeTeke.WpfControl.Controls
             if (!SelectedInit(SelectedIndex))
                 return;
 
-            SelectedItemsAsync(_stackPanel.Children[SelectedIndex] as TagControlItem);
+            SelectedItemsAsync(_stackPanel.Children[SelectedIndex] as TabViewItem);
 
         }
 
@@ -414,11 +450,11 @@ namespace LeeTeke.WpfControl.Controls
 
             if (ItemsSource == null)
             {
-                SelectedItemsAsync(SelectedValue as TagControlItem);
+                SelectedItemsAsync(SelectedValue as TabViewItem);
             }
             else
             {
-                foreach (TagControlItem item in _stackPanel.Children)
+                foreach (TabViewItem item in _stackPanel.Children)
                 {
                     if (item.DataContext == SelectedValue)
                     {
@@ -437,7 +473,7 @@ namespace LeeTeke.WpfControl.Controls
             if (!SelectedInit(SelectedItem))
                 return;
 
-            SelectedItemsAsync(SelectedItem as TagControlItem);
+            SelectedItemsAsync(SelectedItem as TabViewItem);
 
         }
 
@@ -479,12 +515,12 @@ namespace LeeTeke.WpfControl.Controls
         }
 
 
-        private async void TagControlItemClosedEventAsync(object sender, RoutedEventArgs e)
+        private async void TabViewItemClosedEventAsync(object sender, RoutedEventArgs e)
         {
-            if (sender is TagControlItem self)
-                switch ((e as TagControlItemClosedEventArgs).ClosedMode)
+            if (sender is TabViewItem self)
+                switch ((e as TabViewItemClosedEventArgs).ClosedMode)
                 {
-                    case TagControlItemClosedMode.Self:
+                    case TabViewItemClosedMode.Self:
                         if (self.CanClosed)
                         {
 
@@ -495,11 +531,11 @@ namespace LeeTeke.WpfControl.Controls
                             {
                                 if (index > 0)
                                 {
-                                    SelectedItem = _stackPanel.Children[index - 1] as TagControlItem;
+                                    SelectedItem = _stackPanel.Children[index - 1] as TabViewItem;
                                 }
                                 else if (_stackPanel.Children != null && _stackPanel.Children.Count > 0)
                                 {
-                                    SelectedItem = _stackPanel.Children[0] as TagControlItem;
+                                    SelectedItem = _stackPanel.Children[0] as TabViewItem;
                                 }
                             }
                             else if (_stackPanel.Children.Count < 1)
@@ -508,7 +544,7 @@ namespace LeeTeke.WpfControl.Controls
                             }
                         }
                         break;
-                    case TagControlItemClosedMode.Other:
+                    case TabViewItemClosedMode.Other:
 
                         List<object> needCloseItem = new List<object>();
                         for (int i = 0; i < _stackPanel.Children.Count; i++)
@@ -519,7 +555,7 @@ namespace LeeTeke.WpfControl.Controls
                                 needCloseItem.Add(_stackPanel.Children[i]);
                             }
                         }
-                        foreach (TagControlItem item in needCloseItem)
+                        foreach (TabViewItem item in needCloseItem)
                         {
                             if (item.CanClosed&&!item.IsFixed)
                             {
@@ -529,13 +565,13 @@ namespace LeeTeke.WpfControl.Controls
                         }
 
                         break;
-                    case TagControlItemClosedMode.All:
+                    case TabViewItemClosedMode.All:
                         List<object> allItem = new List<object>();
                         for (int i = 0; i < _stackPanel.Children.Count; i++)
                         {
                             allItem.Add(_stackPanel.Children[i]);
                         }
-                        foreach (TagControlItem item in allItem)
+                        foreach (TabViewItem item in allItem)
                         {
                             if (item.CanClosed&&!item.IsFixed)
                             {
@@ -547,7 +583,7 @@ namespace LeeTeke.WpfControl.Controls
                         if (_stackPanel.Children.Count > 0)
                         {
                             ///选择首个
-                            SelectedItem = _stackPanel.Children[0] as TagControlItem;
+                            SelectedItem = _stackPanel.Children[0] as TabViewItem;
                         }
                         else
                         {
@@ -560,7 +596,7 @@ namespace LeeTeke.WpfControl.Controls
 
         }
 
-        private void TagControl_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        private void TabView_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             e.Handled = true;
             if (_scrollViewer != null)
@@ -578,9 +614,9 @@ namespace LeeTeke.WpfControl.Controls
                 }
             }
         }
-        private void TagControlItemSelectedEvent(object sender, RoutedEventArgs e)
+        private void TabViewItemSelectedEvent(object sender, RoutedEventArgs e)
         {
-            if (sender is TagControlItem item && StaticMethods.IsInControl(this, item))
+            if (sender is TabViewItem item && StaticMethods.IsInControl(this, item))
             {
                 if (SelectedItem != item)
                 {
@@ -593,7 +629,7 @@ namespace LeeTeke.WpfControl.Controls
         /// 关闭
         /// </summary>
         /// <param name="item"></param>
-        private async Task CloseItemAsync(TagControlItem item)
+        private async Task CloseItemAsync(TabViewItem item)
         {
 
             await item.CloseAsync();
@@ -613,7 +649,7 @@ namespace LeeTeke.WpfControl.Controls
 
         }
 
-        private async void SelectedItemsAsync(TagControlItem item)
+        private async void SelectedItemsAsync(TabViewItem item)
         {
             if (item == null)
             {
@@ -632,7 +668,7 @@ namespace LeeTeke.WpfControl.Controls
                 }
                 else
                 {
-                    (_stackPanel.Children[i] as TagControlItem).IsSelected = false;
+                    (_stackPanel.Children[i] as TabViewItem).IsSelected = false;
                 }
             }
         }
@@ -641,7 +677,7 @@ namespace LeeTeke.WpfControl.Controls
         /// 
         /// </summary>
         /// <param name="item"></param>
-        private void ItemValueChanged(TagControlItem item)
+        private void ItemValueChanged(TabViewItem item)
         {
             _selectedValue = ItemsSource == null ? item : item?.DataContext;
             _selectedIndex = _stackPanel.Children.IndexOf(item);
@@ -658,7 +694,7 @@ namespace LeeTeke.WpfControl.Controls
         /// Item移动事件发生
         /// </summary>
         /// <param name="item"></param>
-        private void ItemRemoveChanged(TagControlItem item)
+        private void ItemRemoveChanged(TabViewItem item)
         {
             RaiseItemClosed(item);
             try
@@ -674,7 +710,7 @@ namespace LeeTeke.WpfControl.Controls
         /// Item选择事件发生
         /// </summary>
         /// <param name="item"></param>
-        private void ItemSelectedChanged(TagControlItem item)
+        private void ItemSelectedChanged(TabViewItem item)
         {
             ItemValueChanged(item);
             RaiseItemSelected(item);
@@ -707,7 +743,7 @@ namespace LeeTeke.WpfControl.Controls
                 SelectedIndex = _selectedIndex;
                 SelectedValue = _selectedValue;
                 SelectedItem = _selectedItem;
-                foreach (TagControlItem chlid in _stackPanel.Children)
+                foreach (TabViewItem chlid in _stackPanel.Children)
                 {
                     chlid.IsSelected = false;
                 }

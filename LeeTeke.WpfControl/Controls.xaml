@@ -90,7 +90,16 @@
     <Style TargetType="{x:Type local:NotifyIconEx}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="MinHeight" Value="{DynamicResource LeeControlHeight}"/>
+        <Setter Property="MinWidth" Value="150"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="Background" Value="{DynamicResource LeeBrush_Background}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Effect" Value="{DynamicResource LeeShadow1}"/>
         <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        
+        
     </Style>
 
     <Style TargetType="{x:Type local:LodingBar}">
@@ -262,6 +271,8 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}"/>
+        <Setter Property="MinWidth" Value="{DynamicResource  LeeControlMinWidth}"/>
         <Setter Property="Orientation" Value="Horizontal"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Template">
@@ -524,7 +535,6 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
-        <Setter Property="Width" Value="{DynamicResource LeeControlWidth}"/>
         <Setter Property="Height" Value="{DynamicResource LeeControlHeight}"/>
         <Setter Property="Padding" Value="2"/>
         <Setter Property="BorderBrush" Value="{DynamicResource  LeeBrush_BorderBrush}"/>
@@ -684,51 +694,68 @@
 
     </Style>
 
-    <Style TargetType="{x:Type local:TagControlItem}">
+    <Style TargetType="{x:Type local:TabViewItem}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="Margin" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TagControl}},Path=ItemMargin,Mode=OneWay}"/>
-        <Setter Property="PinVisibly" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TagControl}},Path=ItemPinVisibly,Mode=OneWay}"/>
-        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
+        <Setter Property="Margin" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=ItemMargin,Mode=OneWay}"/>
+        <Setter Property="PinVisibly" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=ItemPinVisibly,Mode=OneWay}"/>
+        <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=Foreground,Mode=OneWay}"/>
         <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="VerticalContentAlignment" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=VerticalContentAlignment,Mode=OneWay}"/>
+        <Setter Property="HorizontalContentAlignment" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=HorizontalContentAlignment,Mode=OneWay}"/>
+        <Setter Property="Padding" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=ItemPadding,Mode=OneWay}"/>
+        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="CanClosed" Value="True"/>
-        <Setter Property="CornerRadius" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TagControl}},Path=ItemCornerRadius,Mode=OneWay}"/>
+        <Setter Property="CornerRadius" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=ItemCornerRadius,Mode=OneWay}"/>
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Horizontal">
-                <Setter Property="Width" Value="180"/>
+                <Setter Property="Width" Value="150"/>
                 <Setter Property="Template">
                     <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type local:TagControlItem}" >
+                        <ControlTemplate TargetType="{x:Type local:TabViewItem}" >
                             <Border x:Name="contentBorder" 
                                         BorderBrush="{TemplateBinding BorderBrush}"
                                         BorderThickness="{TemplateBinding BorderThickness}"
                                         Background="{TemplateBinding Background}"
-                                        Padding="{TemplateBinding Padding}"
                                        CornerRadius="{TemplateBinding CornerRadius}" >
                                 <Grid >
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition MinWidth="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TagControl}},Path=ItemContentMiniWidth,Mode=OneWay}"/>
+                                        <ColumnDefinition MinWidth="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=ItemContentMiniWidth,Mode=OneWay}"/>
                                         <ColumnDefinition Width="auto"/>
                                     </Grid.ColumnDefinitions>
+                         
+                                    <Rectangle x:Name="PART_Rectangle" 
+                                               Width="1"
+                                               Fill="{DynamicResource LeeBrush_BorderBrush}"
+                                               Margin="-1,10"
+                                               HorizontalAlignment="Left"/>
                                     <Button x:Name="PART_CloseButton" 
-                                                Grid.Column="1"
-                                                Content="&#xE8BB;"
-                                                FontSize="9"
-                                                Width="25"
-                                                FontFamily="{DynamicResource IconFontFamily}"
-                                                Style="{DynamicResource TextButton}"
-                                               Tag="1"
+                                            Grid.Column="1"
+                                            Content="&#xE8BB;"
+                                            FontSize="9"
+                                            Width="25"
+                                            Height="25"
+                                            Margin="5"
+                                            leedep:ButtonManager.CornerRadius="12.5"
+                                            FontFamily="{DynamicResource IconFontFamily}"
+                                            Style="{DynamicResource ColorButton}"
+                                            BorderThickness="0"
+                                            Background="Transparent"
+                                            Tag="1"
+                                               Foreground="{TemplateBinding Foreground}"
                                                 />
                                     <ContentPresenter x:Name="PART_ContentPresenter" 
                                               ContentTemplate="{TemplateBinding ContentTemplate}"
                                               TextElement.Foreground="{TemplateBinding  Foreground}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                               Margin="{TemplateBinding Padding}"
                                               />
 
                                 </Grid>
                                 <Border.ContextMenu>
                                     <ContextMenu x:Name="PART_ContextMenu">
-                                        <MenuItem x:Name="PART_MenuItem_Pin" 
-                                                  Header="固定选项卡">
+                                        <MenuItem x:Name="PART_MenuItem_Pin"    Header="固定选项卡">
                                             <MenuItem.Icon>
                                                 <TextBlock  x:Name="PART_PinIcon"  
                                                             Text="&#xE718;"
@@ -770,16 +797,23 @@
                                             Value="固定选项卡"/>
                                 </Trigger>
                                 <Trigger Property="IsSelected" Value="True">
-                                    <Setter Property="Background" 
-                                            Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TagControl}},Path=SelectedBrush,Mode=OneWay}"/>
+                                    <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=SelectedBrush,Mode=OneWay}"/>
+                                    <Setter Property="Foreground"  Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=SelectedForeground,Mode=OneWay}"/>
+                                    <Setter Property="Effect" >
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="#88000000" ShadowDepth="0" BlurRadius="5" Opacity="0.5"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="StackPanel.ZIndex" Value="999"/>
+                                    <Setter TargetName="PART_Rectangle" Property="Opacity" Value="0"/>
                                 </Trigger>
                                 <MultiTrigger>
                                     <MultiTrigger.Conditions>
-                                        <Condition Property="IsSelected"   Value="False"/>
+                                        <Condition Property="IsSelected"  Value="False"/>
                                         <Condition  Property="IsMouseOver" Value="True"/>
                                     </MultiTrigger.Conditions>
-                                    <Setter Property="Background" 
-                                                Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TagControl}},Path=SelectedBrush,Mode=OneWay,Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.5}"/>
+                                    <Setter Property="Background" Value="{DynamicResource LeeBrush_Mark}"/>
+                                    <Setter TargetName="PART_Rectangle" Property="Opacity" Value="0"/>
                                 </MultiTrigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -788,10 +822,9 @@
             </Trigger>
             <Trigger Property="Orientation" Value="Vertical">
                 <Setter Property="Height" Value="30"/>
-
                 <Setter Property="Template">
                     <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type local:TagControlItem}" >
+                        <ControlTemplate TargetType="{x:Type local:TabViewItem}" >
                             <Border x:Name="contentBorder" 
                                         BorderBrush="{TemplateBinding BorderBrush}"
                                         BorderThickness="{TemplateBinding BorderThickness}"
@@ -800,7 +833,7 @@
                                         CornerRadius="{TemplateBinding CornerRadius}" >
                                 <Grid >
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition MinWidth="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TagControl}},Path=ItemContentMiniWidth,Mode=OneWay}"  Width="*"/>
+                                        <ColumnDefinition MinWidth="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=ItemContentMiniWidth,Mode=OneWay}"  Width="*"/>
                                         <ColumnDefinition Width="auto"/>
                                     </Grid.ColumnDefinitions>
                                     <Button x:Name="PART_CloseButton" 
@@ -863,7 +896,7 @@
                                 </Trigger>
                                 <Trigger Property="IsSelected" Value="True">
                                     <Setter Property="Background" 
-                                            Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TagControl}},Path=SelectedBrush,Mode=OneWay}"/>
+                                            Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=SelectedBrush,Mode=OneWay}"/>
                                     <Setter TargetName="contentBorder"
                                             Property="Effect"
                                             Value="{DynamicResource LeeShadow}"/>
@@ -874,7 +907,7 @@
                                         <Condition  Property="IsMouseOver" Value="True"/>
                                     </MultiTrigger.Conditions>
                                     <Setter Property="Background" 
-                                                Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TagControl}},Path=SelectedBrush,Mode=OneWay,Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.5}"/>
+                                                Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=SelectedBrush,Mode=OneWay,Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.5}"/>
                                 </MultiTrigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -884,17 +917,24 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="{x:Type local:TagControl}">
+    <Style TargetType="{x:Type local:TabView}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="Orientation" Value="Horizontal"/>
-        <Setter Property="ItemCornerRadius" Value="2,2,0,0"/>
+        <Setter Property="ItemCornerRadius" Value="4,4,0,0"/>
+        <Setter Property="Height" Value="{DynamicResource LeeControlHeight}"/>
         <Setter Property="ItemPinVisibly" Value="True"/>
+        <Setter Property="ItemMargin" Value="0"/>
+        <Setter Property="ItemPadding" Value="10,5,0,5"/>
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="SelectedBrush" Value="{DynamicResource LeeBrush_Theme}"/>
-        <Setter Property="MinHeight" Value="30"/>
+        <Setter Property="SelectedForeground" Value="{DynamicResource LeeBrush_TextDark}"/>
+
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:TagControl}">
+                <ControlTemplate TargetType="{x:Type local:TabView}">
                     <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
@@ -927,19 +967,19 @@
                 <ItemsPanelTemplate>
                     <StackPanel x:Name="PART_StackPanel" 
                                 FocusVisualStyle="{x:Null}"
-                                Orientation="{Binding Orientation,  RelativeSource={ RelativeSource Mode=FindAncestor,AncestorType={x:Type local:TagControl},AncestorLevel=1},Mode=OneWay}"   />
+                                Orientation="{Binding Orientation,  RelativeSource={ RelativeSource Mode=FindAncestor,AncestorType={x:Type local:TabView},AncestorLevel=1},Mode=OneWay}"   />
                 </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Horizontal">
-                <Setter Property="ItemCornerRadius" Value="2,2,0,0"/>
-                <Setter Property="ItemMargin" Value="0,0,1,0"/>
+                <Setter Property="ItemCornerRadius" Value="4,4,0,0"/>
+
 
             </Trigger>
             <Trigger Property="Orientation" Value="Vertical">
-                <Setter Property="ItemCornerRadius" Value="2"/>
-                <Setter Property="ItemMargin" Value="0,2"/>
+                <Setter Property="ItemCornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        
 
             </Trigger>
         </Style.Triggers>
@@ -982,8 +1022,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-
 
     <Style TargetType="{x:Type local:ScrollBanner}">
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>

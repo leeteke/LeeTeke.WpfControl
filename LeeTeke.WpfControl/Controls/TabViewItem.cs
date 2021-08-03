@@ -16,20 +16,21 @@ using System.Windows.Shapes;
 
 namespace LeeTeke.WpfControl.Controls
 {
-    public class TagControlItem : ContentControl
+    public class TabViewItem : ContentControl
     {
-        static TagControlItem()
+        static TabViewItem()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(TagControlItem), new FrameworkPropertyMetadata(typeof(TagControlItem)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(TabViewItem), new FrameworkPropertyMetadata(typeof(TabViewItem)));
         }
 
-        public TagControlItem()
+        public TabViewItem()
         {
-            MouseDown += TagControlItem_MouseDown;
-            KeyDown += TagControlItem_KeyDown;
+            MouseDown += TabViewItem_MouseDown;
+            KeyDown += TabViewItem_KeyDown;
+          
         }
 
-        private void TagControlItem_KeyDown(object sender, KeyEventArgs e)
+        private void TabViewItem_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
             {
@@ -43,7 +44,7 @@ namespace LeeTeke.WpfControl.Controls
 
         }
 
-        private void TagControlItem_MouseDown(object sender, MouseButtonEventArgs e)
+        private void TabViewItem_MouseDown(object sender, MouseButtonEventArgs e)
         {
             IsSelected = true;
         }
@@ -60,15 +61,15 @@ namespace LeeTeke.WpfControl.Controls
 
                 if (this.Template.FindName("PART_MenuItem_CloseAll", this) is MenuItem allItem)
                 {
-                    allItem.Click += (es, ex) => RaiseClosed(TagControlItemClosedMode.All);
+                    allItem.Click += (es, ex) => RaiseClosed(TabViewItemClosedMode.All);
                 }
                 if (this.Template.FindName("PART_MenuItem_CloseOther", this) is MenuItem otherItem)
                 {
-                    otherItem.Click += (es, ex) => RaiseClosed(TagControlItemClosedMode.Other);
+                    otherItem.Click += (es, ex) => RaiseClosed(TabViewItemClosedMode.Other);
                 }
                 if (this.Template.FindName("PART_MenuItem_CloseSelf", this) is MenuItem selftItem)
                 {
-                    selftItem.Click += (es, ex) => RaiseClosed(TagControlItemClosedMode.Self);
+                    selftItem.Click += (es, ex) => RaiseClosed(TabViewItemClosedMode.Self);
                 }
 
                 if (this.Template.FindName("PART_MenuItem_Pin", this) is MenuItem btnPin)
@@ -78,7 +79,7 @@ namespace LeeTeke.WpfControl.Controls
 
                 if (this.Template.FindName("PART_CloseButton", this) is Button button)
                 {
-                    button.Click += (es, ex) => RaiseClosed(TagControlItemClosedMode.Self);
+                    button.Click += (es, ex) => RaiseClosed(TabViewItemClosedMode.Self);
                 }
 
                 if (this.Template.FindName("PART_ContentPresenter",this) is ContentPresenter contentPresenter)
@@ -86,10 +87,10 @@ namespace LeeTeke.WpfControl.Controls
                     contentPresenter.Loaded += (es, ex) =>
                     {
                         var chlid = VisualTreeHelper.GetChild(contentPresenter, 0);
-                        BindingOperations.SetBinding(this, TagControlItem.CanClosedProperty, new Binding()
+                        BindingOperations.SetBinding(this, TabViewItem.CanClosedProperty, new Binding()
                         {
                             Source = chlid,
-                            Path = new PropertyPath("(0)", new DependencyProperty[] { LeeTeke.WpfControl.Dependencies.TagControlManager.ItemCanCloseProperty }),
+                            Path = new PropertyPath("(0)", new DependencyProperty[] { LeeTeke.WpfControl.Dependencies.TabViewManager.ItemCanCloseProperty }),
                             Mode = BindingMode.OneWay
                         });
                     };
@@ -102,8 +103,7 @@ namespace LeeTeke.WpfControl.Controls
             }
 
         }
-
-       
+              
 
         #region 属性
         /// <summary>
@@ -113,7 +113,6 @@ namespace LeeTeke.WpfControl.Controls
 
         public new ContextMenu ContextMenu { get; private set; }
         #endregion
-
 
         #region 依赖属性
 
@@ -129,7 +128,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for CanClosed.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CanClosedProperty =
-            DependencyProperty.Register("CanClosed", typeof(bool), typeof(TagControlItem));
+            DependencyProperty.Register("CanClosed", typeof(bool), typeof(TabViewItem));
 
         #endregion
 
@@ -146,11 +145,11 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for IsSelected.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsSelectedProperty =
-            DependencyProperty.Register("IsSelected", typeof(bool), typeof(TagControlItem), new PropertyMetadata(false, IsSelectedChanged));
+            DependencyProperty.Register("IsSelected", typeof(bool), typeof(TabViewItem), new PropertyMetadata(false, IsSelectedChanged));
 
         private static void IsSelectedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is TagControlItem item && e.NewValue != e.OldValue)
+            if (d is TabViewItem item && e.NewValue != e.OldValue)
             {
                 if ((bool)e.NewValue == true)
                 {
@@ -174,10 +173,9 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for CornerRadius.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CornerRadiusProperty =
-            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(TagControlItem));
+            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(TabViewItem));
 
         #endregion
-
 
         #region PinVisibly
         /// <summary>
@@ -191,7 +189,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for PinVisibly.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PinVisiblyProperty =
-            DependencyProperty.Register("PinVisibly", typeof(bool), typeof(TagControlItem));
+            DependencyProperty.Register("PinVisibly", typeof(bool), typeof(TabViewItem));
         #endregion
 
         #region Orientation
@@ -206,14 +204,8 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for Orientation.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty OrientationProperty =
-            DependencyProperty.Register("Orientation", typeof(Orientation), typeof(TagControlItem));
+            DependencyProperty.Register("Orientation", typeof(Orientation), typeof(TabViewItem));
 
-        #endregion
-
-
-        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty MyPropertyProperty =
-            DependencyProperty.Register("MyProperty", typeof(int), typeof(TagControlItem));
         #endregion
 
 
@@ -229,58 +221,59 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for IsFixed.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsFixedProperty =
-            DependencyProperty.Register("IsFixed", typeof(bool), typeof(TagControlItem));
+            DependencyProperty.Register("IsFixed", typeof(bool), typeof(TabViewItem));
 
         #endregion
 
+        #endregion
 
+        #region RouteEvent
 
         #region Closed
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public event TagControlItemClosedEventHandler Closed
+        public event TabViewItemClosedEventHandler Closed
         {
             add { AddHandler(ClosedEvent, value); }
             remove { RemoveHandler(ClosedEvent, value); }
         }
 
         public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent(
-        "Closed", RoutingStrategy.Bubble, typeof(TagControlItemClosedEventHandler), typeof(TagControlItem));
+        "Closed", RoutingStrategy.Bubble, typeof(TabViewItemClosedEventHandler), typeof(TabViewItem));
 
 
-        private void RaiseClosed(TagControlItemClosedMode newValue)
+        private void RaiseClosed(TabViewItemClosedMode newValue)
         {
-            var arg = new TagControlItemClosedEventArgs(newValue, ClosedEvent);
+            var arg = new TabViewItemClosedEventArgs(newValue, ClosedEvent);
             RaiseEvent(arg);
         }
 
         #endregion
 
-
         #region Selected
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public event TagControlItemSelectedEventHandler Selected
+        public event TabViewItemSelectedEventHandler Selected
         {
             add { AddHandler(SelectedEvent, value); }
             remove { RemoveHandler(SelectedEvent, value); }
         }
 
         public static readonly RoutedEvent SelectedEvent = EventManager.RegisterRoutedEvent(
-        "Selected", RoutingStrategy.Bubble, typeof(TagControlItemSelectedEventHandler), typeof(TagControlItem));
+        "Selected", RoutingStrategy.Bubble, typeof(TabViewItemSelectedEventHandler), typeof(TabViewItem));
 
 
         private void RaiseSelected()
         {
-            var arg = new TagControlItemSelectedEventArgs(SelectedEvent);
+            var arg = new TabViewItemSelectedEventArgs(SelectedEvent);
             RaiseEvent(arg);
         }
 
         #endregion
 
-
+        #endregion
         #region 公共方法
         /// <summary>
         /// 关闭Item
