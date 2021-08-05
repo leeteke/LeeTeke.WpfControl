@@ -1022,6 +1022,37 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    
+    <Style TargetType="{x:Type local:NotifyBannerItem}">
+
+        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=Background,Mode=OneWay}"/>
+        <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=BorderBrush,Mode=OneWay}"/>
+        <Setter Property="BorderThickness" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=BorderThickness,Mode=OneWay}"/>
+        <Setter Property="Effect" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=Effect,Mode=OneWay}"/>
+        <Setter Property="CornerRadius" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=CornerRadius,Mode=OneWay}"/>
+        <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=Foreground,Mode=OneWay}"/>
+        <Setter Property="FontSize" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=FontSize,Mode=OneWay}"/>
+        <Setter Property="FontStretch" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=FontStretch,Mode=OneWay}"/>
+        <Setter Property="Margin" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=Padding,Mode=OneWay}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:NotifyBannerItem}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Effect="{TemplateBinding Effect}">
+                        <Grid>
+                            
+                            <ContentPresenter Margin="{TemplateBinding Margin}"/>
+                        </Grid>
+                    </Border>
+                    
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style TargetType="{x:Type local:ScrollBanner}">
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>

@@ -9,7 +9,7 @@ namespace LeeTeke.WpfControl
 {
     public class SlideViewItemClickedEventArgs:RoutedEventArgs
     {
-        public object Source { get; private set; }
+        public object Source { get;  }
         public SlideViewItemClickedEventArgs(object source,RoutedEvent routedEvent):base(routedEvent)
         {
             Source = source;

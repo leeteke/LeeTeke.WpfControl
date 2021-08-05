@@ -9,7 +9,7 @@ namespace LeeTeke.WpfControl
 {
    public class LodingBarValueChangedEventArgs:RoutedEventArgs
     {
-        public double Value { get; private set; }
+        public double Value { get;  }
 
         public LodingBarValueChangedEventArgs(double value ,RoutedEvent routedEvent):base(routedEvent)
         {

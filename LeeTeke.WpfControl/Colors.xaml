@@ -36,7 +36,7 @@
     <Color x:Key="LeeColor_Background" R="243" G="243" B="243" A="255"/>
     <SolidColorBrush x:Key="LeeBrush_BackgroundDark" Color="{DynamicResource LeeColor_BackgroundDark}"/>
     <Color x:Key="LeeColor_BackgroundDark" R="32" G="32" B="32" A="255"/>
-    
+
     <!--默认主题色-->
     <SolidColorBrush x:Key="LeeBrush_Theme" Color="{DynamicResource LeeColor_Theme}"/>
     <Color x:Key="LeeColor_Theme" R="50" G="108" B="243" A="255"/>
@@ -46,14 +46,14 @@
     <SolidColorBrush x:Key="LeeBrush_Forground" Color="{DynamicResource LeeColor_White}"/>
     <SolidColorBrush x:Key="LeeBrush_ForgroundDrak" Color="{DynamicResource LeeColor_Black}"/>
 
-    
+
     <!--默认文字颜色-->
     <SolidColorBrush x:Key="LeeBrush_Text" Color="{DynamicResource LeeColor_Black}" />
     <SolidColorBrush x:Key="LeeBrush_TextDark" Color="{DynamicResource LeeColor_White}" />
-    
+
     <!--默认原边-->
     <CornerRadius x:Key="LeeCornerRadius">4</CornerRadius>
-    
+
     <!--默认边框颜色-->
     <SolidColorBrush x:Key="LeeBrush_BorderBrush"  Color="{DynamicResource LeeColor_Gray}" />
     <SolidColorBrush x:Key="LeeBrush_BorderBrushDark"  Color="{DynamicResource LeeColor_Black}" />
@@ -184,7 +184,7 @@
     <!--242灰-->
     <SolidColorBrush x:Key="LeeBrush_Gray242" Color="{DynamicResource LeeColor_Gray242}"/>
     <Color x:Key="LeeColor_Gray242"  R="242" G="242" B="245" A="255"  />
-    
+
     <SolidColorBrush x:Key="LeeBrush_Gray233" Color="{DynamicResource LeeColor_Gray233}"/>
     <Color x:Key="LeeColor_Gray233"  R="233" G="233" B="233" A="255"  />
     <!--224灰-->
@@ -213,9 +213,33 @@
     <!--默认阴影灰-->
     <Color x:Key="LeeBrush_GrayShadow">#7FB6B6B6</Color>
 
-    <!--默认水莲灰-->   
+    <!--默认水莲灰-->
     <SolidColorBrush x:Key="LeeBrush_RippleDefault" Color="{DynamicResource LeeColor_RippleDefault}"/>
     <Color x:Key="LeeColor_RippleDefault"  R="211" G="211" B="211" A="51"  />
+
+    <!--Primary-->
+    <SolidColorBrush x:Key="LeeBrush_Primary" Color="{DynamicResource LeeColor_Primary}"/>
+    <Color x:Key="LeeColor_Primary"  R="13" G="110" B="253" A="255"  />
+    
+    <!--Secondary-->
+    <SolidColorBrush x:Key="LeeBrush_Secondary" Color="{DynamicResource LeeColor_Secondary}"/>
+    <Color x:Key="LeeColor_Secondary"  R="108" G="117" B="125" A="255"  />
+
+    <!--Success-->
+    <SolidColorBrush x:Key="LeeBrush_Success" Color="{DynamicResource LeeColor_Success}"/>
+    <Color x:Key="LeeColor_Success"  R="25" G="135" B="84" A="255"  />
+
+    <!--Warning-->
+    <SolidColorBrush x:Key="LeeBrush_Warning" Color="{DynamicResource LeeColor_Warning}"/>
+    <Color x:Key="LeeColor_Warning"  R="255" G="193" B="7" A="255"  />
+
+    <!--Error-->
+    <SolidColorBrush x:Key="LeeBrush_Error" Color="{DynamicResource LeeColor_Error}"/>
+    <Color x:Key="LeeColor_Error"  R="220" G="53" B="69" A="255"  />
+
+    <!--Info-->
+    <SolidColorBrush x:Key="LeeBrush_Info" Color="{DynamicResource LeeColor_Info}"/>
+    <Color x:Key="LeeColor_Info"  R="13" G="202" B="240" A="255"  />
 
     <LinearGradientBrush x:Key="LeeLGBrush_MessengerV" EndPoint="0.5,1" StartPoint="0.5,0">
         <GradientStop Color="#00c6ff" Offset="0"/>

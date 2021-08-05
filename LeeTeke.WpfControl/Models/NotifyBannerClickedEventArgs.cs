@@ -9,7 +9,7 @@ namespace LeeTeke.WpfControl
 {
     public class NotifyBannerClickedEventArgs : RoutedEventArgs
     {
-        public object Value { get; private set; }
+        public object Value { get;  }
 
         public NotifyBannerClickedEventArgs(object value, RoutedEvent @event) : base(@event)
         {

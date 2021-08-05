@@ -7,15 +7,17 @@ using System.Windows;
 
 namespace LeeTeke.WpfControl
 {
-    public class TabViewColsedEventArgs: RoutedEventArgs
+   public class NotifyClosedEventArgs: RoutedEventArgs
     {
 
         public object Value { get;  }
-        public TabViewColsedEventArgs(object value,RoutedEvent routedEvent):base(routedEvent)
+
+        public NotifyClosedEventArgs(object value ,RoutedEvent @event):base(@event)
         {
             Value = value;
         }
+
     }
 
-    public delegate void TabViewColsedEventHandler(object sender, TabViewColsedEventArgs e);
+    public delegate void NotifyClosedEventHandler(object sender, NotifyClosedEventArgs e);
 }

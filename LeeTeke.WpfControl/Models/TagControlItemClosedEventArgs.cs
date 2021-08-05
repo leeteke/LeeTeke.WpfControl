@@ -9,7 +9,7 @@ namespace LeeTeke.WpfControl
 {
     public class TabViewItemClosedEventArgs : RoutedEventArgs
     {
-        public TabViewItemClosedMode ClosedMode { get; private set; }
+        public TabViewItemClosedMode ClosedMode { get;  }
         public TabViewItemClosedEventArgs(TabViewItemClosedMode mode,RoutedEvent routedEvent):base(routedEvent)
         {
             ClosedMode = mode;

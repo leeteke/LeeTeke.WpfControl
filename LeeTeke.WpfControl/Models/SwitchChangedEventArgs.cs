@@ -9,7 +9,7 @@ namespace LeeTeke.WpfControl
 {
     public class SwitchChangedEventArgs : RoutedEventArgs
     {
-        public bool Switch { get; private set; }
+        public bool Switch { get;  }
         public SwitchChangedEventArgs(bool @switch, RoutedEvent routedEvent) : base(routedEvent) => Switch = @switch;
 
     }
