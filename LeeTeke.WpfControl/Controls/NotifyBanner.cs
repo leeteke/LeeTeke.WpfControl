@@ -95,15 +95,15 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public BannerPathMode BannerPath
+        public NotifyPath BannerPath
         {
-            get { return (BannerPathMode)GetValue(BannerPathProperty); }
+            get { return (NotifyPath)GetValue(BannerPathProperty); }
             set { SetValue(BannerPathProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for BannerPath.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty BannerPathProperty =
-            DependencyProperty.Register("BannerPath", typeof(BannerPathMode), typeof(NotifyBanner));
+            DependencyProperty.Register("BannerPath", typeof(NotifyPath), typeof(NotifyBanner));
 
 
 
@@ -396,15 +396,15 @@ namespace LeeTeke.WpfControl.Controls
 
             switch (BannerPath)
             {
-                case BannerPathMode.RightBottom:
-                case BannerPathMode.RightCenter:
-                case BannerPathMode.RightTop:
+                case NotifyPath.RightBottom:
+                case NotifyPath.RightCenter:
+                case NotifyPath.RightTop:
                     show.RenderTransform = new TranslateTransform() { X = _displacement };
                     show.HorizontalAlignment = HorizontalAlignment.Right;
                     break;
-                case BannerPathMode.LeftBottom:
-                case BannerPathMode.LeftCenter:
-                case BannerPathMode.LeftTop:
+                case NotifyPath.LeftBottom:
+                case NotifyPath.LeftCenter:
+                case NotifyPath.LeftTop:
                     show.RenderTransform = new TranslateTransform() { X = -_displacement };
                     show.HorizontalAlignment = HorizontalAlignment.Left;
                     break;
@@ -478,7 +478,7 @@ namespace LeeTeke.WpfControl.Controls
 
                 Value = BannerPath switch
                 {
-                    BannerPathMode.LeftTop or BannerPathMode.LeftCenter or BannerPathMode.LeftBottom => -_displacement,
+                    NotifyPath.LeftTop or NotifyPath.LeftCenter or NotifyPath.LeftBottom => -_displacement,
                     _ => _displacement
                 },
                 KeyTime = KeyTime.FromTimeSpan(this.EasingDuration.TimeSpan),
@@ -528,14 +528,14 @@ namespace LeeTeke.WpfControl.Controls
                     {
                         switch (BannerPath)
                         {
-                            case BannerPathMode.RightTop:
-                            case BannerPathMode.RightCenter:
-                            case BannerPathMode.LeftTop:
-                            case BannerPathMode.LeftCenter:
+                            case NotifyPath.RightTop:
+                            case NotifyPath.RightCenter:
+                            case NotifyPath.LeftTop:
+                            case NotifyPath.LeftCenter:
                                 _stackPanel?.Children.Insert(0, element);
                                 break;
-                            case BannerPathMode.RightBottom:
-                            case BannerPathMode.LeftBottom:
+                            case NotifyPath.RightBottom:
+                            case NotifyPath.LeftBottom:
                             default:
                                 _stackPanel.Children.Add(element);
                                 break;
@@ -550,14 +550,14 @@ namespace LeeTeke.WpfControl.Controls
 
                         switch (BannerPath)
                         {
-                            case BannerPathMode.RightTop:
-                            case BannerPathMode.RightCenter:
-                            case BannerPathMode.LeftTop:
-                            case BannerPathMode.LeftCenter:
+                            case NotifyPath.RightTop:
+                            case NotifyPath.RightCenter:
+                            case NotifyPath.LeftTop:
+                            case NotifyPath.LeftCenter:
                                 stack.Children.Insert(0, element);
                                 break;
-                            case BannerPathMode.RightBottom:
-                            case BannerPathMode.LeftBottom:
+                            case NotifyPath.RightBottom:
+                            case NotifyPath.LeftBottom:
                             default:
                                 stack.Children.Add(element);
                                 break;
@@ -660,7 +660,7 @@ namespace LeeTeke.WpfControl.Controls
 
         public Grid Control { get; set; }
 
-        public BannerPathMode BannerPath { get; set; }
+        public NotifyPath BannerPath { get; set; }
 
     }
 }

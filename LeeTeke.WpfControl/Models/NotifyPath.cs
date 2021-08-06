@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LeeTeke.WpfControl
 {
-    public enum BannerPathMode
+    public enum NotifyPath
     {
         /// <summary>
         /// 右上角
@@ -22,6 +22,7 @@ namespace LeeTeke.WpfControl
         /// 右下角
         /// </summary>
         RightBottom,
+
         /// <summary>
         /// 左上角
         /// </summary>
@@ -30,7 +31,6 @@ namespace LeeTeke.WpfControl
         /// 左中间
         /// </summary>
         LeftCenter,
-
         /// <summary>
         /// 左下角
         /// </summary>

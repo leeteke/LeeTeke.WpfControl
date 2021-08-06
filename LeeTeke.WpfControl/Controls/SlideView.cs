@@ -422,7 +422,6 @@ namespace LeeTeke.WpfControl.Controls
                                 DoubleAnimationUsingKeyFrames xDA = new DoubleAnimationUsingKeyFrames();
                                 xDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                                 {
-
                                     Value = (this.ActualWidth-this.BorderThickness.Left-this.BorderThickness.Right) * CurrentIndex,
                                     KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(TransitionDuration)),
                                     EasingFunction = TransitionEasing,
@@ -431,6 +430,8 @@ namespace LeeTeke.WpfControl.Controls
                                 Storyboard.SetTarget(xDA, this);
                                 Storyboard.SetTargetProperty(xDA, new PropertyPath(SlideView.HorizontalOffsetProperty));
                                 _sbMove.Begin();
+
+
                                 break;
                             case Orientation.Vertical:
 

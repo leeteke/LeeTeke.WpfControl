@@ -52,11 +52,10 @@ namespace LeeTeke.WpfControl.Controls
         static NotifyBannerItem()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(NotifyBannerItem), new FrameworkPropertyMetadata(typeof(NotifyBannerItem)));
-     
+
         }
         public NotifyBannerItem()
         {
-
         }
 
 
@@ -153,6 +152,24 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("CanClick", typeof(bool), typeof(NotifyBannerItem));
         #endregion
 
+
+        #region Path
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public NotifyPath Path
+        {
+            get { return (NotifyPath)GetValue(PathProperty); }
+            set { SetValue(PathProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Path.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PathProperty =
+            DependencyProperty.Register("Path", typeof(NotifyPath), typeof(NotifyBannerItem));
+        #endregion
+
+
+
         #endregion
 
         #region Closed
@@ -198,6 +215,33 @@ namespace LeeTeke.WpfControl.Controls
             var arg = new NotifyClickedEventArgs(newValue, ClickedEvent);
             RaiseEvent(arg);
         }
+
+        #endregion
+
+
+        #region Prviate
+
+
+        /// <summary>
+        /// 关闭
+        /// </summary>
+        private void Closing()
+        {
+            Storyboard storyboard = new Storyboard();
+            DoubleAnimationUsingKeyFrames oDA = new DoubleAnimationUsingKeyFrames();
+            oDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+            {
+                Value = 0,
+                KeyTime = KeyTime.FromTimeSpan(Duration.TimeSpan),
+                EasingFunction = EasingFunction,
+            });
+            storyboard.Children.Add(oDA);
+            Storyboard.SetTarget(oDA, this);
+            Storyboard.SetTargetProperty(oDA, new PropertyPath(NotifyBannerItem.OpacityMaskProperty));
+                                                 
+             
+        }
+
 
         #endregion
 

@@ -13,12 +13,12 @@ namespace LeeTeke.WpfControl.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value is BannerPathMode mode
+            return value is NotifyPath mode
                 ? mode switch
                 {
-                    BannerPathMode.RightTop or BannerPathMode.LeftTop => VerticalAlignment.Top,
-                    BannerPathMode.RightBottom or BannerPathMode.LeftBottom => VerticalAlignment.Bottom,
-                    BannerPathMode.LeftCenter or BannerPathMode.RightCenter => VerticalAlignment.Center,
+                    NotifyPath.RightTop or NotifyPath.LeftTop => VerticalAlignment.Top,
+                    NotifyPath.RightBottom or NotifyPath.LeftBottom => VerticalAlignment.Bottom,
+                    NotifyPath.LeftCenter or NotifyPath.RightCenter => VerticalAlignment.Center,
                     _ => VerticalAlignment.Stretch,
                 }
                 : (object)VerticalAlignment.Stretch;
