@@ -178,6 +178,7 @@ namespace LeeTeke.WpfControl.Controls
                 old?.RemoveHandler(MouseLeaveEvent, mask._routedLeftLevelEvent);
                 old?.RemoveHandler(MouseMoveEvent, mask._routedMoveEvent);
 
+                
                 mask.ParentElement.AddHandler(MouseLeftButtonUpEvent, mask._routedLeftUpEvent, true);
                 mask.ParentElement.AddHandler(MouseLeftButtonDownEvent, mask._routedLeftDownEvent, true);
                 mask.ParentElement.AddHandler(MouseLeaveEvent, mask._routedLeftLevelEvent, true);

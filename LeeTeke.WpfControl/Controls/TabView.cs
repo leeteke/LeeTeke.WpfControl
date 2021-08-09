@@ -323,6 +323,21 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
+        #region CloseVisibly
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public ShowMode CloseVisibly
+        {
+            get { return (ShowMode)GetValue(CloseVisiblyProperty); }
+            set { SetValue(CloseVisiblyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CloseVisibly.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CloseVisiblyProperty =
+            DependencyProperty.Register("CloseVisibly", typeof(ShowMode), typeof(TabView));
+        #endregion
+
 
         #region ItemPadding
         /// <summary>
@@ -428,6 +443,7 @@ namespace LeeTeke.WpfControl.Controls
         #region 内部逻辑
 
 
+
         private void SelectedIndexChanged()
         {
             if (SelectedIndex < 0 || SelectedIndex > _stackPanel.Children.Count - 1)
@@ -521,7 +537,7 @@ namespace LeeTeke.WpfControl.Controls
                 switch ((e as TabViewItemClosedEventArgs).ClosedMode)
                 {
                     case TabViewItemClosedMode.Self:
-                        if (self.CanClosed)
+                        if (self.CanClosing)
                         {
 
                             var index = _stackPanel.Children.IndexOf(self);
@@ -557,7 +573,7 @@ namespace LeeTeke.WpfControl.Controls
                         }
                         foreach (TabViewItem item in needCloseItem)
                         {
-                            if (item.CanClosed&&!item.IsFixed)
+                            if (item.CanClosing&&!item.IsFixed)
                             {
                                 CloseItemAsync(item);
                                 ItemRemoveChanged(item);
@@ -573,7 +589,7 @@ namespace LeeTeke.WpfControl.Controls
                         }
                         foreach (TabViewItem item in allItem)
                         {
-                            if (item.CanClosed&&!item.IsFixed)
+                            if (item.CanClosing&&!item.IsFixed)
                             {
                                 CloseItemAsync(item);
                                 ItemRemoveChanged(item);

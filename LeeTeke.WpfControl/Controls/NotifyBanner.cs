@@ -71,10 +71,10 @@ namespace LeeTeke.WpfControl.Controls
 
         private bool _isLoded = false;
 
-        private ResourceDictionary _buttonResource;
+       
         public NotifyBanner()
         {
-            _buttonResource = new ResourceDictionary() { Source = new Uri("pack://application:,,,/LeeTeke.WpfControl;component/Themes/Button.xaml") };
+         
         }
 
         public override void OnApplyTemplate()
@@ -90,6 +90,22 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         #region 依赖
+
+
+        #region CloseVisibly
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public ShowMode CloseVisibly
+        {
+            get { return (ShowMode)GetValue(CloseVisiblyProperty); }
+            set { SetValue(CloseVisiblyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CloseVisibly.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CloseVisiblyProperty =
+            DependencyProperty.Register("CloseVisibly", typeof(ShowMode), typeof(NotifyBanner));
+        #endregion
 
         #region BannerPath
         /// <summary>
@@ -141,22 +157,7 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-        #region IsKeepShow
-        /// <summary>
-        /// 请填写描述
-        /// </summary>
-        public bool IsKeepShow
-        {
-            get { return (bool)GetValue(IsKeepShowProperty); }
-            set { SetValue(IsKeepShowProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for IsKeepShow.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsKeepShowProperty =
-            DependencyProperty.Register("IsKeepShow", typeof(bool), typeof(NotifyBanner));
-
-        #endregion
-
+      
         #region ShowMode
         /// <summary>
         /// 展示模式
@@ -191,37 +192,37 @@ namespace LeeTeke.WpfControl.Controls
 
         #region ShowDuration
         /// <summary>
-        /// 请填写描述
+        /// 请添加描述
         /// </summary>
-        public int ShowDuration
+        public Duration ShowDuration
         {
-            get { return (int)GetValue(ShowDurationProperty); }
+            get { return (Duration)GetValue(ShowDurationProperty); }
             set { SetValue(ShowDurationProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for ShowDuration.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ShowDurationProperty =
-            DependencyProperty.Register("ShowDuration", typeof(int), typeof(NotifyBanner));
-
+            DependencyProperty.Register("ShowDuration", typeof(Duration), typeof(NotifyBanner));
         #endregion
+
 
         #region Content
         /// <summary>
         /// 内容
         /// </summary>
-        public NotifyBannerShowModel Content
+        public NotifyBannerShowData Content
         {
-            get { return (NotifyBannerShowModel)GetValue(ContentProperty); }
+            get { return (NotifyBannerShowData)GetValue(ContentProperty); }
             set { SetValue(ContentProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Content.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ContentProperty =
-            DependencyProperty.Register("Content", typeof(NotifyBannerShowModel), typeof(NotifyBanner), new FrameworkPropertyMetadata(default, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(ContentChanged)));
+            DependencyProperty.Register("Content", typeof(NotifyBannerShowData), typeof(NotifyBanner), new FrameworkPropertyMetadata(default, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(ContentChanged)));
 
         private static void ContentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is NotifyBanner banner && e.NewValue is NotifyBannerShowModel model && banner._isLoded)
+            if (d is NotifyBanner banner && e.NewValue is NotifyBannerShowData model && banner._isLoded)
             {
                 banner.HaveContentAsync(model);
             }
@@ -311,203 +312,20 @@ namespace LeeTeke.WpfControl.Controls
 
         #region 私有逻辑
 
-        private async void HaveContentAsync(NotifyBannerShowModel model)
+        private async void HaveContentAsync(NotifyBannerShowData data)
         {
-            var data = new NotifybannerDataContext() { Data = model };
-            GenerateSB(data);
-
-            if (model.Sound != null)
+            var control = new NotifyBannerItem(data);
+            var add= UXAdd(control);
+            if (add)
             {
-                model.Sound.Play();
-                model.Sound.Dispose();
-            }
-
-            if (IsKeepShow)
-                return;
-
-            ///等待持续时间
-            await Task.Delay(model.Duration ?? this.ShowDuration);
-            if (data.IsClicked)
-                return;
-
-            BackSB(data);
-
-        }
-        /// <summary>
-        /// 生成动画
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        private void GenerateSB(NotifybannerDataContext data)
-        {
-
-
-            if (data.Data == null)
-                return;
-
-            if (data.Data.Content is not FrameworkElement element)
-            {
-                element = new TextBlock()
+                control.Closed += (es, ex) =>
                 {
-                    Text = data.Data.Content.ToString(),
-                    Foreground = this.Foreground,
-                    FontSize = this.FontSize,
-                    FontWeight = this.FontWeight,
-                    FontFamily = this.FontFamily,
-                    FontStretch = this.FontStretch,
-                    VerticalAlignment = this.VerticalContentAlignment,
-                    HorizontalAlignment = this.HorizontalContentAlignment,
-                    TextWrapping = TextWrapping.Wrap
+                    UXRemove(control);
                 };
             }
-
-
-
-            var show = new Grid() { Background = new SolidColorBrush(Colors.Transparent) };
-
-            show.Children.Add(new Border()
-            {
-                Padding = this.Padding,
-                Background = data.Data.Background ?? this.Background,
-                Effect = this.Effect,
-                MinHeight = this.MinHeight,
-                MinWidth = this.MinWidth,
-                CornerRadius = this.CornerRadius,
-                Child = element,
-                IsHitTestVisible = false,
-            });
-
-            var closeButton = new Button()
-            {
-                VerticalAlignment = VerticalAlignment.Top,
-                HorizontalAlignment = HorizontalAlignment.Right,
-                Content = "╳",
-                Width = 20,
-                Height = 20,
-            };
-            closeButton.Click += CloseButton_Click;
-            show.Children.Add(closeButton);
-            data.Control = show;
-            data.BannerPath = this.BannerPath;
-            show.Opacity = 1;
-            show.DataContext = data;
-            show.MouseUp += Show_MouseUp;
-            show.Margin = new Thickness(0, 0, 0, 5);
-
-            switch (BannerPath)
-            {
-                case NotifyPath.RightBottom:
-                case NotifyPath.RightCenter:
-                case NotifyPath.RightTop:
-                    show.RenderTransform = new TranslateTransform() { X = _displacement };
-                    show.HorizontalAlignment = HorizontalAlignment.Right;
-                    break;
-                case NotifyPath.LeftBottom:
-                case NotifyPath.LeftCenter:
-                case NotifyPath.LeftTop:
-                    show.RenderTransform = new TranslateTransform() { X = -_displacement };
-                    show.HorizontalAlignment = HorizontalAlignment.Left;
-                    break;
-                default:
-                    break;
-            }
-
-            var sb = new Storyboard() { FillBehavior = FillBehavior.HoldEnd };
-
-            DoubleAnimationUsingKeyFrames xDA = new DoubleAnimationUsingKeyFrames();
-            xDA.KeyFrames.Add(new EasingDoubleKeyFrame()
-            {
-                Value = 0,
-                KeyTime = KeyTime.FromTimeSpan(this.EasingDuration.TimeSpan),
-                EasingFunction = this.EasingFunction,
-            });
-
-            DoubleAnimationUsingKeyFrames oDA = new DoubleAnimationUsingKeyFrames();
-            oDA.KeyFrames.Add(new EasingDoubleKeyFrame()
-            {
-
-                Value = 1,
-                KeyTime = KeyTime.FromTimeSpan(this.EasingDuration.TimeSpan),
-                EasingFunction = this.EasingFunction,
-            });
-            sb.Children.Add(xDA);
-
-            sb.Children.Add(oDA);
-
-
-            Storyboard.SetTarget(xDA, show);
-            Storyboard.SetTargetProperty(xDA, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.X)"));
-
-            Storyboard.SetTarget(oDA, show);
-            Storyboard.SetTargetProperty(oDA, new PropertyPath(Border.OpacityProperty));
-
-            ///添加
-            if (UXAdd(show))
-                sb.Begin();
         }
-        /// <summary>
-        /// 关闭按钮
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender is Button button && button.DataContext is NotifybannerDataContext data && !data.IsClicked)
-            {
-                BackSB(data);
-            }
+        
 
-        }
-
-        private void Show_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is Border border && border.DataContext is NotifybannerDataContext data && !data.IsClicked)
-            {
-                BackSB(data);
-                RaiseNotifyBannerClicked(data.Data.Value);
-            }
-        }
-
-        private void BackSB(NotifybannerDataContext data)
-        {
-            data.IsClicked = true;
-            var sb = new Storyboard() { FillBehavior = FillBehavior.Stop };
-            DoubleAnimationUsingKeyFrames xDA = new DoubleAnimationUsingKeyFrames();
-            xDA.KeyFrames.Add(new EasingDoubleKeyFrame()
-            {
-
-                Value = BannerPath switch
-                {
-                    NotifyPath.LeftTop or NotifyPath.LeftCenter or NotifyPath.LeftBottom => -_displacement,
-                    _ => _displacement
-                },
-                KeyTime = KeyTime.FromTimeSpan(this.EasingDuration.TimeSpan),
-                EasingFunction = new ExponentialEase() { EasingMode = EasingMode.EaseOut },
-            });
-
-            DoubleAnimationUsingKeyFrames oDA = new DoubleAnimationUsingKeyFrames();
-            oDA.KeyFrames.Add(new EasingDoubleKeyFrame()
-            {
-
-                Value = 0,
-                KeyTime = KeyTime.FromTimeSpan(this.EasingDuration.TimeSpan),
-                EasingFunction = new ExponentialEase() { EasingMode = EasingMode.EaseOut },
-            });
-            sb.Children.Add(xDA);
-            sb.Children.Add(oDA);
-
-            Storyboard.SetTarget(xDA, data.Control);
-            Storyboard.SetTargetProperty(xDA, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.X)"));
-
-            Storyboard.SetTarget(oDA, data.Control);
-            Storyboard.SetTargetProperty(oDA, new PropertyPath(Border.OpacityProperty));
-
-            sb.Completed += (e, s) =>
-            {
-                UXRemove(data.Control);
-            };
-            sb.Begin();
-        }
 
 
         /// <summary>
@@ -532,10 +350,9 @@ namespace LeeTeke.WpfControl.Controls
                             case NotifyPath.RightCenter:
                             case NotifyPath.LeftTop:
                             case NotifyPath.LeftCenter:
+                            case NotifyPath.TopCenter:
                                 _stackPanel?.Children.Insert(0, element);
                                 break;
-                            case NotifyPath.RightBottom:
-                            case NotifyPath.LeftBottom:
                             default:
                                 _stackPanel.Children.Add(element);
                                 break;
@@ -554,10 +371,9 @@ namespace LeeTeke.WpfControl.Controls
                             case NotifyPath.RightCenter:
                             case NotifyPath.LeftTop:
                             case NotifyPath.LeftCenter:
+                            case NotifyPath.TopCenter:
                                 stack.Children.Insert(0, element);
                                 break;
-                            case NotifyPath.RightBottom:
-                            case NotifyPath.LeftBottom:
                             default:
                                 stack.Children.Add(element);
                                 break;
@@ -651,16 +467,4 @@ namespace LeeTeke.WpfControl.Controls
 
     }
 
-
-    class NotifybannerDataContext
-    {
-        public bool IsClicked { get; set; }
-
-        public NotifyBannerShowModel Data { get; set; }
-
-        public Grid Control { get; set; }
-
-        public NotifyPath BannerPath { get; set; }
-
-    }
 }

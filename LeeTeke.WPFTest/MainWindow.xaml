@@ -52,19 +52,20 @@
                 <Button   Height="30" 
                         Content="黑白切换" 
                         Command="{Binding TestCommand}"
-                        ToolTip="黑白切换" />
+                        ToolTip="黑白切换" 
+                          leecontrol:TabViewItem.ItemCanClosing="True"/>
 
                 
-                <leecontrol:TabView >
-                    <leecontrol:TabViewItem Content="你好22222222222222222222222"/>
-                    <leecontrol:TabViewItem Content="你好2"/>
-                    <leecontrol:TabViewItem Content="你好2"/>
-                    <leecontrol:TabViewItem Content="你好2"/>
-                    <leecontrol:TabViewItem Content="你好2"/>
-                    <leecontrol:TabViewItem Content="你好2"/>
-                    <leecontrol:TabViewItem Content="你好2"/>
-                    <leecontrol:TabViewItem Content="你好3"
-                                            IsSelected="True"/>
+                <leecontrol:TabView  CloseVisibly="MouseOver" 
+                                     Orientation="Horizontal"
+                                     ItemsSource="{Binding TestList}">
+
+                    <leecontrol:TabView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock leecontrol:TabViewItem.ItemCanClosing="{Binding Boolen}" Text="{Binding Title}"/>
+                        </DataTemplate>
+                    </leecontrol:TabView.ItemTemplate>
+                
                 </leecontrol:TabView>
 
                 <leecontrol:SwitchButton>
@@ -139,8 +140,8 @@
                 <PasswordBox  
                     leedep:PasswordManager.EnterCommand="{Binding TestCommand}"
                     leedep:PasswordManager.EscToEmpty="True"
-                              leedep:PasswordManager.Attach="True"
-                              leedep:PasswordManager.Password="{Binding ElementName=txt,Path=Text,Mode=TwoWay}"/>
+                    leedep:PasswordManager.Attach="True"
+                    leedep:PasswordManager.Password="{Binding ElementName=txt,Path=Text,Mode=TwoWay}"/>
 
                 <leecontrol:TextBoxEx Mode="Password" 
                                       Text="2"

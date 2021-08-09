@@ -52,15 +52,54 @@ namespace LeeTeke.WpfControl.Controls
         static NotifyBannerItem()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(NotifyBannerItem), new FrameworkPropertyMetadata(typeof(NotifyBannerItem)));
-
         }
-        public NotifyBannerItem()
+        public NotifyBannerItem(NotifyBannerShowData data)
         {
+        
+            this.Content = data.Content;
+            this.DataContext = data.Value;
+            if (data.Duration != null)
+                this.Duration = (Duration)data.Duration;
+
+            this.Sound = data.Sound;
+            this.Status = data.Status;
+            Loaded += NotifyBannerItem_Loaded;
         }
 
+        private void NotifyBannerItem_Loaded(object sender, RoutedEventArgs e)
+        {
+            Show();
+        }
 
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+             if (this.Template.FindName("PART_CloseButton",this) is Button btn)
+            {
+                btn.Click +=(es,ex)=>Close();
+            }
+ 
+        }
+
+      
 
         #region 依赖属性
+
+        #region CloseVisibly
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public ShowMode CloseVisibly
+        {
+            get { return (ShowMode)GetValue(CloseVisiblyProperty); }
+            set { SetValue(CloseVisiblyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CloseVisibly.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CloseVisiblyProperty =
+            DependencyProperty.Register("CloseVisibly", typeof(ShowMode), typeof(NotifyBannerItem));
+        #endregion
 
         #region CornerRadius
         /// <summary>
@@ -122,6 +161,23 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("Duration", typeof(Duration), typeof(NotifyBannerItem));
         #endregion
 
+
+        #region EasingDuration
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Duration EasingDuration
+        {
+            get { return (Duration)GetValue(EasingDurationProperty); }
+            set { SetValue(EasingDurationProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for EasingDuration.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EasingDurationProperty =
+            DependencyProperty.Register("EasingDuration", typeof(Duration), typeof(NotifyBannerItem));
+        #endregion
+
+
         #region EasingFunction
         /// <summary>
         /// 动画效果
@@ -152,7 +208,6 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("CanClick", typeof(bool), typeof(NotifyBannerItem));
         #endregion
 
-
         #region Path
         /// <summary>
         /// 请添加描述
@@ -167,7 +222,6 @@ namespace LeeTeke.WpfControl.Controls
         public static readonly DependencyProperty PathProperty =
             DependencyProperty.Register("Path", typeof(NotifyPath), typeof(NotifyBannerItem));
         #endregion
-
 
 
         #endregion
@@ -218,33 +272,186 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-
         #region Prviate
 
+
+
+        public void Show()
+        {
+            Storyboard storyboard = new Storyboard() {  FillBehavior= FillBehavior.HoldEnd };
+            DoubleAnimationUsingKeyFrames oDA = new DoubleAnimationUsingKeyFrames();
+            oDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+            {
+                Value = 1,
+                KeyTime = KeyTime.FromTimeSpan(EasingDuration.TimeSpan),
+                EasingFunction = EasingFunction,
+            });
+            storyboard.Children.Add(oDA);
+            Storyboard.SetTarget(oDA, this);
+            Storyboard.SetTargetProperty(oDA, new PropertyPath(NotifyBannerItem.OpacityProperty));
+
+            switch (Path)
+            {
+                case NotifyPath.RightTop:
+                case NotifyPath.RightCenter:
+                case NotifyPath.RightBottom:
+                   
+                    DoubleAnimationUsingKeyFrames rDA = new DoubleAnimationUsingKeyFrames();
+                    rDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+                    {
+                        Value = 200,
+                    });
+                    rDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+                    {
+                        Value = 0,
+                        KeyTime = KeyTime.FromTimeSpan(EasingDuration.TimeSpan),
+                        EasingFunction = EasingFunction,
+                    });
+                    storyboard.Children.Add(rDA);
+                    Storyboard.SetTarget(rDA, this);
+                    Storyboard.SetTargetProperty(rDA, new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, TranslateTransform.XProperty }));
+                    break;
+                case NotifyPath.LeftTop:
+                case NotifyPath.LeftCenter:
+                case NotifyPath.LeftBottom:
+             
+                    DoubleAnimationUsingKeyFrames lDA = new DoubleAnimationUsingKeyFrames();
+                    lDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+                    {
+                        Value = -200,
+                    });
+                    lDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+                    {
+                        Value = 0,
+                        KeyTime = KeyTime.FromTimeSpan(EasingDuration.TimeSpan),
+                        EasingFunction = EasingFunction,
+                    });
+                    storyboard.Children.Add(lDA);
+                    Storyboard.SetTarget(lDA, this);
+                    Storyboard.SetTargetProperty(lDA, new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, TranslateTransform.XProperty }));
+                    break;
+                case NotifyPath.TopCenter:
+                  
+                    DoubleAnimationUsingKeyFrames tDA = new DoubleAnimationUsingKeyFrames();
+                    tDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+                    {
+                        Value = 50,
+                    });
+                    tDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+                    {
+                        Value = 0,
+                        KeyTime = KeyTime.FromTimeSpan(EasingDuration.TimeSpan),
+                        EasingFunction = EasingFunction,
+                    });
+                    storyboard.Children.Add(tDA);
+                    Storyboard.SetTarget(tDA, this);
+                    Storyboard.SetTargetProperty(tDA, new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, TranslateTransform.YProperty }));
+                    break;
+                case NotifyPath.BottomCenter:
+             
+                    DoubleAnimationUsingKeyFrames bDA = new DoubleAnimationUsingKeyFrames();
+                    bDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+                    {
+                        Value = -50,
+                    });
+                    bDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+                    {
+                        Value = 0,
+                        KeyTime = KeyTime.FromTimeSpan(EasingDuration.TimeSpan),
+                        EasingFunction = EasingFunction,
+                    });
+                    storyboard.Children.Add(bDA);
+                    Storyboard.SetTarget(bDA, this);
+                    Storyboard.SetTargetProperty(bDA, new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, TranslateTransform.YProperty }));
+                    break;
+                default:
+                    break;
+            }
+
+            storyboard.Begin();
+        }
 
         /// <summary>
         /// 关闭
         /// </summary>
-        private void Closing()
+        public void Close()
         {
             Storyboard storyboard = new Storyboard();
             DoubleAnimationUsingKeyFrames oDA = new DoubleAnimationUsingKeyFrames();
             oDA.KeyFrames.Add(new EasingDoubleKeyFrame()
             {
                 Value = 0,
-                KeyTime = KeyTime.FromTimeSpan(Duration.TimeSpan),
+                KeyTime = KeyTime.FromTimeSpan(EasingDuration.TimeSpan),
                 EasingFunction = EasingFunction,
             });
             storyboard.Children.Add(oDA);
             Storyboard.SetTarget(oDA, this);
-            Storyboard.SetTargetProperty(oDA, new PropertyPath(NotifyBannerItem.OpacityMaskProperty));
-                                                 
-             
+            Storyboard.SetTargetProperty(oDA, new PropertyPath(NotifyBannerItem.OpacityProperty));
+
+            switch (Path)
+            {
+                case NotifyPath.RightTop:
+                case NotifyPath.RightCenter:
+                case NotifyPath.RightBottom:
+                    DoubleAnimationUsingKeyFrames rDA = new DoubleAnimationUsingKeyFrames();
+                    rDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+                    {
+                        Value = 200,
+                        KeyTime = KeyTime.FromTimeSpan(EasingDuration.TimeSpan),
+                        EasingFunction = EasingFunction,
+                    });
+                    storyboard.Children.Add(rDA);
+                    Storyboard.SetTarget(rDA, this);
+                    Storyboard.SetTargetProperty(rDA, new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, TranslateTransform.XProperty }));
+                    break;
+                case NotifyPath.LeftTop:
+                case NotifyPath.LeftCenter:
+                case NotifyPath.LeftBottom:
+                    DoubleAnimationUsingKeyFrames lDA = new DoubleAnimationUsingKeyFrames();
+                    lDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+                    {
+                        Value = -200,
+                        KeyTime = KeyTime.FromTimeSpan(EasingDuration.TimeSpan),
+                        EasingFunction = EasingFunction,
+                    });
+                    storyboard.Children.Add(lDA);
+                    Storyboard.SetTarget(lDA, this);
+                    Storyboard.SetTargetProperty(lDA, new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, TranslateTransform.XProperty }));
+                    break;
+                case NotifyPath.TopCenter:
+                    DoubleAnimationUsingKeyFrames tDA = new DoubleAnimationUsingKeyFrames();
+                    tDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+                    {
+                        Value = 50,
+                        KeyTime = KeyTime.FromTimeSpan(EasingDuration.TimeSpan),
+                        EasingFunction = EasingFunction,
+                    });
+                    storyboard.Children.Add(tDA);
+                    Storyboard.SetTarget(tDA, this);
+                    Storyboard.SetTargetProperty(tDA, new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, TranslateTransform.YProperty }));
+                    break;
+                case NotifyPath.BottomCenter:
+                    DoubleAnimationUsingKeyFrames bDA = new DoubleAnimationUsingKeyFrames();
+                    bDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+                    {
+                        Value = -50,
+                        KeyTime = KeyTime.FromTimeSpan(EasingDuration.TimeSpan),
+                        EasingFunction = EasingFunction,
+                    });
+                    storyboard.Children.Add(bDA);
+                    Storyboard.SetTarget(bDA, this);
+                    Storyboard.SetTargetProperty(bDA, new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, TranslateTransform.YProperty }));
+                    break;
+                default:
+                    break;
+            }
+
+            storyboard.Completed += (es, ex) => RaiseClosed(this.DataContext);
+            storyboard.Begin();
         }
 
 
         #endregion
-
 
     }
 }

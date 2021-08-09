@@ -1,0 +1,265 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies"
+                    xmlns:local="clr-namespace:LeeTeke.WpfControl.Controls"
+                    >
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="{x:Type local:TabViewItem}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="Margin" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=ItemMargin,Mode=OneWay}"/>
+        <Setter Property="PinVisibly" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=ItemPinVisibly,Mode=OneWay}"/>
+        <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=Foreground,Mode=OneWay}"/>
+        <Setter Property="CloseVisibly" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=CloseVisibly,Mode=OneWay}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="VerticalContentAlignment" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=VerticalContentAlignment,Mode=OneWay}"/>
+        <Setter Property="HorizontalContentAlignment" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=HorizontalContentAlignment,Mode=OneWay}"/>
+        <Setter Property="Padding" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=ItemPadding,Mode=OneWay}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="CanClosing" Value="True"/>
+        <Setter Property="Orientation" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=Orientation,Mode=OneWay}"/>
+        <Setter Property="CornerRadius" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=ItemCornerRadius,Mode=OneWay}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:TabViewItem}" >
+                    <Border x:Name="contentBorder" 
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        Background="{TemplateBinding Background}"
+                                       CornerRadius="{TemplateBinding CornerRadius}" >
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=ItemContentMiniWidth,Mode=OneWay}"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Rectangle x:Name="PART_Rectangle" 
+                                               Width="1"
+                                               Fill="{DynamicResource LeeBrush_BorderBrush}"
+                                               Margin="-1,10"
+                                               HorizontalAlignment="Left"/>
+
+
+                            <TextBlock Text="&#xE840;"
+                                       FontFamily="{DynamicResource IconFontFamily}"
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       Margin="0,5,5,5"
+                                       Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=IsFixed,Converter={StaticResource VisibilityForBoolConverter},Mode=OneWay}"
+                                       />
+
+                            <Button x:Name="PART_CloseButton" 
+                                            Grid.Column="2"
+                                            Content="&#xE8BB;"
+                                            FontSize="9"
+                                            Width="25"
+                                            Height="25"
+                                            Margin="0,5,5,5"
+                                            Visibility="Collapsed"
+                                            leedep:ButtonManager.CornerRadius="12.5"
+                                            FontFamily="{DynamicResource IconFontFamily}"
+                                            Style="{DynamicResource ColorButton}"
+                                            BorderThickness="0"
+                                            Background="Transparent"
+                                            Tag="1"
+                                            Foreground="{TemplateBinding Foreground}"
+                                            />
+                            <ContentPresenter x:Name="PART_ContentPresenter" 
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              TextElement.Foreground="{TemplateBinding  Foreground}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                               Margin="{TemplateBinding Padding}"
+                                              />
+
+                        </Grid>
+                        <Border.ContextMenu>
+                            <ContextMenu x:Name="PART_ContextMenu">
+                                <MenuItem x:Name="PART_MenuItem_Pin"    Header="固定选项卡">
+                                    <MenuItem.Icon>
+                                        <TextBlock  x:Name="PART_PinIcon"  
+                                                            Text="&#xE718;"
+                                                             FontFamily="{DynamicResource IconFontFamily}"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem x:Name="PART_MenuItem_CloseAll" 
+                                                  Header="关闭所有选项卡"/>
+                                <MenuItem x:Name="PART_MenuItem_CloseOther" 
+                                                  Header="关闭除此之外的选项卡"/>
+                                <MenuItem x:Name="PART_MenuItem_CloseSelf"  
+                                                  Visibility="{TemplateBinding  CanClosing,Converter={StaticResource VisibilityForBoolConverter}}" 
+                                                          Header="关闭"/>
+
+                            </ContextMenu>
+                        </Border.ContextMenu>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Orientation" Value="Horizontal">
+                            <Setter Property="Width" Value="150"/>
+                        </Trigger>
+
+                        <Trigger Property="Orientation" Value="Vertical">
+                            <Setter Property="Height" Value="35"/>
+                            <Setter  TargetName="PART_Rectangle" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+
+                        <Trigger Property="PinVisibly" Value="False">
+                            <Setter Property="Visibility"  TargetName="PART_MenuItem_Pin"
+                                            Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="CloseVisibly" Value="Visible">
+                            <Setter TargetName="PART_CloseButton" Property="Visibility"  Value="Visible"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="CloseVisibly"  Value="MouseOver"/>
+                                <Condition  Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_CloseButton" Property="Visibility"  Value="Visible"/>
+                        </MultiTrigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected"  Value="True"/>
+                                <Condition  Property="CloseVisibly" Value="MouseOver"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_CloseButton" Property="Visibility"  Value="Visible"/>
+                        </MultiTrigger>
+
+                        <Trigger Property="CanClosing" Value="False">
+                            <Setter Property="Visibility"  TargetName="PART_MenuItem_Pin"
+                                            Value="Collapsed"/>
+                            <Setter Property="Visibility"  TargetName="PART_CloseButton"
+                                            Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="IsFixed" Value="True">
+                            <Setter Property="Text"  TargetName="PART_PinIcon"
+                                            Value="&#xE840;"/>
+                            <Setter Property="Header"  TargetName="PART_MenuItem_Pin"
+                                            Value="解除固定"/>
+                        </Trigger>
+                        <Trigger Property="IsFixed" Value="False">
+                            <Setter Property="Text"  TargetName="PART_PinIcon"
+                                            Value="&#xE718;"/>
+                            <Setter Property="Header"  TargetName="PART_MenuItem_Pin"
+                                            Value="固定选项卡"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=SelectedBrush,Mode=OneWay}"/>
+                            <Setter Property="Foreground"  Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=SelectedForeground,Mode=OneWay}"/>
+                    
+                            <Setter Property="StackPanel.ZIndex" Value="999"/>
+                            <Setter TargetName="PART_Rectangle" Property="Opacity" Value="0"/>
+                        </Trigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected"  Value="True"/>
+                                <Condition  Property="Orientation" Value="Horizontal"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Effect" >
+                                <Setter.Value>
+                                    <DropShadowEffect Color="#88000000" ShadowDepth="0" BlurRadius="5" Opacity="0.5"/>
+                                </Setter.Value>
+                            </Setter>
+                        </MultiTrigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected"  Value="True"/>
+                                <Condition  Property="Orientation" Value="Vertical"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Effect"  Value="{DynamicResource LeeShadow}"/>
+                        </MultiTrigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected"  Value="False"/>
+                                <Condition  Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="{DynamicResource LeeBrush_Mark}"/>
+                            <Setter TargetName="PART_Rectangle" Property="Opacity" Value="0"/>
+                        </MultiTrigger>
+
+
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+       
+    </Style>
+
+    <Style TargetType="{x:Type local:TabView}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="Orientation" Value="Horizontal"/>
+        <Setter Property="ItemCornerRadius" Value="4,4,0,0"/>
+        <Setter Property="Height" Value="{DynamicResource LeeControlHeight}"/>
+        <Setter Property="ItemPinVisibly" Value="True"/>
+        <Setter Property="ItemMargin" Value="0"/>
+        <Setter Property="ItemPadding" Value="10,5"/>
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="SelectedBrush" Value="{DynamicResource LeeBrush_Theme}"/>
+        <Setter Property="SelectedForeground" Value="{DynamicResource LeeBrush_TextDark}"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:TabView}">
+                    <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Margin="{TemplateBinding Margin}"
+                                Padding="{TemplateBinding Padding}">
+                        <ScrollViewer   x:Name="PART_ScrollViewer"   
+                                HorizontalScrollBarVisibility="Hidden" 
+                                VerticalScrollBarVisibility="Disabled"
+                                Style="{x:Null}"
+                                >
+                            <ItemsPresenter x:Name="PART_ItemsPresenter" />
+
+                        </ScrollViewer>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Orientation" Value="Horizontal">
+                            <Setter TargetName="PART_ScrollViewer" Property="HorizontalScrollBarVisibility" Value="Hidden"/>
+                            <Setter TargetName="PART_ScrollViewer" Property="VerticalScrollBarVisibility" Value="Disabled"/>
+                        </Trigger>
+                        <Trigger Property="Orientation" Value="Vertical">
+                            <Setter TargetName="PART_ScrollViewer" Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+                            <Setter TargetName="PART_ScrollViewer" Property="VerticalScrollBarVisibility" Value="Hidden"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel x:Name="PART_StackPanel" 
+                                FocusVisualStyle="{x:Null}"
+                                Orientation="{Binding Orientation,  RelativeSource={ RelativeSource Mode=FindAncestor,AncestorType={x:Type local:TabView},AncestorLevel=1},Mode=OneWay}"   />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Horizontal">
+                <Setter Property="ItemCornerRadius" Value="4,4,0,0"/>
+
+
+            </Trigger>
+            <Trigger Property="Orientation" Value="Vertical">
+                <Setter Property="ItemCornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+
+
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+</ResourceDictionary>

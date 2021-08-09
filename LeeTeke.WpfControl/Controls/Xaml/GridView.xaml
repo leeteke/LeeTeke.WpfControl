@@ -1,0 +1,37 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:local="clr-namespace:LeeTeke.WpfControl.Controls">
+
+    <Style TargetType="{x:Type local:GridView}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:GridView}">
+                    <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Margin="{TemplateBinding Margin}"
+                    Padding="{TemplateBinding Padding}">
+                        <ScrollViewer   x:Name="PART_ScrollViewer"
+                                        VerticalScrollBarVisibility="{TemplateBinding  VerticalScrollBarVisibility}"
+                                        HorizontalScrollBarVisibility="{TemplateBinding HorizontalScrollBarVisibility}"
+                                >
+                            <ItemsPresenter     />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <WrapPanel x:Name="PART_WrapPanell" 
+                               FocusVisualStyle="{x:Null}"
+                               Orientation="{Binding RelativeSource={RelativeSource AncestorType=local:GridView}, Path=Orientation,Mode=OneWay}"
+                        />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

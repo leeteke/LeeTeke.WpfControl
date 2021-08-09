@@ -23,11 +23,41 @@ namespace LeeTeke.WpfControl.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TabViewItem), new FrameworkPropertyMetadata(typeof(TabViewItem)));
         }
 
+
+        #region ItemCanClosing
+        public static bool? GetItemCanClosing(DependencyObject obj)
+        {
+            return (bool?)obj.GetValue(ItemCanClosingProperty);
+        }
+
+        public static void SetItemCanClosing(DependencyObject obj, bool? value)
+        {
+            obj.SetValue(ItemCanClosingProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for ItemCanClosing.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemCanClosingProperty =
+            DependencyProperty.RegisterAttached("ItemCanClosing", typeof(bool?), typeof(TabViewItem), new PropertyMetadata(ItemCanClosingChanged));
+
+        private static void ItemCanClosingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is FrameworkElement element && e.NewValue != null&&e.NewValue is bool @result)
+            {
+                var pd = StaticMethods.FindVisualParent<TabViewItem>(element);
+                if (pd != null)
+                {
+                    pd.CanClosing = @result;
+                }
+            }
+        }
+        #endregion
+
+
+
         public TabViewItem()
         {
             MouseDown += TabViewItem_MouseDown;
             KeyDown += TabViewItem_KeyDown;
-          
         }
 
         private void TabViewItem_KeyDown(object sender, KeyEventArgs e)
@@ -40,7 +70,7 @@ namespace LeeTeke.WpfControl.Controls
                 default:
                     break;
             }
-        
+
 
         }
 
@@ -82,20 +112,20 @@ namespace LeeTeke.WpfControl.Controls
                     button.Click += (es, ex) => RaiseClosed(TabViewItemClosedMode.Self);
                 }
 
-                if (this.Template.FindName("PART_ContentPresenter",this) is ContentPresenter contentPresenter)
+                if (this.Template.FindName("PART_ContentPresenter", this) is ContentPresenter contentPresenter)
                 {
                     contentPresenter.Loaded += (es, ex) =>
                     {
-                        var chlid = VisualTreeHelper.GetChild(contentPresenter, 0);
-                        BindingOperations.SetBinding(this, TabViewItem.CanClosedProperty, new Binding()
-                        {
-                            Source = chlid,
-                            Path = new PropertyPath("(0)", new DependencyProperty[] { LeeTeke.WpfControl.Dependencies.TabViewManager.ItemCanCloseProperty }),
-                            Mode = BindingMode.OneWay
-                        });
+                        //var chlid = VisualTreeHelper.GetChild(contentPresenter, 0);
+                        //BindingOperations.SetBinding(this, TabViewItem.CanClosingProperty, new Binding()
+                        //{
+                        //    Source = chlid,
+                        //    Path = new PropertyPath("(0)", new DependencyProperty[] { LeeTeke.WpfControl.Dependencies.TabViewManager.ItemCanCloseProperty }),
+                        //    Mode = BindingMode.OneWay
+                        //});
                     };
                 }
-             
+
 
             }
             catch
@@ -103,7 +133,8 @@ namespace LeeTeke.WpfControl.Controls
             }
 
         }
-              
+
+
 
         #region 属性
         /// <summary>
@@ -116,22 +147,21 @@ namespace LeeTeke.WpfControl.Controls
 
         #region 依赖属性
 
-        #region CanClosed
+        #region CanClosing
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public bool CanClosed
+        public bool CanClosing
         {
-            get { return (bool)GetValue(CanClosedProperty); }
-            set { SetValue(CanClosedProperty, value); }
+            get { return (bool)GetValue(CanClosingProperty); }
+            set { SetValue(CanClosingProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for CanClosed.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty CanClosedProperty =
-            DependencyProperty.Register("CanClosed", typeof(bool), typeof(TabViewItem));
+        public static readonly DependencyProperty CanClosingProperty =
+            DependencyProperty.Register("CanClosing", typeof(bool), typeof(TabViewItem));
 
         #endregion
-
 
         #region IsSelected
         /// <summary>
@@ -159,7 +189,6 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         #endregion
-
 
         #region CornerRadius
         /// <summary>
@@ -208,7 +237,6 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-
         #region IsFixed
         /// <summary>
         /// 是否固定
@@ -224,6 +252,22 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("IsFixed", typeof(bool), typeof(TabViewItem));
 
         #endregion
+
+        #region CloseVisibly
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public ShowMode CloseVisibly
+        {
+            get { return (ShowMode)GetValue(CloseVisiblyProperty); }
+            set { SetValue(CloseVisiblyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CloseVisibly.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CloseVisiblyProperty =
+            DependencyProperty.Register("CloseVisibly", typeof(ShowMode), typeof(TabViewItem));
+        #endregion
+
 
         #endregion
 
@@ -274,13 +318,14 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
         #endregion
+
         #region 公共方法
         /// <summary>
         /// 关闭Item
         /// </summary>
         public async Task CloseAsync()
         {
-            if (CanClosed)
+            if (CanClosing)
             {
                 var hover = new DoubleAnimationUsingKeyFrames();
                 hover.KeyFrames.Add(new EasingDoubleKeyFrame()

@@ -92,11 +92,11 @@ namespace LeeTeke.WPFTest.ViewModels
         }
 
 
-        private LeeTeke.WpfControl.NotifyBannerShowModel _NotifyData;
+        private LeeTeke.WpfControl.NotifyBannerShowData _NotifyData;
         /// <summary>
         /// 请填写属性名
         /// </summary>
-        public LeeTeke.WpfControl.NotifyBannerShowModel NotifyData
+        public LeeTeke.WpfControl.NotifyBannerShowData NotifyData
         {
             get { return _NotifyData; }
             set
@@ -160,7 +160,7 @@ namespace LeeTeke.WPFTest.ViewModels
             _switch = !_switch;
             StaticMethods.SetLightOrDark(_switch);
 
-            NotifyData = new NotifyBannerShowModel("切换" +( _switch ? "普通主题" : "暗黑主题"));
+            NotifyData = new NotifyBannerShowData("切换" +( _switch ? "普通主题" : "暗黑主题"));
         }
 
     }

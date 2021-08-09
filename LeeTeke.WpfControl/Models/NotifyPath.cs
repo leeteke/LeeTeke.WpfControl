@@ -34,7 +34,12 @@ namespace LeeTeke.WpfControl
         /// <summary>
         /// 左下角
         /// </summary>
-        LeftBottom
+        LeftBottom,
 
+        TopCenter,
+
+        BottomCenter,
+
+          
     }
 }

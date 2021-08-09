@@ -186,28 +186,20 @@
                             BorderThickness="0"
                             Background="{TemplateBinding Background}" >
 
-                        <Grid>
+                   
                         <ContentPresenter x:Name="Presenter"
                                           Margin="{TemplateBinding Padding}"
                                           TextElement.Foreground="{TemplateBinding Foreground}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           ContentSource="Content" />
-
-                            <TextBlock x:Name="PART_SelectedText" 
-                                       Text="✔"
-                                       Visibility="Collapsed"
-                                       HorizontalAlignment="Right"
-                                       VerticalAlignment="Center"
-                                       Foreground="{DynamicResource LeeBrush_Theme}"
-                                       Margin="5,0"/>
-                        </Grid>
+                                         
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected"  Value="True">
-                            <Setter Property="Visibility"  
-                                    TargetName="PART_SelectedText"
-                                    Value="Visible" />
+                            <Setter Property="Background"  
+                                    TargetName="border"
+                                    Value="{DynamicResource LeeBrush_ItemSelectedBackground}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver"  Value="True">
                             <Setter Property="Background"  

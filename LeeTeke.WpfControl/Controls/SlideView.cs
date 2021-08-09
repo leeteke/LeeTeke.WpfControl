@@ -65,16 +65,6 @@ namespace LeeTeke.WpfControl.Controls
         }
 
      
-
-
-
-
-
-
-
-
-
-
         #region 属性
         /// <summary>
         /// 总数量

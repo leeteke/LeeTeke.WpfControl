@@ -21,7 +21,7 @@ namespace LeeTeke.WpfControl
             {
                 Application.Current.Resources["LeeBrush_Background"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Background"]);
                 Application.Current.Resources["LeeBrush_Forground"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_White"]);
-               Application.Current.Resources["LeeBrush_Text"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Black"]);
+                Application.Current.Resources["LeeBrush_Text"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Black"]);
                 Application.Current.Resources["LeeBrush_BorderBrush"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Gray"]);
                 Application.Current.Resources["LeeBrush_BorderBrushMouseOver"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Gray191"]);
 
@@ -30,8 +30,8 @@ namespace LeeTeke.WpfControl
             }
             else
             {
-               Application.Current.Resources["LeeBrush_Background"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_BackgroundDark"]);
-               Application.Current.Resources["LeeBrush_Forground"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Black"]);
+                Application.Current.Resources["LeeBrush_Background"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_BackgroundDark"]);
+                Application.Current.Resources["LeeBrush_Forground"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Black"]);
                 Application.Current.Resources["LeeBrush_Text"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_White"]);
                 Application.Current.Resources["LeeBrush_BorderBrush"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Black"]);
                 Application.Current.Resources["LeeBrush_BorderBrushMouseOver"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Gray51"]);
@@ -533,19 +533,19 @@ namespace LeeTeke.WpfControl
         /// <summary>
         /// 寻找子控件
         /// </summary>
-        /// <typeparam name="childItem"></typeparam>
+        /// <typeparam name="T"></typeparam>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static childItem FindVisualChild<childItem>(DependencyObject obj) where childItem : DependencyObject
+        public static T FindVisualChild<T>(DependencyObject obj) where T : DependencyObject
         {
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
             {
                 DependencyObject child = VisualTreeHelper.GetChild(obj, i);
-                if (child != null && child is childItem)
-                    return (childItem)child;
+                if (child != null && child is T)
+                    return (T)child;
                 else
                 {
-                    childItem childOfChild = FindVisualChild<childItem>(child);
+                    T childOfChild = FindVisualChild<T>(child);
                     if (childOfChild != null)
                         return childOfChild;
                 }
@@ -553,6 +553,29 @@ namespace LeeTeke.WpfControl
             return null;
         }
 
+        /// <summary>
+        /// 寻找子控件
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static T FindVisualParent<T>(DependencyObject obj) where T : DependencyObject
+        {
+            var p = VisualTreeHelper.GetParent(obj);
+            if (p==null)
+            {
+                return null;
+            }
+            if (p is T)
+            {
+                return (T)p;
+            }
+            else
+            {
+                return FindVisualParent<T>(p);
+            }
+    
+        }
 
         /// <summary>
         /// 是否在控件里面

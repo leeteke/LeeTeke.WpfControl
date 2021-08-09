@@ -1,0 +1,83 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"   
+                    xmlns:local="clr-namespace:LeeTeke.WpfControl.Controls"
+                    >
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="{x:Type local:SlideView}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}"/>
+        <Setter Property="MinWidth" Value="{DynamicResource  LeeControlMinWidth}"/>
+        <Setter Property="Orientation" Value="Horizontal"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SlideView}">
+                    <Border  Background="{TemplateBinding Background}"
+                             BorderBrush="{TemplateBinding BorderBrush}"
+                             BorderThickness="{TemplateBinding BorderThickness}"
+                             CornerRadius="{TemplateBinding CornerRadius}"
+                             Padding="{TemplateBinding Padding}">
+                        <ScrollViewer x:Name="PART_ScrollViewer"   
+                                HorizontalScrollBarVisibility="Hidden" 
+                                VerticalScrollBarVisibility="Hidden"
+                                Style="{x:Null}"
+                                  FocusVisualStyle="{DynamicResource LeeFocusVisual}"
+                                IsTabStop="False">
+                            <ScrollViewer.Clip>
+                                <MultiBinding  Converter="{StaticResource  MultiValueToClipConverter}" Mode="OneWay">
+                                    <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualWidth"/>
+                                    <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualHeight"/>
+                                    <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}"  Path="CornerRadius"/>
+                                </MultiBinding>
+                            </ScrollViewer.Clip>
+                            <ItemsPresenter />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="{Binding Orientation,  RelativeSource={ RelativeSource Mode=FindAncestor,AncestorType={x:Type local:SlideView},AncestorLevel=1},Mode=OneWay}"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+    <Style TargetType="{x:Type local:SlideViewItem}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="Width" 
+                    Value="{Binding RelativeSource={ RelativeSource Mode=FindAncestor,AncestorType={x:Type ScrollViewer},AncestorLevel=1},Path=ActualWidth,Mode=OneWay}"/>
+        <Setter Property="Height" 
+                    Value="{Binding RelativeSource={ RelativeSource Mode=FindAncestor,AncestorType={x:Type ScrollViewer},AncestorLevel=1},Path=ActualHeight,Mode=OneWay}"/>
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SlideViewItem}" >
+                    <Border x:Name="contentBorder" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}"
+                                Padding="{TemplateBinding Padding}">
+                        <ContentPresenter x:Name="contentPresenter" 
+                                              TextElement.Foreground="{TemplateBinding Foreground}"
+                                              />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>
