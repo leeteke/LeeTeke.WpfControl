@@ -53,39 +53,26 @@ namespace LeeTeke.WpfControl.Controls
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(NotifyBanner), new FrameworkPropertyMetadata(typeof(NotifyBanner)));
         }
-        /// <summary>
-        /// 位移距离
-        /// </summary>
-        private double _displacement = 200;
 
-        /// <summary>
-        /// 界面的stackpanel
-        /// </summary>
+
         private StackPanel _stackPanel;
-
-
         /// <summary>
         /// 通知窗口
         /// </summary>
         private Window _notifyWindow;
 
-        private bool _isLoded = false;
 
-       
         public NotifyBanner()
         {
-         
         }
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-
-
-            _stackPanel = this.Template.FindName("PART_StackPanel", this) as StackPanel;
-            if (_stackPanel != null)
+            
+            if(this.Template.FindName("PART_StackPanel",this) is StackPanel stack)
             {
-                _isLoded = true;
+                _stackPanel = stack;
             }
         }
 
@@ -107,23 +94,6 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("CloseVisibly", typeof(ShowMode), typeof(NotifyBanner));
         #endregion
 
-        #region BannerPath
-        /// <summary>
-        /// 请填写描述
-        /// </summary>
-        public NotifyPath BannerPath
-        {
-            get { return (NotifyPath)GetValue(BannerPathProperty); }
-            set { SetValue(BannerPathProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for BannerPath.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty BannerPathProperty =
-            DependencyProperty.Register("BannerPath", typeof(NotifyPath), typeof(NotifyBanner));
-
-
-
-        #endregion
 
         #region EasingFunction
         /// <summary>
@@ -157,7 +127,7 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-      
+
         #region ShowMode
         /// <summary>
         /// 展示模式
@@ -206,6 +176,22 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
+        #region NotifySite
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public NotifySite NotifySite
+        {
+            get { return (NotifySite)GetValue(NotifySiteProperty); }
+            set { SetValue(NotifySiteProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for NotifySite.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty NotifySiteProperty =
+            DependencyProperty.Register("NotifySite", typeof(NotifySite), typeof(NotifyBanner));
+        #endregion
+
+
         #region Content
         /// <summary>
         /// 内容
@@ -222,7 +208,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private static void ContentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is NotifyBanner banner && e.NewValue is NotifyBannerShowData model && banner._isLoded)
+            if (d is NotifyBanner banner && e.NewValue is NotifyBannerShowData model )
             {
                 banner.HaveContentAsync(model);
             }
@@ -314,8 +300,9 @@ namespace LeeTeke.WpfControl.Controls
 
         private async void HaveContentAsync(NotifyBannerShowData data)
         {
-            var control = new NotifyBannerItem(data);
-            var add= UXAdd(control);
+            var control = new NotifyBannerItem(data, NotifySite);
+            ItemBiding(control);
+            var add = UXAdd(control);
             if (add)
             {
                 control.Closed += (es, ex) =>
@@ -324,87 +311,59 @@ namespace LeeTeke.WpfControl.Controls
                 };
             }
         }
-        
-
-
-
         /// <summary>
         /// 通知添加UI
         /// </summary>
         /// <param name="element"></param>
-        private bool UXAdd(UIElement element)
+        private bool UXAdd(NotifyBannerItem item)
         {
-            switch (ShowMode)
+            try
             {
-                case NotifyBannerShowMode.InApp:
-                    ///这是 
-                    if (_stackPanel == null)
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        switch (BannerPath)
-                        {
-                            case NotifyPath.RightTop:
-                            case NotifyPath.RightCenter:
-                            case NotifyPath.LeftTop:
-                            case NotifyPath.LeftCenter:
-                            case NotifyPath.TopCenter:
-                                _stackPanel?.Children.Insert(0, element);
-                                break;
-                            default:
-                                _stackPanel.Children.Add(element);
-                                break;
-                        }
-
-                        return true;
-                    }
-                case NotifyBannerShowMode.OnDesktop:
-                    var win = GenerateWindow();
-                    if (win.Content is StackPanel stack)
-                    {
-
-                        switch (BannerPath)
-                        {
-                            case NotifyPath.RightTop:
-                            case NotifyPath.RightCenter:
-                            case NotifyPath.LeftTop:
-                            case NotifyPath.LeftCenter:
-                            case NotifyPath.TopCenter:
-                                stack.Children.Insert(0, element);
-                                break;
-                            default:
-                                stack.Children.Add(element);
-                                break;
-                        }
-
-                        win.Show();
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-
-                default:
+                var panel = ShowMode switch
+                {
+                    NotifyBannerShowMode.InApp => _stackPanel,
+                    NotifyBannerShowMode.OnDesktop => GenerateWindow().Content as StackPanel,
+                    _ => null,
+                };
+                if (panel==null)
                     return false;
+
+                switch (item.Site)
+                {
+                    case NotifySite.TopRight:
+                    case NotifySite.TopCenter:
+                    case NotifySite.TopLeft:
+                        panel.Children.Insert(0, item);
+                        break;
+                    case NotifySite.BottomRight:
+                    case NotifySite.BottomCenter:
+                    case NotifySite.BottomLeft:
+                        panel.Children.Add(item);
+                        break;
+                    default:
+                        return false;
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
             }
 
-
-
         }
+
+
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="element"></param>
         /// <returns></returns>
-        private bool UXRemove(UIElement element)
+        private bool UXRemove(NotifyBannerItem item)
         {
-            if (VisualTreeHelper.GetParent(element) is StackPanel sp)
+            if (VisualTreeHelper.GetParent(item) is StackPanel sp)
             {
-                sp.Children.Remove(element);
+                sp.Children.Remove(item);
                 if (sp.Children.Count < 1 && ShowMode == NotifyBannerShowMode.OnDesktop)
                 {
                     _notifyWindow.Close();
@@ -434,17 +393,25 @@ namespace LeeTeke.WpfControl.Controls
                     Path = new PropertyPath(NotifyBanner.OnDesktopMarginProperty),
                     Mode = BindingMode.OneWay
                 });
-
                 spE.SetBinding(StackPanel.VerticalAlignmentProperty, new Binding
                 {
                     Source = this,
-                    Path = new PropertyPath(NotifyBanner.BannerPathProperty),
+                    Path = new PropertyPath(NotifyBanner.NotifySiteProperty),
                     Mode = BindingMode.OneWay,
-                    Converter= new NotifyConverter()
+                    Converter = new NotifyConverter(),
+                    ConverterParameter="V"
+                });
+                spE.SetBinding(StackPanel.HorizontalAlignmentProperty, new Binding
+                {
+                    Source = this,
+                    Path = new PropertyPath(NotifyBanner.NotifySiteProperty),
+                    Mode = BindingMode.OneWay,
+                    Converter = new NotifyConverter(),
+                    ConverterParameter="H"
                 });
                 _notifyWindow = new()
                 {
-                    Title = "notifyWindowService",
+                    Title = "NotifyWindowService",
                     AllowsTransparency = true,
                     WindowStyle = WindowStyle.None,
                     Background = null,
@@ -458,9 +425,140 @@ namespace LeeTeke.WpfControl.Controls
                     _notifyWindow = null;
                 };
             }
-
+            _notifyWindow.Show();
             return _notifyWindow;
 
+        }
+
+
+        private void ItemBiding(NotifyBannerItem item)
+        {
+            item.SetBinding(NotifyBannerItem.BackgroundProperty, new Binding
+            {
+                Source = this,
+                Path = new PropertyPath(NotifyBanner.BackgroundProperty),
+                Mode = BindingMode.OneWay
+            });
+
+            item.SetBinding(NotifyBannerItem.BorderBrushProperty, new Binding
+            {
+                Source = this,
+                Path = new PropertyPath(NotifyBanner.BorderBrushProperty),
+                Mode = BindingMode.OneWay
+            });
+
+            item.SetBinding(NotifyBannerItem.EffectProperty, new Binding
+            {
+                Source = this,
+                Path = new PropertyPath(NotifyBanner.EffectProperty),
+                Mode = BindingMode.OneWay
+            });
+
+            item.SetBinding(NotifyBannerItem.BorderThicknessProperty, new Binding
+            {
+                Source = this,
+                Path = new PropertyPath(NotifyBanner.BorderThicknessProperty),
+                Mode = BindingMode.OneWay
+            });
+
+            item.SetBinding(NotifyBannerItem.CornerRadiusProperty, new Binding
+            {
+                Source = this,
+                Path = new PropertyPath(NotifyBanner.CornerRadiusProperty),
+                Mode = BindingMode.OneWay
+            });
+
+            item.SetBinding(NotifyBannerItem.ForegroundProperty, new Binding
+            {
+                Source = this,
+                Path = new PropertyPath(NotifyBanner.ForegroundProperty),
+                Mode = BindingMode.OneWay
+            });
+
+            item.SetBinding(NotifyBannerItem.FontSizeProperty, new Binding
+            {
+                Source = this,
+                Path = new PropertyPath(NotifyBanner.FontSizeProperty),
+                Mode = BindingMode.OneWay
+            });
+
+            item.SetBinding(NotifyBannerItem.FontStretchProperty, new Binding
+            {
+                Source = this,
+                Path = new PropertyPath(NotifyBanner.FontStretchProperty),
+                Mode = BindingMode.OneWay
+            });
+
+            item.SetBinding(NotifyBannerItem.MarginProperty, new Binding
+            {
+                Source = this,
+                Path = new PropertyPath(NotifyBanner.MarginProperty),
+                Mode = BindingMode.OneWay
+            });
+
+            item.SetBinding(NotifyBannerItem.PaddingProperty, new Binding
+            {
+                Source = this,
+                Path = new PropertyPath(NotifyBanner.PaddingProperty),
+                Mode = BindingMode.OneWay
+            });
+
+            item.SetBinding(NotifyBannerItem.MinHeightProperty, new Binding
+            {
+                Source = this,
+                Path = new PropertyPath(NotifyBanner.MinHeightProperty),
+                Mode = BindingMode.OneWay
+            });
+
+            item.SetBinding(NotifyBannerItem.MinWidthProperty, new Binding
+            {
+                Source = this,
+                Path = new PropertyPath(NotifyBanner.MinWidthProperty),
+                Mode = BindingMode.OneWay
+            });
+
+            item.SetBinding(NotifyBannerItem.DurationProperty, new Binding
+            {
+                Source = this,
+                Path = new PropertyPath(NotifyBanner.ShowDurationProperty),
+                Mode = BindingMode.OneWay
+            });
+
+
+            item.SetBinding(NotifyBannerItem.EasingDurationProperty, new Binding
+            {
+                Source = this,
+                Path = new PropertyPath(NotifyBanner.EasingDurationProperty),
+                Mode = BindingMode.OneWay
+            });
+
+            item.SetBinding(NotifyBannerItem.CloseVisiblyProperty, new Binding
+            {
+                Source = this,
+                Path = new PropertyPath(NotifyBanner.CloseVisiblyProperty),
+                Mode = BindingMode.OneWay
+            });
+
+            item.SetBinding(NotifyBannerItem.EasingFunctionProperty, new Binding
+            {
+                Source = this,
+                Path = new PropertyPath(NotifyBanner.EasingFunctionProperty),
+                Mode = BindingMode.OneWay
+            });
+
+            item.SetBinding(NotifyBannerItem.VerticalContentAlignmentProperty, new Binding
+            {
+                Source = this,
+                Path = new PropertyPath(NotifyBanner.VerticalContentAlignmentProperty),
+                Mode = BindingMode.OneWay
+            });
+
+            item.SetBinding(NotifyBannerItem.HorizontalContentAlignmentProperty, new Binding
+            {
+                Source = this,
+                Path = new PropertyPath(NotifyBanner.HorizontalContentAlignmentProperty),
+                Mode = BindingMode.OneWay
+            });
         }
         #endregion
 

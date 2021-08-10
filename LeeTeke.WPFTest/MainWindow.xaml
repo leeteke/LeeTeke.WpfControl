@@ -31,8 +31,7 @@
 
         <ScrollViewer Grid.Row="1" 
                       Margin="10"
-                      HorizontalScrollBarVisibility="Disabled"
-                       >
+                      HorizontalScrollBarVisibility="Disabled">
 
    
 
@@ -213,7 +212,9 @@
         </leecontrol:NotifyIconEx>
 
         <leecontrol:NotifyBanner Grid.RowSpan="3"
-                                 Content="{Binding NotifyData}"/>
+                                
+                                 Content="{Binding NotifyData}"
+                                 />
 
     </Grid>
 

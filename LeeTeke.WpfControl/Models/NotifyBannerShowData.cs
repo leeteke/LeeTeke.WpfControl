@@ -20,12 +20,12 @@ namespace LeeTeke.WpfControl
         /// <summary>
         /// 状态
         /// </summary>
-        public NotifyStatus Status { get; }
+        public NotifyStatus Status { get; set; }
 
         /// <summary>
         /// 内容，默认文本可以是FE
         /// </summary>
-        public object Content { get; }
+        public object Content { get; set; }
 
         /// <summary>
         /// 背景音，默认没有
@@ -38,13 +38,21 @@ namespace LeeTeke.WpfControl
         public Duration? Duration { get; set; }
 
 
-        public NotifyBannerShowData(object content, NotifyStatus status = NotifyStatus.Primary, object value = null, Duration? duration = null, Stream sound = null)
+        public Action CloseAction { get; set; }
+
+        public NotifyBannerShowData(object content, NotifyStatus status = NotifyStatus.Primary,  object value = null, Duration? duration = null, Stream sound = null)
         {
+          
             Content = content;
             Status = status;
             Value = value;
             Duration = duration;
             Sound = sound;
+        }
+
+        public NotifyBannerShowData()
+        {
+
         }
 
     }

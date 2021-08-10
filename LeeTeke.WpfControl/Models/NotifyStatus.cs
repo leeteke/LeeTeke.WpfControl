@@ -14,7 +14,7 @@ namespace LeeTeke.WpfControls
         //EC61
         Success,
         //EB90
-        Erro,
+        Error,
         // E814
         Warning,
         //F167

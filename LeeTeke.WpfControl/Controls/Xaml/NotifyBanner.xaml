@@ -2,17 +2,19 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
                     xmlns:local="clr-namespace:LeeTeke.WpfControl.Controls"
                     xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies"
+                    xmlns:conver="clr-namespace:LeeTeke.WpfControl.Converters"
                     >
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
     </ResourceDictionary.MergedDictionaries>
+
+    <conver:NotifyConverter x:Key="NotifyConverter"/>
 
 
 
     <Style TargetType="{x:Type local:NotifyBanner}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter  Property="BannerPath" Value="RightTop"/>
         <Setter Property="EasingFunction" >
             <Setter.Value>
                 <ExponentialEase  EasingMode="EaseOut"/>
@@ -20,52 +22,39 @@
         </Setter>
         <Setter Property="EasingDuration" Value="0:0:0.200"/>
         <Setter Property="ShowDuration" Value="5000"/>
+        <Setter Property="NotifySite" Value="TopRight"/>
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter  Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="ShowMode" Value="InApp"/>
         <Setter Property="OnDesktopMargin" Value="8"/>
         <Setter Property="Effect" Value="{DynamicResource LeeShadow}"/>
         <Setter Property="MinHeight" Value="60"/>
-        <Setter Property="MinWidth" Value="240"/>
+        <Setter Property="MinWidth" Value="260"/>
         <Setter Property="CloseVisibly" Value="MouseOver"/>
-        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="Margin" Value="5"/>
         <Setter  Property="Effect" Value="{DynamicResource LeeShadow}"/>
-        <Setter Property="CornerRadius" Value="{DynamicResource  LeeCornerRadius}"/>
+        <Setter Property="CornerRadius" Value="8"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:NotifyBanner}">
-                    <StackPanel x:Name="PART_StackPanel"
-                            Background="{x:Null}" >
-
-                    </StackPanel>
+                  
+                        <StackPanel x:Name="PART_StackPanel"
+                                    Background="{x:Null}"  
+                                    VerticalAlignment="{TemplateBinding NotifySite,Converter={StaticResource NotifyConverter},ConverterParameter=V}"
+                                    HorizontalAlignment="{TemplateBinding NotifySite,Converter={StaticResource NotifyConverter},ConverterParameter=H}"
+                                    />
+              
+                 
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
     <Style TargetType="{x:Type local:NotifyBannerItem}">
-
-        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=Background,Mode=OneWay}"/>
-        <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=BorderBrush,Mode=OneWay}"/>
-        <Setter Property="BorderThickness" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=BorderThickness,Mode=OneWay}"/>
-        <Setter Property="Effect" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=Effect,Mode=OneWay}"/>
-        <Setter Property="CornerRadius" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=CornerRadius,Mode=OneWay}"/>
-        <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=Foreground,Mode=OneWay}"/>
-        <Setter Property="FontSize" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=FontSize,Mode=OneWay}"/>
-        <Setter Property="FontStretch" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=FontStretch,Mode=OneWay}"/>
-        <Setter Property="Margin" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=Padding,Mode=OneWay}"/>
-        <Setter Property="MinHeight"  Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=MinHeight,Mode=OneWay}"/>
-        <Setter Property="MinWidth"  Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=MinWidth,Mode=OneWay}"/>
-        <Setter Property="Duration" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=ShowDuration,Mode=OneWay}"/>
-        <Setter Property="EasingDuration" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=EasingDuration,Mode=OneWay}"/>
-        <Setter Property="EasingFunction" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=EasingFunction,Mode=OneWay}"/>
-        <Setter Property="Path" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=BannerPath,Mode=OneWay}"/>
-        <Setter Property="CloseVisibly" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=CloseVisibly,Mode=OneWay}"/>
-        <Setter Property="VerticalContentAlignment" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=VerticalContentAlignment,Mode=OneWay}"/>
-        <Setter Property="HorizontalContentAlignment" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:NotifyBanner}}, Path=HorizontalContentAlignment,Mode=OneWay}"/>
-        <Setter Property="Opacity" Value="0"/>
+     <Setter Property="Opacity" Value="0"/>
         <Setter Property="RenderTransform">
             <Setter.Value>
                 <TranslateTransform/>
@@ -81,20 +70,23 @@
                             Effect="{TemplateBinding Effect}">
                         <Grid  >
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition x:Name="PART_Column1"  Width="0"/>
+                                <ColumnDefinition x:Name="PART_Column1"  Width="50"/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition x:Name="PART_Column2" Width="auto"/>
                             </Grid.ColumnDefinitions>
 
                             <TextBlock x:Name="PART_Icon"
-                                    
+                                       FontFamily="{DynamicResource IconFontFamily}"
+                                       FontSize="24"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
                                        />
 
-                            <ContentPresenter Grid.Column="1"
+                            <ContentPresenter x:Name="PART_Content" Grid.Column="1"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              Margin="{TemplateBinding Margin}"/>
-                            
+                                              Margin="{TemplateBinding Padding}"/>
+
                             <Button x:Name="PART_CloseButton" 
                                             Grid.Column="2"
                                             Content="&#xE8BB;"
@@ -114,6 +106,8 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
+
+
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True"/>
@@ -128,34 +122,48 @@
                         <Trigger Property="CloseVisibly" Value="Visible">
                             <Setter TargetName="PART_CloseButton" Property="Visibility" Value="Visible"/>
                         </Trigger>
-                        
+
                         <Trigger Property="Status" Value="Callback">
                             <Setter TargetName="PART_Icon" Property="Visibility" Value="Collapsed"/>
                             <Setter TargetName="PART_Column1" Property="Width" Value="0"/>
+                            <Setter TargetName="PART_Column2" Property="Width" Value="0"/>
                             <Setter TargetName="PART_CloseButton" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="PART_Content" Property="VerticalAlignment" Value="Stretch"/>
+                            <Setter TargetName="PART_Content" Property="HorizontalAlignment" Value="Stretch"/>
                         </Trigger>
-                            
+
                         <Trigger Property="Status" Value="Primary">
-                            <Setter TargetName="PART_Icon" Property="Text" Value="0"/>
-                            <Setter TargetName="PART_Icon" Property="Foreground" Value="{DynamicResource LeeBrush_Primary}"/>
+                            <Setter TargetName="PART_Icon" Property="Text" Value="&#xE7E7;"/>
+                            <Setter TargetName="PART_Icon" Property="Foreground" Value="{DynamicResource LeeBrush_Theme}"/>
                         </Trigger>
-                        <Trigger Property="Status" Value="Callback">
+                        <Trigger Property="Status" Value="Error">
+                            <Setter TargetName="PART_Icon" Property="Text" Value="&#xEB90;"/>
+                            <Setter TargetName="PART_Icon" Property="Foreground" Value="{DynamicResource LeeBrush_Error}"/>
+                        </Trigger>
+                        <Trigger Property="Status" Value="Info">
+                            <Setter TargetName="PART_Icon" Property="Text" Value="&#xF167;"/>
+                            <Setter TargetName="PART_Icon" Property="Foreground" Value="{DynamicResource LeeBrush_Info}"/>
+                        </Trigger>
+                        <Trigger Property="Status" Value="Warning">
+                            <Setter TargetName="PART_Icon" Property="Text" Value="&#xE814;"/>
+                            <Setter TargetName="PART_Icon" Property="Foreground" Value="{DynamicResource LeeBrush_Warning}"/>
+                        </Trigger>
+                        <Trigger Property="Status" Value="Success">
+                            <Setter TargetName="PART_Icon" Property="Text" Value="&#xEC61;"/>
+                            <Setter TargetName="PART_Icon" Property="Foreground" Value="{DynamicResource LeeBrush_Success}"/>
+                        </Trigger>
+                        <Trigger Property="Status" Value="None">
+                            <Setter TargetName="PART_Content" Property="VerticalAlignment" Value="Center"/>
+                            <Setter TargetName="PART_Content" Property="HorizontalAlignment" Value="Center"/>
+                            <Setter TargetName="PART_Icon" Property="Visibility" Value="Collapsed"/>
                             <Setter TargetName="PART_Column1" Property="Width" Value="0"/>
-                            <Setter TargetName="PART_CloseButton" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
-                        <Trigger Property="Status" Value="Callback">
-                            <Setter TargetName="PART_Column1" Property="Width" Value="0"/>
-                            <Setter TargetName="PART_CloseButton" Property="Visibility" Value="Collapsed"/>
-                        </Trigger>
-                        <Trigger Property="Status" Value="Callback">
-                            <Setter TargetName="PART_Column1" Property="Width" Value="0"/>
-                            <Setter TargetName="PART_CloseButton" Property="Visibility" Value="Collapsed"/>
-                        </Trigger>
+                   
                     </ControlTemplate.Triggers>
-    
+
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    
+
 </ResourceDictionary>

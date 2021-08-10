@@ -55,15 +55,12 @@
                                         BorderBrush="{TemplateBinding BorderBrush}"
                                         CornerRadius="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/2,Mode=OneWay}"
                                />
-                                <Border x:Name="PART_CloseBorder" Width="{Binding ElementName=PART_Grid,Path=ActualWidth,Converter={StaticResource DoubleFollowConverter},ConverterParameter=1}"
-                                           Height="{Binding ElementName=PART_Grid,Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=1}"
-                                           Background="{TemplateBinding Background}"
-                                           BorderThickness="0"
-                                           IsHitTestVisible="False"
-                                          
-                                           CornerRadius="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/2,Mode=OneWay}"
-                                            RenderTransformOrigin="1,0.5"
-                                          >
+                                <Border x:Name="PART_CloseBorder" 
+                                        Background="{TemplateBinding Background}"
+                                        BorderThickness="0"
+                                        IsHitTestVisible="False"
+                                        CornerRadius="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/2,Mode=OneWay}"
+                                        RenderTransformOrigin="1,0.5">
                                     <Border.RenderTransform>
                                         <ScaleTransform ScaleX="1" ScaleY="1"/>
                                     </Border.RenderTransform>

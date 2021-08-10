@@ -227,7 +227,7 @@
 
     <!--Success-->
     <SolidColorBrush x:Key="LeeBrush_Success" Color="{DynamicResource LeeColor_Success}"/>
-    <Color x:Key="LeeColor_Success"  R="25" G="135" B="84" A="255"  />
+    <Color x:Key="LeeColor_Success"  R="25" G="180" B="110" A="255"  />
 
     <!--Warning-->
     <SolidColorBrush x:Key="LeeBrush_Warning" Color="{DynamicResource LeeColor_Warning}"/>
@@ -239,7 +239,7 @@
 
     <!--Info-->
     <SolidColorBrush x:Key="LeeBrush_Info" Color="{DynamicResource LeeColor_Info}"/>
-    <Color x:Key="LeeColor_Info"  R="13" G="202" B="240" A="255"  />
+    <Color x:Key="LeeColor_Info"  R="12" G="193" B="230" A="255"  />
 
     <LinearGradientBrush x:Key="LeeLGBrush_MessengerV" EndPoint="0.5,1" StartPoint="0.5,0">
         <GradientStop Color="#00c6ff" Offset="0"/>

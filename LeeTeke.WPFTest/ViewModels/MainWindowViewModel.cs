@@ -9,6 +9,8 @@ using Prism.Commands;
 using LeeTeke.WPFTest.Models;
 using System.Windows.Media.Imaging;
 using LeeTeke.WpfControl;
+using System.IO;
+using System.Windows.Controls;
 
 namespace LeeTeke.WPFTest.ViewModels
 {
@@ -160,7 +162,30 @@ namespace LeeTeke.WPFTest.ViewModels
             _switch = !_switch;
             StaticMethods.SetLightOrDark(_switch);
 
-            NotifyData = new NotifyBannerShowData("切换" +( _switch ? "普通主题" : "暗黑主题"));
+            NotifyData = new NotifyBannerShowData("切换" + (_switch ? "普通主题" : "暗黑主题"), WpfControls.NotifyStatus.Success, null, null, LeeTeke.WPFTest.Properties.Resources._8400);
+
+            NotifyData = new NotifyBannerShowData("切换" + (_switch ? "普通主题" : "暗黑主题"), WpfControls.NotifyStatus.Info, null, null, LeeTeke.WPFTest.Properties.Resources._8400);
+
+            NotifyData = new NotifyBannerShowData("切换" + (_switch ? "普通主题" : "暗黑主题"), WpfControls.NotifyStatus.Warning, null, null, LeeTeke.WPFTest.Properties.Resources._8400);
+
+            NotifyData = new NotifyBannerShowData("切换" + (_switch ? "普通主题" : "暗黑主题"), WpfControls.NotifyStatus.Error, null, null, LeeTeke.WPFTest.Properties.Resources._8400);
+
+            NotifyData = new NotifyBannerShowData("切换" + (_switch ? "普通主题" : "暗黑主题"), WpfControls.NotifyStatus.None, null, null, LeeTeke.WPFTest.Properties.Resources._8400);
+
+            var apd = new NotifyBannerShowData();
+            var btn = new Button()
+            {
+                Content = "测试",
+            };
+            btn.Click += (a4, ad) =>
+            {
+                apd.CloseAction();
+            };
+            apd.Status = WpfControls.NotifyStatus.Callback;
+            apd.Content = btn;
+            NotifyData = apd;
+
+            NotifyData = new NotifyBannerShowData("切换" + (_switch ? "普通主题" : "暗黑主题"), WpfControls.NotifyStatus.Primary, null, null, LeeTeke.WPFTest.Properties.Resources._8400);
         }
 
     }

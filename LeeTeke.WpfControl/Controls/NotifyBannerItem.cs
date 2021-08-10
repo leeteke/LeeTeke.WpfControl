@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -53,9 +54,12 @@ namespace LeeTeke.WpfControl.Controls
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(NotifyBannerItem), new FrameworkPropertyMetadata(typeof(NotifyBannerItem)));
         }
-        public NotifyBannerItem(NotifyBannerShowData data)
+
+        public NotifySite Site { get; }
+        public NotifyBannerItem(NotifyBannerShowData data, NotifySite site)
         {
-        
+
+            Site = site;
             this.Content = data.Content;
             this.DataContext = data.Value;
             if (data.Duration != null)
@@ -64,6 +68,11 @@ namespace LeeTeke.WpfControl.Controls
             this.Sound = data.Sound;
             this.Status = data.Status;
             Loaded += NotifyBannerItem_Loaded;
+            if (data.Status== NotifyStatus.Callback)
+            {
+                data.CloseAction = () => Close();
+            }
+            
         }
 
         private void NotifyBannerItem_Loaded(object sender, RoutedEventArgs e)
@@ -75,14 +84,14 @@ namespace LeeTeke.WpfControl.Controls
         {
             base.OnApplyTemplate();
 
-             if (this.Template.FindName("PART_CloseButton",this) is Button btn)
+            if (this.Template.FindName("PART_CloseButton", this) is Button btn)
             {
-                btn.Click +=(es,ex)=>Close();
+                btn.Click += (es, ex) => Close();
             }
- 
+
         }
 
-      
+
 
         #region 依赖属性
 
@@ -208,20 +217,6 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("CanClick", typeof(bool), typeof(NotifyBannerItem));
         #endregion
 
-        #region Path
-        /// <summary>
-        /// 请添加描述
-        /// </summary>
-        public NotifyPath Path
-        {
-            get { return (NotifyPath)GetValue(PathProperty); }
-            set { SetValue(PathProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Path.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty PathProperty =
-            DependencyProperty.Register("Path", typeof(NotifyPath), typeof(NotifyBannerItem));
-        #endregion
 
 
         #endregion
@@ -278,7 +273,7 @@ namespace LeeTeke.WpfControl.Controls
 
         public void Show()
         {
-            Storyboard storyboard = new Storyboard() {  FillBehavior= FillBehavior.HoldEnd };
+            Storyboard storyboard = new Storyboard() { FillBehavior = FillBehavior.HoldEnd };
             DoubleAnimationUsingKeyFrames oDA = new DoubleAnimationUsingKeyFrames();
             oDA.KeyFrames.Add(new EasingDoubleKeyFrame()
             {
@@ -290,12 +285,11 @@ namespace LeeTeke.WpfControl.Controls
             Storyboard.SetTarget(oDA, this);
             Storyboard.SetTargetProperty(oDA, new PropertyPath(NotifyBannerItem.OpacityProperty));
 
-            switch (Path)
+            switch (Site)
             {
-                case NotifyPath.RightTop:
-                case NotifyPath.RightCenter:
-                case NotifyPath.RightBottom:
-                   
+                case NotifySite.TopRight:
+                case NotifySite.BottomRight:
+
                     DoubleAnimationUsingKeyFrames rDA = new DoubleAnimationUsingKeyFrames();
                     rDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                     {
@@ -311,10 +305,9 @@ namespace LeeTeke.WpfControl.Controls
                     Storyboard.SetTarget(rDA, this);
                     Storyboard.SetTargetProperty(rDA, new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, TranslateTransform.XProperty }));
                     break;
-                case NotifyPath.LeftTop:
-                case NotifyPath.LeftCenter:
-                case NotifyPath.LeftBottom:
-             
+                case NotifySite.TopLeft:
+                case NotifySite.BottomLeft:
+
                     DoubleAnimationUsingKeyFrames lDA = new DoubleAnimationUsingKeyFrames();
                     lDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                     {
@@ -330,8 +323,8 @@ namespace LeeTeke.WpfControl.Controls
                     Storyboard.SetTarget(lDA, this);
                     Storyboard.SetTargetProperty(lDA, new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, TranslateTransform.XProperty }));
                     break;
-                case NotifyPath.TopCenter:
-                  
+                case NotifySite.TopCenter:
+
                     DoubleAnimationUsingKeyFrames tDA = new DoubleAnimationUsingKeyFrames();
                     tDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                     {
@@ -347,8 +340,8 @@ namespace LeeTeke.WpfControl.Controls
                     Storyboard.SetTarget(tDA, this);
                     Storyboard.SetTargetProperty(tDA, new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, TranslateTransform.YProperty }));
                     break;
-                case NotifyPath.BottomCenter:
-             
+                case NotifySite.BottomCenter:
+
                     DoubleAnimationUsingKeyFrames bDA = new DoubleAnimationUsingKeyFrames();
                     bDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                     {
@@ -368,7 +361,21 @@ namespace LeeTeke.WpfControl.Controls
                     break;
             }
 
+      
             storyboard.Begin();
+
+            if (Sound != null)
+            {
+                try
+                {
+                    using var sound = new SoundPlayer(Sound);
+                    sound.Play();
+                }
+                catch (Exception)
+                {
+                }
+            }
+
         }
 
         /// <summary>
@@ -388,11 +395,10 @@ namespace LeeTeke.WpfControl.Controls
             Storyboard.SetTarget(oDA, this);
             Storyboard.SetTargetProperty(oDA, new PropertyPath(NotifyBannerItem.OpacityProperty));
 
-            switch (Path)
+            switch (Site)
             {
-                case NotifyPath.RightTop:
-                case NotifyPath.RightCenter:
-                case NotifyPath.RightBottom:
+                case NotifySite.TopRight:
+                case NotifySite.BottomRight:
                     DoubleAnimationUsingKeyFrames rDA = new DoubleAnimationUsingKeyFrames();
                     rDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                     {
@@ -404,9 +410,8 @@ namespace LeeTeke.WpfControl.Controls
                     Storyboard.SetTarget(rDA, this);
                     Storyboard.SetTargetProperty(rDA, new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, TranslateTransform.XProperty }));
                     break;
-                case NotifyPath.LeftTop:
-                case NotifyPath.LeftCenter:
-                case NotifyPath.LeftBottom:
+                case NotifySite.TopLeft:
+                case NotifySite.BottomLeft:
                     DoubleAnimationUsingKeyFrames lDA = new DoubleAnimationUsingKeyFrames();
                     lDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                     {
@@ -418,11 +423,11 @@ namespace LeeTeke.WpfControl.Controls
                     Storyboard.SetTarget(lDA, this);
                     Storyboard.SetTargetProperty(lDA, new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, TranslateTransform.XProperty }));
                     break;
-                case NotifyPath.TopCenter:
+                case NotifySite.TopCenter:
                     DoubleAnimationUsingKeyFrames tDA = new DoubleAnimationUsingKeyFrames();
                     tDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                     {
-                        Value = 50,
+                        Value = -50,
                         KeyTime = KeyTime.FromTimeSpan(EasingDuration.TimeSpan),
                         EasingFunction = EasingFunction,
                     });
@@ -430,11 +435,11 @@ namespace LeeTeke.WpfControl.Controls
                     Storyboard.SetTarget(tDA, this);
                     Storyboard.SetTargetProperty(tDA, new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, TranslateTransform.YProperty }));
                     break;
-                case NotifyPath.BottomCenter:
+                case NotifySite.BottomCenter:
                     DoubleAnimationUsingKeyFrames bDA = new DoubleAnimationUsingKeyFrames();
                     bDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                     {
-                        Value = -50,
+                        Value = 50,
                         KeyTime = KeyTime.FromTimeSpan(EasingDuration.TimeSpan),
                         EasingFunction = EasingFunction,
                     });

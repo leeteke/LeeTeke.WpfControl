@@ -13,20 +13,35 @@ namespace LeeTeke.WpfControl.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value is NotifyPath mode
-                ? mode switch
+            if ($"{parameter}" == "H")
+            {
+                return value is NotifySite site ? site switch
                 {
-                    NotifyPath.RightTop or NotifyPath.LeftTop => VerticalAlignment.Top,
-                    NotifyPath.RightBottom or NotifyPath.LeftBottom => VerticalAlignment.Bottom,
-                    NotifyPath.LeftCenter or NotifyPath.RightCenter => VerticalAlignment.Center,
-                    _ => VerticalAlignment.Stretch,
-                }
-                : (object)VerticalAlignment.Stretch;
+                    NotifySite.BottomCenter or NotifySite.TopCenter => HorizontalAlignment.Center,
+                    NotifySite.BottomLeft or NotifySite.TopLeft => HorizontalAlignment.Left,
+                    NotifySite.BottomRight or NotifySite.TopRight => HorizontalAlignment.Right,
+                    _ => HorizontalAlignment.Stretch
+                } : HorizontalAlignment.Stretch;
+            }
+
+            if ($"{parameter}" == "V")
+            {
+                return value is NotifySite site ? site switch
+                {
+                    NotifySite.BottomCenter or NotifySite.BottomRight or NotifySite.BottomLeft => VerticalAlignment.Bottom,
+                  NotifySite.TopCenter or NotifySite.TopRight or NotifySite.TopLeft=>VerticalAlignment.Top,
+                    _ => VerticalAlignment.Stretch
+                } : VerticalAlignment.Stretch;
+            }
+
+            return DependencyProperty.UnsetValue;
+
+          
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return default;
+            return DependencyProperty.UnsetValue;
         }
     }
 }
