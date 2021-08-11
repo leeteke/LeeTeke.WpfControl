@@ -37,17 +37,14 @@ namespace LeeTeke.WpfControl
         /// </summary>
         public Duration? Duration { get; set; }
 
+        public bool CanClick { get; set; }
 
-        public Action CloseAction { get; set; }
+        public Action CloseAction { get; internal set; }
 
-        public NotifyBannerShowData(object content, NotifyStatus status = NotifyStatus.Primary,  object value = null, Duration? duration = null, Stream sound = null)
+        public NotifyBannerShowData(object content, NotifyStatus status = NotifyStatus.Primary)
         {
-          
             Content = content;
             Status = status;
-            Value = value;
-            Duration = duration;
-            Sound = sound;
         }
 
         public NotifyBannerShowData()

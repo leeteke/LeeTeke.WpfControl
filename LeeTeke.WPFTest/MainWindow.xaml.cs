@@ -56,20 +56,7 @@ namespace LeeTeke.WPFTest
             }
         }
 
-        private void test_NotifyBannerClicked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void test_NotifyBannerClicked_1(object sender, WpfControl.NotifyBannerClickedEventArgs e)
-        {
-
-        }
-
-        private void test_NotifyBannerClicked(object sender, WpfControl.NotifyBannerClickedEventArgs e)
-        {
-
-        }
+   
 
         private void tage_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -81,6 +68,14 @@ namespace LeeTeke.WPFTest
             //   tage.Width = 45;
         }
 
-    
+        private void NotifyBanner_Clicked(object sender, WpfControl.NotifyBannerClickedEventArgs e)
+        {
+
+        }
+
+        private void NotifyBanner_Closed(object sender, WpfControl.NotifyClosedEventArgs e)
+        {
+
+        }
     }
 }

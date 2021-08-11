@@ -21,11 +21,12 @@
             </Setter.Value>
         </Setter>
         <Setter Property="EasingDuration" Value="0:0:0.200"/>
-        <Setter Property="ShowDuration" Value="5000"/>
+        <Setter Property="ShowDuration" Value="0:0:3"/>
         <Setter Property="NotifySite" Value="TopRight"/>
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="AutoClose" Value="True"/>
         <Setter  Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="ShowMode" Value="InApp"/>
         <Setter Property="OnDesktopMargin" Value="8"/>
@@ -164,6 +165,11 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="CanClick" Value="True">
+                <Setter Property="Cursor" Value="Hand"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
 </ResourceDictionary>

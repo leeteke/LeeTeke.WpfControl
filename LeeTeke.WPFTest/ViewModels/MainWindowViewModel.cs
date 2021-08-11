@@ -162,15 +162,8 @@ namespace LeeTeke.WPFTest.ViewModels
             _switch = !_switch;
             StaticMethods.SetLightOrDark(_switch);
 
-            NotifyData = new NotifyBannerShowData("切换" + (_switch ? "普通主题" : "暗黑主题"), WpfControls.NotifyStatus.Success, null, null, LeeTeke.WPFTest.Properties.Resources._8400);
+            NotifyData = new NotifyBannerShowData("切换" + (_switch ? "普通主题" : "暗黑主题")) { Value=123,  CanClick=true};
 
-            NotifyData = new NotifyBannerShowData("切换" + (_switch ? "普通主题" : "暗黑主题"), WpfControls.NotifyStatus.Info, null, null, LeeTeke.WPFTest.Properties.Resources._8400);
-
-            NotifyData = new NotifyBannerShowData("切换" + (_switch ? "普通主题" : "暗黑主题"), WpfControls.NotifyStatus.Warning, null, null, LeeTeke.WPFTest.Properties.Resources._8400);
-
-            NotifyData = new NotifyBannerShowData("切换" + (_switch ? "普通主题" : "暗黑主题"), WpfControls.NotifyStatus.Error, null, null, LeeTeke.WPFTest.Properties.Resources._8400);
-
-            NotifyData = new NotifyBannerShowData("切换" + (_switch ? "普通主题" : "暗黑主题"), WpfControls.NotifyStatus.None, null, null, LeeTeke.WPFTest.Properties.Resources._8400);
 
             var apd = new NotifyBannerShowData();
             var btn = new Button()
@@ -185,7 +178,6 @@ namespace LeeTeke.WPFTest.ViewModels
             apd.Content = btn;
             NotifyData = apd;
 
-            NotifyData = new NotifyBannerShowData("切换" + (_switch ? "普通主题" : "暗黑主题"), WpfControls.NotifyStatus.Primary, null, null, LeeTeke.WPFTest.Properties.Resources._8400);
         }
 
     }

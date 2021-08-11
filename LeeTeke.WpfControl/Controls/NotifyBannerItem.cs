@@ -16,6 +16,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace LeeTeke.WpfControl.Controls
 {
@@ -56,6 +57,8 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         public NotifySite Site { get; }
+        private DispatcherTimer _timer;
+        private bool _closing = false;
         public NotifyBannerItem(NotifyBannerShowData data, NotifySite site)
         {
 
@@ -67,12 +70,37 @@ namespace LeeTeke.WpfControl.Controls
 
             this.Sound = data.Sound;
             this.Status = data.Status;
+            this.CanClick = data.CanClick;
             Loaded += NotifyBannerItem_Loaded;
-            if (data.Status== NotifyStatus.Callback)
+            if (data.Status == NotifyStatus.Callback)
             {
                 data.CloseAction = () => Close();
             }
-            
+
+            this.MouseEnter += NotifyBannerItem_MouseEnter;
+            this.MouseLeave += NotifyBannerItem_MouseLeave;
+            this.MouseLeftButtonUp += NotifyBannerItem_MouseLeftButtonUp;
+
+        }
+
+        private void NotifyBannerItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            RaiseClicked(this.DataContext);
+        }
+
+        private void NotifyBannerItem_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (Status!= NotifyStatus.Callback&& AutoClose&&!_closing&&_timer!=null)
+            {
+
+                _timer.Interval = Duration.TimeSpan;
+                _timer.Start();
+            }
+        }
+
+        private void NotifyBannerItem_MouseEnter(object sender, MouseEventArgs e)
+        {
+            _timer?.Stop();
         }
 
         private void NotifyBannerItem_Loaded(object sender, RoutedEventArgs e)
@@ -171,6 +199,22 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
+        #region AutoClose
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public bool AutoClose
+        {
+            get { return (bool)GetValue(AutoCloseProperty); }
+            set { SetValue(AutoCloseProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for AutoClose.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty AutoCloseProperty =
+            DependencyProperty.Register("AutoClose", typeof(bool), typeof(NotifyBannerItem));
+        #endregion
+
+
         #region EasingDuration
         /// <summary>
         /// 请添加描述
@@ -218,7 +262,6 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
-
         #endregion
 
         #region Closed
@@ -263,6 +306,7 @@ namespace LeeTeke.WpfControl.Controls
                 return;
             var arg = new NotifyClickedEventArgs(newValue, ClickedEvent);
             RaiseEvent(arg);
+            Close();
         }
 
         #endregion
@@ -361,7 +405,20 @@ namespace LeeTeke.WpfControl.Controls
                     break;
             }
 
-      
+
+            storyboard.Completed += (so, se) =>
+            {
+                if (Status != NotifyStatus.Callback&& AutoClose)
+                {
+                    _timer = new DispatcherTimer();
+                    _timer.Interval = Duration.TimeSpan;
+                    _timer.Tick += (to, te) =>
+                    {
+                        Close();
+                    };
+                    _timer.Start();
+                }
+            };
             storyboard.Begin();
 
             if (Sound != null)
@@ -383,6 +440,8 @@ namespace LeeTeke.WpfControl.Controls
         /// </summary>
         public void Close()
         {
+            _closing = true;
+            _timer?.Stop();
             Storyboard storyboard = new Storyboard();
             DoubleAnimationUsingKeyFrames oDA = new DoubleAnimationUsingKeyFrames();
             oDA.KeyFrames.Add(new EasingDoubleKeyFrame()

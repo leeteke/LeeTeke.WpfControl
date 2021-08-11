@@ -212,8 +212,8 @@
         </leecontrol:NotifyIconEx>
 
         <leecontrol:NotifyBanner Grid.RowSpan="3"
-                                
                                  Content="{Binding NotifyData}"
+                           ClosedCommand="{Binding TestCommand}"
                                  />
 
     </Grid>

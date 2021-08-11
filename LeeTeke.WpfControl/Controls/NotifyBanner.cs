@@ -160,6 +160,22 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
+        #region AutoClose
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public bool AutoClose
+        {
+            get { return (bool)GetValue(AutoCloseProperty); }
+            set { SetValue(AutoCloseProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for AutoClose.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty AutoCloseProperty =
+            DependencyProperty.Register("AutoClose", typeof(bool), typeof(NotifyBanner));
+        #endregion
+
+
         #region ShowDuration
         /// <summary>
         /// 请添加描述
@@ -248,9 +264,17 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
+   
+
+        #endregion
+
+
+        #region ICommand
+
+
         #region ClickedCommand
         /// <summary>
-        /// 请填写描述
+        /// 请添加描述
         /// </summary>
         public ICommand ClickedCommand
         {
@@ -261,12 +285,56 @@ namespace LeeTeke.WpfControl.Controls
         // Using a DependencyProperty as the backing store for ClickedCommand.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ClickedCommandProperty =
             DependencyProperty.Register("ClickedCommand", typeof(ICommand), typeof(NotifyBanner));
-
         #endregion
+
+
+        #region ClosedCommand
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public ICommand ClosedCommand
+        {
+            get { return (ICommand)GetValue(ClosedCommandProperty); }
+            set { SetValue(ClosedCommandProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ClosedCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ClosedCommandProperty =
+            DependencyProperty.Register("ClosedCommand", typeof(ICommand), typeof(NotifyBanner));
+        #endregion
+
+
 
         #endregion
 
         #region RouteEvent
+
+
+
+
+        #region NotifyBannerClosed
+        /// <summary>
+        /// 请填写描述
+        /// </summary>
+        public event NotifyClosedEventHandler Closed
+        {
+            add { AddHandler(NotifyBannerClosedEvent, value); }
+            remove { RemoveHandler(NotifyBannerClosedEvent, value); }
+        }
+
+        public static readonly RoutedEvent NotifyBannerClosedEvent = EventManager.RegisterRoutedEvent(
+        "Closed", RoutingStrategy.Bubble, typeof(NotifyClosedEventHandler), typeof(NotifyBanner));
+
+
+        private void RaiseNotifyBannerClosed(object newValue)
+        {
+            var arg = new NotifyClosedEventArgs(newValue, NotifyBannerClosedEvent);
+            RaiseEvent(arg);
+            ClosedCommand?.Execute(newValue);
+        }
+
+
+        #endregion
 
 
         #region NotifyBannerClicked
@@ -287,6 +355,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             var arg = new NotifyBannerClickedEventArgs(newValue, NotifyBannerClickedEvent);
             RaiseEvent(arg);
+            ClickedCommand?.Execute(newValue);
         }
 
         #endregion
@@ -305,9 +374,14 @@ namespace LeeTeke.WpfControl.Controls
             var add = UXAdd(control);
             if (add)
             {
+                control.Clicked += (es, ex) =>
+                {
+                    RaiseNotifyBannerClicked(ex.Value);
+                };
                 control.Closed += (es, ex) =>
                 {
                     UXRemove(control);
+                    RaiseNotifyBannerClosed(ex.Value);
                 };
             }
         }
@@ -557,6 +631,13 @@ namespace LeeTeke.WpfControl.Controls
             {
                 Source = this,
                 Path = new PropertyPath(NotifyBanner.HorizontalContentAlignmentProperty),
+                Mode = BindingMode.OneWay
+            });
+
+            item.SetBinding(NotifyBannerItem.AutoCloseProperty, new Binding
+            {
+                Source = this,
+                Path = new PropertyPath(NotifyBanner.AutoCloseProperty),
                 Mode = BindingMode.OneWay
             });
         }
