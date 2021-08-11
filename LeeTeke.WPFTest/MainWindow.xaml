@@ -45,8 +45,10 @@
                         <MenuItem Header="ceshi"/>
                     </ContextMenu>
                 </StackPanel.ContextMenu>
+                <leecontrol:ScrollBanner
+                    Content="你好" 
+                    />
 
-       
 
                 <Button   Height="30" 
                         Content="黑白切换" 
@@ -54,7 +56,9 @@
                         ToolTip="黑白切换" 
                           leecontrol:TabViewItem.ItemCanClosing="True"/>
 
-                
+            
+
+
                 <leecontrol:TabView  CloseVisibly="MouseOver" 
                                      Orientation="Horizontal"
                                      ItemsSource="{Binding TestList}">
@@ -213,7 +217,7 @@
 
         <leecontrol:NotifyBanner Grid.RowSpan="3"
                                  Content="{Binding NotifyData}"
-                           ClosedCommand="{Binding TestCommand}"
+                                 d:Visibility="Collapsed"
                                  />
 
     </Grid>

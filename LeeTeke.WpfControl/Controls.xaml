@@ -17,59 +17,10 @@
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/TextBoxEx.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/TabView.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/NotifyBanner.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/ScrollBanner.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
 
 
-    <Style TargetType="{x:Type local:ScrollBanner}">
-        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
-        <Setter Property="Background" Value="{DynamicResource LeeBrush_YellowLight}"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
-        <Setter Property="Orientation" Value="Horizontal"/>
-        <Setter Property="MinHeight" Value="35"/>
-        <Setter Property="MinWidth" Value="100"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:ScrollBanner}">
-                    <Border BorderThickness="{TemplateBinding BorderThickness}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            Background="{TemplateBinding Background}"
-                            CornerRadius="{TemplateBinding CornerRadius}"
-                            Effect="{TemplateBinding Effect}">
-                        <Grid>
-                            <StackPanel Orientation="{TemplateBinding Orientation}">
-                                <StackPanel.Clip>
-                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}">
-                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
-                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
-                                        <Binding   RelativeSource="{RelativeSource Mode=TemplatedParent}"  Path="CornerRadius" Mode="OneWay"/>
-                                    </MultiBinding>
-                                </StackPanel.Clip>
-                                <ContentPresenter  x:Name="PART_Content"  />
-                            </StackPanel>
-                            <Button VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    Width="20"
-                                    Height="20"
-                                    leedep:ButtonManager.CornerRadius="10"/>
-                        </Grid>
-                    </Border>
-
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="Orientation" Value="Horizontal">
-                            <Setter  TargetName="PART_Content" Property="HorizontalAlignment" Value="Left"/>
-                            <Setter  TargetName="PART_Content" Property="VerticalAlignment" Value="Center"/>
-                        </Trigger>
-                        <Trigger Property="Orientation" Value="Vertical">
-                            <Setter  TargetName="PART_Content" Property="VerticalAlignment" Value="Bottom"/>
-                            <Setter  TargetName="PART_Content" Property="HorizontalAlignment" Value="Center"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+ 
 </ResourceDictionary>
