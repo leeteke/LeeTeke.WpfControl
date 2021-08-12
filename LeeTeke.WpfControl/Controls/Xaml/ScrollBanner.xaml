@@ -14,6 +14,8 @@
         <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="Orientation" Value="Horizontal"/>
         <Setter Property="MinHeight" Value="35"/>
+        <Setter Property="Speed" Value="1"/>
+        <Setter Property="AutoScrolling" Value="True"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -49,7 +51,7 @@
                                             FontFamily="{DynamicResource IconFontFamily}"
                                             Style="{DynamicResource ColorButton}"
                                             BorderThickness="0"
-                                            Background="Transparent"
+                                            Background="{DynamicResource LeeBrush_Mark}"
                                             Tag="1"
                                             Foreground="{TemplateBinding Foreground}"
                                             />
@@ -70,6 +72,9 @@
                             <Setter TargetName="PART_CloseButton" Property="Visibility" Value="Visible"/>
                         </Trigger>
 
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
 
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

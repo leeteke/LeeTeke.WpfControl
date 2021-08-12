@@ -46,7 +46,8 @@
                     </ContextMenu>
                 </StackPanel.ContextMenu>
                 <leecontrol:ScrollBanner
-                    Content="你好" 
+                    Content="你好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好" 
+                    AutoScrolling="False"
                     />
 
 

@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -55,41 +57,63 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         private Storyboard _scrollingSB;
+        private ContentPresenter _content;
+
         public ScrollBanner()
         {
             SizeChanged += ScrollBanner_SizeChanged;
-
+            IsEnabledChanged += ScrollBanner_IsEnabledChanged;
+            IsVisibleChanged += ScrollBanner_IsVisibleChanged;
         }
 
 
 
         #region override
-        protected override void OnContentChanged(object oldContent, object newContent)
+
+        public override void OnApplyTemplate()
         {
+            base.OnApplyTemplate();
 
-            if (newContent != null && newContent is not FrameworkElement)
+            if (this.Template.FindName("PART_Content", this) is ContentPresenter presenter)
             {
-                this.Content = new TextBlock() { Text = newContent.ToString() };
-                return;
+                _content = presenter;
+                _content.SizeChanged += Presenter_SizeChanged;
             }
 
-            base.OnContentChanged(oldContent, newContent);
-
-            if (IsEnabled == true && Visibility != Visibility.Visible && newContent != null)
+            if (this.Template.FindName("PART_CloseButton", this) is Button btn)
             {
-                Visibility = Visibility.Visible;
-                return;
+                btn.Click += CloseBtn_Click;
             }
 
-            ScrollingAnimationWork();
         }
 
+        protected override void OnContentChanged(object oldContent, object newContent)
+        {
+            base.OnContentChanged(oldContent, newContent);
+            IsClosed = false;
+            ScrollingAnimationWork();
+        }
 
 
         #endregion
 
         #region 依赖属性
 
+
+        #region IsClosed
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public bool IsClosed
+        {
+            get { return (bool)GetValue(IsClosedProperty); }
+            private set { SetValue(IsClosedProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsClosed.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsClosedProperty =
+            DependencyProperty.Register("IsClosed", typeof(bool), typeof(ScrollBanner));
+        #endregion
 
         #region IsScrolling
         /// <summary>
@@ -98,7 +122,7 @@ namespace LeeTeke.WpfControl.Controls
         public bool IsScrolling
         {
             get { return (bool)GetValue(IsScrollingProperty); }
-            set { SetValue(IsScrollingProperty, value); }
+            private set { SetValue(IsScrollingProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for IsScrolling.  This enables animation, styling, binding, etc...
@@ -118,7 +142,15 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for AutoScrolling.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty AutoScrollingProperty =
-            DependencyProperty.Register("AutoScrolling", typeof(bool), typeof(ScrollBanner));
+            DependencyProperty.Register("AutoScrolling", typeof(bool), typeof(ScrollBanner), new PropertyMetadata(AutoScrollingChanged));
+
+        private static void AutoScrollingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is ScrollBanner scrollBanner)
+            {
+                scrollBanner.ScrollingAnimationWork();
+            }
+        }
         #endregion
 
         #region Orientation
@@ -151,28 +183,25 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(ScrollBanner));
         #endregion
 
-        #region IsEnabled
+        #region Speed
         /// <summary>
         /// 请添加描述
         /// </summary>
-        public new bool IsEnabled
+        public double Speed
         {
-            get { return (bool)GetValue(IsEnabledProperty); }
-            set { SetValue(IsEnabledProperty, value); }
+            get { return (double)GetValue(SpeedProperty); }
+            set { SetValue(SpeedProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for IsEnabled.  This enables animation, styling, binding, etc...
-        public static new readonly DependencyProperty IsEnabledProperty =
-            DependencyProperty.Register("IsEnabled", typeof(bool), typeof(ScrollBanner), new PropertyMetadata(true, EnabledChanged));
+        // Using a DependencyProperty as the backing store for Speed.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SpeedProperty =
+            DependencyProperty.Register("Speed", typeof(double), typeof(ScrollBanner),new PropertyMetadata(SpeedChanged));
 
-        private static void EnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void SpeedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is ScrollBanner banner)
+            if (d is ScrollBanner scrollBanner)
             {
-                if (e.NewValue is bool @bool)
-                {
-                    banner.Visibility = @bool ? Visibility.Visible : Visibility.Collapsed;
-                }
+                scrollBanner._scrollingSB?.SetSpeedRatio((double)e.NewValue);
             }
         }
         #endregion
@@ -187,20 +216,65 @@ namespace LeeTeke.WpfControl.Controls
             ScrollingAnimationWork();
         }
 
+
+        private void ScrollBanner_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+
+            ScrollingAnimationWork();
+        }
+
+        private void ScrollBanner_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+
+            ScrollingAnimationWork();
+
+        }
+
+
+        private void CloseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            IsClosed = true;
+            this.Visibility = Visibility.Collapsed;
+        }
+
+        private void Presenter_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+
+            ScrollingAnimationWork();
+        }
+
+
+
         private void ScrollingAnimationWork()
         {
-            ///如果等于空
-            if (Content == null || Content is not FrameworkElement || this.ActualHeight == 0 || this.ActualWidth == 0 || !IsEnabled)
+
+            _scrollingSB?.Stop();
+            IsScrolling = false;
+
+            if (Content == null || !IsEnabled || _content == null || IsClosed)
             {
-                _scrollingSB?.Stop();
+                if (_content != null)
+                    _content.RenderTransform = new TranslateTransform() { X = 0, Y = 0 };
                 return;
             }
+            Visibility = Visibility.Visible;
+
             switch (Orientation)
             {
                 case Orientation.Horizontal:
+                    if (AutoScrolling && _content.ActualWidth < this.ActualWidth)
+                    {
+                        _content.RenderTransform = new TranslateTransform() { X = 0, Y = 0 };
+                        return;
+                    }
                     HScrollingAnimationWork();
                     break;
                 case Orientation.Vertical:
+                    if (AutoScrolling && _content.ActualHeight < this.ActualHeight)
+                    {
+                        _content.RenderTransform = new TranslateTransform() { X = 0, Y = 0 };
+                        return;
+                    }
                     VScrollingAnimationWork();
                     break;
                 default:
@@ -210,71 +284,53 @@ namespace LeeTeke.WpfControl.Controls
 
         private void HScrollingAnimationWork()
         {
-            ///停止现在的动画
-            _scrollingSB?.Stop();
 
-            if (Content is FrameworkElement element)
+
+            _content.RenderTransformOrigin = new Point(0, 0.5);
+            _content.RenderTransform = new TranslateTransform() { X = this.ActualWidth + 5 };
+            _scrollingSB = new Storyboard()
             {
-                element.SizeChanged += (es, ex) => ScrollingAnimationWork();
-                ///是否自动判断
-                if (AutoScrolling)
-                {
-                    if (element.ActualWidth < this.ActualWidth)
-                        return;
-                }
+                FillBehavior = FillBehavior.Stop,
+                RepeatBehavior = RepeatBehavior.Forever
+            };
+            _scrollingSB.Children.Add(new DoubleAnimation()
+            {
+                To = -(_content.ActualWidth + 5),
+                Duration = TimeSpan.FromSeconds(10 * this.ActualWidth / 600)
+            });
+            Storyboard.SetTarget(_scrollingSB, _content);
+            Storyboard.SetTargetProperty(_scrollingSB, new PropertyPath("(0).(1)", new DependencyProperty[] { ContentPresenter.RenderTransformProperty, TranslateTransform.XProperty }));
 
-                element.RenderTransformOrigin = new Point(0, 0.5);
-                element.RenderTransform = new TranslateTransform() { X = this.ActualWidth + 5 };
-                _scrollingSB = new Storyboard()
-                {
-                    FillBehavior = FillBehavior.Stop,
-                    RepeatBehavior = RepeatBehavior.Forever
-                };
-                _scrollingSB.Children.Add(new DoubleAnimation()
-                {
-                    To = -(element.ActualWidth + 5),
-                    Duration = TimeSpan.FromSeconds(10 * this.ActualWidth / 600)
-                });
-                Storyboard.SetTarget(_scrollingSB, element);
-                Storyboard.SetTargetProperty(_scrollingSB, new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, TranslateTransform.XProperty }));
+            _scrollingSB.Begin();
 
-                _scrollingSB.Begin();
-            }
+            _scrollingSB.SetSpeedRatio(Speed);
+
+
+            IsScrolling = true;
         }
 
         private void VScrollingAnimationWork()
         {
-            ///停止现在的动画
-            _scrollingSB?.Stop();
-            if (Content is FrameworkElement element)
+            _content.RenderTransformOrigin = new Point(0.5, 0);
+            _content.RenderTransform = new TranslateTransform() { Y = this.ActualHeight + 5 };
+            _scrollingSB = new Storyboard()
             {
-                element.SizeChanged += (es, ex) => ScrollingAnimationWork();
-                ///是否自动判断
-                if (AutoScrolling)
-                {
-                    if (element.ActualHeight < this.ActualHeight)
-                        return;
-                }
+                FillBehavior = FillBehavior.Stop,
+                RepeatBehavior = RepeatBehavior.Forever
+            };
+            _scrollingSB.Children.Add(new DoubleAnimation()
+            {
+                To = -(_content.ActualHeight + 5),
+                Duration = TimeSpan.FromSeconds(4 * this.ActualHeight / 35)
+            });
+            Storyboard.SetTarget(_scrollingSB, _content);
+            Storyboard.SetTargetProperty(_scrollingSB, new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, TranslateTransform.YProperty }));
 
-                element.RenderTransformOrigin = new Point(0.5, 0);
-                element.RenderTransform = new TranslateTransform() { Y = this.ActualHeight + 5 };
-                _scrollingSB = new Storyboard()
-                {
-                    FillBehavior = FillBehavior.Stop,
-                    RepeatBehavior = RepeatBehavior.Forever
-                };
-                _scrollingSB.Children.Add(new DoubleAnimation()
-                {
-                    To = -(element.ActualHeight + 5),
-                    Duration = TimeSpan.FromSeconds(4 * this.ActualHeight / 35)
-                });
-                Storyboard.SetTarget(_scrollingSB, element);
-                Storyboard.SetTargetProperty(_scrollingSB, new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, TranslateTransform.YProperty }));
-
-                _scrollingSB.Begin();
-            }
+            _scrollingSB.SetSpeedRatio(Speed);
+            _scrollingSB.Begin();
         }
-        #endregion
-
     }
+    #endregion
+
+
 }
