@@ -12,43 +12,66 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="IsTabStop" Value="True"/>
+        <Setter Property="Orientation" Value="Horizontal"/>
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
+        <Setter Property="CornerRadius"  Value="{DynamicResource  LeeCornerRadius}"/>
         <Setter Property="ItemBorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="ItemRippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}"/>
         <Setter Property="ItemCheckedBackground" Value="{DynamicResource LeeBrush_Theme}"/>
         <Setter Property="ItemCheckedBorderBrush" Value="{DynamicResource LeeBrush_Theme}"/>
-        <Setter Property="ItemCheckedForeground" Value="{DynamicResource LeeBrush_Text}"/>
+        <Setter Property="ItemCheckedForeground" Value="White"/>
         <Setter Property="ItemMouseOverBackground" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=Background,Converter={StaticResource ColorDepthConverter},ConverterParameter=-0.3}"/>
         <Setter Property="ItemMouseOverBorderBrush" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=BorderBrush,Converter={StaticResource ColorDepthConverter},ConverterParameter=-0.3}"/>
+        <Setter Property="ItemMargin" Value="{DynamicResource LeeControlPadding}"/>
+        <Setter Property="ItemPadding" Value="10,5"/>
+        <Setter Property="ItemCorenerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="ItemBackground" Value="Transparent"/>
+        <Setter Property="VerticalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ItemBorderThickness" Value="1"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ToggleGroup}">
-                    <Border Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    Margin="{TemplateBinding Margin}"
-                    Padding="{TemplateBinding Padding}">
-                        <ScrollViewer   x:Name="PART_ScrollViewer"   
-                                HorizontalScrollBarVisibility="Hidden" 
-                                VerticalScrollBarVisibility="Hidden"
-                                Style="{x:Null}"
-                                >
-                            <ItemsPresenter />
-                        </ScrollViewer>
+                    <ScrollViewer x:Name="PART_ScrollViewer"
+                                  BorderBrush="{TemplateBinding BorderBrush}"
+                                  BorderThickness="{TemplateBinding BorderThickness}"
+                                  Margin="{TemplateBinding Margin}"
+                                  Padding="{TemplateBinding Padding}"
+                                  VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}"
+                                  HorizontalScrollBarVisibility="{TemplateBinding HorizontalScrollBarVisibility}"
+                                  >
+                        <ScrollViewer.Clip>
+                            <MultiBinding  Converter="{StaticResource  MultiValueToClipConverter}" Mode="OneWay">
+                                <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualWidth"/>
+                                <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualHeight"/>
+                                <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}"  Path="CornerRadius"/>
+                            </MultiBinding>
+                        </ScrollViewer.Clip>
+                        <ItemsPresenter />
+                    </ScrollViewer>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Orientation" Value="Horizontal">
+                            <Setter  Property="VerticalScrollBarVisibility" Value="Disabled"/>
+                            <Setter   Property="HorizontalScrollBarVisibility" Value="Auto"/>
+                        </Trigger>
+                        <Trigger Property="Orientation" Value="Vertical">
+                            <Setter  Property="VerticalScrollBarVisibility" Value="Auto"/>
+                            <Setter   Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+                        </Trigger>
+                        <Trigger Property="Orientation" Value="WrapHorizontal">
+                            <Setter   Property="VerticalScrollBarVisibility" Value="Auto"/>
+                            <Setter   Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+                        </Trigger>
 
-                    </Border>
+                        <Trigger Property="Orientation" Value="WrapVertical">
+                            <Setter  Property="VerticalScrollBarVisibility" Value="Disabled"/>
+                            <Setter   Property="HorizontalScrollBarVisibility" Value="Auto"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="ItemsPanel">
-            <Setter.Value>
-                <ItemsPanelTemplate>
-                    <WrapPanel x:Name="PART_WrapPanel" 
-                       FocusVisualStyle="{x:Null}"      
-                        Orientation="{Binding Orientation,  RelativeSource={ RelativeSource Mode=FindAncestor,AncestorType={x:Type local:ToggleGroup},AncestorLevel=1},Mode=OneWay}"
-                        />
-                </ItemsPanelTemplate>
-            </Setter.Value>
-        </Setter>
+   
         <Setter Property="ItemContainerStyle">
             <Setter.Value>
                 <Style BasedOn="{StaticResource LeeToggleButton}"  TargetType="ToggleButton">
@@ -69,5 +92,6 @@
                 </Style>
             </Setter.Value>
         </Setter>
+        
     </Style>
 </ResourceDictionary>

@@ -18,6 +18,7 @@
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/TabView.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/NotifyBanner.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/ScrollBanner.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/Pagination.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
 

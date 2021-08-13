@@ -54,18 +54,29 @@ namespace LeeTeke.WpfControl.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ToggleGroup), new FrameworkPropertyMetadata(typeof(ToggleGroup)));
         }
 
-        private WrapPanel _wrapPanel;
+        private Panel _panel;
         private object _selectedValue;
         private object _selectedItem;
         private object _selectedIndex;
 
         public ToggleGroup()
         {
-            EventManager.RegisterClassHandler(typeof(WrapPanel), WrapPanel.SizeChangedEvent, new RoutedEventHandler(PART_WrapPanel_Loaded));
 
             EventManager.RegisterClassHandler(typeof(ToggleButton), ToggleButton.CheckedEvent, new RoutedEventHandler(ToggleButton_Checked));
             EventManager.RegisterClassHandler(typeof(ToggleButton), ToggleButton.UncheckedEvent, new RoutedEventHandler(ToggleButton_UnChecked));
+
+            var hfac = new FrameworkElementFactory(typeof(StackPanel));
+            hfac.SetValue(StackPanel.OrientationProperty, System.Windows.Controls.Orientation.Horizontal);
+            hfac.AddHandler(StackPanel.LoadedEvent, new RoutedEventHandler((es, ex) =>
+            {
+                _panel = es as Panel;
+            }));
+            ItemsPanel = new ItemsPanelTemplate(hfac);
+
+            Loaded += ToggleGroup_Loaded;
         }
+
+
 
         #region override
 
@@ -79,7 +90,11 @@ namespace LeeTeke.WpfControl.Controls
             return new ToggleButton();
         }
 
+        protected override void OnItemsPanelChanged(ItemsPanelTemplate oldItemsPanel, ItemsPanelTemplate newItemsPanel)
+        {
+            base.OnItemsPanelChanged(oldItemsPanel, newItemsPanel);
 
+        }
 
 
         #endregion
@@ -88,18 +103,87 @@ namespace LeeTeke.WpfControl.Controls
 
         #region Orientation
 
-        public Orientation Orientation
+        public ToggleGroupOrientation Orientation
         {
-            get { return (Orientation)GetValue(OrientationProperty); }
+            get { return (ToggleGroupOrientation)GetValue(OrientationProperty); }
             set { SetValue(OrientationProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Orientation.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty OrientationProperty =
-            DependencyProperty.Register("Orientation", typeof(Orientation), typeof(ToggleGroup));
+            DependencyProperty.Register("Orientation", typeof(ToggleGroupOrientation), typeof(ToggleGroup), new PropertyMetadata(OrientationChanged));
+
+        private static void OrientationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is ToggleGroup toggleGroup && e.NewValue is ToggleGroupOrientation orientation)
+            {
+                switch (orientation)
+                {
+                    case ToggleGroupOrientation.Horizontal:
+                        var hfac = new FrameworkElementFactory(typeof(StackPanel));
+                        hfac.SetValue(StackPanel.OrientationProperty, System.Windows.Controls.Orientation.Horizontal);
+                        hfac.AddHandler(StackPanel.LoadedEvent, new RoutedEventHandler((es, ex) =>
+                        {
+                            toggleGroup._panel = es as Panel;
+                        }));
+                        toggleGroup.ItemsPanel = new ItemsPanelTemplate(hfac);
+                        break;
+                    case ToggleGroupOrientation.Vertical:
+
+                        var vfac = new FrameworkElementFactory(typeof(StackPanel));
+                        vfac.SetValue(StackPanel.OrientationProperty, System.Windows.Controls.Orientation.Vertical);
+                        vfac.AddHandler(StackPanel.LoadedEvent, new RoutedEventHandler((es, ex) =>
+                        {
+                            toggleGroup._panel = es as Panel;
+                        }));
+                        toggleGroup.ItemsPanel = new ItemsPanelTemplate(vfac);
+                        break;
+                    case ToggleGroupOrientation.WrapHorizontal:
+
+                        var whfac = new FrameworkElementFactory(typeof(WrapPanel));
+                        whfac.SetValue(WrapPanel.OrientationProperty, System.Windows.Controls.Orientation.Horizontal);
+                        whfac.AddHandler(WrapPanel.LoadedEvent, new RoutedEventHandler((es, ex) =>
+                        {
+                            toggleGroup._panel = es as Panel;
+                        }));
+                        toggleGroup.ItemsPanel = new ItemsPanelTemplate(whfac);
+                        break;
+                    case ToggleGroupOrientation.WrapVertical:
+                        var wvfac = new FrameworkElementFactory(typeof(WrapPanel));
+                        wvfac.SetValue(WrapPanel.OrientationProperty, System.Windows.Controls.Orientation.Vertical);
+                        wvfac.AddHandler(WrapPanel.LoadedEvent, new RoutedEventHandler((es, ex) =>
+                        {
+                            toggleGroup._panel = es as Panel;
+                        }));
+                        toggleGroup.ItemsPanel = new ItemsPanelTemplate(wvfac);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+        }
 
 
         #endregion
+
+
+        #region CornerRadius
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public CornerRadius CornerRadius
+        {
+            get { return (CornerRadius)GetValue(CornerRadiusProperty); }
+            set { SetValue(CornerRadiusProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CornerRadius.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CornerRadiusProperty =
+            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(ToggleGroup));
+        #endregion
+
+
 
         #region SelectedItem
         /// <summary>
@@ -210,6 +294,39 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
+
+        #region VerticalScrollBarVisibility
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public ScrollBarVisibility VerticalScrollBarVisibility
+        {
+            get { return (ScrollBarVisibility)GetValue(VerticalScrollBarVisibilityProperty); }
+            set { SetValue(VerticalScrollBarVisibilityProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for VerticalScrollBarVisibility.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty VerticalScrollBarVisibilityProperty =
+            DependencyProperty.Register("VerticalScrollBarVisibility", typeof(ScrollBarVisibility), typeof(ToggleGroup));
+        #endregion
+
+
+        #region HorizontalScrollBarVisibility
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public ScrollBarVisibility HorizontalScrollBarVisibility
+        {
+            get { return (ScrollBarVisibility)GetValue(HorizontalScrollBarVisibilityProperty); }
+            set { SetValue(HorizontalScrollBarVisibilityProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for HorizontalScrollBarVisibility.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HorizontalScrollBarVisibilityProperty =
+            DependencyProperty.Register("HorizontalScrollBarVisibility", typeof(ScrollBarVisibility), typeof(ToggleGroup));
+        #endregion
+
+
         #region Item功能
 
 
@@ -225,7 +342,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemPadding.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemPaddingProperty =
-            DependencyProperty.Register("ItemPadding", typeof(Thickness), typeof(ToggleGroup), new PropertyMetadata(new Thickness(15, 5, 15, 5)));
+            DependencyProperty.Register("ItemPadding", typeof(Thickness), typeof(ToggleGroup));
 
         #endregion
 
@@ -242,7 +359,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemMargin.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemMarginProperty =
-            DependencyProperty.Register("ItemMargin", typeof(Thickness), typeof(ToggleGroup), new PropertyMetadata(new Thickness(5)));
+            DependencyProperty.Register("ItemMargin", typeof(Thickness), typeof(ToggleGroup));
 
         #endregion
 
@@ -259,7 +376,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemCorenerRadius.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemCorenerRadiusProperty =
-            DependencyProperty.Register("ItemCorenerRadius", typeof(CornerRadius), typeof(ToggleGroup), new PropertyMetadata(new CornerRadius(5)));
+            DependencyProperty.Register("ItemCorenerRadius", typeof(CornerRadius), typeof(ToggleGroup));
 
 
 
@@ -294,7 +411,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemBackground.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemBackgroundProperty =
-            DependencyProperty.Register("ItemBackground", typeof(Brush), typeof(ToggleGroup), new PropertyMetadata(new SolidColorBrush(Colors.Transparent)));
+            DependencyProperty.Register("ItemBackground", typeof(Brush), typeof(ToggleGroup));
 
         #endregion
 
@@ -328,7 +445,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemBorderThickness.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemBorderThicknessProperty =
-            DependencyProperty.Register("ItemBorderThickness", typeof(Thickness), typeof(ToggleGroup), new PropertyMetadata(new Thickness(2)));
+            DependencyProperty.Register("ItemBorderThickness", typeof(Thickness), typeof(ToggleGroup));
 
         #endregion
 
@@ -413,7 +530,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemCheckedForeground.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemCheckedForegroundProperty =
-            DependencyProperty.Register("ItemCheckedForeground", typeof(Brush), typeof(ToggleGroup), new PropertyMetadata(new SolidColorBrush(Colors.White)));
+            DependencyProperty.Register("ItemCheckedForeground", typeof(Brush), typeof(ToggleGroup));
 
         #endregion
 
@@ -568,35 +685,28 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-
-        private void PART_WrapPanel_Loaded(object sender, RoutedEventArgs e)
+        private void ToggleGroup_Loaded(object sender, RoutedEventArgs e)
         {
-            if (sender is WrapPanel wrap && StaticMethods.IsInControl(this, wrap))
+
+            if (SelectedIndex != null)
             {
-                if (wrap.Name == "PART_WrapPanel")
-                {
-                    _wrapPanel = wrap;
-                    if (SelectedIndex != null)
-                    {
-                        SelectedIndexChanged();
-                        return;
-                    }
-
-                    if (SelectedValue != null)
-                    {
-                        SelectedValueChanged();
-                        return;
-                    }
-
-                    if (SelectedItem != null)
-                    {
-                        SelectedItemChanged();
-                        return;
-                    }
-                }
+                SelectedIndexChanged();
+                return;
             }
 
+            if (SelectedValue != null)
+            {
+                SelectedValueChanged();
+                return;
+            }
+
+            if (SelectedItem != null)
+            {
+                SelectedItemChanged();
+                return;
+            }
         }
+
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)
         {
 
@@ -725,7 +835,7 @@ namespace LeeTeke.WpfControl.Controls
         }
 
 
-        private  void ValueChanged(object value)
+        private void ValueChanged(object value)
         {
 
             if (ItemsSource == null)
@@ -741,11 +851,14 @@ namespace LeeTeke.WpfControl.Controls
             //单选项
             if (SelectionMode == ToggleGroupMode.Single)
             {
-                foreach (ToggleButton chlid in _wrapPanel.Children)
+
+
+            
+                foreach (ToggleButton chlid in _panel.Children)
                 {
                     if (value == chlid.DataContext)
                     {
-                        _selectedIndex = _wrapPanel.Children.IndexOf(chlid);
+                        _selectedIndex = _panel.Children.IndexOf(chlid);
                         _selectedItem = chlid;
                         _selectedValue = chlid.DataContext;
                         SelectedIndex = _selectedIndex;
@@ -771,7 +884,7 @@ namespace LeeTeke.WpfControl.Controls
             {
                 foreach (var singleList in valueList)
                 {
-                    foreach (ToggleButton child in _wrapPanel.Children)
+                    foreach (ToggleButton child in _panel.Children)
                     {
                         if (child.DataContext == singleList)
                         {
@@ -785,7 +898,7 @@ namespace LeeTeke.WpfControl.Controls
                             #endregion
                                 ((List<object>)_selectedValue).Add(child.DataContext);
                             ((List<ToggleButton>)_selectedItem).Add(child);
-                            ((List<int>)_selectedIndex).Add(_wrapPanel.Children.IndexOf(child));
+                            ((List<int>)_selectedIndex).Add(_panel.Children.IndexOf(child));
                             SelectedIndex = _selectedIndex;
                             SelectedValue = _selectedValue;
                             SelectedItem = _selectedItem;
@@ -814,11 +927,11 @@ namespace LeeTeke.WpfControl.Controls
             if (SelectionMode == ToggleGroupMode.Single && item is ToggleButton toggle)
             {
 
-                foreach (ToggleButton chlid in _wrapPanel.Children)
+                foreach (ToggleButton chlid in _panel.Children)
                 {
                     if (toggle == chlid)
                     {
-                        _selectedIndex = _wrapPanel.Children.IndexOf(chlid);
+                        _selectedIndex = _panel.Children.IndexOf(chlid);
                         _selectedItem = chlid;
                         _selectedValue = chlid;
                         SelectedIndex = _selectedIndex;
@@ -844,7 +957,7 @@ namespace LeeTeke.WpfControl.Controls
 
                 foreach (var singleList in toogleList)
                 {
-                    foreach (ToggleButton child in _wrapPanel.Children)
+                    foreach (ToggleButton child in _panel.Children)
                     {
                         if (child == singleList)
                         {
@@ -858,7 +971,7 @@ namespace LeeTeke.WpfControl.Controls
                             #endregion
                                 ((List<ToggleButton>)_selectedValue).Add(child);
                             ((List<ToggleButton>)_selectedItem).Add(child);
-                            ((List<int>)_selectedIndex).Add(_wrapPanel.Children.IndexOf(child));
+                            ((List<int>)_selectedIndex).Add(_panel.Children.IndexOf(child));
 
                             SelectedIndex = _selectedIndex;
                             SelectedValue = _selectedValue;
@@ -888,11 +1001,11 @@ namespace LeeTeke.WpfControl.Controls
 
 
 
-                foreach (ToggleButton chlid in _wrapPanel.Children)
+                foreach (ToggleButton chlid in _panel.Children)
                 {
-                    if (_wrapPanel.Children.IndexOf(chlid) == index)
+                    if (_panel.Children.IndexOf(chlid) == index)
                     {
-                        _selectedIndex = _wrapPanel.Children.IndexOf(chlid);
+                        _selectedIndex = _panel.Children.IndexOf(chlid);
                         _selectedItem = chlid;
                         _selectedValue = chlid;
                         SelectedIndex = _selectedIndex;
@@ -918,9 +1031,9 @@ namespace LeeTeke.WpfControl.Controls
 
                 foreach (var singleList in valueList)
                 {
-                    foreach (ToggleButton child in _wrapPanel.Children)
+                    foreach (ToggleButton child in _panel.Children)
                     {
-                        if (_wrapPanel.Children.IndexOf(child) == singleList)
+                        if (_panel.Children.IndexOf(child) == singleList)
                         {
                             #region 如果没有初始化Value值
                             if (_selectedValue == null)
@@ -932,7 +1045,7 @@ namespace LeeTeke.WpfControl.Controls
                             #endregion
                                 ((List<ToggleButton>)_selectedValue).Add(child);
                             ((List<ToggleButton>)_selectedItem).Add(child);
-                            ((List<int>)_selectedIndex).Add(_wrapPanel.Children.IndexOf(child));
+                            ((List<int>)_selectedIndex).Add(_panel.Children.IndexOf(child));
 
                             SelectedIndex = _selectedIndex;
                             SelectedValue = _selectedValue;
@@ -958,7 +1071,7 @@ namespace LeeTeke.WpfControl.Controls
         /// </summary>
         private bool SelectedInit(object args)
         {
-            if (_wrapPanel == null)
+            if (_panel == null)
             {
                 return false;
             }
@@ -971,7 +1084,7 @@ namespace LeeTeke.WpfControl.Controls
                 SelectedIndex = _selectedIndex;
                 SelectedValue = _selectedValue;
                 SelectedItem = _selectedItem;
-                foreach (ToggleButton chlid in _wrapPanel.Children)
+                foreach (ToggleButton chlid in _panel.Children)
                 {
                     chlid.IsChecked = false;
                 }

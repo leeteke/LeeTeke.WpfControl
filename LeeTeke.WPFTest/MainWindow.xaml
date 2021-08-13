@@ -48,8 +48,10 @@
                 <leecontrol:ScrollBanner
                     Content="你好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好" 
                     AutoScrolling="False"
+                  
                     />
 
+                <leecontrol:Pagination/>
 
                 <Button   Height="30" 
                         Content="黑白切换" 
@@ -57,10 +59,21 @@
                         ToolTip="黑白切换" 
                           leecontrol:TabViewItem.ItemCanClosing="True"/>
 
-            
+                <leecontrol:ToggleGroup ItemsSource="{Binding TestList}"
+                                        SelectionMode="Single"
+                                      >
+                    <leecontrol:ToggleGroup.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Title}"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"/>
+                        </DataTemplate>
+                    </leecontrol:ToggleGroup.ItemTemplate>
+                </leecontrol:ToggleGroup>
 
 
-                <leecontrol:TabView  CloseVisibly="MouseOver" 
+
+                    <leecontrol:TabView  CloseVisibly="MouseOver" 
                                      Orientation="Horizontal"
                                      ItemsSource="{Binding TestList}">
 
@@ -107,25 +120,13 @@
                     Height="200"
                     IsCycle="True"
                     AutoPaly="True"
+                    ItemsSource="{Binding TestList}"
                    >
-           
-                        <Rectangle  Fill="Red"
-                                    Height="100"
-                                    Width="900"
-                               />
-
-
-
-                    <Rectangle  Fill="Fuchsia"
-                                    Height="100"
-                                    Width="900"
-                         />
-
-     
-                        <Rectangle  Fill="DarkSlateBlue"
-                                    Height="100"
-                                    Width="900"
-                               />
+                    <leecontrol:SlideView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Image}"/>
+                        </DataTemplate>
+                    </leecontrol:SlideView.ItemTemplate>
      
                 </leecontrol:SlideView>
 
@@ -153,24 +154,15 @@
 
                 <CheckBox  Content="你好"
                            leedep:CheckBoxManager.CheckedContent="你选中了我"
+                           Height="35"
                             />
                 <ComboBox IsEditable="False"  
-                          >
-                    <ComboBoxItem>
-                        <Rectangle  Fill="Red" 
-                                    Width="100"
-                                    Height="20"
-                                    />
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <Rectangle  Fill="Beige" Width="100" Height="20" />
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <Rectangle  Fill="Aqua"  Width="100" Height="20"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <Rectangle  Fill="Azure" Width="100" Height="20" />
-                    </ComboBoxItem>
+                          ItemsSource="{Binding TestList}">
+                    <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Image}" Stretch="UniformToFill"/>
+                            </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
                 
       

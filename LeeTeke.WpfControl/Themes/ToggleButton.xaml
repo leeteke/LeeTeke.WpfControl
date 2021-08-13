@@ -29,10 +29,12 @@
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Border x:Name="PART_Border" 
                             BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}" 
-                                Background="{TemplateBinding Background}" 
-                                CornerRadius="{Binding Path=(leedep:ToggleButtonManager.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}">
-                        <Grid Background="Transparent">
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            Background="{TemplateBinding Background}" 
+                            CornerRadius="{Binding Path=(leedep:ToggleButtonManager.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"
+                            Margin="{TemplateBinding Margin}">
+                        <Grid Background="Transparent"
+                              >
                             <controls:RippleMask ParentElement="{Binding RelativeSource={RelativeSource  Mode=TemplatedParent}}"
                                                  RippleBrush="{Binding Path=(leedep:ToggleButtonManager.RippleBrush),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"
                                                  CornerRadius="{Binding Path=(leedep:ToggleButtonManager.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"

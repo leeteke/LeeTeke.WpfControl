@@ -38,8 +38,7 @@
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
-        <Setter Property="Height" Value="{DynamicResource LeeControlHeight}"/>
-        <Setter Property="Width" Value="{DynamicResource LeeControlWidth}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource LeeItemHeight}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="leedep:ComboBoxManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="leedep:ComboBoxManager.EscToEmpty" Value="True"/>

@@ -559,10 +559,33 @@ namespace LeeTeke.WpfControl
         /// <typeparam name="T"></typeparam>
         /// <param name="obj"></param>
         /// <returns></returns>
+        public static T FindVisualChild<T>(DependencyObject obj, string name) where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+                if (child == null)
+                    continue;
+                if (child.GetValue(FrameworkElement.NameProperty) == name && child is T)
+                    return (T)child;
+
+                child = FindVisualChild<T>(child, name);
+                if (child != null)
+                    return (T)child;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 寻找子控件
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public static T FindVisualParent<T>(DependencyObject obj) where T : DependencyObject
         {
             var p = VisualTreeHelper.GetParent(obj);
-            if (p==null)
+            if (p == null)
             {
                 return null;
             }
@@ -574,7 +597,7 @@ namespace LeeTeke.WpfControl
             {
                 return FindVisualParent<T>(p);
             }
-    
+
         }
 
         /// <summary>

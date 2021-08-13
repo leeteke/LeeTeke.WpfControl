@@ -102,6 +102,7 @@
         <Setter Property="VerticalScrollBarVisibility"   Value="Auto" />
         <Setter Property="VerticalContentAlignment"   Value="Stretch" />
         <Setter Property="HorizontalContentAlignment"  Value="Stretch" />
+        <Setter Property="leedep:ScrollManager.CornerRadius" Value="0"/>
         <Setter Property="leedep:ScrollManager.TrackBrush"   Value="Transparent" />
         <Setter Property="leedep:ScrollManager.ThumbBrush"   Value="{DynamicResource LeeBrush_Theme}" />
         <Setter Property="leedep:ScrollManager.ScrollBarCornerRadius"  Value="{DynamicResource  LeeCornerRadius}" />
@@ -111,7 +112,8 @@
                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
                     <Border BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            Background="{TemplateBinding Background}">
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ScrollManager.CornerRadius),Mode=OneWay}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
