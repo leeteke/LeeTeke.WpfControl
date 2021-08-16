@@ -22,6 +22,7 @@ namespace LeeTeke.WpfControl.Controls
         private bool _canClose;
         private bool _isDialog = false;
 
+
         public bool CanClose
         {
             get { return _canClose; }

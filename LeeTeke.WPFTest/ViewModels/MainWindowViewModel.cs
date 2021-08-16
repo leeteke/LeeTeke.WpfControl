@@ -149,10 +149,7 @@ namespace LeeTeke.WPFTest.ViewModels
 
             Text = "123123123";
 
-
-
-
-        }
+                    }
 
 
 
@@ -162,21 +159,7 @@ namespace LeeTeke.WPFTest.ViewModels
             _switch = !_switch;
             StaticMethods.SetLightOrDark(_switch);
 
-            NotifyData = new NotifyBannerShowData("切换" + (_switch ? "普通主题" : "暗黑主题")) { Value=123,  CanClick=true};
-
-
-            var apd = new NotifyBannerShowData();
-            var btn = new Button()
-            {
-                Content = "测试",
-            };
-            btn.Click += (a4, ad) =>
-            {
-                apd.CloseAction();
-            };
-            apd.Status = WpfControls.NotifyStatus.Callback;
-            apd.Content = btn;
-            NotifyData = apd;
+            MessageBoxEx.Show("你好", MessageStatus.Question);
 
         }
 

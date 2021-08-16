@@ -13,7 +13,7 @@
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Background}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Margin" Value="10"/>
-        <Setter Property="Effect" Value="{DynamicResource LeeShadow1}"/>
+        <Setter Property="Effect" Value="{DynamicResource LeeShadow}"/>
         <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
 
     </Style>

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -50,5 +51,209 @@ namespace LeeTeke.WpfControl.Controls
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Pagination), new FrameworkPropertyMetadata(typeof(Pagination)));
         }
+
+
+        private ComboBox _jumpBox;
+        private ToggleGroup _group;
+        public Pagination()
+        {
+            Loaded += Pagination_Loaded;
+        }
+
+
+
+        #region override
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            if (this.Template.FindName("PART_JumpComboBox", this) is ComboBox comboBox)
+            {
+                _jumpBox = comboBox;
+                _jumpBox.SelectionChanged += _jumpBox_SelectionChanged;
+            }
+
+            if (this.Template.FindName("PART_PageGroup", this) is ToggleGroup toggle)
+            {
+                _group = toggle;
+
+                _group.SelectionChanged += _group_SelectionChanged;
+            }
+        }
+
+
+
+
+
+        #endregion
+
+        #region 依赖
+
+        #region MaxPageCount
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public int MaxPageCount
+        {
+            get { return (int)GetValue(MaxPageCountProperty); }
+            set { SetValue(MaxPageCountProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MaxPageCount.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MaxPageCountProperty =
+            DependencyProperty.Register("MaxPageCount", typeof(int), typeof(Pagination));
+        #endregion
+
+        #region PageIndex
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public int PageIndex
+        {
+            get { return (int)GetValue(PageIndexProperty); }
+            set { SetValue(PageIndexProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for PageIndex.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PageIndexProperty =
+            DependencyProperty.Register("PageIndex", typeof(int), typeof(Pagination), new FrameworkPropertyMetadata(1, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault) { DefaultUpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
+        #endregion
+
+
+        #region PageButtonSize
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public double PageButtonSize
+        {
+            get { return (double)GetValue(PageButtonSizeProperty); }
+            set { SetValue(PageButtonSizeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for PageButtonSize.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PageButtonSizeProperty =
+            DependencyProperty.Register("PageButtonSize", typeof(double), typeof(Pagination));
+        #endregion
+
+
+        #region ShowIndex
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public int ShowIndex
+        {
+            get { return (int)GetValue(ShowIndexProperty); }
+            set { SetValue(ShowIndexProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ShowIndex.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ShowIndexProperty =
+            DependencyProperty.Register("ShowIndex", typeof(int), typeof(Pagination));
+        #endregion
+
+        #region JumpVisibility
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Visibility JumpVisibility
+        {
+            get { return (Visibility)GetValue(JumpVisibilityProperty); }
+            set { SetValue(JumpVisibilityProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for JumpVisibility.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty JumpVisibilityProperty =
+            DependencyProperty.Register("JumpVisibility", typeof(Visibility), typeof(Pagination));
+        #endregion
+
+        #endregion
+
+
+        #region 私有
+
+
+        /// <summary>
+        /// 试图加载
+        /// </summary>
+        private void ViewLoding()
+        {
+            if (!IsLoaded)
+                return;
+            _group.Items.Clear();
+            if (MaxPageCount < 1)
+            {
+                this.Visibility = Visibility.Collapsed;
+                return;
+            }
+
+            ///如果小于1 则进行判断 自动
+
+            var lodingInt = GetLodingIndex();
+
+            for (int i = 0; i < lodingInt; i++)
+            {
+                _group.Items.Add(RasiztoggleGroup(i + 1));
+            }
+
+        }
+
+        private int GetLodingIndex()
+        {
+            var result = 1;
+            ///如果show大于maxpage。则区maxpage
+            if (ShowIndex > MaxPageCount)
+            {
+                return MaxPageCount;
+            }
+
+            ///如果有实际数,否则为自动判断 默认最小为1
+            if (ShowIndex > 0)
+            {
+                return ShowIndex;
+            }
+
+            result = (int)((_group.ActualWidth - 1) / PageButtonSize);
+            if (result < 1)
+                return 1;
+            return result;
+        }
+
+        private ToggleButton RasiztoggleGroup(int index)
+        {
+            ToggleButton button = new ToggleButton()
+            {
+                Content = index,
+                DataContext = index,
+            };
+            return button;
+        }
+
+        /// <summary>
+        /// 控件加载完成
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Pagination_Loaded(object sender, RoutedEventArgs e)
+        {
+         //   ViewLoding();
+        }
+        /// <summary>
+        /// 选择窗口选择
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _jumpBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+
+        private void _group_SelectionChanged(object sender, ToggleSelectionChangedEventArgs e)
+        {
+
+        }
+        #endregion
+
     }
 }

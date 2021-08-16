@@ -6,11 +6,46 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
+using LeeTeke.WpfControl;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-    public class ListViewItemManager
+    public class ListBoxItemManager
     {
+
+        #region MinHeight
+        public static double GetMinHeight(DependencyObject obj)
+        {
+            return (double)obj.GetValue(MinHeightProperty);
+        }
+
+        public static void SetMinHeight(DependencyObject obj, double value)
+        {
+            obj.SetValue(MinHeightProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MinHeight.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MinHeightProperty =
+            DependencyProperty.RegisterAttached("MinHeight", typeof(double), typeof(ListBoxItemManager));
+        #endregion
+
+
+        #region MinWidth
+        public static double GetMinWidth(DependencyObject obj)
+        {
+            return (double)obj.GetValue(MinWidthProperty);
+        }
+
+        public static void SetMinWidth(DependencyObject obj, double value)
+        {
+            obj.SetValue(MinWidthProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MinWidth.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MinWidthProperty =
+            DependencyProperty.RegisterAttached("MinWidth", typeof(double), typeof(ListBoxItemManager));
+        #endregion
+
 
         #region Background
         public static Brush GetBackground(DependencyObject obj)
@@ -25,7 +60,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for Background.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty BackgroundProperty =
-            DependencyProperty.RegisterAttached("Background", typeof(Brush), typeof(ListViewItemManager));
+            DependencyProperty.RegisterAttached("Background", typeof(Brush), typeof(ListBoxItemManager));
         #endregion
 
         #region BorderBrush
@@ -41,7 +76,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for BorderBrush.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty BorderBrushProperty =
-            DependencyProperty.RegisterAttached("BorderBrush", typeof(Brush), typeof(ListViewItemManager));
+            DependencyProperty.RegisterAttached("BorderBrush", typeof(Brush), typeof(ListBoxItemManager));
         #endregion
 
         #region BorderThickness
@@ -57,7 +92,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for BorderThickness.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty BorderThicknessProperty =
-            DependencyProperty.RegisterAttached("BorderThickness", typeof(Thickness), typeof(ListViewItemManager));
+            DependencyProperty.RegisterAttached("BorderThickness", typeof(Thickness), typeof(ListBoxItemManager));
         #endregion
 
         #region MouseOverBackground
@@ -73,7 +108,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for MouseOverBackground.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MouseOverBackgroundProperty =
-            DependencyProperty.RegisterAttached("MouseOverBackground", typeof(Brush), typeof(ListViewItemManager));
+            DependencyProperty.RegisterAttached("MouseOverBackground", typeof(Brush), typeof(ListBoxItemManager));
         #endregion
 
         #region MouseOverBorderBrush
@@ -89,7 +124,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for MouseOverBorderBrush.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MouseOverBorderBrushProperty =
-            DependencyProperty.RegisterAttached("MouseOverBorderBrush", typeof(Brush), typeof(ListViewItemManager));
+            DependencyProperty.RegisterAttached("MouseOverBorderBrush", typeof(Brush), typeof(ListBoxItemManager));
         #endregion
 
         #region MouseOverBorderThickness
@@ -105,7 +140,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for MouseOverBorderThickness.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MouseOverBorderThicknessProperty =
-            DependencyProperty.RegisterAttached("MouseOverBorderThickness", typeof(Thickness), typeof(ListViewItemManager));
+            DependencyProperty.RegisterAttached("MouseOverBorderThickness", typeof(Thickness), typeof(ListBoxItemManager));
         #endregion
 
         #region Marigin
@@ -121,7 +156,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for Marigin.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MariginProperty =
-            DependencyProperty.RegisterAttached("Marigin", typeof(Thickness), typeof(ListViewItemManager));
+            DependencyProperty.RegisterAttached("Marigin", typeof(Thickness), typeof(ListBoxItemManager));
         #endregion
 
         #region Padding
@@ -137,7 +172,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for Padding.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PaddingProperty =
-            DependencyProperty.RegisterAttached("Padding", typeof(Thickness), typeof(ListViewItemManager));
+            DependencyProperty.RegisterAttached("Padding", typeof(Thickness), typeof(ListBoxItemManager));
         #endregion
 
         #region Effect
@@ -153,7 +188,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for Effect.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty EffectProperty =
-            DependencyProperty.RegisterAttached("Effect", typeof(Effect), typeof(ListViewItemManager));
+            DependencyProperty.RegisterAttached("Effect", typeof(Effect), typeof(ListBoxItemManager));
         #endregion
 
         #region MouseOverEffect
@@ -169,7 +204,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for MouseOverEffect.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MouseOverEffectProperty =
-            DependencyProperty.RegisterAttached("MouseOverEffect", typeof(Effect), typeof(ListViewItemManager));
+            DependencyProperty.RegisterAttached("MouseOverEffect", typeof(Effect), typeof(ListBoxItemManager));
         #endregion
 
         #region SelectedEffect
@@ -185,7 +220,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for SelectedEffect.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedEffectProperty =
-            DependencyProperty.RegisterAttached("SelectedEffect", typeof(Effect), typeof(ListViewItemManager));
+            DependencyProperty.RegisterAttached("SelectedEffect", typeof(Effect), typeof(ListBoxItemManager));
         #endregion
 
         #region CornerRadius
@@ -201,7 +236,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for CornerRadius.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CornerRadiusProperty =
-            DependencyProperty.RegisterAttached("CornerRadius", typeof(CornerRadius), typeof(ListViewItemManager));
+            DependencyProperty.RegisterAttached("CornerRadius", typeof(CornerRadius), typeof(ListBoxItemManager));
         #endregion
 
         #region SelectedBackground
@@ -217,7 +252,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for SelectedBackground.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedBackgroundProperty =
-            DependencyProperty.RegisterAttached("SelectedBackground", typeof(Brush), typeof(ListViewItemManager));
+            DependencyProperty.RegisterAttached("SelectedBackground", typeof(Brush), typeof(ListBoxItemManager));
         #endregion
 
         #region SelectedBorderBrush
@@ -233,7 +268,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for SelectedBorderBrush.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedBorderBrushProperty =
-            DependencyProperty.RegisterAttached("SelectedBorderBrush", typeof(Brush), typeof(ListViewItemManager));
+            DependencyProperty.RegisterAttached("SelectedBorderBrush", typeof(Brush), typeof(ListBoxItemManager));
         #endregion
 
         #region SelectedBorderThickness
@@ -249,7 +284,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for SelectedBorderThickness.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedBorderThicknessProperty =
-            DependencyProperty.RegisterAttached("SelectedBorderThickness", typeof(Thickness), typeof(ListViewItemManager));
+            DependencyProperty.RegisterAttached("SelectedBorderThickness", typeof(Thickness), typeof(ListBoxItemManager));
         #endregion
 
         #region SelectedForeground
@@ -265,7 +300,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for SelectedForeground.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedForegroundProperty =
-            DependencyProperty.RegisterAttached("SelectedForeground", typeof(Brush), typeof(ListViewItemManager));
+            DependencyProperty.RegisterAttached("SelectedForeground", typeof(Brush), typeof(ListBoxItemManager));
         #endregion
 
         #region SelectedFontSize
@@ -281,7 +316,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for SelectedFontSize.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedFontSizeProperty =
-            DependencyProperty.RegisterAttached("SelectedFontSize", typeof(double), typeof(ListViewItemManager));
+            DependencyProperty.RegisterAttached("SelectedFontSize", typeof(double), typeof(ListBoxItemManager));
         #endregion
 
         #region SelectedFontWeight
@@ -297,7 +332,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for SelectedFontWeight.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedFontWeightProperty =
-            DependencyProperty.RegisterAttached("SelectedFontWeight", typeof(FontWeight), typeof(ListViewItemManager));
+            DependencyProperty.RegisterAttached("SelectedFontWeight", typeof(FontWeight), typeof(ListBoxItemManager));
         #endregion
 
         #region MarkSite
@@ -315,7 +350,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for MarkSite.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MarkSiteProperty =
-            DependencyProperty.RegisterAttached("MarkSite", typeof(ListItemMarkSite), typeof(ListViewItemManager), new PropertyMetadata(ListItemMarkSite.Left));
+            DependencyProperty.RegisterAttached("MarkSite", typeof(ListItemMarkSite), typeof(ListBoxItemManager), new PropertyMetadata(ListItemMarkSite.Left));
 
 
 
@@ -338,7 +373,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for MarkSize.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MarkSizeProperty =
-            DependencyProperty.RegisterAttached("MarkSize", typeof(double), typeof(ListViewItemManager), new PropertyMetadata(3.0));
+            DependencyProperty.RegisterAttached("MarkSize", typeof(double), typeof(ListBoxItemManager), new PropertyMetadata(3.0));
 
 
 
@@ -360,7 +395,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for MarkMargin.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MarkMarginProperty =
-            DependencyProperty.RegisterAttached("MarkMargin", typeof(Thickness), typeof(ListViewItemManager), new PropertyMetadata(new Thickness(0)));
+            DependencyProperty.RegisterAttached("MarkMargin", typeof(Thickness), typeof(ListBoxItemManager), new PropertyMetadata(new Thickness(0)));
         #endregion
 
         #region MarkMouseOverBrush
@@ -376,7 +411,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for MarkMouseOverBrush.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MarkMouseOverBrushProperty =
-            DependencyProperty.RegisterAttached("MarkMouseOverBrush", typeof(Brush), typeof(ListViewItemManager));
+            DependencyProperty.RegisterAttached("MarkMouseOverBrush", typeof(Brush), typeof(ListBoxItemManager));
         #endregion
 
         #region MarkSelectedBrush
@@ -392,9 +427,10 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for MarkSelectedBrush.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MarkSelectedBrushProperty =
-            DependencyProperty.RegisterAttached("MarkSelectedBrush", typeof(Brush), typeof(ListViewItemManager));
+            DependencyProperty.RegisterAttached("MarkSelectedBrush", typeof(Brush), typeof(ListBoxItemManager));
         #endregion
 
     }
+
 
 }

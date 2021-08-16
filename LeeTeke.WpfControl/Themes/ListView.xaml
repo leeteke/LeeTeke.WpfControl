@@ -6,6 +6,54 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
     </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="GridViewColumnHeaderGripper" TargetType="Thumb">
+        <Setter Property="Canvas.Right" Value="-9"/>
+        <Setter Property="Width" Value="18"/>
+        <Setter Property="Height" Value="{Binding ActualHeight, RelativeSource={RelativeSource TemplatedParent}}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Thumb">
+                    <Border Background="Transparent" Padding="{TemplateBinding Padding}">
+                        <Rectangle Fill="{TemplateBinding Background}" HorizontalAlignment="Center" Width="1"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="GridViewColumnHeader">
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
+        <Setter Property="Padding" Value="12,6,12,12"/>
+        <Setter Property="MinHeight" Value="44"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="GridViewColumnHeader">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                 
+                        <Border x:Name="HeaderBorder" BorderBrush="{TemplateBinding BorderBrush}" Background="Transparent">
+                            <ContentPresenter x:Name="HeaderContent"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <Canvas Grid.Column="1">
+                            <Thumb x:Name="PART_HeaderGripper" Style="{StaticResource GridViewColumnHeaderGripper}"/>
+                        </Canvas>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
     <Style x:Key="LeetekeListViewItem" TargetType="{x:Type ListViewItem}">
         <Setter Property="Background" Value="{Binding Path=(leedep:ListViewItemManager.Background), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
         <Setter Property="BorderBrush" Value="{Binding Path=(leedep:ListViewItemManager.BorderBrush), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
@@ -44,9 +92,11 @@
                                     <SolidColorBrush x:Name="rectBrush" Color="Transparent"/>
                                 </Rectangle.Fill>
                             </Rectangle>
-                            <ContentPresenter x:Name="contentPresenter"
+                            <GridViewRowPresenter  x:Name="contentPresenter"
                                               Grid.Column="1"
                                               Grid.Row="1"
+                                              Content="{TemplateBinding Content}"
+                                              Columns="{TemplateBinding GridView.ColumnCollection}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               />
@@ -100,8 +150,7 @@
         </Setter>
     </Style>
 
-
-    <!--更改了滚动条的istview-->
+    <!--更改了滚动条的istBox-->
     <Style x:Key="LeetekeListView" TargetType="{x:Type ListView}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
@@ -115,7 +164,6 @@
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-        <Setter Property="leedep:ListViewManager.ShowHeadShadow" Value="False"/>
         <Setter Property="leedep:ListViewManager.Orientation" Value="Vertical"/>
         <Setter Property="leedep:ListViewItemManager.MarkSite" Value="Null"/>
         <Setter Property="leedep:ListViewItemManager.Background" Value="Transparent"/>
@@ -138,13 +186,6 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate  TargetType="{x:Type ListView}">
-                    <Grid  x:Name="PART_Grid">
-                        <Grid.Clip>
-                            <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
-                                <Binding  ElementName="PART_Grid" Path="ActualWidth"/>
-                                <Binding  ElementName="PART_Grid" Path="ActualHeight"/>
-                            </MultiBinding>
-                        </Grid.Clip>
                         <ScrollViewer x:Name="scrollviewer" 
                                       HorizontalScrollBarVisibility="{Binding  RelativeSource={ RelativeSource  Mode=FindAncestor,AncestorType=ListView},Path=(ScrollViewer.HorizontalScrollBarVisibility),Mode=OneWay}" 
                                       VerticalScrollBarVisibility="{Binding  RelativeSource={ RelativeSource  Mode=FindAncestor,AncestorType=ListView},Path=(ScrollViewer.VerticalScrollBarVisibility),Mode=OneWay}"
@@ -153,6 +194,7 @@
                                       >
                             <Grid>
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
                                     <RowDefinition/>
                                     <RowDefinition Height="auto"/>
                                 </Grid.RowDefinitions>
@@ -160,56 +202,37 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
+
+                                <GridViewHeaderRowPresenter AllowsColumnReorder="{Binding View.AllowsColumnReorder, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                    ColumnHeaderContainerStyle="{Binding View.ColumnHeaderContainerStyle, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                    ColumnHeaderToolTip="{Binding View.ColumnHeaderToolTip, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                    ColumnHeaderContextMenu="{Binding View.ColumnHeaderContextMenu, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                    ColumnHeaderTemplate="{Binding View.ColumnHeaderTemplate, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                    Columns="{Binding View.Columns, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                    Margin="2,0"
+                                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                                 <!--背景-->
-                                <ContentControl Grid.Row="0" Grid.Column="0"
+                                <ContentControl Grid.Row="1"
+                                                Grid.Column="0"
                                                 Content="{Binding Path=(leedep:ListViewManager.NoItemsContent),  RelativeSource={RelativeSource AncestorType={x:Type ListView},AncestorLevel=1},Mode=OneWay}"
                                                 Visibility="{TemplateBinding  HasItems,Converter={StaticResource VisibilityForBoolReverseConverter}}"/>
 
-                                <ItemsPresenter Grid.Row="0" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                               
+
+                                <ItemsPresenter Grid.Row="1" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
 
 
                                 <!--尾部-->
-                                <ContentControl x:Name="PART_ListEnd" Grid.Row="1" Grid.Column="0"
+                                <ContentControl x:Name="PART_ListEnd" 
+                                                Grid.Row="2" 
+                                                Grid.Column="0"
                                                 Content="{Binding Path=(leedep:ListViewManager.ListEndContent),  RelativeSource={RelativeSource AncestorType={x:Type ListView},AncestorLevel=1},Mode=OneWay}"
                                                 Visibility="{TemplateBinding  HasItems,Converter={StaticResource VisibilityForBoolConverter}}"/>
 
                             </Grid>
                         </ScrollViewer>
-
-                        <Ellipse VerticalAlignment="Top"
-                                 Height="10"
-                                 Fill="Black"
-                                Visibility="{Binding Path=(leedep:ListViewManager.ShowHeadShadow),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Converter={StaticResource VisibilityForBoolConverter},Mode=OneWay}" 
-                                Opacity="{Binding ElementName=scrollviewer,Path=VerticalOffset,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/50,Mode=OneWay}"
-                                 Margin="0,-12">
-                            <Ellipse.Effect>
-                                <DropShadowEffect Direction="270" 
-                                                  ShadowDepth="5" 
-                                                  RenderingBias="Performance"
-                                                  BlurRadius="10" 
-                                                  Opacity="0.3"
-                                                  />
-                            </Ellipse.Effect>
-                        </Ellipse>
-
-
-                        <Ellipse HorizontalAlignment="Left"
-                                 Visibility="{Binding Path=(leedep:ListViewManager.ShowHeadShadow),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Converter={StaticResource VisibilityForBoolConverter},Mode=OneWay}" 
-                                Opacity="{Binding ElementName=scrollviewer,Path=HorizontalOffset,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/50,Mode=OneWay}"
-                                 Width="10"
-                                 Fill="Black"
-                                 Margin="-12,0">
-                            <Ellipse.Effect>
-                                <DropShadowEffect Direction="0" 
-                                                  ShadowDepth="5" 
-                                                  RenderingBias="Performance"
-                                                  BlurRadius="10" 
-                                                  Opacity="0.3"
-                                                  />
-                            </Ellipse.Effect>
-                        </Ellipse>
-
-                    </Grid>
+                  
+                 
                     <ControlTemplate.Triggers>
                         <Trigger Property="leedep:ListViewManager.Orientation" Value="Vertical">
                             <Setter TargetName="PART_ListEnd" Property="Grid.Row" Value="1" />

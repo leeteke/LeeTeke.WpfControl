@@ -163,39 +163,16 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                      
-                        <EventTrigger RoutedEvent="MouseEnter">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation  Storyboard.TargetName="PART_VerticalGrid"
-                                                      Storyboard.TargetProperty="Opacity"
-                                                      To="1"
-                                                      Duration="0:0:0.15" />
-                                    <DoubleAnimation Storyboard.TargetName="PART_HorizontalGrid"
-                                                     Storyboard.TargetProperty="Opacity"
-                                                     To="1"
-                                                     Duration="0:0:0.15" />
+                        <Trigger SourceName="PART_HorizontalScrollBar" Property="IsVisible" Value="False">
+                            <Setter TargetName="PART_HorizontalGrid" Property="Height" Value="0"/>
+                        </Trigger>
+                        
 
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseLeave">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation  Storyboard.TargetName="PART_VerticalGrid"
-                                                      Storyboard.TargetProperty="Opacity"
-                                                      BeginTime="0:0:2"
-                                                      To="0"
-                                                      Duration="0:0:0.15" />
-                                    <DoubleAnimation Storyboard.TargetName="PART_HorizontalGrid"
-                                                     Storyboard.TargetProperty="Opacity"
-                                                     BeginTime="0:0:2"
-                                                     To="0"
-                                                     Duration="0:0:0.15" />
+                        <Trigger SourceName="PART_VerticalScrollBar" Property="IsVisible" Value="False">
+                            <Setter TargetName="PART_VerticalGrid" Property="Width" Value="0"/>
+                        </Trigger>
+                     
 
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
                         <EventTrigger RoutedEvent="ScrollChanged">
                             <BeginStoryboard>
                                 <Storyboard>
@@ -262,6 +239,39 @@
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation  Storyboard.TargetName="PART_VerticalGrid"
+                                                      Storyboard.TargetProperty="Opacity"
+                                                      To="1"
+                                                      Duration="0:0:0.15" />
+                                    <DoubleAnimation Storyboard.TargetName="PART_HorizontalGrid"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="1"
+                                                     Duration="0:0:0.15" />
+
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation  Storyboard.TargetName="PART_VerticalGrid"
+                                                      Storyboard.TargetProperty="Opacity"
+                                                      BeginTime="0:0:2"
+                                                      To="0"
+                                                      Duration="0:0:0.15" />
+                                    <DoubleAnimation Storyboard.TargetName="PART_HorizontalGrid"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     BeginTime="0:0:2"
+                                                     To="0"
+                                                     Duration="0:0:0.15" />
+
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

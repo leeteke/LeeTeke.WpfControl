@@ -86,7 +86,7 @@
                     <Setter Property="leedep:ToggleButtonManager.CheckedBackground" Value="{Binding Path=ItemCheckedBackground, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
                     <Setter Property="leedep:ToggleButtonManager.CheckedBorderBrush" Value="{Binding Path=ItemCheckedBorderBrush, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
                     <Setter Property="leedep:ToggleButtonManager.MouseOverBackground" Value="{Binding Path=ItemMouseOverBackground, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
-                    <Setter Property="leedep:ToggleButtonManager.MouseOverBorderBrush" Value="{Binding Path=ItemBorderBrush, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
+                    <Setter Property="leedep:ToggleButtonManager.MouseOverBorderBrush" Value="{Binding Path=ItemMouseOverBackground, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
                     <Setter Property="leedep:ToggleButtonManager.CheckedForeground" Value="{Binding Path=ItemCheckedForeground, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
 
                 </Style>

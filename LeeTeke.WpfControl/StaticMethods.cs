@@ -24,19 +24,17 @@ namespace LeeTeke.WpfControl
                 Application.Current.Resources["LeeBrush_Text"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Black"]);
                 Application.Current.Resources["LeeBrush_BorderBrush"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Gray"]);
                 Application.Current.Resources["LeeBrush_BorderBrushMouseOver"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Gray191"]);
-
                 Application.Current.Resources["LeeBrush_Mark"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Mark"]);
 
             }
             else
             {
-                Application.Current.Resources["LeeBrush_Background"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_BackgroundDark"]);
-                Application.Current.Resources["LeeBrush_Forground"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Black"]);
-                Application.Current.Resources["LeeBrush_Text"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_White"]);
-                Application.Current.Resources["LeeBrush_BorderBrush"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Black"]);
-                Application.Current.Resources["LeeBrush_BorderBrushMouseOver"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Gray51"]);
-
-                Application.Current.Resources["LeeBrush_Mark"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_MarkDark"]);
+                Application.Current.Resources["LeeBrush_Background"] = new SolidColorBrush(((SolidColorBrush)Application.Current.Resources["LeeBrush_BackgroundDark"]).Color);
+                Application.Current.Resources["LeeBrush_Forground"] = new SolidColorBrush(((SolidColorBrush)Application.Current.Resources["LeeBrush_ForgroundDark"]).Color);
+                Application.Current.Resources["LeeBrush_Text"] = new SolidColorBrush(((SolidColorBrush)Application.Current.Resources["LeeBrush_TextDark"]).Color);
+                Application.Current.Resources["LeeBrush_BorderBrush"] = new SolidColorBrush(((SolidColorBrush)Application.Current.Resources["LeeBrush_BorderBrushDark"]).Color);
+                Application.Current.Resources["LeeBrush_BorderBrushMouseOver"] = new SolidColorBrush(((SolidColorBrush)Application.Current.Resources["LeeBrush_BorderBrushMouseOverDark"]).Color);
+                Application.Current.Resources["LeeBrush_Mark"] = new SolidColorBrush(((SolidColorBrush)Application.Current.Resources["LeeBrush_MarkDark"]).Color);
             }
         }
 

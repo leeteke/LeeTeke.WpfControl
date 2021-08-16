@@ -15,7 +15,7 @@
         leedep:WindowShaowManager.CornerRadius="{DynamicResource LeeCornerRadius}"
         >
 
-    <Grid  Background="{DynamicResource LeePage_Background}">
+    <Grid  Background="{DynamicResource LeeBrush_Forground}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="259*"/>
             <ColumnDefinition Width="61*"/>
@@ -47,7 +47,7 @@
                    Margin="10"
                    Foreground="{DynamicResource LeeBrush_YellowMicrosoft}"
                    Grid.Row="1"
-                   FontFamily="{StaticResource IconFontFamily}"
+                   FontFamily="{DynamicResource IconFontFamily}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Left"
                    Visibility="Collapsed"

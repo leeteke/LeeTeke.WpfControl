@@ -54,7 +54,8 @@ namespace LeeTeke.WpfControl.Dependencies
                         {
                             if (window.WindowState == WindowState.Maximized)
                             {
-                                if (window.Content is FrameworkElement  ui){
+                                if (window.Content is FrameworkElement ui)
+                                {
                                     ui.Margin = new Thickness(8);
                                 }
                             }
@@ -83,8 +84,9 @@ namespace LeeTeke.WpfControl.Dependencies
                         var shaow = new Border
                         {
                             Name = "shaowborder",
+                            BorderThickness= new Thickness(0),
                             Margin = new Thickness(8),
-                            Effect = new DropShadowEffect() { BlurRadius = 8, Direction = 0, ShadowDepth = 0, Color = Colors.Black, Opacity = 0.4 }
+                            Effect = GetShaow(d) ?? Application.Current.Resources["LeeShadow"] as DropShadowEffect
                         };
 
 
@@ -129,13 +131,14 @@ namespace LeeTeke.WpfControl.Dependencies
                             }
                             window.Content = shaow;
                         };
+                       
                         window.Activated += (we, ws) =>
                         {
-                            ((DropShadowEffect)shaow.Effect).Opacity = 0.4;
+                            shaow.Effect = GetShaow(d) ?? Application.Current.Resources["LeeShadow"] as DropShadowEffect;
                         };
                         window.Deactivated += (we, ws) =>
                         {
-                            ((DropShadowEffect)shaow.Effect).Opacity = 0.2;
+                            shaow.Effect =  Application.Current.Resources["LeeShadow1"] as DropShadowEffect;
                         };
                         window.StateChanged += (we, ws) =>
                         {
@@ -217,6 +220,24 @@ namespace LeeTeke.WpfControl.Dependencies
 
         #endregion
 
+
+        #region Shaow
+        public static Effect GetShaow(DependencyObject obj)
+        {
+            return (Effect)obj.GetValue(ShaowProperty);
+        }
+
+        public static void SetShaow(DependencyObject obj, Effect value)
+        {
+            obj.SetValue(ShaowProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for Shaow.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ShaowProperty =
+            DependencyProperty.RegisterAttached("Shaow", typeof(Effect), typeof(WindowShaowManager));
+        #endregion
+
+      
 
 
     }

@@ -77,7 +77,7 @@
 
                         <Trigger Property="IsChecked" Value="true">
                             <Setter Property="Background" TargetName="PART_Border"  Value="{Binding Path=(leedep:ToggleButtonManager.CheckedBackground),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"/>
-                            <Setter Property="BorderThickness" TargetName="PART_Border"  Value="0"/>
+                            <Setter Property="BorderBrush" TargetName="PART_Border"  Value="{Binding Path=(leedep:ToggleButtonManager.CheckedBorderBrush),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"/>
                             <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{Binding Path=(leedep:ToggleButtonManager.CheckedForeground),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"/>
                         </Trigger>
 

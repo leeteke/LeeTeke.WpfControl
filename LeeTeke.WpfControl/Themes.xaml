@@ -6,6 +6,7 @@
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/Button.xaml" />
         <ResourceDictionary  Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/CheckBox.xaml" />
         <ResourceDictionary  Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ListView.xaml" />
+        <ResourceDictionary  Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ListBox.xaml" />
         <ResourceDictionary  Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ScrollView.xaml" />
         <ResourceDictionary  Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ContextMenu.xaml" />
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ToggleButton.xaml"/>
@@ -28,6 +29,8 @@
     <Style BasedOn="{StaticResource LeeToggleButton }" TargetType="ToggleButton"/>
     <Style BasedOn="{StaticResource LeeComboBox}" TargetType="ComboBox"/>
     <Style BasedOn="{StaticResource LeeRadioButton}" TargetType="RadioButton"/>
+    <Style BasedOn="{StaticResource LeetekeListBox}" TargetType="ListBox"/>
+    <Style BasedOn="{StaticResource LeetekeListBoxItem}" TargetType="ListBoxItem"/>
     <Style BasedOn="{StaticResource LeetekeListView}" TargetType="ListView"/>
     <Style BasedOn="{StaticResource LeetekeListViewItem}" TargetType="ListViewItem"/>
     <Style BasedOn="{StaticResource LeeDataGrid}" TargetType="DataGrid"/>

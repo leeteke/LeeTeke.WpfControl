@@ -4,8 +4,8 @@
                     xmlns:local="clr-namespace:LeeTeke.WpfControl">
     <!--默认阴影主题-->
     <DropShadowEffect x:Key="LeeShadow" BlurRadius="8" ShadowDepth="1.5" Direction="270" Color="#88000000" Opacity=".2" RenderingBias="Performance" />
-    <DropShadowEffect x:Key="LeeShadow1"  BlurRadius="5" ShadowDepth="1" Direction="270" Color="#88000000" Opacity=".2" RenderingBias="Performance" />
-    <DropShadowEffect x:Key="LeeShadow2" BlurRadius="8" ShadowDepth="1.5" Direction="270" Color="#88000000" Opacity=".2" RenderingBias="Performance" />
+    <DropShadowEffect x:Key="LeeShadow1"  BlurRadius="8" ShadowDepth="1" Direction="270" Color="#88000000" Opacity=".1" RenderingBias="Performance" />
+    <DropShadowEffect x:Key="LeeShadow2" BlurRadius="5" ShadowDepth="1" Direction="270" Color="#88000000" Opacity=".2" RenderingBias="Performance" />
     <DropShadowEffect x:Key="LeeShadow3"  BlurRadius="14" ShadowDepth="4.5" Direction="270" Color="#88000000" Opacity=".2" RenderingBias="Performance" />
     <DropShadowEffect x:Key="LeeShadow4" BlurRadius="25" ShadowDepth="8" Direction="270" Color="#88000000" Opacity=".2" RenderingBias="Performance" />
     <DropShadowEffect x:Key="LeeShadow5" BlurRadius="35" ShadowDepth="13" Direction="270" Color="#88000000" Opacity=".2" RenderingBias="Performance" />
@@ -44,7 +44,7 @@
 
     <!--默认主色调-->
     <SolidColorBrush x:Key="LeeBrush_Forground" Color="{DynamicResource LeeColor_White}"/>
-    <SolidColorBrush x:Key="LeeBrush_ForgroundDrak" Color="{DynamicResource LeeColor_Black}"/>
+    <SolidColorBrush x:Key="LeeBrush_ForgroundDark" Color="{DynamicResource LeeColor_Black}"/>
 
 
     <!--默认文字颜色-->
@@ -56,10 +56,10 @@
 
     <!--默认边框颜色-->
     <SolidColorBrush x:Key="LeeBrush_BorderBrush"  Color="{DynamicResource LeeColor_Gray}" />
-    <SolidColorBrush x:Key="LeeBrush_BorderBrushDark"  Color="{DynamicResource LeeColor_Black}" />
+    <SolidColorBrush x:Key="LeeBrush_BorderBrushDark"  Color="{DynamicResource LeeColor_Gray45}" />
 
     <SolidColorBrush x:Key="LeeBrush_BorderBrushMouseOver"  Color="{DynamicResource LeeColor_Gray191}" />
-    <SolidColorBrush x:Key="LeeBrush_BorderBrushDarkMouseOver"  Color="{DynamicResource LeeColor_Gray51}" />
+    <SolidColorBrush x:Key="LeeBrush_BorderBrushMouseOverDark"  Color="{DynamicResource LeeColor_Gray51}" />
 
     <!--Item选择背景色-->
     <SolidColorBrush x:Key="LeeBrush_ItemSelectedBackground" Color="{DynamicResource LeeColor_ItemSelectedBackground}" />
@@ -80,7 +80,7 @@
     <Color x:Key="LeeColor_MarkDark" R="251" G="253" B="255" A="30" />
 
     <SolidColorBrush x:Key="LeeBrush_Black" Color="{DynamicResource LeeColor_Black}"/>
-    <Color x:Key="LeeColor_Black" R="45" G="45" B="45" A="255" />
+    <Color x:Key="LeeColor_Black" R="43" G="43" B="43" A="255" />
 
     <!--微软黄-->
     <SolidColorBrush x:Key="LeeBrush_RedMicrosoft" Color="{DynamicResource LeeColor_RedMicrosoft}" />
@@ -204,12 +204,15 @@
     <!--102灰-->
     <SolidColorBrush x:Key="LeeBrush_Gray102" Color="{DynamicResource LeeColor_Gray102}"/>
     <Color x:Key="LeeColor_Gray102"  R="103" G="102" B="102" A="255"  />
-    <!--51灰-->
+    <!--76灰-->
     <SolidColorBrush x:Key="LeeBrush_Gray76" Color="{DynamicResource LeeColor_Gray76}"/>
     <Color x:Key="LeeColor_Gray76"  R="76" G="76" B="76" A="255"  />
     <!--51灰-->
     <SolidColorBrush x:Key="LeeBrush_Gray51" Color="{DynamicResource LeeColor_Gray51}"/>
     <Color x:Key="LeeColor_Gray51"  R="51" G="51" B="51" A="255"  />
+    <!--45灰-->
+    <SolidColorBrush x:Key="LeeBrush_Gray45" Color="{DynamicResource LeeColor_Gray47}"/>
+    <Color x:Key="LeeColor_Gray45"  R="45" G="45" B="45" A="255"  />
     <!--默认阴影灰-->
     <Color x:Key="LeeBrush_GrayShadow">#7FB6B6B6</Color>
 
@@ -240,6 +243,14 @@
     <!--Info-->
     <SolidColorBrush x:Key="LeeBrush_Info" Color="{DynamicResource LeeColor_Info}"/>
     <Color x:Key="LeeColor_Info"  R="12" G="193" B="230" A="255"  />
+
+    <!--Info-->
+    <SolidColorBrush x:Key="LeeBrush_Question" Color="{DynamicResource LeeColor_Question}"/>
+    <Color x:Key="LeeColor_Question"  R="1" G="119" B="215" A="255"  />
+
+    <!--Info-->
+    <SolidColorBrush x:Key="LeeBrush_Stop" Color="{DynamicResource LeeColor_Stop}"/>
+    <Color x:Key="LeeColor_Stop"  R="235" G="60" B="0" A="255"  />
 
     <LinearGradientBrush x:Key="LeeLGBrush_MessengerV" EndPoint="0.5,1" StartPoint="0.5,0">
         <GradientStop Color="#00c6ff" Offset="0"/>

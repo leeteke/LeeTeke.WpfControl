@@ -14,11 +14,13 @@
         <Setter Property="Height" Value="{DynamicResource LeeItemHeight}"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="ShowIndex" Value="0"/>
+        <Setter Property="PageButtonSize" Value="25"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:Pagination}">
 
-                    <Grid>
+                    <Grid >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="auto"/>
@@ -32,12 +34,12 @@
                                 Height="{TemplateBinding Height}"
                                 Margin="2,0">
                             <StackPanel Orientation="Horizontal">
-                                <Rectangle Width="{Binding RelativeSource={RelativeSource Mode=Self},Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/6}"
+                                <Rectangle Width="{Binding RelativeSource={RelativeSource Mode=Self},Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/12}"
                                            Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}},Path=Foreground}"
                                            VerticalAlignment="Stretch"
                                            Margin="0,0,-3,0" />
                                 
-                                <TextBlock Text="&#xE96F;"
+                                <TextBlock Text="&#xE76B;"
                                            FontFamily="{DynamicResource IconFontFamily}"
                                            VerticalAlignment="Center"
                                            Foreground="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}},Path=Foreground}"/>
@@ -45,27 +47,18 @@
                             </StackPanel>
                         </Button>
 
-                        <Button Content="&#xE96F;"
+                        <Button Content="&#xE76B;"
                                 Grid.Column="1"
                                  Margin="2,0"
                                 Width="{TemplateBinding Height}"
                                 Height="{TemplateBinding Height}"
                                 FontFamily="{DynamicResource IconFontFamily}"/>
 
-                        <lee:ToggleGroup Grid.Column="2"
-                                         ItemBackground="{TemplateBinding Background}"
-                                         ItemMargin="0,0"
-                                         ItemBorderThickness="1,0,0,0"
-                                         ItemCorenerRadius="0"
-                                         CornerRadius="{DynamicResource LeeCornerRadius}"
-                                         >
-                            <ToggleButton Content="1"/>
-                            <ToggleButton Content="2"/>
-                            <ToggleButton Content="3"/>
-                        </lee:ToggleGroup>
-                        
-                        
-                        <Button Content="&#xE970;"
+                        <ListBox/>
+
+
+
+                        <Button Content="&#xE76C;"
                                 Grid.Column="3"
                                  Margin="2,0"
                                 Width="{TemplateBinding Height}"
@@ -77,11 +70,11 @@
                                 Grid.Column="4"
                                  Margin="2,0">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="&#xE970;"
+                                <TextBlock Text="&#xE76C;"
                                            FontFamily="{DynamicResource IconFontFamily}"
                                            VerticalAlignment="Center"
                                            Foreground="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}},Path=Foreground}"/>
-                                <Rectangle Width="{Binding RelativeSource={RelativeSource Mode=Self},Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/6}"
+                                <Rectangle Width="{Binding RelativeSource={RelativeSource Mode=Self},Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/12}"
                                            Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}},Path=Foreground}"
                                            Margin="-3,0,0,0"
                                            VerticalAlignment="Stretch"/>
@@ -92,32 +85,18 @@
 
                         <StackPanel Grid.Column="5"
                                      Margin="2,0"
+                                    Visibility="{TemplateBinding JumpVisibility}"
                                     Orientation="Horizontal">
                             <TextBlock Text="跳转到"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       FontSize="{TemplateBinding FontSize}"
+                                       FontWeight="{TemplateBinding FontWeight}"
                                        VerticalAlignment="Center"
                                        Margin="5"/>
-                            <ComboBox leedep:ComboBoxManager.PreviewText="" 
+                            <ComboBox x:Name="PART_JumpComboBox"
+                                      leedep:ComboBoxManager.PreviewText="" 
                                       Width="50"
-                                      Height="{TemplateBinding Height}">
-                                <ComboBoxItem Content="1"/>
-                                <ComboBoxItem Content="2"/>
-                                <ComboBoxItem Content="3"/>
-                                <ComboBoxItem Content="3"/>
-                                <ComboBoxItem Content="3"/>
-                                <ComboBoxItem Content="30"/>
-                                <ComboBoxItem Content="3"/>
-                                <ComboBoxItem Content="3"/>
-                                <ComboBoxItem Content="3"/>
-                                <ComboBoxItem Content="3"/>
-                                <ComboBoxItem Content="3000000000"/>
-                                <ComboBoxItem Content="3"/>
-                                <ComboBoxItem Content="3"/>
-                                <ComboBoxItem Content="3"/>
-                                <ComboBoxItem Content="3"/>
-                                <ComboBoxItem Content="3"/>
-                                <ComboBoxItem Content="3"/>
-                                <ComboBoxItem Content="3"/>
-                            </ComboBox>
+                                      Height="{TemplateBinding Height}"/>
                         </StackPanel>
 
                     </Grid>

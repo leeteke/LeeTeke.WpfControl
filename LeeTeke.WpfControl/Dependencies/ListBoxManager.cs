@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-    public class ListViewManager
+    public class ListBoxManager
     {
 
         #region Orientation
@@ -26,7 +26,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for Orientation.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty OrientationProperty =
-            DependencyProperty.RegisterAttached("Orientation", typeof(Orientation), typeof(ListViewManager));
+            DependencyProperty.RegisterAttached("Orientation", typeof(Orientation), typeof(ListBoxManager));
 
 
 
@@ -45,7 +45,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for NoItemsContent.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty NoItemsContentProperty =
-            DependencyProperty.RegisterAttached("NoItemsContent", typeof(object), typeof(ListViewManager));
+            DependencyProperty.RegisterAttached("NoItemsContent", typeof(object), typeof(ListBoxManager));
 
         #endregion
 
@@ -62,9 +62,8 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for ListEndContent.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ListEndContentProperty =
-            DependencyProperty.RegisterAttached("ListEndContent", typeof(object), typeof(ListViewManager));
+            DependencyProperty.RegisterAttached("ListEndContent", typeof(object), typeof(ListBoxManager));
         #endregion
-
 
     }
    

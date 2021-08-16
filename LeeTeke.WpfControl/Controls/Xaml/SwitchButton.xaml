@@ -78,7 +78,7 @@
                                              Height="{Binding ElementName=PART_Canvas,Path=ActualHeight,Mode=OneWay}"
                                              Fill="{DynamicResource LeeBrush_Forground}"
                                              IsHitTestVisible="False"
-                                             Effect="{DynamicResource LeeShadow1}"
+                                             Effect="{DynamicResource LeeShadow2}"
                                              >
                             </Ellipse>
 
