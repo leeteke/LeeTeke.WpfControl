@@ -48,7 +48,6 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("MarkBrush", typeof(Brush), typeof(RadioButtonManager));
         #endregion
 
-
         #region MarkSize
         /// <summary>
         /// 标记大小
@@ -68,7 +67,6 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("MarkSize", typeof(double), typeof(RadioButtonManager));
         #endregion
 
-
         #region MarkMargin
         /// <summary>
         /// Mark边距
@@ -87,9 +85,6 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty MarkMarginProperty =
             DependencyProperty.RegisterAttached("MarkMargin", typeof(Thickness), typeof(RadioButtonManager));
         #endregion
-
-
-
 
 
     }

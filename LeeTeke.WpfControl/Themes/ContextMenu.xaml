@@ -10,7 +10,8 @@
     <Style x:Key="LeeContextMenu" TargetType="{x:Type ContextMenu}" >
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="leedep:ContextMenuManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="leedep:CornerRadiusManager.IsClip" Value="True"/>
         <Setter Property="MinWidth" Value="180"/>
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}"/>
         <Setter Property="BorderThickness" Value="0"/>
@@ -25,15 +26,10 @@
                             Margin="8"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Effect="{Binding Path=(leedep:ContextMenuManager.Shadow),RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}"
-                            CornerRadius="{Binding Path=(leedep:ContextMenuManager.CornerRadius),RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}">
-                        <ScrollViewer  Margin="{TemplateBinding Padding}">
-                            <ScrollViewer.Clip>
-                                <MultiBinding  Converter="{StaticResource  MultiValueToClipConverter}" Mode="OneWay">
-                                    <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualWidth"/>
-                                    <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualHeight"/>
-                                    <Binding ElementName="border"  Path="CornerRadius"/>
-                                </MultiBinding>
-                            </ScrollViewer.Clip>
+                            CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius),RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}">
+                        <ScrollViewer  Margin="{TemplateBinding Padding}"
+                                                 leedep:CornerRadiusManager.CornerRadius="{Binding ElementName=dropDownBorder,Path=CornerRadius,Mode=OneWay}"
+                                                  leedep:CornerRadiusManager.IsClip="True">
                             <StackPanel IsItemsHost="True"
                                         KeyboardNavigation.DirectionalNavigation="Cycle" />
                         </ScrollViewer>
@@ -64,9 +60,8 @@
                                         Background="{TemplateBinding Background}"
                                         BorderBrush="{TemplateBinding BorderBrush}"
                                         BorderThickness="{TemplateBinding BorderThickness}"
-                                        CornerRadius="{Binding Path=(leedep:MenuItemManager.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}">
-                                
-                                <Grid >
+                                        CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}">
+                                <Grid x:Name="PART_Grid">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="auto" MinWidth="30"/>
                                         <ColumnDefinition/>
@@ -75,7 +70,7 @@
                                     <controls:RippleMask ParentElement="{Binding RelativeSource={RelativeSource  Mode=TemplatedParent}}"
                                                          Grid.ColumnSpan="3"
                                                          RippleBrush="{Binding Path=(leedep:MenuItemManager.RippleBrush),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"
-                                                         CornerRadius="{Binding Path=(leedep:MenuItemManager.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"
+                                                         CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"
                                                          IsOverflow="False"/>
                                     <ContentPresenter x:Name="IconContent"
                                                       ContentSource="Icon"
@@ -121,9 +116,13 @@
                                                 Background="{Binding Background,RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}"
                                                MinWidth="{Binding MinWidth,RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}"
                                                 Effect="{Binding Path=(leedep:ContextMenuManager.Shadow),RelativeSource={RelativeSource AncestorType=ContextMenu,Mode=FindAncestor},Mode=OneWay}"
-                                                CornerRadius="{Binding Path=(leedep:MenuItemManager.CornerRadius),RelativeSource={RelativeSource AncestorType=ContextMenu,Mode=FindAncestor},Mode=OneWay}">
+                                                CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius),RelativeSource={RelativeSource AncestorType=ContextMenu,Mode=FindAncestor},Mode=OneWay}">
                                             </Border>
-                                            <ScrollViewer Margin="{Binding Padding,RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}">
+                                            <ScrollViewer Margin="{Binding Padding,RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}"
+                                                           leedep:CornerRadiusManager.CornerRadius="{Binding ElementName=BdrSubmenu,Path=CornerRadius,Mode=OneWay}"
+                                                          leedep:CornerRadiusManager.IsClip="True"
+                                                          
+                                                          >
                                                 
                                                 <StackPanel IsItemsHost="True"
                                                         KeyboardNavigation.DirectionalNavigation="Cycle" />
@@ -135,6 +134,19 @@
 
                             </Border>
                             <ControlTemplate.Triggers>
+
+                                <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
+                                    <Setter TargetName="PART_Grid" Property="Clip">
+                                        <Setter.Value>
+                                            <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                                <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
+                                                <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
+                                                <Binding ElementName="border"  Path="CornerRadius" Mode="OneWay"/>
+                                                <Binding ElementName="border"  Path="BorderThickness" Mode="OneWay"/>
+                                            </MultiBinding>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
                                 <Trigger Property="IsMouseOver"  Value="True">
                                     <Setter Property="Background" TargetName="border" Value="{DynamicResource LeeBrush_Mark}"/>
                                 </Trigger>

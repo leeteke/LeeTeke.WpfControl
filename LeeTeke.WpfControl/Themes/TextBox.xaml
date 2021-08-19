@@ -6,7 +6,7 @@
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <Style x:Key="LeeTextBox" TargetType="{x:Type TextBox}">
-        <Setter Property="leedep:TextBoxManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="BorderThickness" Value="1"/>
@@ -23,14 +23,15 @@
                             BorderThickness="{TemplateBinding BorderThickness}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             SnapsToDevicePixels="True"
-                            CornerRadius="{Binding Path=(leedep:TextBoxManager.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}">
+                            CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}">
 
                         <ScrollViewer x:Name="PART_ContentHost" 
                                       Focusable="false" 
                                       Background="Transparent"
                                       HorizontalScrollBarVisibility="Hidden"
                                       VerticalScrollBarVisibility="Hidden"
-                                      Style="{DynamicResource LeeScrollViewer}">
+                                       leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path= (leedep:CornerRadiusManager.CornerRadius),Mode=OneWay}"
+                                      leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path= (leedep:CornerRadiusManager.IsClip),Mode=OneWay}">
                         </ScrollViewer>
 
                     </Border>

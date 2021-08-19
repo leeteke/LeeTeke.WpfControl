@@ -40,7 +40,7 @@
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="MinHeight" Value="{DynamicResource LeeItemHeight}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="leedep:ComboBoxManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="leedep:ComboBoxManager.EscToEmpty" Value="True"/>
         <Setter Property="leedep:ComboBoxManager.ShowPreviewText" Value="True"/>
         <Setter Property="leedep:ComboBoxManager.PreviewText" Value="--请选择--"/>
@@ -58,8 +58,9 @@
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{Binding Path=(leedep:ComboBoxManager.CornerRadius),RelativeSource={RelativeSource AncestorType={x:Type ComboBox}},Mode=OneWay}">
-                        <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
+                            CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius),RelativeSource={RelativeSource AncestorType={x:Type ComboBox}},Mode=OneWay}">
+                        <Grid x:Name="templateRoot" 
+                              SnapsToDevicePixels="true">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="0"/>
@@ -82,14 +83,9 @@
                                         Margin="1,0,8,8"
                                         Effect="{DynamicResource LeeShadow}"
                                         >
-                                    <ScrollViewer x:Name="DropDownScrollViewer" >
-                                        <ScrollViewer.Clip>
-                                            <MultiBinding  Converter="{StaticResource  MultiValueToClipConverter}" Mode="OneWay">
-                                                <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualWidth"/>
-                                                <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualHeight"/>
-                                                <Binding  ElementName="dropDownBorder"  Path="CornerRadius"/>
-                                            </MultiBinding>
-                                        </ScrollViewer.Clip>
+                                    <ScrollViewer x:Name="DropDownScrollViewer" 
+                                                  leedep:CornerRadiusManager.CornerRadius="{Binding ElementName=dropDownBorder,Path=CornerRadius,Mode=OneWay}"
+                                                  leedep:CornerRadiusManager.IsClip="True">
                                         <ItemsPresenter x:Name="ItemsPresenter"
                                                             KeyboardNavigation.DirectionalNavigation="Contained"
                                                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
@@ -137,6 +133,18 @@
                     </Border>
                     <ControlTemplate.Triggers>
 
+                        <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
+                            <Setter TargetName="templateRoot" Property="Clip">
+                                <Setter.Value>
+                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
+                                        <Binding ElementName="PART_Border"  Path="CornerRadius" Mode="OneWay"/>
+                                        <Binding ElementName="PART_Border"  Path="BorderThickness" Mode="OneWay"/>
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition SourceName="PART_EditableTextBox" Property="IsFocused" Value="False"/>

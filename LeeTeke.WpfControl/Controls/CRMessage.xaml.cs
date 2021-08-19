@@ -1,9 +1,7 @@
 ﻿using LeeTeke.WpfControl.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -12,16 +10,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Shell;
 
 namespace LeeTeke.WpfControl.Controls
 {
     /// <summary>
-    /// Message.xaml 的交互逻辑
-    /// </summary>
-    /// <summary>
     /// MessageBoxEx.xaml 的交互逻辑
     /// </summary>
-    public partial class Message :  IMessageWin
+    public partial class CRMessage : System.Windows.Window, IMessageWin
     {
         public object Value { get; set; }
         private bool _canClose;
@@ -34,10 +30,16 @@ namespace LeeTeke.WpfControl.Controls
             set
             {
                 _canClose = value;
-                CloseButtonIsEnable = value;
+                btnClose.IsEnabled = value ;
             }
         }
 
+        public new string Title
+        {
+            get => textTitle.Text;
+            set => textTitle.Text = value;
+
+        }
 
         public new object Content
         {
@@ -56,7 +58,7 @@ namespace LeeTeke.WpfControl.Controls
                     content.HorizontalAlignment = HorizontalAlignment.Stretch;
                 }
             }
-
+          
         }
         public System.Windows.Window Window { get => this; }
         public bool ShowLoding
@@ -126,8 +128,18 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
 
-        public Message()
+        public CRMessage(CornerRadius? cornerRadius = null)
         {
+            if (StaticMethods.MessageBoxExCR != default)
+            {
+                Dependencies.CornerRadiusManager.SetCornerRadius(this, StaticMethods.MessageBoxExCR);
+            }
+            else if (cornerRadius != null)
+            {
+                Dependencies.CornerRadiusManager.SetCornerRadius(this, (CornerRadius)cornerRadius);
+            }
+
+
             InitializeComponent();
             Owner = Application.Current.MainWindow;
             CanClose = true;
@@ -160,7 +172,7 @@ namespace LeeTeke.WpfControl.Controls
 
                 if (Value is Action action)
                 {
-                    action.Invoke();
+                    action.BeginInvoke(null,null);
                 }
 
                 if (_isDialog)

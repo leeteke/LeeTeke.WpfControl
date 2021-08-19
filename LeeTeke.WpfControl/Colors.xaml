@@ -26,6 +26,8 @@
     <sys:Double x:Key="LeeControlMinHeight">35</sys:Double>
     <sys:Double x:Key="LeeControlMinWidth">120</sys:Double>
     <sys:Double x:Key="LeeItemHeight">28</sys:Double>
+    <sys:Double x:Key="LeeListItemHeight">50</sys:Double>
+    <sys:Double x:Key="LeeListItemWidth">100</sys:Double>
     <sys:Double x:Key="LeeItemWidth">80</sys:Double>
     <sys:Double x:Key="LeeItemMinHeight">28</sys:Double>
     <sys:Double x:Key="LeeItemMinWidth">80</sys:Double>

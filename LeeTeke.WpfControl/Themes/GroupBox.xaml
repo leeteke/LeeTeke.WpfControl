@@ -21,19 +21,19 @@
         <Setter Property="leedep:GroupBoxManager.SplitLineBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="leedep:GroupBoxManager.SplitLineMargin" Value="1"/>
         <Setter Property="leedep:GroupBoxManager.SplitLineVisibility" Value="Collapsed"/>
-        <Setter Property="leedep:GroupBoxManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=(leedep:GroupBoxManager.BorderMode),Mode=OneWay}" Value="External">
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type GroupBox}">
-                            <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            <Border x:Name="PART_Border" BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     Background="{TemplateBinding Background}"
                                     Margin="{TemplateBinding Margin}"
-                                    CornerRadius="{Binding Path=(leedep:GroupBoxManager.CornerRadius),RelativeSource={RelativeSource AncestorType=GroupBox},Mode=OneWay}"
+                                    CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius),RelativeSource={RelativeSource AncestorType=GroupBox},Mode=OneWay}"
                                     Padding="{TemplateBinding Padding}">
-                                <Grid  >
+                                <Grid x:Name="PART_Grid"  >
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
@@ -57,15 +57,31 @@
                                                Visibility="{Binding Path=(leedep:GroupBoxManager.SplitLineVisibility),RelativeSource={RelativeSource AncestorType=GroupBox},Mode=OneWay}"
                                                SnapsToDevicePixels="{DynamicResource LeeSnapsToDevicePixels}"
                                                />
-                                    <ContentPresenter   Grid.Row="2" />
+                                    <ContentPresenter Content="{TemplateBinding Content}"
+                                                      Grid.Row="2" />
 
                                 </Grid>
                             </Border>
                             <ControlTemplate.Triggers>
+                                <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
+                                    <Setter TargetName="PART_Grid" Property="Clip">
+                                        <Setter.Value>
+                                            <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                                <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
+                                                <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
+                                                <Binding ElementName="PART_Border"  Path="CornerRadius" Mode="OneWay"/>
+                                                <Binding ElementName="PART_Border"  Path="BorderThickness" Mode="OneWay"/>
+                                            </MultiBinding>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+
                                 <DataTrigger Binding="{Binding Header,Converter={StaticResource IsNullConverter},RelativeSource={RelativeSource Self}}"
                                      Value="True">
                                     <Setter TargetName="Header"  Property="Visibility"  Value="Collapsed" />
                                 </DataTrigger>
+                                
+                                
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Setter.Value>
@@ -95,18 +111,36 @@
                                                       VerticalAlignment="Center"
                                                       />
                          
-                                <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                <Border x:Name="PART_Border" BorderBrush="{TemplateBinding BorderBrush}"
                                         BorderThickness="{TemplateBinding BorderThickness}"
                                         Background="{TemplateBinding Background}"
                                         Margin="{TemplateBinding Padding}"
-                                        CornerRadius="{Binding Path=(leedep:GroupBoxManager.CornerRadius),RelativeSource={RelativeSource AncestorType=GroupBox},Mode=OneWay}"
+                                        CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius),RelativeSource={RelativeSource AncestorType=GroupBox},Mode=OneWay}"
                                         Grid.Row="1">
-                                    <ContentPresenter   
+                                 
+                                        <ContentPresenter  x:Name="PART_Content"
+                                                           Content="{TemplateBinding Content}"
                                                     />
+                            
+                                
                             </Border>
                             </Grid>
                            
                             <ControlTemplate.Triggers>
+
+                                <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
+                                    <Setter TargetName="PART_Content" Property="Clip">
+                                        <Setter.Value>
+                                            <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                                <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
+                                                <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
+                                                <Binding ElementName="PART_Border"  Path="CornerRadius" Mode="OneWay"/>
+                                                <Binding ElementName="PART_Border"  Path="BorderThickness" Mode="OneWay"/>
+                                            </MultiBinding>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+
                                 <DataTrigger Binding="{Binding Header,Converter={StaticResource IsNullConverter},RelativeSource={RelativeSource Self}}"
                                      Value="True">
                                     <Setter TargetName="Header"  Property="Visibility"  Value="Collapsed" />

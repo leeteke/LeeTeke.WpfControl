@@ -1,4 +1,4 @@
-﻿<Window x:Class="LeeTeke.WPFTest.MainWindow"
+﻿<leecontrol:Window x:Class="LeeTeke.WPFTest.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -12,18 +12,16 @@
         Height="450"
         Width="600"
         x:Name="windows"
-        Background="{DynamicResource LeeBrush_Background}"
+        WindowState="Normal"
+        ClientFull="True"
         d:Height="1000"
         >
-    <Window.Resources>
-        
-      
-    </Window.Resources>
 
-    
+    <leecontrol:Window.TitleContent>
+        <Button Content="你好" Width="60"  />
+    </leecontrol:Window.TitleContent>
 
-    <Grid   Visibility="Visible">
-
+    <Grid   >
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition/>
@@ -34,8 +32,7 @@
                       HorizontalScrollBarVisibility="Disabled"
                       >
 
-            <StackPanel  x:Name="stack"
-                >
+            <StackPanel  x:Name="stack"  >
                 <StackPanel.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="ceshi"/>
@@ -53,10 +50,23 @@
                 <leecontrol:Pagination MaxPageCount="5"/>
 
                 <Button   Height="30" 
-                        Content="黑白切换" 
-                        Command="{Binding TestCommand}"
-                        ToolTip="黑白切换" 
-                          leecontrol:TabViewItem.ItemCanClosing="True"/>
+                         Command="{Binding TestCommand}"
+                         ToolTip="黑白切换" 
+                          Padding="0"
+                         >
+                    <leecontrol:ImageEx Source="/Datas/myicon.jpg"  
+                                    
+                                    Effect="{DynamicResource LeeShadow}">
+                        <leecontrol:ImageEx.DefaultContent>
+                            <Image Source="/Datas/test.ico"/>
+                        </leecontrol:ImageEx.DefaultContent>
+                    </leecontrol:ImageEx>
+                </Button>
+
+                <DataGrid ItemsSource="{Binding TestList}"
+                          AutoGenerateColumns="True"
+                          CanUserAddRows="True"
+                          CanUserDeleteRows="True"/>
 
 
                 <ListBox ItemsSource="{Binding TestList}"
@@ -65,15 +75,23 @@
                          Margin="10">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Height="50" Text="{Binding Title}"/>
+                            <TextBlock Height="35" Text="{Binding Title}"/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
 
-                <ListView ItemsSource="{Binding TestList}" >
+                <ListView ItemsSource="{Binding TestList}" 
+                          Margin="5"
+                          Height="200"
+                          >
                     <ListView.View>
-                        <GridView>
-                                <GridViewColumn Header="标题" Width="auto" DisplayMemberBinding="{Binding Title}"/>
+                        <GridView   >
+                            <GridViewColumn Width="auto" DisplayMemberBinding="{Binding Title}" >
+                                <GridViewColumn.Header>
+                                    <TextBlock Text="你好"/>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                               <GridViewColumn Header="标题" Width="auto" DisplayMemberBinding="{Binding Boolen}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -181,6 +199,7 @@
                             />
                 <ComboBox IsEditable="False"  
                           Height="35"
+                          leedep:CornerRadiusManager.IsClip="True"
                           ItemsSource="{Binding TestList}">
                     <ComboBox.ItemTemplate>
                             <DataTemplate>
@@ -241,4 +260,4 @@
 
     </Grid>
 
-</Window>
+</leecontrol:Window>

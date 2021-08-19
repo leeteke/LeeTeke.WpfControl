@@ -22,7 +22,7 @@
         <Setter Property="leedep:SliderManager.HeaderDock" Value="Top"/>
         <Setter Property="Orientation" Value="Horizontal"/>
         <Setter Property="Height" Value="{DynamicResource LeeControlHeight}"/>
-        <Setter Property="leedep:SliderManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="leedep:SliderManager.TrackSize" Value="8"/>
         <Setter Property="leedep:SliderManager.RegisterMouseWheel" Value="True"/>
         <Setter Property="leedep:SliderManager.TrackBrush" Value="{DynamicResource LeeBrush_Theme}"/>
@@ -69,7 +69,7 @@
                                             VerticalAlignment="Center"
                                             Background="{TemplateBinding Background}"
                                             Margin="{TemplateBinding Padding}"
-                                            CornerRadius="{Binding Path=(leedep:SliderManager.CornerRadius), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"/>
+                                            CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"/>
                                     <Track x:Name="PART_Track"
                                            Grid.Row="1"
                                            Margin="0,0,0,0"
@@ -85,7 +85,7 @@
                                                         <Border Background="{TemplateBinding Background}"
                                                                 Height="{Binding Path=(leedep:SliderManager.TrackSize), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
                                                                 VerticalAlignment="Center"
-                                                              CornerRadius="{Binding Path=(leedep:SliderManager.CornerRadius), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"/>
+                                                              CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"/>
                                                         <!--<Rectangle Fill="{TemplateBinding Background}"
                                                                        Height="{Binding Path=(leedep:SliderManager.TrackSize), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
                                                                        VerticalAlignment="Center" />-->
@@ -212,7 +212,7 @@
                                             HorizontalAlignment="Center"
                                             Background="{TemplateBinding Background}"
                                             Margin="{TemplateBinding Padding}"
-                                            CornerRadius="{Binding Path=(leedep:SliderManager.CornerRadius), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"/>
+                                            CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"/>
                                     <Track x:Name="PART_Track"
                                            Grid.Column="1"
                                            Margin="0,0,0,0"
@@ -227,7 +227,7 @@
                                                         <Border Background="{TemplateBinding Background}"
                                                                 Width="{Binding Path=(leedep:SliderManager.TrackSize), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
                                                                 HorizontalAlignment="Center"
-                                                                CornerRadius="{Binding Path=(leedep:SliderManager.CornerRadius), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"/>
+                                                                CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"/>
                                                         <!--<Rectangle Fill="{TemplateBinding Background}"
                                                                        Height="{Binding Path=(leedep:SliderManager.TrackSize), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
                                                                        VerticalAlignment="Center" />-->

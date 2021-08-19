@@ -149,7 +149,7 @@ namespace LeeTeke.WPFTest.ViewModels
 
             Text = "123123123";
 
-                    }
+        }
 
 
 
@@ -159,8 +159,22 @@ namespace LeeTeke.WPFTest.ViewModels
             _switch = !_switch;
             StaticMethods.SetLightOrDark(_switch);
 
-            MessageBoxEx.Show("你好", MessageStatus.Question);
+            MessageBoxEx msg = new MessageBoxEx()
+            {
+                Content = "测试",
+                ShowLoding = true,
+                Status= MessageStatus.Question
+            };
 
+            msg.AddOptions("你好", 123);
+            msg.AddOptions("你好1", 456);
+            msg.AddOptions("你好2", 789);
+            var reulst = await msg.ShowDialogAsync();
+            NotifyData = new NotifyBannerShowData()
+            {
+                Content = $"您选择了 {reulst}",
+                Status = NotifyStatus.Info
+            };
         }
 
     }

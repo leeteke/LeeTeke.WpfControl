@@ -26,7 +26,6 @@ namespace LeeTeke.WpfControl.Dependencies
 
         #endregion
 
-
         #region CheckBoxSize
         /// <summary>
         /// 选择框大小
@@ -45,7 +44,6 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty CheckBoxSizeProperty =
             DependencyProperty.RegisterAttached("CheckBoxSize", typeof(double), typeof(CheckBoxManager));
         #endregion
-
 
         #region CheckedContent
         public static object GetCheckedContent(DependencyObject obj)

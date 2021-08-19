@@ -60,7 +60,7 @@
                                             Height="25"
                                             Margin="0,5,5,5"
                                             Visibility="Collapsed"
-                                            leedep:ButtonManager.CornerRadius="12.5"
+                                            leedep:CornerRadiusManager.CornerRadius="12.5"
                                             FontFamily="{DynamicResource IconFontFamily}"
                                             Style="{DynamicResource ColorButton}"
                                             BorderThickness="0"

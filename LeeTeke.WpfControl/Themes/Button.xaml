@@ -13,8 +13,8 @@
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Height" Value="{DynamicResource LeeControlHeight}"/>
-        <Setter Property="leedep:ButtonManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="leedep:CornerRadiusManager.IsClip" Value="True"/>
         <Setter Property="leedep:ButtonManager.RippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -26,21 +26,10 @@
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}},Path=(leedep:ButtonManager.CornerRadius),Mode=OneWay}"
+                            CornerRadius="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}},Path=(leedep:CornerRadiusManager.CornerRadius),Mode=OneWay}"
                             Effect="{TemplateBinding Effect}"
                             >
-                        <Grid Background="Transparent">
-                            <Grid.Clip>
-                                <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
-                                    <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
-                                    <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
-                                    <Binding  RelativeSource="{RelativeSource AncestorType={x:Type Button}}"  Path="(leedep:ButtonManager.CornerRadius)" Mode="OneWay"/>
-                                </MultiBinding>
-                            </Grid.Clip>
-                            <controls:RippleMask ParentElement="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}},Mode=OneWay}"
-                                             RippleBrush="{Binding Path=(leedep:ButtonManager.RippleBrush),RelativeSource={RelativeSource AncestorType={x:Type Button}},Mode=OneWay}"
-                                             CornerRadius="{Binding Path=(leedep:ButtonManager.CornerRadius),RelativeSource={RelativeSource AncestorType={x:Type Button}},Mode=OneWay}"
-                                             IsOverflow="False"/>
+                        <Grid x:Name="PART_Grid" Background="Transparent">
                             <ContentPresenter x:Name="contentPresenter" 
                                           Focusable="False" 
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -48,9 +37,25 @@
                                           RecognizesAccessKey="True"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <controls:RippleMask ParentElement="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}},Mode=OneWay}"
+                                             RippleBrush="{Binding Path=(leedep:ButtonManager.RippleBrush),RelativeSource={RelativeSource AncestorType={x:Type Button}},Mode=OneWay}"
+                                             CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius),RelativeSource={RelativeSource AncestorType={x:Type Button}},Mode=OneWay}"
+                                             IsOverflow="False"/>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
+                            <Setter TargetName="PART_Grid" Property="Clip">
+                                <Setter.Value>
+                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
+                                        <Binding ElementName="PART_Border"  Path="CornerRadius" Mode="OneWay"/>
+                                        <Binding ElementName="PART_Border"  Path="BorderThickness" Mode="OneWay"/>
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter> 
+                        </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="BorderBrush"
                                      Value="{DynamicResource LeeBrush_BorderBrushMouseOver}"
@@ -76,9 +81,9 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Height" Value="{DynamicResource LeeControlHeight}"/>
         <Setter Property="leedep:ButtonManager.RippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}"/>
-        <Setter Property="leedep:ButtonManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="leedep:CornerRadiusManager.IsClip" Value="True"/>
         <Setter Property="leedep:ButtonManager.MouseOverBackground" Value="{DynamicResource LeeBrush_Mark}"/>
         <Setter Property="leedep:ButtonManager.MouseOverBorderBrush" Value="{DynamicResource LeeBrush_Mark}"/>
         <Setter Property="leedep:ButtonManager.MouseOverForeground" Value="White"/>
@@ -90,22 +95,11 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}" 
                             Background="{TemplateBinding Background}" 
-                            CornerRadius="{Binding Path=(leedep:ButtonManager.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"
+                            CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"
                             Effect="{TemplateBinding Effect}"
                            >
                         <Grid x:Name="PART_Grid"
                               Background="Transparent">
-                            <Grid.Clip>
-                                <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
-                                    <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
-                                    <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
-                                    <Binding  RelativeSource="{RelativeSource AncestorType={x:Type Button}}"  Path="(leedep:ButtonManager.CornerRadius)" Mode="OneWay"/>
-                                </MultiBinding>
-                            </Grid.Clip>
-                            <controls:RippleMask ParentElement="{Binding RelativeSource={RelativeSource  Mode=TemplatedParent}}"
-                                                 RippleBrush="{Binding Path=(leedep:ButtonManager.RippleBrush),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"
-                                                 CornerRadius="{Binding Path=(leedep:ButtonManager.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"
-                                                 IsOverflow="False"/>
                             <ContentPresenter x:Name="contentPresenter" 
                                               Focusable="False" 
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -113,9 +107,26 @@
                                               RecognizesAccessKey="True"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <controls:RippleMask ParentElement="{Binding RelativeSource={RelativeSource  Mode=TemplatedParent}}"
+                                                 RippleBrush="{Binding Path=(leedep:ButtonManager.RippleBrush),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"
+                                                 CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"
+                                                 IsOverflow="False"/>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
+                            <Setter TargetName="PART_Grid" Property="Clip">
+                                <Setter.Value>
+                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
+                                        <Binding ElementName="PART_Border"  Path="CornerRadius" Mode="OneWay"/>
+                                        <Binding ElementName="PART_Border"  Path="BorderThickness" Mode="OneWay"/>
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+
                         <Trigger Property="IsMouseOver" 
                                  Value="true">
                             <Setter Property="Background" 
@@ -155,7 +166,6 @@
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Padding" Value="{DynamicResource LeeControlPadding}"/>
-        <Setter Property="Height" Value="{DynamicResource LeeControlHeight}"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -193,7 +203,9 @@
                                      Property="TextElement.Foreground" 
                                      Value="{Binding Path=(leedep:ButtonManager.PressedForeground),RelativeSource={RelativeSource  Mode=TemplatedParent},Mode=OneWay}"/>
                         </Trigger>
-
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="Gray"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
 
                 </ControlTemplate>

@@ -11,50 +11,28 @@
     <Style x:Key="LeeDataGrid" TargetType="{x:Type DataGrid}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="leedep:DataGridManager.DataGridHook"
-                Value="True" />
-        <Setter Property="SnapsToDevicePixels"
-                Value="True" />
-        <Setter Property="FontSize"
-                Value="13" />
-        <Setter Property="Background"
-                Value="Transparent" />
-        <Setter Property="BorderBrush"
-                Value="{DynamicResource LeeBrush_BorderBrush}" />
-        <Setter Property="BorderThickness"
-                Value="1" />
-        <Setter Property="HorizontalGridLinesBrush"
-                Value="LightGray" />
-        <Setter Property="VerticalGridLinesBrush"
-                Value="LightGray" />
-        <Setter Property="leedep:DataGridManager.CellPadding"
-                Value="10,0" />
-        <Setter Property="leedep:DataGridManager.HeaderPadding"
-                Value="10,0" />
-        <Setter Property="leedep:DataGridManager.RowMinHeight"
-                Value="35" />
-        <Setter Property="leedep:DataGridManager.HeaderMinHeight"
-                Value="40" />
-        <Setter Property="leedep:DataGridManager.ColumnVerticalContentAlignment"
-                Value="Center" />
-        <Setter Property="leedep:DataGridManager.ColumnHorizontalContentAlignment"
-                Value="Stretch" />
-        <Setter Property="leedep:DataGridManager.ResizeThumbThickness"
-                Value="0.5" />
-        <Setter Property="leedep:DataGridManager.ResizeThumbBrush"
-                Value="LightGray" />
-        <Setter Property="leedep:DataGridManager.HoverBackground"
-                Value="#22DDDDDD" />
-        <Setter Property="leedep:DataGridManager.SelectedBackground"
-                Value="#44DDDDDD" />
-        <Setter Property="leedep:DataGridManager.SelectedForeground"
-                Value="{Binding Foreground,RelativeSource={RelativeSource Self}}" />
-        <Setter Property="leedep:DataGridManager.HeaderBackground"
-                Value="#FAFAFA" />
-        <Setter Property="leedep:DataGridManager.HeaderForeground"
-                Value="DimGray" />
-        <Setter Property="Foreground"
-                Value="#3E3E3E" />
+        <Setter Property="leedep:DataGridManager.DataGridHook"                Value="True" />
+        <Setter Property="SnapsToDevicePixels"                Value="True" />
+        <Setter Property="FontSize"                Value="13" />
+        <Setter Property="Background"                Value="Transparent" />
+        <Setter Property="BorderBrush"                Value="{DynamicResource LeeBrush_BorderBrush}" />
+        <Setter Property="BorderThickness"                Value="1" />
+        <Setter Property="HorizontalGridLinesBrush"                Value="LightGray" />
+        <Setter Property="VerticalGridLinesBrush"                Value="LightGray" />
+        <Setter Property="leedep:DataGridManager.CellPadding"                Value="10,0" />
+        <Setter Property="leedep:DataGridManager.HeaderPadding"                Value="10,0" />
+        <Setter Property="leedep:DataGridManager.RowMinHeight"                Value="35" />
+        <Setter Property="leedep:DataGridManager.HeaderMinHeight"                Value="40" />
+        <Setter Property="leedep:DataGridManager.ColumnVerticalContentAlignment"                Value="Center" />
+        <Setter Property="leedep:DataGridManager.ColumnHorizontalContentAlignment"                Value="Stretch" />
+        <Setter Property="leedep:DataGridManager.ResizeThumbThickness"                Value="0.5" />
+        <Setter Property="leedep:DataGridManager.ResizeThumbBrush"                Value="LightGray" />
+        <Setter Property="leedep:DataGridManager.HoverBackground"                Value="#22DDDDDD" />
+        <Setter Property="leedep:DataGridManager.SelectedBackground"                Value="#44DDDDDD" />
+        <Setter Property="leedep:DataGridManager.SelectedForeground"                Value="{Binding Foreground,RelativeSource={RelativeSource Self}}" />
+        <Setter Property="leedep:DataGridManager.HeaderBackground"                Value="#FAFAFA" />
+        <Setter Property="leedep:DataGridManager.HeaderForeground"                Value="DimGray" />
+        <Setter Property="Foreground"                Value="#3E3E3E" />
 
         <Setter Property="RowValidationErrorTemplate">
             <Setter.Value>
@@ -78,7 +56,7 @@
                     <Trigger Property="VerticalScrollBarVisibility" Value="Auto"/>
                     <Trigger Property="HorizontalScrollBarVisibility" Value="Auto"/>
                 </Style.Triggers>
-                
+
                 <Style.Resources>
                     <Style TargetType="ScrollBar"
                            BasedOn="{StaticResource LeeScrollBar}">

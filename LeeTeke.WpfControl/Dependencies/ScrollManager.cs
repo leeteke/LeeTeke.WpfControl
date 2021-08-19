@@ -40,24 +40,6 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("ThumbBrush", typeof(Brush), typeof(ScrollManager));
         #endregion
 
-
-        #region CornerRadius
-        public static CornerRadius GetCornerRadius(DependencyObject obj)
-        {
-            return (CornerRadius)obj.GetValue(CornerRadiusProperty);
-        }
-
-        public static void SetCornerRadius(DependencyObject obj, CornerRadius value)
-        {
-            obj.SetValue(CornerRadiusProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for CornerRadius.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty CornerRadiusProperty =
-            DependencyProperty.RegisterAttached("CornerRadius", typeof(CornerRadius), typeof(ScrollManager));
-        #endregion
-
-
         #region ScrollBarCornerRadius
         public static CornerRadius GetScrollBarCornerRadius(DependencyObject obj)
         {
@@ -73,7 +55,6 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("ScrollBarCornerRadius", typeof(CornerRadius), typeof(ScrollManager));
 
         #endregion
-
 
         #region ScrollBarShadow
 
@@ -169,5 +150,7 @@ namespace LeeTeke.WpfControl.Dependencies
                 e.Handled = true;
         }
         #endregion
+
     }
+        
 }

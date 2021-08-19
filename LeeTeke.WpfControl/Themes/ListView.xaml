@@ -7,46 +7,42 @@
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="GridViewColumnHeaderGripper" TargetType="Thumb">
-        <Setter Property="Canvas.Right" Value="-9"/>
-        <Setter Property="Width" Value="18"/>
-        <Setter Property="Height" Value="{Binding ActualHeight, RelativeSource={RelativeSource TemplatedParent}}"/>
-        <Setter Property="Padding" Value="0"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Thumb">
-                    <Border Background="Transparent" Padding="{TemplateBinding Padding}">
-                        <Rectangle Fill="{TemplateBinding Background}" HorizontalAlignment="Center" Width="1"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
 
     <Style TargetType="GridViewColumnHeader">
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
-        <Setter Property="Padding" Value="12,6,12,12"/>
-        <Setter Property="MinHeight" Value="44"/>
+        <Setter Property="MinHeight" Value="{DynamicResource LeeItemMinHeight}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="GridViewColumnHeader">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="auto"/>
-                        </Grid.ColumnDefinitions>
-                 
-                        <Border x:Name="HeaderBorder" BorderBrush="{TemplateBinding BorderBrush}" Background="Transparent">
+                    <Grid Background="Transparent">
+                        <Border x:Name="HeaderBorder" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                Padding="{TemplateBinding Padding}"
+                                Margin="{TemplateBinding Margin}">
                             <ContentPresenter x:Name="HeaderContent"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
-                        <Canvas Grid.Column="1">
-                            <Thumb x:Name="PART_HeaderGripper" Style="{StaticResource GridViewColumnHeaderGripper}"/>
-                        </Canvas>
+
+                        <Thumb x:Name="PART_HeaderGripper" 
+                               Width="3"
+                               Margin="0,4"
+                               HorizontalAlignment="Right"
+                               Background="Transparent"
+                               >
+                            <Thumb.Template>
+                                <ControlTemplate TargetType="{x:Type Thumb}">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            Margin="{TemplateBinding Margin}"/>
+                                </ControlTemplate>
+                            </Thumb.Template>
+                        </Thumb>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -55,6 +51,8 @@
 
 
     <Style x:Key="LeetekeListViewItem" TargetType="{x:Type ListViewItem}">
+        <Setter Property="MinHeight" Value="{Binding Path=(leedep:ListViewItemManager.MinHeight), RelativeSource={RelativeSource AncestorType={x:Type ListBox}},Mode=OneWay}"/>
+        <Setter Property="MinWidth" Value="{Binding Path=(leedep:ListViewItemManager.MinWidth), RelativeSource={RelativeSource AncestorType={x:Type ListBox}},Mode=OneWay}"/>
         <Setter Property="Background" Value="{Binding Path=(leedep:ListViewItemManager.Background), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
         <Setter Property="BorderBrush" Value="{Binding Path=(leedep:ListViewItemManager.BorderBrush), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
         <Setter Property="BorderBrush" Value="{Binding Path=(leedep:ListViewItemManager.BorderBrush), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
@@ -65,33 +63,20 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="Effect" Value="{Binding Path=(leedep:ListViewItemManager.Effect), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="leedep:ListViewItemManager.CornerRadius" Value="{Binding Path=(leedep:ListViewItemManager.CornerRadius), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListViewItemManager.IsClip" Value="{Binding Path=(leedep:ListViewItemManager.IsClip), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListViewItem}">
-                    <Border x:Name="border"
+                    <Border x:Name="PART_Border"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Background="{TemplateBinding Background}"
                             Margin="{TemplateBinding Margin}"
-                            CornerRadius="{Binding Path=(leedep:ListViewItemManager.CornerRadius), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"
+                            CornerRadius="{Binding Path=(leedep:ListViewItemManager.CornerRadius), RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}},Mode=OneWay}"
                             Effect="{TemplateBinding Effect}">
-                        <Grid  Margin="{TemplateBinding Padding}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto" />
-                                <RowDefinition  />
-                                <RowDefinition Height="auto" />
-                            </Grid.RowDefinitions>
-                            <Rectangle x:Name="rectangle" 
-                                       Margin="{Binding Path=(leedep:ListViewItemManager.MarkMargin), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}">
-                                <Rectangle.Fill >
-                                    <SolidColorBrush x:Name="rectBrush" Color="Transparent"/>
-                                </Rectangle.Fill>
-                            </Rectangle>
+                        <Grid x:Name="PART_Grid"  
+                              Margin="{TemplateBinding Padding}">
                             <GridViewRowPresenter  x:Name="contentPresenter"
                                               Grid.Column="1"
                                               Grid.Row="1"
@@ -103,39 +88,26 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Path=(leedep:ListViewItemManager.MarkSite),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"   Value="Left">
-                            <Setter TargetName="rectangle"  Property="Grid.Row" Value="1"/>
-                            <Setter TargetName="rectangle" Property="Grid.Column"  Value="0"/>
-                            <Setter TargetName="rectangle" Property="Width" Value="{Binding Path=(leedep:ListViewItemManager.MarkSize),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
-                        </DataTrigger>
 
-                        <DataTrigger Binding="{Binding Path=(leedep:ListViewItemManager.MarkSite),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"   Value="Right">
-                            <Setter TargetName="rectangle"  Property="Grid.Row" Value="1"/>
-                            <Setter TargetName="rectangle" Property="Grid.Column"  Value="2"/>
-                            <Setter TargetName="rectangle" Property="Width" Value="{Binding Path=(leedep:ListViewItemManager.MarkSize),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
-                        </DataTrigger>
-
-                        <DataTrigger Binding="{Binding Path=(leedep:ListViewItemManager.MarkSite),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"   Value="Top">
-                            <Setter TargetName="rectangle"  Property="Grid.Row" Value="0"/>
-                            <Setter TargetName="rectangle" Property="Grid.Column"  Value="1"/>
-                            <Setter TargetName="rectangle" Property="Height" Value="{Binding Path=(leedep:ListViewItemManager.MarkSize),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
-                        </DataTrigger>
-
-                        <DataTrigger Binding="{Binding Path=(leedep:ListViewItemManager.MarkSite),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"   Value="Bottom">
-                            <Setter TargetName="rectangle"  Property="Grid.Row" Value="2"/>
-                            <Setter TargetName="rectangle" Property="Grid.Column"  Value="1"/>
-                            <Setter TargetName="rectangle" Property="Height" Value="{Binding Path=(leedep:ListViewItemManager.MarkSize),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
-                        </DataTrigger>
-
+                        <Trigger Property="leedep:ListViewItemManager.IsClip" Value="True">
+                            <Setter TargetName="PART_Grid" Property="Clip">
+                                <Setter.Value>
+                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
+                                        <Binding ElementName="PART_Border"  Path="CornerRadius" Mode="OneWay"/>
+                                        <Binding ElementName="PART_Border"  Path="BorderThickness" Mode="OneWay"/>
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="rectangle" Property="Fill" Value="{Binding Path=(leedep:ListViewItemManager.MarkMouseOverBrush),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
                             <Setter Property="Background" Value="{Binding Path=(leedep:ListViewItemManager.MouseOverBackground),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}" />
                             <Setter  Property="BorderBrush" Value="{Binding Path=(leedep:ListViewItemManager.MouseOverBorderBrush),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
                             <Setter  Property="BorderThickness" Value="{Binding Path=(leedep:ListViewItemManager.MouseOverBorderThickness),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
                             <Setter Property="Effect" Value="{Binding Path=(leedep:ListViewItemManager.MouseOverEffect), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="rectangle" Property="Fill" Value="{Binding Path=(leedep:ListViewItemManager.MarkSelectedBrush),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
                             <Setter Property="Background" Value="{Binding Path=(leedep:ListViewItemManager.SelectedBackground),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}" />
                             <Setter  Property="BorderBrush" Value="{Binding Path=(leedep:ListViewItemManager.SelectedBorderBrush),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
                             <Setter  Property="BorderThickness" Value="{Binding Path=(leedep:ListViewItemManager.SelectedBorderThickness),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
@@ -156,7 +128,7 @@
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
-        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
@@ -164,96 +136,179 @@
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-        <Setter Property="leedep:ListViewManager.Orientation" Value="Vertical"/>
-        <Setter Property="leedep:ListViewItemManager.MarkSite" Value="Null"/>
-        <Setter Property="leedep:ListViewItemManager.Background" Value="Transparent"/>
+        <Setter Property="leedep:ListViewItemManager.CornerRadius" Value="{DynamicResource LeeCornerRadius  }"/>
+        <Setter Property="leedep:ListViewItemManager.Marigin" Value="0,2"/>
+        <Setter Property="leedep:ListViewItemManager.MinHeight" Value="{DynamicResource LeeListItemHeight}"/>
+        <Setter Property="leedep:ListViewItemManager.MinWidth" Value="{DynamicResource LeeListItemWidth}"/>
+        <Setter Property="leedep:ListViewItemManager.Background" Value="{DynamicResource LeeBrush_Forground}"/>
         <Setter Property="leedep:ListViewItemManager.SelectedForeground" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=Foreground,Mode=OneWay}"/>
         <Setter Property="leedep:ListViewItemManager.SelectedFontSize" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=FontSize,Mode=OneWay}"/>
         <Setter Property="leedep:ListViewItemManager.SelectedFontWeight" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=FontWeight,Mode=OneWay}"/>
-        <Setter Property="leedep:ListViewItemManager.MarkMouseOverBrush" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(leedep:ListViewItemManager.MarkSelectedBrush),Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.5,Mode=OneWay}"/>
         <Setter Property="leedep:ListViewItemManager.SelectedBackground" Value="{DynamicResource LeeBrush_ItemSelectedBackground}"/>
         <Setter Property="leedep:ListViewItemManager.MouseOverBackground" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(leedep:ListViewItemManager.SelectedBackground),Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.5,Mode=OneWay}"/>
+        <Setter Property="leedep:ListViewManager.HeaderBorderThickness" Value="0,0,0,1"/>
+        <Setter Property="leedep:ListViewManager.HeaderBorderBursh" Value="{DynamicResource LeeBrush_BorderBrush}"/>
+        <Setter Property="leedep:ListViewManager.HeaderFreeze" Value="True"/>
         <Setter Property="ItemContainerStyle"  Value="{StaticResource LeetekeListViewItem}" />
-        <Setter Property="ItemsPanel">
-            <Setter.Value>
-                <ItemsPanelTemplate>
-                    <StackPanel  FocusVisualStyle="{x:Null}"
-                                Orientation="{Binding Path=(leedep:ListViewManager.Orientation),  RelativeSource={RelativeSource AncestorType={x:Type ListView},AncestorLevel=1},Mode=OneWay}"
-                       />
-                </ItemsPanelTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate  TargetType="{x:Type ListView}">
-                        <ScrollViewer x:Name="scrollviewer" 
+
+        <Style.Triggers>
+            <Trigger Property="leedep:ListViewManager.HeaderFreeze" Value="True">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate  TargetType="{x:Type ListView}">
+                            <Grid Margin="{TemplateBinding Margin}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Border x:Name="PART_HeaderBorder"
+                                        Grid.ColumnSpan="2"
+                                    Background="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListViewManager.HeaderBackground),Mode=OneWay}"
+                                    BorderBrush="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListViewManager.HeaderBorderBursh),Mode=OneWay}"
+                                     BorderThickness="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListViewManager.HeaderBorderThickness),Mode=OneWay}"
+                                     CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListViewManager.HeaderCornerRadius),Mode=OneWay}"
+                                      Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListViewManager.HeaderMargin),Mode=OneWay}"
+                                      Padding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListViewManager.HeaderPadding),Mode=OneWay}">
+                                    <GridViewHeaderRowPresenter x:Name="PART_Header"
+                                                            AllowsColumnReorder="{Binding View.AllowsColumnReorder, RelativeSource={RelativeSource TemplatedParent}}"
+                                                            ColumnHeaderContainerStyle="{Binding View.ColumnHeaderContainerStyle, RelativeSource={RelativeSource TemplatedParent}}"
+                                                            ColumnHeaderToolTip="{Binding View.ColumnHeaderToolTip, RelativeSource={RelativeSource TemplatedParent}}"
+                                                            ColumnHeaderContextMenu="{Binding View.ColumnHeaderContextMenu, RelativeSource={RelativeSource TemplatedParent}}"
+                                                            ColumnHeaderTemplate="{Binding View.ColumnHeaderTemplate, RelativeSource={RelativeSource TemplatedParent}}"
+                                                            ColumnHeaderTemplateSelector="{Binding View.ColumnHeaderTemplateSelector,RelativeSource={RelativeSource TemplatedParent}}"
+                                                            Columns="{Binding View.Columns, RelativeSource={RelativeSource TemplatedParent}}"
+                                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </Border>
+                                <ScrollViewer Grid.Row="1" 
+                                                 Grid.ColumnSpan="2"
+                                      x:Name="PART_ScrollViewer" 
                                       HorizontalScrollBarVisibility="{Binding  RelativeSource={ RelativeSource  Mode=FindAncestor,AncestorType=ListView},Path=(ScrollViewer.HorizontalScrollBarVisibility),Mode=OneWay}" 
                                       VerticalScrollBarVisibility="{Binding  RelativeSource={ RelativeSource  Mode=FindAncestor,AncestorType=ListView},Path=(ScrollViewer.VerticalScrollBarVisibility),Mode=OneWay}"
                                       CanContentScroll="{Binding  RelativeSource={ RelativeSource  Mode=FindAncestor,AncestorType=ListView},Path=(ScrollViewer.CanContentScroll),Mode=OneWay}"
                                       PanningMode="{Binding  RelativeSource={ RelativeSource  Mode=FindAncestor,AncestorType=ListView},Path=(ScrollViewer.PanningMode),Mode=OneWay}"
+                                      Background="{TemplateBinding Background}"
+                                      BorderThickness="{TemplateBinding BorderThickness}"
+                                      BorderBrush="{TemplateBinding BorderBrush}"
+                                      leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path= (leedep:CornerRadiusManager.CornerRadius),Mode=OneWay}"
+                                      leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path= (leedep:CornerRadiusManager.IsClip),Mode=OneWay}"
                                       >
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition/>
-                                    <RowDefinition Height="auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition Width="auto"/>
-                                </Grid.ColumnDefinitions>
+                                    <Grid Margin="{TemplateBinding Padding}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
 
-                                <GridViewHeaderRowPresenter AllowsColumnReorder="{Binding View.AllowsColumnReorder, RelativeSource={RelativeSource TemplatedParent}}"
-                                                                    ColumnHeaderContainerStyle="{Binding View.ColumnHeaderContainerStyle, RelativeSource={RelativeSource TemplatedParent}}"
-                                                                    ColumnHeaderToolTip="{Binding View.ColumnHeaderToolTip, RelativeSource={RelativeSource TemplatedParent}}"
-                                                                    ColumnHeaderContextMenu="{Binding View.ColumnHeaderContextMenu, RelativeSource={RelativeSource TemplatedParent}}"
-                                                                    ColumnHeaderTemplate="{Binding View.ColumnHeaderTemplate, RelativeSource={RelativeSource TemplatedParent}}"
-                                                                    Columns="{Binding View.Columns, RelativeSource={RelativeSource TemplatedParent}}"
-                                                                    Margin="2,0"
-                                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                <!--背景-->
-                                <ContentControl Grid.Row="1"
-                                                Grid.Column="0"
+                                        <!--背景-->
+                                        <ContentControl Grid.Row="0"
                                                 Content="{Binding Path=(leedep:ListViewManager.NoItemsContent),  RelativeSource={RelativeSource AncestorType={x:Type ListView},AncestorLevel=1},Mode=OneWay}"
                                                 Visibility="{TemplateBinding  HasItems,Converter={StaticResource VisibilityForBoolReverseConverter}}"/>
+                                        <ItemsPresenter   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
 
-                               
-
-                                <ItemsPresenter Grid.Row="1" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-
-
-                                <!--尾部-->
-                                <ContentControl x:Name="PART_ListEnd" 
-                                                Grid.Row="2" 
-                                                Grid.Column="0"
+                                        <!--尾部-->
+                                        <ContentControl x:Name="PART_ListEnd" 
+                                                Grid.Row="1" 
                                                 Content="{Binding Path=(leedep:ListViewManager.ListEndContent),  RelativeSource={RelativeSource AncestorType={x:Type ListView},AncestorLevel=1},Mode=OneWay}"
                                                 Visibility="{TemplateBinding  HasItems,Converter={StaticResource VisibilityForBoolConverter}}"/>
 
+                                    </Grid>
+                                </ScrollViewer>
                             </Grid>
-                        </ScrollViewer>
-                  
-                 
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="leedep:ListViewManager.Orientation" Value="Vertical">
-                            <Setter TargetName="PART_ListEnd" Property="Grid.Row" Value="1" />
-                            <Setter TargetName="PART_ListEnd" Property="Grid.Column" Value="0" />
-                        </Trigger>
-                        <Trigger Property="leedep:ListViewManager.Orientation" Value="Horizontal">
-                            <Setter TargetName="PART_ListEnd" Property="Grid.Row" Value="0" />
-                            <Setter TargetName="PART_ListEnd" Property="Grid.Column" Value="1" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <Trigger Property="leedep:ListViewManager.Orientation" Value="Vertical">
-                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
-                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+                            <ControlTemplate.Triggers>
+
+                                <Trigger Property="leedep:ListViewManager.HeaderIsClip" Value="True">
+                                    <Setter TargetName="PART_Header" Property="Clip">
+                                        <Setter.Value>
+                                            <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                                <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
+                                                <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
+                                                <Binding ElementName="PART_HeaderBorder"  Path="CornerRadius" Mode="OneWay"/>
+                                                <Binding ElementName="PART_HeaderBorder"  Path="BorderThickness" Mode="OneWay"/>
+                                            </MultiBinding>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                          
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
             </Trigger>
-            <Trigger Property="leedep:ListViewManager.Orientation" Value="Horizontal">
-                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
-                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+
+            <Trigger Property="leedep:ListViewManager.HeaderFreeze" Value="False">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate  TargetType="{x:Type ListView}">
+                              
+                              <ScrollViewer  x:Name="PART_ScrollViewer" 
+                                      HorizontalScrollBarVisibility="{Binding  RelativeSource={ RelativeSource  Mode=FindAncestor,AncestorType=ListView},Path=(ScrollViewer.HorizontalScrollBarVisibility),Mode=OneWay}" 
+                                      VerticalScrollBarVisibility="{Binding  RelativeSource={ RelativeSource  Mode=FindAncestor,AncestorType=ListView},Path=(ScrollViewer.VerticalScrollBarVisibility),Mode=OneWay}"
+                                      CanContentScroll="{Binding  RelativeSource={ RelativeSource  Mode=FindAncestor,AncestorType=ListView},Path=(ScrollViewer.CanContentScroll),Mode=OneWay}"
+                                      PanningMode="{Binding  RelativeSource={ RelativeSource  Mode=FindAncestor,AncestorType=ListView},Path=(ScrollViewer.PanningMode),Mode=OneWay}"
+                                      Background="{TemplateBinding Background}"
+                                      BorderThickness="{TemplateBinding BorderThickness}"
+                                      BorderBrush="{TemplateBinding BorderBrush}"
+                                      Margin="{TemplateBinding Margin}"
+                                      leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path= (leedep:CornerRadiusManager.CornerRadius),Mode=OneWay}"
+                                      leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path= (leedep:CornerRadiusManager.IsClip),Mode=OneWay}"
+                                      >
+                                    <Grid Margin="{TemplateBinding Padding}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Border x:Name="PART_HeaderBorder"     
+                                                Background="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListViewManager.HeaderBackground),Mode=OneWay}"
+                                                BorderBrush="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListViewManager.HeaderBorderBursh),Mode=OneWay}"
+                                                BorderThickness="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListViewManager.HeaderBorderThickness),Mode=OneWay}"
+                                                CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListViewManager.HeaderCornerRadius),Mode=OneWay}"
+                                                Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListViewManager.HeaderMargin),Mode=OneWay}"
+                                                Padding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListViewManager.HeaderPadding),Mode=OneWay}">
+                                            <GridViewHeaderRowPresenter x:Name="PART_Header"
+                                                                        AllowsColumnReorder="{Binding View.AllowsColumnReorder, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                        ColumnHeaderContainerStyle="{Binding View.ColumnHeaderContainerStyle, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                        ColumnHeaderToolTip="{Binding View.ColumnHeaderToolTip, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                        ColumnHeaderContextMenu="{Binding View.ColumnHeaderContextMenu, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                        ColumnHeaderTemplate="{Binding View.ColumnHeaderTemplate, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                        ColumnHeaderTemplateSelector="{Binding View.ColumnHeaderTemplateSelector,RelativeSource={RelativeSource TemplatedParent}}"
+                                                                        Columns="{Binding View.Columns, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                        </Border>
+                                        <!--背景-->
+                                        <ContentControl Grid.Row="1"
+                                                Content="{Binding Path=(leedep:ListViewManager.NoItemsContent),  RelativeSource={RelativeSource AncestorType={x:Type ListView},AncestorLevel=1},Mode=OneWay}"
+                                                Visibility="{TemplateBinding  HasItems,Converter={StaticResource VisibilityForBoolReverseConverter}}"/>
+                                        <ItemsPresenter Grid.Row="1"   
+                                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+
+                                        <!--尾部-->
+                                        <ContentControl x:Name="PART_ListEnd" 
+                                                Grid.Row="2" 
+                                                Content="{Binding Path=(leedep:ListViewManager.ListEndContent),  RelativeSource={RelativeSource AncestorType={x:Type ListView},AncestorLevel=1},Mode=OneWay}"
+                                                Visibility="{TemplateBinding  HasItems,Converter={StaticResource VisibilityForBoolConverter}}"/>
+
+                                    </Grid>
+                                </ScrollViewer>
+                            <ControlTemplate.Triggers>
+
+                                <Trigger Property="leedep:ListViewManager.HeaderIsClip" Value="True">
+                                    <Setter TargetName="PART_Header" Property="Clip">
+                                        <Setter.Value>
+                                            <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                                <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
+                                                <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
+                                                <Binding ElementName="PART_HeaderBorder"  Path="CornerRadius" Mode="OneWay"/>
+                                                <Binding ElementName="PART_HeaderBorder"  Path="BorderThickness" Mode="OneWay"/>
+                                            </MultiBinding>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
             </Trigger>
         </Style.Triggers>
     </Style>

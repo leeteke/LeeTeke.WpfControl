@@ -6,6 +6,7 @@
                     xmlns:conver="clr-namespace:LeeTeke.WpfControl.Converters"
                     xmlns:local="clr-namespace:LeeTeke.WpfControl.Controls">
     <ResourceDictionary.MergedDictionaries>
+
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/GridView.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/ImageEx.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/LodingBar.xaml"/>
@@ -19,6 +20,7 @@
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/NotifyBanner.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/ScrollBanner.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/Pagination.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/Window.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
 

@@ -1,4 +1,5 @@
 ﻿using LeeTeke.WpfControl.Controls;
+using LeeTeke.WpfControl.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,7 +11,7 @@ namespace LeeTeke.WpfControl
 {
     public class MessageBoxEx
     {
-
+        public static bool IsDefaultShowMsgCR = true;
         /// <summary>
         /// 显示并返回
         /// </summary>
@@ -19,19 +20,19 @@ namespace LeeTeke.WpfControl
         /// <returns></returns>
         public static bool Show(string content, MessageStatus status = MessageStatus.None)
         {
-            Message message = new Message();
-            message.textConetnt.Text = content;
-            SetIcon(message, status);
+            IMessageWin message = IsDefaultShowMsgCR ? new CRMessage() : new Message();
+            message.Content = content;
+            message.Status = status;
             switch (status)
             {
                 case MessageStatus.None:
                     break;
                 case MessageStatus.Question:
-                    message.AddButton("是", true);
-                    message.AddButton("否", false);
+                    message.AddOptions("是", true);
+                    message.AddOptions("否", false);
                     break;
                 default:
-                    message.AddButton("确定", true);
+                    message.AddOptions("确定", true);
                     break;
             }
             _ = message.ShowDialog();
@@ -40,33 +41,33 @@ namespace LeeTeke.WpfControl
 
         public static bool Show(string title, string content, MessageStatus status = MessageStatus.None)
         {
-            Message message = new Message();
-            message.textTitle.Text = title;
-            message.textTitle.Visibility = System.Windows.Visibility.Visible;
-            message.textConetnt.Text = content;
-            SetIcon(message, status);
+            IMessageWin message = IsDefaultShowMsgCR ? new CRMessage() : new Message();
+            message.Title = title;
+            message.Content = content;
+            message.Status = status;
             switch (status)
             {
                 case MessageStatus.None:
                     break;
-                   
+
                 case MessageStatus.Question:
-                    message.AddButton("是", true);
-                    message.AddButton("否", false);
+                    message.AddOptions("是", true);
+                    message.AddOptions("否", false);
                     break;
                 default:
-                    message.AddButton("确定", true);
+                    message.AddOptions("确定", true);
                     break;
             }
 
-            _ = message.ShowDialog();
+            _ = message.Window.ShowDialog();
             return message.Value == null ? false : (bool)message.Value;
         }
 
-        private Message _msg;
+        private IMessageWin _msg;
+
         public MessageBoxEx(CornerRadius cornerRadius = default)
         {
-            _msg = new Message(cornerRadius);
+            _msg = IsDefaultShowMsgCR ? new CRMessage(cornerRadius) : new Message();
         }
         /// <summary>
         /// 是否可以关闭
@@ -79,8 +80,8 @@ namespace LeeTeke.WpfControl
 
         public bool ShowLoding
         {
-            get => _msg.loding.Visibility == System.Windows.Visibility.Visible;
-            set => _msg.loding.Visibility = value ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            get => _msg.ShowLoding;
+            set => _msg.ShowLoding = value;
         }
         /// <summary>
         /// 关闭
@@ -88,7 +89,7 @@ namespace LeeTeke.WpfControl
         public void Close()
         {
             CanClose = true;
-            _msg.Close();
+            _msg.Window.Close();
             GC.Collect();
         }
         /// <summary>
@@ -96,55 +97,44 @@ namespace LeeTeke.WpfControl
         /// </summary>
         public string Title
         {
-            get => _msg.textTitle.Text;
-            set
-            {
-                _msg.textTitle.Text = value;
-                _msg.textTitle.Visibility = string.IsNullOrWhiteSpace(value) ? System.Windows.Visibility.Collapsed : System.Windows.Visibility.Visible;
-            }
+            get => _msg.Title;
+            set => _msg.Title = value;
         }
 
-
+        public MessageStatus Status
+        {
+            get => _msg.Status;
+            set => _msg.Status = value;
+        }
         /// <summary>
         /// 内容
         /// </summary>
-        public string Content
+        public object Content
         {
-            get => _msg.textConetnt.Text;
-            set => _msg.textConetnt.Text = value;
+            get => _msg.Content;
+            set => _msg.Content = value;
         }
 
-        /// <summary>
-        /// 设置自定义内容
-        /// </summary>
-        /// <param name="element"></param>
-        public void SetContent(UIElement element)
-        {
-            _msg.textConetnt.Visibility = Visibility.Collapsed;
-            _msg.gridMain.Children.Add(element);
-            System.Windows.Controls.Grid.SetColumn(element, 1);
-            System.Windows.Controls.Grid.SetRow(element, 1);
-        }
+
 
 
         /// <summary>
         /// lodingbar模式
         /// </summary>
-        public LodingBarMode LodingBarModel
+        public LodingBarMode LodingbarMode
         {
-            get => _msg.loding.Mode;
-            set => _msg.loding.Mode = value;
+            get => _msg.LodingBarMode;
+            set => _msg.LodingBarMode = value;
         }
 
         /// <summary>
         /// 设置lodingVale 范围0-100;
         /// </summary>
-        public double LodingBarValue { get => _msg.loding.Value; set => _msg.loding.Value = value; }
-        /// <summary>
-        /// 设置图标
-        /// </summary>
-        /// <param name="icon"></param>
-        public void SetIcon(MessageStatus icon) => SetIcon(_msg, icon);
+        public double LodingBarValue
+        {
+            get => _msg.LodingBarValue;
+            set => _msg.LodingBarValue = value;
+        }
 
 
         /// <summary>
@@ -153,29 +143,28 @@ namespace LeeTeke.WpfControl
         /// <param name="name"></param>
         /// <param name="vale"></param>
         /// <param name="btnCornerRadius">圆角值</param>
-        public void AddOptions(string name, object vale, CornerRadius btnCornerRadius = default) => _msg.AddButton(name, vale, btnCornerRadius);
+        public void AddOptions(string name, object vale, CornerRadius btnCornerRadius = default) => _msg.AddOptions(name, vale, btnCornerRadius);
 
         /// <summary>
         /// 设置大小
         /// </summary>
         /// <param name="width"></param>
         /// <param name="height"></param>
-        public void SetSize(double width = 320, double height = 200)
-        {
-            _msg.Width = width;
-            _msg.Height = height;
-        }
+
+        public void SetSize(double width = 320, double height = 200) => _msg.SetSize(width, height);
 
 
-        public async Task<object> ShowDialog()
+        public bool? ShowDialog() => _msg.ShowDialog();
+
+        public async Task<object> ShowDialogAsync()
         {
 
             var task = Task<object>.Factory.StartNew(() =>
              {
-                 _msg.Dispatcher.Invoke(() =>
-                 {
-                     _ = _msg.ShowDialog();
-                 });
+                 _msg.Window.Dispatcher.Invoke(() =>
+                {
+                    _ = _msg.ShowDialog();
+                });
                  return _msg.Value;
              });
             return await task;
@@ -186,49 +175,6 @@ namespace LeeTeke.WpfControl
             _msg.Show();
         }
 
-        private static void SetIcon(Message msg, MessageStatus icon)
-        {
-            switch (icon)
-            {
-                case MessageStatus.None:
-                    msg.icon.Visibility = Visibility.Collapsed;
-                    break;
-                case MessageStatus.OK:
-                    msg.icon.Visibility = Visibility.Visible;
-                    msg.icon.Text = "\xEC61";
-                    msg.icon.Foreground = Application.Current.Resources["LeeBrush_Success"] as SolidColorBrush;
-                    break;
-                case MessageStatus.Warning:
-                    msg.icon.Visibility = Visibility.Visible;
-                    msg.icon.Text = "\xE814";
-                    msg.icon.Foreground = Application.Current.Resources["LeeBrush_Warning"] as SolidColorBrush;
-                    break;
-                case MessageStatus.Info:
-                    msg.icon.Visibility = Visibility.Visible;
-                    msg.icon.Text = "\xF167";
-                    msg.icon.Foreground = Application.Current.Resources["LeeBrush_Info"] as SolidColorBrush;
-                    break;
-                case MessageStatus.Question:
-                    msg.icon.Visibility = Visibility.Visible;
-                    msg.icon.Text = "\xE9CE";
-                    msg.icon.Foreground = Application.Current.Resources["LeeBrush_Question"] as SolidColorBrush;
-                    break;
-                case MessageStatus.Error:
-                    msg.icon.Visibility = Visibility.Visible;
-                    msg.icon.Text = "\xEB90";
-                    msg.icon.Foreground = Application.Current.Resources["LeeBrush_Error"] as SolidColorBrush;
-                    break;
-                case MessageStatus.Stop:
-                    msg.icon.Visibility = Visibility.Visible;
-                    msg.icon.Text = "\xF140";
-                    msg.icon.Foreground = Application.Current.Resources["LeeColor_Stop"] as SolidColorBrush;
-                    break;
-            
-                default:
-                    break;
-            }
-
-        }
 
     }
 

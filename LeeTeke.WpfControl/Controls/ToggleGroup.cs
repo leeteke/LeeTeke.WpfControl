@@ -47,7 +47,7 @@ namespace LeeTeke.WpfControl.Controls
     ///
     /// </summary>
     [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(ToggleButton))]
-    public class ToggleGroup : ItemsControl
+    public class ToggleGroup : ItemsControl 
     {
         static ToggleGroup()
         {
@@ -61,6 +61,7 @@ namespace LeeTeke.WpfControl.Controls
 
         public ToggleGroup()
         {
+ 
 
             EventManager.RegisterClassHandler(typeof(ToggleButton), ToggleButton.CheckedEvent, new RoutedEventHandler(ToggleButton_Checked));
             EventManager.RegisterClassHandler(typeof(ToggleButton), ToggleButton.UncheckedEvent, new RoutedEventHandler(ToggleButton_UnChecked));
@@ -561,10 +562,6 @@ namespace LeeTeke.WpfControl.Controls
 
 
         #region RouteEvent
-
-
-
-
         #region SelectionChanged
         /// <summary>
         /// 请填写描述
@@ -595,8 +592,6 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         #endregion
-
-
         #endregion
 
 

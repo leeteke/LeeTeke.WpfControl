@@ -47,7 +47,7 @@
                                             HorizontalAlignment="Right"
                                             Margin="0,0,5,0"
                                             Visibility="Collapsed"
-                                            leedep:ButtonManager.CornerRadius="12.5"
+                                            leedep:CornerRadiusManager.CornerRadius="12.5"
                                             FontFamily="{DynamicResource IconFontFamily}"
                                             Style="{DynamicResource ColorButton}"
                                             BorderThickness="0"

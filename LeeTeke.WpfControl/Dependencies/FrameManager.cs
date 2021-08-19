@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-   public class FrameManager
+   public class FrameManager 
     {
 
 

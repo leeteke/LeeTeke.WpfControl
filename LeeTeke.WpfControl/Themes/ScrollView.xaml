@@ -21,32 +21,32 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ScrollBar}">
-              
-                        <Track x:Name="PART_Track"
+
+                    <Track x:Name="PART_Track"
                                IsEnabled="{TemplateBinding IsMouseOver}"
                                IsDirectionReversed="true">
-                            <Track.Thumb>
-                                <Thumb>
-                                    <Thumb.Template>
-                                        <ControlTemplate TargetType="Thumb">
+                        <Track.Thumb>
+                            <Thumb>
+                                <Thumb.Template>
+                                    <ControlTemplate TargetType="Thumb">
                                         <Border x:Name="PART_Border"  
                                                 BorderThickness="0"
                                                 Background="{Binding Path=(leedep:ScrollManager.ThumbBrush),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}"
                                                 CornerRadius="{Binding Path=(leedep:ScrollManager.ScrollBarCornerRadius),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}" 
                                                 Effect="{Binding Path=(leedep:ScrollManager.ScrollBarShadow),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}"
                                                        />
-                                            <ControlTemplate.Triggers>
+                                        <ControlTemplate.Triggers>
                                             <DataTrigger Binding="{Binding ElementName=PART_Border,Path=ActualWidth,Converter={StaticResource DoubleComparisonConverter},ConverterParameter=Less_4}" Value="True">
                                                 <Setter TargetName="PART_Border" Property="CornerRadius" Value="2"/>
                                             </DataTrigger>
-                                  
+
                                         </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Thumb.Template>
-                                </Thumb>
-                            </Track.Thumb>
-                        </Track>
-                  
+                                    </ControlTemplate>
+                                </Thumb.Template>
+                            </Thumb>
+                        </Track.Thumb>
+                    </Track>
+
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -58,32 +58,32 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ScrollBar}">
-            
-                                <Track x:Name="PART_Track"
+
+                            <Track x:Name="PART_Track"
                                        IsEnabled="{TemplateBinding IsMouseOver}">
-                                    <Track.Thumb>
-                                        <Thumb>
-                                            <Thumb.Template>
-                                                <ControlTemplate TargetType="Thumb">
-                                                    <Border x:Name="PART_Border" 
+                                <Track.Thumb>
+                                    <Thumb>
+                                        <Thumb.Template>
+                                            <ControlTemplate TargetType="Thumb">
+                                                <Border x:Name="PART_Border" 
                                                             Background="{Binding Path=(leedep:ScrollManager.ThumbBrush),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}"
                                                             BorderThickness="0"
                                                             CornerRadius="{Binding Path=(leedep:ScrollManager.ScrollBarCornerRadius),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}" 
                                                             Effect="{Binding Path=(leedep:ScrollManager.ScrollBarShadow),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}"   
                                                             />
-                                                    <ControlTemplate.Triggers>
-                                                        <DataTrigger Binding="{Binding ElementName=PART_Border,Path=ActualWidth,Converter={StaticResource DoubleComparisonConverter},ConverterParameter=Less_4}" Value="True">
-                                                            <Setter TargetName="PART_Border" Property="CornerRadius" Value="2"/>
-                                                        </DataTrigger>
+                                                <ControlTemplate.Triggers>
+                                                    <DataTrigger Binding="{Binding ElementName=PART_Border,Path=ActualWidth,Converter={StaticResource DoubleComparisonConverter},ConverterParameter=Less_4}" Value="True">
+                                                        <Setter TargetName="PART_Border" Property="CornerRadius" Value="2"/>
+                                                    </DataTrigger>
 
-                                                    </ControlTemplate.Triggers>
-                                                </ControlTemplate>
-                                                
-                                            </Thumb.Template>
-                                        </Thumb>
-                                    </Track.Thumb>
-                                </Track>
-                      
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+
+                                        </Thumb.Template>
+                                    </Thumb>
+                                </Track.Thumb>
+                            </Track>
+
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
@@ -102,7 +102,6 @@
         <Setter Property="VerticalScrollBarVisibility"   Value="Auto" />
         <Setter Property="VerticalContentAlignment"   Value="Stretch" />
         <Setter Property="HorizontalContentAlignment"  Value="Stretch" />
-        <Setter Property="leedep:ScrollManager.CornerRadius" Value="0"/>
         <Setter Property="leedep:ScrollManager.TrackBrush"   Value="Transparent" />
         <Setter Property="leedep:ScrollManager.ThumbBrush"   Value="{DynamicResource LeeBrush_Theme}" />
         <Setter Property="leedep:ScrollManager.ScrollBarCornerRadius"  Value="{DynamicResource  LeeCornerRadius}" />
@@ -110,11 +109,11 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                    <Border x:Name="PART_Border" BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Background="{TemplateBinding Background}"
-                            CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ScrollManager.CornerRadius),Mode=OneWay}">
-                        <Grid>
+                            CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:CornerRadiusManager.CornerRadius),Mode=OneWay}">
+                        <Grid x:Name="PART_Grid">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
                                 <ColumnDefinition Width="auto" />
@@ -159,20 +158,27 @@
                                        Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
                                        />
                             </Grid>
-                              
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
+                            <Setter TargetName="PART_Grid" Property="Clip">
+                                <Setter.Value>
+                                    <MultiBinding  Converter="{StaticResource  MultiValueToClipConverter}" Mode="OneWay">
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualWidth"/>
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualHeight"/>
+                                        <Binding  ElementName="PART_Border"  Path="CornerRadius"/>
+                                        <Binding  ElementName="PART_Border"  Path="BorderThickness"/>
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
                         <Trigger SourceName="PART_HorizontalScrollBar" Property="IsVisible" Value="False">
                             <Setter TargetName="PART_HorizontalGrid" Property="Height" Value="0"/>
                         </Trigger>
-                        
-
                         <Trigger SourceName="PART_VerticalScrollBar" Property="IsVisible" Value="False">
                             <Setter TargetName="PART_VerticalGrid" Property="Width" Value="0"/>
                         </Trigger>
-                     
-
                         <EventTrigger RoutedEvent="ScrollChanged">
                             <BeginStoryboard>
                                 <Storyboard>
@@ -186,7 +192,7 @@
                                                      To="1"
                                                         BeginTime="0:0:1"
                                                      Duration="0:0:0.15" />
-                             
+
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
@@ -198,7 +204,7 @@
                                                       Storyboard.TargetProperty="Width"
                                                       To="{StaticResource ScrollViewerBarSize}"
                                                       Duration="0:0:0.15" />
-                         
+
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
@@ -222,7 +228,7 @@
                                                      Storyboard.TargetProperty="Height"
                                                      To="{StaticResource ScrollViewerBarSize}"
                                                      Duration="0:0:0.15" />
-                           
+
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
@@ -235,7 +241,7 @@
                                                      To="{StaticResource ScrollViewerMiniBarSize}"
                                                     BeginTime="0:0:2"
                                                      Duration="0:0:0.15" />
-                                  
+
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
@@ -271,7 +277,6 @@
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
-
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
