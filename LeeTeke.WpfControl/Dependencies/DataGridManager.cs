@@ -14,9 +14,89 @@ using System.Windows.Media;
 namespace LeeTeke.WpfControl.Dependencies
 {
 
-    public class DataGridManager 
-
+    public class DataGridManager
     {
+
+        #region HeaderFreeze
+        public static bool GetHeaderFreeze(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(HeaderFreezeProperty);
+        }
+
+        public static void SetHeaderFreeze(DependencyObject obj, bool value)
+        {
+            obj.SetValue(HeaderFreezeProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for HeaderFreeze.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HeaderFreezeProperty =
+            DependencyProperty.RegisterAttached("HeaderFreeze", typeof(bool), typeof(DataGridManager));
+        #endregion
+
+        #region HeaderBackground
+        public static Brush GetHeaderBackground(DependencyObject obj)
+        {
+            return (Brush)obj.GetValue(HeaderBackgroundProperty);
+        }
+
+        public static void SetHeaderBackground(DependencyObject obj, Brush value)
+        {
+            obj.SetValue(HeaderBackgroundProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for HeaderBackground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HeaderBackgroundProperty =
+            DependencyProperty.RegisterAttached("HeaderBackground", typeof(Brush), typeof(DataGridManager));
+        #endregion
+
+        #region HeaderBorderThickness
+        public static Thickness GetHeaderBorderThickness(DependencyObject obj)
+        {
+            return (Thickness)obj.GetValue(HeaderBorderThicknessProperty);
+        }
+
+        public static void SetHeaderBorderThickness(DependencyObject obj, Thickness value)
+        {
+            obj.SetValue(HeaderBorderThicknessProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for HeaderBorderThickness.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HeaderBorderThicknessProperty =
+            DependencyProperty.RegisterAttached("HeaderBorderThickness", typeof(Thickness), typeof(DataGridManager));
+        #endregion
+
+        #region HeaderBorderBursh
+        public static Brush GetHeaderBorderBursh(DependencyObject obj)
+        {
+            return (Brush)obj.GetValue(HeaderBorderBurshProperty);
+        }
+
+        public static void SetHeaderBorderBursh(DependencyObject obj, Brush value)
+        {
+            obj.SetValue(HeaderBorderBurshProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for HeaderBorderBursh.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HeaderBorderBurshProperty =
+            DependencyProperty.RegisterAttached("HeaderBorderBursh", typeof(Brush), typeof(DataGridManager));
+        #endregion
+
+        #region HeaderMargin
+        public static Thickness GetHeaderMargin(DependencyObject obj)
+        {
+            return (Thickness)obj.GetValue(HeaderMarginProperty);
+        }
+
+        public static void SetHeaderMargin(DependencyObject obj, Thickness value)
+        {
+            obj.SetValue(HeaderMarginProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for HeaderMargin.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HeaderMarginProperty =
+            DependencyProperty.RegisterAttached("HeaderMargin", typeof(Thickness), typeof(DataGridManager));
+        #endregion
+
         #region HeaderPadding
         public static Thickness GetHeaderPadding(DependencyObject obj)
         {
@@ -28,9 +108,149 @@ namespace LeeTeke.WpfControl.Dependencies
             obj.SetValue(HeaderPaddingProperty, value);
         }
 
+        // Using a DependencyProperty as the backing store for HeaderPadding.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty HeaderPaddingProperty =
             DependencyProperty.RegisterAttached("HeaderPadding", typeof(Thickness), typeof(DataGridManager));
         #endregion
+
+        #region HeaderCornerRadius
+        public static CornerRadius GetHeaderCornerRadius(DependencyObject obj)
+        {
+            return (CornerRadius)obj.GetValue(HeaderCornerRadiusProperty);
+        }
+
+        public static void SetHeaderCornerRadius(DependencyObject obj, CornerRadius value)
+        {
+            obj.SetValue(HeaderCornerRadiusProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for HeaderCornerRadius.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HeaderCornerRadiusProperty =
+            DependencyProperty.RegisterAttached("HeaderCornerRadius", typeof(CornerRadius), typeof(DataGridManager));
+        #endregion
+
+        #region HeaderIsClip
+        public static bool GetHeaderIsClip(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(HeaderIsClipProperty);
+        }
+
+        public static void SetHeaderIsClip(DependencyObject obj, bool value)
+        {
+            obj.SetValue(HeaderIsClipProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for HeaderIsClip.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HeaderIsClipProperty =
+            DependencyProperty.RegisterAttached("HeaderIsClip", typeof(bool), typeof(DataGridManager));
+        #endregion
+
+
+        #region NoItemsContent
+        public static object GetNoItemsContent(DependencyObject obj)
+        {
+            return (object)obj.GetValue(NoItemsContentProperty);
+        }
+
+        public static void SetNoItemsContent(DependencyObject obj, object value)
+        {
+            obj.SetValue(NoItemsContentProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for NoItemsContent.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty NoItemsContentProperty =
+            DependencyProperty.RegisterAttached("NoItemsContent", typeof(object), typeof(DataGridManager));
+
+        #endregion
+
+        #region ListEndContent
+        public static object GetListEndContent(DependencyObject obj)
+        {
+            return (object)obj.GetValue(ListEndContentProperty);
+        }
+
+        public static void SetListEndContent(DependencyObject obj, object value)
+        {
+            obj.SetValue(ListEndContentProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for ListEndContent.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ListEndContentProperty =
+            DependencyProperty.RegisterAttached("ListEndContent", typeof(object), typeof(DataGridManager));
+        #endregion
+
+
+        #region ShowRowNumber
+        public static bool GetShowRowNumber(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(ShowRowNumberProperty);
+        }
+
+        public static void SetShowRowNumber(DependencyObject obj, bool value)
+        {
+            obj.SetValue(ShowRowNumberProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for ShowRowNumber.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ShowRowNumberProperty =
+            DependencyProperty.RegisterAttached("ShowRowNumber", typeof(bool), typeof(DataGridManager), new PropertyMetadata(ShowRowNumberChanged));
+
+        private static void ShowRowNumberChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is DataGrid dataGrid)
+            {
+                if (e.NewValue is bool show && show)
+                {
+                    dataGrid.LoadingRow += DataGrid_LoadingRow;
+
+                }
+                else
+                {
+                    dataGrid.LoadingRow -= DataGrid_LoadingRow;
+
+                }
+            }
+        }
+
+        private static void DataGrid_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            e.Row.Header = e.Row.GetIndex() + 1;
+        }
+        #endregion
+
+
+        #region RowHeaderVerticalContentAlignment
+        public static VerticalAlignment GetRowHeaderVerticalContentAlignment(DependencyObject obj)
+        {
+            return (VerticalAlignment)obj.GetValue(RowHeaderVerticalContentAlignmentProperty);
+        }
+
+        public static void SetRowHeaderVerticalContentAlignment(DependencyObject obj, VerticalAlignment value)
+        {
+            obj.SetValue(RowHeaderVerticalContentAlignmentProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for RowHeaderVerticalContentAlignment.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RowHeaderVerticalContentAlignmentProperty =
+            DependencyProperty.RegisterAttached("RowHeaderVerticalContentAlignment", typeof(VerticalAlignment), typeof(DataGridManager));
+        #endregion
+
+        #region RowHeaderHorizontalContentAlignment
+        public static HorizontalAlignment GetRowHeaderHorizontalContentAlignment(DependencyObject obj)
+        {
+            return (HorizontalAlignment)obj.GetValue(RowHeaderHorizontalContentAlignmentProperty);
+        }
+
+        public static void SetRowHeaderHorizontalContentAlignment(DependencyObject obj, HorizontalAlignment value)
+        {
+            obj.SetValue(RowHeaderHorizontalContentAlignmentProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for RowHeaderHorizontalContentAlignment.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RowHeaderHorizontalContentAlignmentProperty =
+            DependencyProperty.RegisterAttached("RowHeaderHorizontalContentAlignment", typeof(HorizontalAlignment), typeof(DataGridManager));
+        #endregion
+
 
         #region CellPadding
         public static Thickness GetCellPadding(DependencyObject obj)
@@ -79,21 +299,6 @@ namespace LeeTeke.WpfControl.Dependencies
 
         #endregion
 
-        #region HeaderBackground
-        public static Brush GetHeaderBackground(DependencyObject obj)
-        {
-            return (Brush)obj.GetValue(HeaderBackgroundProperty);
-        }
-
-        public static void SetHeaderBackground(DependencyObject obj, Brush value)
-        {
-            obj.SetValue(HeaderBackgroundProperty, value);
-        }
-
-        public static readonly DependencyProperty HeaderBackgroundProperty =
-            DependencyProperty.RegisterAttached("HeaderBackground", typeof(Brush), typeof(DataGridManager));
-        #endregion
-
         #region HeaderForeground
         public static Brush GetHeaderForeground(DependencyObject obj)
         {
@@ -109,35 +314,39 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("HeaderForeground", typeof(Brush), typeof(DataGridManager));
         #endregion
 
-        #region ResizeThumbThickness
-        public static double GetResizeThumbThickness(DependencyObject obj)
+        #region HeaderFontSize
+        public static double GetHeaderFontSize(DependencyObject obj)
         {
-            return (double)obj.GetValue(ResizeThumbThicknessProperty);
+            return (double)obj.GetValue(HeaderFontSizeProperty);
         }
 
-        public static void SetResizeThumbThickness(DependencyObject obj, double value)
+        public static void SetHeaderFontSize(DependencyObject obj, double value)
         {
-            obj.SetValue(ResizeThumbThicknessProperty, value);
+            obj.SetValue(HeaderFontSizeProperty, value);
         }
 
-        public static readonly DependencyProperty ResizeThumbThicknessProperty =
-            DependencyProperty.RegisterAttached("ResizeThumbThickness", typeof(double), typeof(DataGridManager));
+        // Using a DependencyProperty as the backing store for HeaderFontSize.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HeaderFontSizeProperty =
+            DependencyProperty.RegisterAttached("HeaderFontSize", typeof(double), typeof(DataGridManager));
         #endregion
 
-        #region ResizeThumbBrush
-        public static Brush GetResizeThumbBrush(DependencyObject obj)
+        #region HeaderFontWeight
+        public static FontWeight GetHeaderFontWeight(DependencyObject obj)
         {
-            return (Brush)obj.GetValue(ResizeThumbBrushProperty);
+            return (FontWeight)obj.GetValue(HeaderFontWeightProperty);
         }
 
-        public static void SetResizeThumbBrush(DependencyObject obj, Brush value)
+        public static void SetHeaderFontWeight(DependencyObject obj, FontWeight value)
         {
-            obj.SetValue(ResizeThumbBrushProperty, value);
+            obj.SetValue(HeaderFontWeightProperty, value);
         }
 
-        public static readonly DependencyProperty ResizeThumbBrushProperty =
-            DependencyProperty.RegisterAttached("ResizeThumbBrush", typeof(Brush), typeof(DataGridManager));
+        // Using a DependencyProperty as the backing store for HeaderFontWeight.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HeaderFontWeightProperty =
+            DependencyProperty.RegisterAttached("HeaderFontWeight", typeof(FontWeight), typeof(DataGridManager));
         #endregion
+
+
 
         #region ColumnVerticalContentAlignment
         public static VerticalAlignment GetColumnVerticalContentAlignment(DependencyObject obj)
@@ -169,19 +378,54 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("ColumnHorizontalContentAlignment", typeof(HorizontalAlignment), typeof(DataGridManager));
         #endregion
 
-        #region HoverBackground
-        public static Brush GetHoverBackground(DependencyObject obj)
+
+
+        #region MouseOverBackground
+        public static Brush GetMouseOverBackground(DependencyObject obj)
         {
-            return (Brush)obj.GetValue(HoverBackgroundProperty);
+            return (Brush)obj.GetValue(MouseOverBackgroundProperty);
         }
 
-        public static void SetHoverBackground(DependencyObject obj, Brush value)
+        public static void SetMouseOverBackground(DependencyObject obj, Brush value)
         {
-            obj.SetValue(HoverBackgroundProperty, value);
+            obj.SetValue(MouseOverBackgroundProperty, value);
         }
 
-        public static readonly DependencyProperty HoverBackgroundProperty =
-            DependencyProperty.RegisterAttached("HoverBackground", typeof(Brush), typeof(DataGridManager));
+        // Using a DependencyProperty as the backing store for MouseOverBackground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MouseOverBackgroundProperty =
+            DependencyProperty.RegisterAttached("MouseOverBackground", typeof(Brush), typeof(DataGridManager));
+        #endregion
+
+        #region MouseOrverBorderBrush
+        public static Brush GetMouseOrverBorderBrush(DependencyObject obj)
+        {
+            return (Brush)obj.GetValue(MouseOrverBorderBrushProperty);
+        }
+
+        public static void SetMouseOrverBorderBrush(DependencyObject obj, Brush value)
+        {
+            obj.SetValue(MouseOrverBorderBrushProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MouseOrverBorderBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MouseOrverBorderBrushProperty =
+            DependencyProperty.RegisterAttached("MouseOrverBorderBrush", typeof(Brush), typeof(DataGridManager));
+        #endregion
+
+        #region MouseOrverForeground
+        public static Brush GetMouseOrverForeground(DependencyObject obj)
+        {
+            return (Brush)obj.GetValue(MouseOrverForegroundProperty);
+        }
+
+        public static void SetMouseOrverForeground(DependencyObject obj, Brush value)
+        {
+            obj.SetValue(MouseOrverForegroundProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MouseOrverForeground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MouseOrverForegroundProperty =
+            DependencyProperty.RegisterAttached("MouseOrverForeground", typeof(Brush), typeof(DataGridManager));
         #endregion
 
         #region SelectedBackground
@@ -197,6 +441,22 @@ namespace LeeTeke.WpfControl.Dependencies
 
         public static readonly DependencyProperty SelectedBackgroundProperty =
             DependencyProperty.RegisterAttached("SelectedBackground", typeof(Brush), typeof(DataGridManager));
+        #endregion
+
+        #region SelectedBorderBrush
+        public static Brush GetSelectedBorderBrush(DependencyObject obj)
+        {
+            return (Brush)obj.GetValue(SelectedBorderBrushProperty);
+        }
+
+        public static void SetSelectedBorderBrush(DependencyObject obj, Brush value)
+        {
+            obj.SetValue(SelectedBorderBrushProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for SelectedBorderBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedBorderBrushProperty =
+            DependencyProperty.RegisterAttached("SelectedBorderBrush", typeof(Brush), typeof(DataGridManager));
         #endregion
 
         #region SelectedForeground
@@ -233,6 +493,55 @@ namespace LeeTeke.WpfControl.Dependencies
 
         #endregion
 
+        #region  AutoGenerateComboxStyle
+        public static Style GetAutoGenerateComboxStyle(DependencyObject obj)
+        {
+            return (Style)obj.GetValue( AutoGenerateComboxStyleProperty);
+        }
+
+        public static void SetAutoGenerateComboxStyle(DependencyObject obj, Style value)
+        {
+            obj.SetValue( AutoGenerateComboxStyleProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for  AutoGenerateComboxStyle.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty AutoGenerateComboxStyleProperty =
+            DependencyProperty.RegisterAttached("AutoGenerateComboxStyle", typeof(Style), typeof(DataGridManager));
+        #endregion
+
+        #region AutoGenerateTextBoxStyle
+        public static Style GetAutoGenerateTextBoxStyle(DependencyObject obj)
+        {
+            return (Style)obj.GetValue(AutoGenerateTextBoxStyleProperty);
+        }
+
+        public static void SetAutoGenerateTextBoxStyle(DependencyObject obj, Style value)
+        {
+            obj.SetValue(AutoGenerateTextBoxStyleProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for AutoGenerateTextBoxStyle.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty AutoGenerateTextBoxStyleProperty =
+            DependencyProperty.RegisterAttached("AutoGenerateTextBoxStyle", typeof(Style), typeof(DataGridManager));
+        #endregion
+
+        #region AutoGenerateImageStyle
+        public static Style GetAutoGenerateImageStyle(DependencyObject obj)
+        {
+            return (Style)obj.GetValue(AutoGenerateImageStyleProperty);
+        }
+
+        public static void SetAutoGenerateImageStyle(DependencyObject obj, Style value)
+        {
+            obj.SetValue(AutoGenerateImageStyleProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for AutoGenerateImageStyle.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty AutoGenerateImageStyleProperty =
+            DependencyProperty.RegisterAttached("AutoGenerateImageStyle", typeof(Style), typeof(DataGridManager));
+        #endregion
+
+
         #region SelectedItems
         public static IList GetSelectedItems(DependencyObject obj)
         {
@@ -247,6 +556,62 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty SelectedItemsProperty =
             DependencyProperty.RegisterAttached("SelectedItems", typeof(IList), typeof(DataGridManager));
         #endregion
+
+        #region (internal)CheckBoxHook
+        internal static object GetCheckBoxHook(DependencyObject obj)
+        {
+            return (object)obj.GetValue(CheckBoxHookProperty);
+        }
+
+        internal static void SetCheckBoxHook(DependencyObject obj, object value)
+        {
+            obj.SetValue(CheckBoxHookProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for CheckBoxHook.  This enables animation, styling, binding, etc...
+        internal static readonly DependencyProperty CheckBoxHookProperty =
+            DependencyProperty.RegisterAttached("CheckBoxHook", typeof(object), typeof(DataGridManager), new PropertyMetadata(CheckBoxHookChanged));
+
+        private static void CheckBoxHookChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is CheckBox check)
+            {
+                if (e.NewValue is DataGrid data)
+                {
+                    check.Checked += Check_Checked;
+                    check.Unchecked += Check_Unchecked;
+                    data.SelectedCellsChanged += (es, ew) =>
+                    {
+                        check.IsChecked = data.SelectedItems.Count == data.Items.Count;
+                    };
+                }
+                else
+                {
+                    check.Checked -= Check_Checked;
+                }
+            }
+        }
+
+        private static void Check_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (sender is CheckBox check && GetCheckBoxHook(check) is DataGrid datagrid)
+            {
+                datagrid.SelectedIndex = -1;
+            }
+        }
+
+        private static void Check_Checked(object sender, RoutedEventArgs e)
+        {
+            if (sender is CheckBox check && GetCheckBoxHook(check) is DataGrid datagrid)
+            {
+                datagrid.SelectAll();
+            }
+        }
+
+
+
+        #endregion
+
 
         #region (Internal) DataGridHook
         internal static bool GetDataGridHook(DependencyObject obj)
@@ -297,13 +662,8 @@ namespace LeeTeke.WpfControl.Dependencies
 
                 newColumn.ItemsSource = Enum.GetValues(e.PropertyType).Cast<Enum>();
                 newColumn.SelectedItemBinding = new Binding(e.PropertyName) { Mode = bindingMode, UpdateSourceTrigger = updateSourceTrigger };
-                newColumn.EditingElementStyle = new Style(typeof(ComboBox))
-                {
-                    BasedOn = (Style)dataGrid.FindResource(typeof(ComboBox))
-                };
-                newColumn.EditingElementStyle.Setters.Add(new Setter(ComboBox.HeightProperty, 30.0));
-                newColumn.EditingElementStyle.Setters.Add(new Setter(ComboBox.PaddingProperty, new Thickness(5, 0, 20, 0)));
-
+                newColumn.EditingElementStyle = GetAutoGenerateComboxStyle(dataGrid);
+             
                 e.Column = newColumn;
             }
             else if (e.PropertyType == typeof(bool))
@@ -315,47 +675,34 @@ namespace LeeTeke.WpfControl.Dependencies
                     IsReadOnly = readOnly,
                     Visibility = visibility,
                 };
-
                 newColumn.Binding = new Binding(e.PropertyName) { Mode = bindingMode, UpdateSourceTrigger = updateSourceTrigger };
-
-
-                newColumn.ElementStyle = new Style(typeof(SwitchButton));
-
-                var userStyle = GetAutoGenerateCheckBoxStyle(dataGrid);
-                if (userStyle == null)
-                {
-                    newColumn.ElementStyle = new Style(typeof(CheckBox))
-                    {
-                        BasedOn = (Style)dataGrid.FindResource(typeof(CheckBox))
-                    };
-                    newColumn.ElementStyle.Setters.Add(new Setter(CheckBox.BorderThicknessProperty, new Thickness(1)));
-                    newColumn.ElementStyle.Setters.Add(new Setter(CheckBox.BackgroundProperty, new SolidColorBrush(Colors.Transparent)));
-
-                    newColumn.EditingElementStyle = new Style(typeof(CheckBox))
-                    {
-                        BasedOn = (Style)dataGrid.FindResource(typeof(CheckBox))
-                    };
-                    newColumn.EditingElementStyle.Setters.Add(new Setter(CheckBox.BorderThicknessProperty, new Thickness(1)));
-                    newColumn.EditingElementStyle.Setters.Add(new Setter(CheckBox.BackgroundProperty, new SolidColorBrush(Colors.Transparent)));
-                
-                }
-                else
-                {
-                    newColumn.ElementStyle = userStyle;
-                    newColumn.EditingElementStyle = userStyle;
-                }
-
+                newColumn.ElementStyle = GetAutoGenerateCheckBoxStyle(dataGrid);
+                newColumn.EditingElementStyle = GetAutoGenerateCheckBoxStyle(dataGrid);
                 if (dataGrid.IsReadOnly)
                 {
                     newColumn.ElementStyle.Setters.Add(new Setter(CheckBox.IsEnabledProperty, false));
-                    newColumn.ElementStyle.Setters.Add(new Setter(CheckBox.OpacityProperty, 1.0));
                 }
 
-                newColumn.CellStyle = new Style(typeof(DataGridCell))
+                e.Column = newColumn;
+            }
+            else if (e.PropertyType == typeof(ImageSource))
+            {
+                var newColumn = new DataGridTemplateColumn()
                 {
-                    BasedOn = (Style)dataGrid.FindResource(typeof(DataGridCell)),
+                    Width = width,
+                    Header = header,
+                    IsReadOnly = readOnly,
+                    Visibility = visibility,
                 };
 
+
+                var dt= new DataTemplate();
+                var fef = new FrameworkElementFactory(typeof(Image));
+                fef.SetBinding(Image.SourceProperty, new Binding(e.PropertyName) { Mode = bindingMode, UpdateSourceTrigger = updateSourceTrigger });
+                fef.SetValue(Image.StyleProperty, GetAutoGenerateImageStyle(dataGrid));
+                dt.VisualTree = fef;
+                newColumn.CellTemplate = dt;
+                newColumn.CellEditingTemplate = dt;
                 e.Column = newColumn;
             }
             else
@@ -370,29 +717,14 @@ namespace LeeTeke.WpfControl.Dependencies
 
                 newColumn.Binding = new Binding(e.PropertyName) { Mode = bindingMode, UpdateSourceTrigger = updateSourceTrigger };
 
-                newColumn.ElementStyle = new Style(typeof(TextBlock))
+                newColumn.ElementStyle = GetAutoGenerateTextBoxStyle(dataGrid);
+
+                newColumn.EditingElementStyle = GetAutoGenerateTextBoxStyle(dataGrid);
+                if (dataGrid.IsReadOnly)
                 {
-                    BasedOn = (Style)dataGrid.FindResource(typeof(TextBlock))
-                };
-
-                newColumn.ElementStyle.Setters.Add(new Setter(TextBox.MaxHeightProperty, 100.0));
-
-                newColumn.EditingElementStyle = new Style(typeof(TextBox))
-                {
-                    BasedOn = (Style)dataGrid.FindResource(typeof(TextBox))
-                };
-
-                newColumn.EditingElementStyle.Setters.Add(new Setter(TextBox.MaxHeightProperty, 100.0));
-                newColumn.EditingElementStyle.Setters.Add(new Setter(TextBox.VerticalScrollBarVisibilityProperty, ScrollBarVisibility.Auto));
-                newColumn.EditingElementStyle.Setters.Add(new Setter(TextBox.HorizontalScrollBarVisibilityProperty, ScrollBarVisibility.Auto));
-                newColumn.EditingElementStyle.Setters.Add(new Setter(TextBox.MarginProperty, new Thickness(2)));
-
-
-                newColumn.CellStyle = new Style(typeof(DataGridCell))
-                {
-                    BasedOn = (Style)dataGrid.FindResource(typeof(DataGridCell)),
-                };
-                newColumn.CellStyle.Setters.Add(new Setter(DataGridCell.PaddingProperty, new Thickness(0, 0, 10, 0)));
+                    newColumn.ElementStyle.Setters.Add(new Setter(TextBox.IsReadOnlyProperty, true));
+                    newColumn.ElementStyle.Setters.Add(new Setter(TextBox.BorderThicknessProperty, 0));
+                }
 
                 e.Column = newColumn;
             }

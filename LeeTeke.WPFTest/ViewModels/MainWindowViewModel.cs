@@ -168,7 +168,7 @@ namespace LeeTeke.WPFTest.ViewModels
 
             msg.AddOptions("你好", 123);
             msg.AddOptions("你好1", 456);
-            msg.AddOptions("你好2", 789);
+        
             var reulst = await msg.ShowDialogAsync();
             NotifyData = new NotifyBannerShowData()
             {

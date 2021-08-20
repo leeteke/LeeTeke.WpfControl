@@ -11,7 +11,6 @@ namespace LeeTeke.WpfControl.Dependencies
     public class ListViewManager:ListManager
     {
 
-
         #region HeaderFreeze
         public static bool GetHeaderFreeze(DependencyObject obj)
         {
@@ -27,8 +26,6 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty HeaderFreezeProperty =
             DependencyProperty.RegisterAttached("HeaderFreeze", typeof(bool), typeof(ListViewManager));
         #endregion
-
-
 
         #region HeaderBackground
         public static Brush GetHeaderBackground(DependencyObject obj)
@@ -78,7 +75,6 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("HeaderBorderBursh", typeof(Brush), typeof(ListViewManager));
         #endregion
 
-
         #region HeaderMargin
         public static Thickness GetHeaderMargin(DependencyObject obj)
         {
@@ -94,7 +90,6 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty HeaderMarginProperty =
             DependencyProperty.RegisterAttached("HeaderMargin", typeof(Thickness), typeof(ListViewManager));
         #endregion
-
 
         #region HeaderPadding
         public static Thickness GetHeaderPadding(DependencyObject obj)
@@ -112,7 +107,6 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("HeaderPadding", typeof(Thickness), typeof(ListViewManager));
         #endregion
 
-
         #region HeaderCornerRadius
         public static CornerRadius GetHeaderCornerRadius(DependencyObject obj)
         {
@@ -128,7 +122,6 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty HeaderCornerRadiusProperty =
             DependencyProperty.RegisterAttached("HeaderCornerRadius", typeof(CornerRadius), typeof(ListViewManager));
         #endregion
-
 
         #region HeaderIsClip
         public static bool GetHeaderIsClip(DependencyObject obj)

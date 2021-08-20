@@ -84,5 +84,43 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty HaveCheckedContentProperty =
             DependencyProperty.RegisterAttached("HaveCheckedContent", typeof(bool), typeof(CheckBoxManager));
         #endregion
+
+
+        #region SwitchHeight
+        public static double GetSwitchHeight(DependencyObject obj)
+        {
+            return (double)obj.GetValue(SwitchHeightProperty);
+        }
+
+        public static void SetSwitchHeight(DependencyObject obj, double value)
+        {
+            obj.SetValue(SwitchHeightProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for SwitchHeight.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SwitchHeightProperty =
+            DependencyProperty.RegisterAttached("SwitchHeight", typeof(double), typeof(CheckBoxManager));
+        #endregion
+
+
+
+        #region SwitchWidth
+        public static double GetSwitchWidth(DependencyObject obj)
+        {
+            return (double)obj.GetValue(SwitchWidthProperty);
+        }
+
+        public static void SetSwitchWidth(DependencyObject obj, double value)
+        {
+            obj.SetValue(SwitchWidthProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for SwitchWidth.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SwitchWidthProperty =
+            DependencyProperty.RegisterAttached("SwitchWidth", typeof(double), typeof(CheckBoxManager));
+        #endregion
+
+
+
     }
 }

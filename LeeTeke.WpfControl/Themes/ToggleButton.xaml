@@ -104,72 +104,65 @@
 
     </Style>
 
-    <Style x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+    <Style x:Key="RotateToggleButton" TargetType="{x:Type ToggleButton}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="IsTabStop" Value="false"/>
         <Setter Property="Focusable" Value="false"/>
         <Setter Property="ClickMode" Value="Press"/>
+        <Setter Property="Content" Value="&#xE70D;"/>
+        <Setter Property="FontFamily" Value="{DynamicResource IconFontFamily}"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                        <Grid Background="Transparent">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="30" />
-                            </Grid.ColumnDefinitions>
-                            <Path x:Name="arrow1"
-                                  Opacity="1"
-                                  VerticalAlignment="Center"
-                                  Grid.Column="1"
-                                  HorizontalAlignment="Center"
-                                  Data="M5,4 H14 L9.5,10 Z"
-                                  Width="15"
-                                  Height="15"
-                                  Fill="{TemplateBinding Foreground}" />
-                            <Path x:Name="arrow2"
-                                  Opacity="0"
-                                  VerticalAlignment="Center"
-                                  Grid.Column="1"
-                                  HorizontalAlignment="Center"
-                                  Data="M5,10 H14 L9.5,4.5 Z"
-                                  Width="15"
-                                  Height="15"
-                                  Fill="{TemplateBinding Foreground}" />
-                        </Grid>
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Margin="{TemplateBinding Margin}"
+                            >
+                        <ContentPresenter x:Name="PART_Content"
+                                          Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          RenderTransformOrigin="0.5,0.5"
+                                          >
+                            <ContentPresenter.RenderTransform>
+                                <RotateTransform x:Name="PART_Angle" Angle="0"/>
+                            </ContentPresenter.RenderTransform>
+                        </ContentPresenter>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsChecked"
-                                                                 Value="True">
+                        <Trigger Property="IsChecked"  Value="True">
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="arrow1"
-                                                                                         Storyboard.TargetProperty="Opacity"
-                                                                                         To="0"
-                                                                                         Duration="0:0:0.2"></DoubleAnimation>
-                                        <DoubleAnimation Storyboard.TargetName="arrow2"
-                                                                                         Storyboard.TargetProperty="Opacity"
-                                                                                         To="1"
-                                                                                         Duration="0:0:0.2"></DoubleAnimation>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Angle"
+                                                                        Storyboard.TargetProperty="Angle">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.2"
+                                                                  Value="180">
+                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                    <SineEase EasingMode="EaseIn"/>
+                                                </EasingDoubleKeyFrame.EasingFunction>
+                                            </EasingDoubleKeyFrame>
+                                        </DoubleAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
                             <Trigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="arrow1"
-                                                                                         Storyboard.TargetProperty="Opacity"
-                                                                                         To="1"
-                                                                                         Duration="0:0:0.2"></DoubleAnimation>
-                                        <DoubleAnimation Storyboard.TargetName="arrow2"
-                                                                                         Storyboard.TargetProperty="Opacity"
-                                                                                         To="0"
-                                                                                         Duration="0:0:0.2"></DoubleAnimation>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Angle"
+                                                                        Storyboard.TargetProperty="Angle">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.2"
+                                                                  Value="0">
+                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                    <SineEase EasingMode="EaseIn"/>
+                                                </EasingDoubleKeyFrame.EasingFunction>
+                                            </EasingDoubleKeyFrame>
+                                        </DoubleAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
@@ -180,4 +173,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    
+    
 </ResourceDictionary>

@@ -11,10 +11,11 @@
         Title="WpfControl测试 窗口"
         Height="450"
         Width="600"
+        d:Height="1500"   
         x:Name="windows"
         WindowState="Normal"
         ClientFull="True"
-        d:Height="1000"
+       
         >
 
     <leecontrol:Window.TitleContent>
@@ -66,7 +67,14 @@
                 <DataGrid ItemsSource="{Binding TestList}"
                           AutoGenerateColumns="True"
                           CanUserAddRows="True"
-                          CanUserDeleteRows="True"/>
+                          CanUserDeleteRows="True"
+                          HeadersVisibility="All"
+                          CanUserSortColumns="True"
+                          Margin="5"
+                          Height="150"
+                          leedep:DataGridManager.ShowRowNumber="True">
+
+                </DataGrid>
 
 
                 <ListBox ItemsSource="{Binding TestList}"
@@ -194,8 +202,8 @@
                                       />
 
                 <CheckBox  Content="你好"
-                           Height="35"
                            leedep:CheckBoxManager.CheckedContent="你选中了我"
+                           Style="{StaticResource SwitchCheckBox}"
                             />
                 <ComboBox IsEditable="False"  
                           Height="35"

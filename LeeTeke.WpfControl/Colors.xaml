@@ -21,7 +21,7 @@
         </Setter>
     </Style>
 
-    <sys:Double x:Key="LeeControlHeight">35</sys:Double>
+    <sys:Double x:Key="LeeControlHeight">30</sys:Double>
     <sys:Double x:Key="LeeControlWidth">120</sys:Double>
     <sys:Double x:Key="LeeControlMinHeight">35</sys:Double>
     <sys:Double x:Key="LeeControlMinWidth">120</sys:Double>

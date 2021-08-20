@@ -33,16 +33,8 @@
                                Margin="0,4"
                                HorizontalAlignment="Right"
                                Background="Transparent"
-                               >
-                            <Thumb.Template>
-                                <ControlTemplate TargetType="{x:Type Thumb}">
-                                    <Border Background="{TemplateBinding Background}"
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                            Margin="{TemplateBinding Margin}"/>
-                                </ControlTemplate>
-                            </Thumb.Template>
-                        </Thumb>
+                               Cursor="SizeWE"
+                               />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
