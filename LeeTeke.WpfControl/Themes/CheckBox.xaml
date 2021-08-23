@@ -3,29 +3,40 @@
                     xmlns:controls="clr-namespace:LeeTeke.WpfControl.Controls"
                     xmlns:local="clr-namespace:LeeTeke.WpfControl.Themes"
                     xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies">
-    
+
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <Style x:Key="LeeCheckBox" TargetType="{x:Type CheckBox}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}"/>
         <Setter Property="Height" Value="{DynamicResource LeeControlHeight}"/>
         <Setter Property="leedep:CheckBoxManager.RippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}"/>
-        <Setter Property="leedep:CheckBoxManager.CheckBoxSize" Value="14"/>
+        <Setter Property="leedep:CheckBoxManager.CheckBoxSize" Value="18"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter  Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="{DynamicResource LeeControlPadding}"/>
-
+        <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type CheckBox}">
-                    <Grid x:Name="templateRoot" 
-                          Background="Transparent" 
-                          SnapsToDevicePixels="True">
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="StoryboardCheckedTrue">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.StrokeDashOffset)" Storyboard.TargetName="path">
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0" />
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="StoryboardCheckedFalse">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.StrokeDashOffset)" Storyboard.TargetName="path">
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="8" />
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+                    <Grid  >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="*"/>
@@ -34,16 +45,46 @@
                             ParentElement="{Binding RelativeSource={ RelativeSource Mode=TemplatedParent}}"
                             IsOverflow="True"
                             />
-                        <Viewbox x:Name="viewBox" 
-                                 MaxHeight="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:CheckBoxManager.CheckBoxSize),Mode=OneWay}"
-                                 Margin="3" >
-                            <Path x:Name="optionMark"
-                                      Data="M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M19,5V19H5V5H19Z"
-                                      Fill="{TemplateBinding BorderBrush}"
-                                      Stretch="Fill"
-                                       />
+                        <Border x:Name="PART_Border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Height="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:CheckBoxManager.CheckBoxSize),Mode=OneWay}"
+                                Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:CheckBoxManager.CheckBoxSize),Mode=OneWay}"
+                                CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:CornerRadiusManager.CornerRadius),Mode=OneWay}"
+                                >
+                            <Grid>
+                                <Viewbox  Margin="3">
+                                    <Path FlowDirection="LeftToRight"
+                                  UseLayoutRounding="True"
+                                  x:Name="path"
+                                  StrokeDashOffset="8"
+                                  StrokeDashArray="8,8"
+                                  Width="12"
+                                  Height="12"
+                                  Data="M 0,2 3,5 8,0"
+                                  StrokeThickness="2"
+                                  Stretch="Uniform"
+                                  Stroke="White" />
+                                </Viewbox>
+                                <Rectangle x:Name="PART_CheckedNull" 
+                                   Fill="{DynamicResource LeeBrush_Theme}"
+                                   Margin="1"
+                                   Visibility="Collapsed"
+                                   >
+                                    <Rectangle.Clip>
+                                        <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                            <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
+                                            <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
+                                            <Binding ElementName="PART_Border"  Path="CornerRadius" Mode="OneWay"/>
+                                        </MultiBinding>
+                                    </Rectangle.Clip>
+                                </Rectangle>
+                            </Grid>
 
-                        </Viewbox>
+                        </Border>
+
+
                         <ContentPresenter x:Name="contentPresenter"
                                           Grid.Column="1" 
                                           Focusable="False"
@@ -68,18 +109,32 @@
                     </Grid>
                     <ControlTemplate.Triggers>
 
-                        <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Fill" 
-                                    TargetName="optionMark" 
-                                    Value="{DynamicResource LeeBrush_BorderBrushMouseOver}"/>
-                        </Trigger>
+
+                        <MultiTrigger >
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="False"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_Border" Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrushMouseOver}"/>
+                        </MultiTrigger>
+
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Fill" TargetName="optionMark" Value="LightGray"/>
+                            <Setter Property="Opacity" Value="0.9"/>
                         </Trigger>
 
                         <Trigger Property="IsChecked" Value="true">
-                            <Setter Property="Fill" TargetName="optionMark" Value="{DynamicResource LeeBrush_Theme}"/>
-                            <Setter Property="Data" TargetName="optionMark" Value="M10,17L5,12L6.41,10.58L10,14.17L17.59,6.58L19,8M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3Z"/>
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource StoryboardCheckedTrue}" />
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource StoryboardCheckedFalse}" />
+                            </Trigger.ExitActions>
+                            <Setter Property="Background" Value="{DynamicResource LeeBrush_Theme}" />
+                            <Setter Property="BorderThickness" Value="0" />
+                        </Trigger>
+
+                        <Trigger Property="IsChecked" Value="{x:Null}">
+                            <Setter TargetName="PART_CheckedNull" Property="Visibility" Value="Visible"/>
                         </Trigger>
 
                         <MultiTrigger >
@@ -91,55 +146,185 @@
                             <Setter  TargetName="Checked_ContentPresenter" Property="Visibility" Value="Visible"/>
                         </MultiTrigger>
 
-                        <Trigger Property="IsChecked" Value="{x:Null}">
-                            <Setter Property="Fill" TargetName="optionMark" Value="{DynamicResource LeeBrush_Theme}"/>
-                            <Setter Property="Data" TargetName="optionMark" Value="M6,13L6,11L18,11L18,13M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3Z"/>
-                        </Trigger>
+
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+
     
+
+
+    <QuarticEase x:Key="SwitchEasingFunction" EasingMode="EaseOut"/>
     <Style x:Key="SwitchCheckBox" TargetType="{x:Type CheckBox}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="leedep:CheckBoxManager.SwitchWidth" Value="32"/>
-        <Setter Property="leedep:CheckBoxManager.SwitchHeight" Value="16"/>
-        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}"/>
         <Setter Property="Height" Value="{DynamicResource LeeControlHeight}"/>
+        <Setter Property="leedep:CheckBoxManager.RippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}"/>
+        <Setter Property="leedep:CheckBoxManager.CheckBoxSize" Value="18"/>
+        <Setter Property="leedep:CheckBoxManager.SwtichFill" Value="{DynamicResource LeeBrush_Forground}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter  Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="{DynamicResource LeeControlPadding}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <controls:SwitchButton  x:Name="PART_Switch"
-                                                BorderBrush="{TemplateBinding BorderBrush}"
-                                                Foreground="{TemplateBinding Foreground}"
-                                                FontSize="{TemplateBinding FontSize}"
-                                                Padding="{TemplateBinding Padding}"
-                                                Content="{TemplateBinding Content}"
-                                                ButtonWidth="{Binding RelativeSource={RelativeSource AncestorType={x:Type CheckBox}},Path=(leedep:CheckBoxManager.SwitchWidth),Mode=OneWay}"
-                                                ButtonHeight="{Binding RelativeSource={RelativeSource AncestorType={x:Type CheckBox}},Path=(leedep:CheckBoxManager.SwitchHeight),Mode=OneWay}"
-                                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                HorizontalContentAlignment="{TemplateBinding HorizontalAlignment}"
-                                                CloseContent="{Binding RelativeSource={RelativeSource AncestorType={x:Type CheckBox}},Path=(leedep:CheckBoxManager.CheckedContent),Mode=OneWay}"
-                                                />
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="StoryboardCheckedTrue">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="X"
+                                                           Storyboard.TargetName="PART_EllipseTT">
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="20" EasingFunction="{StaticResource SwitchEasingFunction}" />
+                            </DoubleAnimationUsingKeyFrames>
+
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="ScaleX"
+                                                           Storyboard.TargetName="PART_CheckedFalseST">
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0" EasingFunction="{StaticResource SwitchEasingFunction}" />
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="ScaleY"
+                                                           Storyboard.TargetName="PART_CheckedFalseST">
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0" EasingFunction="{StaticResource SwitchEasingFunction}"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            
+                        </Storyboard>
+                        <Storyboard x:Key="StoryboardCheckedFalse">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="X"
+                                                           Storyboard.TargetName="PART_EllipseTT" >
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"  EasingFunction="{StaticResource SwitchEasingFunction}"/>
+                            </DoubleAnimationUsingKeyFrames>
+
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="ScaleX"
+                                                           Storyboard.TargetName="PART_CheckedFalseST">
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1" EasingFunction="{StaticResource SwitchEasingFunction}"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="ScaleY"
+                                                           Storyboard.TargetName="PART_CheckedFalseST">
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1" EasingFunction="{StaticResource SwitchEasingFunction}" />
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Viewbox Height="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:CheckBoxManager.CheckBoxSize),Mode=OneWay}" >
+                            <Grid   x:Name="PART_Grid">
+                                <Border x:Name="PART_CheckedTrue" 
+                                           Width="40"
+                                           Height="20"
+                                           Background="{DynamicResource LeeBrush_Theme}"
+                                           CornerRadius="10"
+                                           BorderBrush="{TemplateBinding BorderBrush}"
+                                           BorderThickness="{TemplateBinding BorderThickness}"
+                                           VerticalAlignment="Center"
+                                            />
+                                <Border x:Name="PART_CheckedFalse" 
+                                        Width="40"
+                                        Height="20"
+                                        Background="{TemplateBinding Background}"
+                                        CornerRadius="10"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        VerticalAlignment="Center"
+                                        RenderTransformOrigin="1,0.5">
+                                    <Border.RenderTransform>
+                                        <ScaleTransform x:Name="PART_CheckedFalseST" ScaleX="1" ScaleY="1"/>
+                                    </Border.RenderTransform>
+                                    </Border>
+
+                                <Ellipse x:Name="PART_Ellipse" 
+                                         Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type CheckBox}},Path=(leedep:CheckBoxManager.SwtichFill),Mode=OneWay}"
+                                         Width="22"
+                                         Height="22"
+                                         Effect="{DynamicResource LeeShadow2}"
+                                         HorizontalAlignment="Left"
+                                         RenderTransformOrigin="0.5,0.5">
+                                    <Ellipse.RenderTransform>
+                                        <TranslateTransform x:Name="PART_EllipseTT"  X="0"/>
+                                    </Ellipse.RenderTransform>
+                                </Ellipse>
+                                
+                            </Grid>
+                        </Viewbox>
+
+
+                        <ContentPresenter x:Name="contentPresenter"
+                                          Grid.Column="1" 
+                                          Focusable="False"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                          Margin="{TemplateBinding Padding}"
+                                          RecognizesAccessKey="True" 
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                        <ContentPresenter x:Name="Checked_ContentPresenter"
+                                          Grid.Column="1" 
+                                          Content="{Binding RelativeSource={RelativeSource AncestorType={x:Type CheckBox}},Path=(leedep:CheckBoxManager.CheckedContent),Mode=OneWay}"
+                                          Focusable="False"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                          Margin="{TemplateBinding Padding}"
+                                          RecognizesAccessKey="True" 
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Visibility="Collapsed"/>
+
+
+                    </Grid>
                     <ControlTemplate.Triggers>
 
-                        <Trigger Property="IsChecked" Value="true">
-                            <Setter TargetName="PART_Switch" Property="Switch" Value="True"/>
+
+                        <MultiTrigger >
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="False"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <!--<Setter TargetName="PART_Border" Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrushMouseOver}"/>-->
+                        </MultiTrigger>
+
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" Value="0.9"/>
                         </Trigger>
+
                         <Trigger Property="IsChecked" Value="False">
-                            <Setter TargetName="PART_Switch" Property="Switch" Value="False"/>
+                            <Setter TargetName="PART_CheckedFalse" Property="BorderThickness" Value="1" />
+                            <Setter TargetName="PART_CheckedTrue" Property="BorderThickness" Value="4" />
+                            <Setter TargetName="PART_CheckedTrue" Property="BorderBrush" Value="{x:Null}" />
                         </Trigger>
+
+                        <Trigger Property="IsChecked" Value="true">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource StoryboardCheckedTrue}" />
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource StoryboardCheckedFalse}" />
+                            </Trigger.ExitActions>
+                            <Setter TargetName="PART_CheckedFalse" Property="BorderThickness" Value="0" />
+                            <Setter TargetName="PART_CheckedTrue" Property="BorderThickness" Value="1" />
+                        </Trigger>
+
+                        <Trigger Property="IsChecked" Value="{x:Null}">
+                            <Setter TargetName="PART_CheckedFalse" Property="Background" Value="{DynamicResource LeeBrush_Theme}"/>
+                            <Setter TargetName="PART_Ellipse" Property="Opacity" Value="0"/>
+                        </Trigger>
+
+                        <MultiTrigger >
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True"/>
+                                <Condition Property="leedep:CheckBoxManager.HaveCheckedContent" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter  TargetName="contentPresenter" Property="Visibility" Value="Collapsed"/>
+                            <Setter  TargetName="Checked_ContentPresenter" Property="Visibility" Value="Visible"/>
+                        </MultiTrigger>
+
 
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-</ResourceDictionary>
+</ResourceDictionary> 

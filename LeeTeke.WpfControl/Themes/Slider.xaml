@@ -32,7 +32,7 @@
                          Width="15"
                          Height="15"
                          VerticalAlignment="Center"
-                         Fill="White"
+                         Fill="{DynamicResource LeeBrush_White}"
                          Effect="{DynamicResource LeeShadow}"
                          />
             </Setter.Value>

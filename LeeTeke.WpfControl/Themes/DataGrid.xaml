@@ -7,22 +7,31 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
-        <ResourceDictionary  Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ScrollView.xaml" />
+        <ResourceDictionary  Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/CheckBox.xaml" />
+        <ResourceDictionary  Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ComboBox.xaml" />
+        <ResourceDictionary  Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/TextBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-  
+
 
     <Style x:Key="LeeDataGrid" TargetType="{x:Type DataGrid}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="SelectionUnit" Value="FullRow"/>
         <Setter Property="leedep:DataGridManager.DataGridHook" Value="True" />
         <Setter Property="SnapsToDevicePixels"  Value="True" />
         <Setter Property="FontSize"   Value="13" />
-        <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="RowHeaderWidth" Value="50"/>
         <Setter Property="GridLinesVisibility" Value="None"/>
+        <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
+        <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
+        <Setter Property="leedep:DataGridManager.RowMargin" Value="0,2"/>
+        <Setter Property="leedep:DataGridManager.RowCornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="leedep:DataGridManager.RowIsClip" Value="True"/>
+        <Setter Property="leedep:DataGridManager.RowBackground" Value="{DynamicResource LeeBrush_Forground}"/>
         <Setter Property="leedep:DataGridManager.HeaderFreeze" Value="True"/>
         <Setter Property="leedep:DataGridManager.RowHeaderVerticalContentAlignment" Value="Center"/>
         <Setter Property="leedep:DataGridManager.RowHeaderHorizontalContentAlignment" Value="Center"/>
@@ -30,11 +39,43 @@
         <Setter Property="leedep:DataGridManager.RowMinHeight"   Value="35" />
         <Setter Property="leedep:DataGridManager.HeaderMinHeight"   Value="40" />
         <Setter Property="leedep:DataGridManager.ColumnVerticalContentAlignment"   Value="Center" />
-        <Setter Property="leedep:DataGridManager.ColumnHorizontalContentAlignment"    Value="Stretch" />
-        <Setter Property="leedep:DataGridManager.SelectedBackground"    Value="#44DDDDDD" />
-        <Setter Property="leedep:DataGridManager.SelectedForeground"     Value="{Binding Foreground,RelativeSource={RelativeSource Self}}" />
-        <Setter Property="leedep:DataGridManager.HeaderBackground"   Value="#FAFAFA" />
-        <Setter Property="leedep:DataGridManager.HeaderForeground"  Value="DimGray" />
+        <Setter Property="leedep:DataGridManager.ColumnHorizontalContentAlignment"    Value="Center" />
+        <Setter Property="leedep:DataGridManager.SelectedBackground"    Value="{DynamicResource LeeBrush_Theme}" />
+        <Setter Property="leedep:DataGridManager.SelectedForeground"    Value="Red" />
+        <Setter Property="leedep:DataGridManager.MouseOrverForeground"    Value="{x:Null}" />
+        <Setter Property="leedep:DataGridManager.MouseOverBackground"    Value="{DynamicResource LeeBrush_Mark}" />
+        <Setter Property="leedep:DataGridManager.HeaderBackground"   Value="Transparent" />
+        <Setter Property="leedep:DataGridManager.HeaderForeground"  Value="{DynamicResource LeeBrush_Text}" />
+        <Setter Property="leedep:DataGridManager.AutoGenerateComboxStyle" >
+            <Setter.Value>
+                <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource  LeeComboBox}">
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="leedep:DataGridManager.AutoGenerateCheckBoxStyle" >
+            <Setter.Value>
+                <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource  SwitchCheckBox}">
+                    <Setter Property="IsEnabled" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridCell}},Path=IsReadOnly,Mode=OneWay}"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="leedep:DataGridManager.AutoGenerateImageStyle" >
+            <Setter.Value>
+                <Style TargetType="{x:Type Image}" >
+                    <Setter Property="MaxWidth" Value="100"/>
+                    <Setter Property="MaxHeight" Value="100"/>
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="leedep:DataGridManager.AutoGenerateTextBoxStyle" >
+            <Setter.Value>
+                <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource  LeeTextBox}">
+                    <Setter Property="Background" Value="{DynamicResource LeeBrush_White}"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="Foreground"  Value="{DynamicResource LeeBrush_Text}" />
@@ -245,16 +286,15 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="LeeDataGridColumnHeader" 
-           TargetType="{x:Type DataGridColumnHeader}">
+    <Style x:Key="LeeDataGridColumnHeader" TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="FontSize" Value="{Binding FontSize,RelativeSource={RelativeSource AncestorType=DataGrid}}" />
         <Setter Property="Background"  Value="{Binding Path=(leedep:DataGridManager.HeaderBackground),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
         <Setter Property="Foreground"  Value="{DynamicResource LeeBrush_Theme}" />
         <Setter Property="MinHeight" Value="{Binding Path=(leedep:DataGridManager.HeaderMinHeight),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-        <Setter Property="leedep:DataGridManager.ColumnVerticalContentAlignment"      Value="{Binding Path=(leedep:DataGridManager.ColumnVerticalContentAlignment),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-        <Setter Property="leedep:DataGridManager.ColumnHorizontalContentAlignment"   Value="{Binding Path=(leedep:DataGridManager.ColumnHorizontalContentAlignment),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="VerticalContentAlignment"      Value="{Binding Path=(leedep:DataGridManager.ColumnVerticalContentAlignment),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="HorizontalContentAlignment"   Value="{Binding Path=(leedep:DataGridManager.ColumnHorizontalContentAlignment),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
         <Setter Property="leedep:DataGridManager.HeaderPadding"  Value="{Binding Path=(leedep:DataGridManager.HeaderPadding),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -262,7 +302,7 @@
                     <Border BorderThickness="{TemplateBinding BorderThickness}"
                                 BorderBrush="{TemplateBinding BorderBrush}" 
                             Background="{TemplateBinding Background}"
-                                Margin="{TemplateBinding Margin}">
+                            Margin="{TemplateBinding Margin}">
 
                         <Grid  >
                             <StackPanel Orientation="Horizontal"
@@ -373,97 +413,53 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="FontSize"  Value="{Binding FontSize,RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-        <Setter Property="Background" Value="White" />
-        <Setter Property="leedep:DataGridManager.CellPadding"
-                Value="{Binding Path=(leedep:DataGridManager.CellPadding),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-        <Setter Property="leedep:DataGridManager.ColumnVerticalContentAlignment"
-                Value="{Binding Path=(leedep:DataGridManager.ColumnVerticalContentAlignment),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-        <Setter Property="leedep:DataGridManager.ColumnHorizontalContentAlignment"
-                Value="{Binding Path=(leedep:DataGridManager.ColumnHorizontalContentAlignment),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-        <Setter Property="leedep:DataGridManager.SelectedBackground"
-                Value="{Binding Path=(leedep:DataGridManager.SelectedBackground),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Padding"  Value="{Binding Path=(leedep:DataGridManager.CellPadding),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="VerticalContentAlignment"  Value="{Binding Path=(leedep:DataGridManager.ColumnVerticalContentAlignment),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="HorizontalContentAlignment"  Value="{Binding Path=(leedep:DataGridManager.ColumnHorizontalContentAlignment),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="leedep:DataGridManager.SelectedForeground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},Path=(leedep:DataGridManager.SelectedForeground),Mode=OneWay}"/>
+        <Setter Property="leedep:DataGridManager.SelectedBackground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},Path=(leedep:DataGridManager.SelectedBackground),Mode=OneWay}"/>
+        <Setter Property="leedep:DataGridManager.SelectedBorderBrush" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},Path=(leedep:DataGridManager.SelectedBorderBrush),Mode=OneWay}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridCell}">
-                    <Grid>
-                                        
+                    <Border x:Name="PART_Border"
+                            BorderThickness="0"
+                            Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}">
                         <ContentPresenter x:Name="Presenter"
-                                          HorizontalAlignment="{Binding Path=(leedep:DataGridManager.ColumnHorizontalContentAlignment),RelativeSource={RelativeSource AncestorType=DataGridCell}}"
-                                          VerticalAlignment="{Binding Path=(leedep:DataGridManager.ColumnVerticalContentAlignment),RelativeSource={RelativeSource AncestorType=DataGridCell}}"
-                                          Margin="{Binding Path=(leedep:DataGridManager.CellPadding),RelativeSource={RelativeSource AncestorType=DataGridCell}}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                    </Grid>
+                    </Border>
                     <ControlTemplate.Triggers>
+                
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsMouseOver,RelativeSource={RelativeSource Self}}"
-                                           Value="True" />
-                                <Condition Binding="{Binding SelectionUnit,RelativeSource={RelativeSource AncestorType=DataGrid},Mode=OneWay}"
-                                           Value="Cell" />
+                                <Condition Binding="{Binding IsSelected,RelativeSource={RelativeSource Self}}"  Value="True"/>
+                                <Condition Binding="{Binding SelectionUnit,RelativeSource={RelativeSource AncestorType=DataGrid},Mode=OneWay}" Value="CellOrRowHeader" />
                             </MultiDataTrigger.Conditions>
-                            <MultiDataTrigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="BdrHover"
-                                                         Storyboard.TargetProperty="Opacity"
-                                                         To="1"
-                                                         Duration="0:0:0.2"></DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </MultiDataTrigger.EnterActions>
-                            <MultiDataTrigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="BdrHover"
-                                                         Storyboard.TargetProperty="Opacity"
-                                                         To="0"
-                                                         Duration="0:0:0.2"></DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </MultiDataTrigger.ExitActions>
+                            <Setter TargetName="PART_Border"  Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridCell}},Path=(leedep:DataGridManager.SelectedBackground),Mode=OneWay}"/>
+                            <Setter TargetName="PART_Border"  Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridCell}},Path=(leedep:DataGridManager.SelectedBorderBrush),Mode=OneWay}"/>
                         </MultiDataTrigger>
+
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsMouseOver,RelativeSource={RelativeSource Self}}"
-                                           Value="True" />
-                                <Condition Binding="{Binding SelectionUnit,RelativeSource={RelativeSource AncestorType=DataGrid},Mode=OneWay}"
-                                           Value="CellOrRowHeader" />
+                                <Condition Binding="{Binding IsSelected,RelativeSource={RelativeSource Self}}"  Value="True"/>
+                                <Condition Binding="{Binding SelectionUnit,RelativeSource={RelativeSource AncestorType=DataGrid},Mode=OneWay}" Value="Cell" />
                             </MultiDataTrigger.Conditions>
-                            <MultiDataTrigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="BdrHover"
-                                                         Storyboard.TargetProperty="Opacity"
-                                                         To="1"
-                                                         Duration="0:0:0.2"></DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </MultiDataTrigger.EnterActions>
-                            <MultiDataTrigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="BdrHover"
-                                                         Storyboard.TargetProperty="Opacity"
-                                                         To="0"
-                                                         Duration="0:0:0.2"></DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </MultiDataTrigger.ExitActions>
+                            <Setter TargetName="PART_Border"  Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridCell}},Path=(leedep:DataGridManager.SelectedBackground),Mode=OneWay}"/>
+                            <Setter TargetName="PART_Border"  Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridCell}},Path=(leedep:DataGridManager.SelectedBorderBrush),Mode=OneWay}"/>
                         </MultiDataTrigger>
+
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsSelected,RelativeSource={RelativeSource Self}}"
-                                           Value="True"/>
-                                <Condition Binding="{Binding Path=(leedep:DataGridManager.SelectedForeground),RelativeSource={RelativeSource AncestorType=DataGrid},Converter={StaticResource IsNotNullConverter}}"
-                                           Value="True"/>
+                                <Condition Binding="{Binding IsSelected,RelativeSource={RelativeSource Self}}"  Value="True"/>
+                                <Condition Binding="{Binding Path=(leedep:DataGridManager.SelectedForeground),RelativeSource={RelativeSource AncestorType={x:Type DataGridCell}},Converter={StaticResource IsNotNullConverter}}"  Value="True"/>
                             </MultiDataTrigger.Conditions>
-                            <Setter Property="Foreground"
-                                    Value="{Binding Path=(leedep:DataGridManager.SelectedForeground),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                            <Setter Property="Foreground"  Value="{Binding Path=(leedep:DataGridManager.SelectedForeground),RelativeSource={RelativeSource AncestorType={x:Type DataGridCell}}}" />
                         </MultiDataTrigger>
-                        <Trigger  Property="IsSelected"
-                                  Value="True">
-                       
-                        </Trigger>
+
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -474,58 +470,81 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="FontSize"   Value="{Binding FontSize,RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-        <Setter Property="MinHeight" Value="{Binding Path=(leedep:DataGridManager.RowMinHeight),RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},Path=Background}"/>
+        <Setter Property="MinHeight" Value="{Binding Path=(leedep:DataGridManager.RowMinHeight),RelativeSource={RelativeSource AncestorType=DataGrid},Mode=OneWay}" />
+        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},Path=(leedep:DataGridManager.RowBackground),Mode=OneWay}"/>
+        <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},Path=(leedep:DataGridManager.RowBorderBrush),Mode=OneWay}"/>
+        <Setter Property="BorderThickness" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},Path=(leedep:DataGridManager.RowBorderThickness),Mode=OneWay}"/>
+        <Setter Property="Margin" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},Path=(leedep:DataGridManager.RowMargin),Mode=OneWay}"/>
+        <Setter Property="Padding" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},Path=(leedep:DataGridManager.RowPadding),Mode=OneWay}"/>
+        <Setter Property="leedep:CornerRadiusManager.IsClip" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},Path=(leedep:DataGridManager.RowIsClip),Mode=OneWay}"/>
+        <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},Path=(leedep:DataGridManager.RowCornerRadius),Mode=OneWay}"/>
+        <Setter Property="leedep:DataGridManager.MouseOrverBorderBrush" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},Path=(leedep:DataGridManager.MouseOverBackground),Mode=OneWay}"/>
+        <Setter Property="leedep:DataGridManager.MouseOverBackground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},Path=(leedep:DataGridManager.MouseOverBackground),Mode=OneWay}"/>
+        <Setter Property="leedep:DataGridManager.SelectedBackground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},Path=(leedep:DataGridManager.SelectedBackground),Mode=OneWay}"/>
+        <Setter Property="leedep:DataGridManager.SelectedBorderBrush" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},Path=(leedep:DataGridManager.SelectedBorderBrush),Mode=OneWay}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridRow}">
-                
-                        
-                    <Grid Background="{TemplateBinding Background}">
-                
-                        <SelectiveScrollingGrid>
-                            <SelectiveScrollingGrid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </SelectiveScrollingGrid.ColumnDefinitions>
-                            <SelectiveScrollingGrid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="Auto" />
-                            </SelectiveScrollingGrid.RowDefinitions>
-                            <DataGridCellsPresenter Grid.Column="1"
+                    <Border x:Name="PART_Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Margin="{TemplateBinding Margin}"
+                            CornerRadius="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}},Path=(leedep:CornerRadiusManager.CornerRadius),Mode=OneWay}">
+                        <Grid x:Name="PART_Grid" 
+                             Margin="{TemplateBinding Padding}">
+                            <SelectiveScrollingGrid>
+                                <SelectiveScrollingGrid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </SelectiveScrollingGrid.ColumnDefinitions>
+                                <SelectiveScrollingGrid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </SelectiveScrollingGrid.RowDefinitions>
+                                <DataGridCellsPresenter Grid.Column="1"
                                                     ItemsPanel="{TemplateBinding ItemsPanel}"
                                                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                            <DataGridDetailsPresenter Grid.Column="1"
+                                <DataGridDetailsPresenter Grid.Column="1"
                                                       Grid.Row="1"
                                                       Visibility="{TemplateBinding DetailsVisibility}"
                                                       SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding AreRowDetailsFrozen,  ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical}, Converter={x:Static DataGrid.RowDetailsScrollingConverter},  RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
-                            <DataGridRowHeader Grid.RowSpan="2"
+                                <DataGridRowHeader Grid.RowSpan="2"
                                                SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
                                                Visibility="{Binding HeadersVisibility,  ConverterParameter={x:Static DataGridHeadersVisibility.Row},  Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
-                        </SelectiveScrollingGrid>
-                    </Grid>
+                            </SelectiveScrollingGrid>
+                        </Grid>
+                    </Border>
                     <ControlTemplate.Triggers>
+                   
+                        
+                        <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
+                            <Setter TargetName="PART_Grid" Property="Clip">
+                                <Setter.Value>
+                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
+                                        <Binding ElementName="PART_Border"  Path="CornerRadius" Mode="OneWay"/>
+                                        <Binding ElementName="PART_Border"  Path="BorderThickness" Mode="OneWay"/>
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsMouseOver,RelativeSource={RelativeSource Self}}"
-                                           Value="True" />
-                                <Condition Binding="{Binding SelectionUnit,RelativeSource={RelativeSource AncestorType=DataGrid},Mode=OneWay}"
-                                           Value="FullRow" />
+                                <Condition Binding="{Binding IsMouseOver,RelativeSource={RelativeSource Self}}" Value="True" />
+                                <Condition Binding="{Binding SelectionUnit,RelativeSource={RelativeSource AncestorType=DataGrid},Mode=OneWay}" Value="FullRow" />
                             </MultiDataTrigger.Conditions>
-                            <MultiDataTrigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                    
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </MultiDataTrigger.EnterActions>
-                            <MultiDataTrigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                    
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </MultiDataTrigger.ExitActions>
+                            <Setter TargetName="PART_Border"  Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}},Path=(leedep:DataGridManager.MouseOverBackground),Mode=OneWay}"/>
+                            <Setter TargetName="PART_Border"  Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}},Path=(leedep:DataGridManager.MouseOrverBorderBrush),Mode=OneWay}"/>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsSelected,RelativeSource={RelativeSource Self}}" Value="True" />
+                                <Condition Binding="{Binding SelectionUnit,RelativeSource={RelativeSource AncestorType=DataGrid},Mode=OneWay}" Value="FullRow" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="PART_Border"  Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}},Path=(leedep:DataGridManager.SelectedBackground),Mode=OneWay}"/>
+                            <Setter TargetName="PART_Border"  Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}},Path=(leedep:DataGridManager.SelectedBorderBrush),Mode=OneWay}"/>
                         </MultiDataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

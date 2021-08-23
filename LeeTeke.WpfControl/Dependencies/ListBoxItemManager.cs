@@ -76,6 +76,25 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("MarkMargin", typeof(Thickness), typeof(ListBoxItemManager), new PropertyMetadata(new Thickness(0)));
         #endregion
 
+
+        #region MarkCornerRadius
+        public static CornerRadius GetMarkCornerRadius(DependencyObject obj)
+        {
+            return (CornerRadius)obj.GetValue(MarkCornerRadiusProperty);
+        }
+
+        public static void SetMarkCornerRadius(DependencyObject obj, CornerRadius value)
+        {
+            obj.SetValue(MarkCornerRadiusProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MarkCornerRadius.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MarkCornerRadiusProperty =
+            DependencyProperty.RegisterAttached("MarkCornerRadius", typeof(CornerRadius), typeof(ListBoxItemManager));
+        #endregion
+
+
+
         #region MarkMouseOverBrush
         public static Brush GetMarkMouseOverBrush(DependencyObject obj)
         {

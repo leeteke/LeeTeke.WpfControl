@@ -14,5 +14,15 @@ namespace LeeTeke.WPFTest.Models
         public bool Boolen { get; set; }
 
         public ImageSource Image { get; set; }
+
+        public TestEnum Enum { get; set; }
+    }
+
+    enum TestEnum
+    {
+        你好,
+        不好,
+        说什么
     }
 }
+

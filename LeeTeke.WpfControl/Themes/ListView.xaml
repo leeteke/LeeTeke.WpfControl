@@ -133,11 +133,11 @@
         <Setter Property="leedep:ListViewItemManager.MinHeight" Value="{DynamicResource LeeListItemHeight}"/>
         <Setter Property="leedep:ListViewItemManager.MinWidth" Value="{DynamicResource LeeListItemWidth}"/>
         <Setter Property="leedep:ListViewItemManager.Background" Value="{DynamicResource LeeBrush_Forground}"/>
-        <Setter Property="leedep:ListViewItemManager.SelectedForeground" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=Foreground,Mode=OneWay}"/>
+        <Setter Property="leedep:ListViewItemManager.SelectedForeground" Value="{DynamicResource LeeBrush_White}"/>
         <Setter Property="leedep:ListViewItemManager.SelectedFontSize" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=FontSize,Mode=OneWay}"/>
         <Setter Property="leedep:ListViewItemManager.SelectedFontWeight" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=FontWeight,Mode=OneWay}"/>
-        <Setter Property="leedep:ListViewItemManager.SelectedBackground" Value="{DynamicResource LeeBrush_ItemSelectedBackground}"/>
-        <Setter Property="leedep:ListViewItemManager.MouseOverBackground" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(leedep:ListViewItemManager.SelectedBackground),Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.5,Mode=OneWay}"/>
+        <Setter Property="leedep:ListViewItemManager.SelectedBackground" Value="{DynamicResource LeeBrush_Theme}"/>
+        <Setter Property="leedep:ListViewItemManager.MouseOverBackground" Value="{DynamicResource LeeBrush_Mark}"/>
         <Setter Property="leedep:ListViewManager.HeaderBorderThickness" Value="0,0,0,1"/>
         <Setter Property="leedep:ListViewManager.HeaderBorderBursh" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="leedep:ListViewManager.HeaderFreeze" Value="True"/>

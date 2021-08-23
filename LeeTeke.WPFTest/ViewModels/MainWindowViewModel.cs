@@ -118,6 +118,15 @@ namespace LeeTeke.WPFTest.ViewModels
         public DelegateCommand<object> TestCommand { get; set; }
 
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DelegateCommand ThemeChangedCommand => new(ThemeChangedCommandExecute);
+ 
+
+
+
         #endregion
 
         private bool _switch = false;
@@ -156,8 +165,6 @@ namespace LeeTeke.WPFTest.ViewModels
         private async void TestCommandExecute(object obj)
         {
 
-            _switch = !_switch;
-            StaticMethods.SetLightOrDark(_switch);
 
             MessageBoxEx msg = new MessageBoxEx()
             {
@@ -175,6 +182,13 @@ namespace LeeTeke.WPFTest.ViewModels
                 Content = $"您选择了 {reulst}",
                 Status = NotifyStatus.Info
             };
+        }
+
+        private void ThemeChangedCommandExecute()
+        {
+
+            _switch = !_switch;
+            StaticMethods.SetLightOrDark(_switch);
         }
 
     }

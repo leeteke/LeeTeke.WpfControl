@@ -145,6 +145,54 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("HeaderIsClip", typeof(bool), typeof(DataGridManager));
         #endregion
 
+        #region HeaderForeground
+        public static Brush GetHeaderForeground(DependencyObject obj)
+        {
+            return (Brush)obj.GetValue(HeaderForegroundProperty);
+        }
+
+        public static void SetHeaderForeground(DependencyObject obj, Brush value)
+        {
+            obj.SetValue(HeaderForegroundProperty, value);
+        }
+
+        public static readonly DependencyProperty HeaderForegroundProperty =
+            DependencyProperty.RegisterAttached("HeaderForeground", typeof(Brush), typeof(DataGridManager));
+        #endregion
+
+        #region HeaderFontSize
+        public static double GetHeaderFontSize(DependencyObject obj)
+        {
+            return (double)obj.GetValue(HeaderFontSizeProperty);
+        }
+
+        public static void SetHeaderFontSize(DependencyObject obj, double value)
+        {
+            obj.SetValue(HeaderFontSizeProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for HeaderFontSize.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HeaderFontSizeProperty =
+            DependencyProperty.RegisterAttached("HeaderFontSize", typeof(double), typeof(DataGridManager));
+        #endregion
+
+        #region HeaderFontWeight
+        public static FontWeight GetHeaderFontWeight(DependencyObject obj)
+        {
+            return (FontWeight)obj.GetValue(HeaderFontWeightProperty);
+        }
+
+        public static void SetHeaderFontWeight(DependencyObject obj, FontWeight value)
+        {
+            obj.SetValue(HeaderFontWeightProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for HeaderFontWeight.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HeaderFontWeightProperty =
+            DependencyProperty.RegisterAttached("HeaderFontWeight", typeof(FontWeight), typeof(DataGridManager));
+        #endregion
+
+
 
         #region NoItemsContent
         public static object GetNoItemsContent(DependencyObject obj)
@@ -178,7 +226,6 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty ListEndContentProperty =
             DependencyProperty.RegisterAttached("ListEndContent", typeof(object), typeof(DataGridManager));
         #endregion
-
 
         #region ShowRowNumber
         public static bool GetShowRowNumber(DependencyObject obj)
@@ -217,7 +264,6 @@ namespace LeeTeke.WpfControl.Dependencies
             e.Row.Header = e.Row.GetIndex() + 1;
         }
         #endregion
-
 
         #region RowHeaderVerticalContentAlignment
         public static VerticalAlignment GetRowHeaderVerticalContentAlignment(DependencyObject obj)
@@ -299,51 +345,116 @@ namespace LeeTeke.WpfControl.Dependencies
 
         #endregion
 
-        #region HeaderForeground
-        public static Brush GetHeaderForeground(DependencyObject obj)
+        #region RowBackground
+        public static Brush GetRowBackground(DependencyObject obj)
         {
-            return (Brush)obj.GetValue(HeaderForegroundProperty);
+            return (Brush)obj.GetValue(RowBackgroundProperty);
         }
 
-        public static void SetHeaderForeground(DependencyObject obj, Brush value)
+        public static void SetRowBackground(DependencyObject obj, Brush value)
         {
-            obj.SetValue(HeaderForegroundProperty, value);
+            obj.SetValue(RowBackgroundProperty, value);
         }
 
-        public static readonly DependencyProperty HeaderForegroundProperty =
-            DependencyProperty.RegisterAttached("HeaderForeground", typeof(Brush), typeof(DataGridManager));
+        // Using a DependencyProperty as the backing store for RowBackground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RowBackgroundProperty =
+            DependencyProperty.RegisterAttached("RowBackground", typeof(Brush), typeof(DataGridManager));
         #endregion
 
-        #region HeaderFontSize
-        public static double GetHeaderFontSize(DependencyObject obj)
+        #region RowBorderBrush
+        public static Brush GetRowBorderBrush(DependencyObject obj)
         {
-            return (double)obj.GetValue(HeaderFontSizeProperty);
+            return (Brush)obj.GetValue(RowBorderBrushProperty);
         }
 
-        public static void SetHeaderFontSize(DependencyObject obj, double value)
+        public static void SetRowBorderBrush(DependencyObject obj, Brush value)
         {
-            obj.SetValue(HeaderFontSizeProperty, value);
+            obj.SetValue(RowBorderBrushProperty, value);
         }
 
-        // Using a DependencyProperty as the backing store for HeaderFontSize.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty HeaderFontSizeProperty =
-            DependencyProperty.RegisterAttached("HeaderFontSize", typeof(double), typeof(DataGridManager));
+        // Using a DependencyProperty as the backing store for RowBorderBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RowBorderBrushProperty =
+            DependencyProperty.RegisterAttached("RowBorderBrush", typeof(Brush), typeof(DataGridManager));
         #endregion
 
-        #region HeaderFontWeight
-        public static FontWeight GetHeaderFontWeight(DependencyObject obj)
+        #region RowBorderThickness
+        public static Thickness GetRowBorderThickness(DependencyObject obj)
         {
-            return (FontWeight)obj.GetValue(HeaderFontWeightProperty);
+            return (Thickness)obj.GetValue(RowBorderThicknessProperty);
         }
 
-        public static void SetHeaderFontWeight(DependencyObject obj, FontWeight value)
+        public static void SetRowBorderThickness(DependencyObject obj, Thickness value)
         {
-            obj.SetValue(HeaderFontWeightProperty, value);
+            obj.SetValue(RowBorderThicknessProperty, value);
         }
 
-        // Using a DependencyProperty as the backing store for HeaderFontWeight.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty HeaderFontWeightProperty =
-            DependencyProperty.RegisterAttached("HeaderFontWeight", typeof(FontWeight), typeof(DataGridManager));
+        // Using a DependencyProperty as the backing store for RowBorderThickness.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RowBorderThicknessProperty =
+            DependencyProperty.RegisterAttached("RowBorderThickness", typeof(Thickness), typeof(DataGridManager));
+        #endregion
+
+        #region RowCornerRadius
+        public static CornerRadius GetRowCornerRadius(DependencyObject obj)
+        {
+            return (CornerRadius)obj.GetValue(RowCornerRadiusProperty);
+        }
+
+        public static void SetRowCornerRadius(DependencyObject obj, CornerRadius value)
+        {
+            obj.SetValue(RowCornerRadiusProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for RowCornerRadius.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RowCornerRadiusProperty =
+            DependencyProperty.RegisterAttached("RowCornerRadius", typeof(CornerRadius), typeof(DataGridManager));
+        #endregion
+
+        #region RowIsClip
+        public static bool GetRowIsClip(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(RowIsClipProperty);
+        }
+
+        public static void SetRowIsClip(DependencyObject obj, bool value)
+        {
+            obj.SetValue(RowIsClipProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for RowIsClip.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RowIsClipProperty =
+            DependencyProperty.RegisterAttached("RowIsClip", typeof(bool), typeof(DataGridManager));
+        #endregion
+
+        #region RowMargin
+        public static Thickness GetRowMargin(DependencyObject obj)
+        {
+            return (Thickness)obj.GetValue(RowMarginProperty);
+        }
+
+        public static void SetRowMargin(DependencyObject obj, Thickness value)
+        {
+            obj.SetValue(RowMarginProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for RowMargin.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RowMarginProperty =
+            DependencyProperty.RegisterAttached("RowMargin", typeof(Thickness), typeof(DataGridManager));
+        #endregion
+
+        #region RowPadding
+        public static Thickness GetRowPadding(DependencyObject obj)
+        {
+            return (Thickness)obj.GetValue(RowPaddingProperty);
+        }
+
+        public static void SetRowPadding(DependencyObject obj, Thickness value)
+        {
+            obj.SetValue(RowPaddingProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for RowPadding.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RowPaddingProperty =
+            DependencyProperty.RegisterAttached("RowPadding", typeof(Thickness), typeof(DataGridManager));
         #endregion
 
 
@@ -476,6 +587,9 @@ namespace LeeTeke.WpfControl.Dependencies
 
         #endregion
 
+
+
+
         #region AutoGenerateCheckBoxStyle
         public static Style GetAutoGenerateCheckBoxStyle(DependencyObject obj)
         {
@@ -524,6 +638,7 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty AutoGenerateTextBoxStyleProperty =
             DependencyProperty.RegisterAttached("AutoGenerateTextBoxStyle", typeof(Style), typeof(DataGridManager));
         #endregion
+
 
         #region AutoGenerateImageStyle
         public static Style GetAutoGenerateImageStyle(DependencyObject obj)
@@ -578,8 +693,8 @@ namespace LeeTeke.WpfControl.Dependencies
             {
                 if (e.NewValue is DataGrid data)
                 {
-                    check.Checked += Check_Checked;
-                    check.Unchecked += Check_Unchecked;
+                    check.Click += Check_Click;
+    
                     data.SelectedCellsChanged += (es, ew) =>
                     {
                         check.IsChecked = data.SelectedItems.Count == data.Items.Count;
@@ -587,26 +702,28 @@ namespace LeeTeke.WpfControl.Dependencies
                 }
                 else
                 {
-                    check.Checked -= Check_Checked;
+                    check.Click -= Check_Click;
                 }
             }
         }
 
-        private static void Check_Unchecked(object sender, RoutedEventArgs e)
+        private static void Check_Click(object sender, RoutedEventArgs e)
         {
             if (sender is CheckBox check && GetCheckBoxHook(check) is DataGrid datagrid)
             {
-                datagrid.SelectedIndex = -1;
+                if (check.IsChecked==true)
+                {
+                    datagrid.SelectAll();
+                }
+
+                if (check.IsChecked==false)
+                {
+                    datagrid.SelectedIndex = -1;
+                }
             }
         }
 
-        private static void Check_Checked(object sender, RoutedEventArgs e)
-        {
-            if (sender is CheckBox check && GetCheckBoxHook(check) is DataGrid datagrid)
-            {
-                datagrid.SelectAll();
-            }
-        }
+
 
 
 
@@ -663,7 +780,7 @@ namespace LeeTeke.WpfControl.Dependencies
                 newColumn.ItemsSource = Enum.GetValues(e.PropertyType).Cast<Enum>();
                 newColumn.SelectedItemBinding = new Binding(e.PropertyName) { Mode = bindingMode, UpdateSourceTrigger = updateSourceTrigger };
                 newColumn.EditingElementStyle = GetAutoGenerateComboxStyle(dataGrid);
-             
+
                 e.Column = newColumn;
             }
             else if (e.PropertyType == typeof(bool))
@@ -678,11 +795,6 @@ namespace LeeTeke.WpfControl.Dependencies
                 newColumn.Binding = new Binding(e.PropertyName) { Mode = bindingMode, UpdateSourceTrigger = updateSourceTrigger };
                 newColumn.ElementStyle = GetAutoGenerateCheckBoxStyle(dataGrid);
                 newColumn.EditingElementStyle = GetAutoGenerateCheckBoxStyle(dataGrid);
-                if (dataGrid.IsReadOnly)
-                {
-                    newColumn.ElementStyle.Setters.Add(new Setter(CheckBox.IsEnabledProperty, false));
-                }
-
                 e.Column = newColumn;
             }
             else if (e.PropertyType == typeof(ImageSource))
@@ -717,14 +829,8 @@ namespace LeeTeke.WpfControl.Dependencies
 
                 newColumn.Binding = new Binding(e.PropertyName) { Mode = bindingMode, UpdateSourceTrigger = updateSourceTrigger };
 
-                newColumn.ElementStyle = GetAutoGenerateTextBoxStyle(dataGrid);
-
                 newColumn.EditingElementStyle = GetAutoGenerateTextBoxStyle(dataGrid);
-                if (dataGrid.IsReadOnly)
-                {
-                    newColumn.ElementStyle.Setters.Add(new Setter(TextBox.IsReadOnlyProperty, true));
-                    newColumn.ElementStyle.Setters.Add(new Setter(TextBox.BorderThicknessProperty, 0));
-                }
+            
 
                 e.Column = newColumn;
             }

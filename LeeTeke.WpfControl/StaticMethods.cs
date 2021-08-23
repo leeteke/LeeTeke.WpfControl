@@ -200,25 +200,25 @@ namespace LeeTeke.WpfControl
             }
 
             // Taking the border thickness into account
-            var leftHalf = borderThickness.Left * 0.5;
+            var leftHalf = borderThickness.Left ;
             if (leftHalf < double.Epsilon)
             {
                 leftHalf = 0.0;
             }
 
-            var topHalf = borderThickness.Top * 0.5;
+            var topHalf = borderThickness.Top ;
             if (topHalf < double.Epsilon)
             {
                 topHalf = 0.0;
             }
 
-            var rightHalf = borderThickness.Right * 0.5;
+            var rightHalf = borderThickness.Right ;
             if (rightHalf < double.Epsilon)
             {
                 rightHalf = 0.0;
             }
 
-            var bottomHalf = borderThickness.Bottom * 0.5;
+            var bottomHalf = borderThickness.Bottom ;
             if (bottomHalf < double.Epsilon)
             {
                 bottomHalf = 0.0;

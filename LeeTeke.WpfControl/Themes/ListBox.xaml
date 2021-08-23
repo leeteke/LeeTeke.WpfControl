@@ -21,6 +21,7 @@
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="leedep:ListBoxItemManager.CornerRadius" Value="{Binding Path=(leedep:ListBoxItemManager.CornerRadius), RelativeSource={RelativeSource AncestorType={x:Type ListBox}},Mode=OneWay}"/>
         <Setter Property="leedep:ListBoxItemManager.IsClip" Value="{Binding Path=(leedep:ListBoxItemManager.IsClip), RelativeSource={RelativeSource AncestorType={x:Type ListBox}},Mode=OneWay}"/>
+        
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
@@ -44,6 +45,13 @@
                             </Grid.RowDefinitions>
                             <Rectangle x:Name="rectangle" 
                                        Margin="{Binding Path=(leedep:ListBoxItemManager.MarkMargin), RelativeSource={RelativeSource AncestorType={x:Type ListBox}},Mode=OneWay}">
+                                <Rectangle.Clip>
+                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
+                                        <Binding RelativeSource="{RelativeSource  AncestorType={x:Type ListBox}}"   Path="(leedep:ListBoxItemManager.MarkCornerRadius)" Mode="OneWay"/>
+                                    </MultiBinding>
+                                </Rectangle.Clip>
                                 <Rectangle.Fill >
                                     <SolidColorBrush x:Name="rectBrush" Color="Transparent"/>
                                 </Rectangle.Fill>
@@ -138,12 +146,12 @@
         <Setter Property="leedep:ListBoxItemManager.Background" Value="Transparent"/>
         <Setter Property="leedep:ListBoxItemManager.MinHeight" Value="{DynamicResource LeeItemMinHeight}"/>
         <Setter Property="leedep:ListBoxItemManager.MinWidth" Value="{DynamicResource LeeItemMinWidth}"/>
-        <Setter Property="leedep:ListBoxItemManager.SelectedForeground" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=Foreground,Mode=OneWay}"/>
+        <Setter Property="leedep:ListBoxItemManager.SelectedForeground" Value="{DynamicResource LeeBrush_White}"/>
         <Setter Property="leedep:ListBoxItemManager.SelectedFontSize" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=FontSize,Mode=OneWay}"/>
         <Setter Property="leedep:ListBoxItemManager.SelectedFontWeight" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=FontWeight,Mode=OneWay}"/>
         <Setter Property="leedep:ListBoxItemManager.MarkMouseOverBrush" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(leedep:ListBoxItemManager.MarkSelectedBrush),Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.5,Mode=OneWay}"/>
-        <Setter Property="leedep:ListBoxItemManager.SelectedBackground" Value="{DynamicResource LeeBrush_ItemSelectedBackground}"/>
-        <Setter Property="leedep:ListBoxItemManager.MouseOverBackground" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(leedep:ListBoxItemManager.SelectedBackground),Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.5,Mode=OneWay}"/>
+        <Setter Property="leedep:ListBoxItemManager.SelectedBackground" Value="{DynamicResource LeeBrush_Theme}"/>
+        <Setter Property="leedep:ListBoxItemManager.MouseOverBackground" Value="{DynamicResource LeeBrush_Mark}"/>
         <Setter Property="ItemContainerStyle"  Value="{StaticResource LeetekeListBoxItem}" />
         <Setter Property="ItemsPanel">
             <Setter.Value>
@@ -157,7 +165,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate  TargetType="{x:Type ListBox}">
-                        <ScrollViewer x:Name="scrollviewer" 
+                    <ScrollViewer x:Name="scrollviewer" 
                                       HorizontalScrollBarVisibility="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(ScrollViewer.HorizontalScrollBarVisibility),Mode=OneWay}" 
                                       VerticalScrollBarVisibility="{Binding  RelativeSource={RelativeSource  Mode=TemplatedParent},Path=(ScrollViewer.VerticalScrollBarVisibility),Mode=OneWay}"
                                       CanContentScroll="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(ScrollViewer.CanContentScroll),Mode=OneWay}"
@@ -169,31 +177,31 @@
                                       leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path= (leedep:CornerRadiusManager.CornerRadius),Mode=OneWay}"
                                       leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path= (leedep:CornerRadiusManager.IsClip),Mode=OneWay}"
                                       >
-                            
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition Height="auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition Width="auto"/>
-                                </Grid.ColumnDefinitions>
-                                <!--背景-->
-                             <ContentPresenter Grid.Row="0" Grid.Column="0"
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <!--背景-->
+                            <ContentPresenter Grid.Row="0" Grid.Column="0"
                                                 Content="{Binding Path=(leedep:ListBoxManager.NoItemsContent),  RelativeSource={RelativeSource  Mode=TemplatedParent},Mode=OneWay}"
                                                 Visibility="{TemplateBinding  HasItems,Converter={StaticResource VisibilityForBoolReverseConverter}}"/>
 
-                                <ItemsPresenter Grid.Row="0" 
+                            <ItemsPresenter Grid.Row="0" 
                                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                <!--尾部-->
-                                <ContentPresenter x:Name="PART_ListEnd" 
+                            <!--尾部-->
+                            <ContentPresenter x:Name="PART_ListEnd" 
                                                 Grid.Row="1" 
                                                 Grid.Column="0"
                                                 Content="{Binding Path=(leedep:ListBoxManager.ListEndContent),  RelativeSource={RelativeSource  Mode=TemplatedParent},Mode=OneWay}"
                                                 Visibility="{TemplateBinding  HasItems,Converter={StaticResource VisibilityForBoolConverter}}"/>
                         </Grid>
-                        </ScrollViewer>
+                    </ScrollViewer>
                     <ControlTemplate.Triggers>
                         <Trigger Property="leedep:ListBoxManager.Orientation" Value="Vertical">
                             <Setter TargetName="PART_ListEnd" Property="Grid.Row" Value="1" />
@@ -218,5 +226,5 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
 </ResourceDictionary>

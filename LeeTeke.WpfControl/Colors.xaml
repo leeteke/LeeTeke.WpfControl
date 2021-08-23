@@ -35,7 +35,7 @@
 
     <!--默认主背景色-->
     <SolidColorBrush x:Key="LeeBrush_Background" Color="{DynamicResource LeeColor_Background}"/>
-    <Color x:Key="LeeColor_Background" R="243" G="243" B="243" A="255"/>
+    <Color x:Key="LeeColor_Background" R="247" G="247" B="247" A="255"/>
     <SolidColorBrush x:Key="LeeBrush_BackgroundDark" Color="{DynamicResource LeeColor_BackgroundDark}"/>
     <Color x:Key="LeeColor_BackgroundDark" R="32" G="32" B="32" A="255"/>
 
@@ -63,9 +63,6 @@
     <SolidColorBrush x:Key="LeeBrush_BorderBrushMouseOver"  Color="{DynamicResource LeeColor_Gray191}" />
     <SolidColorBrush x:Key="LeeBrush_BorderBrushMouseOverDark"  Color="{DynamicResource LeeColor_Gray51}" />
 
-    <!--Item选择背景色-->
-    <SolidColorBrush x:Key="LeeBrush_ItemSelectedBackground" Color="{DynamicResource LeeColor_ItemSelectedBackground}" />
-    <Color x:Key="LeeColor_ItemSelectedBackground"  R="0" G="0" B="0" A="48"   />
 
     <!--Icon-->
     <FontFamily x:Key="IconFontFamily">/LeeTeke.WpfControl;component/LeeTekeDatas/#Segoe MDL2 Assets</FontFamily>
@@ -82,7 +79,7 @@
     <Color x:Key="LeeColor_MarkDark" R="251" G="253" B="255" A="30" />
 
     <SolidColorBrush x:Key="LeeBrush_Black" Color="{DynamicResource LeeColor_Black}"/>
-    <Color x:Key="LeeColor_Black" R="43" G="43" B="43" A="255" />
+    <Color x:Key="LeeColor_Black" R="28" G="28" B="28" A="255" />
 
     <!--微软黄-->
     <SolidColorBrush x:Key="LeeBrush_RedMicrosoft" Color="{DynamicResource LeeColor_RedMicrosoft}" />
@@ -213,8 +210,12 @@
     <SolidColorBrush x:Key="LeeBrush_Gray51" Color="{DynamicResource LeeColor_Gray51}"/>
     <Color x:Key="LeeColor_Gray51"  R="51" G="51" B="51" A="255"  />
     <!--45灰-->
-    <SolidColorBrush x:Key="LeeBrush_Gray45" Color="{DynamicResource LeeColor_Gray47}"/>
-    <Color x:Key="LeeColor_Gray45"  R="45" G="45" B="45" A="255"  />
+    <SolidColorBrush x:Key="LeeBrush_Gray45" Color="{DynamicResource LeeColor_Gray45}"/>
+    <Color x:Key="LeeColor_Gray45"  R="35" G="35" B="35" A="255"  />
+
+    <!--35灰-->
+    <SolidColorBrush x:Key="LeeBrush_Gray35" Color="{DynamicResource LeeColor_Gray35}"/>
+    <Color x:Key="LeeColor_Gray35"  R="35" G="35" B="35" A="255"  />
     <!--默认阴影灰-->
     <Color x:Key="LeeBrush_GrayShadow">#7FB6B6B6</Color>
 
