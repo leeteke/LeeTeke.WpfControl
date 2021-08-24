@@ -51,7 +51,7 @@
                                         <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
                                         <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
                                         <Binding ElementName="PART_Border"  Path="CornerRadius" Mode="OneWay"/>
-                                        <Binding ElementName="PART_Border"  Path="BorderThickness" Mode="OneWay"/>
+                                  
                                     </MultiBinding>
                                 </Setter.Value>
                             </Setter> 
@@ -62,10 +62,7 @@
                                     />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Background"  Value="Transparent"/>
-                            <Setter Property="BorderBrush"  Value="#50000000"/>
-                            <Setter Property="BorderThickness" Value="0.5"/>
-                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="Gray"/>
+                            <Setter Property="Opacity"  Value="{DynamicResource FasleEnableOpacity}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -121,7 +118,7 @@
                                         <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
                                         <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
                                         <Binding ElementName="PART_Border"  Path="CornerRadius" Mode="OneWay"/>
-                                        <Binding ElementName="PART_Border"  Path="BorderThickness" Mode="OneWay"/>
+                                    
                                     </MultiBinding>
                                 </Setter.Value>
                             </Setter>
@@ -141,10 +138,7 @@
                         </Trigger>
 
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Background"  Value="Transparent"/>
-                            <Setter Property="BorderBrush" Value="#50000000"/>
-                            <Setter Property="BorderThickness"  Value="0.5"/>
-                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="Gray"/>
+                            <Setter Property="Opacity"  Value="{DynamicResource FasleEnableOpacity}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -204,7 +198,7 @@
                                      Value="{Binding Path=(leedep:ButtonManager.PressedForeground),RelativeSource={RelativeSource  Mode=TemplatedParent},Mode=OneWay}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="Gray"/>
+                            <Setter Property="Opacity"  Value="{DynamicResource FasleEnableOpacity}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
 

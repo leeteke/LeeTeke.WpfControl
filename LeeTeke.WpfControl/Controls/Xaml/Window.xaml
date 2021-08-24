@@ -159,7 +159,6 @@
                                         <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualWidth"/>
                                         <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualHeight"/>
                                         <Binding  ElementName="WIN_Border"  Path="CornerRadius"/>
-                                        <Binding  ElementName="WIN_Border"  Path="BorderThickness"/>
                                     </MultiBinding>
                                 </Setter.Value>
                             </Setter>

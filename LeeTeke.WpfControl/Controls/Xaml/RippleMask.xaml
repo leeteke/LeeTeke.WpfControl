@@ -27,7 +27,6 @@
                                         <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualWidth"/>
                                         <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualHeight"/>
                                         <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}"  Path="CornerRadius"/>
-                                        <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}"  Path="BorderThickness"/>
                                     </MultiBinding>
                                 </Setter.Value>
                             </Setter>

@@ -47,7 +47,7 @@ namespace LeeTeke.WpfControl.Controls
     ///
     /// </summary>
     [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(ToggleButton))]
-    public class ToggleGroup : ItemsControl 
+    public class ToggleGroup : ItemsControl
     {
         static ToggleGroup()
         {
@@ -61,7 +61,7 @@ namespace LeeTeke.WpfControl.Controls
 
         public ToggleGroup()
         {
- 
+
 
             EventManager.RegisterClassHandler(typeof(ToggleButton), ToggleButton.CheckedEvent, new RoutedEventHandler(ToggleButton_Checked));
             EventManager.RegisterClassHandler(typeof(ToggleButton), ToggleButton.UncheckedEvent, new RoutedEventHandler(ToggleButton_UnChecked));
@@ -184,8 +184,6 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(ToggleGroup));
         #endregion
 
-
-
         #region SelectedItem
         /// <summary>
         /// 选择的Item
@@ -296,6 +294,23 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
+        #region SelectedMinimum
+        /// <summary>
+        /// 最小选择数
+        /// </summary>
+        public int SelectedMinimum
+        {
+            get { return (int)GetValue(SelectedMinimumProperty); }
+            set { SetValue(SelectedMinimumProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SelectedMinimum.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedMinimumProperty =
+            DependencyProperty.Register("SelectedMinimum", typeof(int), typeof(ToggleGroup));
+        #endregion
+
+
+
         #region VerticalScrollBarVisibility
         /// <summary>
         /// 请添加描述
@@ -326,7 +341,6 @@ namespace LeeTeke.WpfControl.Controls
         public static readonly DependencyProperty HorizontalScrollBarVisibilityProperty =
             DependencyProperty.Register("HorizontalScrollBarVisibility", typeof(ScrollBarVisibility), typeof(ToggleGroup));
         #endregion
-
 
         #region Item功能
 
@@ -539,7 +553,6 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-
         #region SelectionChangedCommand
         /// <summary>
         /// 请填写描述
@@ -555,7 +568,6 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("SelectionChangedCommand", typeof(ICommand), typeof(ToggleGroup));
 
         #endregion
-
 
 
         #endregion
@@ -764,6 +776,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (sender is ToggleButton button && StaticMethods.IsInControl(this, button))
             {
+             
 
                 if (ItemsSource == null)
                 {
@@ -848,7 +861,7 @@ namespace LeeTeke.WpfControl.Controls
             {
 
 
-            
+
                 foreach (ToggleButton chlid in _panel.Children)
                 {
                     if (value == chlid.DataContext)

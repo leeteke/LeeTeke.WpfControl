@@ -51,7 +51,7 @@
                   
                     />
 
-                <leecontrol:Pagination MaxPageCount="5"/>
+                <leecontrol:Pagination MaxPageCount="20"/>
 
                 <Button   Height="30" 
                          Command="{Binding TestCommand}"
@@ -66,6 +66,8 @@
                     </leecontrol:ImageEx>
                 </Button>
 
+                <DatePicker/>
+                 
 
                 <CheckBox  Content="你好"
                            Style="{StaticResource SwitchCheckBox}"
@@ -88,11 +90,11 @@
                 <DataGrid ItemsSource="{Binding TestList}"
                           HorizontalAlignment="Stretch"
                           AutoGenerateColumns="True"
-                          CanUserAddRows="True"
-                          CanUserDeleteRows="True"
                           HeadersVisibility="All"
                           SelectionMode="Extended"
                           CanUserSortColumns="True"
+                          CanUserAddRows="False"
+                          CanUserDeleteRows="False"
                           Margin="5"
                          >
                     <DataGrid.RowHeaderTemplate>
@@ -100,6 +102,7 @@
                             <CheckBox IsChecked="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}},Path=IsSelected}"/>
                         </DataTemplate>
                     </DataGrid.RowHeaderTemplate>
+     
                 </DataGrid>
 
 
@@ -114,7 +117,7 @@
                          Margin="10">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Grid Height="35">
+                            <Grid >
                                 
                             <TextBlock
                                        VerticalAlignment="Center"
@@ -131,7 +134,8 @@
                           >
                     <ListView.View>
                         <GridView   >
-                            <GridViewColumn Width="auto" DisplayMemberBinding="{Binding Title}" >
+                            <GridViewColumn Width="auto"
+                                            DisplayMemberBinding="{Binding Title}" >
                                 <GridViewColumn.Header>
                                     <TextBlock Text="你好"/>
                                 </GridViewColumn.Header>

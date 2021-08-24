@@ -43,20 +43,44 @@
 
 
     <Style x:Key="LeetekeListViewItem" TargetType="{x:Type ListViewItem}">
-        <Setter Property="MinHeight" Value="{Binding Path=(leedep:ListViewItemManager.MinHeight), RelativeSource={RelativeSource AncestorType={x:Type ListBox}},Mode=OneWay}"/>
-        <Setter Property="MinWidth" Value="{Binding Path=(leedep:ListViewItemManager.MinWidth), RelativeSource={RelativeSource AncestorType={x:Type ListBox}},Mode=OneWay}"/>
-        <Setter Property="Background" Value="{Binding Path=(leedep:ListViewItemManager.Background), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
-        <Setter Property="BorderBrush" Value="{Binding Path=(leedep:ListViewItemManager.BorderBrush), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
-        <Setter Property="BorderBrush" Value="{Binding Path=(leedep:ListViewItemManager.BorderBrush), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
-        <Setter Property="BorderThickness" Value="{Binding Path=(leedep:ListViewItemManager.BorderThickness), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
-        <Setter Property="Margin" Value="{Binding Path=(leedep:ListViewItemManager.Marigin), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
-        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
-        <Setter Property="Padding" Value="{Binding Path=(leedep:ListViewItemManager.Padding), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
-        <Setter Property="Effect" Value="{Binding Path=(leedep:ListViewItemManager.Effect), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="leedep:ListViewItemManager.CornerRadius" Value="{Binding Path=(leedep:ListViewItemManager.CornerRadius), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
-        <Setter Property="leedep:ListViewItemManager.IsClip" Value="{Binding Path=(leedep:ListViewItemManager.IsClip), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <!--常规属性-->
+        <Setter Property="MinHeight" Value="{Binding Path=(leedep:ListItemManager.MinHeight), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="MinWidth" Value="{Binding Path=(leedep:ListItemManager.MinWidth), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="Background" Value="{Binding Path=(leedep:ListItemManager.Background), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="BorderBrush" Value="{Binding Path=(leedep:ListItemManager.BorderBrush), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="BorderThickness" Value="{Binding Path=(leedep:ListItemManager.BorderThickness), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="Margin" Value="{Binding Path=(leedep:ListItemManager.Marigin), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="Padding" Value="{Binding Path=(leedep:ListItemManager.Padding), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="Effect" Value="{Binding Path=(leedep:ListItemManager.Effect), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+
+        <!--MouseOver-->
+        <Setter Property="leedep:ListItemManager.MouseOverBackground" Value="{Binding Path=(leedep:ListItemManager.MouseOverBackground), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverBorderBrush" Value="{Binding Path=(leedep:ListItemManager.MouseOverBorderBrush), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverBorderThickness" Value="{Binding Path=(leedep:ListItemManager.MouseOverBorderThickness), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverEffect" Value="{Binding Path=(leedep:ListItemManager.MouseOverEffect), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverFontSize" Value="{Binding Path=(leedep:ListItemManager.MouseOverFontSize), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverFontWeight" Value="{Binding Path=(leedep:ListItemManager.MouseOverFontWeight), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverForeground" Value="{Binding Path=(leedep:ListItemManager.MouseOverForeground), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverMarigin" Value="{Binding Path=(leedep:ListItemManager.MouseOverMarigin), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverPadding" Value="{Binding Path=(leedep:ListItemManager.MouseOverPadding), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+
+        <!--Selected-->
+        <Setter Property="leedep:ListItemManager.SelectedBackground" Value="{Binding Path=(leedep:ListItemManager.SelectedBackground), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedBorderBrush" Value="{Binding Path=(leedep:ListItemManager.SelectedBorderBrush), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedBorderThickness" Value="{Binding Path=(leedep:ListItemManager.SelectedBorderThickness), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedEffect" Value="{Binding Path=(leedep:ListItemManager.SelectedEffect), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedFontSize" Value="{Binding Path=(leedep:ListItemManager.SelectedFontSize), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedFontWeight" Value="{Binding Path=(leedep:ListItemManager.SelectedFontWeight), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedForeground" Value="{Binding Path=(leedep:ListItemManager.SelectedForeground), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedMarigin" Value="{Binding Path=(leedep:ListItemManager.SelectedMarigin), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedPadding" Value="{Binding Path=(leedep:ListItemManager.SelectedPadding), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+
+        <!--Item的cornerRadius-->
+        <Setter Property="leedep:ListItemManager.CornerRadius" Value="{Binding Path=(leedep:ListItemManager.CornerRadius), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.IsClip" Value="{Binding Path=(leedep:ListItemManager.IsClip), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListViewItem}">
@@ -65,48 +89,51 @@
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Background="{TemplateBinding Background}"
                             Margin="{TemplateBinding Margin}"
-                            CornerRadius="{Binding Path=(leedep:ListViewItemManager.CornerRadius), RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}},Mode=OneWay}"
+                            CornerRadius="{Binding Path=(leedep:ListItemManager.CornerRadius), RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}},Mode=OneWay}"
                             Effect="{TemplateBinding Effect}">
-                        <Grid x:Name="PART_Grid"  
-                              Margin="{TemplateBinding Padding}">
+               
                             <GridViewRowPresenter  x:Name="contentPresenter"
-                                              Grid.Column="1"
-                                              Grid.Row="1"
-                                              Content="{TemplateBinding Content}"
-                                              Columns="{TemplateBinding GridView.ColumnCollection}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              />
-                        </Grid>
+                                                   Margin="{TemplateBinding Padding}"
+                                                   Content="{TemplateBinding Content}"
+                                                   Columns="{TemplateBinding GridView.ColumnCollection}"
+                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                   />
+                        
                     </Border>
                     <ControlTemplate.Triggers>
-
-                        <Trigger Property="leedep:ListViewItemManager.IsClip" Value="True">
-                            <Setter TargetName="PART_Grid" Property="Clip">
+                        <Trigger Property="leedep:ListItemManager.IsClip" Value="True">
+                            <Setter TargetName="contentPresenter" Property="Clip">
                                 <Setter.Value>
                                     <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
                                         <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
                                         <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
                                         <Binding ElementName="PART_Border"  Path="CornerRadius" Mode="OneWay"/>
-                                        <Binding ElementName="PART_Border"  Path="BorderThickness" Mode="OneWay"/>
                                     </MultiBinding>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{Binding Path=(leedep:ListViewItemManager.MouseOverBackground),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}" />
-                            <Setter  Property="BorderBrush" Value="{Binding Path=(leedep:ListViewItemManager.MouseOverBorderBrush),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
-                            <Setter  Property="BorderThickness" Value="{Binding Path=(leedep:ListViewItemManager.MouseOverBorderThickness),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
-                            <Setter Property="Effect" Value="{Binding Path=(leedep:ListViewItemManager.MouseOverEffect), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+                            <Setter TargetName="PART_Border" Property="Background" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.MouseOverBackground),Mode=OneWay}"/>
+                            <Setter TargetName="PART_Border" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.MouseOverBorderBrush),Mode=OneWay}"/>
+                            <Setter TargetName="PART_Border" Property="BorderThickness" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.MouseOverBorderThickness),Mode=OneWay}"/>
+                            <Setter TargetName="PART_Border" Property="Margin" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.MouseOverMarigin),Mode=OneWay}"/>
+                            <Setter TargetName="PART_Border" Property="Effect" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.MouseOverEffect),Mode=OneWay}"/>
+                            <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.MouseOverForeground),Mode=OneWay}"/>
+                            <Setter TargetName="contentPresenter" Property="TextElement.FontSize" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.MouseOverFontSize),Mode=OneWay}"/>
+                            <Setter TargetName="contentPresenter" Property="TextElement.FontWeight" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.MouseOverFontWeight),Mode=OneWay}"/>
+                            <Setter TargetName="contentPresenter" Property="Margin" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.MouseOverPadding),Mode=OneWay}"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="{Binding Path=(leedep:ListViewItemManager.SelectedBackground),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}" />
-                            <Setter  Property="BorderBrush" Value="{Binding Path=(leedep:ListViewItemManager.SelectedBorderBrush),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
-                            <Setter  Property="BorderThickness" Value="{Binding Path=(leedep:ListViewItemManager.SelectedBorderThickness),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
-                            <Setter Property="Foreground" Value="{Binding Path=(leedep:ListViewItemManager.SelectedForeground),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}" />
-                            <Setter  Property="FontSize" Value="{Binding Path=(leedep:ListViewItemManager.SelectedFontSize),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
-                            <Setter  Property="FontWeight" Value="{Binding Path=(leedep:ListViewItemManager.SelectedFontWeight),RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
-                            <Setter Property="Effect" Value="{Binding Path=(leedep:ListViewItemManager.SelectedEffect), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+                            <Setter TargetName="PART_Border" Property="Background" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.SelectedBackground),Mode=OneWay}"/>
+                            <Setter TargetName="PART_Border" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.SelectedBorderBrush),Mode=OneWay}"/>
+                            <Setter TargetName="PART_Border" Property="BorderThickness" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.SelectedBorderThickness),Mode=OneWay}"/>
+                            <Setter TargetName="PART_Border" Property="Margin" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.SelectedMarigin),Mode=OneWay}"/>
+                            <Setter TargetName="PART_Border" Property="Effect" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.SelectedEffect),Mode=OneWay}"/>
+                            <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.SelectedForeground),Mode=OneWay}"/>
+                            <Setter TargetName="contentPresenter" Property="TextElement.FontSize" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.SelectedFontSize),Mode=OneWay}"/>
+                            <Setter TargetName="contentPresenter" Property="TextElement.FontWeight" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.SelectedFontWeight),Mode=OneWay}"/>
+                            <Setter TargetName="contentPresenter" Property="Margin" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.SelectedPadding),Mode=OneWay}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -128,19 +155,50 @@
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-        <Setter Property="leedep:ListViewItemManager.CornerRadius" Value="{DynamicResource LeeCornerRadius  }"/>
-        <Setter Property="leedep:ListViewItemManager.Marigin" Value="0,2"/>
-        <Setter Property="leedep:ListViewItemManager.MinHeight" Value="{DynamicResource LeeListItemHeight}"/>
-        <Setter Property="leedep:ListViewItemManager.MinWidth" Value="{DynamicResource LeeListItemWidth}"/>
-        <Setter Property="leedep:ListViewItemManager.Background" Value="{DynamicResource LeeBrush_Forground}"/>
-        <Setter Property="leedep:ListViewItemManager.SelectedForeground" Value="{DynamicResource LeeBrush_White}"/>
-        <Setter Property="leedep:ListViewItemManager.SelectedFontSize" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=FontSize,Mode=OneWay}"/>
-        <Setter Property="leedep:ListViewItemManager.SelectedFontWeight" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=FontWeight,Mode=OneWay}"/>
-        <Setter Property="leedep:ListViewItemManager.SelectedBackground" Value="{DynamicResource LeeBrush_Theme}"/>
-        <Setter Property="leedep:ListViewItemManager.MouseOverBackground" Value="{DynamicResource LeeBrush_Mark}"/>
+
         <Setter Property="leedep:ListViewManager.HeaderBorderThickness" Value="0,0,0,1"/>
         <Setter Property="leedep:ListViewManager.HeaderBorderBursh" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="leedep:ListViewManager.HeaderFreeze" Value="True"/>
+
+
+
+        <!--常规属性-->
+        <Setter Property="leedep:ListItemManager.MinHeight" Value="40"/>
+        <Setter Property="leedep:ListItemManager.MinWidth" Value="{DynamicResource LeeItemMinWidth}"/>
+        <Setter Property="leedep:ListItemManager.Background" Value="{DynamicResource LeeBrush_Forground}"/>
+        <Setter Property="leedep:ListItemManager.BorderBrush" Value="{x:Null}"/>
+        <Setter Property="leedep:ListItemManager.BorderThickness" Value="0"/>
+        <Setter Property="leedep:ListItemManager.Marigin" Value="0,2"/>
+        <Setter Property="leedep:ListItemManager.Padding" Value="0"/>
+        <Setter Property="leedep:ListItemManager.Effect" Value="{x:Null}"/>
+
+        <!--MouseOver-->
+        <Setter Property="leedep:ListItemManager.MouseOverBackground" Value="{DynamicResource LeeBrush_Mark}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverBorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverBorderThickness" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(leedep:ListItemManager.BorderThickness),Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverEffect" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(leedep:ListItemManager.Effect),Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverFontSize" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=FontSize,Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverFontWeight" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=FontWeight,Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverForeground" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=Foreground,Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverMarigin" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(leedep:ListItemManager.Marigin),Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverPadding" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(leedep:ListItemManager.Padding),Mode=OneWay}"/>
+
+        <!--Selected-->
+        <Setter Property="leedep:ListItemManager.SelectedBackground" Value="{DynamicResource LeeBrush_Theme}"/>
+        <Setter Property="leedep:ListItemManager.SelectedBorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
+        <Setter Property="leedep:ListItemManager.SelectedBorderThickness" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(leedep:ListItemManager.BorderThickness),Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedEffect" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(leedep:ListItemManager.Effect),Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedFontSize" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=FontSize,Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedFontWeight" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=FontWeight,Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedForeground" Value="{DynamicResource LeeBrush_White}"/>
+        <Setter Property="leedep:ListItemManager.SelectedMarigin" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(leedep:ListItemManager.Marigin),Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedPadding" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(leedep:ListItemManager.Padding),Mode=OneWay}"/>
+
+        <!--Item的cornerRadius-->
+        <Setter Property="leedep:ListItemManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="leedep:ListItemManager.IsClip" Value="False"/>
+
+
         <Setter Property="ItemContainerStyle"  Value="{StaticResource LeetekeListViewItem}" />
 
         <Style.Triggers>
@@ -214,7 +272,7 @@
                                                 <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
                                                 <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
                                                 <Binding ElementName="PART_HeaderBorder"  Path="CornerRadius" Mode="OneWay"/>
-                                                <Binding ElementName="PART_HeaderBorder"  Path="BorderThickness" Mode="OneWay"/>
+                                         
                                             </MultiBinding>
                                         </Setter.Value>
                                     </Setter>
@@ -291,7 +349,7 @@
                                                 <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
                                                 <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
                                                 <Binding ElementName="PART_HeaderBorder"  Path="CornerRadius" Mode="OneWay"/>
-                                                <Binding ElementName="PART_HeaderBorder"  Path="BorderThickness" Mode="OneWay"/>
+                                        
                                             </MultiBinding>
                                         </Setter.Value>
                                     </Setter>

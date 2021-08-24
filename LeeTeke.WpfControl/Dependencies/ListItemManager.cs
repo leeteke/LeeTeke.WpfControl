@@ -92,6 +92,54 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("BorderThickness", typeof(Thickness), typeof(ListItemManager));
         #endregion
 
+        #region Marigin
+        public static Thickness GetMarigin(DependencyObject obj)
+        {
+            return (Thickness)obj.GetValue(MariginProperty);
+        }
+
+        public static void SetMarigin(DependencyObject obj, Thickness value)
+        {
+            obj.SetValue(MariginProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for Marigin.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MariginProperty =
+            DependencyProperty.RegisterAttached("Marigin", typeof(Thickness), typeof(ListItemManager));
+        #endregion
+
+        #region Padding
+        public static Thickness GetPadding(DependencyObject obj)
+        {
+            return (Thickness)obj.GetValue(PaddingProperty);
+        }
+
+        public static void SetPadding(DependencyObject obj, Thickness value)
+        {
+            obj.SetValue(PaddingProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for Padding.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PaddingProperty =
+            DependencyProperty.RegisterAttached("Padding", typeof(Thickness), typeof(ListItemManager));
+        #endregion
+
+        #region Effect
+        public static Effect GetEffect(DependencyObject obj)
+        {
+            return (Effect)obj.GetValue(EffectProperty);
+        }
+
+        public static void SetEffect(DependencyObject obj, Effect value)
+        {
+            obj.SetValue(EffectProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for Effect.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EffectProperty =
+            DependencyProperty.RegisterAttached("Effect", typeof(Effect), typeof(ListItemManager));
+        #endregion
+
         #region MouseOverBackground
         public static Brush GetMouseOverBackground(DependencyObject obj)
         {
@@ -140,52 +188,84 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("MouseOverBorderThickness", typeof(Thickness), typeof(ListItemManager));
         #endregion
 
-        #region Marigin
-        public static Thickness GetMarigin(DependencyObject obj)
+        #region MouseOverMarigin
+        public static Thickness GetMouseOverMarigin(DependencyObject obj)
         {
-            return (Thickness)obj.GetValue(MariginProperty);
+            return (Thickness)obj.GetValue(MouseOverMariginProperty);
         }
 
-        public static void SetMarigin(DependencyObject obj, Thickness value)
+        public static void SetMouseOverMarigin(DependencyObject obj, Thickness value)
         {
-            obj.SetValue(MariginProperty, value);
+            obj.SetValue(MouseOverMariginProperty, value);
         }
 
-        // Using a DependencyProperty as the backing store for Marigin.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty MariginProperty =
-            DependencyProperty.RegisterAttached("Marigin", typeof(Thickness), typeof(ListItemManager));
+        // Using a DependencyProperty as the backing store for MouseOverMarigin.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MouseOverMariginProperty =
+            DependencyProperty.RegisterAttached("MouseOverMarigin", typeof(Thickness), typeof(ListItemManager));
         #endregion
 
-        #region Padding
-        public static Thickness GetPadding(DependencyObject obj)
+        #region MouseOverPadding
+        public static Thickness GetMouseOverPadding(DependencyObject obj)
         {
-            return (Thickness)obj.GetValue(PaddingProperty);
+            return (Thickness)obj.GetValue(MouseOverPaddingProperty);
         }
 
-        public static void SetPadding(DependencyObject obj, Thickness value)
+        public static void SetMouseOverPadding(DependencyObject obj, Thickness value)
         {
-            obj.SetValue(PaddingProperty, value);
+            obj.SetValue(MouseOverPaddingProperty, value);
         }
 
-        // Using a DependencyProperty as the backing store for Padding.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty PaddingProperty =
-            DependencyProperty.RegisterAttached("Padding", typeof(Thickness), typeof(ListItemManager));
+        // Using a DependencyProperty as the backing store for MouseOverPadding.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MouseOverPaddingProperty =
+            DependencyProperty.RegisterAttached("MouseOverPadding", typeof(Thickness), typeof(ListItemManager));
         #endregion
 
-        #region Effect
-        public static Effect GetEffect(DependencyObject obj)
+        #region MouseOverForeground
+        public static Brush GetMouseOverForeground(DependencyObject obj)
         {
-            return (Effect)obj.GetValue(EffectProperty);
+            return (Brush)obj.GetValue(MouseOverForegroundProperty);
         }
 
-        public static void SetEffect(DependencyObject obj, Effect value)
+        public static void SetMouseOverForeground(DependencyObject obj, Brush value)
         {
-            obj.SetValue(EffectProperty, value);
+            obj.SetValue(MouseOverForegroundProperty, value);
         }
 
-        // Using a DependencyProperty as the backing store for Effect.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty EffectProperty =
-            DependencyProperty.RegisterAttached("Effect", typeof(Effect), typeof(ListItemManager));
+        // Using a DependencyProperty as the backing store for MouseOverForeground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MouseOverForegroundProperty =
+            DependencyProperty.RegisterAttached("MouseOverForeground", typeof(Brush), typeof(ListItemManager));
+        #endregion
+
+        #region MouseOverFontSize
+        public static double GetMouseOverFontSize(DependencyObject obj)
+        {
+            return (double)obj.GetValue(MouseOverFontSizeProperty);
+        }
+
+        public static void SetMouseOverFontSize(DependencyObject obj, double value)
+        {
+            obj.SetValue(MouseOverFontSizeProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MouseOverFontSize.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MouseOverFontSizeProperty =
+            DependencyProperty.RegisterAttached("MouseOverFontSize", typeof(double), typeof(ListItemManager));
+        #endregion
+
+        #region MouseOverFontWeight
+        public static FontWeight GetMouseOverFontWeight(DependencyObject obj)
+        {
+            return (FontWeight)obj.GetValue(MouseOverFontWeightProperty);
+        }
+
+        public static void SetMouseOverFontWeight(DependencyObject obj, FontWeight value)
+        {
+            obj.SetValue(MouseOverFontWeightProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MouseOverFontWeight.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MouseOverFontWeightProperty =
+            DependencyProperty.RegisterAttached("MouseOverFontWeight", typeof(FontWeight), typeof(ListItemManager));
         #endregion
 
         #region MouseOverEffect
@@ -316,6 +396,41 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("SelectedFontWeight", typeof(FontWeight), typeof(ListItemManager));
         #endregion
 
+
+        #region SelectedMarigin
+        public static Thickness GetSelectedMarigin(DependencyObject obj)
+        {
+            return (Thickness)obj.GetValue(SelectedMariginProperty);
+        }
+
+        public static void SetSelectedMarigin(DependencyObject obj, Thickness value)
+        {
+            obj.SetValue(SelectedMariginProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for SelectedMarigin.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedMariginProperty =
+            DependencyProperty.RegisterAttached("SelectedMarigin", typeof(Thickness), typeof(ListItemManager));
+        #endregion
+
+
+        #region SelectedPadding
+        public static Thickness GetSelectedPadding(DependencyObject obj)
+        {
+            return (Thickness)obj.GetValue(SelectedPaddingProperty);
+        }
+
+        public static void SetSelectedPadding(DependencyObject obj, Thickness value)
+        {
+            obj.SetValue(SelectedPaddingProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for SelectedPadding.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedPaddingProperty =
+            DependencyProperty.RegisterAttached("SelectedPadding", typeof(Thickness), typeof(ListItemManager));
+        #endregion
+
+
         #region CornerRadius
         public static CornerRadius GetCornerRadius(DependencyObject obj)
         {
@@ -347,8 +462,6 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty IsClipProperty =
             DependencyProperty.RegisterAttached("IsClip", typeof(bool), typeof(ListItemManager));
         #endregion
-
-
 
     }
 }

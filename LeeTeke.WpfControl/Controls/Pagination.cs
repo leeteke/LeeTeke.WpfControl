@@ -53,8 +53,12 @@ namespace LeeTeke.WpfControl.Controls
         }
 
 
-        private ComboBox _jumpBox;
-        private ToggleGroup _group;
+
+        private ListBox _list;
+        private Button _headButton;
+        private Button _endButton;
+        private Button _previousButton;
+        private Button _nextButton;
         public Pagination()
         {
             Loaded += Pagination_Loaded;
@@ -68,19 +72,74 @@ namespace LeeTeke.WpfControl.Controls
         {
             base.OnApplyTemplate();
 
-            if (this.Template.FindName("PART_JumpComboBox", this) is ComboBox comboBox)
+
+
+            if (this.GetTemplateChild("PART_PageList") is ListBox list)
             {
-                _jumpBox = comboBox;
-                _jumpBox.SelectionChanged += _jumpBox_SelectionChanged;
+                _list = list;
+
+                _list.SelectionChanged += _list_SelectionChanged; ;
             }
 
-            if (this.Template.FindName("PART_PageGroup", this) is ToggleGroup toggle)
+            if (this.GetTemplateChild("PART_PreviousButton") is Button pbtn)
             {
-                _group = toggle;
+                _previousButton = pbtn;
+                _previousButton.Click += (ox, oe) =>
+                {
+                    if (_list != null)
+                    {
+                        if (_list.SelectedIndex > -1)
+                        {
+                            _list.SelectedIndex--;
+                        }
+                        else if (_list.SelectedIndex == -1 && _list.Items != null)
+                        {
+                            _list.SelectedIndex = 0;
+                        }
+                    }
+                };
+            }
 
-                _group.SelectionChanged += _group_SelectionChanged;
+            if (this.GetTemplateChild("PART_HeadButton") is Button hbtn)
+            {
+                _headButton = hbtn;
+                _headButton.Click += (ox, oe) =>
+                {
+                    if (_list != null)
+                    {
+                        _list.SelectedIndex = 0;
+                    }
+                };
+            }
+
+            if (this.GetTemplateChild("PART_NextButton") is Button nbtn)
+            {
+                _nextButton = nbtn;
+                _nextButton.Click += (ox, oe) =>
+                {
+                    if (_list != null)
+                    {
+                        _list.SelectedIndex++;
+                    }
+                };
+            }
+
+            if (this.GetTemplateChild("PART_EndButton") is Button ebtn)
+            {
+                _endButton = ebtn;
+                _endButton.Click += (ox, oe) =>
+                {
+                    if (_list != null && _list.Items != null)
+                    {
+                        _list.SelectedIndex = _list.Items.Count - 1;
+                    }
+                };
             }
         }
+
+
+
+
 
 
 
@@ -102,7 +161,15 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for MaxPageCount.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MaxPageCountProperty =
-            DependencyProperty.Register("MaxPageCount", typeof(int), typeof(Pagination));
+            DependencyProperty.Register("MaxPageCount", typeof(int), typeof(Pagination), new PropertyMetadata(MaxPageCountChanged));
+
+        private static void MaxPageCountChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is Pagination pagination&&e.NewValue is int _value)
+            {
+                pagination.ViewLoding();
+            }
+        }
         #endregion
 
         #region PageIndex
@@ -121,19 +188,68 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
-        #region PageButtonSize
+
+        #region ButtonWidth
         /// <summary>
         /// 请添加描述
         /// </summary>
-        public double PageButtonSize
+        public double ButtonWidth
         {
-            get { return (double)GetValue(PageButtonSizeProperty); }
-            set { SetValue(PageButtonSizeProperty, value); }
+            get { return (double)GetValue(ButtonWidthProperty); }
+            set { SetValue(ButtonWidthProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for PageButtonSize.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty PageButtonSizeProperty =
-            DependencyProperty.Register("PageButtonSize", typeof(double), typeof(Pagination));
+        // Using a DependencyProperty as the backing store for ButtonWidth.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ButtonWidthProperty =
+            DependencyProperty.Register("ButtonWidth", typeof(double), typeof(Pagination));
+        #endregion
+
+
+        #region ButtonMargin
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Thickness ButtonMargin
+        {
+            get { return (Thickness)GetValue(ButtonMarginProperty); }
+            set { SetValue(ButtonMarginProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ButtonMargin.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ButtonMarginProperty =
+            DependencyProperty.Register("ButtonMargin", typeof(Thickness), typeof(Pagination));
+        #endregion
+
+
+
+        #region ButtonHeight
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public double ButtonHeight
+        {
+            get { return (double)GetValue(ButtonHeightProperty); }
+            set { SetValue(ButtonHeightProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ButtonHeight.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ButtonHeightProperty =
+            DependencyProperty.Register("ButtonHeight", typeof(double), typeof(Pagination));
+        #endregion
+
+        #region CornerRadius
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public CornerRadius CornerRadius
+        {
+            get { return (CornerRadius)GetValue(CornerRadiusProperty); }
+            set { SetValue(CornerRadiusProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CornerRadius.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CornerRadiusProperty =
+            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(Pagination));
         #endregion
 
 
@@ -180,7 +296,8 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (!IsLoaded)
                 return;
-            _group.Items.Clear();
+            PageIndex = -1;
+            _list.ItemsSource = null;
             if (MaxPageCount < 1)
             {
                 this.Visibility = Visibility.Collapsed;
@@ -189,45 +306,17 @@ namespace LeeTeke.WpfControl.Controls
 
             ///如果小于1 则进行判断 自动
 
-            var lodingInt = GetLodingIndex();
-
-            for (int i = 0; i < lodingInt; i++)
+            List<int> pages = new();
+            for (int i = 0; i < MaxPageCount; i++)
             {
-                _group.Items.Add(RasiztoggleGroup(i + 1));
+                pages.Add(i + 1);
             }
+
+            _list.ItemsSource = pages;
 
         }
 
-        private int GetLodingIndex()
-        {
-            var result = 1;
-            ///如果show大于maxpage。则区maxpage
-            if (ShowIndex > MaxPageCount)
-            {
-                return MaxPageCount;
-            }
 
-            ///如果有实际数,否则为自动判断 默认最小为1
-            if (ShowIndex > 0)
-            {
-                return ShowIndex;
-            }
-
-            result = (int)((_group.ActualWidth - 1) / PageButtonSize);
-            if (result < 1)
-                return 1;
-            return result;
-        }
-
-        private ToggleButton RasiztoggleGroup(int index)
-        {
-            ToggleButton button = new ToggleButton()
-            {
-                Content = index,
-                DataContext = index,
-            };
-            return button;
-        }
 
         /// <summary>
         /// 控件加载完成
@@ -236,22 +325,41 @@ namespace LeeTeke.WpfControl.Controls
         /// <param name="e"></param>
         private void Pagination_Loaded(object sender, RoutedEventArgs e)
         {
-         //   ViewLoding();
-        }
-        /// <summary>
-        /// 选择窗口选择
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void _jumpBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            ViewLoding();
         }
 
 
-        private void _group_SelectionChanged(object sender, ToggleSelectionChangedEventArgs e)
+        private void _list_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (sender is ListBox list)
+            {
+                if (list.SelectedIndex == 0)
+                {
+                    _headButton.IsEnabled = false;
+                    _previousButton.IsEnabled = false;
+                }
+                else
+                {
+                    _headButton.IsEnabled = true;
+                    _previousButton.IsEnabled = true;
+                }
 
+                if (list.SelectedIndex == list.Items.Count - 1)
+                {
+                    _endButton.IsEnabled = false;
+                    _nextButton.IsEnabled = false;
+                }
+                else
+                {
+                    _endButton.IsEnabled = true;
+                    _nextButton.IsEnabled = true;
+                }
+
+                if (list.SelectedIndex>-1)
+                {
+                    list.ScrollIntoView(list.SelectedItem);
+                }
+            }
         }
         #endregion
 

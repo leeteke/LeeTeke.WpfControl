@@ -4,31 +4,47 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using LeeTeke.WpfControl;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-    public class ListBoxItemManager: ListItemManager
+    public class ListBoxItemManager
     {
+
+        #region MarkShow
+        public static bool GetMarkShow(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(MarkShowProperty);
+        }
+
+        public static void SetMarkShow(DependencyObject obj, bool value)
+        {
+            obj.SetValue(MarkShowProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MarkShow.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MarkShowProperty =
+            DependencyProperty.RegisterAttached("MarkShow", typeof(bool), typeof(ListBoxItemManager));
+        #endregion
 
         #region MarkSite
 
-
-        public static ListItemMarkSite GetMarkSite(DependencyObject obj)
+        public static Dock GetMarkSite(DependencyObject obj)
         {
-            return (ListItemMarkSite)obj.GetValue(MarkSiteProperty);
+            return (Dock)obj.GetValue(MarkSiteProperty);
         }
 
-        public static void SetMarkSite(DependencyObject obj, ListItemMarkSite value)
+        public static void SetMarkSite(DependencyObject obj, Dock value)
         {
             obj.SetValue(MarkSiteProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for MarkSite.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MarkSiteProperty =
-            DependencyProperty.RegisterAttached("MarkSite", typeof(ListItemMarkSite), typeof(ListBoxItemManager), new PropertyMetadata(ListItemMarkSite.Left));
+            DependencyProperty.RegisterAttached("MarkSite", typeof(Dock), typeof(ListBoxItemManager));
 
 
 
@@ -36,8 +52,6 @@ namespace LeeTeke.WpfControl.Dependencies
         #endregion
 
         #region MarkSize
-
-
 
         public static double GetMarkSize(DependencyObject obj)
         {
@@ -51,10 +65,23 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for MarkSize.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MarkSizeProperty =
-            DependencyProperty.RegisterAttached("MarkSize", typeof(double), typeof(ListBoxItemManager), new PropertyMetadata(3.0));
+            DependencyProperty.RegisterAttached("MarkSize", typeof(double), typeof(ListBoxItemManager));
+        #endregion
 
+        #region MarkBrush
+        public static Brush GetMarkBrush(DependencyObject obj)
+        {
+            return (Brush)obj.GetValue(MarkBrushProperty);
+        }
 
+        public static void SetMarkBrush(DependencyObject obj, Brush value)
+        {
+            obj.SetValue(MarkBrushProperty, value);
+        }
 
+        // Using a DependencyProperty as the backing store for MarkBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MarkBrushProperty =
+            DependencyProperty.RegisterAttached("MarkBrush", typeof(Brush), typeof(ListBoxItemManager));
         #endregion
 
         #region MarkMargin
@@ -73,9 +100,8 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for MarkMargin.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MarkMarginProperty =
-            DependencyProperty.RegisterAttached("MarkMargin", typeof(Thickness), typeof(ListBoxItemManager), new PropertyMetadata(new Thickness(0)));
+            DependencyProperty.RegisterAttached("MarkMargin", typeof(Thickness), typeof(ListBoxItemManager));
         #endregion
-
 
         #region MarkCornerRadius
         public static CornerRadius GetMarkCornerRadius(DependencyObject obj)
@@ -92,8 +118,6 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty MarkCornerRadiusProperty =
             DependencyProperty.RegisterAttached("MarkCornerRadius", typeof(CornerRadius), typeof(ListBoxItemManager));
         #endregion
-
-
 
         #region MarkMouseOverBrush
         public static Brush GetMarkMouseOverBrush(DependencyObject obj)

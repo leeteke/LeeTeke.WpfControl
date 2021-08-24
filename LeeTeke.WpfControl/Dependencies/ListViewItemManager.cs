@@ -9,7 +9,7 @@ using System.Windows.Media.Effects;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-    public class ListViewItemManager:ListItemManager
+    public class ListViewItemManager
     {
        
 

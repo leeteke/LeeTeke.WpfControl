@@ -3,62 +3,65 @@
                      xmlns:local="clr-namespace:LeeTeke.WpfControl.Themes"
                     xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies">
 
-    <ControlTemplate x:Key="LeeDatePickerTextBoxTemplate" 
+    <ControlTemplate x:Key="LeeDatePickerTextBoxTemplate"      
                      TargetType="{x:Type DatePickerTextBox}">
         <Grid>
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="CommonStates">
-                <VisualState x:Name="Normal"/>
-                <VisualState x:Name="MouseOver"/>
-            </VisualStateGroup>
-            <VisualStateGroup x:Name="WatermarkStates">
-                <VisualStateGroup.Transitions>
-                    <VisualTransition GeneratedDuration="0"/>
-                </VisualStateGroup.Transitions>
-                <VisualState x:Name="Unwatermarked"/>
-                <VisualState x:Name="Watermarked">
-                    <Storyboard>
-                        <DoubleAnimation Duration="0" Storyboard.TargetName="ContentElement" Storyboard.TargetProperty="Opacity" To="0"/>
-                        <DoubleAnimation Duration="0" Storyboard.TargetName="PART_Watermark" Storyboard.TargetProperty="Opacity" To="1"/>
-                    </Storyboard>
-                </VisualState>
-            </VisualStateGroup>
-            <VisualStateGroup x:Name="FocusStates">
-                <VisualStateGroup.Transitions>
-                    <VisualTransition GeneratedDuration="0"/>
-                </VisualStateGroup.Transitions>
-                <VisualState x:Name="Unfocused"/>
-                <VisualState x:Name="Focused">
-                    <Storyboard>
-                        <DoubleAnimation Duration="0" Storyboard.TargetName="FocusVisual" Storyboard.TargetProperty="Opacity" To="1"/>
-                    </Storyboard>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-        <Border x:Name="Border"
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal"/>
+                    <VisualState x:Name="MouseOver"/>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="WatermarkStates">
+                    <VisualStateGroup.Transitions>
+                        <VisualTransition GeneratedDuration="0"/>
+                    </VisualStateGroup.Transitions>
+                    <VisualState x:Name="Unwatermarked"/>
+                    <VisualState x:Name="Watermarked">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0" Storyboard.TargetName="ContentElement" Storyboard.TargetProperty="Opacity" To="0"/>
+                            <DoubleAnimation Duration="0" Storyboard.TargetName="PART_Watermark" Storyboard.TargetProperty="Opacity" To="1"/>
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="FocusStates">
+                    <VisualStateGroup.Transitions>
+                        <VisualTransition GeneratedDuration="0"/>
+                    </VisualStateGroup.Transitions>
+                    <VisualState x:Name="Unfocused"/>
+                    <VisualState x:Name="Focused">
+                   
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Border x:Name="Border"
                     Background="Transparent" 
                     BorderThickness="{TemplateBinding BorderThickness}" 
                     BorderBrush="{TemplateBinding BorderBrush}" 
                     Opacity="1"
                     Padding="{TemplateBinding Padding}">
-            <Grid x:Name="WatermarkContent"
+                <Grid x:Name="WatermarkContent"
                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                <Border x:Name="ContentElement"
+                    <Border x:Name="ContentElement"
                             BorderThickness="0"
                             BorderBrush="#FFFFFFFF"/>
-                <Border x:Name="watermark_decorator"
+                    <Border x:Name="watermark_decorator"
                             BorderThickness="0" 
                             BorderBrush="#FFFFFFFF">
-                    <ContentControl x:Name="PART_Watermark" Focusable="False" IsHitTestVisible="False" Opacity="0" Padding="2"/>
-                </Border>
-                <ScrollViewer x:Name="PART_ContentHost" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="0" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                <Border x:Name="FocusVisual" BorderBrush="#FF45D6FA" CornerRadius="1" IsHitTestVisible="False" Opacity="0"/>
-            </Grid>
-        </Border>
-    </Grid>
+                        <ContentControl x:Name="PART_Watermark"
+                                    Focusable="False" 
+                                    IsHitTestVisible="False" Opacity="0" Padding="2"/>
+                    </Border>
+                    <ScrollViewer x:Name="PART_ContentHost" 
+                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              Margin="0" 
+                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    
+                </Grid>
+            </Border>
+        </Grid>
     </ControlTemplate>
-    
+
     <Style x:Key="LeeDatePicker" TargetType="{x:Type DatePicker}">
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="leedep:CornerRadiusManager.IsClip" Value="True"/>
@@ -109,6 +112,7 @@
                                     Content="&#xED28;"
                                     FontFamily="{DynamicResource IconFontFamily}"
                                     Background="Transparent"
+                                    Style="{StaticResource TextButton}"
                                     />
                             <DatePickerTextBox x:Name="PART_TextBox" 
                                                Grid.Column="0"
@@ -145,7 +149,7 @@
                                         <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
                                         <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
                                         <Binding ElementName="PART_Border"  Path="CornerRadius" Mode="OneWay"/>
-                                        <Binding ElementName="PART_Border"  Path="BorderThickness" Mode="OneWay"/>
+                            
                                     </MultiBinding>
                                 </Setter.Value>
                             </Setter>
@@ -156,5 +160,5 @@
         </Setter>
     </Style>
 
- 
+
 </ResourceDictionary>

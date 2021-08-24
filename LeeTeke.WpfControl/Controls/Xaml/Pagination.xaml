@@ -15,11 +15,19 @@
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="ShowIndex" Value="0"/>
-        <Setter Property="PageButtonSize" Value="25"/>
+        <Setter Property="PageIndex" Value="0"/>
+        <Setter Property="ButtonWidth" Value="35"/>
+        <Setter Property="ButtonHeight" Value="30"/>
+        <Setter Property="ButtonMargin" Value="2,0"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:Pagination}">
 
+             
                     <Grid >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
@@ -30,45 +38,83 @@
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Button Width="{TemplateBinding Height}"
-                                Height="{TemplateBinding Height}"
-                                Margin="2,0">
+                        <Button x:Name="PART_HeadButton"
+                                Width="{TemplateBinding ButtonWidth}"
+                                Background="{TemplateBinding Background}"
+                                Height="{TemplateBinding ButtonHeight}"
+                                Margin="{TemplateBinding ButtonMargin}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}">
                             <StackPanel Orientation="Horizontal">
                                 <Rectangle Width="{Binding RelativeSource={RelativeSource Mode=Self},Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/12}"
                                            Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}},Path=Foreground}"
                                            VerticalAlignment="Stretch"
                                            Margin="0,0,-3,0" />
-                                
+
                                 <TextBlock Text="&#xE76B;"
                                            FontFamily="{DynamicResource IconFontFamily}"
                                            VerticalAlignment="Center"
                                            Foreground="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}},Path=Foreground}"/>
-                      
+
                             </StackPanel>
                         </Button>
 
-                        <Button Content="&#xE76B;"
+                        <Button x:Name="PART_PreviousButton"
+                                Content="&#xE76B;"
                                 Grid.Column="1"
-                                 Margin="2,0"
-                                Width="{TemplateBinding Height}"
-                                Height="{TemplateBinding Height}"
+                                Width="{TemplateBinding ButtonWidth}"
+                                Background="{TemplateBinding Background}"
+                                Height="{TemplateBinding ButtonHeight}"
+                                Margin="{TemplateBinding ButtonMargin}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}"
                                 FontFamily="{DynamicResource IconFontFamily}"/>
 
-                        <ListBox/>
+                        
+                        <ListBox x:Name="PART_PageList"
+                                 Grid.Column="2"
+                                 SelectedIndex="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=PageIndex,Mode=TwoWay,Converter={StaticResource DoubleFollowConverter},ConverterParameter=-1}"
+                                 Height="{TemplateBinding ButtonHeight}"
+                                 leedep:ListManager.Orientation="Horizontal"
+                                 leedep:ListItemManager.Marigin="{TemplateBinding ButtonMargin}"
+                                 BorderThickness="0"
+                                 leedep:ListItemManager.MinWidth="{TemplateBinding ButtonWidth}"
+                                 leedep:ListItemManager.MinHeight="{TemplateBinding ButtonHeight}"
+                                 leedep:ListItemManager.Background="{TemplateBinding Background}"
+                                 leedep:ListItemManager.BorderThickness="{TemplateBinding BorderThickness}"
+                                 leedep:ListItemManager.BorderBrush="{TemplateBinding BorderBrush}"
+                                 leedep:ListItemManager.CornerRadius="{TemplateBinding CornerRadius}"
+                                 SelectionMode="Single"
+                                 leedep:ListItemManager.SelectedBackground="{DynamicResource LeeBrush_Theme}"
+                                 VerticalContentAlignment="Center"
+                                 HorizontalContentAlignment="Center"
+                                 ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                 />
 
-
-
-                        <Button Content="&#xE76C;"
+                        <Button x:Name="PART_NextButton"
+                                Content="&#xE76C;"
                                 Grid.Column="3"
-                                 Margin="2,0"
-                                Width="{TemplateBinding Height}"
-                                Height="{TemplateBinding Height}"
+                                Background="{TemplateBinding Background}"
+                                Width="{TemplateBinding ButtonWidth}"
+                                Height="{TemplateBinding ButtonHeight}"
+                                Margin="{TemplateBinding ButtonMargin}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}"
                                 FontFamily="{DynamicResource IconFontFamily}"/>
 
-                        <Button Width="{TemplateBinding Height}"
-                                Height="{TemplateBinding Height}"
+                        <Button x:Name="PART_EndButton"
                                 Grid.Column="4"
-                                 Margin="2,0">
+                                Width="{TemplateBinding ButtonWidth}"
+                                Background="{TemplateBinding Background}"
+                                Height="{TemplateBinding ButtonHeight}"
+                                Margin="{TemplateBinding ButtonMargin}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="&#xE76C;"
                                            FontFamily="{DynamicResource IconFontFamily}"
@@ -79,12 +125,12 @@
                                            Margin="-3,0,0,0"
                                            VerticalAlignment="Stretch"/>
                             </StackPanel>
-                            
+
                         </Button>
 
 
                         <StackPanel Grid.Column="5"
-                                     Margin="2,0"
+                                     Margin="{TemplateBinding ButtonMargin}"
                                     Visibility="{TemplateBinding JumpVisibility}"
                                     Orientation="Horizontal">
                             <TextBlock Text="跳转到"
@@ -93,19 +139,27 @@
                                        FontWeight="{TemplateBinding FontWeight}"
                                        VerticalAlignment="Center"
                                        Margin="5"/>
-                            <ComboBox x:Name="PART_JumpComboBox"
-                                      leedep:ComboBoxManager.PreviewText="" 
-                                      Width="50"
-                                      Height="{TemplateBinding Height}"/>
+                            <ComboBox 
+                                leedep:ComboBoxManager.PreviewText="" 
+                                MinWidth="60"
+                                MinHeight="0"
+                                leedep:ComboBoxManager.BanQuick="True"
+                                Background="{TemplateBinding Background}"
+                                Height="{TemplateBinding ButtonHeight}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                ItemsSource="{Binding ElementName=PART_PageList,Path=ItemsSource,Mode=OneWay}"
+                                SelectedIndex="{Binding ElementName=PART_PageList,Path=SelectedIndex,Mode=TwoWay}"
+                                leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}"/>
                         </StackPanel>
 
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        
+
     </Style>
-    
-    
-    
+
+
+
 </ResourceDictionary>
