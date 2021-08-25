@@ -62,7 +62,7 @@
                                     />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Opacity"  Value="{DynamicResource FasleEnableOpacity}"/>
+                            <Setter Property="Opacity"  Value="{DynamicResource UnEnableOpacity}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -138,7 +138,7 @@
                         </Trigger>
 
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Opacity"  Value="{DynamicResource FasleEnableOpacity}"/>
+                            <Setter Property="Opacity"  Value="{DynamicResource UnEnableOpacity}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -198,7 +198,7 @@
                                      Value="{Binding Path=(leedep:ButtonManager.PressedForeground),RelativeSource={RelativeSource  Mode=TemplatedParent},Mode=OneWay}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Opacity"  Value="{DynamicResource FasleEnableOpacity}"/>
+                            <Setter Property="Opacity"  Value="{DynamicResource UnEnableOpacity}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
 

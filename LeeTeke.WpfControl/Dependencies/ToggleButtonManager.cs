@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 using System.Windows.Media;
 
 namespace LeeTeke.WpfControl.Dependencies
@@ -10,7 +11,7 @@ namespace LeeTeke.WpfControl.Dependencies
     public class ToggleButtonManager
     {
 
-    
+
 
         #region RippleBrush
         public static Brush GetRippleBrush(DependencyObject obj)
@@ -62,6 +63,39 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("MouseOverBorderBrush", typeof(Brush), typeof(ToggleButtonManager));
         #endregion
 
+        #region MouseOverBorderThickness
+        public static Thickness GetMouseOverBorderThickness(DependencyObject obj)
+        {
+            return (Thickness)obj.GetValue(MouseOverBorderThicknessProperty);
+        }
+
+        public static void SetMouseOverBorderThickness(DependencyObject obj, Thickness value)
+        {
+            obj.SetValue(MouseOverBorderThicknessProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MouseOverBorderThickness.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MouseOverBorderThicknessProperty =
+            DependencyProperty.RegisterAttached("MouseOverBorderThickness", typeof(Thickness), typeof(ToggleButtonManager));
+        #endregion
+
+        #region MouseOverForeground
+        public static Brush GetMouseOverForeground(DependencyObject obj)
+        {
+            return (Brush)obj.GetValue(MouseOverForegroundProperty);
+        }
+
+        public static void SetMouseOverForeground(DependencyObject obj, Brush value)
+        {
+            obj.SetValue(MouseOverForegroundProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MouseOverForeground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MouseOverForegroundProperty =
+            DependencyProperty.RegisterAttached("MouseOverForeground", typeof(Brush), typeof(ToggleButtonManager));
+        #endregion
+
+
         #region CheckedBackground
 
 
@@ -102,6 +136,22 @@ namespace LeeTeke.WpfControl.Dependencies
 
         #endregion
 
+        #region CheckedBorderThickness
+        public static Thickness GetCheckedBorderThickness(DependencyObject obj)
+        {
+            return (Thickness)obj.GetValue(CheckedBorderThicknessProperty);
+        }
+
+        public static void SetCheckedBorderThickness(DependencyObject obj, Thickness value)
+        {
+            obj.SetValue(CheckedBorderThicknessProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for CheckedBorderThickness.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CheckedBorderThicknessProperty =
+            DependencyProperty.RegisterAttached("CheckedBorderThickness", typeof(Thickness), typeof(ToggleButtonManager));
+        #endregion
+
         #region CheckedForeground
 
 
@@ -138,7 +188,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for CheckedContent.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CheckedContentProperty =
-            DependencyProperty.RegisterAttached("CheckedContent", typeof(object), typeof(ToggleButtonManager),new PropertyMetadata(CheckedContentChanged));
+            DependencyProperty.RegisterAttached("CheckedContent", typeof(object), typeof(ToggleButtonManager), new PropertyMetadata(CheckedContentChanged));
 
         private static void CheckedContentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -166,6 +216,7 @@ namespace LeeTeke.WpfControl.Dependencies
         #endregion
 
 
+               
 
 
     }

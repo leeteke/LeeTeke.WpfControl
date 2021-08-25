@@ -51,7 +51,9 @@
                   
                     />
 
-                <leecontrol:Pagination MaxPageCount="20"/>
+                <leecontrol:Pagination MaxPageCount="5"
+                                       DisplayPages="4"
+                                       />
 
                 <Button   Height="30" 
                          Command="{Binding TestCommand}"
@@ -91,11 +93,12 @@
                           HorizontalAlignment="Stretch"
                           AutoGenerateColumns="True"
                           HeadersVisibility="All"
-                          SelectionMode="Extended"
+                          SelectionMode="Single"
                           CanUserSortColumns="True"
                           CanUserAddRows="False"
                           CanUserDeleteRows="False"
                           Margin="5"
+                          IsReadOnly="False"
                          >
                     <DataGrid.RowHeaderTemplate>
                         <DataTemplate>
@@ -104,7 +107,6 @@
                     </DataGrid.RowHeaderTemplate>
      
                 </DataGrid>
-
 
                 <ListBox ItemsSource="{Binding TestList}"
                          VerticalContentAlignment="Center" 
@@ -149,10 +151,12 @@
 
                 <leecontrol:ToggleGroup ItemsSource="{Binding TestList}"
                                         SelectionMode="Single"
+                                        SelectedMinimum="1"
                                       >
                     <leecontrol:ToggleGroup.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Title}"
+                            <TextBlock   
+                                       Text="{Binding Title}"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"/>
                         </DataTemplate>
@@ -240,10 +244,10 @@
                 
       
                 <ToggleButton 
-                              Content="你好" 
-                              Height="35"
+                    Content="你好" 
+                    Height="35"
                     leedep:ToggleButtonManager.CheckedContent="你好1"
-                                 />
+                    />
                 <RadioButton Content="RadioButton"
                              />
                 <RadioButton Content="RadioButton" />

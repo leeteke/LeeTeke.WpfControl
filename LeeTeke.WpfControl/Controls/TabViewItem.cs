@@ -37,16 +37,21 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemCanClosing.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemCanClosingProperty =
-            DependencyProperty.RegisterAttached("ItemCanClosing", typeof(bool?), typeof(TabViewItem), new PropertyMetadata(ItemCanClosingChanged));
+            DependencyProperty.RegisterAttached("ItemCanClosing", typeof(bool?), typeof(TabViewItem),  new FrameworkPropertyMetadata(default, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, ItemCanClosingChanged) { DefaultUpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
 
         private static void ItemCanClosingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is FrameworkElement element && e.NewValue != null&&e.NewValue is bool @result)
+            if (d is FrameworkElement element && e.NewValue != null )
             {
                 var pd = StaticMethods.FindVisualParent<TabViewItem>(element);
                 if (pd != null)
                 {
-                    pd.CanClosing = @result;
+                    pd.SetBinding(CanClosingProperty, new Binding()
+                    {
+                        Source = d,
+                        Path = new PropertyPath(TabViewItem.ItemCanClosingProperty),
+                        Mode = BindingMode.TwoWay
+                    });
                 }
             }
         }

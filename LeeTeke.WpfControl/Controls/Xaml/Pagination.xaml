@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:LeeTeke.WpfControl.Controls"
                     xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies"
+                    xmlns:controls="clr-namespace:LeeTeke.WpfControl.Controls"
                     xmlns:lee="clr-namespace:LeeTeke.WpfControl.Controls">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
@@ -14,8 +15,7 @@
         <Setter Property="Height" Value="{DynamicResource LeeItemHeight}"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
-        <Setter Property="ShowIndex" Value="0"/>
-        <Setter Property="PageIndex" Value="0"/>
+        <Setter Property="PageIndex" Value="1"/>
         <Setter Property="ButtonWidth" Value="35"/>
         <Setter Property="ButtonHeight" Value="30"/>
         <Setter Property="ButtonMargin" Value="2,0"/>
@@ -45,6 +45,7 @@
                                 Margin="{TemplateBinding ButtonMargin}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
+                                IsEnabled="False"
                                 leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}">
                             <StackPanel Orientation="Horizontal">
                                 <Rectangle Width="{Binding RelativeSource={RelativeSource Mode=Self},Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/12}"
@@ -62,7 +63,8 @@
 
                         <Button x:Name="PART_PreviousButton"
                                 Content="&#xE76B;"
-                                Grid.Column="1"
+                                Grid.Column="1" 
+                                IsEnabled="False"
                                 Width="{TemplateBinding ButtonWidth}"
                                 Background="{TemplateBinding Background}"
                                 Height="{TemplateBinding ButtonHeight}"
@@ -72,31 +74,19 @@
                                 leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}"
                                 FontFamily="{DynamicResource IconFontFamily}"/>
 
-                        
-                        <ListBox x:Name="PART_PageList"
-                                 Grid.Column="2"
-                                 SelectedIndex="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=PageIndex,Mode=TwoWay,Converter={StaticResource DoubleFollowConverter},ConverterParameter=-1}"
-                                 Height="{TemplateBinding ButtonHeight}"
-                                 leedep:ListManager.Orientation="Horizontal"
-                                 leedep:ListItemManager.Marigin="{TemplateBinding ButtonMargin}"
-                                 BorderThickness="0"
-                                 leedep:ListItemManager.MinWidth="{TemplateBinding ButtonWidth}"
-                                 leedep:ListItemManager.MinHeight="{TemplateBinding ButtonHeight}"
-                                 leedep:ListItemManager.Background="{TemplateBinding Background}"
-                                 leedep:ListItemManager.BorderThickness="{TemplateBinding BorderThickness}"
-                                 leedep:ListItemManager.BorderBrush="{TemplateBinding BorderBrush}"
-                                 leedep:ListItemManager.CornerRadius="{TemplateBinding CornerRadius}"
-                                 SelectionMode="Single"
-                                 leedep:ListItemManager.SelectedBackground="{DynamicResource LeeBrush_Theme}"
-                                 VerticalContentAlignment="Center"
-                                 HorizontalContentAlignment="Center"
-                                 ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                                 />
+
+                        <controls:ToggleGroup x:Name="PART_PageGroup"
+                                              Grid.Column="2"
+                                              SelectedMinimum="1"
+                                              SelectionMode="Single"
+                                              HorizontalScrollBarVisibility="Disabled"/>
+
+
 
                         <Button x:Name="PART_NextButton"
                                 Content="&#xE76C;"
                                 Grid.Column="3"
+                                IsEnabled="False"
                                 Background="{TemplateBinding Background}"
                                 Width="{TemplateBinding ButtonWidth}"
                                 Height="{TemplateBinding ButtonHeight}"
@@ -108,6 +98,7 @@
 
                         <Button x:Name="PART_EndButton"
                                 Grid.Column="4"
+                                IsEnabled="False"
                                 Width="{TemplateBinding ButtonWidth}"
                                 Background="{TemplateBinding Background}"
                                 Height="{TemplateBinding ButtonHeight}"
@@ -139,7 +130,7 @@
                                        FontWeight="{TemplateBinding FontWeight}"
                                        VerticalAlignment="Center"
                                        Margin="5"/>
-                            <ComboBox 
+                            <ComboBox x:Name="PART_ComboBox"
                                 leedep:ComboBoxManager.PreviewText="" 
                                 MinWidth="60"
                                 MinHeight="0"
@@ -148,8 +139,6 @@
                                 Height="{TemplateBinding ButtonHeight}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                ItemsSource="{Binding ElementName=PART_PageList,Path=ItemsSource,Mode=OneWay}"
-                                SelectedIndex="{Binding ElementName=PART_PageList,Path=SelectedIndex,Mode=TwoWay}"
                                 leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}"/>
                         </StackPanel>
 

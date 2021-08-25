@@ -12,15 +12,22 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="Background"  Value="Transparent"/>
-        <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
-        <Setter Property="leedep:ToggleButtonManager.RippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}"/>
-        <Setter Property="leedep:ToggleButtonManager.CheckedBackground" Value="{DynamicResource LeeBrush_Theme}"/>
-        <Setter Property="leedep:ToggleButtonManager.CheckedBorderBrush" Value="{DynamicResource LeeBrush_Theme}"/>
-        <Setter Property="leedep:ToggleButtonManager.CheckedForeground" Value="White"/>
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="Foreground"  Value="{DynamicResource LeeBrush_Text}"/>
-        <Setter Property="leedep:ToggleButtonManager.MouseOverBorderBrush" Value="{DynamicResource LeeBrush_BorderBrushMouseOver}"/>
         <Setter Property="BorderThickness" Value="1"/>
+        
+        <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="leedep:ToggleButtonManager.RippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}"/>
+        <Setter Property="leedep:ToggleButtonManager.MouseOverBackground" Value="{DynamicResource LeeBrush_Mark}"/>
+        <Setter Property="leedep:ToggleButtonManager.MouseOverBorderBrush" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=BorderBrush,Mode=OneWay}"/>
+        <Setter Property="leedep:ToggleButtonManager.MouseOverBorderThickness" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=BorderThickness,Mode=OneWay}"/>
+        <Setter Property="leedep:ToggleButtonManager.MouseOverForeground" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=Foreground,Mode=OneWay}"/>
+
+        <Setter Property="leedep:ToggleButtonManager.CheckedBackground" Value="{DynamicResource LeeBrush_Theme}"/>
+        <Setter Property="leedep:ToggleButtonManager.CheckedBorderBrush" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=BorderBrush,Mode=OneWay}"/>
+        <Setter Property="leedep:ToggleButtonManager.CheckedBorderThickness" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=BorderThickness,Mode=OneWay}"/>
+        <Setter Property="leedep:ToggleButtonManager.CheckedForeground" Value="White"/>
+
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Padding" Value="2"/>
@@ -72,8 +79,10 @@
                             </Setter>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" TargetName="PART_Border"  Value="{Binding Path=(leedep:ToggleButtonManager.MouseOverBackground),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"/>
-                            <Setter Property="BorderBrush" TargetName="PART_Border" Value="{Binding Path=(leedep:ToggleButtonManager.MouseOverBorderBrush),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"/>
+                            <Setter Property="Background" TargetName="PART_Border"  Value="{Binding Path=(leedep:ToggleButtonManager.MouseOverBackground),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"/>
+                            <Setter Property="BorderBrush" TargetName="PART_Border" Value="{Binding Path=(leedep:ToggleButtonManager.MouseOverBorderBrush),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"/>
+                            <Setter Property="BorderThickness" TargetName="PART_Border"  Value="{Binding Path=(leedep:ToggleButtonManager.MouseOverBorderThickness),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{Binding Path=(leedep:ToggleButtonManager.MouseOverForeground),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"/>
                         </Trigger>
 
                         <MultiTrigger >
@@ -86,16 +95,15 @@
                         </MultiTrigger>
 
                         <Trigger Property="IsChecked" Value="true">
-                            <Setter Property="Background" TargetName="PART_Border"  Value="{Binding Path=(leedep:ToggleButtonManager.CheckedBackground),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"/>
-                            <Setter Property="BorderBrush" TargetName="PART_Border"  Value="{Binding Path=(leedep:ToggleButtonManager.CheckedBorderBrush),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"/>
-                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{Binding Path=(leedep:ToggleButtonManager.CheckedForeground),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"/>
+                            <Setter Property="Background" TargetName="PART_Border"  Value="{Binding Path=(leedep:ToggleButtonManager.CheckedBackground),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"/>
+                            <Setter Property="BorderBrush" TargetName="PART_Border"  Value="{Binding Path=(leedep:ToggleButtonManager.CheckedBorderBrush),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"/>
+                            <Setter Property="BorderThickness" TargetName="PART_Border"  Value="{Binding Path=(leedep:ToggleButtonManager.CheckedBorderThickness),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{Binding Path=(leedep:ToggleButtonManager.CheckedForeground),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"/>
                         </Trigger>
 
 
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Background" Value="LightGray"/>
-                            <Setter Property="BorderBrush" Value="{x:Null}"/>
-                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="White"/>
+                            <Setter Property="Opacity" Value="{DynamicResource UnEnableOpacity}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

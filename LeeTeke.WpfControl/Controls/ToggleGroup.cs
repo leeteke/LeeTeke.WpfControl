@@ -62,7 +62,6 @@ namespace LeeTeke.WpfControl.Controls
         public ToggleGroup()
         {
 
-
             EventManager.RegisterClassHandler(typeof(ToggleButton), ToggleButton.CheckedEvent, new RoutedEventHandler(ToggleButton_Checked));
             EventManager.RegisterClassHandler(typeof(ToggleButton), ToggleButton.UncheckedEvent, new RoutedEventHandler(ToggleButton_UnChecked));
 
@@ -71,10 +70,26 @@ namespace LeeTeke.WpfControl.Controls
             hfac.AddHandler(StackPanel.LoadedEvent, new RoutedEventHandler((es, ex) =>
             {
                 _panel = es as Panel;
+                if (SelectedIndex != null)
+                {
+                    SelectedIndexChanged();
+                    return;
+                }
+
+                if (SelectedValue != null)
+                {
+                    SelectedValueChanged();
+                    return;
+                }
+
+                if (SelectedItem != null)
+                {
+                    SelectedItemChanged();
+                    return;
+                }
             }));
             ItemsPanel = new ItemsPanelTemplate(hfac);
-
-            Loaded += ToggleGroup_Loaded;
+          
         }
 
 
@@ -398,6 +413,22 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
+        #region ItemIsClip
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public bool ItemIsClip
+        {
+            get { return (bool)GetValue(ItemIsClipProperty); }
+            set { SetValue(ItemIsClipProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ItemIsClip.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemIsClipProperty =
+            DependencyProperty.Register("ItemIsClip", typeof(bool), typeof(ToggleGroup));
+        #endregion
+
+
         #region ItemRippleBrush
         /// <summary>
         /// item的涟漪颜色
@@ -499,6 +530,40 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
+
+        #region ItemMouseOverBorderThickness
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Thickness ItemMouseOverBorderThickness
+        {
+            get { return (Thickness)GetValue(ItemMouseOverBorderThicknessProperty); }
+            set { SetValue(ItemMouseOverBorderThicknessProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ItemMouseOverBorderThickness.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemMouseOverBorderThicknessProperty =
+            DependencyProperty.Register("ItemMouseOverBorderThickness", typeof(Thickness), typeof(ToggleGroup));
+        #endregion
+
+
+
+        #region ItemMouseOverForeground
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Brush ItemMouseOverForeground
+        {
+            get { return (Brush)GetValue(ItemMouseOverForegroundProperty); }
+            set { SetValue(ItemMouseOverForegroundProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ItemMouseOverForeground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemMouseOverForegroundProperty =
+            DependencyProperty.Register("ItemMouseOverForeground", typeof(Brush), typeof(ToggleGroup));
+        #endregion
+
+
         #region ItemCheckedBackground
         /// <summary>
         /// Item被选中的背景色
@@ -531,6 +596,23 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("ItemCheckedBorderBrush", typeof(Brush), typeof(ToggleGroup));
 
         #endregion
+
+
+        #region ItemCheckedBorderThickness
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Thickness ItemCheckedBorderThickness
+        {
+            get { return (Thickness)GetValue(ItemCheckedBorderThicknessProperty); }
+            set { SetValue(ItemCheckedBorderThicknessProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ItemCheckedBorderThickness.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemCheckedBorderThicknessProperty =
+            DependencyProperty.Register("ItemCheckedBorderThickness", typeof(Thickness), typeof(ToggleGroup));
+        #endregion
+
 
 
         #region ItemCheckedForeground
@@ -692,27 +774,7 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-        private void ToggleGroup_Loaded(object sender, RoutedEventArgs e)
-        {
-
-            if (SelectedIndex != null)
-            {
-                SelectedIndexChanged();
-                return;
-            }
-
-            if (SelectedValue != null)
-            {
-                SelectedValueChanged();
-                return;
-            }
-
-            if (SelectedItem != null)
-            {
-                SelectedItemChanged();
-                return;
-            }
-        }
+       
 
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)
         {
@@ -776,7 +838,26 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (sender is ToggleButton button && StaticMethods.IsInControl(this, button))
             {
-             
+
+                switch (SelectionMode)
+                {
+                    case ToggleGroupMode.Single:
+                        if (SelectedMinimum > 0 && sender.Equals(SelectedItem))
+                        {
+                            button.IsChecked = true;
+                            return;
+                        }
+                        break;
+                    case ToggleGroupMode.Multiple:
+                        if (SelectedMinimum > 0 && SelectedItem is IList list && list.Count <= SelectedMinimum)
+                        {
+                            button.IsChecked = true;
+                            return;
+                        }
+                        break;
+                    default:
+                        break;
+                }
 
                 if (ItemsSource == null)
                 {
@@ -784,7 +865,10 @@ namespace LeeTeke.WpfControl.Controls
                     switch (SelectionMode)
                     {
                         case ToggleGroupMode.Single:
-                            SelectedItem = null;
+                            if (sender.Equals(SelectedItem))
+                            {
+                                SelectedItem = null;
+                            }
                             break;
                         case ToggleGroupMode.Multiple:
 
@@ -816,7 +900,10 @@ namespace LeeTeke.WpfControl.Controls
 
 
                         case ToggleGroupMode.Single:
-                            SelectedValue = null;
+                            if (button.DataContext.Equals(SelectedValue))
+                            {
+                                SelectedValue = null;
+                            }
                             break;
                         case ToggleGroupMode.Multiple:
                             if (SelectedValue != null && SelectedValue is IList list)
@@ -864,7 +951,8 @@ namespace LeeTeke.WpfControl.Controls
 
                 foreach (ToggleButton chlid in _panel.Children)
                 {
-                    if (value == chlid.DataContext)
+
+                    if (chlid.DataContext.Equals(value))
                     {
                         _selectedIndex = _panel.Children.IndexOf(chlid);
                         _selectedItem = chlid;
@@ -894,7 +982,7 @@ namespace LeeTeke.WpfControl.Controls
                 {
                     foreach (ToggleButton child in _panel.Children)
                     {
-                        if (child.DataContext == singleList)
+                        if (child.DataContext.Equals(singleList))
                         {
                             #region 如果没有初始化Value值
                             if (_selectedValue == null)
@@ -937,7 +1025,7 @@ namespace LeeTeke.WpfControl.Controls
 
                 foreach (ToggleButton chlid in _panel.Children)
                 {
-                    if (toggle == chlid)
+                    if (toggle.Equals(chlid))
                     {
                         _selectedIndex = _panel.Children.IndexOf(chlid);
                         _selectedItem = chlid;
@@ -967,7 +1055,7 @@ namespace LeeTeke.WpfControl.Controls
                 {
                     foreach (ToggleButton child in _panel.Children)
                     {
-                        if (child == singleList)
+                        if (child.Equals(singleList))
                         {
                             #region 如果没有初始化Value值
                             if (_selectedValue == null)

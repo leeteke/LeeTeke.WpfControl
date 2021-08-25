@@ -15,20 +15,32 @@
         <Setter Property="Orientation" Value="Horizontal"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="CornerRadius"  Value="{DynamicResource  LeeCornerRadius}"/>
+        
         <Setter Property="ItemBorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
-        <Setter Property="ItemRippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}"/>
-        <Setter Property="ItemCheckedBackground" Value="{DynamicResource LeeBrush_Theme}"/>
-        <Setter Property="ItemCheckedBorderBrush" Value="{DynamicResource LeeBrush_Theme}"/>
-        <Setter Property="ItemCheckedForeground" Value="White"/>
-        <Setter Property="ItemMouseOverBackground" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=Background,Converter={StaticResource ColorDepthConverter},ConverterParameter=-0.3}"/>
-        <Setter Property="ItemMouseOverBorderBrush" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=BorderBrush,Converter={StaticResource ColorDepthConverter},ConverterParameter=-0.3}"/>
+        <Setter Property="ItemBackground" Value="Transparent"/>
+        <Setter Property="ItemBorderThickness" Value="1"/>
         <Setter Property="ItemMargin" Value="{DynamicResource LeeControlPadding}"/>
         <Setter Property="ItemPadding" Value="10,5"/>
         <Setter Property="ItemCorenerRadius" Value="{DynamicResource LeeCornerRadius}"/>
-        <Setter Property="ItemBackground" Value="Transparent"/>
+        <Setter Property="ItemIsClip" Value="False"/>
+
+        <Setter Property="ItemRippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}"/>
+
+        <Setter Property="ItemMouseOverBackground" Value="{DynamicResource LeeBrush_Mark}"/>
+        <Setter Property="ItemMouseOverBorderBrush" Value="{DynamicResource LeeBrush_BorderBrushMouseOver}"/>
+        <Setter Property="ItemMouseOverForeground" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=Foreground,Mode=OneWay}"/>
+        <Setter Property="ItemMouseOverBorderThickness" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=ItemBorderThickness,Mode=OneWay}"/>
+        
+        <Setter Property="ItemCheckedBackground" Value="{DynamicResource LeeBrush_Theme}"/>
+        <Setter Property="ItemCheckedBorderBrush" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=BorderBrush,Mode=OneWay}"/>
+        <Setter Property="ItemCheckedForeground" Value="White"/>
+        <Setter Property="ItemCheckedBorderThickness" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=ItemBorderThickness,Mode=OneWay}"/>
+ 
+        <Setter Property="ItemCorenerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        
         <Setter Property="VerticalScrollBarVisibility" Value="Disabled"/>
         <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
-        <Setter Property="ItemBorderThickness" Value="1"/>
+       
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ToggleGroup}">
@@ -81,14 +93,21 @@
                     <Setter Property="BorderThickness" Value="{Binding Path=ItemBorderThickness, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
                     <Setter Property="BorderBrush" Value="{Binding Path=ItemBorderBrush, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
                     <Setter Property="Background" Value="{Binding Path=ItemBackground, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
+                    
                     <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{Binding Path=ItemCorenerRadius, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
+                    <Setter Property="leedep:CornerRadiusManager.IsClip" Value="{Binding Path=ItemIsClip, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
+                    
                     <Setter Property="leedep:ToggleButtonManager.RippleBrush" Value="{Binding Path=ItemRippleBrush, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
-                    <Setter Property="leedep:ToggleButtonManager.CheckedBackground" Value="{Binding Path=ItemCheckedBackground, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
-                    <Setter Property="leedep:ToggleButtonManager.CheckedBorderBrush" Value="{Binding Path=ItemCheckedBorderBrush, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
+                    
                     <Setter Property="leedep:ToggleButtonManager.MouseOverBackground" Value="{Binding Path=ItemMouseOverBackground, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
                     <Setter Property="leedep:ToggleButtonManager.MouseOverBorderBrush" Value="{Binding Path=ItemMouseOverBackground, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
+                    <Setter Property="leedep:ToggleButtonManager.MouseOverBorderThickness" Value="{Binding Path=ItemMouseOverBorderThickness, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
+                    <Setter Property="leedep:ToggleButtonManager.MouseOverForeground" Value="{Binding Path=ItemMouseOverForeground, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
+                    
+                    <Setter Property="leedep:ToggleButtonManager.CheckedBackground" Value="{Binding Path=ItemCheckedBackground, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
+                    <Setter Property="leedep:ToggleButtonManager.CheckedBorderBrush" Value="{Binding Path=ItemCheckedBorderBrush, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
                     <Setter Property="leedep:ToggleButtonManager.CheckedForeground" Value="{Binding Path=ItemCheckedForeground, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
-
+                    <Setter Property="leedep:ToggleButtonManager.CheckedBorderThickness" Value="{Binding Path=ItemCheckedBorderThickness, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
                 </Style>
             </Setter.Value>
         </Setter>

@@ -54,7 +54,8 @@ namespace LeeTeke.WpfControl.Controls
 
 
 
-        private ListBox _list;
+        private ToggleGroup _group;
+        private ComboBox _comboBox;
         private Button _headButton;
         private Button _endButton;
         private Button _previousButton;
@@ -73,12 +74,17 @@ namespace LeeTeke.WpfControl.Controls
             base.OnApplyTemplate();
 
 
-
-            if (this.GetTemplateChild("PART_PageList") is ListBox list)
+            if (this.GetTemplateChild("PART_PageGroup") is ToggleGroup group)
             {
-                _list = list;
+                _group = group;
 
-                _list.SelectionChanged += _list_SelectionChanged; ;
+                _group.SelectionChanged += _group_SelectionChanged;
+            }
+
+            if (this.GetTemplateChild("PART_ComboBox") is ComboBox box)
+            {
+                _comboBox = box; ;
+                _comboBox.SelectionChanged += _comboBox_SelectionChanged;
             }
 
             if (this.GetTemplateChild("PART_PreviousButton") is Button pbtn)
@@ -86,17 +92,7 @@ namespace LeeTeke.WpfControl.Controls
                 _previousButton = pbtn;
                 _previousButton.Click += (ox, oe) =>
                 {
-                    if (_list != null)
-                    {
-                        if (_list.SelectedIndex > -1)
-                        {
-                            _list.SelectedIndex--;
-                        }
-                        else if (_list.SelectedIndex == -1 && _list.Items != null)
-                        {
-                            _list.SelectedIndex = 0;
-                        }
-                    }
+                    this.PageIndex--;
                 };
             }
 
@@ -105,10 +101,7 @@ namespace LeeTeke.WpfControl.Controls
                 _headButton = hbtn;
                 _headButton.Click += (ox, oe) =>
                 {
-                    if (_list != null)
-                    {
-                        _list.SelectedIndex = 0;
-                    }
+                    this.PageIndex = 1;
                 };
             }
 
@@ -117,10 +110,7 @@ namespace LeeTeke.WpfControl.Controls
                 _nextButton = nbtn;
                 _nextButton.Click += (ox, oe) =>
                 {
-                    if (_list != null)
-                    {
-                        _list.SelectedIndex++;
-                    }
+                    this.PageIndex++;
                 };
             }
 
@@ -129,13 +119,14 @@ namespace LeeTeke.WpfControl.Controls
                 _endButton = ebtn;
                 _endButton.Click += (ox, oe) =>
                 {
-                    if (_list != null && _list.Items != null)
-                    {
-                        _list.SelectedIndex = _list.Items.Count - 1;
-                    }
+                    this.PageIndex = this.MaxPageCount;
                 };
             }
         }
+
+
+
+
 
 
 
@@ -165,7 +156,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private static void MaxPageCountChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is Pagination pagination&&e.NewValue is int _value)
+            if (d is Pagination pagination && e.NewValue is int _value)
             {
                 pagination.ViewLoding();
             }
@@ -184,7 +175,16 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for PageIndex.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PageIndexProperty =
-            DependencyProperty.Register("PageIndex", typeof(int), typeof(Pagination), new FrameworkPropertyMetadata(1, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault) { DefaultUpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
+            DependencyProperty.Register("PageIndex", typeof(int), typeof(Pagination), new FrameworkPropertyMetadata(1, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, PageIndexChanged) { DefaultUpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
+
+        private static void PageIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is Pagination pagination && e.NewValue != e.OldValue)
+            {
+                pagination.GropShowNumber((int)e.NewValue);
+
+            }
+        }
         #endregion
 
 
@@ -253,20 +253,30 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
-        #region ShowIndex
+        #region DisplayPages
         /// <summary>
         /// 请添加描述
         /// </summary>
-        public int ShowIndex
+        public int DisplayPages
         {
-            get { return (int)GetValue(ShowIndexProperty); }
-            set { SetValue(ShowIndexProperty, value); }
+            get { return (int)GetValue(DisplayPagesProperty); }
+            set { SetValue(DisplayPagesProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for ShowIndex.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ShowIndexProperty =
-            DependencyProperty.Register("ShowIndex", typeof(int), typeof(Pagination));
+        // Using a DependencyProperty as the backing store for DisplayPages.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DisplayPagesProperty =
+            DependencyProperty.Register("DisplayPages", typeof(int), typeof(Pagination), new PropertyMetadata(DisplayPagesChanged));
+
+        private static void DisplayPagesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is Pagination pagination && e.NewValue is int _value)
+            {
+                pagination.ViewLoding();
+            }
+        }
         #endregion
+
+
 
         #region JumpVisibility
         /// <summary>
@@ -296,8 +306,8 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (!IsLoaded)
                 return;
-            PageIndex = -1;
-            _list.ItemsSource = null;
+
+            _group.ItemsSource = null;
             if (MaxPageCount < 1)
             {
                 this.Visibility = Visibility.Collapsed;
@@ -311,12 +321,54 @@ namespace LeeTeke.WpfControl.Controls
             {
                 pages.Add(i + 1);
             }
+            _comboBox.ItemsSource = pages;
 
-            _list.ItemsSource = pages;
-
+            GropShowNumber(PageIndex);
         }
 
 
+        private void GropShowNumber(int number)
+        {
+            if (!IsLoaded)
+                return;
+            if (DisplayPages < MaxPageCount)
+            {
+                List<int> pages = new();
+                //前面的数
+                int hd = (int)Math.Round((((double)DisplayPages - 1) / 2), MidpointRounding.AwayFromZero);
+                //后面的数
+                int ed = DisplayPages - 1 - hd;
+
+                if (number - hd <= 1)
+                {
+                    ed += hd + (hd - number) - 1;
+                    hd = DisplayPages - ed - 1;
+
+                }
+                //////这里算法有问题
+                for (int i = 0; i <= hd ; i++)
+                    pages.Add(0);
+                for (int i = 0 ; i <=ed; i++)
+                    pages.Add(i+number);
+
+
+                _group.ItemsSource = pages;
+                _group.SelectedValue = number;
+            }
+            else
+            {
+                List<int> pages = new();
+                for (int i = 0; i < MaxPageCount; i++)
+                    pages.Add(i + 1);
+                _group.ItemsSource = pages;
+                _group.SelectedValue = number;
+            }
+
+            if (_comboBox.SelectedValue == null || (_comboBox.SelectedValue is int svalue && svalue != number))
+            {
+                _comboBox.SelectedValue = number;
+            }
+        }
 
         /// <summary>
         /// 控件加载完成
@@ -328,12 +380,13 @@ namespace LeeTeke.WpfControl.Controls
             ViewLoding();
         }
 
-
-        private void _list_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void _group_SelectionChanged(object sender, ToggleSelectionChangedEventArgs e)
         {
-            if (sender is ListBox list)
+
+            if (sender is ToggleGroup group && group.SelectedIndex is int selectedIndex)
             {
-                if (list.SelectedIndex == 0)
+
+                if (selectedIndex == 0)
                 {
                     _headButton.IsEnabled = false;
                     _previousButton.IsEnabled = false;
@@ -344,7 +397,7 @@ namespace LeeTeke.WpfControl.Controls
                     _previousButton.IsEnabled = true;
                 }
 
-                if (list.SelectedIndex == list.Items.Count - 1)
+                if (selectedIndex == _group.Items.Count - 1)
                 {
                     _endButton.IsEnabled = false;
                     _nextButton.IsEnabled = false;
@@ -355,13 +408,32 @@ namespace LeeTeke.WpfControl.Controls
                     _nextButton.IsEnabled = true;
                 }
 
-                if (list.SelectedIndex>-1)
+                if (selectedIndex > -1)
                 {
-                    list.ScrollIntoView(list.SelectedItem);
+                    PageIndex = (int)group.SelectedValue;
                 }
             }
         }
+
+        private void _comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is ComboBox comboBox)
+            {
+                PageIndex = (int)comboBox.SelectedValue;
+            }
+
+        }
         #endregion
 
+
+
+    }
+
+
+    internal class PaginationPageMode
+    {
+        public int Number { get; set; }
+
+        public bool IsClicked { get; set; }
     }
 }
