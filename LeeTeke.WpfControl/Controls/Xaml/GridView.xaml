@@ -10,12 +10,11 @@
                 <ControlTemplate TargetType="{x:Type local:GridView}">
                     <Border Background="{TemplateBinding Background}"
                     BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    Margin="{TemplateBinding Margin}"
-                    Padding="{TemplateBinding Padding}">
+                    BorderThickness="{TemplateBinding BorderThickness}" >
                         <ScrollViewer   x:Name="PART_ScrollViewer"
                                         VerticalScrollBarVisibility="{TemplateBinding  VerticalScrollBarVisibility}"
                                         HorizontalScrollBarVisibility="{TemplateBinding HorizontalScrollBarVisibility}"
+                                         Padding="{TemplateBinding Padding}"
                                 >
                             <ItemsPresenter     />
                         </ScrollViewer>

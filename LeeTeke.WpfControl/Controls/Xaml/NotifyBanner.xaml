@@ -17,7 +17,7 @@
         <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="EasingFunction" >
             <Setter.Value>
-                <ExponentialEase  EasingMode="EaseOut"/>
+                <QuadraticEase    EasingMode="EaseOut"/>
             </Setter.Value>
         </Setter>
         <Setter Property="EasingDuration" Value="0:0:0.200"/>
@@ -34,8 +34,9 @@
         <Setter Property="MinHeight" Value="60"/>
         <Setter Property="MinWidth" Value="260"/>
         <Setter Property="CloseVisibly" Value="MouseOver"/>
-        <Setter Property="Padding" Value="5"/>
-        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="NotifyMargin" Value="5"/>
+        <Setter Property="NotifyPadding" Value="5"/>
         <Setter  Property="Effect" Value="{DynamicResource LeeShadow}"/>
         <Setter Property="CornerRadius" Value="8"/>
         <Setter Property="Template">
@@ -46,6 +47,7 @@
                                     Background="{x:Null}"  
                                     VerticalAlignment="{TemplateBinding NotifySite,Converter={StaticResource NotifyConverter},ConverterParameter=V}"
                                     HorizontalAlignment="{TemplateBinding NotifySite,Converter={StaticResource NotifyConverter},ConverterParameter=H}"
+                                    ClipToBounds="True"
                                     />
               
                  
@@ -56,20 +58,15 @@
 
     <Style TargetType="{x:Type local:NotifyBannerItem}">
      <Setter Property="Opacity" Value="0"/>
-        <Setter Property="RenderTransform">
-            <Setter.Value>
-                <TranslateTransform/>
-            </Setter.Value>
-        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:NotifyBannerItem}">
-                    <Border Background="{TemplateBinding Background}"
+                    <Border x:Name="PART_Border" Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             CornerRadius="{TemplateBinding CornerRadius}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Effect="{TemplateBinding Effect}">
-                        <Grid  >
+                        <Grid  x:Name="PART_Grid" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition x:Name="PART_Column1"  Width="50"/>
                                 <ColumnDefinition/>
@@ -107,7 +104,17 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-
+                        <Trigger Property="IsClip" Value="True">
+                            <Setter TargetName="PART_Grid" Property="Clip">
+                                <Setter.Value>
+                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
+                                        <Binding ElementName="PART_Border"  Path="CornerRadius" Mode="OneWay"/>
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
 
                         <MultiTrigger>
                             <MultiTrigger.Conditions>

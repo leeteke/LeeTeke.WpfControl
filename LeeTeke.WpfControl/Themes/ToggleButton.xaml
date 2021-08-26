@@ -15,7 +15,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="Foreground"  Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        
+
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="leedep:ToggleButtonManager.RippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}"/>
         <Setter Property="leedep:ToggleButtonManager.MouseOverBackground" Value="{DynamicResource LeeBrush_Mark}"/>
@@ -30,7 +30,7 @@
 
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Padding" Value="2"/>
+        <Setter Property="Padding" Value="{DynamicResource LeeControlPadding}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
@@ -39,22 +39,23 @@
                             BorderThickness="{TemplateBinding BorderThickness}" 
                             Background="{TemplateBinding Background}" 
                             CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"
-                            Margin="{TemplateBinding Margin}">
-                        <Grid x:Name="PART_Grid" Background="Transparent"
+                            >
+                        <Grid x:Name="PART_Grid"
+                              Background="Transparent"
                               >
                             <ContentPresenter x:Name="contentPresenter"
                                               Focusable="False" 
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              Margin="{TemplateBinding Padding}" 
                                               RecognizesAccessKey="True"
+                                              Margin="{TemplateBinding Padding}"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                             <ContentPresenter x:Name="Checked_ContentPresenter"
                                               Focusable="False" 
                                               RecognizesAccessKey="True"
+                                                 Margin="{TemplateBinding Padding}"
                                               Content="{Binding RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}},Path=(leedep:ToggleButtonManager.CheckedContent)}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              Margin="{TemplateBinding Padding}" 
                                               TextElement.Foreground="{Binding ElementName=contentPresenter,Path=(TextElement.Foreground)}"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -129,7 +130,6 @@
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            Margin="{TemplateBinding Margin}"
                             >
                         <ContentPresenter x:Name="PART_Content"
                                           Margin="{TemplateBinding Padding}"

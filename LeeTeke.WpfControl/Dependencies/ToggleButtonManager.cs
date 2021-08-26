@@ -12,6 +12,41 @@ namespace LeeTeke.WpfControl.Dependencies
     {
 
 
+        #region ItemMinWidth
+        public static double GetItemMinWidth(DependencyObject obj)
+        {
+            return (double)obj.GetValue(ItemMinWidthProperty);
+        }
+
+        public static void SetItemMinWidth(DependencyObject obj, double value)
+        {
+            obj.SetValue(ItemMinWidthProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for ItemMinWidth.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemMinWidthProperty =
+            DependencyProperty.RegisterAttached("ItemMinWidth", typeof(double), typeof(ToggleButtonManager));
+        #endregion
+
+
+
+        #region ItemMinHeight
+        public static double GetItemMinHeight(DependencyObject obj)
+        {
+            return (double)obj.GetValue(ItemMinHeightProperty);
+        }
+
+        public static void SetItemMinHeight(DependencyObject obj, double value)
+        {
+            obj.SetValue(ItemMinHeightProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for ItemMinHeight.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemMinHeightProperty =
+            DependencyProperty.RegisterAttached("ItemMinHeight", typeof(double), typeof(ToggleButtonManager));
+        #endregion
+
+
 
         #region RippleBrush
         public static Brush GetRippleBrush(DependencyObject obj)

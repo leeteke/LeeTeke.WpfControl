@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 
 namespace LeeTeke.WpfControl.Dependencies
@@ -53,23 +54,21 @@ namespace LeeTeke.WpfControl.Dependencies
         #endregion
 
 
-        #region TrackThumb
-        /// <summary>
-        /// 请填写描述
-        /// </summary>
-        public static object GetTrackThumb(DependencyObject obj)
+
+        #region TrackThumbStyle
+        public static Style GetTrackThumbStyle(DependencyObject obj)
         {
-            return (object)obj.GetValue(TrackThumbProperty);
+            return (Style)obj.GetValue(TrackThumbStyleProperty);
         }
 
-        public static void SetTrackThumb(DependencyObject obj, object value)
+        public static void SetTrackThumbStyle(DependencyObject obj, Style value)
         {
-            obj.SetValue(TrackThumbProperty, value);
+            obj.SetValue(TrackThumbStyleProperty, value);
         }
 
-        // Using a DependencyProperty as the backing store for TrackThumb.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TrackThumbProperty =
-            DependencyProperty.RegisterAttached("TrackThumb", typeof(object), typeof(SliderManager));
+        // Using a DependencyProperty as the backing store for TrackThumbStyle.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TrackThumbStyleProperty =
+            DependencyProperty.RegisterAttached("TrackThumbStyle", typeof(Style), typeof(SliderManager));
         #endregion
 
 
@@ -91,9 +90,6 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty TrackSizeProperty =
             DependencyProperty.RegisterAttached("TrackSize", typeof(double), typeof(SliderManager));
         #endregion
-
-
-      
 
 
         #region TrackBrush

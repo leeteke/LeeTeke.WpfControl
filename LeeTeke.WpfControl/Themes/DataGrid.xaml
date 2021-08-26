@@ -99,7 +99,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate  TargetType="{x:Type DataGrid}">
-                            <Grid Margin="{TemplateBinding Margin}">
+                            <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto"/>
                                     <RowDefinition/>
@@ -107,11 +107,11 @@
                                 <Border x:Name="PART_HeaderBorder"
                                         Grid.ColumnSpan="2"
                                         Background="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:DataGridManager.HeaderBackground),Mode=OneWay}"
-                                    BorderBrush="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:DataGridManager.HeaderBorderBursh),Mode=OneWay}"
-                                     BorderThickness="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:DataGridManager.HeaderBorderThickness),Mode=OneWay}"
-                                     CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:DataGridManager.HeaderCornerRadius),Mode=OneWay}"
-                                      Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:DataGridManager.HeaderMargin),Mode=OneWay}"
-                                      Padding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:DataGridManager.HeaderPadding),Mode=OneWay}">
+                                        BorderBrush="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:DataGridManager.HeaderBorderBursh),Mode=OneWay}"
+                                        BorderThickness="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:DataGridManager.HeaderBorderThickness),Mode=OneWay}"
+                                        CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:DataGridManager.HeaderCornerRadius),Mode=OneWay}"
+                                        Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:DataGridManager.HeaderMargin),Mode=OneWay}"
+                                        Padding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:DataGridManager.HeaderPadding),Mode=OneWay}">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="auto"/>

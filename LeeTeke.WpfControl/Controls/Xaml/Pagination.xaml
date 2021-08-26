@@ -16,7 +16,7 @@
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="PageIndex" Value="1"/>
-        <Setter Property="ButtonWidth" Value="35"/>
+        <Setter Property="ButtonWidth" Value="30"/>
         <Setter Property="ButtonHeight" Value="30"/>
         <Setter Property="ButtonMargin" Value="2,0"/>
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
@@ -46,6 +46,7 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 IsEnabled="False"
+                                ToolTip="至首页"
                                 leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}">
                             <StackPanel Orientation="Horizontal">
                                 <Rectangle Width="{Binding RelativeSource={RelativeSource Mode=Self},Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/12}"
@@ -65,9 +66,11 @@
                                 Content="&#xE76B;"
                                 Grid.Column="1" 
                                 IsEnabled="False"
+                                ToolTip="上一页"
                                 Width="{TemplateBinding ButtonWidth}"
                                 Background="{TemplateBinding Background}"
                                 Height="{TemplateBinding ButtonHeight}"
+                                VerticalAlignment="Center"
                                 Margin="{TemplateBinding ButtonMargin}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
@@ -79,7 +82,30 @@
                                               Grid.Column="2"
                                               SelectedMinimum="1"
                                               SelectionMode="Single"
-                                              HorizontalScrollBarVisibility="Disabled"/>
+                                              VerticalAlignment="Center"
+                                              Height="{TemplateBinding ButtonHeight}"
+                                              MinHeight="0"
+                                              MinWidth="0"
+                                              BorderThickness="0"
+                                              Padding="0"
+                                              Margin="0"
+                                              ItemBackground="{TemplateBinding Background}"
+                                              ItemMargin="{TemplateBinding ButtonMargin}"
+                                              ItemPadding="0"
+                                              HorizontalScrollBarVisibility="Disabled">
+                            <controls:ToggleGroup.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderThickness="0" Width="{Binding RelativeSource={RelativeSource   AncestorType=local:Pagination},Path=ButtonWidth,Mode=OneWay}">
+                                        <TextBlock Text="{Binding}"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center"/>
+                                    </Border>
+                                            
+                                </DataTemplate>
+                            </controls:ToggleGroup.ItemTemplate>
+                                
+                                
+                        </controls:ToggleGroup>
 
 
 
@@ -87,6 +113,7 @@
                                 Content="&#xE76C;"
                                 Grid.Column="3"
                                 IsEnabled="False"
+                                ToolTip="下一页"
                                 Background="{TemplateBinding Background}"
                                 Width="{TemplateBinding ButtonWidth}"
                                 Height="{TemplateBinding ButtonHeight}"
@@ -99,6 +126,7 @@
                         <Button x:Name="PART_EndButton"
                                 Grid.Column="4"
                                 IsEnabled="False"
+                                ToolTip="至尾页"
                                 Width="{TemplateBinding ButtonWidth}"
                                 Background="{TemplateBinding Background}"
                                 Height="{TemplateBinding ButtonHeight}"

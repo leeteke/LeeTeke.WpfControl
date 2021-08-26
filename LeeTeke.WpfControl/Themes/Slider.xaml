@@ -7,6 +7,20 @@
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <Style x:Key="SliderRepeatButton" TargetType="{x:Type RepeatButton}">
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:CornerRadiusManager.CornerRadius),Mode=OneWay}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="LeeSlider" TargetType="{x:Type Slider}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
@@ -16,6 +30,8 @@
         <Setter Property="TickPlacement"  Value="None" />
         <Setter Property="IsMoveToPointEnabled" Value="True"/>
         <Setter Property="FontSize" Value="12" />
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="AutoToolTipPlacement" Value="None"/>
         <Setter Property="AutoToolTipPrecision" Value="0"/>
         <Setter Property="leedep:SliderManager.Header" Value="{x:Null}"/>
@@ -26,15 +42,23 @@
         <Setter Property="leedep:SliderManager.TrackSize" Value="8"/>
         <Setter Property="leedep:SliderManager.RegisterMouseWheel" Value="True"/>
         <Setter Property="leedep:SliderManager.TrackBrush" Value="{DynamicResource LeeBrush_Theme}"/>
-        <Setter Property="leedep:SliderManager.TrackThumb" >
+        <Setter Property="leedep:SliderManager.TrackThumbStyle" >
             <Setter.Value>
-                <Ellipse x:Name="ellipse"
-                         Width="15"
-                         Height="15"
-                         VerticalAlignment="Center"
-                         Fill="{DynamicResource LeeBrush_White}"
-                         Effect="{DynamicResource LeeShadow}"
-                         />
+                <Style TargetType="{x:Type Thumb}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Thumb}">
+                                <Ellipse x:Name="ellipse"
+                                         Width="15"
+                                         Height="15"
+                                         VerticalAlignment="Center"
+                                         Fill="{DynamicResource LeeBrush_White}"
+                                         Effect="{DynamicResource LeeShadow}"
+                                         />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
             </Setter.Value>
         </Setter>
 
@@ -64,72 +88,44 @@
                                               Placement="Top"
                                               Height="5"
                                               />
-                                    <Border Height="{Binding Path=(leedep:SliderManager.TrackSize), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
+                                    <Border x:Name="PART_Border" 
+                                            Height="{Binding Path=(leedep:SliderManager.TrackSize), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
                                             Grid.Row="1"
                                             VerticalAlignment="Center"
                                             Background="{TemplateBinding Background}"
-                                            Margin="{TemplateBinding Padding}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
                                             CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"/>
                                     <Track x:Name="PART_Track"
                                            Grid.Row="1"
-                                           Margin="0,0,0,0"
                                            FocusVisualStyle="{TemplateBinding FocusVisualStyle}"
-                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                           >
                                         <Track.DecreaseRepeatButton >
                                             <RepeatButton Command="Slider.DecreaseLarge"
-                                                         
-                                                          IsTabStop="False"
-                                                          Background="{Binding Path=(leedep:SliderManager.TrackBrush), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}">
-                                                <RepeatButton.Template>
-                                                    <ControlTemplate TargetType="{x:Type RepeatButton}">
-                                                        <Border Background="{TemplateBinding Background}"
-                                                                Height="{Binding Path=(leedep:SliderManager.TrackSize), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
-                                                                VerticalAlignment="Center"
-                                                              CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"/>
-                                                        <!--<Rectangle Fill="{TemplateBinding Background}"
-                                                                       Height="{Binding Path=(leedep:SliderManager.TrackSize), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
-                                                                       VerticalAlignment="Center" />-->
-
-                                                    </ControlTemplate>
-                                                </RepeatButton.Template>
-
-                                            </RepeatButton>
+                                                          Background="{Binding Path=(leedep:SliderManager.TrackBrush), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
+                                                          BorderBrush="{TemplateBinding BorderBrush}"
+                                                          BorderThickness="{Binding Path=BorderThickness, RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay,Converter={StaticResource ThicknessConverter},ConverterParameter='0,0,N,0'}"
+                                                          VerticalAlignment="Center"
+                                                          leedep:CornerRadiusManager.CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay,Converter={StaticResource CornerRadiusConverter},ConverterParameter='0,N,N,0'}"
+                                                          Height="{Binding Path=(leedep:SliderManager.TrackSize), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
+                                                          Style="{StaticResource SliderRepeatButton}"  />
                                         </Track.DecreaseRepeatButton>
                                         <Track.Thumb>
                                             <Thumb Foreground="{TemplateBinding Foreground}"
                                                    Background="Transparent"
-                                                   >
-                                                <Thumb.Template>
-                                                    <ControlTemplate TargetType="{x:Type Thumb}">
-                                                        <ContentPresenter 
-                                                                x:Name="PART_SelectionRange"
-                                                                Content="{Binding Path=(leedep:SliderManager.TrackThumb),RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
-                                                                Margin="{Binding ElementName=PART_SelectionRange,Path=ActualWidth,Converter={StaticResource ThicknessForDoubleConverter},ConverterParameter=H_*-0.5,Mode=OneWay}"
-                                                                />
-
-                                                    </ControlTemplate>
-                                                    
-                                                </Thumb.Template>
-                                            </Thumb>
+                                                   Style="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:SliderManager.TrackThumbStyle),Mode=OneTime}"
+                                                   />
                                         </Track.Thumb>
                                         <Track.IncreaseRepeatButton>
                                             <RepeatButton Command="Slider.IncreaseLarge"
                                                           Background="Transparent"
-                                                          IsTabStop="False">
-                                                <RepeatButton.Template>
-                                                    <ControlTemplate TargetType="{x:Type RepeatButton}">
-                                                        <Grid Background="Transparent">
-                                                            <Rectangle Fill="{TemplateBinding Background}"
-                                                                       Height="{Binding Path=(leedep:SliderManager.TrackSize), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
-                                                                       VerticalAlignment="Center" />
-                                                        </Grid>
-                                                    </ControlTemplate>
-                                                </RepeatButton.Template>
-
-                                            </RepeatButton>
+                                                          BorderThickness="0"
+                                                          Style="{StaticResource SliderRepeatButton}" />
                                         </Track.IncreaseRepeatButton>
-                            
+
                                     </Track>
+
                                     <TickBar  x:Name="BottomTick"
                                               Grid.Row="2"
                                               Margin="0,1,0,0"
@@ -207,68 +203,39 @@
                                               Placement="Left"
                                               Width="5"
                                               />
-                                    <Border Width="{Binding Path=(leedep:SliderManager.TrackSize), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
+                                    <Border x:Name="PART_Border" 
+                                            Width="{Binding Path=(leedep:SliderManager.TrackSize), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
                                             Grid.Column="1"
                                             HorizontalAlignment="Center"
                                             Background="{TemplateBinding Background}"
-                                            Margin="{TemplateBinding Padding}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
                                             CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"/>
                                     <Track x:Name="PART_Track"
                                            Grid.Column="1"
                                            Margin="0,0,0,0"
-                                           
                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                                         <Track.DecreaseRepeatButton>
                                             <RepeatButton Command="Slider.DecreaseLarge"
-                                                          IsTabStop="True"
-                                                          Background="{Binding Path=(leedep:SliderManager.TrackBrush), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}">
-                                                <RepeatButton.Template>
-                                                    <ControlTemplate TargetType="{x:Type RepeatButton}">
-                                                        <Border Background="{TemplateBinding Background}"
-                                                                Width="{Binding Path=(leedep:SliderManager.TrackSize), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
-                                                                HorizontalAlignment="Center"
-                                                                CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"/>
-                                                        <!--<Rectangle Fill="{TemplateBinding Background}"
-                                                                       Height="{Binding Path=(leedep:SliderManager.TrackSize), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
-                                                                       VerticalAlignment="Center" />-->
-
-                                                    </ControlTemplate>
-                                                </RepeatButton.Template>
-
-                                            </RepeatButton>
+                                                          Background="{Binding Path=(leedep:SliderManager.TrackBrush), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
+                                                          BorderBrush="{TemplateBinding BorderBrush}"
+                                                          BorderThickness="{Binding Path=BorderThickness, RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay,Converter={StaticResource ThicknessConverter},ConverterParameter='0,N,0,0'}"
+                                                          HorizontalAlignment="Center"
+                                                          leedep:CornerRadiusManager.CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay,Converter={StaticResource CornerRadiusConverter},ConverterParameter='N,N,0,0'}"
+                                                          Width="{Binding Path=(leedep:SliderManager.TrackSize), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
+                                                          Style="{StaticResource SliderRepeatButton}"  />
                                         </Track.DecreaseRepeatButton>
                                         <Track.Thumb>
                                             <Thumb Foreground="{TemplateBinding Foreground}"
-                                                   Background="Transparent">
-                                                <Thumb.Template>
-                                                    <ControlTemplate TargetType="{x:Type Thumb}">
-
-                                                        <ContentPresenter 
-                                                                x:Name="PART_SelectionRange"
-                                                                Content="{Binding Path=(leedep:SliderManager.TrackThumb),RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
-                                                               Margin="{Binding ElementName=PART_SelectionRange,Path=ActualHeight,Converter={StaticResource ThicknessForDoubleConverter},ConverterParameter=V_*-0.5,Mode=OneWay}"
-                                                                />
-
-
-                                                    </ControlTemplate>
-                                                </Thumb.Template>
-                                            </Thumb>
+                                                   Background="Transparent"
+                                                   Style="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:SliderManager.TrackThumbStyle),Mode=OneTime}"
+                                                   />
                                         </Track.Thumb>
                                         <Track.IncreaseRepeatButton>
                                             <RepeatButton Command="Slider.IncreaseLarge"
-                                                          IsTabStop="True"
-                                                          Background="Transparent">
-                                                <RepeatButton.Template>
-                                                    <ControlTemplate TargetType="{x:Type RepeatButton}">
-                                                        <Grid Background="Transparent">
-                                                            <Rectangle Fill="{TemplateBinding Background}"
-                                                                       Width="{Binding Path=(leedep:SliderManager.TrackSize), RelativeSource={RelativeSource AncestorType=Slider},Mode=OneWay}"
-                                                                       HorizontalAlignment="Center" />
-                                                        </Grid>
-                                                    </ControlTemplate>
-                                                </RepeatButton.Template>
-
-                                            </RepeatButton>
+                                                          Background="Transparent"
+                                                          BorderThickness="0"
+                                                          Style="{StaticResource SliderRepeatButton}" />
                                         </Track.IncreaseRepeatButton>
                                     </Track>
                                     <TickBar  x:Name="BottomTick"

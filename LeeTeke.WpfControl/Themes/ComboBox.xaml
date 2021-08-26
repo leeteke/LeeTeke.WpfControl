@@ -121,7 +121,8 @@
                                    Grid.ColumnSpan="2"
                                    IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
                                    Placement="Bottom" 
-                                   PopupAnimation="Slide"
+                                   PopupAnimation="Fade"
+                                   VerticalOffset="{Binding ElementName=dropDownBorder,Path=ActualHeight,Mode=OneWay,Converter={StaticResource DoubleFollowConverter},ConverterParameter=*-0.5}"
                                    >
                         
                                 <Border x:Name="dropDownBorder"
@@ -131,10 +132,11 @@
                                         CornerRadius="{DynamicResource LeeCornerRadius}"
                                         BorderBrush="{DynamicResource LeeBrush_BorderBrush}"
                                         BorderThickness="0"
-                                        Margin="1,0,8,8"
+                                        Margin="8"
                                         Effect="{DynamicResource LeeShadow}"
                                         >
                                     <ScrollViewer x:Name="DropDownScrollViewer" 
+                                                  Padding="0,5"
                                                   HorizontalScrollBarVisibility="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(ScrollViewer.HorizontalScrollBarVisibility),Mode=OneWay}" 
                                                   VerticalScrollBarVisibility="{Binding  RelativeSource={RelativeSource  Mode=TemplatedParent},Path=(ScrollViewer.VerticalScrollBarVisibility),Mode=OneWay}"
                                                   CanContentScroll="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(ScrollViewer.CanContentScroll),Mode=OneWay}"
@@ -166,6 +168,7 @@
                                           Grid.ColumnSpan="2" 
                                           HorizontalContentAlignment="Right"
                                           Padding="0,0,5,0"
+                                          ClickMode="Release"
                                           IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
                                           Style="{StaticResource RotateToggleButton}"/>
                             <TextBox x:Name="PART_EditableTextBox" 

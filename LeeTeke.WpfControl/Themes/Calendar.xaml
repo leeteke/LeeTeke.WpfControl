@@ -1,0 +1,332 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="CalendarDayButtonStyle"  TargetType="CalendarDayButton">
+        <Setter Property="MinWidth" Value="10" />
+        <Setter Property="MinHeight" Value="10" />
+        <Setter Property="Width" Value="32" />
+        <Setter Property="Height" Value="32" />
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=ActualHeight,Mode=OneWay,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/2}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CalendarDayButton">
+
+                    <Border x:Name="PART_Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:CornerRadiusManager.CornerRadius),Mode=OneWay}"
+                            >
+                        <ContentPresenter x:Name="PART_Content" 
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_Border" Property="Background" Value="{DynamicResource LeeBrush_Mark}"/>
+                        </Trigger>
+
+                        
+                        <Trigger Property="IsHighlighted" Value="True">
+                            <Setter TargetName="PART_Border" Property="Background" Value="{DynamicResource LeeBrush_Mark}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsToday" Value="True">
+                            <Setter TargetName="PART_Border" Property="BorderBrush" Value="{DynamicResource LeeBrush_Theme}"/>
+                        </Trigger>
+                        
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="PART_Border" Property="Background" Value="{DynamicResource LeeBrush_Theme}"/>
+                            <Setter TargetName="PART_Content" Property="TextElement.Foreground" Value="{DynamicResource LeeBrush_White}"/>
+                        </Trigger>
+                        
+                        <Trigger Property="IsBlackedOut" Value="True">
+                            <Setter TargetName="PART_Content" Property="Opacity" Value="0.1"/>
+                        </Trigger>
+
+                        <Trigger Property="IsInactive" Value="True">
+                            <Setter TargetName="PART_Content" Property="Opacity" Value="0.1"/>
+                        </Trigger>
+
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="PART_Content" Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="CalendarButtonStyle" TargetType="{x:Type CalendarButton}">
+        <Setter Property="MinWidth" Value="10" />
+        <Setter Property="MinHeight" Value="10" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Width" Value="48" />
+        <Setter Property="Height" Value="32" />
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=ActualHeight,Mode=OneWay,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/2}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CalendarButton}">
+                    <Border x:Name="PART_Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:CornerRadiusManager.CornerRadius),Mode=OneWay}"
+                            >
+                        <ContentPresenter x:Name="PART_Content" 
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_Border" Property="Background" Value="{DynamicResource LeeBrush_Mark}"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="PART_Border" Property="Background" Value="{DynamicResource LeeBrush_Mark}"/>
+                        </Trigger>
+                        <Trigger Property="HasSelectedDays" Value="True">
+                            <Setter TargetName="PART_Border" Property="Background" Value="{DynamicResource LeeBrush_Theme}"/>
+                            <Setter TargetName="PART_Content" Property="TextElement.Foreground" Value="{DynamicResource LeeBrush_White}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsInactive" Value="True">
+                            <Setter TargetName="PART_Content" Property="Opacity" Value="0.7"/>
+                        </Trigger>
+                      
+
+                      
+                        
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="CalendarItem">
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="leedep:CalendarManager.TitleBackground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type Calendar}},Path=(leedep:CalendarManager.TitleBackground),Mode=OneWay}"/>
+        <Setter Property="leedep:CalendarManager.TitleTextBrush" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type Calendar}},Path=(leedep:CalendarManager.TitleTextBrush),Mode=OneWay}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CalendarItem">
+                    <ControlTemplate.Resources>
+                        <DataTemplate x:Key="{x:Static CalendarItem.DayTitleTemplateResourceKey}">
+                            <TextBlock  HorizontalAlignment="Center"
+                                       Margin="0,6,0,6"
+                                       Text="{Binding}" 
+                                       Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type CalendarItem}},Path=(leedep:CalendarManager.TitleTextBrush),Mode=OneWay}"
+                                       VerticalAlignment="Center" />
+                        </DataTemplate>
+                    </ControlTemplate.Resources>
+                    <Grid x:Name="PART_Root">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0" 
+                                                         To="1" 
+                                                         Storyboard.TargetProperty="Opacity" 
+                                                         Storyboard.TargetName="PART_DisabledVisual" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Rectangle 
+                                       Grid.ColumnSpan="3"
+                                       Margin="0,0,0,0"
+                                       Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type CalendarItem}},Path=(leedep:CalendarManager.TitleBackground),Mode=OneWay}"/>
+                            <Rectangle Height="{Binding ElementName=PART_HeadRow,Path=ActualHeight}"
+                                       Grid.ColumnSpan="3"
+                                       Grid.Row="1"
+                                       VerticalAlignment="Top"
+                                       Margin="0,0,0,0"
+                                        Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type CalendarItem}},Path=(leedep:CalendarManager.TitleBackground),Mode=OneWay}"
+                                         Visibility="{Binding ElementName=PART_MonthView,Path=Visibility,Mode=OneWay}"/>
+                            <Button x:Name="PART_HeaderButton"
+                                    Focusable="False" 
+                                    Background="Transparent"
+                                    Grid.Column="0"
+                                     Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type CalendarItem}},Path=(leedep:CalendarManager.TitleTextBrush),Mode=OneWay}"
+                                    FontSize="20"
+                                    Grid.Row="0"
+                                    BorderThickness="0"
+                                    Cursor="Hand"
+                                  
+                                    />
+
+                            <Button x:Name="PART_PreviousButton" 
+                                    Width="50" 
+                                    Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type CalendarItem}},Path=(leedep:CalendarManager.TitleTextBrush),Mode=OneWay}"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    HorizontalAlignment="Left"
+                                    Grid.Column="1" 
+                                    Height="50" 
+                                    Padding="16" 
+                                    Focusable="False" 
+                                    Grid.Row="0" 
+                                     Cursor="Hand"
+                                    Content="&#xE70E;"
+                                    FontFamily="{DynamicResource IconFontFamily}"
+                                    />
+
+                            <Button x:Name="PART_NextButton" 
+                                    Width="50"
+                                     Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type CalendarItem}},Path=(leedep:CalendarManager.TitleTextBrush),Mode=OneWay}"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    HorizontalAlignment="Right" 
+                                    Height="50" 
+                                    Padding="16" 
+                                    Grid.Column="2"
+                                    Focusable="False" 
+                                    Grid.Row="0" 
+                                    Cursor="Hand"
+                                    Content="&#xE70D;"
+                                    FontFamily="{DynamicResource IconFontFamily}"
+                                     />
+                      
+                      
+                            <Grid Width="240" 
+                                  Height="235"
+                                  x:Name="PART_MonthView"
+                                  Margin="10,0,10,0" 
+                                  Grid.ColumnSpan="3"
+                                  Grid.Column="0" 
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Grid.Row="1" 
+                                  Visibility="Visible">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition x:Name="PART_HeadRow" />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                            </Grid>
+                            <Grid Width="240" 
+                                  Height="235"
+                                  x:Name="PART_YearView"
+                                   Margin="10,0,10,0" 
+                                  Grid.ColumnSpan="3"
+                                  Grid.Column="0"
+                                  HorizontalAlignment="Center" 
+                                  VerticalAlignment="Center" 
+                                  Grid.Row="1" 
+                                  Visibility="Hidden">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding DisplayMode, RelativeSource={RelativeSource  AncestorType=Calendar}}" Value="Year">
+                            <Setter Property="Visibility" TargetName="PART_MonthView" Value="Hidden" />
+                            <Setter Property="Visibility" TargetName="PART_YearView" Value="Visible" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding DisplayMode, RelativeSource={RelativeSource  AncestorType=Calendar}}" Value="Decade">
+                            <Setter Property="Visibility" TargetName="PART_MonthView" Value="Hidden" />
+                            <Setter Property="Visibility" TargetName="PART_YearView" Value="Visible" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="LeeCalendar" TargetType="{x:Type Calendar}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
+        <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
+        <Setter Property="Language" Value="zh-cn" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="CalendarDayButtonStyle" Value="{StaticResource CalendarDayButtonStyle}" />
+        <Setter Property="CalendarButtonStyle" Value="{StaticResource CalendarButtonStyle}" />
+        <Setter Property="leedep:CalendarManager.TitleBackground" Value="{DynamicResource LeeBrush_Theme}" />
+        <Setter Property="leedep:CalendarManager.TitleTextBrush" Value="{DynamicResource LeeBrush_White}"/>
+        <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}" />
+        <Setter Property="leedep:CornerRadiusManager.IsClip" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Calendar}">
+
+                    <Border x:Name="PART_Border" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            Background="{TemplateBinding Background}" 
+                            Effect="{StaticResource LeeShadow}" 
+                                CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius),RelativeSource={RelativeSource TemplatedParent}}">
+                        <CalendarItem x:Name="PART_CalendarItem" />
+                        
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
+                            <Setter TargetName="PART_CalendarItem" Property="Clip">
+                                <Setter.Value>
+                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
+                                        <Binding ElementName="PART_Border"  Path="CornerRadius" Mode="OneWay"/>
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+</ResourceDictionary>

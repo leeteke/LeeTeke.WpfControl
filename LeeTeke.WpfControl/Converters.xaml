@@ -23,5 +23,7 @@
     <conver:VisibilityForBoolReverseConverter x:Key="VisibilityForBoolReverseConverter"/>
     <conver:DoubleComparisonConverter x:Key="DoubleComparisonConverter"/>
     <conver:ThicknessForDoubleConverter x:Key="ThicknessForDoubleConverter"/>
+    <conver:ThicknessConverter x:Key="ThicknessConverter"/>
+    <conver:CornerRadiusConverter x:Key="CornerRadiusConverter"/>
 
 </ResourceDictionary>

@@ -45,20 +45,16 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ToggleGroup}">
                     <ScrollViewer x:Name="PART_ScrollViewer"
+                                  Background="{TemplateBinding Background}"
                                   BorderBrush="{TemplateBinding BorderBrush}"
                                   BorderThickness="{TemplateBinding BorderThickness}"
-                                  Margin="{TemplateBinding Margin}"
                                   Padding="{TemplateBinding Padding}"
                                   VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}"
                                   HorizontalScrollBarVisibility="{TemplateBinding HorizontalScrollBarVisibility}"
+                                  leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}"
+                                  leedep:CornerRadiusManager.IsClip="{TemplateBinding IsClip}"
                                   >
-                        <ScrollViewer.Clip>
-                            <MultiBinding  Converter="{StaticResource  MultiValueToClipConverter}" Mode="OneWay">
-                                <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualWidth"/>
-                                <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualHeight"/>
-                                <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}"  Path="CornerRadius"/>
-                            </MultiBinding>
-                        </ScrollViewer.Clip>
+                   
                         <ItemsPresenter />
                     </ScrollViewer>
                     <ControlTemplate.Triggers>
@@ -93,6 +89,9 @@
                     <Setter Property="BorderThickness" Value="{Binding Path=ItemBorderThickness, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
                     <Setter Property="BorderBrush" Value="{Binding Path=ItemBorderBrush, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
                     <Setter Property="Background" Value="{Binding Path=ItemBackground, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
+
+                    <Setter Property="MinWidth" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Path=ItemMinWidth,Mode=OneWay}"/>
+                    <Setter Property="MinHeight" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Path=ItemMinHeight,Mode=OneWay}"/>
                     
                     <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{Binding Path=ItemCorenerRadius, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
                     <Setter Property="leedep:CornerRadiusManager.IsClip" Value="{Binding Path=ItemIsClip, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>

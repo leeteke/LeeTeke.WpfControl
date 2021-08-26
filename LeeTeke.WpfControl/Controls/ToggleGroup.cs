@@ -184,6 +184,23 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
+        #region IsClip
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public bool IsClip
+        {
+            get { return (bool)GetValue(IsClipProperty); }
+            set { SetValue(IsClipProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsClip.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsClipProperty =
+            DependencyProperty.Register("IsClip", typeof(bool), typeof(ToggleGroup));
+        #endregion
+
+
+
         #region CornerRadius
         /// <summary>
         /// 请添加描述
@@ -413,6 +430,7 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
+
         #region ItemIsClip
         /// <summary>
         /// 请添加描述
@@ -631,6 +649,37 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
+
+        #region ItemMinWidth
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public double ItemMinWidth
+        {
+            get { return (double)GetValue(ItemMinWidthProperty); }
+            set { SetValue(ItemMinWidthProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ItemMinWidth.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemMinWidthProperty =
+            DependencyProperty.Register("ItemMinWidth", typeof(double), typeof(ToggleGroup));
+        #endregion
+
+
+        #region ItemMinHeight
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public double ItemMinHeight
+        {
+            get { return (double)GetValue(ItemMinHeightProperty); }
+            set { SetValue(ItemMinHeightProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ItemMinHeight.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemMinHeightProperty =
+            DependencyProperty.Register("ItemMinHeight", typeof(double), typeof(ToggleGroup));
+        #endregion
 
 
         #endregion

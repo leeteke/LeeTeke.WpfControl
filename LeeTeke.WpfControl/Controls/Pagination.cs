@@ -175,9 +175,9 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for PageIndex.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PageIndexProperty =
-            DependencyProperty.Register("PageIndex", typeof(int), typeof(Pagination), new FrameworkPropertyMetadata(1, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, PageIndexChanged) { DefaultUpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
+            DependencyProperty.Register("PageIndex", typeof(int), typeof(Pagination), new FrameworkPropertyMetadata(1, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnPageIndexChanged) { DefaultUpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
 
-        private static void PageIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnPageIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is Pagination pagination && e.NewValue != e.OldValue)
             {
@@ -293,8 +293,52 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("JumpVisibility", typeof(Visibility), typeof(Pagination));
         #endregion
 
+
+        #region PageIndexChangedCommand
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public ICommand PageIndexChangedCommand
+        {
+            get { return (ICommand)GetValue(PageIndexChangedCommandProperty); }
+            set { SetValue(PageIndexChangedCommandProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for PageIndexChangedCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PageIndexChangedCommandProperty =
+            DependencyProperty.Register("PageIndexChangedCommand", typeof(ICommand), typeof(Pagination));
         #endregion
 
+
+        #endregion
+
+        #region RouteEvent
+
+
+        #region PageIndexChanged
+        /// <summary>
+        /// 请填写描述
+        /// </summary>
+        public event PageIndexChangedEventHandler PageIndexChanged
+        {
+            add { AddHandler(PageIndexChangedEvent, value); }
+            remove { RemoveHandler(PageIndexChangedEvent, value); }
+        }
+
+        public static readonly RoutedEvent PageIndexChangedEvent = EventManager.RegisterRoutedEvent(
+        "PageIndexChanged", RoutingStrategy.Bubble, typeof(PageIndexChangedEventHandler), typeof(Pagination));
+
+
+        private void RaisePageIndexChanged(int newValue)
+        {
+            var arg = new PageIndexChangedEventArgs(newValue, PageIndexChangedEvent);
+            RaiseEvent(arg);
+            PageIndexChangedCommand?.Execute(newValue);
+        }
+
+        #endregion
+
+        #endregion
 
         #region 私有
 
@@ -331,43 +375,69 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (!IsLoaded)
                 return;
-            if (DisplayPages < MaxPageCount)
+
+            var pageList = ShowPagesList(MaxPageCount, DisplayPages, number);
+            if (pageList.Count>0&& _group.ItemsSource is List<int> vlist && vlist != null && vlist.Count == pageList.Count && vlist.First() == pageList.First())
             {
-                List<int> pages = new();
-                //前面的数
-                int hd = (int)Math.Round((((double)DisplayPages - 1) / 2), MidpointRounding.AwayFromZero);
-                //后面的数
-                int ed = DisplayPages - 1 - hd;
-
-                if (number - hd <= 1)
-                {
-                    ed += hd + (hd - number) - 1;
-                    hd = DisplayPages - ed - 1;
-
-                }
-                //////这里算法有问题
-                for (int i = 0; i <= hd ; i++)
-                    pages.Add(0);
-                for (int i = 0 ; i <=ed; i++)
-                    pages.Add(i+number);
-
-
-                _group.ItemsSource = pages;
                 _group.SelectedValue = number;
             }
             else
             {
-                List<int> pages = new();
-                for (int i = 0; i < MaxPageCount; i++)
-                    pages.Add(i + 1);
-                _group.ItemsSource = pages;
+                _group.ItemsSource = pageList;
                 _group.SelectedValue = number;
             }
+        
+
 
             if (_comboBox.SelectedValue == null || (_comboBox.SelectedValue is int svalue && svalue != number))
             {
                 _comboBox.SelectedValue = number;
             }
+
+            RaisePageIndexChanged(number);
+        }
+
+        /// <summary>
+        /// 算法完成。
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        private static List<int> ShowPagesList(int maxCount, int dispalyNumber, int number)
+        {
+
+            if (dispalyNumber < 1)
+            {
+                return new List<int>();
+            }
+
+            ///最小显示
+            if (dispalyNumber < 2)
+            {
+                return new List<int>() { number };
+            }
+            List<int> result = new();
+
+            int center = (int)Math.Round((double)(dispalyNumber / 2), MidpointRounding.AwayFromZero);
+
+            if (number <= center)
+            {
+                for (int i = 1; i <= dispalyNumber; i++)
+                {
+                    result.Add(i);
+                }
+
+                return result;
+            }
+
+            int start = number + center > maxCount ? maxCount - dispalyNumber + 1 : number - center;
+            for (int i = 0; i < dispalyNumber; i++)
+            {
+                result.Add(i + start);
+            }
+
+            return result;
+
+
         }
 
         /// <summary>

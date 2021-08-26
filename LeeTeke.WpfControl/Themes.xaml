@@ -16,10 +16,13 @@
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/Slider.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/GroupBox.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/TextBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/Calendar.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/DatePicker.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/PasswordBox.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ToolTip.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/Thumb.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/Expander.xaml"/>
+        
     </ResourceDictionary.MergedDictionaries>
 
     <Style BasedOn="{StaticResource LeeButton}" TargetType="Button" />
@@ -43,8 +46,10 @@
     <Style BasedOn="{StaticResource LeeGroupBox}" TargetType="GroupBox"/>
     <Style BasedOn="{StaticResource LeeTextBox}" TargetType="TextBox"/>
     <Style BasedOn="{StaticResource LeePasswordBox}" TargetType="PasswordBox"/>
+    <Style BasedOn="{StaticResource LeeCalendar}" TargetType="Calendar"/>
     <Style BasedOn="{StaticResource LeeDatePicker}" TargetType="DatePicker"/>
     <Style BasedOn="{StaticResource LeeToolTip}" TargetType="ToolTip"/>
     <Style BasedOn="{StaticResource LeeThumb}" TargetType="Thumb"/>
+    <Style BasedOn="{StaticResource LeeExpander}" TargetType="Expander"/>
 
 </ResourceDictionary>

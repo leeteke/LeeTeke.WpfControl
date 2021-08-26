@@ -11,7 +11,7 @@ namespace LeeTeke.WpfControl.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (float.TryParse(parameter.ToString(), out float depth))
+            if (float.TryParse($"{parameter}", out float depth))
             {
                 return value switch
                 {
@@ -25,7 +25,7 @@ namespace LeeTeke.WpfControl.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (float.TryParse(parameter.ToString(), out float depth))
+            if (float.TryParse($"{parameter}", out float depth))
             {
                 return value switch
                 {

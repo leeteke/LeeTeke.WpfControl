@@ -10,7 +10,7 @@ namespace LeeTeke.WpfControl.Models
     public class RollingClickedEventArgs : RoutedEventArgs
     {
 
-        public object Content { get; private set; }
+        public object Content { get;  set; }
         public RollingClickedEventArgs(object value, RoutedEvent @event) : base(@event)
         {
             Content = value;

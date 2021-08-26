@@ -24,12 +24,13 @@
                              BorderBrush="{TemplateBinding BorderBrush}"
                              BorderThickness="{TemplateBinding BorderThickness}"
                              CornerRadius="{TemplateBinding CornerRadius}"
-                             Padding="{TemplateBinding Padding}">
+                             >
                         <ScrollViewer x:Name="PART_ScrollViewer"   
                                 HorizontalScrollBarVisibility="Hidden" 
                                 VerticalScrollBarVisibility="Hidden"
                                 Style="{x:Null}"
-                                  FocusVisualStyle="{DynamicResource LeeFocusVisual}"
+                                Padding="{TemplateBinding Padding}"
+                                FocusVisualStyle="{DynamicResource LeeFocusVisual}"
                                 IsTabStop="False">
                             <ScrollViewer.Clip>
                                 <MultiBinding  Converter="{StaticResource  MultiValueToClipConverter}" Mode="OneWay">

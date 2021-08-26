@@ -65,5 +65,10 @@ namespace LeeTeke.WPFTest
         {
 
         }
+
+        private void Popup_Opened(object sender, EventArgs e)
+        {
+
+        }
     }
 }

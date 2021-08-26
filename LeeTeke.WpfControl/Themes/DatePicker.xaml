@@ -3,6 +3,10 @@
                      xmlns:local="clr-namespace:LeeTeke.WpfControl.Themes"
                     xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/Calendar.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
     <ControlTemplate x:Key="LeeDatePickerTextBoxTemplate"      
                      TargetType="{x:Type DatePickerTextBox}">
         <Grid>
@@ -63,6 +67,8 @@
     </ControlTemplate>
 
     <Style x:Key="LeeDatePicker" TargetType="{x:Type DatePicker}">
+        <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="FocusVisualStyle"  Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="leedep:CornerRadiusManager.IsClip" Value="True"/>
         <Setter Property="leedep:DatePickerManager.PopupAnimation" Value="Fade"/>
@@ -74,8 +80,16 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="{DynamicResource  LeeBrush_BorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="0"/>
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="10,0"/>
+        <Setter Property="MinHeight" Value="{DynamicResource LeeControlHeight}"/>
+        <Setter Property="CalendarStyle" >
+            <Setter.Value>
+                <Style BasedOn="{StaticResource LeeCalendar}" TargetType="{x:Type Calendar}">
+                    <Setter  Property="Margin" Value="8,0,8,8"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -85,16 +99,7 @@
                             BorderBrush="{TemplateBinding BorderBrush}" 
                             Padding="{TemplateBinding Padding}"
                             CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:CornerRadiusManager.CornerRadius),Mode=OneWay}">
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal"/>
-                                <VisualState x:Name="Disabled">
-                                    <Storyboard>
-                                        <DoubleAnimation Duration="0" Storyboard.TargetName="PART_DisabledVisual" Storyboard.TargetProperty="Opacity" To="1"/>
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
+                       
                         <Grid x:Name="PART_Root"
                              >
                             <Grid.ColumnDefinitions>
@@ -105,8 +110,7 @@
                                     Grid.Column="1" 
                                     Focusable="False"
                                     Foreground="{TemplateBinding Foreground}"
-                                    HorizontalAlignment="Left" 
-                                    Grid.Row="0" 
+                                    HorizontalContentAlignment="Center"
                                     Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:DatePickerManager.ButtonWidth),Mode=OneWay}"
                                     FontSize="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:DatePickerManager.ButtonFontSize),Mode=OneWay}"
                                     Content="&#xED28;"
@@ -116,6 +120,7 @@
                                     />
                             <DatePickerTextBox x:Name="PART_TextBox" 
                                                Grid.Column="0"
+                                               Margin="{TemplateBinding Padding}"
                                                Foreground="{TemplateBinding Foreground}"
                                                FontSize="{TemplateBinding FontSize}"
                                                FontStretch="{TemplateBinding FontStretch}"
@@ -153,6 +158,10 @@
                                     </MultiBinding>
                                 </Setter.Value>
                             </Setter>
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="{DynamicResource UnEnableOpacity}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

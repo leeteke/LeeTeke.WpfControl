@@ -10,7 +10,7 @@
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="Padding" Value="10,5"/>
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}"/>
-        <Setter Property="Effect" Value="{DynamicResource LeeShadow}"/>
+        <Setter Property="Effect" Value="{DynamicResource LeeShadow1}"/>
         <Setter Property="Margin" Value="5"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -18,21 +18,20 @@
                     <Border x:Name="PART_Border"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            Padding="{TemplateBinding Padding}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:CornerRadiusManager.CornerRadius),Mode=OneWay}"
                             Effect="{TemplateBinding Effect}"
-                            Margin="{TemplateBinding Margin}"
                             >
                         <ContentPresenter x:Name="PART_Content"
                             RecognizesAccessKey="True"
+                            Margin="{TemplateBinding Padding}"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
                             <Setter TargetName="PART_Content" Property="Clip">
                                 <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}"  Mode="OneWay">
                                         <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
                                         <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
                                         <Binding ElementName="PART_Border"  Path="CornerRadius" Mode="OneWay"/>

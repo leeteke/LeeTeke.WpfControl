@@ -19,7 +19,6 @@
                             BorderThickness="{TemplateBinding BorderThickness}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             CornerRadius="{TemplateBinding   CornerRadius}"
-                            Padding="{TemplateBinding Padding}"
                             >
                         <Grid x:Name="PART_Grid" >
                             <Grid.Clip>
@@ -31,14 +30,17 @@
                             </Grid.Clip>
                             <ContentPresenter x:Name="PART_DefaultContent"
                                           Content="{TemplateBinding DefaultContent}"
+                                              Margin="{TemplateBinding Padding}"
                                           />
                             <Image x:Name="PART_Image"
                                Opacity="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=AnimationValue,Mode=OneWay}"
                                Source="{TemplateBinding Source}"
                                Stretch="{TemplateBinding Stretch}"
+                                    Margin="{TemplateBinding Padding}"
                                           />
                             <ContentPresenter x:Name="PART_Watermark"
                                           IsHitTestVisible="False"
+                                               Margin="{TemplateBinding Padding}"
                                           Content="{TemplateBinding Watermark}"/>
                         </Grid>
                     </Border>

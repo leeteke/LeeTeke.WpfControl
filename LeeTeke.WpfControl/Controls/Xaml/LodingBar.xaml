@@ -27,7 +27,6 @@
                     <Border x:Name="PART_Border"  
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            Padding="{TemplateBinding Padding}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}"   
                             >
@@ -41,6 +40,7 @@
                             </Canvas.Clip>
                             <Rectangle x:Name="PART_Rectangle"
                                        Canvas.Left="0"
+                                       Margin="{TemplateBinding Padding}"
                                        Fill="{TemplateBinding FillBrush}">
                                 <Rectangle.Clip>
                                     <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">

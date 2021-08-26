@@ -76,6 +76,27 @@ namespace LeeTeke.WpfControl.Controls
                 data.CloseAction = () => Close();
             }
 
+            switch (Site)
+            {
+                case NotifySite.TopRight:
+                case NotifySite.BottomRight:
+                    this.RenderTransform = new TranslateTransform(200, 0);
+                    break;
+       
+                case NotifySite.TopLeft:
+                case NotifySite.BottomLeft:
+                    this.RenderTransform = new TranslateTransform(-200, 0);
+                    break;
+                case NotifySite.TopCenter:
+                    this.RenderTransform = new TranslateTransform(0, 50);
+                    break;
+                case NotifySite.BottomCenter:
+                    this.RenderTransform = new TranslateTransform(0, -50);
+                    break;
+                default:
+                    break;
+            }
+
             this.MouseEnter += NotifyBannerItem_MouseEnter;
             this.MouseLeave += NotifyBannerItem_MouseLeave;
             this.MouseLeftButtonUp += NotifyBannerItem_MouseLeftButtonUp;
@@ -151,6 +172,23 @@ namespace LeeTeke.WpfControl.Controls
         public static readonly DependencyProperty CornerRadiusProperty =
             DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(NotifyBannerItem));
         #endregion
+
+
+        #region IsClip
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public bool IsClip
+        {
+            get { return (bool)GetValue(IsClipProperty); }
+            set { SetValue(IsClipProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsClip.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsClipProperty =
+            DependencyProperty.Register("IsClip", typeof(bool), typeof(NotifyBannerItem));
+        #endregion
+
 
         #region Status
         /// <summary>
@@ -334,10 +372,7 @@ namespace LeeTeke.WpfControl.Controls
                 case NotifySite.BottomRight:
 
                     DoubleAnimationUsingKeyFrames rDA = new DoubleAnimationUsingKeyFrames();
-                    rDA.KeyFrames.Add(new EasingDoubleKeyFrame()
-                    {
-                        Value = 200,
-                    });
+             
                     rDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                     {
                         Value = 0,
@@ -352,10 +387,7 @@ namespace LeeTeke.WpfControl.Controls
                 case NotifySite.BottomLeft:
 
                     DoubleAnimationUsingKeyFrames lDA = new DoubleAnimationUsingKeyFrames();
-                    lDA.KeyFrames.Add(new EasingDoubleKeyFrame()
-                    {
-                        Value = -200,
-                    });
+         
                     lDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                     {
                         Value = 0,
@@ -369,10 +401,7 @@ namespace LeeTeke.WpfControl.Controls
                 case NotifySite.TopCenter:
 
                     DoubleAnimationUsingKeyFrames tDA = new DoubleAnimationUsingKeyFrames();
-                    tDA.KeyFrames.Add(new EasingDoubleKeyFrame()
-                    {
-                        Value = 50,
-                    });
+               
                     tDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                     {
                         Value = 0,
@@ -386,10 +415,7 @@ namespace LeeTeke.WpfControl.Controls
                 case NotifySite.BottomCenter:
 
                     DoubleAnimationUsingKeyFrames bDA = new DoubleAnimationUsingKeyFrames();
-                    bDA.KeyFrames.Add(new EasingDoubleKeyFrame()
-                    {
-                        Value = -50,
-                    });
+           
                     bDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                     {
                         Value = 0,

@@ -31,7 +31,7 @@
     <sys:Double x:Key="LeeItemWidth">120</sys:Double>
     <sys:Double x:Key="LeeItemMinHeight">30</sys:Double>
     <sys:Double x:Key="LeeItemMinWidth">120</sys:Double>
-    <sys:Double x:Key="UnEnableOpacity">0.8</sys:Double>
+    <sys:Double x:Key="UnEnableOpacity">0.6</sys:Double>
     <Thickness x:Key="LeeControlPadding">2</Thickness>
 
     <!--默认主背景色-->

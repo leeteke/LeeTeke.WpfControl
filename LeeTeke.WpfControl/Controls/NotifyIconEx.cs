@@ -618,8 +618,6 @@ namespace LeeTeke.WpfControl.Controls
             multiBinding.Bindings.Add(new Binding() { Source = _border, Path = new PropertyPath("ActualWidth"), Mode = BindingMode.OneWay });
             multiBinding.Bindings.Add(new Binding() { Source = _border, Path = new PropertyPath("ActualHeight"), Mode = BindingMode.OneWay });
             multiBinding.Bindings.Add(new Binding() { Source = _border, Path = new PropertyPath("CornerRadius"), Mode = BindingMode.OneWay });
-            multiBinding.Bindings.Add(new Binding() { Source = _border, Path = new PropertyPath("BorderThickness"), Mode = BindingMode.OneWay });
-
             BindingOperations.SetBinding(element, FrameworkElement.ClipProperty, multiBinding);
              _border.Child = null;
             _border.Child = element;

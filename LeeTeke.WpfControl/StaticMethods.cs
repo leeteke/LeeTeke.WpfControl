@@ -654,6 +654,16 @@ namespace LeeTeke.WpfControl
         /// <param name="cornerRadius"></param>
         public static void SetMessageboxExCornerRadius(CornerRadius cornerRadius) => MessageBoxExCR = cornerRadius;
 
+        /// <summary>
+        /// 清理
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        internal static (bool clear, double result) ValueConver(string value)
+        {
+            return double.TryParse(value, out double result) ? (false, result) : value == "N" ? (true, 0) : (false, 0.0);
+        }
+
         ///建议使用此方法
         [DllImport("psapi.dll")]
         private static extern bool EmptyWorkingSet(IntPtr hProcess);

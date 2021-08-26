@@ -79,6 +79,40 @@ namespace LeeTeke.WpfControl.Controls
         #region 依赖
 
 
+
+        #region NotifyMargin
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Thickness NotifyMargin
+        {
+            get { return (Thickness)GetValue(NotifyMarginProperty); }
+            set { SetValue(NotifyMarginProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for NotifyMargin.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty NotifyMarginProperty =
+            DependencyProperty.Register("NotifyMargin", typeof(Thickness), typeof(NotifyBanner));
+        #endregion
+
+        #region NotifyPadding
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Thickness NotifyPadding
+        {
+            get { return (Thickness)GetValue(NotifyPaddingProperty); }
+            set { SetValue(NotifyPaddingProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for NotifyPadding.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty NotifyPaddingProperty =
+            DependencyProperty.Register("NotifyPadding", typeof(Thickness), typeof(NotifyBanner));
+        #endregion
+
+
+
+
         #region CloseVisibly
         /// <summary>
         /// 请添加描述
@@ -264,7 +298,24 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-   
+
+        #region IsClip
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public bool IsClip
+        {
+            get { return (bool)GetValue(IsClipProperty); }
+            set { SetValue(IsClipProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsClip.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsClipProperty =
+            DependencyProperty.Register("IsClip", typeof(bool), typeof(NotifyBanner));
+        #endregion
+
+
+
 
         #endregion
 
@@ -459,7 +510,8 @@ namespace LeeTeke.WpfControl.Controls
 
                 var spE = new StackPanel()
                 {
-                    Background = null
+                    Background = null,
+                    ClipToBounds=true
                 };
                 spE.SetBinding(StackPanel.MarginProperty, new Binding
                 {
@@ -566,14 +618,14 @@ namespace LeeTeke.WpfControl.Controls
             item.SetBinding(NotifyBannerItem.MarginProperty, new Binding
             {
                 Source = this,
-                Path = new PropertyPath(NotifyBanner.MarginProperty),
+                Path = new PropertyPath(NotifyBanner.NotifyMarginProperty),
                 Mode = BindingMode.OneWay
             });
 
             item.SetBinding(NotifyBannerItem.PaddingProperty, new Binding
             {
                 Source = this,
-                Path = new PropertyPath(NotifyBanner.PaddingProperty),
+                Path = new PropertyPath(NotifyBanner.NotifyPaddingProperty),
                 Mode = BindingMode.OneWay
             });
 
@@ -638,6 +690,13 @@ namespace LeeTeke.WpfControl.Controls
             {
                 Source = this,
                 Path = new PropertyPath(NotifyBanner.AutoCloseProperty),
+                Mode = BindingMode.OneWay
+            });
+
+            item.SetBinding(NotifyBannerItem.IsClipProperty, new Binding
+            {
+                Source = this,
+                Path = new PropertyPath(NotifyBanner.IsClipProperty),
                 Mode = BindingMode.OneWay
             });
         }
