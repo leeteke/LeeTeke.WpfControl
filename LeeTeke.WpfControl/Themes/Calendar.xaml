@@ -216,9 +216,9 @@
                       
                       
                             <Grid Width="240" 
-                                  Height="235"
+                                  Height="240"
                                   x:Name="PART_MonthView"
-                                  Margin="10,0,10,0" 
+                                  Margin="10,0,10,10" 
                                   Grid.ColumnSpan="3"
                                   Grid.Column="0" 
                                   HorizontalAlignment="Center"
@@ -245,7 +245,7 @@
                                 </Grid.RowDefinitions>
                             </Grid>
                             <Grid Width="240" 
-                                  Height="235"
+                                  Height="240"
                                   x:Name="PART_YearView"
                                    Margin="10,0,10,0" 
                                   Grid.ColumnSpan="3"

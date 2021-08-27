@@ -9,6 +9,7 @@ namespace LeeTeke.WpfControl.Converters
 {
     public class ColorOpactiyConverter : IValueConverter
     {
+     
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is Color color && int.TryParse(parameter.ToString(), out int a))

@@ -46,6 +46,30 @@
                     </ContextMenu>
                 </StackPanel.ContextMenu>
 
+
+                <TreeView Style="{DynamicResource LeeTreeView}" >
+                    <TreeViewItem Header="你好">
+                        <TreeViewItem Header="你说啥">
+                            <TreeViewItem Header="什么"/>
+                        </TreeViewItem>
+                        <TreeViewItem Header="你说啥"/>
+                        <TreeViewItem Header="你说啥"/>
+                    </TreeViewItem>
+                    <TreeViewItem Header="你好">
+                        <TreeViewItem Header="你说啥">
+                            <TreeViewItem Header="什么"/>
+                        </TreeViewItem>
+                        <TreeViewItem Header="你说啥"/>
+                        <TreeViewItem Header="你说啥"/>
+                    </TreeViewItem>
+                    <TreeViewItem Header="你好">
+                        <TreeViewItem Header="你说啥">
+                            <TreeViewItem Header="什么"/>
+                        </TreeViewItem>
+                        <TreeViewItem Header="你说啥"/>
+                        <TreeViewItem Header="你说啥"/>
+                    </TreeViewItem>
+                </TreeView>
              
 
                 <Expander   

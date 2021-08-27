@@ -251,7 +251,23 @@ namespace LeeTeke.WpfControl.Dependencies
         #endregion
 
 
-               
+        #region RotateMode
+        public static ToggleButtomRotateMode GetRotateMode(DependencyObject obj)
+        {
+            return (ToggleButtomRotateMode)obj.GetValue(RotateModeProperty);
+        }
+
+        public static void SetRotateMode(DependencyObject obj, ToggleButtomRotateMode value)
+        {
+            obj.SetValue(RotateModeProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for RotateMode.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RotateModeProperty =
+            DependencyProperty.RegisterAttached("RotateMode", typeof(ToggleButtomRotateMode), typeof(ToggleButtonManager));
+        #endregion
+
+
 
 
     }

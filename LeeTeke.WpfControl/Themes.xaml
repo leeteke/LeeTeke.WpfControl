@@ -22,7 +22,7 @@
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/ToolTip.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/Thumb.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/Expander.xaml"/>
-        
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/TreeView.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <Style BasedOn="{StaticResource LeeButton}" TargetType="Button" />
@@ -51,5 +51,7 @@
     <Style BasedOn="{StaticResource LeeToolTip}" TargetType="ToolTip"/>
     <Style BasedOn="{StaticResource LeeThumb}" TargetType="Thumb"/>
     <Style BasedOn="{StaticResource LeeExpander}" TargetType="Expander"/>
+    <Style BasedOn="{StaticResource LeeTreeViewItem}" TargetType="TreeViewItem"/>
+    <Style BasedOn="{StaticResource LeeTreeView}" TargetType="TreeView"/>
 
 </ResourceDictionary>

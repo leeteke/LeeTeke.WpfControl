@@ -48,13 +48,75 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type Thumb}">
-                                <Ellipse x:Name="ellipse"
-                                         Width="15"
-                                         Height="15"
+                                <ControlTemplate.Resources>
+                                    <QuarticEase x:Key="Easing" EasingMode="EaseOut"/>
+                                </ControlTemplate.Resources>
+                                <Border x:Name="PART_Border" Width="18" 
+                                        Height="18"
+                                        BorderThickness="0"
+                                        Effect="{DynamicResource LeeShadow}"
+                                        Background="{Binding RelativeSource={RelativeSource AncestorType={x:Type Slider}},Path=Background,Mode=OneWay}"
+                                        CornerRadius="8"
+                                        >
+                                    <Ellipse x:Name="PART_Ellipse"
+                                         Width="10"
+                                         IsHitTestVisible="False"
+                                         Height="10"
                                          VerticalAlignment="Center"
-                                         Fill="{DynamicResource LeeBrush_White}"
-                                         Effect="{DynamicResource LeeShadow}"
+                                         Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type Slider}},Path=(leedep:SliderManager.TrackBrush),Mode=OneWay}"
                                          />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="IsMouseOver" Value="True"/>
+                                            <Condition Property="IsDragging" Value="False"/>
+                                        </MultiTrigger.Conditions>
+                                        <MultiTrigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Ellipse" 
+                                                                                   Storyboard.TargetProperty="Width" >
+                                                        <EasingDoubleKeyFrame KeyTime="0:0:0.2"
+                                                                              Value="14"
+                                                                              EasingFunction="{StaticResource Easing}"
+                                                                              />
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Ellipse" 
+                                                                                   Storyboard.TargetProperty="Height" >
+                                                        <EasingDoubleKeyFrame KeyTime="0:0:0.2"
+                                                                              Value="14"
+                                                                              EasingFunction="{StaticResource Easing}"
+                                                                              />
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </MultiTrigger.EnterActions>
+
+                                        <MultiTrigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Ellipse" 
+                                                                                   Storyboard.TargetProperty="Width" >
+                                                        <EasingDoubleKeyFrame KeyTime="0:0:0.2"
+                                                                              Value="10"
+                                                                              EasingFunction="{StaticResource Easing}"
+                                                                              />
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Ellipse" 
+                                                                                   Storyboard.TargetProperty="Height" >
+                                                        <EasingDoubleKeyFrame KeyTime="0:0:0.2"
+                                                                              Value="10"
+                                                                              EasingFunction="{StaticResource Easing}"
+                                                                              />
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </MultiTrigger.ExitActions>
+                                    </MultiTrigger>
+                                 
+                                </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>

@@ -11,6 +11,8 @@ namespace LeeTeke.WpfControl.Converters
 {
    public class VisibilityForBoolReverseConverter : IValueConverter
     {
+
+      
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is bool vb)

@@ -25,5 +25,4 @@
     <conver:ThicknessForDoubleConverter x:Key="ThicknessForDoubleConverter"/>
     <conver:ThicknessConverter x:Key="ThicknessConverter"/>
     <conver:CornerRadiusConverter x:Key="CornerRadiusConverter"/>
-
 </ResourceDictionary>
