@@ -21,16 +21,12 @@
         </Setter>
     </Style>
 
-    <sys:Double x:Key="LeeControlHeight">35</sys:Double>
-    <sys:Double x:Key="LeeControlWidth">120</sys:Double>
-    <sys:Double x:Key="LeeControlMinHeight">35</sys:Double>
-    <sys:Double x:Key="LeeControlMinWidth">120</sys:Double>
-    <sys:Double x:Key="LeeItemHeight">35</sys:Double>
-    <sys:Double x:Key="LeeListItemHeight">35</sys:Double>
-    <sys:Double x:Key="LeeListItemWidth">120</sys:Double>
-    <sys:Double x:Key="LeeItemWidth">120</sys:Double>
-    <sys:Double x:Key="LeeItemMinHeight">30</sys:Double>
-    <sys:Double x:Key="LeeItemMinWidth">120</sys:Double>
+
+    <sys:Double x:Key="LeeControlMinHeight">30</sys:Double>
+    <sys:Double x:Key="LeeControlMinWidth">150</sys:Double>
+    <sys:Double x:Key="LeeItemMinHeight">28</sys:Double>
+    <sys:Double x:Key="LeeItemMinWidth">150</sys:Double>
+    
     <sys:Double x:Key="UnEnableOpacity">0.6</sys:Double>
     <Thickness x:Key="LeeControlPadding">2</Thickness>
 

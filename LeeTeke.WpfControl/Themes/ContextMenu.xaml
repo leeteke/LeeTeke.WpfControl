@@ -12,7 +12,6 @@
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="leedep:CornerRadiusManager.IsClip" Value="True"/>
-        <Setter Property="MinWidth" Value="180"/>
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="leedep:ContextMenuManager.Shadow" Value="{DynamicResource LeeShadow}"/>
@@ -51,7 +50,8 @@
                 <Setter Property="leedep:MenuItemManager.RippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}"/>
                 <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
                 <Setter Property="BorderThickness" Value="0"/>
-                <Setter Property="Height" Value="{DynamicResource LeeItemHeight}"/>
+                <Setter Property="MinHeight" Value="{DynamicResource LeeItemMinHeight}"/>
+                <Setter Property="MinHeight" Value="{DynamicResource LeeItemMinWidth}"/>
                 <Setter Property="Padding" Value="2"/>
                 <Setter Property="Template">
                     <Setter.Value>

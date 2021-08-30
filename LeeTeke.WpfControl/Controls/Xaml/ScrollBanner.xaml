@@ -13,7 +13,7 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="Orientation" Value="Horizontal"/>
-        <Setter Property="MinHeight" Value="35"/>
+        <Setter Property="MinHeight" Value="{DynamicResource LeeItemMinHeight}"/>
         <Setter Property="Speed" Value="1"/>
         <Setter Property="AutoScrolling" Value="True"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
@@ -41,13 +41,13 @@
                             <Button x:Name="PART_CloseButton" 
                                             Grid.Column="2"
                                             Content="&#xE8BB;"
-                                            FontSize="9"
-                                            Width="25"
-                                            Height="25"
+                                            FontSize="8"
+                                            Width="22"
+                                            Height="22"
                                             HorizontalAlignment="Right"
-                                            Margin="0,0,5,0"
+                                            Margin="0,0,3,0"
                                             Visibility="Collapsed"
-                                            leedep:CornerRadiusManager.CornerRadius="12.5"
+                                            leedep:CornerRadiusManager.CornerRadius="11"
                                             FontFamily="{DynamicResource IconFontFamily}"
                                             Style="{DynamicResource ColorButton}"
                                             BorderThickness="0"

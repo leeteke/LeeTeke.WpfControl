@@ -11,7 +11,7 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}"/>
-        <Setter Property="Height" Value="{DynamicResource LeeControlHeight}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}"/>
         <Setter Property="leedep:CheckBoxManager.RippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}"/>
         <Setter Property="leedep:CheckBoxManager.CheckBoxSize" Value="18"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -161,7 +161,7 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}"/>
-        <Setter Property="Height" Value="{DynamicResource LeeControlHeight}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}"/>
         <Setter Property="leedep:CheckBoxManager.RippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}"/>
         <Setter Property="leedep:CheckBoxManager.CheckBoxSize" Value="18"/>
         <Setter Property="leedep:CheckBoxManager.SwtichFill" Value="{DynamicResource LeeBrush_Forground}"/>
@@ -207,13 +207,15 @@
                             </DoubleAnimationUsingKeyFrames>
                         </Storyboard>
                     </ControlTemplate.Resources>
-                    <Grid >
+                    <Grid  ClipToBounds="False">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Viewbox Height="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:CheckBoxManager.CheckBoxSize),Mode=OneWay}" >
-                            <Grid   x:Name="PART_Grid">
+                        <Viewbox Height="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:CheckBoxManager.CheckBoxSize),Mode=OneWay}" 
+                                 Margin="3"
+                                 ClipToBounds="False">
+                            <Grid   x:Name="PART_Grid" ClipToBounds="False">
                                 <Border x:Name="PART_CheckedTrue" 
                                            Width="40"
                                            Height="20"

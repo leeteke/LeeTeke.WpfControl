@@ -38,7 +38,7 @@
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
-        <Setter Property="MinHeight" Value="{DynamicResource LeeItemHeight}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
@@ -48,15 +48,15 @@
         <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
         <Setter Property="ItemContainerStyle" Value="{DynamicResource  LeeComboBoxItem}"/>
-
+ 
 
 
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="leedep:ComboBoxManager.EscToEmpty" Value="True"/>
         <Setter Property="leedep:ComboBoxManager.ShowPreviewText" Value="True"/>
         <Setter Property="leedep:ComboBoxManager.PreviewText" Value="--请选择--"/>
-        <Setter Property="leedep:ComboBoxManager.ItemHeight" Value="{DynamicResource LeeItemHeight}"/>
-        
+        <Setter Property="leedep:ComboBoxManager.ItemHeight" Value="{DynamicResource LeeItemMinHeight}"/>
+        <Setter Property="leedep:ComboBoxManager.IsDropCenterOnControl" Value="False"/>
 
         <!--常规属性-->
         <Setter Property="leedep:ListItemManager.Background" Value="Transparent"/>
@@ -122,7 +122,6 @@
                                    IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
                                    Placement="Bottom" 
                                    PopupAnimation="Fade"
-                                   VerticalOffset="{Binding ElementName=dropDownBorder,Path=ActualHeight,Mode=OneWay,Converter={StaticResource DoubleFollowConverter},ConverterParameter=*-0.5}"
                                    >
                         
                                 <Border x:Name="dropDownBorder"
@@ -208,6 +207,10 @@
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
+
+                        <Trigger Property="leedep:ComboBoxManager.IsDropCenterOnControl" Value="True">
+                            <Setter  TargetName="PART_Popup" Property="VerticalOffset" Value="{Binding ElementName=dropDownBorder,Path=ActualHeight,Mode=OneWay,Converter={StaticResource DoubleFollowConverter},ConverterParameter=*-0.5}"/>
+                        </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition SourceName="PART_EditableTextBox" Property="IsFocused" Value="False"/>
@@ -235,7 +238,10 @@
                             </MultiTrigger.Conditions>
                             <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
                         </MultiTrigger>
-                     
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="{DynamicResource UnEnableOpacity}"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

@@ -75,6 +75,9 @@
                             <Setter  Property="VerticalScrollBarVisibility" Value="Disabled"/>
                             <Setter   Property="HorizontalScrollBarVisibility" Value="Auto"/>
                         </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="{DynamicResource UnEnableOpacity}"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

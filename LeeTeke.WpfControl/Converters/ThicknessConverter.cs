@@ -30,14 +30,14 @@ namespace LeeTeke.WpfControl.Converters
                     return thickness;
                 }
             }
-            return DependencyProperty.UnsetValue;
+            return default;
         }
 
 
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return DependencyProperty.UnsetValue;
+            return default;
         }
 
 

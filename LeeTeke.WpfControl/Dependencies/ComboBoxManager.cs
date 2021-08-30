@@ -98,7 +98,6 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("ItemHeight", typeof(double), typeof(ComboBoxManager));
         #endregion
 
-
         #region BanQuick
         public static bool GetBanQuick(DependencyObject obj)
         {
@@ -151,9 +150,6 @@ namespace LeeTeke.WpfControl.Dependencies
             }
         }
         #endregion
-
-
-
 
 
         #region MarkShow
@@ -292,6 +288,27 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty MarkSelectedBrushProperty =
             DependencyProperty.RegisterAttached("MarkSelectedBrush", typeof(Brush), typeof(ComboBoxManager));
         #endregion
+
+
+ 
+
+
+        #region IsDropCenterOnControl
+        public static bool GetIsDropCenterOnControl(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(IsDropCenterOnControlProperty);
+        }
+
+        public static void SetIsDropCenterOnControl(DependencyObject obj, bool value)
+        {
+            obj.SetValue(IsDropCenterOnControlProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for IsDropCenterOnControl.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsDropCenterOnControlProperty =
+            DependencyProperty.RegisterAttached("IsDropCenterOnControl", typeof(bool), typeof(ComboBoxManager));
+        #endregion
+
 
     }
 }

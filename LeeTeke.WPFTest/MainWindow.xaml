@@ -79,7 +79,7 @@
                           Margin="5">
                     <Expander.Header>
                         <TextBlock Text="你好"
-                                   Margin="0,10"
+                                   Margin="0,0"
                                    TextWrapping="Wrap"/>
                     </Expander.Header>
                         <Grid Height="100" Width="50"/>
@@ -116,7 +116,7 @@
 
                 <CheckBox x:Name="test"  
                           Content="你好"
-                           Margin="5"
+                          Margin="5"
                            Style="{StaticResource SwitchCheckBox}"
                            leedep:CheckBoxManager.CheckedContent="你选中了我"
                             />
@@ -127,15 +127,15 @@
                        >
                     <Border Height="200" 
                             Width="200"
-                            Background="Red"/>
+                            />
                 </Popup>
                 <CheckBox  Content="你好"
                            Margin="5"
                            leedep:CheckBoxManager.CheckedContent="你选中了我"
                             />
                 <ComboBox IsEditable="False"  
-                          Height="35"
                           Margin="5"
+                          leedep:ComboBoxManager.IsDropCenterOnControl="True"
                           leedep:CornerRadiusManager.IsClip="True"
                           ItemsSource="{Binding TestList}">
                     <ComboBox.ItemTemplate>
@@ -298,6 +298,8 @@
 
                 <leecontrol:TextBoxEx Mode="Password" 
                                       Text="2"
+                                      BorderThickness="1"
+                                      BorderBrush="Red"
                                       />
 
       
@@ -305,7 +307,6 @@
       
                 <ToggleButton 
                     Content="你好" 
-                    Height="35"
                     leedep:ToggleButtonManager.CheckedContent="你好1"
                     />
                 <RadioButton Content="RadioButton"

@@ -20,6 +20,8 @@
         <Setter Property="Padding" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=ItemPadding,Mode=OneWay}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="CanClosing" Value="True"/>
+        <Setter Property="Width" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=ItemWidth,Mode=OneWay}"/>
+        <Setter Property="Height" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=ItemHeight,Mode=OneWay}"/>
         <Setter Property="Orientation" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=Orientation,Mode=OneWay}"/>
         <Setter Property="CornerRadius" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=ItemCornerRadius,Mode=OneWay}"/>
         <Setter Property="Template">
@@ -55,12 +57,12 @@
                             <Button x:Name="PART_CloseButton" 
                                             Grid.Column="2"
                                             Content="&#xE8BB;"
-                                            FontSize="9"
-                                            Width="25"
-                                            Height="25"
-                                            Margin="0,5,5,5"
+                                            FontSize="8"
+                                            Width="22"
+                                            Height="22"
+                                            Margin="3"
                                             Visibility="Collapsed"
-                                            leedep:CornerRadiusManager.CornerRadius="12.5"
+                                            leedep:CornerRadiusManager.CornerRadius="11"
                                             FontFamily="{DynamicResource IconFontFamily}"
                                             Style="{DynamicResource ColorButton}"
                                             BorderThickness="0"
@@ -98,12 +100,8 @@
                         </Border.ContextMenu>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="Orientation" Value="Horizontal">
-                            <Setter Property="Width" Value="150"/>
-                        </Trigger>
 
                         <Trigger Property="Orientation" Value="Vertical">
-                            <Setter Property="Height" Value="35"/>
                             <Setter  TargetName="PART_Rectangle" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
 
@@ -185,7 +183,9 @@
                             <Setter TargetName="PART_Rectangle" Property="Opacity" Value="0"/>
                         </MultiTrigger>
 
-
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="{DynamicResource UnEnableOpacity}"/>
+                        </Trigger>
 
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -198,8 +198,10 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="Orientation" Value="Horizontal"/>
-        <Setter Property="ItemCornerRadius" Value="4,4,0,0"/>
-        <Setter Property="Height" Value="{DynamicResource LeeControlHeight}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}"/>
+        <Setter Property="MinWidth" Value="{DynamicResource LeeControlMinWidth}"/>
+        <Setter Property="ItemWidth" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=MinWidth,Mode=OneWay}"/>
+        <Setter Property="ItemHeight" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=MinHeight,Mode=OneWay}"/>
         <Setter Property="ItemPinVisibly" Value="True"/>
         <Setter Property="ItemMargin" Value="0"/>
         <Setter Property="ItemPadding" Value="10,5"/>
@@ -249,15 +251,13 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
+            
             <Trigger Property="Orientation" Value="Horizontal">
                 <Setter Property="ItemCornerRadius" Value="4,4,0,0"/>
-
-
             </Trigger>
+            
             <Trigger Property="Orientation" Value="Vertical">
                 <Setter Property="ItemCornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
-
-
             </Trigger>
         </Style.Triggers>
 

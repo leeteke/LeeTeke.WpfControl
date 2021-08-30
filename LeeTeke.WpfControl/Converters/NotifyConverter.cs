@@ -34,14 +34,14 @@ namespace LeeTeke.WpfControl.Converters
                 } : VerticalAlignment.Stretch;
             }
 
-            return DependencyProperty.UnsetValue;
+            return default;
 
           
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return DependencyProperty.UnsetValue;
+            return default;
         }
     }
 }

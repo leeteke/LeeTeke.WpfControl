@@ -49,8 +49,12 @@
                                     HorizontalAlignment="{TemplateBinding NotifySite,Converter={StaticResource NotifyConverter},ConverterParameter=H}"
                                     ClipToBounds="True"
                                     />
-              
-                 
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="{DynamicResource UnEnableOpacity}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

@@ -356,20 +356,38 @@ namespace LeeTeke.WpfControl.Controls
 
 
 
-        #region ItemContentMiniWidth
+
+        #region ItemWidth
         /// <summary>
         /// 请添加描述
         /// </summary>
-        public double ItemContentMiniWidth
+        public double ItemWidth
         {
-            get { return (double)GetValue(ItemContentMiniWidthProperty); }
-            set { SetValue(ItemContentMiniWidthProperty, value); }
+            get { return (double)GetValue(ItemWidthProperty); }
+            set { SetValue(ItemWidthProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for ItemContentMiniWidth.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ItemContentMiniWidthProperty =
-            DependencyProperty.Register("ItemContentMiniWidth", typeof(double), typeof(TabView));
+        // Using a DependencyProperty as the backing store for ItemWidth.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemWidthProperty =
+            DependencyProperty.Register("ItemWidth", typeof(double), typeof(TabView));
         #endregion
+
+
+        #region ItemHeight
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public double ItemHeight
+        {
+            get { return (double)GetValue(ItemHeightProperty); }
+            set { SetValue(ItemHeightProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ItemHeight.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemHeightProperty =
+            DependencyProperty.Register("ItemHeight", typeof(double), typeof(TabView));
+        #endregion
+
 
 
         #region SelectedBrush

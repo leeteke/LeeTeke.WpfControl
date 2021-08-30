@@ -4,7 +4,7 @@
 
     <ControlTemplate x:Key="ExpanderDownTemplate" TargetType="{x:Type Expander}">
         <Border x:Name="PART_Border"
-                VerticalAlignment="Top"
+                VerticalAlignment="Stretch"
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}"
                 CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:CornerRadiusManager.CornerRadius),Mode=OneWay}">
@@ -260,8 +260,8 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}" />
-        <Setter Property="MinWidth" Value="{StaticResource LeeControlHeight}" />
+        <Setter Property="MinHeight" Value="30" />
+        <Setter Property="MinWidth" Value="{DynamicResource LeeControlMinHeight}" />
         <Setter Property="Padding" Value="10,0"/>
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}" />
         <Setter Property="leedep:CornerRadiusManager.IsClip" Value="True"/>

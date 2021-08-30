@@ -81,7 +81,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource  LeeBrush_BorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="10,0"/>
-        <Setter Property="MinHeight" Value="{DynamicResource LeeControlHeight}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}"/>
         <Setter Property="CalendarStyle" >
             <Setter.Value>
                 <Style BasedOn="{StaticResource LeeCalendar}" TargetType="{x:Type Calendar}">
