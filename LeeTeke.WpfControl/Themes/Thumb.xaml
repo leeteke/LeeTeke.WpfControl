@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies">
 
     <Style x:Key="LeeThumb" TargetType="{x:Type Thumb}">
         <Setter Property="Background" Value="Transparent"/>
@@ -11,6 +12,8 @@
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
+                            Effect="{TemplateBinding Effect}"
+                            CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:CornerRadiusManager.CornerRadius),Mode=OneWay}"
                             />
                 </ControlTemplate>
             </Setter.Value>
