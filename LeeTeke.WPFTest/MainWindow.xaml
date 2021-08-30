@@ -47,7 +47,9 @@
                 </StackPanel.ContextMenu>
 
 
-                <TreeView Style="{DynamicResource LeeTreeView}" >
+                <TreeView Style="{DynamicResource LeeTreeView}" 
+                          leedep:TreeViewItemManager.SelectedMode="NoItems"
+                          leedep:TreeViewItemManager.NoItemsModeParentSign="True">
                     <TreeViewItem Header="你好">
                         <TreeViewItem Header="你说啥">
                             <TreeViewItem Header="什么"/>

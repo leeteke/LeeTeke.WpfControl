@@ -396,7 +396,6 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("SelectedFontWeight", typeof(FontWeight), typeof(ListItemManager));
         #endregion
 
-
         #region SelectedMarigin
         public static Thickness GetSelectedMarigin(DependencyObject obj)
         {
@@ -413,7 +412,6 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("SelectedMarigin", typeof(Thickness), typeof(ListItemManager));
         #endregion
 
-
         #region SelectedPadding
         public static Thickness GetSelectedPadding(DependencyObject obj)
         {
@@ -429,7 +427,6 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty SelectedPaddingProperty =
             DependencyProperty.RegisterAttached("SelectedPadding", typeof(Thickness), typeof(ListItemManager));
         #endregion
-
 
         #region CornerRadius
         public static CornerRadius GetCornerRadius(DependencyObject obj)
