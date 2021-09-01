@@ -7,6 +7,7 @@
         xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies;assembly=LeeTeke.WpfControl"
         xmlns:leedata="clr-namespace:LeeTeke.WpfControl;assembly=LeeTeke.WpfControl"
         xmlns:local="clr-namespace:LeeTeke.WPFTest"
+        xmlns:leecommand="clr-namespace:LeeTeke.WpfControl.Commands;assembly=LeeTeke.WpfControl"
         mc:Ignorable="d"
         Title="WpfControl测试 窗口"
         Height="450"
@@ -15,7 +16,6 @@
         x:Name="windows"
         WindowState="Normal"
         ClientFull="True"
-       
         >
 
     <leecontrol:Window.TitleContent>
@@ -39,7 +39,7 @@
             <StackPanel  x:Name="stack"  >
                 <StackPanel.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="ceshi"/>
+                        <MenuItem Header="ceshi" />
                         <MenuItem Header="ceshi"/>
                         <MenuItem Header="ceshi"/>
                         <MenuItem Header="ceshi"/>
@@ -72,7 +72,7 @@
                         <TreeViewItem Header="你说啥"/>
                     </TreeViewItem>
                 </TreeView>
-             
+
 
                 <Expander   
                           ExpandDirection="Down"
@@ -82,16 +82,29 @@
                                    Margin="0,0"
                                    TextWrapping="Wrap"/>
                     </Expander.Header>
-                        <Grid Height="100" Width="50"/>
+                    <Grid Height="100" Width="50"/>
                 </Expander>
 
 
-                <leecontrol:ScrollBanner
+                <leecontrol:ScrollBanner x:Name="th"
                     Content="你好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好" 
                     AutoScrolling="False"
                     Margin="5"
-                  
-                    />
+                   >
+                    <leecontrol:ScrollBanner.Resources>
+                        <leecommand:CommandReference x:Key="CopyCommand"
+                                     Command="{x:Static leecommand:ClipboardCommand.CopyCommand}"
+                                      CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type leecontrol:ScrollBanner}}, Path=Content}"
+                                     />
+                    </leecontrol:ScrollBanner.Resources>
+                    <leecontrol:ScrollBanner.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="ceshi" 
+                                      Command="{StaticResource CopyCommand}"
+                                      />
+                        </ContextMenu>
+                    </leecontrol:ScrollBanner.ContextMenu>
+                </leecontrol:ScrollBanner>
 
                 <leecontrol:Pagination MaxPageCount="10"
                                        DisplayPages="4"
@@ -112,7 +125,7 @@
                 </Button>
 
                 <DatePicker Margin="5" />
-                 
+
 
                 <CheckBox x:Name="test"  
                           Content="你好"
@@ -161,7 +174,7 @@
                             <CheckBox IsChecked="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}},Path=IsSelected}"/>
                         </DataTemplate>
                     </DataGrid.RowHeaderTemplate>
-     
+
                 </DataGrid>
 
                 <ListBox ItemsSource="{Binding TestList}"
@@ -177,8 +190,8 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid >
-                                
-                            <TextBlock
+
+                                <TextBlock
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        Text="{Binding Title}"/>
@@ -200,12 +213,12 @@
                                     <TextBlock Text="你好"/>
                                 </GridViewColumn.Header>
                             </GridViewColumn>
-                               <GridViewColumn Header="标题" Width="auto" DisplayMemberBinding="{Binding Boolen}"/>
+                            <GridViewColumn Header="标题" Width="auto" DisplayMemberBinding="{Binding Boolen}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
 
-            
+
 
                 <leecontrol:ToggleGroup ItemsSource="{Binding TestList}"
                                         SelectionMode="Single"
@@ -223,8 +236,8 @@
                     </leecontrol:ToggleGroup.ItemTemplate>
                 </leecontrol:ToggleGroup>
 
-                
-                
+
+
 
 
                 <leecontrol:TabView  CloseVisibly="MouseOver" 
@@ -236,7 +249,7 @@
                             <TextBlock leecontrol:TabViewItem.ItemCanClosing="{Binding Boolen}" Text="{Binding Title}"/>
                         </DataTemplate>
                     </leecontrol:TabView.ItemTemplate>
-                
+
                 </leecontrol:TabView>
 
 
@@ -275,7 +288,7 @@
                             <Image Source="{Binding Image}"/>
                         </DataTemplate>
                     </leecontrol:SlideView.ItemTemplate>
-     
+
                 </leecontrol:SlideView>
 
 
@@ -288,7 +301,7 @@
                 <TextBox x:Name="txt"
                          leedep:TextBoxManager.EnterCommand="{Binding   TestCommand}"
                          />
-                
+
 
                 <PasswordBox  
                     leedep:PasswordManager.EnterCommand="{Binding TestCommand}"
@@ -302,9 +315,9 @@
                                       BorderBrush="Red"
                                       />
 
-      
-                
-      
+
+
+
                 <ToggleButton 
                     Content="你好" 
                     leedep:ToggleButtonManager.CheckedContent="你好1"
@@ -312,7 +325,7 @@
                 <RadioButton Content="RadioButton"
                              />
                 <RadioButton Content="RadioButton" />
-        
+
 
 
                 <GroupBox Height="200"  
@@ -322,15 +335,15 @@
 
                 </GroupBox>
 
-                
+
 
             </StackPanel>
-            
-            
+
+
         </ScrollViewer>
 
 
-      
+
 
         <leecontrol:NotifyIconEx  Icon="/Datas/test.ico"
                                   Flashing="False"
