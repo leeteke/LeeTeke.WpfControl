@@ -8,6 +8,19 @@
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <!--#region 主SV-->
+    <Style x:Key="ScrollBarBaseRepeatButton" TargetType="RepeatButton">
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="IsTabStop" Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RepeatButton">
+                    <Rectangle Fill="{TemplateBinding Background}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style x:Key="LeeScrollBar" TargetType="{x:Type ScrollBar}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
@@ -25,6 +38,12 @@
                     <Track x:Name="PART_Track"
                                IsEnabled="{TemplateBinding IsMouseOver}"
                                IsDirectionReversed="true">
+                        <Track.DecreaseRepeatButton>
+                            <RepeatButton Command="{x:Static ScrollBar.PageUpCommand}" Style="{StaticResource ScrollBarBaseRepeatButton}" />
+                        </Track.DecreaseRepeatButton>
+                        <Track.IncreaseRepeatButton>
+                            <RepeatButton Command="{x:Static ScrollBar.PageDownCommand}" Style="{StaticResource ScrollBarBaseRepeatButton}" />
+                        </Track.IncreaseRepeatButton>
                         <Track.Thumb>
                             <Thumb>
                                 <Thumb.Template>
@@ -52,7 +71,6 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Horizontal">
-                <Setter Property="Background" Value="Transparent" />
                 <Setter Property="MinHeight"  Value="0"/>
                 <Setter Property="Width"   Value="Auto" />
                 <Setter Property="Template">
@@ -60,7 +78,13 @@
                         <ControlTemplate TargetType="{x:Type ScrollBar}">
 
                             <Track x:Name="PART_Track"
-                                       IsEnabled="{TemplateBinding IsMouseOver}">
+                                       IsEnabled="{TemplateBinding IsMouseOver}" >
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Command="{x:Static ScrollBar.PageLeftCommand}" Style="{StaticResource ScrollBarBaseRepeatButton}" />
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Command="{x:Static ScrollBar.PageRightCommand}" Style="{StaticResource ScrollBarBaseRepeatButton}" />
+                                </Track.IncreaseRepeatButton>
                                 <Track.Thumb>
                                     <Thumb>
                                         <Thumb.Template>
@@ -126,28 +150,14 @@
                                                     VirtualizingStackPanel.VirtualizationMode="{Binding Path=(VirtualizingStackPanel.VirtualizationMode),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}"
                                                     CanContentScroll="{TemplateBinding CanContentScroll}"
                                                     Margin="{TemplateBinding Padding}" />
-                            <Grid Grid.ColumnSpan="2"
-                                  Width="{StaticResource ScrollViewerBarSize}"
-                                  x:Name="PART_VerticalGrid"                            
-                                  HorizontalAlignment="Right"
-                                  Opacity="0" 
-                                  Background="Transparent"
-                                 >
-                                <ScrollBar x:Name="PART_VerticalScrollBar"
-                                       Value="{TemplateBinding VerticalOffset}"
-                                       HorizontalAlignment="Right"
-                                       Maximum="{TemplateBinding ScrollableHeight}"
-                                       ViewportSize="{TemplateBinding ViewportHeight}"
-                                       Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
-                                       Width="{DynamicResource ScrollViewerMiniBarSize}"
-                                        />
-                            </Grid>
-                            <Grid Grid.RowSpan="2"
-                                  Opacity="0"
+                            <Grid Opacity="0"
                                   VerticalAlignment="Bottom"
                                   x:Name="PART_HorizontalGrid"
                                   Height="{StaticResource ScrollViewerBarSize}"
                                   Background="Transparent">
+                                <Grid.Margin>
+                                    <Thickness Right="{StaticResource ScrollViewerBarSize}"/>
+                                </Grid.Margin>
                                 <ScrollBar x:Name="PART_HorizontalScrollBar"
                                         Height="{DynamicResource ScrollViewerMiniBarSize}"
                                        Orientation="Horizontal"
@@ -157,6 +167,24 @@
                                        ViewportSize="{TemplateBinding ViewportWidth}"
                                        Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
                                        />
+                            </Grid>
+                            <Grid Width="{StaticResource ScrollViewerBarSize}"
+                                  x:Name="PART_VerticalGrid"                            
+                                  HorizontalAlignment="Right"
+                                  Opacity="0" 
+                                  Background="Transparent"
+                                 >
+                                <Grid.Margin>
+                                    <Thickness Bottom="{StaticResource ScrollViewerBarSize}"/>
+                                </Grid.Margin>
+                                <ScrollBar x:Name="PART_VerticalScrollBar"
+                                       Value="{TemplateBinding VerticalOffset}"
+                                       HorizontalAlignment="Right"
+                                       Maximum="{TemplateBinding ScrollableHeight}"
+                                       ViewportSize="{TemplateBinding ViewportHeight}"
+                                       Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                                       Width="{DynamicResource ScrollViewerMiniBarSize}"
+                                        />
                             </Grid>
                         </Grid>
                     </Border>
@@ -174,9 +202,11 @@
                         </Trigger>
                         <Trigger SourceName="PART_HorizontalScrollBar" Property="IsVisible" Value="False">
                             <Setter TargetName="PART_HorizontalGrid" Property="Height" Value="0"/>
+                            <Setter TargetName="PART_VerticalGrid" Property="Margin" Value="0"/>
                         </Trigger>
                         <Trigger SourceName="PART_VerticalScrollBar" Property="IsVisible" Value="False">
                             <Setter TargetName="PART_VerticalGrid" Property="Width" Value="0"/>
+                            <Setter TargetName="PART_HorizontalGrid" Property="Margin" Value="0"/>
                         </Trigger>
                         <EventTrigger RoutedEvent="ScrollChanged">
                             <BeginStoryboard>
