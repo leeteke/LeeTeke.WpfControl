@@ -39,8 +39,16 @@
             <StackPanel  x:Name="stack"  >
                 <StackPanel.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="ceshi" />
-                        <MenuItem Header="ceshi"/>
+                        <MenuItem Header="ceshi" >
+                            <MenuItem.Icon>
+                                <TextBlock Text="&#xE8C6;" FontFamily="{DynamicResource IconFontFamily}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="ceshi">
+                            <MenuItem.Icon>
+                                <TextBlock Text="&#xE77F;" FontFamily="{DynamicResource IconFontFamily}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                         <MenuItem Header="ceshi"/>
                         <MenuItem Header="ceshi"/>
                     </ContextMenu>
@@ -115,6 +123,7 @@
                          ToolTip="黑白切换" 
                           Padding="0"
                           Margin="5"
+                          Click="Button_Click"
                          >
                     <leecontrol:ImageEx Source="/Datas/myicon.jpg"  
                                     Effect="{DynamicResource LeeShadow}">
@@ -299,7 +308,7 @@
                            Foreground="{DynamicResource LeeBrush_Text}"/>
 
                 <TextBox x:Name="txt"
-                         leedep:TextBoxManager.EnterCommand="{Binding   TestCommand}"
+                         leedep:TextBoxManager.EnterCommand="{Binding   TestCommand}" SelectionBrush="#FF0078D7"
                          />
 
 
@@ -309,7 +318,8 @@
                     leedep:PasswordManager.Attach="True"
                     leedep:PasswordManager.Password="{Binding ElementName=txt,Path=Text,Mode=TwoWay}"/>
 
-                <leecontrol:TextBoxEx Mode="Password" 
+                <leecontrol:TextBoxEx x:Name="textEx" 
+                                      Mode="Password" 
                                       Text="2"
                                       BorderThickness="1"
                                       BorderBrush="Red"

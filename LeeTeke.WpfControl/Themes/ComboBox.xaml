@@ -209,7 +209,18 @@
                         </Trigger>
 
                         <Trigger Property="leedep:ComboBoxManager.IsDropCenterOnControl" Value="True">
-                            <Setter  TargetName="PART_Popup" Property="VerticalOffset" Value="{Binding ElementName=dropDownBorder,Path=ActualHeight,Mode=OneWay,Converter={StaticResource DoubleFollowConverter},ConverterParameter=*-0.5}"/>
+                            <Setter  TargetName="PART_Popup" 
+                                     Property="VerticalOffset"
+                                    >
+                                <Setter.Value>
+                                    <MultiBinding Converter="{StaticResource MultiValueToCenterConverter}" ConverterParameter="*-0.5">
+                                        <MultiBinding.Bindings>
+                                            <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}" Path="ActualHeight"/>
+                                            <Binding ElementName="dropDownBorder" Path="ActualHeight"/>
+                                        </MultiBinding.Bindings>
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>

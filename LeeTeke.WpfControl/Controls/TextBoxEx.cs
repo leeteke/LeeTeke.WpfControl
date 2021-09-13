@@ -47,6 +47,9 @@ namespace LeeTeke.WpfControl.Controls
     /// </summary>
     public class TextBoxEx : Control
     {
+
+        public string SelectedText { get => Mode switch { TextMode.Password => null, _ => _textBox.SelectedText }; }
+
         static TextBoxEx()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TextBoxEx), new FrameworkPropertyMetadata(typeof(TextBoxEx)));
@@ -70,7 +73,7 @@ namespace LeeTeke.WpfControl.Controls
             _password = this.Template.FindName("PART_Password", this) as PasswordBox;
             _textBox = this.Template.FindName("PART_Main", this) as TextBox;
             _border = this.Template.FindName("PART_ICON", this) as Border;
-      
+
             if (_password != null)
             {
                 _password.PasswordChanged += _password_PasswordChanged;
@@ -88,25 +91,40 @@ namespace LeeTeke.WpfControl.Controls
                 _border.MouseDown += _border_MouseDown;
             }
 
-      
+
         }
 
         #endregion
 
         private void TextBoxEx_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
+            switch (e.Key)
             {
-                RaiseEntered(Text);
-                try
-                {
-                    EnterCommand?.Execute(Text);
-                }
-                catch
-                {
+                case Key.Enter:
+                    if (!AcceptsReturn)
+                    {
+                        RaiseEntered(Text);
+                        try
+                        {
+                            EnterCommand?.Execute(Text);
+                        }
+                        catch
+                        {
 
-                }
+                        }
+                    }
+                    break;
+                case Key.Escape:
+
+                    if (EscToClear)
+                    {
+                        Clear();
+                    }
+                    break;
+                default:
+                    break;
             }
+
         }
 
         private void _textBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -186,10 +204,6 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("IsReadOnly", typeof(bool), typeof(TextBoxEx));
 
         #endregion
-
-
-
-
 
         #region Mode
         /// <summary>
@@ -320,6 +334,145 @@ namespace LeeTeke.WpfControl.Controls
         public static readonly DependencyProperty AcceptsReturnProperty =
             DependencyProperty.Register("AcceptsReturn", typeof(bool), typeof(TextBoxEx));
 
+        #endregion
+
+        #region AcceptsTab
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public bool AcceptsTab
+        {
+            get { return (bool)GetValue(AcceptsTabProperty); }
+            set { SetValue(AcceptsTabProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for AcceptsTab.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty AcceptsTabProperty =
+            DependencyProperty.Register("AcceptsTab", typeof(bool), typeof(TextBoxEx));
+        #endregion
+
+
+        #region CaretBrush
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Brush CaretBrush
+        {
+            get { return (Brush)GetValue(CaretBrushProperty); }
+            set { SetValue(CaretBrushProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CaretBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CaretBrushProperty =
+            DependencyProperty.Register("CaretBrush", typeof(Brush), typeof(TextBoxEx));
+        #endregion
+
+        #region IsInactiveSelectionHighlightEnabled
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public bool IsInactiveSelectionHighlightEnabled
+        {
+            get { return (bool)GetValue(IsInactiveSelectionHighlightEnabledProperty); }
+            set { SetValue(IsInactiveSelectionHighlightEnabledProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsInactiveSelectionHighlightEnabled.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsInactiveSelectionHighlightEnabledProperty =
+            DependencyProperty.Register("IsInactiveSelectionHighlightEnabled", typeof(bool), typeof(TextBoxEx));
+        #endregion
+
+
+        #region SelectionBrush
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Brush SelectionBrush
+        {
+            get { return (Brush)GetValue(SelectionBrushProperty); }
+            set { SetValue(SelectionBrushProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SelectionBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectionBrushProperty =
+            DependencyProperty.Register("SelectionBrush", typeof(Brush), typeof(TextBoxEx));
+        #endregion
+
+        #region SelectionOpacity
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public double SelectionOpacity
+        {
+            get { return (double)GetValue(SelectionOpacityProperty); }
+            set { SetValue(SelectionOpacityProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SelectionOpacity.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectionOpacityProperty =
+            DependencyProperty.Register("SelectionOpacity", typeof(double), typeof(TextBoxEx));
+        #endregion
+
+        #region SelectionTextBrush
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Brush SelectionTextBrush
+        {
+            get { return (Brush)GetValue(SelectionTextBrushProperty); }
+            set { SetValue(SelectionTextBrushProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SelectionTextBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectionTextBrushProperty =
+            DependencyProperty.Register("SelectionTextBrush", typeof(Brush), typeof(TextBoxEx));
+        #endregion
+
+
+        #region CharacterCasing
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public CharacterCasing CharacterCasing
+        {
+            get { return (CharacterCasing)GetValue(CharacterCasingProperty); }
+            set { SetValue(CharacterCasingProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CharacterCasing.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CharacterCasingProperty =
+            DependencyProperty.Register("CharacterCasing", typeof(CharacterCasing), typeof(TextBoxEx));
+        #endregion
+
+        #region AutoWordSelection
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public bool AutoWordSelection
+        {
+            get { return (bool)GetValue(AutoWordSelectionProperty); }
+            set { SetValue(AutoWordSelectionProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for AutoWordSelection.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty AutoWordSelectionProperty =
+            DependencyProperty.Register("AutoWordSelection", typeof(bool), typeof(TextBoxEx));
+        #endregion
+
+
+        #region MaxLength
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public int MaxLength
+        {
+            get { return (int)GetValue(MaxLengthProperty); }
+            set { SetValue(MaxLengthProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MaxLength.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MaxLengthProperty =
+            DependencyProperty.Register("MaxLength", typeof(int), typeof(TextBoxEx));
         #endregion
 
         #region Icon
@@ -498,8 +651,6 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-
-
         #region EscToClear
         /// <summary>
         /// 清理
@@ -512,30 +663,8 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for EscToClear.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty EscToClearProperty =
-            DependencyProperty.Register("EscToClear", typeof(bool), typeof(TextBoxEx),new PropertyMetadata(EscToClearChanged));
+            DependencyProperty.Register("EscToClear", typeof(bool), typeof(TextBoxEx));
 
-        private static void EscToClearChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is TextBoxEx box && e.NewValue is bool @bool)
-            {
-                if (@bool)
-                {
-                    box.KeyDown += Box_EscKeyDown;
-                }
-                else
-                {
-                    box.KeyDown -= Box_EscKeyDown;
-                }
-            }
-        }
-
-        private static void Box_EscKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (e.Key == System.Windows.Input.Key.Escape && sender is TextBoxEx box)
-            {
-                box.Text = string.Empty;
-            }
-        }
         #endregion
 
 
@@ -631,7 +760,69 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
+        #region Public
 
+
+        public void SelectAll()
+        {
+            switch (Mode)
+            {
+                case TextMode.General:
+                case TextMode.Number:
+                case TextMode.IMEDispaly:
+                    _textBox.SelectAll();
+                    break;
+                case TextMode.Password:
+                    _password.SelectAll();
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
+        public void Paste()
+        {
+            switch (Mode)
+            {
+                case TextMode.General:
+                case TextMode.Number:
+                case TextMode.IMEDispaly:
+                    _textBox.Paste();
+                    break;
+                case TextMode.Password:
+                    _password.Paste();
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
+        public void Clear()
+        {
+            Text = string.Empty;
+        }
+
+        protected override void OnGotFocus(RoutedEventArgs e)
+        {
+            switch (Mode)
+            {
+                case TextMode.General:
+                case TextMode.IMEDispaly:
+                case TextMode.Number:
+                    _textBox.Focus();
+                    break;
+                case TextMode.Password:
+                    _password.Focus();
+                    break;
+                default:
+                    break;
+            }
+
+            base.OnGotFocus(e);
+        }
+        #endregion
 
     }
 }

@@ -14,9 +14,11 @@
         <Setter Property="leedep:CornerRadiusManager.IsClip" Value="True"/>
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}"/>
         <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FontSize" Value="12"/>
         <Setter Property="leedep:ContextMenuManager.Shadow" Value="{DynamicResource LeeShadow}"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Margin" Value="8"/>
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ContextMenu}">
@@ -160,6 +162,9 @@
                                 </MultiDataTrigger>
                                 <Trigger Property="HasItems"  Value="True">
                                     <Setter TargetName="Path" Property="Visibility"  Value="Visible" />
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" Value="{DynamicResource UnEnableOpacity}"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>

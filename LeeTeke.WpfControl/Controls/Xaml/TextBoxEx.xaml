@@ -36,6 +36,10 @@
         <Setter Property="SplitterMargin" Value="2"/>
         <Setter Property="SplitterVisible" Value="False"/>
         <Setter Property="SplitterSize" Value="1"/>
+        <Setter Property="SelectionBrush" Value="{DynamicResource LeeBrush_Theme}"/>
+        <Setter Property="SelectionOpacity" Value="0.5"/>
+        <Setter Property="SelectionTextBrush" Value="{DynamicResource LeeBrush_Text}"/>
+        <Setter Property="CaretBrush" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:TextBoxEx}">
@@ -90,6 +94,13 @@
                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                          IsReadOnly="{TemplateBinding IsReadOnly}"
+                                         SelectionBrush="{TemplateBinding SelectionBrush}"
+                                         SelectionOpacity="{TemplateBinding SelectionOpacity}"
+                                         SelectionTextBrush="{TemplateBinding SelectionTextBrush}"
+                                         CharacterCasing="{TemplateBinding CharacterCasing}"
+                                         AutoWordSelection="{TemplateBinding AutoWordSelection}"
+                                         MaxLength="{TemplateBinding MaxLength}"
+                                         CaretBrush="{TemplateBinding CaretBrush}"
                                          />
                                 <PasswordBox x:Name="PART_Password"
                                              Visibility="Collapsed"
@@ -106,6 +117,11 @@
                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                              IsEnabled="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=IsReadOnly,Mode=OneWay,Converter={StaticResource BoolReverseConverter}}"
+                                             SelectionBrush="{TemplateBinding SelectionBrush}"
+                                             SelectionOpacity="{TemplateBinding SelectionOpacity}"
+                                             SelectionTextBrush="{TemplateBinding SelectionTextBrush}"
+                                             MaxLength="{TemplateBinding MaxLength}"
+                                             CaretBrush="{TemplateBinding CaretBrush}"
                                              />
                                 <TextBlock x:Name="PART_PreviewText"
                                            Foreground="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Foreground,Converter={StaticResource BrushOpacityConverter},ConverterParameter=0.5,Mode=OneWay}"
