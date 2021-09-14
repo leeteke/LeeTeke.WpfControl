@@ -73,7 +73,7 @@ namespace LeeTeke.WPFTest
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            textEx.Focus();
+            //textEx.Focus();
         }
     }
 }

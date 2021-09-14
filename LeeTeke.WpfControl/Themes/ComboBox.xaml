@@ -122,18 +122,18 @@
                                    IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
                                    Placement="Bottom" 
                                    PopupAnimation="Fade"
+                                
                                    >
-                        
-                                <Border x:Name="dropDownBorder"
+                                <Grid Margin="8">
+                                    <Border x:Name="dropDownBorder"
                                         MinWidth="{Binding ActualWidth, ElementName=templateRoot}" 
                                         MaxHeight="{TemplateBinding MaxDropDownHeight}"
                                         Background="{TemplateBinding Background}"
                                         CornerRadius="{DynamicResource LeeCornerRadius}"
                                         BorderBrush="{DynamicResource LeeBrush_BorderBrush}"
                                         BorderThickness="0"
-                                        Margin="8"
                                         Effect="{DynamicResource LeeShadow}"
-                                        >
+                                        />
                                     <ScrollViewer x:Name="DropDownScrollViewer" 
                                                   Padding="0,5"
                                                   HorizontalScrollBarVisibility="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(ScrollViewer.HorizontalScrollBarVisibility),Mode=OneWay}" 
@@ -146,10 +146,7 @@
                                                             KeyboardNavigation.DirectionalNavigation="Contained"
                                                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                                     </ScrollViewer>
-                                    
-
-                                </Border>
-                             
+                                </Grid>
                             </Popup>
                            
                             <ContentPresenter x:Name="contentPresenter" 
@@ -250,6 +247,7 @@
                             <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
                         </MultiTrigger>
 
+                     
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="{DynamicResource UnEnableOpacity}"/>
                         </Trigger>

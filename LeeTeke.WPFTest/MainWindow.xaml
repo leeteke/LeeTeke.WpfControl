@@ -1,4 +1,4 @@
-﻿<leecontrol:Window x:Class="LeeTeke.WPFTest.MainWindow"
+﻿<leecontrol:Window  x:Class="LeeTeke.WPFTest.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -12,10 +12,8 @@
         Title="WpfControl测试 窗口"
         Height="450"
         Width="600"
-        d:Height="1500"   
         x:Name="windows"
-        WindowState="Normal"
-        ClientFull="True"
+        WindowState="Normal" 
         >
 
     <leecontrol:Window.TitleContent>
@@ -25,11 +23,19 @@
                 Command="{Binding ThemeChangedCommand}"/>
     </leecontrol:Window.TitleContent>
 
-    <Grid   >
+ 
+    
+
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+
+        <Border Background="Transparent"
+                Margin="10"
+                BorderThickness="1"
+                Effect="{DynamicResource LeeShadow2}"/>
 
         <ScrollViewer Grid.Row="1" 
                       Margin="10"
@@ -136,21 +142,13 @@
                 <DatePicker Margin="5" />
 
 
-                <CheckBox x:Name="test"  
+                <CheckBox 
                           Content="你好"
                           Margin="5"
                            Style="{StaticResource SwitchCheckBox}"
                            leedep:CheckBoxManager.CheckedContent="你选中了我"
                             />
-                <Popup IsOpen="{Binding ElementName=test,Path=IsChecked}"
-                       AllowsTransparency="True"
-                       PopupAnimation="Fade"
-                       Opened="Popup_Opened"
-                       >
-                    <Border Height="200" 
-                            Width="200"
-                            />
-                </Popup>
+              
                 <CheckBox  Content="你好"
                            Margin="5"
                            leedep:CheckBoxManager.CheckedContent="你选中了我"
@@ -190,11 +188,9 @@
                          VerticalContentAlignment="Center" 
                          Height="100"
                          SelectionMode="Multiple"
-                         leedep:ListBoxItemManager.MarkSite="Left"
-                         leedep:ListBoxItemManager.MarkSize="4"
-                         leedep:ListBoxItemManager.MarkMouseOverBrush="{DynamicResource LeeBrush_Theme}"
-                         leedep:ListBoxItemManager.MarkMargin="4"
-                         leedep:ListBoxItemManager.MarkCornerRadius="2"
+                        leedep:ListItemManager.Marigin="2.5"
+                         leedep:ListItemManager.Effect="{DynamicResource LeeShadow}"
+                         leedep:ListItemManager.SelectedEffect="{DynamicResource LeeShadow5}"
                          Margin="5">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
@@ -266,7 +262,7 @@
                                     Width="100"
                                     Height="100"
                                     CornerRadius="50"
-                                    Effect="{DynamicResource LeeShadow}">
+                                    Effect="{DynamicResource LeeShadow5}">
                     <leecontrol:ImageEx.DefaultContent>
                         <Image Source="/Datas/test.ico"/>
                     </leecontrol:ImageEx.DefaultContent>
@@ -274,7 +270,7 @@
 
                 <leecontrol:LodingBar  Height="10"
                                        Mode="Wating"
-                                       Effect="{DynamicResource LeeShadow}"/>
+                                       />
                 <Slider  x:Name="slider"
                          Maximum="100"
                          AutoToolTipPrecision="2" AutoToolTipPlacement="TopLeft" />

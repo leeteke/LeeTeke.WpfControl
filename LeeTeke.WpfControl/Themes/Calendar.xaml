@@ -30,12 +30,12 @@
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Border>
                     <ControlTemplate.Triggers>
-                
+
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="PART_Border" Property="Background" Value="{DynamicResource LeeBrush_Mark}"/>
                         </Trigger>
 
-                        
+
                         <Trigger Property="IsHighlighted" Value="True">
                             <Setter TargetName="PART_Border" Property="Background" Value="{DynamicResource LeeBrush_Mark}"/>
                         </Trigger>
@@ -43,12 +43,12 @@
                         <Trigger Property="IsToday" Value="True">
                             <Setter TargetName="PART_Border" Property="BorderBrush" Value="{DynamicResource LeeBrush_Theme}"/>
                         </Trigger>
-                        
+
                         <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="PART_Border" Property="Background" Value="{DynamicResource LeeBrush_Theme}"/>
                             <Setter TargetName="PART_Content" Property="TextElement.Foreground" Value="{DynamicResource LeeBrush_White}"/>
                         </Trigger>
-                        
+
                         <Trigger Property="IsBlackedOut" Value="True">
                             <Setter TargetName="PART_Content" Property="Opacity" Value="0.1"/>
                         </Trigger>
@@ -108,10 +108,10 @@
                         <Trigger Property="IsInactive" Value="True">
                             <Setter TargetName="PART_Content" Property="Opacity" Value="0.7"/>
                         </Trigger>
-                      
 
-                      
-                        
+
+
+
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -213,8 +213,8 @@
                                     Content="&#xE70D;"
                                     FontFamily="{DynamicResource IconFontFamily}"
                                      />
-                      
-                      
+
+
                             <Grid Width="240" 
                                   Height="240"
                                   x:Name="PART_MonthView"
@@ -300,16 +300,16 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Calendar}">
-
-                    <Border x:Name="PART_Border" 
+                    <Grid>
+                        <Border x:Name="PART_Border" 
                             BorderBrush="{TemplateBinding BorderBrush}" 
                             BorderThickness="{TemplateBinding BorderThickness}" 
                             Background="{TemplateBinding Background}" 
                             Effect="{StaticResource LeeShadow}" 
-                                CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius),RelativeSource={RelativeSource TemplatedParent}}">
+                            CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius),RelativeSource={RelativeSource TemplatedParent}}"/>
                         <CalendarItem x:Name="PART_CalendarItem" />
-                        
-                    </Border>
+                    </Grid>
+
                     <ControlTemplate.Triggers>
                         <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
                             <Setter TargetName="PART_CalendarItem" Property="Clip">

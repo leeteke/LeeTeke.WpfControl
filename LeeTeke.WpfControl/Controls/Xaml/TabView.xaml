@@ -27,60 +27,14 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:TabViewItem}" >
-                    <Border x:Name="contentBorder" 
-                                        BorderBrush="{TemplateBinding BorderBrush}"
-                                        BorderThickness="{TemplateBinding BorderThickness}"
-                                        Background="{TemplateBinding Background}"
-                                       CornerRadius="{TemplateBinding CornerRadius}" >
-                        <Grid >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition MinWidth="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=ItemContentMiniWidth,Mode=OneWay}"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MinWidth="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=ItemContentMiniWidth,Mode=OneWay}"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
 
-                            <Rectangle x:Name="PART_Rectangle" 
-                                               Width="1"
-                                               Fill="{DynamicResource LeeBrush_BorderBrush}"
-                                               Margin="-1,10"
-                                               HorizontalAlignment="Left"/>
-
-
-                            <TextBlock Text="&#xE840;"
-                                       FontFamily="{DynamicResource IconFontFamily}"
-                                       Grid.Column="1"
-                                       VerticalAlignment="Center"
-                                       Margin="0,5,5,5"
-                                       Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=IsFixed,Converter={StaticResource VisibilityForBoolConverter},Mode=OneWay}"
-                                       />
-
-                            <Button x:Name="PART_CloseButton" 
-                                            Grid.Column="2"
-                                            Content="&#xE8BB;"
-                                            FontSize="8"
-                                            Width="22"
-                                            Height="22"
-                                            Margin="3"
-                                           MinHeight="0"
-                                            Visibility="Collapsed"
-                                            leedep:CornerRadiusManager.CornerRadius="11"
-                                            FontFamily="{DynamicResource IconFontFamily}"
-                                            Style="{DynamicResource ColorButton}"
-                                            BorderThickness="0"
-                                            Background="Transparent"
-                                            Tag="1"
-                                            Foreground="{TemplateBinding Foreground}"
-                                            />
-                            <ContentPresenter x:Name="PART_ContentPresenter" 
-                                              ContentTemplate="{TemplateBinding ContentTemplate}"
-                                              TextElement.Foreground="{TemplateBinding  Foreground}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                               Margin="{TemplateBinding Padding}"
-                                              />
-
-                        </Grid>
-                        <Border.ContextMenu>
+                        <Grid.ContextMenu>
                             <ContextMenu x:Name="PART_ContextMenu">
                                 <MenuItem x:Name="PART_MenuItem_Pin"    Header="固定选项卡">
                                     <MenuItem.Icon>
@@ -98,8 +52,55 @@
                                                           Header="关闭"/>
 
                             </ContextMenu>
-                        </Border.ContextMenu>
-                    </Border>
+                        </Grid.ContextMenu>
+                        <Border x:Name="contentBorder" 
+                                Grid.ColumnSpan="3"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="{TemplateBinding CornerRadius}" />
+                        <Rectangle x:Name="PART_Rectangle" 
+                                               Width="1"
+                                               Fill="{DynamicResource LeeBrush_BorderBrush}"
+                                               Margin="-1,10"
+                                               HorizontalAlignment="Left"/>
+
+                        <TextBlock Text="&#xE840;"
+                                       FontFamily="{DynamicResource IconFontFamily}"
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       Margin="0,5,5,5"
+                                       Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=IsFixed,Converter={StaticResource VisibilityForBoolConverter},Mode=OneWay}"
+                                       />
+
+                        <Button x:Name="PART_CloseButton" 
+                                            Grid.Column="2"
+                                            Content="&#xE8BB;"
+                                            FontSize="8"
+                                            Width="22"
+                                            Height="22"
+                                            Margin="3"
+                                           MinHeight="0"
+                                            Visibility="Collapsed"
+                                            leedep:CornerRadiusManager.CornerRadius="11"
+                                            FontFamily="{DynamicResource IconFontFamily}"
+                                            Style="{DynamicResource ColorButton}"
+                                            BorderThickness="0"
+                                            Background="Transparent"
+                                            Tag="1"
+                                            Foreground="{TemplateBinding Foreground}"
+                                            />
+                        <ContentPresenter x:Name="PART_ContentPresenter" 
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              TextElement.Foreground="{TemplateBinding  Foreground}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                               Margin="{TemplateBinding Padding}"
+                                              />
+
+                    </Grid>
+
+
                     <ControlTemplate.Triggers>
 
                         <Trigger Property="Orientation" Value="Vertical">
@@ -150,7 +151,7 @@
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=SelectedBrush,Mode=OneWay}"/>
                             <Setter Property="Foreground"  Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=SelectedForeground,Mode=OneWay}"/>
-                    
+
                             <Setter Property="StackPanel.ZIndex" Value="999"/>
                             <Setter TargetName="PART_Rectangle" Property="Opacity" Value="0"/>
                         </Trigger>
@@ -172,7 +173,7 @@
                                 <Condition Property="IsSelected"  Value="True"/>
                                 <Condition  Property="Orientation" Value="Vertical"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Effect"  Value="{DynamicResource LeeShadow}"/>
+                            <Setter  TargetName="contentBorder" Property="Effect"  Value="{DynamicResource LeeShadow}"/>
                         </MultiTrigger>
 
                         <MultiTrigger>
@@ -192,7 +193,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-       
+
     </Style>
 
     <Style TargetType="{x:Type local:TabView}">
@@ -252,11 +253,11 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            
+
             <Trigger Property="Orientation" Value="Horizontal">
                 <Setter Property="ItemCornerRadius" Value="4,4,0,0"/>
             </Trigger>
-            
+
             <Trigger Property="Orientation" Value="Vertical">
                 <Setter Property="ItemCornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
             </Trigger>

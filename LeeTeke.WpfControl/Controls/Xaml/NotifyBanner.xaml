@@ -30,14 +30,13 @@
         <Setter  Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="ShowMode" Value="InApp"/>
         <Setter Property="OnDesktopMargin" Value="8"/>
-        <Setter Property="Effect" Value="{DynamicResource LeeShadow}"/>
+        <Setter Property="Effect" Value="{DynamicResource LeeShadow2}"/>
         <Setter Property="MinHeight" Value="60"/>
         <Setter Property="MinWidth" Value="260"/>
         <Setter Property="CloseVisibly" Value="MouseOver"/>
         <Setter Property="Margin" Value="0"/>
         <Setter Property="NotifyMargin" Value="5"/>
         <Setter Property="NotifyPadding" Value="5"/>
-        <Setter  Property="Effect" Value="{DynamicResource LeeShadow}"/>
         <Setter Property="CornerRadius" Value="8"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -65,11 +64,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:NotifyBannerItem}">
-                    <Border x:Name="PART_Border" Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            CornerRadius="{TemplateBinding CornerRadius}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            Effect="{TemplateBinding Effect}">
+
                         <Grid  x:Name="PART_Grid" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition x:Name="PART_Column1"  Width="50"/>
@@ -77,7 +72,15 @@
                                 <ColumnDefinition x:Name="PART_Column2" Width="auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock x:Name="PART_Icon"
+                        <Border x:Name="PART_Border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Effect="{TemplateBinding Effect}"
+                                Grid.ColumnSpan="3"
+                                />
+                        <TextBlock x:Name="PART_Icon"
                                        FontFamily="{DynamicResource IconFontFamily}"
                                        FontSize="24"
                                        VerticalAlignment="Center"
@@ -108,7 +111,7 @@
                                             Foreground="{TemplateBinding Foreground}"
                                             />
                         </Grid>
-                    </Border>
+                   
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsClip" Value="True">
                             <Setter TargetName="PART_Grid" Property="Clip">
@@ -117,6 +120,7 @@
                                         <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
                                         <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
                                         <Binding ElementName="PART_Border"  Path="CornerRadius" Mode="OneWay"/>
+                                        <Binding ElementName="PART_Border" Path="BorderThickness" Mode="OneWay"/>
                                     </MultiBinding>
                                 </Setter.Value>
                             </Setter>

@@ -12,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -126,6 +127,7 @@ namespace LeeTeke.WpfControl.Controls
         private void NotifyBannerItem_Loaded(object sender, RoutedEventArgs e)
         {
             Show();
+          
         }
 
         public override void OnApplyTemplate()
@@ -142,6 +144,23 @@ namespace LeeTeke.WpfControl.Controls
 
 
         #region 依赖属性
+
+
+        #region Effect
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public new Effect Effect
+        {
+            get { return (Effect)GetValue(EffectProperty); }
+            set { SetValue(EffectProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Effect.  This enables animation, styling, binding, etc...
+        public static new readonly DependencyProperty EffectProperty =
+            DependencyProperty.Register("Effect", typeof(Effect), typeof(NotifyBannerItem));
+        #endregion
+
 
         #region CloseVisibly
         /// <summary>
@@ -354,6 +373,13 @@ namespace LeeTeke.WpfControl.Controls
 
         public void Show()
         {
+            Effect shadow=null;
+            if (this.Effect != null)
+            {
+                shadow = Effect;
+                this.Effect = null;
+            }
+
             Storyboard storyboard = new Storyboard() { FillBehavior = FillBehavior.HoldEnd };
             DoubleAnimationUsingKeyFrames oDA = new DoubleAnimationUsingKeyFrames();
             oDA.KeyFrames.Add(new EasingDoubleKeyFrame()
@@ -443,6 +469,7 @@ namespace LeeTeke.WpfControl.Controls
                     };
                     _timer.Start();
                 }
+                this.Effect = shadow;
             };
             storyboard.Begin();
 
@@ -467,6 +494,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             _closing = true;
             _timer?.Stop();
+            this.Effect = null;
             Storyboard storyboard = new Storyboard();
             DoubleAnimationUsingKeyFrames oDA = new DoubleAnimationUsingKeyFrames();
             oDA.KeyFrames.Add(new EasingDoubleKeyFrame()

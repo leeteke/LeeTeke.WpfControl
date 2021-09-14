@@ -11,7 +11,7 @@ using System.Windows.Shell;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-    public class WindowManager 
+    public class WindowManager
     {
 
         #region Effect
@@ -227,9 +227,9 @@ namespace LeeTeke.WpfControl.Dependencies
 
         private static void Window_StateChanged(object sender, EventArgs e)
         {
-            if (sender is Window window)
+            if (sender is Window window && window.IsLoaded)
             {
-                var border = StaticMethods.FindVisualChild<Border>(window);
+                var border =  window.Content as Grid;
                 if (window.WindowState == WindowState.Maximized)
                 {
                     var bounds = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
@@ -270,9 +270,9 @@ namespace LeeTeke.WpfControl.Dependencies
 
         private static void Window_Deactivated(object sender, EventArgs e)
         {
-            if (sender is Window window && window.Content is FrameworkElement element)
+            if (sender is Window window &&window.IsLoaded)
             {
-                var border = StaticMethods.FindVisualChild<Border>(window);
+                var border = StaticMethods.FindVisualChild<Border>(window.Content as FrameworkElement, "PART_WinBGBorder");
 
                 if (GetDeactivatedEffect(window) != null)
                 {
@@ -312,9 +312,9 @@ namespace LeeTeke.WpfControl.Dependencies
         private static void Window_Activated(object sender, EventArgs e)
         {
 
-            if (sender is Window window )
+            if (sender is Window window&&window.IsLoaded)
             {
-                var border = StaticMethods.FindVisualChild<Border>(window);
+                var border = StaticMethods.FindVisualChild<Border>(window.Content as FrameworkElement, "PART_WinBGBorder");
 
                 border.SetBinding(Border.EffectProperty, new Binding()
                 {
@@ -346,13 +346,62 @@ namespace LeeTeke.WpfControl.Dependencies
             if (sender is Window window && window.Content is FrameworkElement element)
             {
                 var border = StaticMethods.FindVisualChild<Border>(window);
-                border.Margin = new Thickness(7);
-                border.SetBinding(Border.CornerRadiusProperty, new Binding()
+                BindingOperations.ClearAllBindings(border);
+                border.Background = null;
+                border.BorderThickness = new Thickness(0);
+
+
+                var bgBorder = new Border() { Name = "PART_WinBGBorder" };
+                bgBorder.SetBinding(Border.BorderBrushProperty, new Binding()
+                {
+                    Source = window,
+                    Path = new PropertyPath(Window.BorderBrushProperty),
+                    Mode = BindingMode.OneWay
+                });
+
+                bgBorder.SetBinding(Border.BorderThicknessProperty, new Binding()
+                {
+                    Source = window,
+                    Path = new PropertyPath(Window.BorderThicknessProperty),
+                    Mode = BindingMode.OneWay
+                });
+
+                bgBorder.SetBinding(Border.BackgroundProperty, new Binding()
+                {
+                    Source = window,
+                    Path = new PropertyPath(Window.BackgroundProperty),
+                    Mode = BindingMode.OneWay
+                });
+
+                bgBorder.SetBinding(Border.CornerRadiusProperty, new Binding()
                 {
                     Source = window,
                     Path = new PropertyPath(CornerRadiusManager.CornerRadiusProperty),
                     Mode = BindingMode.OneWay
                 });
+
+                bgBorder.SetBinding(Border.EffectProperty, new Binding()
+                {
+                    Source = window,
+                    Path = new PropertyPath(WindowManager.EffectProperty),
+                    Mode = BindingMode.OneWay
+                });
+
+                var contentBorder = new Border() { Background = null, BorderBrush = null };
+                contentBorder.SetBinding(Border.BorderThicknessProperty, new Binding()
+                {
+                    Source = window,
+                    Path = new PropertyPath(Window.BorderThicknessProperty),
+                    Mode = BindingMode.OneWay
+                });
+
+                var bgGrid = new Grid() { Margin = new Thickness(7) };
+                bgGrid.Children.Add(bgBorder);
+                bgGrid.Children.Add(contentBorder);
+                window.Content = null;
+                contentBorder.Child=element;
+                window.Content = bgGrid;
+
                 if (CornerRadiusManager.GetIsClip(window))
                 {
                     MultiBinding multiBinding = new MultiBinding()
@@ -372,16 +421,11 @@ namespace LeeTeke.WpfControl.Dependencies
                     });
                     multiBinding.Bindings.Add(new Binding()
                     {
-                        Source = border,
+                        Source = bgBorder,
                         Path = new PropertyPath("(0)", new DependencyProperty[] { Border.CornerRadiusProperty, }),
                         Mode = BindingMode.OneWay
                     });
-                    multiBinding.Bindings.Add(new Binding()
-                    {
-                        Source = border,
-                        Path = new PropertyPath("(0)", new DependencyProperty[] { Border.BorderThicknessProperty, }),
-                        Mode = BindingMode.OneWay
-                    });
+
                     BindingOperations.SetBinding(element as FrameworkElement, FrameworkElement.ClipProperty, multiBinding);
                 }
             }

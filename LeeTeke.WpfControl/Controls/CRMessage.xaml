@@ -17,9 +17,11 @@
         leedep:WindowManager.DeactivatedEffect="{DynamicResource LeeShadow1}"
         leedep:WindowManager.Effect="{DynamicResource LeeShadow}"
         leedep:WindowManager.Open="True"
+        BorderThickness="0"
+        Background="{DynamicResource LeeBrush_Forground}"
         >
 
-    <Grid  Background="{DynamicResource LeeBrush_Forground}">
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>

@@ -14,7 +14,7 @@
         WindowStyle="ToolWindow"
          Background="{DynamicResource LeeBrush_Forground}"
          WinButtonPanelBackground="{DynamicResource LeeBrush_Forground}"
-              WinTitlePanelBackground="{DynamicResource LeeBrush_Forground}"
+         WinTitlePanelBackground="{DynamicResource LeeBrush_Forground}"
         >
         <Grid x:Name="gridMain"  
               Margin="5,5,5,5" 

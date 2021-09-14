@@ -195,7 +195,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for Speed.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SpeedProperty =
-            DependencyProperty.Register("Speed", typeof(double), typeof(ScrollBanner),new PropertyMetadata(SpeedChanged));
+            DependencyProperty.Register("Speed", typeof(double), typeof(ScrollBanner), new PropertyMetadata(SpeedChanged));
 
         private static void SpeedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -296,7 +296,7 @@ namespace LeeTeke.WpfControl.Controls
             _scrollingSB.Children.Add(new DoubleAnimation()
             {
                 To = -(_content.ActualWidth + 5),
-                Duration = TimeSpan.FromSeconds(10 * this.ActualWidth / 600)
+                Duration = TimeSpan.FromSeconds(10 * ((this.ActualWidth + _content.ActualWidth + 5) / 500))
             });
             Storyboard.SetTarget(_scrollingSB, _content);
             Storyboard.SetTargetProperty(_scrollingSB, new PropertyPath("(0).(1)", new DependencyProperty[] { ContentPresenter.RenderTransformProperty, TranslateTransform.XProperty }));
@@ -321,7 +321,7 @@ namespace LeeTeke.WpfControl.Controls
             _scrollingSB.Children.Add(new DoubleAnimation()
             {
                 To = -(_content.ActualHeight + 5),
-                Duration = TimeSpan.FromSeconds(4 * this.ActualHeight / 35)
+                Duration = TimeSpan.FromSeconds(4 * ((_content.ActualHeight + 5) / 20))
             });
             Storyboard.SetTarget(_scrollingSB, _content);
             Storyboard.SetTargetProperty(_scrollingSB, new PropertyPath("(0).(1)", new DependencyProperty[] { FrameworkElement.RenderTransformProperty, TranslateTransform.YProperty }));

@@ -20,7 +20,7 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:CornerRadiusManager.CornerRadius),Mode=OneWay}"
-                            Effect="{TemplateBinding Effect}"
+                           
                             >
                         <ContentPresenter x:Name="PART_Content"
                             RecognizesAccessKey="True"
