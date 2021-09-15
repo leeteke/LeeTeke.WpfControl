@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LeeTeke.WpfControl
 {
-    public enum LodingBarMode
+    public enum ProcessControlMode
     {
         Loding,
         Wating

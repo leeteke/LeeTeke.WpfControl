@@ -8,6 +8,7 @@
         xmlns:leedata="clr-namespace:LeeTeke.WpfControl;assembly=LeeTeke.WpfControl"
         xmlns:local="clr-namespace:LeeTeke.WPFTest"
         xmlns:leecommand="clr-namespace:LeeTeke.WpfControl.Commands;assembly=LeeTeke.WpfControl"
+                    xmlns:models="clr-namespace:LeeTeke.WPFTest.Models"
         mc:Ignorable="d"
         Title="WpfControl测试 窗口"
         Height="450"
@@ -61,35 +62,22 @@
                 </StackPanel.ContextMenu>
 
 
-                <TreeView Style="{DynamicResource LeeTreeView}" 
-                          leedep:TreeViewItemManager.SelectedMode="NoItems"
-                          leedep:TreeViewItemManager.NoItemsModeParentSign="True">
-                    <TreeViewItem Header="你好">
-                        <TreeViewItem Header="你说啥">
-                            <TreeViewItem Header="什么"/>
-                        </TreeViewItem>
-                        <TreeViewItem Header="你说啥"/>
-                        <TreeViewItem Header="你说啥"/>
-                    </TreeViewItem>
-                    <TreeViewItem Header="你好">
-                        <TreeViewItem Header="你说啥">
-                            <TreeViewItem Header="什么"/>
-                        </TreeViewItem>
-                        <TreeViewItem Header="你说啥"/>
-                        <TreeViewItem Header="你说啥"/>
-                    </TreeViewItem>
-                    <TreeViewItem Header="你好">
-                        <TreeViewItem Header="你说啥">
-                            <TreeViewItem Header="什么"/>
-                        </TreeViewItem>
-                        <TreeViewItem Header="你说啥"/>
-                        <TreeViewItem Header="你说啥"/>
-                    </TreeViewItem>
+                <TreeView  ItemsSource="{Binding TreeList}"
+                          >
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Path=Child}"  
+                                                  >
+                            <TextBlock Text="{Binding Title}"/>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
                 </TreeView>
 
 
-                <Expander   
-                          ExpandDirection="Down"
+
+
+
+
+                <Expander ExpandDirection="Down"
                           Margin="5">
                     <Expander.Header>
                         <TextBlock Text="你好"
@@ -155,6 +143,7 @@
                             />
                 <ComboBox IsEditable="False"  
                           Margin="5"
+                          Height="35"
                           leedep:ComboBoxManager.IsDropCenterOnControl="True"
                           leedep:CornerRadiusManager.IsClip="True"
                           ItemsSource="{Binding TestList}">
@@ -268,13 +257,13 @@
                     </leecontrol:ImageEx.DefaultContent>
                 </leecontrol:ImageEx>
 
-                <leecontrol:LodingBar  Height="10"
+                <leecontrol:ProgressBar  Height="10"
                                        Mode="Wating"
                                        />
                 <Slider  x:Name="slider"
                          Maximum="100"
                          AutoToolTipPrecision="2" AutoToolTipPlacement="TopLeft" />
-                <leecontrol:LodingBar  Height="10"
+                <leecontrol:ProgressBar  Height="10"
                                        Mode="Loding"
                                        Value="{Binding ElementName=slider,Path=Value}"
                                        BorderThickness="1"

@@ -109,6 +109,19 @@ namespace LeeTeke.WPFTest.ViewModels
         }
 
 
+        #region 请填写属性名
+        private ObservableCollection<TreeViewDataModel> _treeList;
+        /// <summary>
+        /// 请填写属性名
+        /// </summary>
+        public ObservableCollection<TreeViewDataModel> TreeList
+        {
+            get => _treeList;
+            set => SetProperty(ref _treeList, value);
+        }
+        #endregion
+
+
 
         #endregion
 
@@ -123,7 +136,7 @@ namespace LeeTeke.WPFTest.ViewModels
         /// 
         /// </summary>
         public DelegateCommand ThemeChangedCommand => new(ThemeChangedCommandExecute);
- 
+
 
 
 
@@ -149,6 +162,67 @@ namespace LeeTeke.WPFTest.ViewModels
                 new TestListModel(){  Title="测试3", Boolen=true, Image=new BitmapImage(new Uri("https://nie.res.netease.com/r/pic/20200317/16005c2f-d749-465f-a05d-3dcbba024f22.jpg"))},
             };
 
+
+            TreeList = new ObservableCollection<TreeViewDataModel>();
+
+            TreeList.Add(new TreeViewDataModel()
+            {
+                Title = "测试1",
+                Child = new ObservableCollection<TreeViewDataModel>()
+                {
+                    new TreeViewDataModel(){ Title="A",  Child=new ObservableCollection<TreeViewDataModel>() {
+                        new TreeViewDataModel(){ Title="a" ,Child=new ObservableCollection<TreeViewDataModel>(){ new TreeViewDataModel() {  Title="1"} } },
+                        new TreeViewDataModel(){ Title="b"}
+                    } },
+                       new TreeViewDataModel(){ Title="B",  Child=new ObservableCollection<TreeViewDataModel>() {
+                           new TreeViewDataModel(){ Title="a"},
+                        new TreeViewDataModel(){ Title="b"}
+                    } },
+                            new TreeViewDataModel(){ Title="C",  Child=new ObservableCollection<TreeViewDataModel>() {
+                           new TreeViewDataModel(){ Title="a"},
+                        new TreeViewDataModel(){ Title="b"}
+                    } }
+                }
+            });
+            TreeList.Add(new TreeViewDataModel()
+            {
+                Title = "测试2",
+                Child = new ObservableCollection<TreeViewDataModel>()
+                {
+                          new TreeViewDataModel(){ Title="A",  Child=new ObservableCollection<TreeViewDataModel>() {
+                        new TreeViewDataModel(){ Title="a"},
+                        new TreeViewDataModel(){ Title="b"}
+                    } },
+                       new TreeViewDataModel(){ Title="B",  Child=new ObservableCollection<TreeViewDataModel>() {
+                           new TreeViewDataModel(){ Title="a"},
+                        new TreeViewDataModel(){ Title="b"}
+                    } },
+                            new TreeViewDataModel(){ Title="C",  Child=new ObservableCollection<TreeViewDataModel>() {
+                           new TreeViewDataModel(){ Title="a"},
+                        new TreeViewDataModel(){ Title="b"}
+                    } }
+                }
+            });
+            TreeList.Add(new TreeViewDataModel()
+            {
+                Title = "测试3",
+                Child = new ObservableCollection<TreeViewDataModel>()
+                {
+                          new TreeViewDataModel(){ Title="A",  Child=new ObservableCollection<TreeViewDataModel>() {
+                        new TreeViewDataModel(){ Title="a"},
+                        new TreeViewDataModel(){ Title="b"}
+                    } },
+                       new TreeViewDataModel(){ Title="B",  Child=new ObservableCollection<TreeViewDataModel>() {
+                           new TreeViewDataModel(){ Title="a"},
+                        new TreeViewDataModel(){ Title="b"}
+                    } },
+                            new TreeViewDataModel(){ Title="C",  Child=new ObservableCollection<TreeViewDataModel>() {
+                           new TreeViewDataModel(){ Title="a"},
+                        new TreeViewDataModel(){ Title="b"}
+                    } }
+                }
+            });
+
             SelectedData = TestList[1];
 
             SelectedList = new List<object>()
@@ -170,12 +244,12 @@ namespace LeeTeke.WPFTest.ViewModels
             {
                 Content = "测试",
                 ShowLoding = true,
-                Status= MessageStatus.Question
+                Status = MessageStatus.Question
             };
 
             msg.AddOptions("你好", 123);
             msg.AddOptions("你好1", 456);
-        
+
             var reulst = await msg.ShowDialogAsync();
             NotifyData = new NotifyBannerShowData()
             {

@@ -45,18 +45,18 @@ namespace LeeTeke.WpfControl.Controls
     ///     <MyNamespace:LodingBar/>
     ///
     /// </summary>
-    public class LodingBar : Control
+    public class ProgressBar : Control
     {
-        static LodingBar()
+        static ProgressBar()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(LodingBar), new FrameworkPropertyMetadata(typeof(LodingBar)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ProgressBar), new FrameworkPropertyMetadata(typeof(ProgressBar)));
         }
 
 
         private Storyboard _lodingSB;
         private long _lastLodingTime = 0;
 
-        public LodingBar()
+        public ProgressBar()
         {
             this.SizeChanged += LodingBar_SizeChanged;
             this.IsVisibleChanged += LodingBar_IsVisibleChanged;
@@ -68,7 +68,7 @@ namespace LeeTeke.WpfControl.Controls
             {
                 switch (Mode)
                 {
-                    case LodingBarMode.Wating:
+                    case ProcessControlMode.Wating:
                         LodingStoryboard(true);
                         break;
                     default:
@@ -102,7 +102,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ProgressLength.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ProgressLengthProperty =
-            DependencyProperty.Register("ProgressLength", typeof(double), typeof(LodingBar));
+            DependencyProperty.Register("ProgressLength", typeof(double), typeof(ProgressBar));
 
         #endregion
 
@@ -120,7 +120,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for RectangleSite.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty RectangleSiteProperty =
-            DependencyProperty.Register("RectangleSite", typeof(double), typeof(LodingBar));
+            DependencyProperty.Register("RectangleSite", typeof(double), typeof(ProgressBar));
 
         #endregion
 
@@ -142,13 +142,13 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for WatingStop.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty WatingStopProperty =
-            DependencyProperty.Register("WatingStop", typeof(bool), typeof(LodingBar), new PropertyMetadata(false, new PropertyChangedCallback(WatinStopChanged)));
+            DependencyProperty.Register("WatingStop", typeof(bool), typeof(ProgressBar), new PropertyMetadata(false, new PropertyChangedCallback(WatinStopChanged)));
 
         private static void WatinStopChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is LodingBar loding && e.NewValue is bool isStop)
+            if (d is ProgressBar loding && e.NewValue is bool isStop)
             {
-                if (loding.Mode == LodingBarMode.Wating)
+                if (loding.Mode == ProcessControlMode.Wating)
                 {
                     if (isStop)
                     {
@@ -176,7 +176,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for CornerRadius.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CornerRadiusProperty =
-            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(LodingBar));
+            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(ProgressBar));
 
 
 
@@ -194,11 +194,11 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for Maximum.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MaximumProperty =
-            DependencyProperty.Register("Maximum", typeof(double), typeof(LodingBar), new PropertyMetadata(100.0, new PropertyChangedCallback(MaximumChanged)));
+            DependencyProperty.Register("Maximum", typeof(double), typeof(ProgressBar), new PropertyMetadata(100.0, new PropertyChangedCallback(MaximumChanged)));
 
         private static void MaximumChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is LodingBar loding && e.NewValue != e.OldValue)
+            if (d is ProgressBar loding && e.NewValue != e.OldValue)
             {
                 if (e.NewValue is double value && value >= 0)
                 {
@@ -225,11 +225,11 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(double), typeof(LodingBar), new PropertyMetadata(0.0, new PropertyChangedCallback(ValuePropertyChanged)));
+            DependencyProperty.Register("Value", typeof(double), typeof(ProgressBar), new PropertyMetadata(0.0, new PropertyChangedCallback(ValuePropertyChanged)));
 
         private static void ValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is LodingBar loding && e.NewValue != e.OldValue && e.NewValue is double value)
+            if (d is ProgressBar loding && e.NewValue != e.OldValue && e.NewValue is double value)
             {
                 if (value < 0)
                 {
@@ -243,7 +243,7 @@ namespace LeeTeke.WpfControl.Controls
                 }
 
                 loding.RaiseValueChanged(value);
-                if (loding.Mode == LodingBarMode.Loding)
+                if (loding.Mode == ProcessControlMode.Loding)
                 {
                     loding.LodingStoryboard();
                 }
@@ -266,7 +266,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for FillBrush.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FillBrushProperty =
-            DependencyProperty.Register("FillBrush", typeof(Brush), typeof(LodingBar));
+            DependencyProperty.Register("FillBrush", typeof(Brush), typeof(ProgressBar));
 
         #endregion
 
@@ -274,19 +274,19 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// Mode
         /// </summary>
-        public LodingBarMode Mode
+        public ProcessControlMode Mode
         {
-            get { return (LodingBarMode)GetValue(ModeProperty); }
+            get { return (ProcessControlMode)GetValue(ModeProperty); }
             set { SetValue(ModeProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Mode.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ModeProperty =
-            DependencyProperty.Register("Mode", typeof(LodingBarMode), typeof(LodingBar), new PropertyMetadata(LodingBarMode.Loding, ModeChanged));
+            DependencyProperty.Register("Mode", typeof(ProcessControlMode), typeof(ProgressBar), new PropertyMetadata(ProcessControlMode.Loding, ModeChanged));
 
         private static void ModeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is LodingBar loding)
+            if (d is ProgressBar loding)
             {
                 loding.LodingStoryboard();
             }
@@ -307,11 +307,10 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for Orientation.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty OrientationProperty =
-            DependencyProperty.Register("Orientation", typeof(Orientation), typeof(LodingBar));
+            DependencyProperty.Register("Orientation", typeof(Orientation), typeof(ProgressBar));
 
 
         #endregion
-
 
         #region EasingFunction
         /// <summary>
@@ -325,10 +324,9 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for EasingFunction.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty EasingFunctionProperty =
-            DependencyProperty.Register("EasingFunction", typeof(IEasingFunction), typeof(LodingBar));
+            DependencyProperty.Register("EasingFunction", typeof(IEasingFunction), typeof(ProgressBar));
 
         #endregion
-
 
         #endregion
 
@@ -339,19 +337,19 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public event LodingBarValueChangedEventHandler ValueChanged
+        public event ProcessControlValueChangedEventHandler ValueChanged
         {
             add { AddHandler(ValueChangedEvent, value); }
             remove { RemoveHandler(ValueChangedEvent, value); }
         }
 
         public static readonly RoutedEvent ValueChangedEvent = EventManager.RegisterRoutedEvent(
-        "ValueChanged", RoutingStrategy.Bubble, typeof(LodingBarValueChangedEventHandler), typeof(LodingBar));
+        "ValueChanged", RoutingStrategy.Bubble, typeof(ProcessControlValueChangedEventHandler), typeof(ProgressBar));
 
 
         private void RaiseValueChanged(double newValue)
         {
-            var arg = new LodingBarValueChangedEventArgs(newValue, ValueChangedEvent);
+            var arg = new ProcessControlValueChangedEventArgs(newValue, ValueChangedEvent);
             RaiseEvent(arg);
         }
 
@@ -395,7 +393,7 @@ namespace LeeTeke.WpfControl.Controls
             if (_lodingSB != null)
                 _lodingSB.Pause();
 
-            if (Mode == LodingBarMode.Loding)
+            if (Mode == ProcessControlMode.Loding)
             {
                 var plc = Value * (ProgressGenCalculation() / Maximum);
                 if ((DateTime.Now.ToFileTime() - _lastLodingTime) < 2000000)
@@ -416,7 +414,7 @@ namespace LeeTeke.WpfControl.Controls
                 });
                 _lodingSB.Children.Add(eDA);
                 Storyboard.SetTarget(eDA, this);
-                Storyboard.SetTargetProperty(eDA, new PropertyPath(LodingBar.ProgressLengthProperty));
+                Storyboard.SetTargetProperty(eDA, new PropertyPath(ProgressBar.ProgressLengthProperty));
                 _lodingSB.Completed += (e, s) =>
                 {
                     this.ProgressLength = plc;
@@ -442,7 +440,7 @@ namespace LeeTeke.WpfControl.Controls
                 });
                 _lodingSB.Children.Add(eDA);
                 Storyboard.SetTarget(eDA, this);
-                Storyboard.SetTargetProperty(eDA, new PropertyPath(LodingBar.RectangleSiteProperty));
+                Storyboard.SetTargetProperty(eDA, new PropertyPath(ProgressBar.RectangleSiteProperty));
                 _lodingSB.Begin();
             }
         }

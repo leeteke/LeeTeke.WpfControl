@@ -17,9 +17,13 @@
         <Setter Property="FontSize" Value="{Binding  RelativeSource={RelativeSource AncestorType={x:Type TreeView}},Path=FontSize,Mode=OneWay}"/>
         <Setter Property="FontWeight" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeView}},Path=FontWeight,Mode=OneWay}"/>
         <Setter Property="MinHeight" Value="{Binding  RelativeSource={RelativeSource AncestorType={x:Type TreeView}},Path=(leedep:TreeViewItemManager.MinHeight),Mode=OneWay}"/>
+        <Setter Property="leedep:TreeViewItemManager.Margin" Value="{Binding  RelativeSource={RelativeSource AncestorType={x:Type TreeView}},Path=(leedep:TreeViewItemManager.Margin),Mode=OneWay}"/>
 
+        <Setter Property="leedep:TreeViewItemManager.CornerRadius" Value="{Binding  RelativeSource={RelativeSource AncestorType={x:Type TreeView}},Path=(leedep:TreeViewItemManager.CornerRadius),Mode=OneWay}"/>
+      
         <Setter Property="leedep:TreeViewItemManager.SwitchSize" Value="{Binding  RelativeSource={RelativeSource AncestorType={x:Type TreeView}},Path=(leedep:TreeViewItemManager.SwitchSize),Mode=OneWay}"/>
-
+        <Setter Property="leedep:TreeViewItemManager.SwitchWidth" Value="{Binding  RelativeSource={RelativeSource AncestorType={x:Type TreeView}},Path=(leedep:TreeViewItemManager.SwitchWidth),Mode=OneWay}"/>
+        
         <Setter Property="leedep:TreeViewItemManager.SelectedCloseOhterMode" Value="{Binding   RelativeSource={RelativeSource AncestorType={x:Type TreeView}},Path=(leedep:TreeViewItemManager.SelectedCloseOhterMode),Mode=OneWay}"/>
         <Setter Property="leedep:TreeViewItemManager.SelectedMode" Value="{Binding   RelativeSource={RelativeSource AncestorType={x:Type TreeView}},Path=(leedep:TreeViewItemManager.SelectedMode),Mode=OneWay}"/>
         <Setter Property="leedep:TreeViewItemManager.NoItemsModeParentSign" Value="{Binding   RelativeSource={RelativeSource AncestorType={x:Type TreeView}},Path=(leedep:TreeViewItemManager.NoItemsModeParentSign),Mode=OneWay}"/>
@@ -33,39 +37,67 @@
         <Setter Property="leedep:TreeViewItemManager.SelectedFontSize" Value="{Binding   RelativeSource={RelativeSource AncestorType={x:Type TreeView}},Path=(leedep:TreeViewItemManager.SelectedFontSize),Mode=OneWay}"/>
         <Setter Property="leedep:TreeViewItemManager.SelectedFontWeight" Value="{Binding   RelativeSource={RelativeSource AncestorType={x:Type TreeView}},Path=(leedep:TreeViewItemManager.SelectedFontWeight),Mode=OneWay}"/>
         <Setter Property="leedep:TreeViewItemManager.SelectedForeground" Value="{Binding   RelativeSource={RelativeSource AncestorType={x:Type TreeView}},Path=(leedep:TreeViewItemManager.SelectedForeground),Mode=OneWay}"/>
+
+        <Setter Property="leedep:TreeViewItemManager.NoItemsModeParentSignBrush" Value="{Binding   RelativeSource={RelativeSource AncestorType={x:Type TreeView}},Path=(leedep:TreeViewItemManager.NoItemsModeParentSignBrush),Mode=OneWay}"/>
+
+        <Setter Property="leedep:TreeViewItemManager.MarkShow" Value="{Binding Path=(leedep:TreeViewItemManager.MarkShow), RelativeSource={RelativeSource AncestorType={x:Type TreeView}},Mode=OneWay}"/>
+        <Setter Property="leedep:TreeViewItemManager.MarkBrush" Value="{Binding Path=(leedep:TreeViewItemManager.MarkBrush), RelativeSource={RelativeSource AncestorType={x:Type TreeView}},Mode=OneWay}"/>
+        <Setter Property="leedep:TreeViewItemManager.MarkCornerRadius" Value="{Binding Path=(leedep:TreeViewItemManager.MarkCornerRadius), RelativeSource={RelativeSource AncestorType={x:Type TreeView}},Mode=OneWay}"/>
+        <Setter Property="leedep:TreeViewItemManager.MarkMargin" Value="{Binding Path=(leedep:TreeViewItemManager.MarkMargin), RelativeSource={RelativeSource AncestorType={x:Type TreeView}},Mode=OneWay}"/>
+        <Setter Property="leedep:TreeViewItemManager.MarkMouseOverBrush" Value="{Binding Path=(leedep:TreeViewItemManager.MarkMouseOverBrush), RelativeSource={RelativeSource AncestorType={x:Type TreeView}},Mode=OneWay}"/>
+        <Setter Property="leedep:TreeViewItemManager.MarkSelectedBrush" Value="{Binding Path=(leedep:TreeViewItemManager.MarkSelectedBrush), RelativeSource={RelativeSource AncestorType={x:Type TreeView}},Mode=OneWay}"/>
+        <Setter Property="leedep:TreeViewItemManager.MarkSize" Value="{Binding Path=(leedep:TreeViewItemManager.MarkSize), RelativeSource={RelativeSource AncestorType={x:Type TreeView}},Mode=OneWay}"/>
+        
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TreeViewItem}">
-                    <Grid >
+                    <Grid  >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.SwitchSize),Mode=OneWay}"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
+               
                         <Border x:Name="PART_HeaderPanel" 
                                 Height="{TemplateBinding MinHeight}"
                                 Background="{TemplateBinding Background}"
                                 Grid.ColumnSpan="2"
+                                Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.Margin),Mode=OneWay}"
+                                CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.CornerRadius),Mode=OneWay}"
                                 BorderThickness="0">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.SwitchSize),Mode=OneWay}"/>
+                                    <ColumnDefinition Width="auto" MinWidth="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay,Converter={StaticResource TreeViewItemSeparateConverter}}"/>
+                                    <ColumnDefinition Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.SwitchWidth),Mode=OneWay}"/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
+
+                                <Rectangle x:Name="PART_Mark" 
+                                       HorizontalAlignment="Left"
+                                       Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.MarkSize),Mode=OneWay}"
+                                       Fill="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.MarkBrush),Mode=OneWay}"
+                                       Margin="{Binding Path=(leedep:TreeViewItemManager.MarkMargin), RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"
+                                       Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.MarkShow),Mode=OneWay,Converter={StaticResource VisibilityForBoolConverter}}">
+                                    <Rectangle.Clip>
+                                        <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                            <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
+                                            <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
+                                            <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}"   Path="(leedep:TreeViewItemManager.MarkCornerRadius)" Mode="OneWay"/>
+                                        </MultiBinding>
+                                    </Rectangle.Clip>
+                                </Rectangle>
+
                                 <ToggleButton x:Name="Expander" 
                                                   Content="&#xE76C;"
-                                                  Grid.Column="0"
+                                                  Grid.Column="1"
                                                   ClickMode="Press" 
+                                                  FontSize="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.SwitchSize),Mode=OneWay}"
                                                   leedep:ToggleButtonManager.RotateMode="Positive90"
                                                   IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" 
                                                   Style="{StaticResource RotateToggleButton}"/>
                                 <ContentPresenter x:Name="PART_Header"
                                              ContentSource="Header"
-                                             Grid.Column="1"
+                                             Grid.Column="2"
                                              Margin="{TemplateBinding Padding}"
                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -87,9 +119,9 @@
                             <Setter Property="Visibility" TargetName="Expander" Value="Collapsed"/>
                         </Trigger>
                         <Trigger SourceName="PART_HeaderPanel" Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_Mark" Property="Fill" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.MarkMouseOverBrush),Mode=OneWay}"/>
                             <Setter Property="Background" TargetName="PART_HeaderPanel" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.MouseOverBackground),Mode=OneWay}"/>
                             <Setter  Property="Foreground"  TargetName="Expander" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.MouseOverForeground),Mode=OneWay}"/>
-                            <Setter Property="FontSize" TargetName="Expander"   Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.MouseOverFontSize),Mode=OneWay}"/>
                             <Setter Property="FontWeight"  TargetName="Expander"   Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.MouseOverFontWeight),Mode=OneWay}"/>
                             <Setter  Property="TextElement.Foreground"  TargetName="PART_Header" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.MouseOverForeground),Mode=OneWay}"/>
                             <Setter Property="TextElement.FontSize" TargetName="PART_Header"   Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.MouseOverFontSize),Mode=OneWay}"/>
@@ -103,9 +135,9 @@
                                 <Condition Property="leedep:TreeViewItemManager.SelectedMode" Value="NoItems"/>
                                 <Condition Property="HasItems" Value="False"/>
                             </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_Mark" Property="Fill" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.MarkSelectedBrush),Mode=OneWay}"/>
                             <Setter Property="Background" TargetName="PART_HeaderPanel" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.SelectedBackground),Mode=OneWay}"/>
                             <Setter Property="Foreground"  TargetName="Expander" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.SelectedForeground),Mode=OneWay}"/>
-                            <Setter Property="FontSize"   TargetName="Expander" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.SelectedFontSize),Mode=OneWay}"/>
                             <Setter Property="FontWeight"  TargetName="Expander" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.SelectedFontWeight),Mode=OneWay}"/>
                             <Setter Property="TextElement.Foreground"  TargetName="PART_Header" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.SelectedForeground),Mode=OneWay}"/>
                             <Setter Property="TextElement.FontSize"   TargetName="PART_Header" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.SelectedFontSize),Mode=OneWay}"/>
@@ -117,9 +149,9 @@
                                 <Condition Property="IsSelected" Value="true"/>
                                 <Condition Property="leedep:TreeViewItemManager.SelectedMode" Value="Normal"/>
                             </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_Mark" Property="Fill" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.MarkSelectedBrush),Mode=OneWay}"/>
                             <Setter Property="Background" TargetName="PART_HeaderPanel" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.SelectedBackground),Mode=OneWay}"/>
                             <Setter Property="Foreground" TargetName="Expander"  Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.SelectedForeground),Mode=OneWay}"/>
-                            <Setter Property="FontSize"  TargetName="Expander" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.SelectedFontSize),Mode=OneWay}"/>
                             <Setter Property="FontWeight" TargetName="Expander"  Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.SelectedFontWeight),Mode=OneWay}"/>
                             <Setter Property="TextElement.Foreground"  TargetName="PART_Header" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.SelectedForeground),Mode=OneWay}"/>
                             <Setter Property="TextElement.FontSize"   TargetName="PART_Header" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.SelectedFontSize),Mode=OneWay}"/>
@@ -134,10 +166,10 @@
                                 <Condition Property="leedep:TreeViewItemManager.SelectedMode" Value="NoItems"/>
                                 <Condition Property="HasItems" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter  Property="Foreground"  TargetName="Expander"  Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.SelectedBackground),Mode=OneWay}"/>
-                            <Setter Property="FontSize"   TargetName="Expander" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.SelectedFontSize),Mode=OneWay}"/>
+
+                            <Setter Property="Foreground"  TargetName="Expander"  Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.NoItemsModeParentSignBrush),Mode=OneWay}"/>
                             <Setter Property="FontWeight"  TargetName="Expander"   Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.SelectedFontWeight),Mode=OneWay}"/>
-                            <Setter  Property="TextElement.Foreground"  TargetName="PART_Header"  Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.SelectedBackground),Mode=OneWay}"/>
+                            <Setter Property="TextElement.Foreground"  TargetName="PART_Header"  Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.NoItemsModeParentSignBrush),Mode=OneWay}"/>
                             <Setter Property="TextElement.FontSize"   TargetName="PART_Header" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.SelectedFontSize),Mode=OneWay}"/>
                             <Setter Property="TextElement.FontWeight"  TargetName="PART_Header"   Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TreeViewItemManager.SelectedFontWeight),Mode=OneWay}"/>
                         </MultiTrigger>
@@ -170,6 +202,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="0"/>
+        
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
@@ -178,7 +211,10 @@
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="leedep:CornerRadiusManager.IsClip" Value="False"/>
 
-        <Setter Property="leedep:TreeViewItemManager.SwitchSize" Value="20"/>
+        <Setter Property="leedep:TreeViewItemManager.Margin" Value="2"/>
+        <Setter Property="leedep:TreeViewItemManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="leedep:TreeViewItemManager.SwitchSize" Value="10"/>
+        <Setter Property="leedep:TreeViewItemManager.SwitchWidth" Value="20"/>
         <Setter Property="leedep:TreeViewItemManager.MinHeight" Value="{DynamicResource LeeItemMinHeight}"/>
 
         <Setter Property="leedep:TreeViewItemManager.SelectedCloseOhterMode" Value="None"/>
@@ -190,10 +226,20 @@
         <Setter Property="leedep:TreeViewItemManager.MouseOverFontWeight" Value="{Binding   RelativeSource={RelativeSource  Mode=Self},Path=FontWeight,Mode=OneWay}"/>
         <Setter Property="leedep:TreeViewItemManager.MouseOverForeground" Value="{Binding   RelativeSource={RelativeSource  Mode=Self},Path=Foreground,Mode=OneWay}"/>
 
-        <Setter Property="leedep:TreeViewItemManager.SelectedBackground" Value="{DynamicResource LeeBrush_Theme}"/>
+        <Setter Property="leedep:TreeViewItemManager.SelectedBackground" Value="{DynamicResource LeeBrush_Mark}"/>
         <Setter Property="leedep:TreeViewItemManager.SelectedFontSize" Value="{Binding   RelativeSource={RelativeSource  Mode=Self},Path=FontSize,Mode=OneWay}"/>
         <Setter Property="leedep:TreeViewItemManager.SelectedFontWeight" Value="{Binding   RelativeSource={RelativeSource  Mode=Self},Path=FontWeight,Mode=OneWay}"/>
-        <Setter Property="leedep:TreeViewItemManager.SelectedForeground" Value="{DynamicResource LeeBrush_White}"/>
+        <Setter Property="leedep:TreeViewItemManager.SelectedForeground" Value="{Binding   RelativeSource={RelativeSource  Mode=Self},Path=Foreground,Mode=OneWay}"/>
+
+        <Setter Property="leedep:TreeViewItemManager.NoItemsModeParentSignBrush" Value="{DynamicResource LeeBrush_Theme}"/>
+        <!--Mark-->
+        <Setter Property="leedep:TreeViewItemManager.MarkShow" Value="True"/>
+        <Setter Property="leedep:TreeViewItemManager.MarkBrush" Value="Transparent"/>
+        <Setter Property="leedep:TreeViewItemManager.MarkCornerRadius" Value="2"/>
+        <Setter Property="leedep:TreeViewItemManager.MarkMargin" Value="0,5,5,5"/>
+        <Setter Property="leedep:TreeViewItemManager.MarkMouseOverBrush" Value="Transparent"/>
+        <Setter Property="leedep:TreeViewItemManager.MarkSelectedBrush" Value="{DynamicResource LeeBrush_Theme}"/>
+        <Setter Property="leedep:TreeViewItemManager.MarkSize" Value="4"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TreeView}">

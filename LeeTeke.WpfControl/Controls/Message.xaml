@@ -53,7 +53,7 @@
                         Grid.Row="2"
                          Grid.ColumnSpan="2"
                         HorizontalAlignment="Right"/>
-            <local:LodingBar x:Name="loding"
+        <local:ProgressBar x:Name="loding"
                              Visibility="Collapsed"
                              Margin="5,0"
                              Height="8"

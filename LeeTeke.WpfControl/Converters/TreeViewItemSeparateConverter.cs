@@ -21,11 +21,18 @@ namespace LeeTeke.WpfControl.Converters
             while (element != null && element.GetType() != typeof(TreeView))
             {
                 element = (UIElement)VisualTreeHelper.GetParent(element);
-                if (element is TreeViewItem item)
+
+                switch (element)
                 {
-                    var size= TreeViewItemManager.GetSwitchSize(item);
-                    left += size;
+                    case TreeViewItem item:
+                        var size = TreeViewItemManager.GetSwitchWidth(item);
+                        left += size;
+                        break;
+                    default:
+                        break;
                 }
+                      
+                
             }
             return left;
 

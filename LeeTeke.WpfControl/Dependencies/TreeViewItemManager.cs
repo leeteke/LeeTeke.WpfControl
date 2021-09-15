@@ -30,6 +30,37 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("MinHeight", typeof(double), typeof(TreeViewItemManager));
         #endregion
 
+        #region Margin
+        public static Thickness GetMargin(DependencyObject obj)
+        {
+            return (Thickness)obj.GetValue(MarginProperty);
+        }
+
+        public static void SetMargin(DependencyObject obj, Thickness value)
+        {
+            obj.SetValue(MarginProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for Margin.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MarginProperty =
+            DependencyProperty.RegisterAttached("Margin", typeof(Thickness), typeof(TreeViewItemManager));
+        #endregion
+
+        #region CornerRadius
+        public static CornerRadius GetCornerRadius(DependencyObject obj)
+        {
+            return (CornerRadius)obj.GetValue(CornerRadiusProperty);
+        }
+
+        public static void SetCornerRadius(DependencyObject obj, CornerRadius value)
+        {
+            obj.SetValue(CornerRadiusProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for CornerRadius.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CornerRadiusProperty =
+            DependencyProperty.RegisterAttached("CornerRadius", typeof(CornerRadius), typeof(TreeViewItemManager));
+        #endregion
 
         #region SwitchSize
         public static double GetSwitchSize(DependencyObject obj)
@@ -46,6 +77,24 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty SwitchSizeProperty =
             DependencyProperty.RegisterAttached("SwitchSize", typeof(double), typeof(TreeViewItemManager));
         #endregion
+
+
+        #region SwitchWidth
+        public static double GetSwitchWidth(DependencyObject obj)
+        {
+            return (double)obj.GetValue(SwitchWidthProperty);
+        }
+
+        public static void SetSwitchWidth(DependencyObject obj, double value)
+        {
+            obj.SetValue(SwitchWidthProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for SwitchWidth.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SwitchWidthProperty =
+            DependencyProperty.RegisterAttached("SwitchWidth", typeof(double), typeof(TreeViewItemManager));
+        #endregion
+
 
         #region SelectedMode
         public static TreeViewSelectedMode GetSelectedMode(DependencyObject obj)
@@ -197,7 +246,6 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("MouseOverFontWeight", typeof(FontWeight), typeof(TreeViewItemManager));
         #endregion
 
-
         #region SelectedBackground
         public static Brush GetSelectedBackground(DependencyObject obj)
         {
@@ -213,7 +261,6 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty SelectedBackgroundProperty =
             DependencyProperty.RegisterAttached("SelectedBackground", typeof(Brush), typeof(TreeViewItemManager));
         #endregion
-
 
         #region SelectedForeground
         public static Brush GetSelectedForeground(DependencyObject obj)
@@ -261,6 +308,138 @@ namespace LeeTeke.WpfControl.Dependencies
         // Using a DependencyProperty as the backing store for SelectedFontWeight.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedFontWeightProperty =
             DependencyProperty.RegisterAttached("SelectedFontWeight", typeof(FontWeight), typeof(TreeViewItemManager));
+        #endregion
+
+
+        #region NoItemsModeParentSignBrush
+        public static Brush GetNoItemsModeParentSignBrush(DependencyObject obj)
+        {
+            return (Brush)obj.GetValue(NoItemsModeParentSignBrushProperty);
+        }
+
+        public static void SetNoItemsModeParentSignBrush(DependencyObject obj, Brush value)
+        {
+            obj.SetValue(NoItemsModeParentSignBrushProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for NoItemsModeParentSignBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty NoItemsModeParentSignBrushProperty =
+            DependencyProperty.RegisterAttached("NoItemsModeParentSignBrush", typeof(Brush), typeof(TreeViewItemManager));
+        #endregion
+
+
+        #region MarkShow
+        public static bool GetMarkShow(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(MarkShowProperty);
+        }
+
+        public static void SetMarkShow(DependencyObject obj, bool value)
+        {
+            obj.SetValue(MarkShowProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MarkShow.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MarkShowProperty =
+            DependencyProperty.RegisterAttached("MarkShow", typeof(bool), typeof(TreeViewItemManager));
+        #endregion
+
+        #region MarkSize
+
+        public static double GetMarkSize(DependencyObject obj)
+        {
+            return (double)obj.GetValue(MarkSizeProperty);
+        }
+
+        public static void SetMarkSize(DependencyObject obj, double value)
+        {
+            obj.SetValue(MarkSizeProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MarkSize.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MarkSizeProperty =
+            DependencyProperty.RegisterAttached("MarkSize", typeof(double), typeof(TreeViewItemManager));
+        #endregion
+
+        #region MarkBrush
+        public static Brush GetMarkBrush(DependencyObject obj)
+        {
+            return (Brush)obj.GetValue(MarkBrushProperty);
+        }
+
+        public static void SetMarkBrush(DependencyObject obj, Brush value)
+        {
+            obj.SetValue(MarkBrushProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MarkBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MarkBrushProperty =
+            DependencyProperty.RegisterAttached("MarkBrush", typeof(Brush), typeof(TreeViewItemManager));
+        #endregion
+
+        #region MarkMargin
+
+        public static Thickness GetMarkMargin(DependencyObject obj)
+        {
+            return (Thickness)obj.GetValue(MarkMarginProperty);
+        }
+
+        public static void SetMarkMargin(DependencyObject obj, Thickness value)
+        {
+            obj.SetValue(MarkMarginProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MarkMargin.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MarkMarginProperty =
+            DependencyProperty.RegisterAttached("MarkMargin", typeof(Thickness), typeof(TreeViewItemManager));
+        #endregion
+
+        #region MarkCornerRadius
+        public static CornerRadius GetMarkCornerRadius(DependencyObject obj)
+        {
+            return (CornerRadius)obj.GetValue(MarkCornerRadiusProperty);
+        }
+
+        public static void SetMarkCornerRadius(DependencyObject obj, CornerRadius value)
+        {
+            obj.SetValue(MarkCornerRadiusProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MarkCornerRadius.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MarkCornerRadiusProperty =
+            DependencyProperty.RegisterAttached("MarkCornerRadius", typeof(CornerRadius), typeof(TreeViewItemManager));
+        #endregion
+
+        #region MarkMouseOverBrush
+        public static Brush GetMarkMouseOverBrush(DependencyObject obj)
+        {
+            return (Brush)obj.GetValue(MarkMouseOverBrushProperty);
+        }
+
+        public static void SetMarkMouseOverBrush(DependencyObject obj, Brush value)
+        {
+            obj.SetValue(MarkMouseOverBrushProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MarkMouseOverBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MarkMouseOverBrushProperty =
+            DependencyProperty.RegisterAttached("MarkMouseOverBrush", typeof(Brush), typeof(TreeViewItemManager));
+        #endregion
+
+        #region MarkSelectedBrush
+        public static Brush GetMarkSelectedBrush(DependencyObject obj)
+        {
+            return (Brush)obj.GetValue(MarkSelectedBrushProperty);
+        }
+
+        public static void SetMarkSelectedBrush(DependencyObject obj, Brush value)
+        {
+            obj.SetValue(MarkSelectedBrushProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MarkSelectedBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MarkSelectedBrushProperty =
+            DependencyProperty.RegisterAttached("MarkSelectedBrush", typeof(Brush), typeof(TreeViewItemManager));
         #endregion
     }
 }

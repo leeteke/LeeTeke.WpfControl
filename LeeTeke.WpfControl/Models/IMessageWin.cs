@@ -21,9 +21,9 @@ namespace LeeTeke.WpfControl.Models
 
         object Content { get; set; }
 
-        LodingBarMode LodingBarMode { get; set; }
+        ProcessControlMode ProcessControlMode { get; set; }
 
-        double LodingBarValue { get; set; }
+        double ProcessControlValue { get; set; }
 
         MessageStatus Status { get; set; }
 

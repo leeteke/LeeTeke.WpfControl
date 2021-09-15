@@ -64,12 +64,12 @@ namespace LeeTeke.WpfControl.Controls
             get => loding.Visibility == Visibility.Visible;
             set => loding.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
         }
-        public LodingBarMode LodingBarMode
+        public ProcessControlMode ProcessControlMode
         {
             get => loding.Mode;
             set => loding.Mode = value;
         }
-        public double LodingBarValue
+        public double ProcessControlValue
         {
             get => loding.Value;
             set => loding.Value = value;
