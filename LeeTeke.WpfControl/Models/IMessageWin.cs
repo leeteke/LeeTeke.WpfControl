@@ -21,7 +21,7 @@ namespace LeeTeke.WpfControl.Models
 
         object Content { get; set; }
 
-        ProcessControlMode ProcessControlMode { get; set; }
+        ProgressControlMode ProcessControlMode { get; set; }
 
         double ProcessControlValue { get; set; }
 

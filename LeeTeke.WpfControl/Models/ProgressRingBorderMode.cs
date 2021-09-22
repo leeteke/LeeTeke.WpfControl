@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace LeeTeke.WpfControl
 {
-    public enum ProcessControlMode
+    public enum ProgressRingBorderMode
     {
-        Loding,
-        Wating
+        Both,
+        OnlyOutSide,
+        OnlyInSide,
     }
 }

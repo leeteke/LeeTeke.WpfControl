@@ -68,7 +68,7 @@ namespace LeeTeke.WpfControl.Controls
             {
                 switch (Mode)
                 {
-                    case ProcessControlMode.Wating:
+                    case ProgressControlMode.Wating:
                         LodingStoryboard(true);
                         break;
                     default:
@@ -148,7 +148,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (d is ProgressBar loding && e.NewValue is bool isStop)
             {
-                if (loding.Mode == ProcessControlMode.Wating)
+                if (loding.Mode == ProgressControlMode.Wating)
                 {
                     if (isStop)
                     {
@@ -243,7 +243,7 @@ namespace LeeTeke.WpfControl.Controls
                 }
 
                 loding.RaiseValueChanged(value);
-                if (loding.Mode == ProcessControlMode.Loding)
+                if (loding.Mode == ProgressControlMode.Loding)
                 {
                     loding.LodingStoryboard();
                 }
@@ -274,15 +274,15 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// Mode
         /// </summary>
-        public ProcessControlMode Mode
+        public ProgressControlMode Mode
         {
-            get { return (ProcessControlMode)GetValue(ModeProperty); }
+            get { return (ProgressControlMode)GetValue(ModeProperty); }
             set { SetValue(ModeProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Mode.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ModeProperty =
-            DependencyProperty.Register("Mode", typeof(ProcessControlMode), typeof(ProgressBar), new PropertyMetadata(ProcessControlMode.Loding, ModeChanged));
+            DependencyProperty.Register("Mode", typeof(ProgressControlMode), typeof(ProgressBar), new PropertyMetadata(ProgressControlMode.Loding, ModeChanged));
 
         private static void ModeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -337,19 +337,19 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public event ProcessControlValueChangedEventHandler ValueChanged
+        public event ProgressControlValueChangedEventHandler ValueChanged
         {
             add { AddHandler(ValueChangedEvent, value); }
             remove { RemoveHandler(ValueChangedEvent, value); }
         }
 
         public static readonly RoutedEvent ValueChangedEvent = EventManager.RegisterRoutedEvent(
-        "ValueChanged", RoutingStrategy.Bubble, typeof(ProcessControlValueChangedEventHandler), typeof(ProgressBar));
+        "ValueChanged", RoutingStrategy.Bubble, typeof(ProgressControlValueChangedEventHandler), typeof(ProgressBar));
 
 
         private void RaiseValueChanged(double newValue)
         {
-            var arg = new ProcessControlValueChangedEventArgs(newValue, ValueChangedEvent);
+            var arg = new ProgressControlValueChangedEventArgs(newValue, ValueChangedEvent);
             RaiseEvent(arg);
         }
 
@@ -393,7 +393,7 @@ namespace LeeTeke.WpfControl.Controls
             if (_lodingSB != null)
                 _lodingSB.Pause();
 
-            if (Mode == ProcessControlMode.Loding)
+            if (Mode == ProgressControlMode.Loding)
             {
                 var plc = Value * (ProgressGenCalculation() / Maximum);
                 if ((DateTime.Now.ToFileTime() - _lastLodingTime) < 2000000)

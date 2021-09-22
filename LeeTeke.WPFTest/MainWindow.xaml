@@ -33,11 +33,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Border Background="Transparent"
-                Margin="10"
-                BorderThickness="1"
-                Effect="{DynamicResource LeeShadow2}"/>
-
+  
         <ScrollViewer Grid.Row="1" 
                       Margin="10"
                       HorizontalScrollBarVisibility="Disabled"

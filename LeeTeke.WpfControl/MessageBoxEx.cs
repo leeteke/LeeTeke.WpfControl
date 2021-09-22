@@ -121,7 +121,7 @@ namespace LeeTeke.WpfControl
         /// <summary>
         /// lodingbar模式
         /// </summary>
-        public ProcessControlMode ProcessControlMode
+        public ProgressControlMode ProcessControlMode
         {
             get => _msg.ProcessControlMode;
             set => _msg.ProcessControlMode = value;
