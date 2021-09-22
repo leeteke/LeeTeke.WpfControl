@@ -25,6 +25,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -53,12 +54,11 @@
                 Click="Button_Click" 
                 Cursor="Hand"/>
         <Grid x:Name="gridMain"  
-              Margin="5,5,5,5" 
+              Margin="10,0" 
               Grid.Row="1"
               Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -75,7 +75,15 @@
                    HorizontalAlignment="Left"
                    Visibility="Collapsed"
                    />
-
+            <local:ProgressRing x:Name="ring"
+                            Width="100"
+                            Height="40"
+                             Thickness="6"
+                                VerticalAlignment="Center"
+                            Mode="Wating"
+                            Visibility="Collapsed"
+                            RingEffect="{DynamicResource LeeShadow2}"
+                            />
             <ContentPresenter x:Name="content"
                               Grid.Column="1"
                               VerticalAlignment="Stretch"
@@ -88,16 +96,31 @@
                         Grid.Row="2"
                         Grid.ColumnSpan="2"
                         HorizontalAlignment="Right"/>
-            <local:ProgressBar x:Name="loding"
-                             Visibility="Collapsed"
-                             Margin="5,0"
-                             Height="8"
-                             Mode="Loding"
-                             Grid.Row="1"
-                             Grid.ColumnSpan="2"
-                             />
+           
         </Grid>
-   
+
+        
+        <local:ProgressBar x:Name="loding"
+                             Visibility="Collapsed"
+                             Margin="5,0,2,5"
+                             Mode="Loding"
+                           Height="8"
+                           VerticalAlignment="Bottom"
+                           Grid.Row="2"
+                           Grid.Column="0"
+                           />
+        
+        <TextBlock Grid.Row="2"
+                   Grid.Column="1"
+                   Height="13"
+                   Width="35"
+                   FontSize="12"
+                   Margin="0,0,5,5"
+                   Foreground="{DynamicResource LeeBrush_Text}"
+                   Visibility="{Binding ElementName=loding,Path=Visibility}">
+            <Run Text="{Binding ElementName=loding,Path=Value}"/> %
+        </TextBlock>
+        
     </Grid>
 
     </Window>

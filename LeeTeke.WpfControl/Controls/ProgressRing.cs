@@ -345,7 +345,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private void LodingIntView()
         {
-            if (!IsLoaded)
+            if (!IsLoaded || Visibility != Visibility.Visible)
                 return;
 
             ///直径 =最小单位-边框厚度
@@ -374,11 +374,12 @@ namespace LeeTeke.WpfControl.Controls
                 default:
                     break;
             }
+
         }
 
         private void LodingRing()
         {
-            if (!IsLoaded || Mode != ProgressControlMode.Loding)
+            if (!IsLoaded || Mode != ProgressControlMode.Loding || Visibility != Visibility.Visible)
                 return;
 
             var angel = Value / Maximum * 360;
@@ -413,13 +414,14 @@ namespace LeeTeke.WpfControl.Controls
 
         private void ChangeRing(double value)
         {
+
             _orbit.Data = GetRoundPath(value, _backDiameter / 2, new Point(this.ActualWidth / 2, _orbit.StrokeThickness / 2 + BorderThickness + ThicknessPadding));
 
         }
 
         private void LodingWating()
         {
-            if (!IsLoaded || Mode != ProgressControlMode.Wating)
+            if (!IsLoaded || Mode != ProgressControlMode.Wating || Visibility != Visibility.Visible)
                 return;
 
             var angel = 1;

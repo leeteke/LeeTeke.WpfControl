@@ -242,18 +242,31 @@ namespace LeeTeke.WPFTest.ViewModels
 
             MessageBoxEx msg = new MessageBoxEx()
             {
-                Content = "测试",
-                ShowLoding = true,
-                Status = MessageStatus.Question
+                Content = "正在等待服务器数据同步...",
+                ShowProcess = false,
+                CanClose=false,
+                Status = MessageStatus.Wating,
             };
 
-            msg.AddOptions("你好", 123);
-            msg.AddOptions("你好1", 456);
+      
+            var reulst =  msg.ShowDialogAsync();
 
-            var reulst = await msg.ShowDialogAsync();
+            await Task.Delay(1000);
+
+            msg.ShowProcess = true;
+
+            msg.Status = MessageStatus.None;
+
+            while (msg.ProcessValue<100)
+            {
+                msg.ProcessValue += 10;
+                await Task.Delay(300);
+            }
+
+
             NotifyData = new NotifyBannerShowData()
             {
-                Content = $"您选择了 {reulst}",
+                Content = $"您选择了 {await  reulst}",
                 Status = NotifyStatus.Info
             };
         }

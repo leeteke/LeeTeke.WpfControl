@@ -78,10 +78,10 @@ namespace LeeTeke.WpfControl
             set => _msg.CanClose = value;
         }
 
-        public bool ShowLoding
+        public bool ShowProcess
         {
-            get => _msg.ShowLoding;
-            set => _msg.ShowLoding = value;
+            get => _msg.ShowProcess;
+            set => _msg.ShowProcess = value;
         }
         /// <summary>
         /// 关闭
@@ -116,24 +116,14 @@ namespace LeeTeke.WpfControl
         }
 
 
-
-
-        /// <summary>
-        /// lodingbar模式
-        /// </summary>
-        public ProgressControlMode ProcessControlMode
-        {
-            get => _msg.ProcessControlMode;
-            set => _msg.ProcessControlMode = value;
-        }
-
+        
         /// <summary>
         /// 设置lodingVale 范围0-100;
         /// </summary>
-        public double ProcessControlValue
+        public double ProcessValue
         {
-            get => _msg.ProcessControlValue;
-            set => _msg.ProcessControlValue = value;
+            get => _msg.ProcessValue;
+            set => _msg.ProcessValue = value;
         }
 
 
@@ -187,5 +177,6 @@ namespace LeeTeke.WpfControl
         Question,
         Error,
         Stop,
+        Wating,
     }
 }

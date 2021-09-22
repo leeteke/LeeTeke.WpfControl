@@ -18,7 +18,6 @@ namespace LeeTeke.WPFTest
         {
             base.OnStartup(e);
 
-          LeeTeke.WpfControl.StaticMethods.SetMessageboxExCornerRadius(new CornerRadius(4));
 
         }
     }

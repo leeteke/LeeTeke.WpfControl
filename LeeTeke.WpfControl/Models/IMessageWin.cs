@@ -13,7 +13,7 @@ namespace LeeTeke.WpfControl.Models
 
         object Value { get; set; }
 
-        bool ShowLoding { get; set; }
+        bool ShowProcess { get; set; }
 
         bool CanClose { get; set; }
 
@@ -21,9 +21,8 @@ namespace LeeTeke.WpfControl.Models
 
         object Content { get; set; }
 
-        ProgressControlMode ProcessControlMode { get; set; }
-
-        double ProcessControlValue { get; set; }
+    
+        double ProcessValue { get; set; }
 
         MessageStatus Status { get; set; }
 

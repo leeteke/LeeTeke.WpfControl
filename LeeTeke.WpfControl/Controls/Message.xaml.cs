@@ -59,17 +59,13 @@ namespace LeeTeke.WpfControl.Controls
 
         }
         public System.Windows.Window Window { get => this; }
-        public bool ShowLoding
+        public bool ShowProcess
         {
             get => loding.Visibility == Visibility.Visible;
             set => loding.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
         }
-        public ProgressControlMode ProcessControlMode
-        {
-            get => loding.Mode;
-            set => loding.Mode = value;
-        }
-        public double ProcessControlValue
+     
+        public double ProcessValue
         {
             get => loding.Value;
             set => loding.Value = value;
@@ -81,7 +77,7 @@ namespace LeeTeke.WpfControl.Controls
             set
             {
                 _status = value;
-
+                ring.Visibility = Visibility.Collapsed;
                 switch (value)
                 {
                     case MessageStatus.None:
@@ -117,9 +113,13 @@ namespace LeeTeke.WpfControl.Controls
                         icon.Text = "\xF140";
                         icon.Foreground = Application.Current.Resources["LeeColor_Stop"] as SolidColorBrush;
                         break;
-
+                    case MessageStatus.Wating:
+                        icon.Visibility = Visibility.Collapsed;
+                        ring.Visibility = Visibility.Visible;
+                        break;
                     default:
                         icon.Visibility = Visibility.Collapsed;
+                        ring.Visibility = Visibility.Collapsed;
                         break;
                 }
 
