@@ -229,7 +229,7 @@ namespace LeeTeke.WpfControl.Dependencies
         {
             if (sender is Window window && window.IsLoaded)
             {
-                var border =  window.Content as Grid;
+                var border = window.Content as Grid;
                 if (window.WindowState == WindowState.Maximized)
                 {
                     var bounds = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
@@ -270,7 +270,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         private static void Window_Deactivated(object sender, EventArgs e)
         {
-            if (sender is Window window &&window.IsLoaded)
+            if (sender is Window window && window.IsLoaded)
             {
                 var border = StaticMethods.FindVisualChild<Border>(window.Content as FrameworkElement, "PART_WinBGBorder");
 
@@ -312,7 +312,7 @@ namespace LeeTeke.WpfControl.Dependencies
         private static void Window_Activated(object sender, EventArgs e)
         {
 
-            if (sender is Window window&&window.IsLoaded)
+            if (sender is Window window && window.IsLoaded)
             {
                 var border = StaticMethods.FindVisualChild<Border>(window.Content as FrameworkElement, "PART_WinBGBorder");
 
@@ -399,7 +399,7 @@ namespace LeeTeke.WpfControl.Dependencies
                 bgGrid.Children.Add(bgBorder);
                 bgGrid.Children.Add(contentBorder);
                 window.Content = null;
-                contentBorder.Child=element;
+                contentBorder.Child = element;
                 window.Content = bgGrid;
 
                 if (CornerRadiusManager.GetIsClip(window))
@@ -423,6 +423,12 @@ namespace LeeTeke.WpfControl.Dependencies
                     {
                         Source = bgBorder,
                         Path = new PropertyPath("(0)", new DependencyProperty[] { Border.CornerRadiusProperty, }),
+                        Mode = BindingMode.OneWay
+                    });
+                    multiBinding.Bindings.Add(new Binding()
+                    {
+                        Source = bgBorder,
+                        Path = new PropertyPath(Border.BorderBrushProperty),
                         Mode = BindingMode.OneWay
                     });
 

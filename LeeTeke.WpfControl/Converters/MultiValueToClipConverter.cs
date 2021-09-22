@@ -24,7 +24,7 @@ namespace LeeTeke.WpfControl.Converters
                 if (values.Length > 2 && values[2] is CornerRadius radius)
                 {
                     ///这里得修改一下
-                    if (radius.BottomRight>0)
+                    if (radius.BottomRight > 0)
                         radius.BottomRight -= 0.5;
 
                     if (radius.TopRight > 0)

@@ -11,6 +11,7 @@
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="IsOverflow" Value="False"/>
+        
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:RippleMask}">
@@ -27,6 +28,7 @@
                                         <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualWidth"/>
                                         <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualHeight"/>
                                         <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}"  Path="CornerRadius"/>
+                             
                                     </MultiBinding>
                                 </Setter.Value>
                             </Setter>

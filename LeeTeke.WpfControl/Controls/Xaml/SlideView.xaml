@@ -20,7 +20,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:SlideView}">
-                    <Border  Background="{TemplateBinding Background}"
+                    <Border  x:Name="PART_Border" Background="{TemplateBinding Background}"
                              BorderBrush="{TemplateBinding BorderBrush}"
                              BorderThickness="{TemplateBinding BorderThickness}"
                              CornerRadius="{TemplateBinding CornerRadius}"
@@ -37,6 +37,7 @@
                                     <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualWidth"/>
                                     <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualHeight"/>
                                     <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}"  Path="CornerRadius"/>
+                                    <Binding ElementName="PART_Border"  Path="BorderThickness" Mode="OneWay"/>
                                 </MultiBinding>
                             </ScrollViewer.Clip>
                             <ItemsPresenter />

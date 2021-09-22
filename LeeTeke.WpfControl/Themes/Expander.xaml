@@ -49,6 +49,7 @@
                             <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
                             <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
                             <Binding ElementName="PART_Border"  Path="CornerRadius" Mode="OneWay"/>
+                            <Binding ElementName="PART_Border"  Path="BorderThickness" Mode="OneWay"/>
                         </MultiBinding>
                     </Setter.Value>
                 </Setter>
@@ -113,6 +114,7 @@
                             <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
                             <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
                             <Binding ElementName="PART_Border"  Path="CornerRadius" Mode="OneWay"/>
+                            <Binding ElementName="PART_Border"  Path="BorderThickness" Mode="OneWay"/>
                         </MultiBinding>
                     </Setter.Value>
                 </Setter>
@@ -175,6 +177,7 @@
                             <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
                             <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
                             <Binding ElementName="PART_Border"  Path="CornerRadius" Mode="OneWay"/>
+                            <Binding ElementName="PART_Border"  Path="BorderThickness" Mode="OneWay"/>
                         </MultiBinding>
                     </Setter.Value>
                 </Setter>
@@ -238,6 +241,7 @@
                             <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
                             <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
                             <Binding ElementName="PART_Border"  Path="CornerRadius" Mode="OneWay"/>
+                            <Binding ElementName="PART_Border"  Path="BorderThickness" Mode="OneWay"/>
                         </MultiBinding>
                     </Setter.Value>
                 </Setter>

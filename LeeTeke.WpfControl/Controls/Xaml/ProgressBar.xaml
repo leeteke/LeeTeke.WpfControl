@@ -36,6 +36,7 @@
                                     <Binding  ElementName="PART_Canvas" Path="ActualWidth"/>
                                     <Binding  ElementName="PART_Canvas" Path="ActualHeight"/>
                                     <Binding ElementName="PART_Border" Path="CornerRadius"/>
+                                    <Binding ElementName="PART_Border"  Path="BorderThickness" />
                                 </MultiBinding>
                             </Canvas.Clip>
                             <Rectangle x:Name="PART_Rectangle"
@@ -47,6 +48,7 @@
                                         <Binding  ElementName="PART_Rectangle" Path="ActualWidth"/>
                                         <Binding  ElementName="PART_Rectangle" Path="ActualHeight"/>
                                         <Binding ElementName="PART_Border" Path="CornerRadius"/>
+                                        <Binding ElementName="PART_Border"  Path="BorderThickness"/>
                                     </MultiBinding>
                                 </Rectangle.Clip>
                             </Rectangle>

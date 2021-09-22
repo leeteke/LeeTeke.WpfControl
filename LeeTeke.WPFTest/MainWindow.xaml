@@ -35,10 +35,12 @@
 
 
         <GroupBox Margin="5"
-                  leedep:CornerRadiusManager.CornerRadius="50"
+                  BorderBrush="Red"
+                  leedep:CornerRadiusManager.CornerRadius="6"
+                  BorderThickness="1"
                   leedep:CornerRadiusManager.IsClip="True"
                   >
-            <Rectangle Fill="Red"/>
+            <Rectangle Fill="Red" Width="900" Height="50"/>
         </GroupBox>
 
 

@@ -146,7 +146,7 @@
                                                 <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
                                                 <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
                                                 <Binding ElementName="border"  Path="CornerRadius" Mode="OneWay"/>
-                                           
+                                                <Binding ElementName="border"  Path="BorderThickness" Mode="OneWay"/>
                                             </MultiBinding>
                                         </Setter.Value>
                                     </Setter>
