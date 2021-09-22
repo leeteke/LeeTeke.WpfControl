@@ -33,7 +33,15 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-  
+
+        <GroupBox Margin="5"
+                  leedep:CornerRadiusManager.CornerRadius="50"
+                  leedep:CornerRadiusManager.IsClip="True"
+                  >
+            <Rectangle Fill="Red"/>
+        </GroupBox>
+
+
         <ScrollViewer Grid.Row="1" 
                       Margin="10"
                       HorizontalScrollBarVisibility="Disabled"

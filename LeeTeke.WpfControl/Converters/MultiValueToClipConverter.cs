@@ -23,6 +23,19 @@ namespace LeeTeke.WpfControl.Converters
                 Thickness borderThickness = default;
                 if (values.Length > 2 && values[2] is CornerRadius radius)
                 {
+                    ///这里得修改一下
+                    if (radius.BottomRight>0)
+                        radius.BottomRight -= 0.5;
+
+                    if (radius.TopRight > 0)
+                        radius.TopRight -= 0.5;
+
+                    if (radius.TopLeft > 0)
+                        radius.TopLeft -= 0.5;
+
+                    if (radius.BottomLeft > 0)
+                        radius.BottomLeft -= 0.5;
+
                     cornerRadius = radius;
                     if (values.Length > 3 && values[3] is Thickness thickness)
                     {
