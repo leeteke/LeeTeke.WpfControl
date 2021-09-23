@@ -13,7 +13,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
-        <Setter Property="MinHeight" Value="{DynamicResource LeeItemMinHeight}"/>
+        <Setter Property="MinHeight" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="GridViewColumnHeader">
@@ -159,7 +159,7 @@
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
 
-        <Setter Property="leedep:ListViewManager.HeaderBorderThickness" Value="0,0,0,1"/>
+        <Setter Property="leedep:ListViewManager.HeaderBorderThickness" Value="0,0,0,0"/>
         <Setter Property="leedep:ListViewManager.HeaderBorderBursh" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="leedep:ListViewManager.HeaderFreeze" Value="True"/>
 

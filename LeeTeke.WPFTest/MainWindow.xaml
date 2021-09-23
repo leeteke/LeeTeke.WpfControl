@@ -12,6 +12,7 @@
         mc:Ignorable="d"
         Title="WpfControl测试 窗口"
         Height="450"
+        d:Height="900"
         Width="600"
         x:Name="windows"
         WindowState="Normal" 
