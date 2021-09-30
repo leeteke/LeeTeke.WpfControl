@@ -275,7 +275,7 @@ namespace LeeTeke.WPFTest.ViewModels
         {
 
             _switch = !_switch;
-            StaticMethods.SetLightOrDark(_switch);
+            StaticMethods.ChangeTheme(_switch);
         }
 
     }

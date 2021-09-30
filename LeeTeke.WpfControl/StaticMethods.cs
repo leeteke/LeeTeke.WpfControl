@@ -15,11 +15,12 @@ namespace LeeTeke.WpfControl
     public class StaticMethods
     {
 
-        public static void SetLightOrDark(bool isLight)
+        public static void ChangeTheme(bool isLight)
         {
             if (isLight)
             {
                 Application.Current.Resources["LeeBrush_Background"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Background"]);
+                Application.Current.Resources["LeeBrush_Background2"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Background2"]);
                 Application.Current.Resources["LeeBrush_Forground"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_White"]);
                 Application.Current.Resources["LeeBrush_Text"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Black"]);
                 Application.Current.Resources["LeeBrush_BorderBrush"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Gray"]);
@@ -30,13 +31,18 @@ namespace LeeTeke.WpfControl
             else
             {
                 Application.Current.Resources["LeeBrush_Background"] = new SolidColorBrush(((SolidColorBrush)Application.Current.Resources["LeeBrush_BackgroundDark"]).Color);
+                Application.Current.Resources["LeeBrush_Background2"] = new SolidColorBrush(((SolidColorBrush)Application.Current.Resources["LeeBrush_BackgroundDark2"]).Color);
                 Application.Current.Resources["LeeBrush_Forground"] = new SolidColorBrush(((SolidColorBrush)Application.Current.Resources["LeeBrush_ForgroundDark"]).Color);
                 Application.Current.Resources["LeeBrush_Text"] = new SolidColorBrush(((SolidColorBrush)Application.Current.Resources["LeeBrush_TextDark"]).Color);
                 Application.Current.Resources["LeeBrush_BorderBrush"] = new SolidColorBrush(((SolidColorBrush)Application.Current.Resources["LeeBrush_BorderBrushDark"]).Color);
                 Application.Current.Resources["LeeBrush_BorderBrushMouseOver"] = new SolidColorBrush(((SolidColorBrush)Application.Current.Resources["LeeBrush_BorderBrushMouseOverDark"]).Color);
                 Application.Current.Resources["LeeBrush_Mark"] = new SolidColorBrush(((SolidColorBrush)Application.Current.Resources["LeeBrush_MarkDark"]).Color);
             }
+
+            ThemeChanged?.Invoke(null, isLight);
         }
+
+        public static event EventHandler<bool> ThemeChanged;
 
         /// <summary>
         /// 改变主题色

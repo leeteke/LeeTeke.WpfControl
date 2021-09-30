@@ -32,9 +32,16 @@
 
     <!--默认主背景色-->
     <SolidColorBrush x:Key="LeeBrush_Background" Color="{DynamicResource LeeColor_Background}"/>
-    <Color x:Key="LeeColor_Background" R="247" G="247" B="247" A="255"/>
+    <Color x:Key="LeeColor_Background" R="243" G="243" B="243" A="255"/>
+    
     <SolidColorBrush x:Key="LeeBrush_BackgroundDark" Color="{DynamicResource LeeColor_BackgroundDark}"/>
     <Color x:Key="LeeColor_BackgroundDark" R="32" G="32" B="32" A="255"/>
+
+    <SolidColorBrush x:Key="LeeBrush_Background2" Color="{DynamicResource LeeColor_Background2}"/>
+    <Color x:Key="LeeColor_Background2" R="249" G="249" B="249" A="255"/>
+
+    <SolidColorBrush x:Key="LeeBrush_BackgroundDark2" Color="{DynamicResource LeeColor_BackgroundDark2}"/>
+    <Color x:Key="LeeColor_BackgroundDark2" R="39" G="39" B="39" A="255"/>
 
     <!--默认主题色-->
     <SolidColorBrush x:Key="LeeBrush_Theme" Color="{DynamicResource LeeColor_Theme}"/>
