@@ -18,7 +18,7 @@
         leedep:WindowManager.Effect="{DynamicResource LeeShadow}"
         leedep:WindowManager.Open="True"
         BorderThickness="0"
-        Background="{DynamicResource LeeBrush_Forground}"
+        Background="{DynamicResource LeeBrush_Background2}"
         >
 
     <Grid >
@@ -52,7 +52,7 @@
                 Click="Button_Click" 
                 Cursor="Hand"/>
         <Grid x:Name="gridMain"  
-              Margin="10,0" 
+              Margin="10,0,10,10" 
               Grid.Row="1"
               Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
@@ -93,7 +93,8 @@
                         Orientation="Horizontal"
                         Grid.Row="2"
                         Grid.ColumnSpan="2"
-                        HorizontalAlignment="Right"/>
+                        HorizontalAlignment="Right"
+                        />
            
         </Grid>
 

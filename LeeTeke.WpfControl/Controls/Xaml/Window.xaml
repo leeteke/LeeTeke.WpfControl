@@ -36,7 +36,7 @@
                             <Style x:Key="TitleButton" 
                                    TargetType="{x:Type Button}" 
                                    BasedOn="{StaticResource  ColorButton}">
-                                <Setter Property="FontSize" Value="9"/>
+                                <Setter Property="FontSize" Value="10"/>
                                 <Setter Property="FontFamily" Value="{DynamicResource IconFontFamily}"/>
                                 <Setter Property="BorderThickness" Value="0"/>
                                 <Setter Property="Background" Value="Transparent"/>

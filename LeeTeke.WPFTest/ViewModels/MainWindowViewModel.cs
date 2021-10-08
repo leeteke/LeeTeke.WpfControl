@@ -245,29 +245,17 @@ namespace LeeTeke.WPFTest.ViewModels
                 Content = "正在等待服务器数据同步...",
                 Title = "测试",
                 ShowProcess = false,
-                CanClose=false,
                 Status = MessageStatus.Wating,
             };
 
-      
-            var reulst =  msg.ShowDialogAsync();
+            msg.AddOptions("测试1",1);
+            var reulst = msg.ShowDialogAsync();
 
-            await Task.Delay(1000);
-
-            msg.ShowProcess = true;
-
-            msg.Status = MessageStatus.None;
-
-            while (msg.ProcessValue<100)
-            {
-                msg.ProcessValue += 10;
-                await Task.Delay(300);
-            }
 
 
             NotifyData = new NotifyBannerShowData()
             {
-                Content = $"您选择了 {await  reulst}",
+                Content = $"您选择了 {await reulst}",
                 Status = NotifyStatus.Info
             };
         }
