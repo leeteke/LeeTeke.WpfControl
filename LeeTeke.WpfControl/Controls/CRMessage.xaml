@@ -32,6 +32,12 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
+        <Grid  Background="Transparent"
+                MouseMove="Rectangle_MouseMove">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
         <TextBlock x:Name="textTitle" 
                    Grid.ColumnSpan="2"
                    Foreground="{DynamicResource LeeBrush_Text}"
@@ -43,7 +49,6 @@
         <Button x:Name="btnClose"
                 HorizontalAlignment="Right"
                 Grid.Column="1"
-              
                 Width="35"
                 VerticalAlignment="Top"
                 Content="&#xE8BB;"
@@ -51,6 +56,7 @@
                 Style="{DynamicResource TextButton}"
                 Click="Button_Click" 
                 Cursor="Hand"/>
+        </Grid>
         <Grid x:Name="gridMain"  
               Margin="10,0,10,10" 
               Grid.Row="1"
