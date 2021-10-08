@@ -86,8 +86,8 @@
                     </TreeView.ItemTemplate>
                 </TreeView>
 
-
-
+                <leecontrol:ProgressRing Height="60"
+                                         Mode="Wating"/>
 
 
 
