@@ -238,9 +238,9 @@ namespace LeeTeke.WPFTest.ViewModels
 
         private async void TestCommandExecute(object obj)
         {
+            MessageBoxEx.Show("sa", MessageStatus.Error);
 
-
-            MessageBoxEx msg = new MessageBoxEx()
+             MessageBoxEx msg = new MessageBoxEx()
             {
                 Content = "正在等待服务器数据同步...",
                 Title = "测试",

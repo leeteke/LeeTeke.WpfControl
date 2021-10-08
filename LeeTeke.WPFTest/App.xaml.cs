@@ -18,7 +18,7 @@ namespace LeeTeke.WPFTest
         {
             base.OnStartup(e);
 
-            LeeTeke.WpfControl.MessageBoxEx.IsDefaultShowMsgCR = false;
+          //  LeeTeke.WpfControl.MessageBoxEx.IsDefaultShowMsgCR = false;
 
         }
     }

@@ -59,7 +59,7 @@ namespace LeeTeke.WpfControl
                     break;
             }
 
-            _ = message.Window.ShowDialog();
+            _ = message.ShowDialog();
             return message.Value == null ? false : (bool)message.Value;
         }
 
