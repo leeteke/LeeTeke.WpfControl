@@ -7,8 +7,8 @@
         xmlns:local="clr-namespace:LeeTeke.WpfControl.Controls"
         xmlns:syx="clr-namespace:System.Collections;assembly=System.Runtime"
         mc:Ignorable="d"
-        Width="320"
-        Height="200"
+        Width="330"
+        Height="210"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
         Closing="Window_Closing"
@@ -23,7 +23,7 @@
 
     <Grid >
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="35"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
@@ -33,11 +33,9 @@
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <TextBlock x:Name="textTitle" 
-                   FontWeight="Bold" 
-                   Height="30"
                    Grid.ColumnSpan="2"
                    Foreground="{DynamicResource LeeBrush_Text}"
-                   FontSize="15"
+                   FontSize="13"
                    VerticalAlignment="Center"
                    Margin="10,0"
                    />
@@ -45,8 +43,8 @@
         <Button x:Name="btnClose"
                 HorizontalAlignment="Right"
                 Grid.Column="1"
-                Height="30"
-                Width="30"
+              
+                Width="35"
                 VerticalAlignment="Top"
                 Content="&#xE8BB;"
                 FontFamily="{StaticResource IconFontFamily}"

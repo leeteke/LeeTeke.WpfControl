@@ -243,6 +243,7 @@ namespace LeeTeke.WPFTest.ViewModels
             MessageBoxEx msg = new MessageBoxEx()
             {
                 Content = "正在等待服务器数据同步...",
+                Title = "测试",
                 ShowProcess = false,
                 CanClose=false,
                 Status = MessageStatus.Wating,
