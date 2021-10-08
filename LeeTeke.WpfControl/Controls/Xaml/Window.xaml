@@ -17,6 +17,7 @@
         <Setter Property="WindowState" Value="Normal"/>
         <Setter Property="UseLayoutRounding" Value="True"/>
         <Setter Property="MinHeight" Value="30"/>
+        <Setter Property="TitleButtonWidth" Value="45"/>
         <Setter Property="MinWidth" Value="140"/>
         <Setter Property="CloseButtonVisibility" Value="Visible"/>
         <Setter Property="CloseButtonIsEnable" Value="True"/>
@@ -35,7 +36,6 @@
                             <Style x:Key="TitleButton" 
                                    TargetType="{x:Type Button}" 
                                    BasedOn="{StaticResource  ColorButton}">
-                                <Setter Property="Width" Value="35"/>
                                 <Setter Property="FontSize" Value="9"/>
                                 <Setter Property="FontFamily" Value="{DynamicResource IconFontFamily}"/>
                                 <Setter Property="BorderThickness" Value="0"/>
@@ -108,6 +108,7 @@
                                     <Button x:Name="WIN_Mini" 
                                             Content="&#xE921;"
                                             ToolTip="最小化"
+                                            Width="{TemplateBinding TitleButtonWidth}"
                                             Style="{StaticResource  TitleButton}"
                                             Command="SystemCommands.MinimizeWindowCommand"
                                            />
@@ -116,6 +117,7 @@
                                             Content="&#xE922;"
                                             ToolTip="最大化"
                                             Command="SystemCommands.MaximizeWindowCommand"
+                                            Width="{TemplateBinding TitleButtonWidth}"
                                             Style="{StaticResource  TitleButton}"
                                            />
 
@@ -123,10 +125,12 @@
                                         Content="&#xE923;"
                                         ToolTip="向下还原"
                                         Command="SystemCommands.RestoreWindowCommand" 
+                                            Width="{TemplateBinding TitleButtonWidth}"
                                         Style="{StaticResource  TitleButton}"
                                       />
 
                                     <Button  x:Name="WIN_Close"
+                                             Width="{TemplateBinding TitleButtonWidth}"
                                          Style="{StaticResource TitleButton}"
                                          Content="&#xE8BB;"
                                          leedep:ButtonManager.MouseOverBackground="{DynamicResource LeeBrush_RedOffice}"

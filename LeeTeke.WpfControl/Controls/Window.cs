@@ -300,6 +300,25 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
+
+
+        #region TitleButtonWidth
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public double TitleButtonWidth
+        {
+            get { return (double)GetValue(TitleButtonWidthProperty); }
+            set { SetValue(TitleButtonWidthProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for TitleButtonWidth.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TitleButtonWidthProperty =
+            DependencyProperty.Register("TitleButtonWidth", typeof(double), typeof(Window));
+        #endregion
+
+
+
         #region MyRegion
 
         private void ViewInit()
