@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace LeeTeke.WpfControl
@@ -21,7 +22,13 @@ namespace LeeTeke.WpfControl
         public static bool Show(string content, MessageStatus status = MessageStatus.None)
         {
             IMessageWin message = IsDefaultShowMsgCR ? new CRMessage() : new Message();
-            message.Content = content;
+            message.Content = new TextBox() {
+                Text = content,
+                TextWrapping = TextWrapping.Wrap,
+                VerticalContentAlignment = VerticalAlignment.Center,
+                IsReadOnly = true,
+                BorderThickness = new Thickness(0)
+            };
             message.Status = status;
             switch (status)
             {
@@ -43,7 +50,14 @@ namespace LeeTeke.WpfControl
         {
             IMessageWin message = IsDefaultShowMsgCR ? new CRMessage() : new Message();
             message.Title = title;
-            message.Content = content;
+            message.Content  = new TextBox()
+            {
+                Text = content,
+                TextWrapping = TextWrapping.Wrap,
+                VerticalContentAlignment = VerticalAlignment.Center,
+                IsReadOnly = true,
+                BorderThickness = new Thickness(0)
+            };
             message.Status = status;
             switch (status)
             {
