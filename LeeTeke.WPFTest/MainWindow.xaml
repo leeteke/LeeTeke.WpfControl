@@ -36,7 +36,7 @@
         </Grid.RowDefinitions>
 
 
-        <GroupBox Margin="5"
+        <GroupBox Margin="10"
                   BorderBrush="Red"
                   leedep:CornerRadiusManager.CornerRadius="6"
                   BorderThickness="1"
@@ -85,6 +85,29 @@
                         </HierarchicalDataTemplate>
                     </TreeView.ItemTemplate>
                 </TreeView>
+
+
+                <StackPanel Orientation="Horizontal" Height="50">
+                    <Rectangle Width="50" Fill="{DynamicResource LeeBrush_Background}" ToolTip="LeeBrush_Background"/>
+                    <Rectangle Width="50" Fill="{DynamicResource LeeBrush_Background2}" ToolTip="LeeBrush_Background2"/>
+                    <Rectangle Width="50" Fill="{DynamicResource LeeBrush_Background3}" ToolTip="LeeBrush_Background3"/>
+                    <Rectangle Width="50" Fill="{DynamicResource LeeBrush_Forground}" ToolTip="LeeBrush_Forground"/>
+                    <Rectangle Width="50" Fill="{DynamicResource LeeBrush_Text}" ToolTip="LeeBrush_Text"/>
+                    <Rectangle Width="50" Fill="{DynamicResource LeeBrush_BorderBrush}" ToolTip="LeeBrush_BorderBrush"/>
+                    <Rectangle Width="50" Fill="{DynamicResource LeeBrush_BorderBrushMouseOver}" ToolTip="LeeBrush_BorderBrushMouseOver"/>
+                    <Rectangle Width="50" Fill="{DynamicResource LeeBrush_Mark}" ToolTip="LeeBrush_Mark"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Height="50">
+                    <Rectangle Width="50" Fill="{DynamicResource LeeBrush_BackgroundDark}"  ToolTip="LeeBrush_BackgroundDark"/>
+                    <Rectangle Width="50" Fill="{DynamicResource LeeBrush_BackgroundDark2}" ToolTip="LeeBrush_BackgroundDark2"/>
+                    <Rectangle Width="50" Fill="{DynamicResource LeeBrush_BackgroundDark3}" ToolTip="LeeBrush_BackgroundDark3"/>
+                    <Rectangle Width="50" Fill="{DynamicResource LeeBrush_ForgroundDark}" ToolTip="LeeBrush_ForgroundDark"/>
+                    <Rectangle Width="50" Fill="{DynamicResource LeeBrush_TextDark}" ToolTip="LeeBrush_TextDark"/>
+                    <Rectangle Width="50" Fill="{DynamicResource LeeBrush_BorderBrushDark}" ToolTip="LeeBrush_BorderBrushDark"/>
+                    <Rectangle Width="50" Fill="{DynamicResource LeeBrush_BorderBrushMouseOverDark}" ToolTip="LeeBrush_BorderBrushMouseOverDark"/>
+                    <Rectangle Width="50" Fill="{DynamicResource LeeBrush_MarkDark}" ToolTip="LeeBrush_MarkDark"/>
+                </StackPanel>
 
                 <leecontrol:ProgressRing Height="60"
                                          Mode="Wating"/>

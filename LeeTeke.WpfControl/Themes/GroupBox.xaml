@@ -30,7 +30,6 @@
                             <Border x:Name="PART_Border" BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     Background="{TemplateBinding Background}"
-                                    Margin="{TemplateBinding Margin}"
                                     CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius),RelativeSource={RelativeSource AncestorType=GroupBox},Mode=OneWay}"
                                     Padding="{TemplateBinding Padding}">
                                 <Grid x:Name="PART_Grid"  >
@@ -58,7 +57,10 @@
                                                SnapsToDevicePixels="{DynamicResource LeeSnapsToDevicePixels}"
                                                />
                                     <ContentPresenter Content="{TemplateBinding Content}"
-                                                      Grid.Row="2" />
+                                                      Grid.Row="2" 
+                                                      Margin="{TemplateBinding Padding}"
+                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                      HorizontalAlignment="{TemplateBinding  HorizontalContentAlignment}"/>
 
                                 </Grid>
                             </Border>
@@ -89,11 +91,10 @@
             </DataTrigger>
 
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=(leedep:GroupBoxManager.BorderMode),Mode=OneWay}" Value="Internal">
-                <Setter Property="Padding"  Value="0" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type GroupBox}">
-                                <Grid  Margin="{TemplateBinding Margin}">
+                                <Grid  >
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
                                      
@@ -114,15 +115,14 @@
                                 <Border x:Name="PART_Border" BorderBrush="{TemplateBinding BorderBrush}"
                                         BorderThickness="{TemplateBinding BorderThickness}"
                                         Background="{TemplateBinding Background}"
-                                        Margin="{TemplateBinding Padding}"
                                         CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius),RelativeSource={RelativeSource AncestorType=GroupBox},Mode=OneWay}"
                                         Grid.Row="1">
-                                 
                                         <ContentPresenter  x:Name="PART_Content"
                                                            Content="{TemplateBinding Content}"
-                                                    />
-                            
-                                
+                                                           Margin="{TemplateBinding Padding}"
+                                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                           HorizontalAlignment="{TemplateBinding  HorizontalContentAlignment}"
+                                                           />
                             </Border>
                             </Grid>
                            
