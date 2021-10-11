@@ -5,12 +5,13 @@ WPF控件
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!--自定义控件需要的res-->
-                <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls.xaml"/>
-                <!--基础控件需要的res-->
-                <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes.xaml"/>
+                <!--顺序必须按照以下填写-->
                 <!--所有控件需要的颜色res-->
                 <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Colors.xaml"/>
+                <!--基础控件需要的res-->
+                <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes.xaml"/>
+                <!--自定义控件需要的res-->
+                <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
