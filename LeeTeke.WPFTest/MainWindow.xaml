@@ -76,6 +76,12 @@
                 </StackPanel.ContextMenu>
 
 
+                <Frame Height="200" 
+                       Padding="10"
+                       Content="{Binding NativePage}">
+                   
+                </Frame>
+
                 <TreeView  ItemsSource="{Binding TreeList}"
                           >
                     <TreeView.ItemTemplate>

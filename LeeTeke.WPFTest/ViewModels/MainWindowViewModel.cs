@@ -109,6 +109,20 @@ namespace LeeTeke.WPFTest.ViewModels
         }
 
 
+
+        #region 请填写属性名
+        private Page _NativePage;
+        /// <summary>
+        /// 请填写属性名
+        /// </summary>
+        public Page NativePage
+        {
+            get => _NativePage;
+            set => SetProperty(ref _NativePage, value);
+        }
+        #endregion
+
+
         #region 请填写属性名
         private ObservableCollection<TreeViewDataModel> _treeList;
         /// <summary>
@@ -231,7 +245,7 @@ namespace LeeTeke.WPFTest.ViewModels
             };
 
             Text = "123123123";
-
+            NativePage=new TestPage();
         }
 
 

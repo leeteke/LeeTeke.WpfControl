@@ -5,7 +5,6 @@
                     >
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes/Button.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 

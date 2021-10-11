@@ -176,7 +176,7 @@
                             <Setter TargetName="PART_Icon" Property="Visibility" Value="Collapsed"/>
                             <Setter TargetName="PART_Column1" Property="Width" Value="0"/>
                         </Trigger>
-                   
+                
                     </ControlTemplate.Triggers>
 
                 </ControlTemplate>

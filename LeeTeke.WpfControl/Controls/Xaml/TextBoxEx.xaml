@@ -173,20 +173,18 @@
                             <Setter TargetName="PART_ICON" Property="Cursor" Value="Hand"/>
 
                         </MultiTrigger>
-                        <DataTrigger Binding="{Binding ElementName=PART_Main,Path=IsFocused,Mode=OneWay}" Value="True">
+
+                        <Trigger SourceName="PART_Main" Property="IsFocused" Value="True">
                             <Setter TargetName="PART_PreviewText" Property="Visibility" Value="Collapsed"/>
                             <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_Theme}"/>
-                        </DataTrigger>
+                        </Trigger>
 
-
-
-                        <DataTrigger Binding="{Binding ElementName=PART_Password,Path=IsFocused,Mode=OneWay}" Value="True">
+                        <Trigger SourceName="PART_Password" Property="IsFocused" Value="True">
                             <Setter TargetName="PART_PreviewText" Property="Visibility" Value="Collapsed"/>
                             <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_Theme}"/>
-                        </DataTrigger>
+                        </Trigger>
 
-
-
+                        
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding ElementName=PART_Main,Path=IsFocused,Mode=OneWay}" Value="False"/>
