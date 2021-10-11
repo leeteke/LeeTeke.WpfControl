@@ -330,7 +330,10 @@
                            Foreground="{DynamicResource LeeBrush_Text}"/>
 
                 <TextBox x:Name="txt"
-                         leedep:TextBoxManager.EnterCommand="{Binding   TestCommand}" SelectionBrush="#FF0078D7"
+                         leedep:TextBoxManager.EnterCommand="{Binding   TestCommand}" 
+                         SelectionBrush="#FF0078D7"
+                         AcceptsReturn="True"
+                         
                          />
 
 
@@ -347,7 +350,13 @@
                                       BorderBrush="Red"
                                       />
 
-
+                <leecontrol:TextBoxEx 
+                                      Mode="IMEDispaly" 
+                                      Text="2"
+                                      BorderThickness="1"
+                             TextBlock.LineHeight="20"
+                    AcceptsReturn="True"
+                                      />
 
 
                 <ToggleButton 
