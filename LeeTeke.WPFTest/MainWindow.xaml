@@ -125,6 +125,7 @@
                     <Expander.Header>
                         <TextBlock Text="你好"
                                    Margin="0,0"
+                                   VerticalAlignment="Center"
                                    TextWrapping="Wrap"/>
                     </Expander.Header>
                     <Grid Height="100" Width="50"/>

@@ -84,7 +84,7 @@
    
         <Setter Property="ItemContainerStyle">
             <Setter.Value>
-                <Style   TargetType="ToggleButton">
+                <Style   TargetType="ToggleButton" BasedOn="{StaticResource LeeToggleButton}">
                     <Setter Property="Margin" Value="{Binding Path=ItemMargin, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
                     <Setter Property="Padding" Value="{Binding Path=ItemPadding, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>
                     <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type local:ToggleGroup}},Mode=OneWay}"/>

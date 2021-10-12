@@ -95,7 +95,8 @@
                                               HorizontalScrollBarVisibility="Disabled">
                             <controls:ToggleGroup.ItemTemplate>
                                 <DataTemplate>
-                                    <Border BorderThickness="0" Width="{Binding RelativeSource={RelativeSource   AncestorType=local:Pagination},Path=ButtonWidth,Mode=OneWay}">
+                                    <Border BorderThickness="0" 
+                                            Width="{Binding RelativeSource={RelativeSource   AncestorType=local:Pagination},Path=ButtonWidth,Mode=OneWay}">
                                         <TextBlock Text="{Binding}"
                                                    VerticalAlignment="Center"
                                                    HorizontalAlignment="Center"/>

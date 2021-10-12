@@ -24,7 +24,7 @@
             <Rectangle Width="100"
                        Height="20"
                        Fill="Red"
-                       Visibility="{Binding ElementName=test,Path=SelectedValue,Converter={StaticResource VisibilityForObjectEqualConverter},ConverterParameter={x:Static data:TestEnum.HttpsAndHSTS}}"/>
+                       />
         </StackPanel>
      
         
