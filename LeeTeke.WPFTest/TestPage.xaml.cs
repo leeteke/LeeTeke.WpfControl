@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LeeTeke.WPFTest.Datas;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,11 @@ namespace LeeTeke.WPFTest
         public TestPage()
         {
             InitializeComponent();
+            test.ItemsSource = new List<TestEnum> {
+             TestEnum.OnlyHttp,
+             TestEnum.OnlyHttps,
+             TestEnum.HttpAndHttps,
+             TestEnum.OnlyHttp};
         }
     }
 }

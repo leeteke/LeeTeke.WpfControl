@@ -5,12 +5,28 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:LeeTeke.WPFTest"
       xmlns:lee="clr-namespace:LeeTeke.WpfControl.Controls;assembly=LeeTeke.WpfControl"
+         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:data="clr-namespace:LeeTeke.WPFTest.Datas"
       mc:Ignorable="d" 
       d:DesignHeight="450" 
       d:DesignWidth="800"
       Title="TestPage">
-
+    <Page.Resources>
+        <ObjectDataProvider x:Key="HttpSSLEnum"  MethodName="GetNames"   ObjectType="{x:Type  sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="data:TestEnum"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Page.Resources>
     <Grid>
-
+        <StackPanel>
+            <ComboBox x:Name="test"/>
+            <Rectangle Width="100"
+                       Height="20"
+                       Fill="Red"
+                       Visibility="{Binding ElementName=test,Path=SelectedValue,Converter={StaticResource VisibilityForObjectEqualConverter},ConverterParameter={x:Static data:TestEnum.HttpsAndHSTS}}"/>
+        </StackPanel>
+     
+        
     </Grid>
 </Page>
