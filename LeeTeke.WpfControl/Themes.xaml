@@ -4107,7 +4107,7 @@
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     Background="{TemplateBinding Background}"
                                     CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius),RelativeSource={RelativeSource AncestorType=GroupBox},Mode=OneWay}"
-                                    Padding="{TemplateBinding Padding}">
+                                    >
                                 <Grid x:Name="PART_Grid"  >
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
