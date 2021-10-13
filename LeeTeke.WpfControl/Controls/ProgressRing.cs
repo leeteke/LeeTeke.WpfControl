@@ -71,7 +71,10 @@ namespace LeeTeke.WpfControl.Controls
         {
             SizeChanged += ProgressRing_SizeChanged;
             Loaded += ProgressRing_Loaded;
+
         }
+
+     
 
         private void ProgressRing_Loaded(object sender, RoutedEventArgs e)
         {

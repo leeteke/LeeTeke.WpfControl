@@ -1,25 +1,19 @@
-﻿using System;
+﻿using LeeTeke.WpfControl;
+using LeeTeke.WPFTest.Models;
+using Prism.Commands;
+using Prism.Mvvm;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Prism.Mvvm;
-using Prism.Commands;
-using LeeTeke.WPFTest.Models;
 using System.Windows.Media.Imaging;
-using LeeTeke.WpfControl;
-using System.IO;
-using System.Windows.Controls;
 
 namespace LeeTeke.WPFTest.ViewModels
 {
-    class MainWindowViewModel : BindableBase
+    class TestPageViewModel: BindableBase
     {
-
-        #region 属性
-
-
 
         private ObservableCollection<TestListModel> _TestList;
         /// <summary>
@@ -93,7 +87,6 @@ namespace LeeTeke.WPFTest.ViewModels
             }
         }
 
-
         private LeeTeke.WpfControl.NotifyBannerShowData _NotifyData;
         /// <summary>
         /// 请填写属性名
@@ -108,21 +101,6 @@ namespace LeeTeke.WPFTest.ViewModels
             }
         }
 
-
-
-        #region 请填写属性名
-        private Page _NativePage;
-        /// <summary>
-        /// 请填写属性名
-        /// </summary>
-        public Page NativePage
-        {
-            get => _NativePage;
-            set => SetProperty(ref _NativePage, value);
-        }
-        #endregion
-
-
         #region 请填写属性名
         private ObservableCollection<TreeViewDataModel> _treeList;
         /// <summary>
@@ -136,54 +114,16 @@ namespace LeeTeke.WPFTest.ViewModels
         #endregion
 
 
-
-        #endregion
-
-
-        #region Command
-
         public DelegateCommand<object> TestCommand { get; set; }
-
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public DelegateCommand ThemeChangedCommand => new(ThemeChangedCommandExecute);
-
-
-
-        /// <summary>
-        /// 命令注释
-        /// </summary>
-        public DelegateCommand PageChangedCommand => new(PageChangedCommandExecute);
-     
-
-
-        #endregion
-
-        private Page _testPage= new TestPage();
-        private bool _switch = false;
-        private bool _page = false;
-        public MainWindowViewModel()
+        public TestPageViewModel()
         {
-            Init();
-
             TestCommand = new DelegateCommand<object>(TestCommandExecute);
-        }
-
-
-
-        private void Init()
-        {
-
             TestList = new ObservableCollection<TestListModel>()
             {
                 new TestListModel(){  Title="测试1", Boolen=true, Image=new BitmapImage(new Uri("https://nie.res.netease.com/r/pic/20200629/3e654b20-5b71-41d5-88a1-a8c814141030.jpg"))},
                 new TestListModel(){  Title="测试2", Boolen=false, Image=new BitmapImage(new Uri("https://nie.res.netease.com/r/pic/20200629/4dd8e4fd-c8a3-4591-8b5f-f1476f2bc129.jpg"))},
                 new TestListModel(){  Title="测试3", Boolen=true, Image=new BitmapImage(new Uri("https://nie.res.netease.com/r/pic/20200317/16005c2f-d749-465f-a05d-3dcbba024f22.jpg"))},
             };
-
 
             TreeList = new ObservableCollection<TreeViewDataModel>();
 
@@ -253,16 +193,14 @@ namespace LeeTeke.WPFTest.ViewModels
             };
 
             Text = "123123123";
-           
         }
-
 
 
         private async void TestCommandExecute(object obj)
         {
             MessageBoxEx.Show("saasddddddddddddddddddddddddddddddddddddddddaaaaaaaaaaaaaaaaaaaaaaaaaaa", MessageStatus.Error);
 
-             MessageBoxEx msg = new MessageBoxEx()
+            MessageBoxEx msg = new MessageBoxEx()
             {
                 Content = "正在等待服务器数据同步...",
                 Title = "测试",
@@ -270,7 +208,7 @@ namespace LeeTeke.WPFTest.ViewModels
                 Status = MessageStatus.Wating,
             };
 
-            msg.AddOptions("测试1",1);
+            msg.AddOptions("测试1", 1);
             var reulst = msg.ShowDialogAsync();
 
 
@@ -281,31 +219,5 @@ namespace LeeTeke.WPFTest.ViewModels
                 Status = NotifyStatus.Info
             };
         }
-
-        private void ThemeChangedCommandExecute()
-        {
-
-            _switch = !_switch;
-            StaticMethods.ChangeTheme(_switch);
-     
-        }
-
-
-        /// <summary>
-        /// 命令注释_Execute
-        /// </summary>
-        private void PageChangedCommandExecute()
-        {
-            _page = !_page;
-            if (_page)
-            {
-                NativePage = _testPage;
-            }
-            else
-            {
-                NativePage = null;
-            }
-        }
-
     }
 }

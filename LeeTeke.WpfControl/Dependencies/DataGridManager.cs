@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
@@ -190,6 +191,24 @@ namespace LeeTeke.WpfControl.Dependencies
         // Using a DependencyProperty as the backing store for HeaderFontWeight.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty HeaderFontWeightProperty =
             DependencyProperty.RegisterAttached("HeaderFontWeight", typeof(FontWeight), typeof(DataGridManager));
+        #endregion
+
+
+
+        #region HeaderEffect
+        public static Effect GetHeaderEffect(DependencyObject obj)
+        {
+            return (Effect)obj.GetValue(HeaderEffectProperty);
+        }
+
+        public static void SetHeaderEffect(DependencyObject obj, Effect value)
+        {
+            obj.SetValue(HeaderEffectProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for HeaderEffect.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HeaderEffectProperty =
+            DependencyProperty.RegisterAttached("HeaderEffect", typeof(Effect), typeof(DataGridManager));
         #endregion
 
 
@@ -587,59 +606,6 @@ namespace LeeTeke.WpfControl.Dependencies
 
         #endregion
 
-
-
-
-        #region AutoGenerateCheckBoxStyle
-        public static Style GetAutoGenerateCheckBoxStyle(DependencyObject obj)
-        {
-            return (Style)obj.GetValue(AutoGenerateCheckBoxStyleProperty);
-        }
-
-        public static void SetAutoGenerateCheckBoxStyle(DependencyObject obj, Style value)
-        {
-            obj.SetValue(AutoGenerateCheckBoxStyleProperty, value);
-        }
-
-        public static readonly DependencyProperty AutoGenerateCheckBoxStyleProperty =
-            DependencyProperty.RegisterAttached("AutoGenerateCheckBoxStyle", typeof(Style), typeof(DataGridManager));
-
-
-        #endregion
-
-        #region  AutoGenerateComboxStyle
-        public static Style GetAutoGenerateComboxStyle(DependencyObject obj)
-        {
-            return (Style)obj.GetValue( AutoGenerateComboxStyleProperty);
-        }
-
-        public static void SetAutoGenerateComboxStyle(DependencyObject obj, Style value)
-        {
-            obj.SetValue( AutoGenerateComboxStyleProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for  AutoGenerateComboxStyle.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty AutoGenerateComboxStyleProperty =
-            DependencyProperty.RegisterAttached("AutoGenerateComboxStyle", typeof(Style), typeof(DataGridManager));
-        #endregion
-
-        #region AutoGenerateTextBoxStyle
-        public static Style GetAutoGenerateTextBoxStyle(DependencyObject obj)
-        {
-            return (Style)obj.GetValue(AutoGenerateTextBoxStyleProperty);
-        }
-
-        public static void SetAutoGenerateTextBoxStyle(DependencyObject obj, Style value)
-        {
-            obj.SetValue(AutoGenerateTextBoxStyleProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for AutoGenerateTextBoxStyle.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty AutoGenerateTextBoxStyleProperty =
-            DependencyProperty.RegisterAttached("AutoGenerateTextBoxStyle", typeof(Style), typeof(DataGridManager));
-        #endregion
-
-
         #region AutoGenerateImageStyle
         public static Style GetAutoGenerateImageStyle(DependencyObject obj)
         {
@@ -656,21 +622,6 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("AutoGenerateImageStyle", typeof(Style), typeof(DataGridManager));
         #endregion
 
-
-        #region SelectedItems
-        public static IList GetSelectedItems(DependencyObject obj)
-        {
-            return (IList)obj.GetValue(SelectedItemsProperty);
-        }
-
-        public static void SetSelectedItems(DependencyObject obj, IList value)
-        {
-            obj.SetValue(SelectedItemsProperty, value);
-        }
-
-        public static readonly DependencyProperty SelectedItemsProperty =
-            DependencyProperty.RegisterAttached("SelectedItems", typeof(IList), typeof(DataGridManager));
-        #endregion
 
         #region (internal)CheckBoxHook
         internal static object GetCheckBoxHook(DependencyObject obj)
@@ -694,7 +645,7 @@ namespace LeeTeke.WpfControl.Dependencies
                 if (e.NewValue is DataGrid data)
                 {
                     check.Click += Check_Click;
-    
+
                     data.SelectedCellsChanged += (es, ew) =>
                     {
                         check.IsChecked = data.SelectedItems.Count == data.Items.Count;
@@ -711,12 +662,12 @@ namespace LeeTeke.WpfControl.Dependencies
         {
             if (sender is CheckBox check && GetCheckBoxHook(check) is DataGrid datagrid)
             {
-                if (check.IsChecked==true)
+                if (check.IsChecked == true)
                 {
                     datagrid.SelectAll();
                 }
 
-                if (check.IsChecked==false)
+                if (check.IsChecked == false)
                 {
                     datagrid.SelectedIndex = -1;
                 }
@@ -730,113 +681,271 @@ namespace LeeTeke.WpfControl.Dependencies
         #endregion
 
 
-        #region (Internal) DataGridHook
-        internal static bool GetDataGridHook(DependencyObject obj)
+        #region TextColumnStyle
+        public static Style GetTextColumnStyle(DependencyObject obj)
         {
-            return (bool)obj.GetValue(DataGridHookProperty);
+            return (Style)obj.GetValue(TextColumnStyleProperty);
         }
 
-        internal static void SetDataGridHook(DependencyObject obj, bool value)
+        public static void SetTextColumnStyle(DependencyObject obj, Style value)
         {
-            obj.SetValue(DataGridHookProperty, value);
+            obj.SetValue(TextColumnStyleProperty, value);
         }
 
-        internal static readonly DependencyProperty DataGridHookProperty =
-            DependencyProperty.RegisterAttached("DataGridHook", typeof(bool), typeof(DataGridManager), new PropertyMetadata(OnDataGridHookChanged));
+        // Using a DependencyProperty as the backing store for TextColumnStyle.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TextColumnStyleProperty =
+            DependencyProperty.RegisterAttached("TextColumnStyle", typeof(Style), typeof(DataGridManager), new PropertyMetadata(OnTextColumnStyleChanged));
 
-        private static void OnDataGridHookChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnTextColumnStyleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var dataGrid = d as DataGrid;
-            dataGrid.AutoGeneratingColumn += DataGrid_AutoGeneratingColumn;
-            SetSelectedItems(dataGrid, dataGrid.SelectedItems);
-        }
-
-        private static void DataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        {
-            var dataGrid = sender as DataGrid;
-
-            #region Get User Custom DataGridColumnAttribute
-
-            var visibility = e.Column.Visibility;
-            var width = e.Column.Width;
-            var header = e.Column.Header;
-            var readOnly = e.Column.IsReadOnly;
-            var bindingMode = BindingMode.TwoWay;
-            var updateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-
-
-            #endregion
-
-            if (e.PropertyType.IsEnum)
+            if (d is DataGrid grid && e.OldValue == null && e.NewValue != null)
             {
-                var newColumn = new DataGridComboBoxColumn()
-                {
-                    Width = width,
-                    Header = header,
-                    IsReadOnly = readOnly,
-                    Visibility = visibility,
-                };
-
-                newColumn.ItemsSource = Enum.GetValues(e.PropertyType).Cast<Enum>();
-                newColumn.SelectedItemBinding = new Binding(e.PropertyName) { Mode = bindingMode, UpdateSourceTrigger = updateSourceTrigger };
-                newColumn.EditingElementStyle = GetAutoGenerateComboxStyle(dataGrid);
-
-                e.Column = newColumn;
+                UpdateTextColumnStyles(grid);
             }
-            else if (e.PropertyType == typeof(bool))
+        }
+        #endregion
+
+        #region EditingTextColumnStyle
+        public static Style GetEditingTextColumnStyle(DependencyObject obj)
+        {
+            return (Style)obj.GetValue(EditingTextColumnStyleProperty);
+        }
+
+        public static void SetEditingTextColumnStyle(DependencyObject obj, Style value)
+        {
+            obj.SetValue(EditingTextColumnStyleProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for EditingTextColumnStyle.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EditingTextColumnStyleProperty =
+            DependencyProperty.RegisterAttached("EditingTextColumnStyle", typeof(Style), typeof(DataGridManager), new PropertyMetadata(OnTextColumnStyleChanged));
+        #endregion
+
+
+        #region ComboBoxColumnStyle
+        public static Style GetComboBoxColumnStyle(DependencyObject obj)
+        {
+            return (Style)obj.GetValue(ComboBoxColumnStyleProperty);
+        }
+
+        public static void SetComboBoxColumnStyle(DependencyObject obj, Style value)
+        {
+            obj.SetValue(ComboBoxColumnStyleProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for ComboBoxColumnStyle.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ComboBoxColumnStyleProperty =
+            DependencyProperty.RegisterAttached("ComboBoxColumnStyle", typeof(Style), typeof(DataGridManager), new PropertyMetadata(OnComboBoxColumnStyleChanged));
+
+        private static void OnComboBoxColumnStyleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is DataGrid grid && e.OldValue == null && e.NewValue != null)
             {
-                var newColumn = new DataGridCheckBoxColumn()
-                {
-                    Width = width,
-                    Header = header,
-                    IsReadOnly = readOnly,
-                    Visibility = visibility,
-                };
-                newColumn.Binding = new Binding(e.PropertyName) { Mode = bindingMode, UpdateSourceTrigger = updateSourceTrigger };
-                newColumn.ElementStyle = GetAutoGenerateCheckBoxStyle(dataGrid);
-                newColumn.EditingElementStyle = GetAutoGenerateCheckBoxStyle(dataGrid);
-                e.Column = newColumn;
+                UpdateComboBoxColumnStyles(grid);
             }
-            else if (e.PropertyType == typeof(ImageSource))
+        }
+        #endregion
+
+
+        #region EditingComboBoxColumnStyle
+        public static Style GetEditingComboBoxColumnStyle(DependencyObject obj)
+        {
+            return (Style)obj.GetValue(EditingComboBoxColumnStyleProperty);
+        }
+
+        public static void SetEditingComboBoxColumnStyle(DependencyObject obj, Style value)
+        {
+            obj.SetValue(EditingComboBoxColumnStyleProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for EditingComboBoxColumnStyle.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EditingComboBoxColumnStyleProperty =
+            DependencyProperty.RegisterAttached("EditingComboBoxColumnStyle", typeof(Style), typeof(DataGridManager), new PropertyMetadata(OnComboBoxColumnStyleChanged));
+        #endregion
+
+
+        #region CheckBoxColumnStyle
+        public static Style GetCheckBoxColumnStyle(DependencyObject obj)
+        {
+            return (Style)obj.GetValue(CheckBoxColumnStyleProperty);
+        }
+
+        public static void SetCheckBoxColumnStyle(DependencyObject obj, Style value)
+        {
+            obj.SetValue(CheckBoxColumnStyleProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for CheckBoxColumnStyle.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CheckBoxColumnStyleProperty =
+            DependencyProperty.RegisterAttached("CheckBoxColumnStyle", typeof(Style), typeof(DataGridManager), new PropertyMetadata(OnCheckBoxColumnStyleChanged));
+
+        private static void OnCheckBoxColumnStyleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is DataGrid grid && e.OldValue == null && e.NewValue != null)
+            {
+                UpdateCheckBoxColumnStyles(grid);
+            }
+        }
+        #endregion
+
+
+        #region EditingCheckBoxColumnStyle
+        public static Style GetEditingCheckBoxColumnStyle(DependencyObject obj)
+        {
+            return (Style)obj.GetValue(EditingCheckBoxColumnStyleProperty);
+        }
+
+        public static void SetEditingCheckBoxColumnStyle(DependencyObject obj, Style value)
+        {
+            obj.SetValue(EditingCheckBoxColumnStyleProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for EditingCheckBoxColumnStyle.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EditingCheckBoxColumnStyleProperty =
+            DependencyProperty.RegisterAttached("EditingCheckBoxColumnStyle", typeof(Style), typeof(DataGridManager));
+        #endregion
+
+        #region ApplyAutoGeneratedStyle
+        public static bool GetApplyAutoGeneratedStyle(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(ApplyAutoGeneratedStyleProperty);
+        }
+
+        public static void SetApplyAutoGeneratedStyle(DependencyObject obj, bool value)
+        {
+            obj.SetValue(ApplyAutoGeneratedStyleProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for ApplyAutoGeneratedStyle.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ApplyAutoGeneratedStyleProperty =
+            DependencyProperty.RegisterAttached("ApplyAutoGeneratedStyle", typeof(bool), typeof(DataGridManager), new PropertyMetadata(OnApplyAutoGeneratedStyleChanged));
+
+        private static void OnApplyAutoGeneratedStyleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is DataGrid grid)
+            {
+                if ((bool)e.NewValue)
+                {
+                    if (grid.AutoGenerateColumns)
+                    {
+                        grid.AutoGeneratedColumns += Grid_AutoGeneratedColumns;
+                        grid.AutoGeneratingColumn += Grid_AutoGeneratingColumn;
+                        return;
+                    }
+
+                    UpdateTextColumnStyles(grid);
+                    UpdateComboBoxColumnStyles(grid);
+                    UpdateCheckBoxColumnStyles(grid);
+                }
+                else
+                {
+                    grid.AutoGeneratedColumns -= Grid_AutoGeneratedColumns;
+                    grid.AutoGeneratingColumn -= Grid_AutoGeneratingColumn;
+                }
+            }
+        }
+
+        private static void Grid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyType == typeof(ImageSource) && sender is DataGrid dataGrid)
             {
                 var newColumn = new DataGridTemplateColumn()
                 {
-                    Width = width,
-                    Header = header,
-                    IsReadOnly = readOnly,
-                    Visibility = visibility,
+                    Width = e.Column.Width,
+                    Header = e.Column.Header,
+                    IsReadOnly = e.Column.IsReadOnly,
+                    Visibility = e.Column.Visibility,
                 };
 
 
-                var dt= new DataTemplate();
+                var dt = new DataTemplate();
                 var fef = new FrameworkElementFactory(typeof(Image));
-                fef.SetBinding(Image.SourceProperty, new Binding(e.PropertyName) { Mode = bindingMode, UpdateSourceTrigger = updateSourceTrigger });
+                fef.SetBinding(Image.SourceProperty, new Binding(e.PropertyName) { Mode = BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
                 fef.SetValue(Image.StyleProperty, GetAutoGenerateImageStyle(dataGrid));
                 dt.VisualTree = fef;
                 newColumn.CellTemplate = dt;
                 newColumn.CellEditingTemplate = dt;
                 e.Column = newColumn;
             }
-            else
+        }
+        #endregion
+
+
+        private static void Grid_AutoGeneratedColumns(object sender, System.EventArgs e)
+        {
+            var grid = (DataGrid)sender;
+            UpdateTextColumnStyles(grid);
+            UpdateComboBoxColumnStyles(grid);
+            UpdateCheckBoxColumnStyles(grid);
+        }
+        private static void UpdateTextColumnStyles(DataGrid grid)
+        {
+            var textColumnStyle = GetTextColumnStyle(grid);
+            var editingTextColumnStyle = GetEditingTextColumnStyle(grid);
+
+            if (textColumnStyle != null)
             {
-                var newColumn = new DataGridTextColumn()
+                foreach (var column in grid.Columns.OfType<DataGridTextColumn>())
                 {
-                    Width = width,
-                    Header = header,
-                    IsReadOnly = readOnly,
-                    Visibility = visibility,
-                };
+                    column.ElementStyle = textColumnStyle;
+                }
+            }
 
-                newColumn.Binding = new Binding(e.PropertyName) { Mode = bindingMode, UpdateSourceTrigger = updateSourceTrigger };
+            if (editingTextColumnStyle != null)
+            {
+                foreach (var column in grid.Columns.OfType<DataGridTextColumn>())
+                {
 
-                newColumn.EditingElementStyle = GetAutoGenerateTextBoxStyle(dataGrid);
-            
+                    column.EditingElementStyle = editingTextColumnStyle;
+                }
+            }
+        }
+        private static void UpdateComboBoxColumnStyles(DataGrid grid)
+        {
+            var comboBoxColumnStyle = GetComboBoxColumnStyle(grid);
+            var editingComboBoxColumnStyle = GetEditingComboBoxColumnStyle(grid);
 
-                e.Column = newColumn;
+            if (comboBoxColumnStyle != null)
+            {
+                foreach (var column in grid.Columns.OfType<DataGridComboBoxColumn>())
+                {
+               
+
+                    column.ElementStyle = comboBoxColumnStyle;
+                }
+            }
+
+            if (editingComboBoxColumnStyle != null)
+            {
+                foreach (var column in grid.Columns.OfType<DataGridComboBoxColumn>())
+                {
+
+                    column.EditingElementStyle = editingComboBoxColumnStyle;
+                }
             }
         }
 
-        #endregion
+        private static void UpdateCheckBoxColumnStyles(DataGrid grid)
+        {
+            var checkBoxColumnStyle = GetCheckBoxColumnStyle(grid);
+            var editingCheckBoxColumnStyle = GetEditingCheckBoxColumnStyle(grid);
 
+            if (checkBoxColumnStyle != null)
+            {
+                foreach (var column in grid.Columns.OfType<DataGridCheckBoxColumn>())
+                {
+
+                    column.ElementStyle = checkBoxColumnStyle;
+                }
+            }
+
+            if (editingCheckBoxColumnStyle != null)
+            {
+                foreach (var column in grid.Columns.OfType<DataGridCheckBoxColumn>())
+                {
+                    column.EditingElementStyle = editingCheckBoxColumnStyle;
+                }
+            }
+        }
     }
 }

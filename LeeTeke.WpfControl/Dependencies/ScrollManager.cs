@@ -151,6 +151,41 @@ namespace LeeTeke.WpfControl.Dependencies
         }
         #endregion
 
+
+        #region TopContent
+        public static object GetTopContent(DependencyObject obj)
+        {
+            return (object)obj.GetValue(TopContentProperty);
+        }
+
+        public static void SetTopContent(DependencyObject obj, object value)
+        {
+            obj.SetValue(TopContentProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for TopContent.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TopContentProperty =
+            DependencyProperty.RegisterAttached("TopContent", typeof(object), typeof(ScrollManager));
+        #endregion
+
+
+        #region LeftContent
+        public static object GetLeftContent(DependencyObject obj)
+        {
+            return (object)obj.GetValue(LeftContentProperty);
+        }
+
+        public static void SetLeftContent(DependencyObject obj, object value)
+        {
+            obj.SetValue(LeftContentProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for LeftContent.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LeftContentProperty =
+            DependencyProperty.RegisterAttached("LeftContent", typeof(object), typeof(ScrollManager));
+        #endregion
+
+
     }
         
 }

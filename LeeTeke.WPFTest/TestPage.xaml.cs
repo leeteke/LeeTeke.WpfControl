@@ -1,4 +1,5 @@
 ﻿using LeeTeke.WPFTest.Datas;
+using LeeTeke.WPFTest.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,11 +25,7 @@ namespace LeeTeke.WPFTest
         public TestPage()
         {
             InitializeComponent();
-            test.ItemsSource = new List<TestEnum> {
-             TestEnum.OnlyHttp,
-             TestEnum.OnlyHttps,
-             TestEnum.HttpAndHttps,
-             TestEnum.OnlyHttp};
+            this.DataContext = new TestPageViewModel();
         }
     }
 }

@@ -480,7 +480,8 @@ namespace LeeTeke.WpfControl.Controls
 
                 if (selectedIndex > -1)
                 {
-                    PageIndex = (int)group.SelectedValue;
+                    if (group.SelectedValue is int pk)
+                        PageIndex = pk;
                 }
             }
         }
