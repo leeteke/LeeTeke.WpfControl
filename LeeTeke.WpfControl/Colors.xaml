@@ -10,6 +10,7 @@
     <DropShadowEffect x:Key="LeeShadow4" BlurRadius="25" ShadowDepth="8" Direction="270" Color="#88000000" Opacity=".2" RenderingBias="Performance" />
     <DropShadowEffect x:Key="LeeShadow5" BlurRadius="35" ShadowDepth="13" Direction="270" Color="#88000000" Opacity=".2" RenderingBias="Performance" />
 
+    <BlurEffect x:Key="LeeBlurEffect"/>
     <sys:Boolean x:Key="LeeSnapsToDevicePixels">True</sys:Boolean>
     <Style x:Key="LeeFocusVisual">
         <Setter Property="Control.Template">

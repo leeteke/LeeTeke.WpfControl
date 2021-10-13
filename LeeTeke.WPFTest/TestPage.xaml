@@ -149,9 +149,11 @@
                            leedep:CheckBoxManager.CheckedContent="你选中了我"
                             />
 
-                <CheckBox  Content="你好"
+                <CheckBox   Content="你好"
                            Margin="5"
                            leedep:CheckBoxManager.CheckedContent="你选中了我"
+                            leedep:EffectManager.Effect="{StaticResource  LeeBlurEffect}"
+                            leedep:EffectManager.Open="{Binding RelativeSource={RelativeSource Mode=Self},Path=IsChecked}"
                             />
                 <ComboBox IsEditable="False"  
                           Margin="5"
