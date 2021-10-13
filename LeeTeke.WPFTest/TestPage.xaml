@@ -120,8 +120,9 @@
                     </leecontrol:ScrollBanner.ContextMenu>
                 </leecontrol:ScrollBanner>
 
-                <leecontrol:Pagination MaxPageCount="10"
+                <leecontrol:Pagination MaxPageCount="2"
                                        DisplayPages="4"
+                                       PageIndex="3"
                                        />
 
                 <Button   Height="30" 

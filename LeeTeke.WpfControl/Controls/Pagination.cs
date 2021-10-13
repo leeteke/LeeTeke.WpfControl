@@ -357,6 +357,10 @@ namespace LeeTeke.WpfControl.Controls
                 this.Visibility = Visibility.Collapsed;
                 return;
             }
+            else
+            {
+                this.Visibility = Visibility.Visible;
+            }
 
             ///如果小于1 则进行判断 自动
 
@@ -415,7 +419,18 @@ namespace LeeTeke.WpfControl.Controls
             {
                 return new List<int>() { number };
             }
+
+    
+
             List<int> result = new();
+            if (dispalyNumber>maxCount)
+            {
+                for (int i = 0; i < maxCount; i++)
+                {
+                    result.Add(i+1);
+                }
+                return result;
+            }
 
             int center = (int)Math.Round((double)(dispalyNumber / 2), MidpointRounding.AwayFromZero);
 
@@ -488,9 +503,9 @@ namespace LeeTeke.WpfControl.Controls
 
         private void _comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (sender is ComboBox comboBox)
+            if (sender is ComboBox comboBox&& comboBox.SelectedValue is int pk)
             {
-                PageIndex = (int)comboBox.SelectedValue;
+                PageIndex = pk;
             }
 
         }
