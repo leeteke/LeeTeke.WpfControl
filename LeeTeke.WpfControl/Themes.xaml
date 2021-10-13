@@ -3012,8 +3012,8 @@
                                 <Condition Property="IsSelected" Value="true" />
                                 <Condition Property="Selector.IsSelectionActive" Value="false" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="{DynamicResource LeeBrush_Primary}"/>
-                            <Setter Property="Foreground" Value="{DynamicResource LeeBrush_White}"  />
+                            <Setter Property="Background" Value="{Binding Path=(leedep:DataGridManager.SelectedBackground),RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},Mode=OneWay}" />
+                            <Setter Property="Foreground" Value="{Binding Path=(leedep:DataGridManager.SelectedForeground),RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},Mode=OneWay}" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -3036,6 +3036,7 @@
         <Setter Property="leedep:DataGridManager.MouseOverBackground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},Path=(leedep:DataGridManager.MouseOverBackground),Mode=OneWay}"/>
         <Setter Property="leedep:DataGridManager.SelectedBackground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},Path=(leedep:DataGridManager.SelectedBackground),Mode=OneWay}"/>
         <Setter Property="leedep:DataGridManager.SelectedBorderBrush" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},Path=(leedep:DataGridManager.SelectedBorderBrush),Mode=OneWay}"/>
+        <Setter Property="leedep:DataGridManager.SelectedForeground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},Path=(leedep:DataGridManager.SelectedForeground),Mode=OneWay}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridRow}">
@@ -3106,8 +3107,8 @@
                                 <Condition Property="IsSelected" Value="true" />
                                 <Condition Property="Selector.IsSelectionActive" Value="false" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="{DynamicResource LeeBrush_Primary}"/>
-                            <Setter Property="Foreground" Value="{DynamicResource LeeBrush_White}" />
+                            <Setter Property="Background" Value="{Binding Path=(leedep:DataGridManager.SelectedBackground),RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},Mode=OneWay}" />
+                            <Setter Property="Foreground" Value="{Binding Path=(leedep:DataGridManager.SelectedForeground),RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},Mode=OneWay}" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -3124,11 +3125,13 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridRowHeader}">
                     <Grid Margin="{TemplateBinding Margin}" >
-                        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                        <Border x:Name="PART_Border"
+                                BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 Background="{TemplateBinding Background}" 
                                 Padding="{TemplateBinding Padding}" >
-                            <ContentPresenter RecognizesAccessKey="True"
+                            <ContentPresenter x:Name="PART_Content"
+                                                   RecognizesAccessKey="True"
                                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -3150,11 +3153,19 @@
                                Height="2"
                                Cursor="SizeNS"/>
                     </Grid>
+
+               
+            
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding IsSelected,RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" Value="True">
+                            <Setter  TargetName="PART_Content" Property="TextElement.Foreground"  Value="{Binding Path=(leedep:DataGridManager.SelectedForeground),RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}},Mode=OneWay}" />
+                        </DataTrigger>
+              
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-
     <Style x:Key="LeeDataGrid" TargetType="{x:Type DataGrid}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
@@ -3180,7 +3191,7 @@
         <Setter Property="leedep:DataGridManager.ColumnVerticalContentAlignment"   Value="Center" />
         <Setter Property="leedep:DataGridManager.ColumnHorizontalContentAlignment"    Value="Center" />
         <Setter Property="leedep:DataGridManager.SelectedBackground"    Value="{DynamicResource LeeBrush_Theme}" />
-        <Setter Property="leedep:DataGridManager.SelectedForeground"    Value="Red" />
+        <Setter Property="leedep:DataGridManager.SelectedForeground"    Value="White" />
         <Setter Property="leedep:DataGridManager.MouseOrverForeground"    Value="{x:Null}" />
         <Setter Property="leedep:DataGridManager.MouseOverBackground"    Value="{DynamicResource LeeBrush_Mark}" />
         <Setter Property="leedep:DataGridManager.HeaderBackground"   Value="Transparent" />
@@ -3621,6 +3632,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    
     <ControlTemplate x:Key="LeeDatePickerTextBoxTemplate"      
                      TargetType="{x:Type DatePickerTextBox}">
         <Grid>

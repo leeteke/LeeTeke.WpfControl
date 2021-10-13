@@ -176,12 +176,9 @@
                           CanUserDeleteRows="False"
                           Margin="5"
                           IsReadOnly="False"
+                          leedep:DataGridManager.ShowRowNumber="True"
                          >
-                    <DataGrid.RowHeaderTemplate>
-                        <DataTemplate>
-                            <CheckBox IsChecked="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}},Path=IsSelected}"/>
-                        </DataTemplate>
-                    </DataGrid.RowHeaderTemplate>
+              
 
                 </DataGrid>
 
