@@ -10,7 +10,7 @@
         Width="330"
         Height="210"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterOwner"
+        WindowStartupLocation="CenterScreen"
         Closing="Window_Closing"
         leedep:CornerRadiusManager.CornerRadius="8"
         leedep:CornerRadiusManager.IsClip="True"

@@ -1231,7 +1231,7 @@
                                         <Track.Thumb>
                                             <Thumb Foreground="{TemplateBinding Foreground}"
                                                    Background="Transparent"
-                                                   Style="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:SliderManager.TrackThumbStyle),Mode=OneTime}"
+                                                   Style="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:SliderManager.TrackThumbStyle),Mode=OneWay}"
                                                    />
                                         </Track.Thumb>
                                         <Track.IncreaseRepeatButton>
@@ -1345,7 +1345,7 @@
                                         <Track.Thumb>
                                             <Thumb Foreground="{TemplateBinding Foreground}"
                                                    Background="Transparent"
-                                                   Style="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:SliderManager.TrackThumbStyle),Mode=OneTime}"
+                                                   Style="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:SliderManager.TrackThumbStyle),Mode=OneWay}"
                                                    />
                                         </Track.Thumb>
                                         <Track.IncreaseRepeatButton>

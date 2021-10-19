@@ -129,7 +129,22 @@ namespace LeeTeke.WpfControl.Controls
         public Message()
         {
             InitializeComponent();
-            Owner = Application.Current.MainWindow;
+            try
+            {
+                foreach (Window item in Application.Current.Windows)
+                {
+                    if (item.IsActive)
+                    {
+                        Owner = item;
+                        WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                        break;
+                    }
+                }
+            }
+            catch 
+            {
+            }
+     
             CanClose = true;
         }
 
