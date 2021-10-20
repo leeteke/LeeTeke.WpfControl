@@ -101,7 +101,7 @@
                                                    WindowChrome.IsHitTestVisibleInChrome="True" 
                                                    Grid.Column="1"
                                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                   HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                    Content="{TemplateBinding TitleContent}"/>
                                 <StackPanel  x:Name="WIN_ButtonPanel" 
                                              Background="{TemplateBinding WinButtonPanelBackground}"
