@@ -15,6 +15,7 @@
         <Setter Property="TitleBackground" Value="{DynamicResource LeeBrush_Forground}"/>
         <Setter Property="WinTitlePanelVerticalAlignment" Value="Stretch"/>
         <Setter Property="WinButtonPanelVerticalAlignment" Value="Stretch"/>
+        <Setter Property="TitleForeground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="TitleHeight" Value="30"/>
         <Setter Property="WindowState" Value="Normal"/>
         <Setter Property="UseLayoutRounding" Value="True"/>
@@ -80,6 +81,7 @@
                                             Background="Transparent"
                                             Margin="10,0,0,0"
                                             MinHeight="0"
+                                           
                                             WindowChrome.IsHitTestVisibleInChrome="True"
                                             BorderThickness="0"
                                             VerticalAlignment="Center">
@@ -93,6 +95,7 @@
                                     <TextBlock x:Name="WIN_Title"
                                                Text="{TemplateBinding Title}" 
                                                Padding="10,0,0,0" 
+                                                Foreground="{TemplateBinding TitleForeground}"
                                                VerticalAlignment="Center"/>
                                     
                                 </StackPanel>
@@ -110,11 +113,13 @@
                                              UseLayoutRounding="True" 
                                              Grid.Column="2" 
                                               MinHeight="30"
+                                             
                                              Orientation="Horizontal">
 
                                     <Button x:Name="WIN_Mini" 
                                             Content="&#xE921;"
                                             ToolTip="最小化"
+                                            Foreground="{TemplateBinding TitleForeground}"
                                             Width="{TemplateBinding TitleButtonWidth}"
                                             Style="{StaticResource  TitleButton}"
                                             Command="SystemCommands.MinimizeWindowCommand"
@@ -123,6 +128,7 @@
                                     <Button x:Name="WIN_Max" 
                                             Content="&#xE922;"
                                             ToolTip="最大化"
+                                            Foreground="{TemplateBinding TitleForeground}"
                                             Command="SystemCommands.MaximizeWindowCommand"
                                             Width="{TemplateBinding TitleButtonWidth}"
                                             Style="{StaticResource  TitleButton}"
@@ -131,6 +137,7 @@
                                     <Button x:Name="WIN_Restore" 
                                         Content="&#xE923;"
                                         ToolTip="向下还原"
+                                            Foreground="{TemplateBinding TitleForeground}"
                                         Command="SystemCommands.RestoreWindowCommand" 
                                             Width="{TemplateBinding TitleButtonWidth}"
                                         Style="{StaticResource  TitleButton}"
@@ -140,6 +147,7 @@
                                              Width="{TemplateBinding TitleButtonWidth}"
                                          Style="{StaticResource TitleButton}"
                                          Content="&#xE8BB;"
+                                             Foreground="{TemplateBinding TitleForeground}"
                                          leedep:ButtonManager.MouseOverBackground="{DynamicResource LeeBrush_RedOffice}"
                                          leedep:ButtonManager.MouseOverForeground="White"
                                          ToolTip="关闭"

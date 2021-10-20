@@ -84,6 +84,7 @@ namespace LeeTeke.WpfControl.Controls
             if (SizeToContent != SizeToContent.WidthAndHeight)
                 return;
 
+          
             SizeToContent = SizeToContent.Height;
             Dispatcher.BeginInvoke(new Action(() => { SizeToContent = SizeToContent.WidthAndHeight; }));
         }
@@ -365,6 +366,22 @@ namespace LeeTeke.WpfControl.Controls
         // Using a DependencyProperty as the backing store for TitleButtonWidth.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TitleButtonWidthProperty =
             DependencyProperty.Register("TitleButtonWidth", typeof(double), typeof(Window));
+        #endregion
+
+
+        #region TitleForeground
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Brush TitleForeground
+        {
+            get { return (Brush)GetValue(TitleForegroundProperty); }
+            set { SetValue(TitleForegroundProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for TitleForeground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TitleForegroundProperty =
+            DependencyProperty.Register("TitleForeground", typeof(Brush), typeof(Window));
         #endregion
 
 

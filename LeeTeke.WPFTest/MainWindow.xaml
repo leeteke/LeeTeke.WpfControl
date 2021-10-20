@@ -16,6 +16,7 @@
         Width="600"
         x:Name="windows"
                     TitleHeight="50"
+                    TitleForeground="Red"
                     VerticalContentAlignment="Bottom"
                    WinButtonPanelVerticalAlignment="Top"
         WindowState="Normal"
