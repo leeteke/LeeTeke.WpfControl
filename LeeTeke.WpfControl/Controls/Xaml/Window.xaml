@@ -12,6 +12,9 @@
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Background}"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
+        <Setter Property="TitleBackground" Value="{DynamicResource LeeBrush_Forground}"/>
+        <Setter Property="WinTitlePanelVerticalAlignment" Value="Stretch"/>
+        <Setter Property="WinButtonPanelVerticalAlignment" Value="Stretch"/>
         <Setter Property="TitleHeight" Value="30"/>
         <Setter Property="WindowState" Value="Normal"/>
         <Setter Property="UseLayoutRounding" Value="True"/>
@@ -40,6 +43,7 @@
                                 <Setter Property="BorderThickness" Value="0"/>
                                 <Setter Property="Background" Value="Transparent"/>
                                 <Setter Property="IsTabStop" Value="False"/>
+                                <Setter Property="MinHeight" Value="0"/>
                                 <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
                                 <Setter Property="leedep:ButtonManager.MouseOverBackground" Value="{DynamicResource LeeBrush_Mark}"/>
                                 <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="0"/>
@@ -57,20 +61,20 @@
 
                             <Grid x:Name="WIN_TitleGrid" 
                                   Height="{TemplateBinding TitleHeight}"
-                                  Background="{DynamicResource LeeBrush_Forground}"
+                                  Background="{TemplateBinding TitleBackground}"
                                   >
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <Grid x:Name="WIN_TitlePanel"
+                                <StackPanel x:Name="WIN_TitlePanel"
                                       Grid.Column="0"
-                                      Background="{TemplateBinding WinTitlePanelBackground}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
+                                            MinHeight="30"
+                                            VerticalAlignment="{TemplateBinding WinTitlePanelVerticalAlignment}"
+                                      Background="{TemplateBinding WinTitlePanelBackground}"
+                                            Orientation="Horizontal">
+                  
                                     <Button Name="WIN_Icon"
                                             Command="{x:Static SystemCommands.ShowSystemMenuCommand}"
                                             Background="Transparent"
@@ -87,21 +91,25 @@
                                                Height="16"/>
                                     </Button>
                                     <TextBlock x:Name="WIN_Title"
-                                               Grid.Column="1" 
                                                Text="{TemplateBinding Title}" 
                                                Padding="10,0,0,0" 
                                                VerticalAlignment="Center"/>
-                                    <ContentPresenter  x:Name="ContentPresenterMain"
-                                                       WindowChrome.IsHitTestVisibleInChrome="True" 
-                                                       Grid.Column="2"
-                                                       Content="{TemplateBinding TitleContent}"/>
-                                </Grid>
+                                    
+                                </StackPanel>
 
+                                <ContentPresenter  x:Name="ContentPresenterMain"
+                                                   WindowChrome.IsHitTestVisibleInChrome="True" 
+                                                   Grid.Column="1"
+                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                   HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                                   Content="{TemplateBinding TitleContent}"/>
                                 <StackPanel  x:Name="WIN_ButtonPanel" 
                                              Background="{TemplateBinding WinButtonPanelBackground}"
+                                             VerticalAlignment="{TemplateBinding WinButtonPanelVerticalAlignment}"
                                              WindowChrome.IsHitTestVisibleInChrome="True" 
                                              UseLayoutRounding="True" 
-                                             Grid.Column="1" 
+                                             Grid.Column="2" 
+                                              MinHeight="30"
                                              Orientation="Horizontal">
 
                                     <Button x:Name="WIN_Mini" 

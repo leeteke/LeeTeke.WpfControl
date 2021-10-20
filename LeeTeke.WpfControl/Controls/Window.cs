@@ -73,6 +73,7 @@ namespace LeeTeke.WpfControl.Controls
                 UseAeroCaptionButtons = false
             };
 #endif
+            
             BindingOperations.SetBinding(chrome, WindowChrome.CaptionHeightProperty,  new Binding(nameof(TitleHeight)) { Source = this });
             WindowChrome.SetWindowChrome(this, chrome);
             Loaded += Window_Loaded;
@@ -206,6 +207,23 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("WinButtonPanelBackground", typeof(Brush), typeof(Window));
         #endregion
 
+
+        #region WinButtonPanelVerticalAlignment
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public VerticalAlignment WinButtonPanelVerticalAlignment
+        {
+            get { return (VerticalAlignment)GetValue(WinButtonPanelVerticalAlignmentProperty); }
+            set { SetValue(WinButtonPanelVerticalAlignmentProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for WinButtonPanelVerticalAlignment.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty WinButtonPanelVerticalAlignmentProperty =
+            DependencyProperty.Register("WinButtonPanelVerticalAlignment", typeof(VerticalAlignment), typeof(Window));
+        #endregion
+
+
         #region WinTitlePanelBackground
         /// <summary>
         /// 请添加描述
@@ -220,6 +238,39 @@ namespace LeeTeke.WpfControl.Controls
         public static readonly DependencyProperty WinTitlePanelBackgroundProperty =
             DependencyProperty.Register("WinTitlePanelBackground", typeof(Brush), typeof(Window));
         #endregion
+
+
+        #region TitleBackground
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Brush TitleBackground
+        {
+            get { return (Brush)GetValue(TitleBackgroundProperty); }
+            set { SetValue(TitleBackgroundProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for TitleBackground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TitleBackgroundProperty =
+            DependencyProperty.Register("TitleBackground", typeof(Brush), typeof(Window));
+        #endregion
+
+
+        #region WinTitlePanelVerticalAlignment
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public VerticalAlignment WinTitlePanelVerticalAlignment
+        {
+            get { return (VerticalAlignment)GetValue(WinTitlePanelVerticalAlignmentProperty); }
+            set { SetValue(WinTitlePanelVerticalAlignmentProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for WinTitlePanelVerticalAlignment.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty WinTitlePanelVerticalAlignmentProperty =
+            DependencyProperty.Register("WinTitlePanelVerticalAlignment", typeof(VerticalAlignment), typeof(Window));
+        #endregion
+
 
         #region TitleContent
         /// <summary>
@@ -298,7 +349,6 @@ namespace LeeTeke.WpfControl.Controls
         public static readonly DependencyProperty ClientFullProperty =
             DependencyProperty.Register("ClientFull", typeof(bool), typeof(Window));
         #endregion
-
 
 
 

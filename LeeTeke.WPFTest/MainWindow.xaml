@@ -8,20 +8,29 @@
         xmlns:leedata="clr-namespace:LeeTeke.WpfControl;assembly=LeeTeke.WpfControl"
         xmlns:local="clr-namespace:LeeTeke.WPFTest"
         xmlns:leecommand="clr-namespace:LeeTeke.WpfControl.Commands;assembly=LeeTeke.WpfControl"
-                    xmlns:models="clr-namespace:LeeTeke.WPFTest.Models"
+        xmlns:models="clr-namespace:LeeTeke.WPFTest.Models"
         mc:Ignorable="d"
         Title="WpfControl测试 窗口"
         Height="450"
         d:Height="900"
         Width="600"
         x:Name="windows"
-        WindowState="Normal" 
-        
+                    TitleHeight="50"
+                    VerticalContentAlignment="Bottom"
+                   WinButtonPanelVerticalAlignment="Top"
+        WindowState="Normal"
+                    WinTitlePanelVerticalAlignment="Top"
+                   
+         ClientFull="False"
         >
 
     <leecontrol:Window.TitleContent>
 
-        <StackPanel Orientation="Horizontal"   HorizontalAlignment="Right">
+        <Grid>
+            
+   
+            <StackPanel Orientation="Horizontal" 
+                    HorizontalAlignment="Right">
 
             <Button Content="界面切换测试"
                 HorizontalAlignment="Right"
@@ -33,8 +42,8 @@
                 Command="{Binding ThemeChangedCommand}"/>
 
         </StackPanel>
-        
 
+        </Grid>
     </leecontrol:Window.TitleContent>
 
  

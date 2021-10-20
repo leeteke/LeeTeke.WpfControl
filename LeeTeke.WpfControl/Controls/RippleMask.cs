@@ -172,17 +172,32 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (d is RippleMask mask)
             {
-                var old = (FrameworkElement)e.OldValue;
-                old?.RemoveHandler(MouseLeftButtonUpEvent, mask._routedLeftUpEvent);
-                old?.RemoveHandler(MouseLeftButtonDownEvent, mask._routedLeftDownEvent);
-                old?.RemoveHandler(MouseLeaveEvent, mask._routedLeftLevelEvent);
-                old?.RemoveHandler(MouseMoveEvent, mask._routedMoveEvent);
-
-                
-                mask.ParentElement.AddHandler(MouseLeftButtonUpEvent, mask._routedLeftUpEvent, true);
-                mask.ParentElement.AddHandler(MouseLeftButtonDownEvent, mask._routedLeftDownEvent, true);
-                mask.ParentElement.AddHandler(MouseLeaveEvent, mask._routedLeftLevelEvent, true);
-                mask.ParentElement.AddHandler(MouseMoveEvent, mask._routedMoveEvent, true);
+                if (e.OldValue is FrameworkElement element)
+                {
+                    try
+                    {
+                        element.RemoveHandler(MouseLeftButtonUpEvent, mask._routedLeftUpEvent);
+                        element.RemoveHandler(MouseLeftButtonDownEvent, mask._routedLeftDownEvent);
+                        element.RemoveHandler(MouseLeaveEvent, mask._routedLeftLevelEvent);
+                        element.RemoveHandler(MouseMoveEvent, mask._routedMoveEvent);
+                    }
+                    catch 
+                    {
+                    }
+                }
+                if (e.NewValue is FrameworkElement newelement)
+                {
+                    try
+                    {
+                        newelement.AddHandler(MouseLeftButtonUpEvent, mask._routedLeftUpEvent, true);
+                        newelement.AddHandler(MouseLeftButtonDownEvent, mask._routedLeftDownEvent, true);
+                        newelement.AddHandler(MouseLeaveEvent, mask._routedLeftLevelEvent, true);
+                        newelement.AddHandler(MouseMoveEvent, mask._routedMoveEvent, true);
+                    }
+                    catch 
+                    {
+                    }
+                }
             }
         }
 
@@ -262,7 +277,7 @@ namespace LeeTeke.WpfControl.Controls
             _canvas = this.Template.FindName("PART_Canvas", this) as Canvas;
         }
 
-     
+
 
 
         private void RoutedMoveEventHandler(object sender, RoutedEventArgs e)
