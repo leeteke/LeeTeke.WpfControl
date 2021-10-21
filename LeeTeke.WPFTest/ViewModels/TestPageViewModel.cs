@@ -123,6 +123,11 @@ namespace LeeTeke.WPFTest.ViewModels
                 new TestListModel(){  Title="测试1", Boolen=true, Image=new BitmapImage(new Uri("https://nie.res.netease.com/r/pic/20200629/3e654b20-5b71-41d5-88a1-a8c814141030.jpg"))},
                 new TestListModel(){  Title="测试2", Boolen=false, Image=new BitmapImage(new Uri("https://nie.res.netease.com/r/pic/20200629/4dd8e4fd-c8a3-4591-8b5f-f1476f2bc129.jpg"))},
                 new TestListModel(){  Title="测试3", Boolen=true, Image=new BitmapImage(new Uri("https://nie.res.netease.com/r/pic/20200317/16005c2f-d749-465f-a05d-3dcbba024f22.jpg"))},
+                new TestListModel(){  Title="测试4", Boolen=true, Image=new BitmapImage(new Uri("https://pal7.cubejoy.com/images/apic/bvimg10.jpg"))},
+                new TestListModel(){  Title="测试5", Boolen=true, Image=new BitmapImage(new Uri("https://pal7.cubejoy.com/images/apic/bvimg19.jpg"))},
+                new TestListModel(){  Title="测试6", Boolen=true, Image=new BitmapImage(new Uri("https://pal7.cubejoy.com/images/apic/bvimg13.jpg"))},
+                new TestListModel(){  Title="测试7", Boolen=true, Image=new BitmapImage(new Uri("https://pal7.cubejoy.com/images/apic/bvimg11.jpg"))},
+                new TestListModel(){  Title="测试8", Boolen=true, Image=new BitmapImage(new Uri("https://pal7.cubejoy.com/images/apic/bvimg12.jpg"))},
             };
 
             TreeList = new ObservableCollection<TreeViewDataModel>();

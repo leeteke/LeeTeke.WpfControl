@@ -56,6 +56,8 @@ namespace LeeTeke.WpfControl.Controls
 
         private ScrollViewer _scrollViewer;
         private StackPanel _stackPanel;
+        private Button _leftBtn;
+        private Button _rightBtn;
 
         private IList _ilist;
 
@@ -75,7 +77,7 @@ namespace LeeTeke.WpfControl.Controls
 
         public TabView()
         {
-            
+
             EventManager.RegisterClassHandler(typeof(TabViewItem), TabViewItem.ClosedEvent, new RoutedEventHandler(TabViewItemClosedEventAsync));
             EventManager.RegisterClassHandler(typeof(TabViewItem), TabViewItem.SelectedEvent, new RoutedEventHandler(TabViewItemSelectedEvent));
             EventManager.RegisterClassHandler(typeof(StackPanel), StackPanel.SizeChangedEvent, new RoutedEventHandler(StackPanelLoadedEvent));
@@ -99,9 +101,39 @@ namespace LeeTeke.WpfControl.Controls
             return new TabViewItem();
         }
 
-     
 
-   
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            if (this.GetTemplateChild("PART_Left") is Button leftBtn)
+            {
+                _leftBtn = leftBtn;
+                _leftBtn.Click += _leftBtn_Click;
+                _leftBtn.MouseDown += _leftBtn_MouseDown;
+            }
+
+            if (this.GetTemplateChild("PART_Right") is Button rightBtn)
+            {
+                _rightBtn = rightBtn;
+                _rightBtn.Click += _rightBtn_Click;
+            }
+
+
+            if (this.GetTemplateChild("PART_ScrollViewer") is ScrollViewer scroll)
+            {
+                _scrollViewer = scroll;
+                _scrollViewer.ScrollChanged += _scrollViewer_ScrollChanged;
+                _scrollViewer.SizeChanged += _scrollViewer_SizeChanged;
+            }
+
+
+
+        }
+
+    
+
+
 
 
         #endregion
@@ -122,7 +154,7 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         public static readonly RoutedEvent ItemClosedEvent = EventManager.RegisterRoutedEvent(
-        "ItemClosed", RoutingStrategy.Bubble, typeof( TabViewColsedEventHandler), typeof(TabView));
+        "ItemClosed", RoutingStrategy.Bubble, typeof(TabViewColsedEventHandler), typeof(TabView));
 
 
         private void RaiseItemClosed(object newValue)
@@ -145,7 +177,7 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         public static readonly RoutedEvent ItemSelectedEvent = EventManager.RegisterRoutedEvent(
-        "ItemSelected", RoutingStrategy.Bubble, typeof( TabViewSelectedEventHandler), typeof(TabView));
+        "ItemSelected", RoutingStrategy.Bubble, typeof(TabViewSelectedEventHandler), typeof(TabView));
 
 
         private void RaiseItemSelected(object newValue)
@@ -513,15 +545,44 @@ namespace LeeTeke.WpfControl.Controls
 
 
 
-        public override void OnApplyTemplate()
+        private void _leftBtn_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            base.OnApplyTemplate();
-            _scrollViewer = this.Template.FindName("PART_ScrollViewer", this) as ScrollViewer;
+
         }
 
+        private void _rightBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (Orientation == Orientation.Horizontal && _scrollViewer != null)
+            {
 
+                _scrollViewer.ScrollToHorizontalOffset(_scrollViewer.HorizontalOffset + 120);
+            }
+        }
 
+        private void _leftBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (Orientation == Orientation.Horizontal && _scrollViewer != null)
+            {
+                _scrollViewer.ScrollToHorizontalOffset(_scrollViewer.HorizontalOffset - 120);
+            }
+        }
 
+        private void _scrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            if (Orientation == Orientation.Horizontal)
+            {
+                _leftBtn.Visibility = e.HorizontalOffset == 0 ? Visibility.Collapsed : Visibility.Visible;
+
+                if (e.ExtentWidth > (e.ViewportWidth + e.HorizontalOffset))
+                {
+                    _rightBtn.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    _rightBtn.Visibility = Visibility.Collapsed;
+                }
+            }
+        }
 
         private void StackPanelLoadedEvent(object sender, RoutedEventArgs e)
         {
@@ -591,7 +652,7 @@ namespace LeeTeke.WpfControl.Controls
                         }
                         foreach (TabViewItem item in needCloseItem)
                         {
-                            if (item.CanClosing&&!item.IsFixed)
+                            if (item.CanClosing && !item.IsFixed)
                             {
                                 CloseItemAsync(item);
                                 ItemRemoveChanged(item);
@@ -607,7 +668,7 @@ namespace LeeTeke.WpfControl.Controls
                         }
                         foreach (TabViewItem item in allItem)
                         {
-                            if (item.CanClosing&&!item.IsFixed)
+                            if (item.CanClosing && !item.IsFixed)
                             {
                                 CloseItemAsync(item);
                                 ItemRemoveChanged(item);
@@ -638,7 +699,7 @@ namespace LeeTeke.WpfControl.Controls
                 switch (Orientation)
                 {
                     case Orientation.Horizontal:
-                        _scrollViewer.ScrollToHorizontalOffset( _scrollViewer.HorizontalOffset- e.Delta);
+                        _scrollViewer.ScrollToHorizontalOffset(_scrollViewer.HorizontalOffset - e.Delta);
                         break;
                     case Orientation.Vertical:
                         _scrollViewer.ScrollToVerticalOffset(_scrollViewer.VerticalOffset - e.Delta);
@@ -655,6 +716,7 @@ namespace LeeTeke.WpfControl.Controls
                 if (SelectedItem != item)
                 {
                     SelectedItem = item;
+                    ScrollToItem(item);
                 }
             }
         }
@@ -706,6 +768,15 @@ namespace LeeTeke.WpfControl.Controls
                 }
             }
         }
+
+        private void _scrollViewer_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (SelectedItem is TabViewItem item)
+            {
+                ScrollToItem(item);
+            }
+        }
+
 
         /// <summary>
         /// 
@@ -788,6 +859,41 @@ namespace LeeTeke.WpfControl.Controls
             return true;
         }
 
+        #endregion
+
+        #region 公开方法
+
+
+        public void ScrollToItem(TabViewItem item)
+        {
+            if (Orientation == Orientation.Horizontal)
+            {
+                // 获取要定位之前 ScrollViewer 目前的滚动位置
+                var currentScrollPosition = _scrollViewer.HorizontalOffset;
+                var point = new Point(currentScrollPosition, 0);
+                // 计算出目标位置并滚动
+                var targetPosition = item.TransformToVisual(_scrollViewer).Transform(point);
+
+                var seto = targetPosition.X - ((_scrollViewer.ActualWidth - item.ActualWidth) / 2);
+
+                _scrollViewer.ScrollToHorizontalOffset(seto);
+
+            }
+            else
+            {
+                // 获取要定位之前 ScrollViewer 目前的滚动位置
+                var currentScrollPosition = _scrollViewer.VerticalOffset;
+                var point = new Point(0, currentScrollPosition);
+                // 计算出目标位置并滚动
+                var targetPosition = item.TransformToVisual(_scrollViewer).Transform(point);
+
+                var seto = targetPosition.Y - ((_scrollViewer.ActualHeight - item.ActualHeight) / 2);
+
+                _scrollViewer.ScrollToVerticalOffset(seto);
+            }
+
+
+        }
         #endregion
     }
 }

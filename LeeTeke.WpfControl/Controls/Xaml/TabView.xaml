@@ -80,7 +80,7 @@
                                             Width="22"
                                             Height="22"
                                             Margin="3"
-                                           MinHeight="0"
+                                            MinHeight="0"
                                             Visibility="Collapsed"
                                             leedep:CornerRadiusManager.CornerRadius="11"
                                             FontFamily="{DynamicResource IconFontFamily}"
@@ -221,14 +221,40 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Margin="{TemplateBinding Margin}"
                                 Padding="{TemplateBinding Padding}">
-                        <ScrollViewer   x:Name="PART_ScrollViewer"   
+                        <Grid>
+                            <ScrollViewer   x:Name="PART_ScrollViewer"   
                                 HorizontalScrollBarVisibility="Hidden" 
                                 VerticalScrollBarVisibility="Disabled"
                                 Style="{x:Null}"
                                 >
-                            <ItemsPresenter x:Name="PART_ItemsPresenter" />
+                                <ItemsPresenter x:Name="PART_ItemsPresenter" />
 
-                        </ScrollViewer>
+                            </ScrollViewer>
+
+                            <Button x:Name="PART_Left"
+                                    Visibility="Collapsed"
+                                    HorizontalAlignment="Left"
+                                    Content="&#xe760;"
+                                    Width="20"
+                                    FontSize="15"
+                                    BorderThickness="0"
+                                    Foreground="{DynamicResource LeeBrush_White}"
+                                    Background="#80000000"
+                                    leedep:CornerRadiusManager.CornerRadius="0"
+                                    FontFamily="{DynamicResource IconFontFamily}"/>
+
+                            <Button x:Name="PART_Right"
+                                    Visibility="Collapsed"
+                                    HorizontalAlignment="Right"
+                                    Content="&#xe761;"
+                                    Width="20"
+                                    FontSize="15"
+                                    BorderThickness="0"
+                                    Foreground="{DynamicResource LeeBrush_White}"
+                                    Background="#80000000"
+                                    leedep:CornerRadiusManager.CornerRadius="0"
+                                    FontFamily="{DynamicResource IconFontFamily}"/>
+                        </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Orientation" Value="Horizontal">
