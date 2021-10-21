@@ -30,8 +30,13 @@ namespace LeeTeke.WPFTest
    
         }
 
-
-      
-
+        private void Rectangle_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton== MouseButtonState.Pressed)
+            {
+         
+                DragDrop.DoDragDrop(sender as UIElement, new DataObject("UIElement", sender as UIElement, true), DragDropEffects.Move);
+            }
+        }
     }
 }

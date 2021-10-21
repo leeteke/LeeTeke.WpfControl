@@ -48,6 +48,18 @@
                 </StackPanel.ContextMenu>
 
 
+                <leecontrol:TabView  CloseVisibly="MouseOver" 
+                                     Orientation="Horizontal"
+                                     ShowScrollToButton="True"
+                                     ItemsSource="{Binding TestList}">
+
+                    <leecontrol:TabView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock leecontrol:TabViewItem.ItemCanClosing="{Binding Boolen}" Text="{Binding Title}"/>
+                        </DataTemplate>
+                    </leecontrol:TabView.ItemTemplate>
+
+                </leecontrol:TabView>
 
 
                 <TreeView  ItemsSource="{Binding TreeList}"
@@ -246,18 +258,7 @@
 
 
 
-                <leecontrol:TabView  CloseVisibly="MouseOver" 
-                                     Orientation="Horizontal"
-                                     ItemsSource="{Binding TestList}">
-
-                    <leecontrol:TabView.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock leecontrol:TabViewItem.ItemCanClosing="{Binding Boolen}" Text="{Binding Title}"/>
-                        </DataTemplate>
-                    </leecontrol:TabView.ItemTemplate>
-
-                </leecontrol:TabView>
-
+            
 
                 <leecontrol:ImageEx Source="/Datas/myicon.jpg"  
                                     Width="100"

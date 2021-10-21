@@ -388,7 +388,6 @@ namespace LeeTeke.WpfControl.Controls
 
 
 
-
         #region ItemWidth
         /// <summary>
         /// 请添加描述
@@ -488,6 +487,22 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
+        #region ShowScrollToButton
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public bool ShowScrollToButton
+        {
+            get { return (bool)GetValue(ShowScrollToButtonProperty); }
+            set { SetValue(ShowScrollToButtonProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ShowScrollToButton.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ShowScrollToButtonProperty =
+            DependencyProperty.Register("ShowScrollToButton", typeof(bool), typeof(TabView));
+        #endregion
+
+
         #endregion
 
         #region 内部逻辑
@@ -569,7 +584,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private void _scrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            if (Orientation == Orientation.Horizontal)
+            if (Orientation == Orientation.Horizontal&&ShowScrollToButton)
             {
                 _leftBtn.Visibility = e.HorizontalOffset == 0 ? Visibility.Collapsed : Visibility.Visible;
 

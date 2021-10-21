@@ -9,13 +9,8 @@
         Title="TestWindow" Height="450" Width="800"
         Background="{DynamicResource LeeBrush_Background}">
     <Grid>
-        <lee:ProgressRing Width="60"
-                          Height="60"
-                          Value="{Binding ElementName=slider,Path=Value}"
-                          Mode="Loding"
-                          />
 
-
-        <Slider  x:Name="slider" Maximum="100"/>
+        <Rectangle Width="50" Height="50" Fill="Gainsboro"
+                   MouseMove="Rectangle_MouseMove"/>
     </Grid>
 </Window>
