@@ -15,6 +15,7 @@ using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Shell;
 
 namespace LeeTeke.WpfControl.Controls
 {
@@ -538,17 +539,20 @@ namespace LeeTeke.WpfControl.Controls
                 _notifyWindow = new()
                 {
                     Title = "NotifyWindowService",
-                    AllowsTransparency = true,
                     WindowStyle = WindowStyle.None,
+                    AllowsTransparency = true,
                     Background = null,
                     WindowState = WindowState.Maximized,
+                   ResizeMode= ResizeMode.NoResize,
                     Topmost = true,
                     ShowInTaskbar = false,
                     Content = spE
                 };
+           //  WindowChrome.SetWindowChrome(_notifyWindow, new WindowChrome() {  GlassFrameThickness= new Thickness(-1), CaptionHeight=0});
                 _notifyWindow.Closed += (cx, ce) =>
                 {
                     _notifyWindow = null;
+                    LeeTeke.WpfControl.StaticMethods.ClearMemory();
                 };
             }
             _notifyWindow.Show();

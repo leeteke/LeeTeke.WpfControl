@@ -6,9 +6,14 @@
         xmlns:local="clr-namespace:LeeTeke.WPFTest"
         xmlns:lee="clr-namespace:LeeTeke.WpfControl.Controls;assembly=LeeTeke.WpfControl"
         mc:Ignorable="d"
-        Title="TestWindow" Height="450" Width="800"
-        Background="{DynamicResource LeeBrush_Background}">
-    <Grid>
+        Title="TestWindow" 
+        Height="450"
+        Width="800"
+    
+        WindowStyle="None"
+        >
+
+    <Grid  Margin="20">
 
         <Rectangle Width="50" Height="50" Fill="Gainsboro"
                    MouseMove="Rectangle_MouseMove"/>

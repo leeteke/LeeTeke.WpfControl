@@ -22,13 +22,7 @@ namespace LeeTeke.WpfControl
         public static bool Show(string content, MessageStatus status = MessageStatus.None)
         {
             IMessageWin message = IsDefaultShowMsgCR ? new CRMessage() : new Message();
-            message.Content = new TextBox() {
-                Text = content,
-                TextWrapping = TextWrapping.Wrap,
-                VerticalContentAlignment = VerticalAlignment.Center,
-                IsReadOnly = true,
-                BorderThickness = new Thickness(0)
-            };
+            message.Content = content; 
             message.Status = status;
             switch (status)
             {
@@ -50,14 +44,7 @@ namespace LeeTeke.WpfControl
         {
             IMessageWin message = IsDefaultShowMsgCR ? new CRMessage() : new Message();
             message.Title = title;
-            message.Content  = new TextBox()
-            {
-                Text = content,
-                TextWrapping = TextWrapping.Wrap,
-                VerticalContentAlignment = VerticalAlignment.Center,
-                IsReadOnly = true,
-                BorderThickness = new Thickness(0)
-            };
+            message.Content = content;
             message.Status = status;
             switch (status)
             {

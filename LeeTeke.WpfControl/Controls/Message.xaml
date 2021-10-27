@@ -56,7 +56,6 @@
                              Thickness="6"
                             Mode="Wating"
                             Visibility="Collapsed"
-                            RingEffect="{DynamicResource LeeShadow2}"
                             />
 
         <ContentPresenter x:Name="content"

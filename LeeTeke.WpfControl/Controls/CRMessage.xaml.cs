@@ -30,7 +30,7 @@ namespace LeeTeke.WpfControl.Controls
             set
             {
                 _canClose = value;
-                btnClose.IsEnabled = value ;
+                btnClose.IsEnabled = value;
             }
         }
 
@@ -46,19 +46,33 @@ namespace LeeTeke.WpfControl.Controls
             get => content.Content;
             set
             {
-                content.Content = value;
                 if (value is string str)
                 {
-                    content.VerticalAlignment = VerticalAlignment.Center;
-                    content.HorizontalAlignment = HorizontalAlignment.Left;
+                    if (content.Content is TextBox tb)
+                    {
+                        tb.Text = str;
+                    }
+                    else
+                    {
+                        content.Content = new TextBox()
+                        {
+                            Text = str,
+                            TextWrapping = TextWrapping.Wrap,
+                            VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+                            HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
+                            BorderThickness = new Thickness(0),
+                            IsReadOnly = true,
+                            VerticalContentAlignment = VerticalAlignment.Center,
+                            HorizontalContentAlignment = HorizontalAlignment.Left,
+                        };
+                    }
                 }
                 else
                 {
-                    content.VerticalAlignment = VerticalAlignment.Stretch;
-                    content.HorizontalAlignment = HorizontalAlignment.Stretch;
+                    content.Content = value;
                 }
             }
-          
+
         }
         public System.Windows.Window Window { get => this; }
         public bool ShowProcess
@@ -66,7 +80,7 @@ namespace LeeTeke.WpfControl.Controls
             get => loding.Visibility == Visibility.Visible;
             set => loding.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
         }
- 
+
         public double ProcessValue
         {
             get => loding.Value;
@@ -186,7 +200,7 @@ namespace LeeTeke.WpfControl.Controls
 
                 if (Value is Action action)
                 {
-                    action.BeginInvoke(null,null);
+                    action.BeginInvoke(null, null);
                 }
 
                 if (_isDialog)

@@ -360,6 +360,7 @@
         </ScrollViewer>
         <leecontrol:NotifyBanner Grid.RowSpan="3"
                                  Content="{Binding NotifyData}"
+                                 ShowMode="OnDesktop"
                                  d:Visibility="Collapsed"
                                  />
     </Grid>

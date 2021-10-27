@@ -25,6 +25,8 @@
          ClientFull="False"
         >
 
+
+    
     <leecontrol:Window.TitleContent>
 
         <Grid>

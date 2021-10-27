@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Width="330"
         Height="210"
-        ResizeMode="NoResize"
+     
         WindowStartupLocation="CenterScreen"
         Closing="Window_Closing"
         leedep:CornerRadiusManager.CornerRadius="8"
@@ -86,7 +86,6 @@
                                 VerticalAlignment="Center"
                             Mode="Wating"
                             Visibility="Collapsed"
-                            RingEffect="{DynamicResource LeeShadow2}"
                             />
             <ContentPresenter x:Name="content"
                               Grid.Column="1"

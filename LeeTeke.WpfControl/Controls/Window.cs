@@ -49,7 +49,7 @@ namespace LeeTeke.WpfControl.Controls
     ///     <MyNamespace:Window/>
     ///
     /// </summary>
-    public  class Window : System.Windows.Window
+    public class Window : System.Windows.Window
     {
         static Window()
         {
@@ -63,18 +63,20 @@ namespace LeeTeke.WpfControl.Controls
             var chrome = new WindowChrome
             {
                 CornerRadius = new CornerRadius(),
-                GlassFrameThickness = new Thickness(0, 0, 0, 1)
+                GlassFrameThickness = new Thickness(0, 0, 0, 1),
+                                NonClientFrameEdges= NonClientFrameEdges.Right| NonClientFrameEdges.Bottom| NonClientFrameEdges.Left
+                
             };
 #else
             var chrome = new WindowChrome
             {
                 CornerRadius = new CornerRadius(),
                 GlassFrameThickness = new Thickness(0, 0, 0, 1),
-                UseAeroCaptionButtons = false
+                UseAeroCaptionButtons = false,
             };
 #endif
-            
-            BindingOperations.SetBinding(chrome, WindowChrome.CaptionHeightProperty,  new Binding(nameof(TitleHeight)) { Source = this });
+
+            BindingOperations.SetBinding(chrome, WindowChrome.CaptionHeightProperty, new Binding(nameof(TitleHeight)) { Source = this });
             WindowChrome.SetWindowChrome(this, chrome);
             Loaded += Window_Loaded;
         }
@@ -84,7 +86,7 @@ namespace LeeTeke.WpfControl.Controls
             if (SizeToContent != SizeToContent.WidthAndHeight)
                 return;
 
-          
+
             SizeToContent = SizeToContent.Height;
             Dispatcher.BeginInvoke(new Action(() => { SizeToContent = SizeToContent.WidthAndHeight; }));
         }
@@ -92,7 +94,7 @@ namespace LeeTeke.WpfControl.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-       
+
             ViewInit();
         }
 

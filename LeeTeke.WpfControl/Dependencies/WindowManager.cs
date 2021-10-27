@@ -165,25 +165,19 @@ namespace LeeTeke.WpfControl.Dependencies
                     {
                         WindowChrome windowChrome = new WindowChrome
                         {
-                            ResizeBorderThickness = new Thickness(11),
-                            CornerRadius = new CornerRadius(0),
                             CaptionHeight = 0,
-                            GlassFrameThickness = new Thickness(1)
+                            GlassFrameThickness = new Thickness(-1),
                         };
                         window.SetValue(WindowChrome.WindowChromeProperty, windowChrome);
-                        window.AllowsTransparency = true;
                         window.Background = null;
                         window.WindowStyle = WindowStyle.None;
-
+                        window.ResizeMode = ResizeMode.NoResize;
 
                         window.Loaded += Window_Loaded;
 
                         window.Activated += Window_Activated;
 
                         window.Deactivated += Window_Deactivated;
-
-                        window.StateChanged += Window_StateChanged;
-
 
                     }
 

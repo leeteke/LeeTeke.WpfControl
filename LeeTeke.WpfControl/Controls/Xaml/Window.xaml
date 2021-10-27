@@ -24,6 +24,7 @@
         <Setter Property="MinWidth" Value="140"/>
         <Setter Property="CloseButtonVisibility" Value="Visible"/>
         <Setter Property="CloseButtonIsEnable" Value="True"/>
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:Window}">
@@ -35,6 +36,7 @@
                             CornerRadius="{TemplateBinding CornerRadius}"
                             ClipToBounds="True"
                            >
+                      
                         <Border.Resources>
                             <Style x:Key="TitleButton" 
                                    TargetType="{x:Type Button}" 
@@ -56,7 +58,8 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <AdornerDecorator x:Name="WIN_Client" 
-                                              Grid.Row="1">
+                                              Grid.Row="1"
+                                              >
                                 <ContentPresenter   ClipToBounds="True"/>
                             </AdornerDecorator>
 
@@ -188,8 +191,6 @@
                             <Setter TargetName="WIN_Icon" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
 
-
-
                         <Trigger Property="WindowState" Value="Maximized">
                             <Setter TargetName="WIN_Max"  Property="Visibility" Value="Collapsed"/>
                             <Setter TargetName="WIN_Restore"  Property="Visibility" Value="Visible"/>
@@ -242,6 +243,8 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+  
+
 
     </Style>
 
