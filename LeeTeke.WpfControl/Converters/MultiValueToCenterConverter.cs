@@ -23,11 +23,11 @@ namespace LeeTeke.WpfControl.Converters
                 {
                     return value += change;
                 }
-                else if (parameter.ToString().StartsWith('*') && double.TryParse(parameter.ToString().TrimStart('*'), out double product))
+                else if (parameter.ToString().StartsWith("*") && double.TryParse(parameter.ToString().TrimStart('*'), out double product))
                 {
                     return value *= product;
                 }
-                else if (parameter.ToString().StartsWith('/') && double.TryParse(parameter.ToString().TrimStart('/'), out double divisor))
+                else if (parameter.ToString().StartsWith("/") && double.TryParse(parameter.ToString().TrimStart('/'), out double divisor))
                 {
                     return value /= divisor;
                 }

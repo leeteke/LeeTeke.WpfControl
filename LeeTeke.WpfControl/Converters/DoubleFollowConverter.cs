@@ -16,11 +16,11 @@ namespace LeeTeke.WpfControl.Converters
                 {
                     return lord += change;
                 }
-                else if (parameter.ToString().StartsWith('*') && double.TryParse(parameter.ToString().TrimStart('*'), out double product))
+                else if (parameter.ToString().StartsWith("*") && double.TryParse(parameter.ToString().TrimStart('*'), out double product))
                 {
                     return lord *= product;
                 }
-                else if (parameter.ToString().StartsWith('/') && double.TryParse(parameter.ToString().TrimStart('/'), out double divisor))
+                else if (parameter.ToString().StartsWith("/") && double.TryParse(parameter.ToString().TrimStart('/'), out double divisor))
                 {
                     return lord /= divisor;
                 }
@@ -37,11 +37,11 @@ namespace LeeTeke.WpfControl.Converters
                 {
                     return lord -= change;
                 }
-                else if (parameter.ToString().StartsWith('*') && double.TryParse(parameter.ToString().TrimStart('*'), out double product))
+                else if (parameter.ToString().StartsWith("*") && double.TryParse(parameter.ToString().TrimStart('*'), out double product))
                 {
                     return lord /= product;
                 }
-                else if (parameter.ToString().StartsWith('/') && double.TryParse(parameter.ToString().TrimStart('/'), out double divisor))
+                else if (parameter.ToString().StartsWith("/") && double.TryParse(parameter.ToString().TrimStart('/'), out double divisor))
                 {
                     return lord *= divisor;
                 }

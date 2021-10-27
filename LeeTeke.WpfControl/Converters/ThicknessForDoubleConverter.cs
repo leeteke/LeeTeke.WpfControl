@@ -26,11 +26,11 @@ namespace LeeTeke.WpfControl.Converters
                 {
                 _value += change;
                 }
-                else if (_parameter[1].ToString().StartsWith('*') && double.TryParse(_parameter[1].ToString().TrimStart('*'), out double product))
+                else if (_parameter[1].ToString().StartsWith("*") && double.TryParse(_parameter[1].ToString().TrimStart('*'), out double product))
                 {
                 _value *= product;
                 }
-                else if (_parameter[1].ToString().StartsWith('/') && double.TryParse(_parameter[1].ToString().TrimStart('/'), out double divisor))
+                else if (_parameter[1].ToString().StartsWith("/") && double.TryParse(_parameter[1].ToString().TrimStart('/'), out double divisor))
                 {
                 _value /= divisor;
                 }

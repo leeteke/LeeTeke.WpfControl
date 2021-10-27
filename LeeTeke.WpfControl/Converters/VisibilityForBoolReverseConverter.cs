@@ -27,7 +27,6 @@ namespace LeeTeke.WpfControl.Converters
                 return vb switch
                 {
                     Visibility.Visible => false,
-                    Visibility.Hidden or Visibility.Collapsed => true,
                     _ => true,
                 };
             }

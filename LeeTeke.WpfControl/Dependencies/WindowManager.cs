@@ -133,7 +133,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         private static void OpenChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is not Controls.Window && d is Window window && e.NewValue != e.OldValue && e.NewValue != null)
+            if (!(d is Controls.Window) && d is Window window && e.NewValue != e.OldValue && e.NewValue != null)
             {
                 window.StateChanged -= NoCorWindow_StateChanged;
                 window.Loaded -= Window_Loaded;

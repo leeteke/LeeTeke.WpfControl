@@ -74,7 +74,7 @@ namespace LeeTeke.WpfControl.Controls
 
         }
 
-     
+
 
         private void ProgressRing_Loaded(object sender, RoutedEventArgs e)
         {
@@ -459,10 +459,11 @@ namespace LeeTeke.WpfControl.Controls
             if (angel > 360)
                 angel = 360;
 
-            Point endPt = new();
+            var endPt = new Point();
 
             bool isLagreCircel = false;  //是否优势弧？？？
             double ra;//弧度
+#if NET5_0_OR_GREATER
             switch (angel)
             {
                 case <= 90:
@@ -496,8 +497,37 @@ namespace LeeTeke.WpfControl.Controls
                     endPt.Y = startPt.Y;
                     break;
             }
-
-            PathGeometry pathGeometry = new()
+#else
+    if (angel<=90)
+	{
+                    ra = (90 - angel) * Math.PI / 180;
+                    endPt.X = startPt.X + Math.Cos(ra) * radius;
+                    endPt.Y = startPt.Y + radius - Math.Sin(ra) * radius;
+	} else if (angel<= 180)
+	{
+     ra = (angel - 90) * Math.PI / 180;
+                    endPt.X = startPt.X + Math.Cos(ra) * radius;
+                    endPt.Y = startPt.Y + radius + Math.Sin(ra) * radius;
+	} else if (angel<= 270)
+    {
+                        isLagreCircel = true;
+                    ra = (angel - 180) * Math.PI / 180;
+                    endPt.X = startPt.X - Math.Sin(ra) * radius;
+                    endPt.Y = startPt.Y + radius + Math.Cos(ra) * radius;
+    } else if(angel< 360)
+    {
+     isLagreCircel = true;
+                    ra = (angel - 270) * Math.PI / 180;
+                    endPt.X = startPt.X - Math.Cos(ra) * radius;
+                    endPt.Y = startPt.Y + radius - Math.Sin(ra) * radius;
+     }else
+     {
+                    isLagreCircel = true;
+                    endPt.X = startPt.X - 0.001;
+                    endPt.Y = startPt.Y;
+     }
+#endif
+            PathGeometry pathGeometry = new PathGeometry()
             {
                 Figures = new PathFigureCollection{
                     new PathFigure{

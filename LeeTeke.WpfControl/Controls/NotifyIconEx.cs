@@ -612,7 +612,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private void AddRightContent(FrameworkElement element)
         {
-            MultiBinding multiBinding = new() { 
+            var multiBinding = new MultiBinding() { 
              Converter=new MultiValueToClipConverter(),
             };
             multiBinding.Bindings.Add(new Binding() { Source = _border, Path = new PropertyPath("ActualWidth"), Mode = BindingMode.OneWay });

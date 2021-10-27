@@ -364,7 +364,7 @@ namespace LeeTeke.WpfControl.Controls
 
             ///如果小于1 则进行判断 自动
 
-            List<int> pages = new();
+            var pages = new List<int>();
             for (int i = 0; i < MaxPageCount; i++)
             {
                 pages.Add(i + 1);
@@ -422,7 +422,7 @@ namespace LeeTeke.WpfControl.Controls
 
     
 
-            List<int> result = new();
+           var result = new List<int>();
             if (dispalyNumber>maxCount)
             {
                 for (int i = 0; i < maxCount; i++)

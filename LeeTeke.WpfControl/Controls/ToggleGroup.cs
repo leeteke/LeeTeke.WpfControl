@@ -89,7 +89,7 @@ namespace LeeTeke.WpfControl.Controls
                 }
             }));
             ItemsPanel = new ItemsPanelTemplate(hfac);
-          
+
         }
 
 
@@ -753,7 +753,8 @@ namespace LeeTeke.WpfControl.Controls
                     }
                     break;
                 case ToggleGroupMode.Multiple:
-                    if (SelectedIndex is not IList)
+
+                    if (!(SelectedIndex is IList))
                     {
                         if (int.TryParse(SelectedIndex.ToString(), out int value2))
                         {
@@ -778,7 +779,7 @@ namespace LeeTeke.WpfControl.Controls
                     ValueChanged(SelectedValue);
                     break;
                 case ToggleGroupMode.Multiple:
-                    if (SelectedValue is not IList)
+                    if (!(SelectedValue is IList))
                     {
                         ValueChanged(new List<object>() { SelectedValue });
                     }
@@ -804,7 +805,7 @@ namespace LeeTeke.WpfControl.Controls
                     }
                     break;
                 case ToggleGroupMode.Multiple:
-                    if (SelectedItem is not IList)
+                    if (!(SelectedItem is IList))
                     {
                         if (SelectedItem is ToggleButton)
                         {
@@ -823,7 +824,7 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-       
+
 
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)
         {

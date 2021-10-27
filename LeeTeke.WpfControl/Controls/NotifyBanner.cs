@@ -536,7 +536,7 @@ namespace LeeTeke.WpfControl.Controls
                     Converter = new NotifyConverter(),
                     ConverterParameter="H"
                 });
-                _notifyWindow = new()
+                _notifyWindow = new Window()
                 {
                     Title = "NotifyWindowService",
                     WindowStyle = WindowStyle.None,

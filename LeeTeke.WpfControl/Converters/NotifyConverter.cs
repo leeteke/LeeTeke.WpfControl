@@ -15,28 +15,58 @@ namespace LeeTeke.WpfControl.Converters
         {
             if ($"{parameter}" == "H")
             {
-                return value is NotifySite site ? site switch
+                if (value is NotifySite site)
                 {
-                    NotifySite.BottomCenter or NotifySite.TopCenter => HorizontalAlignment.Center,
-                    NotifySite.BottomLeft or NotifySite.TopLeft => HorizontalAlignment.Left,
-                    NotifySite.BottomRight or NotifySite.TopRight => HorizontalAlignment.Right,
-                    _ => HorizontalAlignment.Stretch
-                } : HorizontalAlignment.Stretch;
+                    switch (site)
+                    {
+
+                        case NotifySite.BottomCenter:
+                        case NotifySite.TopCenter:
+                            return HorizontalAlignment.Center;
+                        case NotifySite.BottomLeft:
+                        case NotifySite.TopLeft:
+                            return HorizontalAlignment.Left;
+                        case NotifySite.BottomRight:
+                        case NotifySite.TopRight:
+                            return HorizontalAlignment.Right;
+                        default:
+                            return HorizontalAlignment.Stretch;
+                    }
+                }
+                else
+                {
+                    return HorizontalAlignment.Stretch;
+                }
             }
 
             if ($"{parameter}" == "V")
             {
-                return value is NotifySite site ? site switch
+                if (value is NotifySite site)
                 {
-                    NotifySite.BottomCenter or NotifySite.BottomRight or NotifySite.BottomLeft => VerticalAlignment.Bottom,
-                  NotifySite.TopCenter or NotifySite.TopRight or NotifySite.TopLeft=>VerticalAlignment.Top,
-                    _ => VerticalAlignment.Stretch
-                } : VerticalAlignment.Stretch;
+                    switch (site)
+                    {
+                        case NotifySite.TopRight:
+                        case NotifySite.TopCenter:
+                        case NotifySite.TopLeft:
+                            return VerticalAlignment.Top;
+                        case NotifySite.BottomRight:
+                        case NotifySite.BottomCenter:
+                        case NotifySite.BottomLeft:
+
+                            return VerticalAlignment.Bottom;
+                        default:
+                            return VerticalAlignment.Stretch;
+                    }
+                }
+                else
+                {
+                    return VerticalAlignment.Stretch;
+                }
             }
 
             return default;
 
-          
+
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -168,11 +168,14 @@ namespace LeeTeke.WpfControl
         /// <returns></returns>
         public static Brush ChangeBrushDepth(Brush brush, float depth)
         {
-            return brush switch
+            if (brush is SolidColorBrush scbrush)
             {
-                SolidColorBrush scbrush => scbrush.Color == Colors.Transparent ? (depth > 0 ? new SolidColorBrush(Color.FromArgb((byte)(255 * depth), (byte)255, (byte)255, (byte)255)) : new SolidColorBrush(Color.FromArgb((byte)(255 * Math.Abs(depth)), (byte)0, (byte)0, (byte)0))) : new SolidColorBrush(StaticMethods.ChangeColorDepth(scbrush.Color, depth)),
-                _ => depth > 0 ? new SolidColorBrush(Color.FromArgb((byte)(255 * depth), (byte)255, (byte)255, (byte)255)) : new SolidColorBrush(Color.FromArgb((byte)(255 * Math.Abs(depth)), (byte)0, (byte)0, (byte)0)),
-            };
+                return scbrush.Color == Colors.Transparent ? (depth > 0 ? new SolidColorBrush(Color.FromArgb((byte)(255 * depth), (byte)255, (byte)255, (byte)255)) : new SolidColorBrush(Color.FromArgb((byte)(255 * Math.Abs(depth)), (byte)0, (byte)0, (byte)0))) : new SolidColorBrush(StaticMethods.ChangeColorDepth(scbrush.Color, depth));
+            }
+            else
+            {
+                return depth > 0 ? new SolidColorBrush(Color.FromArgb((byte)(255 * depth), (byte)255, (byte)255, (byte)255)) : new SolidColorBrush(Color.FromArgb((byte)(255 * Math.Abs(depth)), (byte)0, (byte)0, (byte)0));
+            }
         }
 
         /// <summary>
@@ -648,9 +651,25 @@ namespace LeeTeke.WpfControl
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        internal static (bool clear, double result) ValueConver(string value)
+        internal static ValueConverModel ValueConver(string value)
         {
-            return double.TryParse(value, out double result) ? (false, result) : value == "N" ? (true, 0) : (false, 0.0);
+            var re = new ValueConverModel();
+
+            if (double.TryParse(value, out double result))
+            {
+                return new ValueConverModel { clear = false, result = result };
+
+            }
+
+            if (value == "N")
+            {
+                return new ValueConverModel { clear = true, result = 0 };
+            }
+            else
+            {
+                return new ValueConverModel { clear = false, result = 0.0 };
+            }
+          
         }
 
         ///建议使用此方法

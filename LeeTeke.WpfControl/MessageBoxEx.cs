@@ -21,7 +21,15 @@ namespace LeeTeke.WpfControl
         /// <returns></returns>
         public static bool Show(string content, MessageStatus status = MessageStatus.None)
         {
-            IMessageWin message = IsDefaultShowMsgCR ? new CRMessage() : new Message();
+            IMessageWin message;
+            if (IsDefaultShowMsgCR)
+            {
+                message=new CRMessage();
+            }
+            else
+            {
+                message=new Message();
+            }
             message.Content = content; 
             message.Status = status;
             switch (status)
@@ -42,7 +50,15 @@ namespace LeeTeke.WpfControl
 
         public static bool Show(string title, string content, MessageStatus status = MessageStatus.None)
         {
-            IMessageWin message = IsDefaultShowMsgCR ? new CRMessage() : new Message();
+            IMessageWin message;
+            if (IsDefaultShowMsgCR)
+            {
+                message = new CRMessage();
+            }
+            else
+            {
+                message = new Message();
+            }
             message.Title = title;
             message.Content = content;
             message.Status = status;
@@ -68,7 +84,15 @@ namespace LeeTeke.WpfControl
 
         public MessageBoxEx(CornerRadius cornerRadius = default)
         {
-            _msg = IsDefaultShowMsgCR ? new CRMessage(cornerRadius) : new Message();
+  
+            if (IsDefaultShowMsgCR)
+            {
+                _msg = new CRMessage(cornerRadius);
+            }
+            else
+            {
+                _msg = new Message();
+            }
         }
         /// <summary>
         /// 是否可以关闭
