@@ -3154,13 +3154,13 @@
                                Cursor="SizeNS"/>
                     </Grid>
 
-               
-            
+
+
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding IsSelected,RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" Value="True">
                             <Setter  TargetName="PART_Content" Property="TextElement.Foreground"  Value="{Binding Path=(leedep:DataGridManager.SelectedForeground),RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}},Mode=OneWay}" />
                         </DataTrigger>
-              
+
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -3632,7 +3632,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
     <ControlTemplate x:Key="LeeDatePickerTextBoxTemplate"      
                      TargetType="{x:Type DatePickerTextBox}">
         <Grid>
@@ -4242,6 +4242,9 @@
         <Setter Property="Margin" Value="{Binding Path=(leedep:ListItemManager.Marigin), RelativeSource={RelativeSource AncestorType={x:Type ListBox}},Mode=OneWay}"/>
         <Setter Property="Padding" Value="{Binding Path=(leedep:ListItemManager.Padding), RelativeSource={RelativeSource AncestorType={x:Type ListBox}},Mode=OneWay}"/>
         <Setter Property="leedep:ListItemManager.Effect" Value="{Binding Path=(leedep:ListItemManager.Effect), RelativeSource={RelativeSource AncestorType={x:Type ListBox}},Mode=OneWay}"/>
+
+        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ListBox}},Mode=OneWay}"/>
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ListBox}},Mode=OneWay}"/>
         <!--MouseOver-->
         <Setter Property="leedep:ListItemManager.MouseOverBackground" Value="{Binding Path=(leedep:ListItemManager.MouseOverBackground), RelativeSource={RelativeSource AncestorType={x:Type ListBox}},Mode=OneWay}"/>
         <Setter Property="leedep:ListItemManager.MouseOverBorderBrush" Value="{Binding Path=(leedep:ListItemManager.MouseOverBorderBrush), RelativeSource={RelativeSource AncestorType={x:Type ListBox}},Mode=OneWay}"/>
@@ -4515,9 +4518,9 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="GridViewColumnHeader">
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+    <Style x:Key="LeetekeGridViewColumnHeader" TargetType="{x:Type GridViewColumnHeader}">
+        <Setter Property="VerticalContentAlignment" Value="{Binding Path=(leedep:ListViewManager.HeaderVerticalAlignment), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/> 
+        <Setter Property="HorizontalContentAlignment" Value="{Binding Path=(leedep:ListViewManager.HeaderHorizontalAlignment), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/> 
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="MinHeight" Value="0"/>
@@ -4552,6 +4555,10 @@
     <Style x:Key="LeetekeListViewItem" TargetType="{x:Type ListViewItem}">
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+
+        <Setter Property="VerticalContentAlignment" Value="{Binding Path=VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="HorizontalContentAlignment" Value="{Binding Path=HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+
         <!--常规属性-->
         <Setter Property="MinHeight" Value="{Binding Path=(leedep:ListItemManager.MinHeight), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
         <Setter Property="MinWidth" Value="{Binding Path=(leedep:ListItemManager.MinWidth), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
@@ -4598,7 +4605,7 @@
                             Background="{TemplateBinding Background}"
                             Margin="{TemplateBinding Margin}"
                             CornerRadius="{Binding Path=(leedep:ListItemManager.CornerRadius), RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}},Mode=OneWay}"
-                                 Effect="{Binding Path=(leedep:ListItemManager.Effect), RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}},Mode=OneWay}"
+                            Effect="{Binding Path=(leedep:ListItemManager.Effect), RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}},Mode=OneWay}"
                             />
 
                         <GridViewRowPresenter  x:Name="contentPresenter"
@@ -4669,7 +4676,8 @@
         <Setter Property="leedep:ListViewManager.HeaderBorderThickness" Value="0,0,0,0"/>
         <Setter Property="leedep:ListViewManager.HeaderBorderBursh" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="leedep:ListViewManager.HeaderFreeze" Value="True"/>
-
+        <Setter Property="leedep:ListViewManager.HeaderHorizontalAlignment" Value="Stretch"/>
+        <Setter Property="leedep:ListViewManager.HeaderVerticalAlignment" Value="Center"/>
 
 
         <!--常规属性-->
@@ -4878,8 +4886,8 @@
     <Style x:Key="LeeTreeViewItem" TargetType="{x:Type TreeViewItem}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type TreeView}}}"/>
-        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type TreeView}}}"/>
+        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type TreeView}},Mode=OneWay}"/>
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type TreeView}},Mode=OneWay}"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Foreground" Value="{Binding  RelativeSource={RelativeSource AncestorType={x:Type TreeView}},Path=Foreground,Mode=OneWay}"/>
@@ -5159,6 +5167,7 @@
     <Style BasedOn="{StaticResource LeeToggleButton }" TargetType="ToggleButton"/>
     <Style BasedOn="{StaticResource LeeComboBox}" TargetType="ComboBox"/>
     <Style BasedOn="{StaticResource LeeRadioButton}" TargetType="RadioButton"/>
+    <Style BasedOn="{StaticResource LeetekeGridViewColumnHeader}" TargetType="GridViewColumnHeader"/>
     <Style BasedOn="{StaticResource LeetekeListBox}" TargetType="ListBox"/>
     <Style BasedOn="{StaticResource LeetekeListBoxItem}" TargetType="ListBoxItem"/>
     <Style BasedOn="{StaticResource LeetekeListView}" TargetType="ListView"/>

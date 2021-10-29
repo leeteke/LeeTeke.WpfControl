@@ -139,5 +139,40 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("HeaderIsClip", typeof(bool), typeof(ListViewManager));
         #endregion
 
+
+        #region HeaderHorizontalAlignment
+        public static HorizontalAlignment GetHeaderHorizontalAlignment(DependencyObject obj)
+        {
+            return (HorizontalAlignment)obj.GetValue(HeaderHorizontalAlignmentProperty);
+        }
+
+        public static void SetHeaderHorizontalAlignment(DependencyObject obj, HorizontalAlignment value)
+        {
+            obj.SetValue(HeaderHorizontalAlignmentProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for HeaderHorizontalAlignment.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HeaderHorizontalAlignmentProperty =
+            DependencyProperty.RegisterAttached("HeaderHorizontalAlignment", typeof(HorizontalAlignment), typeof(ListViewManager));
+        #endregion
+
+
+        #region HeaderVerticalAlignment
+        public static VerticalAlignment GetHeaderVerticalAlignment(DependencyObject obj)
+        {
+            return (VerticalAlignment)obj.GetValue(HeaderVerticalAlignmentProperty);
+        }
+
+        public static void SetHeaderVerticalAlignment(DependencyObject obj, VerticalAlignment value)
+        {
+            obj.SetValue(HeaderVerticalAlignmentProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for HeaderVerticalAlignment.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HeaderVerticalAlignmentProperty =
+            DependencyProperty.RegisterAttached("HeaderVerticalAlignment", typeof(VerticalAlignment), typeof(ListViewManager));
+        #endregion
+
+
     }
 }
