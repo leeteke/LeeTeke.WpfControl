@@ -36,6 +36,7 @@
         <Setter Property="IconForeground" Value="{DynamicResource  LeeBrush_Theme}"/>
         <Setter Property="IconVerticalAlignment" Value="Center"/>
         <Setter Property="IconHorizontalAlignment" Value="Center"/>
+        
         <Setter Property="SplitterFill" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=BorderBrush}"/>
         <Setter Property="SplitterMargin" Value="2"/>
         <Setter Property="SplitterVisible" Value="False"/>
@@ -51,7 +52,6 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}"
-                            Padding="{TemplateBinding Padding}"
                             Effect="{TemplateBinding Effect}">
 
                         <DockPanel x:Name="PART_Panel">
