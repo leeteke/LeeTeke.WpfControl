@@ -22,16 +22,20 @@
         <Setter Property="Padding" Value="2"/>
         <Setter Property="BorderBrush" Value="{DynamicResource  LeeBrush_BorderBrush}"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="IconDock" Value="Left"/>
-        <Setter Property="Icon" Value="&#xE74C;"/>
+
         <Setter Property="IsReadOnly" Value="False"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
-        <Setter Property="IconSize" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=FontSize}"/>
+        <Setter Property="IconDock" Value="Left"/>
+        <Setter Property="Icon" Value="&#xE74C;"/>
+        <Setter Property="IconFontSize" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=FontSize}"/>
+        <Setter Property="IconFontFamily" Value="{DynamicResource IconFontFamily}"/>
         <Setter Property="IconCanClick" Value="False"/>
         <Setter Property="IconVisible" Value="False"/>
         <Setter Property="IconMargin" Value="2,0"/>
-        <Setter Property="IconFill" Value="{DynamicResource  LeeBrush_Theme}"/>
+        <Setter Property="IconForeground" Value="{DynamicResource  LeeBrush_Theme}"/>
+        <Setter Property="IconVerticalAlignment" Value="Center"/>
+        <Setter Property="IconHorizontalAlignment" Value="Center"/>
         <Setter Property="SplitterFill" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=BorderBrush}"/>
         <Setter Property="SplitterMargin" Value="2"/>
         <Setter Property="SplitterVisible" Value="False"/>
@@ -49,29 +53,19 @@
                             CornerRadius="{TemplateBinding CornerRadius}"
                             Padding="{TemplateBinding Padding}"
                             Effect="{TemplateBinding Effect}">
-     
-                        <DockPanel x:Name="PART_Panel">
 
-                            <Border x:Name="PART_ICON"
-                                    BorderThickness="0"
-                                    Background="Transparent"
-                                    Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=IconVisible,Mode=OneWay,Converter={StaticResource VisibilityForBoolConverter}}"
-                                    DockPanel.Dock="{TemplateBinding IconDock}"
-                                    >
-                                <TextBlock  IsHitTestVisible="True"
-                                            Text="{TemplateBinding Icon}"
-                                            FontSize="{TemplateBinding IconSize}"
-                                            FontFamily="{DynamicResource IconFontFamily}"
-                                            DockPanel.Dock="{TemplateBinding IconDock}"
-                                            Foreground="{TemplateBinding IconFill}"
-                                            VerticalAlignment="Center"
-                                            MinHeight="0"
-                                            HorizontalAlignment="Center"
-                                            Background="Transparent"
-                                            Margin="{TemplateBinding IconMargin}"
-                                           />
-                            </Border>
-                            <Rectangle   MinHeight="{TemplateBinding SplitterSize}"
+                        <DockPanel x:Name="PART_Panel">
+                            <ContentPresenter x:Name="PART_ICON" Content="{TemplateBinding Icon}"
+                                                  TextElement.FontFamily="{TemplateBinding  IconFontFamily}"
+                                                  TextElement.FontSize="{TemplateBinding IconFontSize}"
+                                                  TextElement.Foreground="{TemplateBinding IconForeground}"
+                                                  Margin="{TemplateBinding IconMargin}"
+                                                  VerticalAlignment="{TemplateBinding IconVerticalAlignment}"
+                                                  HorizontalAlignment="{TemplateBinding IconHorizontalAlignment}"
+                                                  Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=IconVisible,Mode=OneWay,Converter={StaticResource VisibilityForBoolConverter}}"
+                                                  DockPanel.Dock="{TemplateBinding IconDock}"
+                                                  />
+                            <Rectangle  MinHeight="{TemplateBinding SplitterSize}"
                                          MinWidth="{TemplateBinding SplitterSize}"
                                          Fill="{TemplateBinding SplitterFill}"
                                          Margin="{TemplateBinding SplitterMargin}"
@@ -90,6 +84,7 @@
                                          TextAlignment="{TemplateBinding TextAlignment}"
                                          input:InputMethod.IsInputMethodEnabled="False"
                                          BorderThickness="0"
+                                         Padding="{TemplateBinding Padding}"
                                          MinHeight="0"
                                          TextWrapping="{TemplateBinding TextWrapping}"
                                          AcceptsReturn="{TemplateBinding AcceptsReturn}"
@@ -111,6 +106,7 @@
                                              MinHeight="0"
                                              BorderThickness="0"
                                              FocusVisualStyle="{x:Null}"
+                                             Padding="{TemplateBinding Padding}"
                                              Foreground="{TemplateBinding Foreground}"
                                              FontFamily="{TemplateBinding FontFamily}"
                                              FontSize="{TemplateBinding FontSize}"
@@ -131,6 +127,7 @@
                                            Text="{TemplateBinding PreviewText}"
                                            Background="{x:Null}"
                                            IsHitTestVisible="False"
+                                           Padding="{TemplateBinding Padding}"
                                            Visibility="Visible"
                                            TextWrapping="{TemplateBinding TextWrapping}"
                                            MinHeight="0"
@@ -184,7 +181,7 @@
                             <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_Theme}"/>
                         </Trigger>
 
-                        
+
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding ElementName=PART_Main,Path=IsFocused,Mode=OneWay}" Value="False"/>
@@ -206,7 +203,7 @@
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="{DynamicResource UnEnableOpacity}"/>
                         </Trigger>
-                        
+
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

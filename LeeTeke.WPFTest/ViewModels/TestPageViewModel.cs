@@ -203,7 +203,7 @@ namespace LeeTeke.WPFTest.ViewModels
 
         private async void TestCommandExecute(object obj)
         {
-            MessageBoxEx.Show("saasddddddddddddddddddddddddddddddddddddddddaaaaaaaaaaaaaaaaaaaaaaaaaaa", MessageStatus.Error);
+         var bt=   MessageBoxEx.Show("a","saasddddddddddddddddddddddddddddddddddddddddaaaaaaaaaaaaaaaaaaaaaaaaaaa", MessageStatus.Question);
 
             MessageBoxEx msg = new MessageBoxEx()
             {

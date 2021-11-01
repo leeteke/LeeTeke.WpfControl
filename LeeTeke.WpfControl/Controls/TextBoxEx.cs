@@ -58,7 +58,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private PasswordBox _password;
         private TextBox _textBox;
-        private Border _border;
+        private ContentPresenter _icon;
         public TextBoxEx()
         {
             KeyDown += TextBoxEx_KeyDown;
@@ -72,7 +72,7 @@ namespace LeeTeke.WpfControl.Controls
             base.OnApplyTemplate();
             _password = this.Template.FindName("PART_Password", this) as PasswordBox;
             _textBox = this.Template.FindName("PART_Main", this) as TextBox;
-            _border = this.Template.FindName("PART_ICON", this) as Border;
+            _icon = this.Template.FindName("PART_ICON", this) as ContentPresenter;
 
             if (_password != null)
             {
@@ -86,9 +86,9 @@ namespace LeeTeke.WpfControl.Controls
                 _textBox.TextChanged += _textBox_TextChanged;
             }
 
-            if (_border != null)
+            if (_icon != null)
             {
-                _border.MouseDown += _border_MouseDown;
+                _icon.MouseDown += _icon_MouseDown;
             }
 
 
@@ -160,7 +160,7 @@ namespace LeeTeke.WpfControl.Controls
 
         }
 
-        private void _border_MouseDown(object sender, MouseButtonEventArgs e)
+        private void _icon_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (IconCanClick)
             {
@@ -492,20 +492,36 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("MaxLength", typeof(int), typeof(TextBoxEx));
         #endregion
 
+
         #region Icon
         /// <summary>
-        /// 请填写描述
+        /// 请添加描述
         /// </summary>
-        public string Icon
+        public object Icon
         {
-            get { return (string)GetValue(IconProperty); }
+            get { return (object)GetValue(IconProperty); }
             set { SetValue(IconProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Icon.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IconProperty =
-            DependencyProperty.Register("Icon", typeof(string), typeof(TextBoxEx));
+            DependencyProperty.Register("Icon", typeof(object), typeof(TextBoxEx));
+        #endregion
 
+
+        #region IconFontFamily
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public FontFamily IconFontFamily
+        {
+            get { return (FontFamily)GetValue(IconFontFamilyProperty); }
+            set { SetValue(IconFontFamilyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IconFontFamily.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IconFontFamilyProperty =
+            DependencyProperty.Register("IconFontFamily", typeof(FontFamily), typeof(TextBoxEx));
         #endregion
 
         #region IconMargin
@@ -524,37 +540,71 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-        #region IconSize
+
+        #region IconFontSize
         /// <summary>
-        /// 请填写描述
+        /// 请添加描述
         /// </summary>
-        public double IconSize
+        public double IconFontSize
         {
-            get { return (double)GetValue(IconSizeProperty); }
-            set { SetValue(IconSizeProperty, value); }
+            get { return (double)GetValue(IconFontSizeProperty); }
+            set { SetValue(IconFontSizeProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for IconSize.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IconSizeProperty =
-            DependencyProperty.Register("IconSize", typeof(double), typeof(TextBoxEx));
-
+        // Using a DependencyProperty as the backing store for IconFontSize.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IconFontSizeProperty =
+            DependencyProperty.Register("IconFontSize", typeof(double), typeof(TextBoxEx));
         #endregion
 
-        #region IconFill
+
+        #region IconVerticalAlignment
         /// <summary>
-        /// 请填写描述
+        /// 请添加描述
         /// </summary>
-        public Brush IconFill
+        public VerticalAlignment IconVerticalAlignment
         {
-            get { return (Brush)GetValue(IconFillProperty); }
-            set { SetValue(IconFillProperty, value); }
+            get { return (VerticalAlignment)GetValue(IconVerticalAlignmentProperty); }
+            set { SetValue(IconVerticalAlignmentProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for IconFill.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IconFillProperty =
-            DependencyProperty.Register("IconFill", typeof(Brush), typeof(TextBoxEx));
-
+        // Using a DependencyProperty as the backing store for IconVerticalAlignment.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IconVerticalAlignmentProperty =
+            DependencyProperty.Register("IconVerticalAlignment", typeof(VerticalAlignment), typeof(TextBoxEx));
         #endregion
+
+
+        #region IconHorizontalAlignment
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public HorizontalAlignment IconHorizontalAlignment
+        {
+            get { return (HorizontalAlignment)GetValue(IconHorizontalAlignmentProperty); }
+            set { SetValue(IconHorizontalAlignmentProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IconHorizontalAlignment.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IconHorizontalAlignmentProperty =
+            DependencyProperty.Register("IconHorizontalAlignment", typeof(HorizontalAlignment), typeof(TextBoxEx));
+        #endregion
+
+
+
+        #region IconForeground
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Brush IconForeground
+        {
+            get { return (Brush)GetValue(IconForegroundProperty); }
+            set { SetValue(IconForegroundProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IconForeground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IconForegroundProperty =
+            DependencyProperty.Register("IconForeground", typeof(Brush), typeof(TextBoxEx));
+        #endregion
+
 
         #region IconVisible
         /// <summary>

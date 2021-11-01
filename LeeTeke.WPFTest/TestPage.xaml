@@ -48,6 +48,23 @@
                 </StackPanel.ContextMenu>
 
 
+                <leecontrol:TextBoxEx 
+                    Margin="5"
+                    Height="50"
+                                      Mode="IMEDispaly" 
+                                      Text="2"
+                    IconVisible="True"
+                                      BorderThickness="1"
+                       IconCanClick="True"
+                    IconCommand="{Binding TestCommand}"
+                    AcceptsReturn="True"
+                    IconFontFamily="{x:Null}"
+                                      >
+                    <leecontrol:TextBoxEx.Icon>
+                        <Grid Width="100"  Height="20"
+                              Background="Red"/>
+                    </leecontrol:TextBoxEx.Icon>
+                </leecontrol:TextBoxEx>
                 <leecontrol:TabView  CloseVisibly="MouseOver" 
                                      Orientation="Horizontal"
                                      ShowScrollToButton="True"
@@ -326,13 +343,6 @@
                                       BorderBrush="Red"
                                       />
 
-                <leecontrol:TextBoxEx 
-                                      Mode="IMEDispaly" 
-                                      Text="2"
-                                      BorderThickness="1"
-                             TextBlock.LineHeight="20"
-                    AcceptsReturn="True"
-                                      />
 
 
                 <ToggleButton 
