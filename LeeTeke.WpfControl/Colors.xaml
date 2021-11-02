@@ -85,9 +85,9 @@
 
     
     <!--Icon-->
-    <FontFamily x:Key="IconFontFamily">/LeeTeke.WpfControl;component/LeeTekeDatas/#Segoe MDL2 Assets</FontFamily>
+    <FontFamily x:Key="IconFontFamily">/LeeTeke.WpfControl;component/LeeTekeDatas/#Segoe Fluent Icons</FontFamily>
 
-    
+
 
     <SolidColorBrush x:Key="LeeBrush_White" Color="{DynamicResource LeeColor_White}"/>
     <Color x:Key="LeeColor_White" R="251" G="253" B="255" A="255" />

@@ -127,7 +127,7 @@ namespace LeeTeke.WpfControl.Controls
                     case MessageStatus.Stop:
                         icon.Visibility = Visibility.Visible;
                         icon.Text = "\xF140";
-                        icon.Foreground = Application.Current.Resources["LeeColor_Stop"] as SolidColorBrush;
+                        icon.Foreground = Application.Current.Resources["LeeBrush_Stop"] as SolidColorBrush;
                         break;
                     case MessageStatus.Wating:
                         icon.Visibility = Visibility.Collapsed;

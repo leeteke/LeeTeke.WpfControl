@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 
 namespace LeeTeke.WPFTest.ViewModels
 {
-    class TestPageViewModel: BindableBase
+    class TestPageViewModel : BindableBase
     {
 
         private ObservableCollection<TestListModel> _TestList;
@@ -203,26 +203,50 @@ namespace LeeTeke.WPFTest.ViewModels
 
         private async void TestCommandExecute(object obj)
         {
-         var bt=   MessageBoxEx.Show("a","saasddddddddddddddddddddddddddddddddddddddddaaaaaaaaaaaaaaaaaaaaaaaaaaa", MessageStatus.Question);
-
-            MessageBoxEx msg = new MessageBoxEx()
-            {
-                Content = "正在等待服务器数据同步...",
-                Title = "测试",
-                ShowProcess = false,
-                Status = MessageStatus.Wating,
-            };
-
-            msg.AddOptions("测试1", 1);
-            var reulst = msg.ShowDialogAsync();
+            _ = MessageBoxEx.Show("1", "1", MessageStatus.Question);
+            _ = MessageBoxEx.Show("1", "1", MessageStatus.Stop);
+            _ = MessageBoxEx.Show("1", "1", MessageStatus.None);
+            _ = MessageBoxEx.Show("1", "1", MessageStatus.OK);
+            _ = MessageBoxEx.Show("1", "1", MessageStatus.Info);
+            _ = MessageBoxEx.Show("1", "1", MessageStatus.Wating);
+            _ = MessageBoxEx.Show("1", "1", MessageStatus.Error);
+            _ = MessageBoxEx.Show("1", "1", MessageStatus.Warning);
 
 
 
             NotifyData = new NotifyBannerShowData()
             {
-                Content = $"您选择了 {await reulst}",
+                Content = $"1",
                 Status = NotifyStatus.Info
             };
+            NotifyData = new NotifyBannerShowData()
+            {
+                Content = $"1",
+                Status = NotifyStatus.Success
+            };
+            NotifyData = new NotifyBannerShowData()
+            {
+                Content = $"1",
+                Status = NotifyStatus.Primary
+            };
+            NotifyData = new NotifyBannerShowData()
+            {
+                Content = $"1",
+                Status = NotifyStatus.Error
+            };
+            NotifyData = new NotifyBannerShowData()
+            {
+                Content = $"1",
+                Status = NotifyStatus.Warning
+            };
+         
+            NotifyData = new NotifyBannerShowData()
+            {
+                Content = $"1",
+                Status = NotifyStatus.None
+            };
+
+         
         }
     }
 }

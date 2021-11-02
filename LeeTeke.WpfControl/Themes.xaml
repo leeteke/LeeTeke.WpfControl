@@ -2665,6 +2665,7 @@
         </Setter>
 
     </Style>
+
     <Style x:Key="LeeContextMenu" TargetType="{x:Type ContextMenu}" >
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
@@ -2674,6 +2675,7 @@
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="leedep:ContextMenuManager.Shadow" Value="{DynamicResource LeeShadow}"/>
+        <Setter Property="leedep:ContextMenuManager.ContentDock" Value="Bottom"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Margin" Value="8"/>
 
@@ -2687,20 +2689,36 @@
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Effect="{Binding Path=(leedep:ContextMenuManager.Shadow),RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}"
                             CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius),RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}"/>
-                        <ScrollViewer Padding="{TemplateBinding Padding}"
-                                       leedep:CornerRadiusManager.CornerRadius="{Binding ElementName=border,Path=CornerRadius,Mode=OneWay}"
-                                       leedep:CornerRadiusManager.IsClip="True"
-                                       >
-                            <StackPanel IsItemsHost="True"
-                                        KeyboardNavigation.DirectionalNavigation="Cycle" />
-                        </ScrollViewer>
+                        <DockPanel x:Name="contentDock">
+                            <ContentPresenter Content="{Binding Path=(leedep:ContextMenuManager.Content),RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}" 
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              DockPanel.Dock="{Binding Path=(leedep:ContextMenuManager.ContentDock),RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}"/>
 
+                            <ScrollViewer Padding="{TemplateBinding Padding}"
+                                       >
+                                <StackPanel IsItemsHost="True"
+                                        KeyboardNavigation.DirectionalNavigation="Cycle" />
+                            </ScrollViewer>
+                        </DockPanel>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Path=(leedep:ContextMenuManager.Shadow),RelativeSource={RelativeSource Mode=Self},Mode=OneWay}"
-                                     Value="{x:Null}">
+
+                        <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
+                            <Setter TargetName="contentDock" Property="Clip">
+                                <Setter.Value>
+                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
+                                        <Binding ElementName="border"  Path="CornerRadius" Mode="OneWay"/>
+                                        <Binding ElementName="border"  Path="BorderThickness" Mode="OneWay"/>
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+
+                        <Trigger Property="leedep:ContextMenuManager.Shadow"    Value="{x:Null}">
                             <Setter TargetName="border" Property="Margin" Value="0" />
-                        </DataTrigger>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -4519,8 +4537,8 @@
     </Style>
 
     <Style x:Key="LeetekeGridViewColumnHeader" TargetType="{x:Type GridViewColumnHeader}">
-        <Setter Property="VerticalContentAlignment" Value="{Binding Path=(leedep:ListViewManager.HeaderVerticalAlignment), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/> 
-        <Setter Property="HorizontalContentAlignment" Value="{Binding Path=(leedep:ListViewManager.HeaderHorizontalAlignment), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/> 
+        <Setter Property="VerticalContentAlignment" Value="{Binding Path=(leedep:ListViewManager.HeaderVerticalAlignment), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
+        <Setter Property="HorizontalContentAlignment" Value="{Binding Path=(leedep:ListViewManager.HeaderHorizontalAlignment), RelativeSource={RelativeSource AncestorType={x:Type ListView}},Mode=OneWay}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="MinHeight" Value="0"/>

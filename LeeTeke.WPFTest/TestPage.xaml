@@ -31,7 +31,10 @@
 
             <StackPanel  x:Name="stack"  >
                 <StackPanel.ContextMenu>
-                    <ContextMenu>
+                    <ContextMenu leedep:ContextMenuManager.ContentDock="Right" >
+                        <leedep:ContextMenuManager.Content>
+                            <Border  Background="Red" Width="100"/>
+                        </leedep:ContextMenuManager.Content>
                         <MenuItem Header="ceshi" >
                             <MenuItem.Icon>
                                 <TextBlock Text="&#xE8C6;" FontFamily="{DynamicResource IconFontFamily}"/>
@@ -58,17 +61,20 @@
                        IconCanClick="True"
                     IconCommand="{Binding TestCommand}"
                     AcceptsReturn="True"
-                    IconFontFamily="{x:Null}"
                                       >
-                    <leecontrol:TextBoxEx.Icon>
-                        <Grid Width="100"  Height="20"
-                              Background="Red"/>
-                    </leecontrol:TextBoxEx.Icon>
+                
                 </leecontrol:TextBoxEx>
                 <leecontrol:TabView  CloseVisibly="MouseOver" 
                                      Orientation="Horizontal"
                                      ShowScrollToButton="True"
-                                     ItemsSource="{Binding TestList}">
+                                    
+                                     ItemsSource="{Binding TestList}"
+                                     ItemContxtMenuContentDock="Bottom">
+                    <leecontrol:TabView.ItemContxtMenuContent>
+                        <Grid Height="100">
+                            <Rectangle Width="50" Height="50" Fill="Red" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </leecontrol:TabView.ItemContxtMenuContent>
 
                     <leecontrol:TabView.ItemTemplate>
                         <DataTemplate>
@@ -80,6 +86,7 @@
 
 
                 <TreeView  ItemsSource="{Binding TreeList}"
+                          
                           >
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding Path=Child}"  

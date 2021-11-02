@@ -37,11 +37,11 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemCanClosing.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemCanClosingProperty =
-            DependencyProperty.RegisterAttached("ItemCanClosing", typeof(bool?), typeof(TabViewItem),  new FrameworkPropertyMetadata(default, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, ItemCanClosingChanged) { DefaultUpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
+            DependencyProperty.RegisterAttached("ItemCanClosing", typeof(bool?), typeof(TabViewItem), new FrameworkPropertyMetadata(default, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, ItemCanClosingChanged) { DefaultUpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
 
         private static void ItemCanClosingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is FrameworkElement element && e.NewValue != null )
+            if (d is FrameworkElement element && e.NewValue != null)
             {
                 var pd = StaticMethods.FindVisualParent<TabViewItem>(element);
                 if (pd != null)
@@ -89,46 +89,10 @@ namespace LeeTeke.WpfControl.Controls
             base.OnApplyTemplate();
             try
             {
-                if (this.Template.FindName("PART_ContextMenu", this) is ContextMenu contextMenu)
-                {
-                    this.ContextMenu = contextMenu;
-                }
-
-                if (this.Template.FindName("PART_MenuItem_CloseAll", this) is MenuItem allItem)
-                {
-                    allItem.Click += (es, ex) => RaiseClosed(TabViewItemClosedMode.All);
-                }
-                if (this.Template.FindName("PART_MenuItem_CloseOther", this) is MenuItem otherItem)
-                {
-                    otherItem.Click += (es, ex) => RaiseClosed(TabViewItemClosedMode.Other);
-                }
-                if (this.Template.FindName("PART_MenuItem_CloseSelf", this) is MenuItem selftItem)
-                {
-                    selftItem.Click += (es, ex) => RaiseClosed(TabViewItemClosedMode.Self);
-                }
-
-                if (this.Template.FindName("PART_MenuItem_Pin", this) is MenuItem btnPin)
-                {
-                    btnPin.Click += (es, ex) => IsFixed = !IsFixed;
-                }
 
                 if (this.Template.FindName("PART_CloseButton", this) is Button button)
                 {
                     button.Click += (es, ex) => RaiseClosed(TabViewItemClosedMode.Self);
-                }
-
-                if (this.Template.FindName("PART_ContentPresenter", this) is ContentPresenter contentPresenter)
-                {
-                    contentPresenter.Loaded += (es, ex) =>
-                    {
-                        //var chlid = VisualTreeHelper.GetChild(contentPresenter, 0);
-                        //BindingOperations.SetBinding(this, TabViewItem.CanClosingProperty, new Binding()
-                        //{
-                        //    Source = chlid,
-                        //    Path = new PropertyPath("(0)", new DependencyProperty[] { LeeTeke.WpfControl.Dependencies.TabViewManager.ItemCanCloseProperty }),
-                        //    Mode = BindingMode.OneWay
-                        //});
-                    };
                 }
 
 
@@ -147,7 +111,7 @@ namespace LeeTeke.WpfControl.Controls
         /// </summary>
         public bool IsClosed { get; private set; }
 
-        public new ContextMenu ContextMenu { get; private set; }
+        //public new ContextMenu ContextMenu { get; private set; }
         #endregion
 
         #region 依赖属性
@@ -272,6 +236,7 @@ namespace LeeTeke.WpfControl.Controls
         public static readonly DependencyProperty CloseVisiblyProperty =
             DependencyProperty.Register("CloseVisibly", typeof(ShowMode), typeof(TabViewItem));
         #endregion
+
 
 
         #endregion

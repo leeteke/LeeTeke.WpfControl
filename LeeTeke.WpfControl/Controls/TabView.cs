@@ -58,12 +58,19 @@ namespace LeeTeke.WpfControl.Controls
         private StackPanel _stackPanel;
         private Button _leftBtn;
         private Button _rightBtn;
+        private ContextMenu _contextMenu;
+        private MenuItem _pinMenuItem;
+        private MenuItem _allMenuItem;
+        private MenuItem _otherMenuItem;
+        private MenuItem _selfMenuItem;
 
         private IList _ilist;
 
         private int _selectedIndex = -1;
         private object _selectedItem;
         private object _selectedValue;
+
+
 
         private IList ItemList
         {
@@ -81,10 +88,48 @@ namespace LeeTeke.WpfControl.Controls
             EventManager.RegisterClassHandler(typeof(TabViewItem), TabViewItem.ClosedEvent, new RoutedEventHandler(TabViewItemClosedEventAsync));
             EventManager.RegisterClassHandler(typeof(TabViewItem), TabViewItem.SelectedEvent, new RoutedEventHandler(TabViewItemSelectedEvent));
             EventManager.RegisterClassHandler(typeof(StackPanel), StackPanel.SizeChangedEvent, new RoutedEventHandler(StackPanelLoadedEvent));
+
+            this.PreviewMouseRightButtonDown += TabView_PreviewMouseRightButtonDown;
+
             PreviewMouseWheel += TabView_PreviewMouseWheel;
         }
 
+        private void TabView_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DependencyObject source = e.OriginalSource as DependencyObject;
+            while (source != null && source.GetType() != typeof(TabViewItem))
+                source = VisualTreeHelper.GetParent(source);
+            if (source != null && source is TabViewItem item)
+            {
+                e.Handled = true;
+                _contextMenu.DataContext = item;
+                if (item.CanClosing)
+                {
+                    _pinMenuItem.Visibility = Visibility.Visible;
+                    _selfMenuItem.Visibility = Visibility.Visible;
+                    if (_pinMenuItem.Icon is TextBlock tb)
+                    {
+                        if (item.IsFixed)
+                        {
+                            tb.Text = "\xe77a";
+                            _pinMenuItem.Header = "解除固定";
+                        }
+                        else
+                        {
+                            tb.Text = "\xe718";
+                            _pinMenuItem.Header = "固定选项卡";
+                        }
+                    }
+                }
+                else
+                {
+                    _pinMenuItem.Visibility = Visibility.Collapsed;
+                    _selfMenuItem.Visibility = Visibility.Collapsed;
+                }
 
+
+            }
+        }
 
 
 
@@ -126,18 +171,81 @@ namespace LeeTeke.WpfControl.Controls
                 _scrollViewer.ScrollChanged += _scrollViewer_ScrollChanged;
                 _scrollViewer.SizeChanged += _scrollViewer_SizeChanged;
             }
+            if (this.GetTemplateChild("PART_ContextMenu") is ContextMenu contextMenu)
+            {
+                _contextMenu = contextMenu;
 
+                _contextMenu.SetBinding(Dependencies.ContextMenuManager.ContentDockProperty, new Binding()
+                {
+                    Source = this,
+                    Path = new PropertyPath(TabView.ItemContxtMenuContentDockProperty),
+                    Mode = BindingMode.OneWay,
+                });
+                _contextMenu.SetBinding(Dependencies.ContextMenuManager.ContentProperty, new Binding()
+                {
+                    Source = this,
+                    Path = new PropertyPath(TabView.ItemContxtMenuContentProperty),
+                    Mode = BindingMode.OneWay,
+                });
+
+                _contextMenu.Closed += (e, s) => contextMenu.DataContext = this.DataContext;
+            }
+
+            if (this.GetTemplateChild("PART_MenuItem_CloseAll") is MenuItem allItem)
+            {
+                _allMenuItem = allItem;
+                _allMenuItem.Click += (es, ex) =>
+                {
+                    if (_contextMenu.DataContext is TabViewItem item)
+                    {
+                        TabViewItemClosedEventAsync(item, new TabViewItemClosedEventArgs(TabViewItemClosedMode.All, null));
+                    }
+                };
+            }
+            if (this.GetTemplateChild("PART_MenuItem_CloseOther") is MenuItem otherItem)
+            {
+                _otherMenuItem = otherItem;
+                _otherMenuItem.Click += (es, ex) =>
+                {
+                    if (_contextMenu.DataContext is TabViewItem item)
+                    {
+                        TabViewItemClosedEventAsync(item, new TabViewItemClosedEventArgs(TabViewItemClosedMode.Other, null));
+                    }
+                };
+            }
+            if (this.GetTemplateChild("PART_MenuItem_CloseSelf") is MenuItem selftItem)
+            {
+                _selfMenuItem = selftItem;
+                _selfMenuItem.Click += (es, ex) =>
+                {
+                    if (_contextMenu.DataContext is TabViewItem item)
+                    {
+                        TabViewItemClosedEventAsync(item, new TabViewItemClosedEventArgs(TabViewItemClosedMode.Self, null));
+                    }
+                };
+            }
+
+            if (this.GetTemplateChild("PART_MenuItem_Pin") is MenuItem btnPin)
+            {
+                _pinMenuItem = btnPin;
+                btnPin.Click += (es, ex) =>
+                {
+                    if (_contextMenu.DataContext is TabViewItem item)
+                    {
+                        item.IsFixed = !item.IsFixed;
+                    }
+                };
+            }
 
 
         }
 
-    
+
 
 
 
 
         #endregion
-
 
         #region RouteEvent
 
@@ -503,6 +611,37 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
+        #region ItemContxtMenuContent
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public object ItemContxtMenuContent
+        {
+            get { return (object)GetValue(ItemContxtMenuContentProperty); }
+            set { SetValue(ItemContxtMenuContentProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ItemContxtMenuContent.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemContxtMenuContentProperty =
+            DependencyProperty.Register("ItemContxtMenuContent", typeof(object), typeof(TabView));
+        #endregion
+
+        #region ItemContxtMenuContentDock
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Dock ItemContxtMenuContentDock
+        {
+            get { return (Dock)GetValue(ItemContxtMenuContentDockProperty); }
+            set { SetValue(ItemContxtMenuContentDockProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ItemContxtMenuContentDock.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemContxtMenuContentDockProperty =
+            DependencyProperty.Register("ItemContxtMenuContentDock", typeof(Dock), typeof(TabView));
+        #endregion
+
+
         #endregion
 
         #region 内部逻辑
@@ -584,7 +723,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private void _scrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            if (Orientation == Orientation.Horizontal&&ShowScrollToButton)
+            if (Orientation == Orientation.Horizontal && ShowScrollToButton)
             {
                 _leftBtn.Visibility = e.HorizontalOffset == 0 ? Visibility.Collapsed : Visibility.Visible;
 
@@ -636,26 +775,36 @@ namespace LeeTeke.WpfControl.Controls
 
                             var index = _stackPanel.Children.IndexOf(self);
                             ItemRemoveChanged(self);
+                            ///等待关闭
                             await CloseItemAsync(self);
-                            if (self.IsSelected)
+                            ///如果当前是选择的
+                            if (SelectedItem == self)
                             {
-                                if (index > 0)
+                                if (self.IsSelected)
                                 {
-                                    SelectedItem = _stackPanel.Children[index - 1] as TabViewItem;
+                                    if (index > 0)
+                                    {
+                                        SelectedItem = _stackPanel.Children[index - 1] as TabViewItem;
+                                    }
+                                    else if (_stackPanel.Children != null && _stackPanel.Children.Count > 0)
+                                    {
+                                        SelectedItem = _stackPanel.Children[0] as TabViewItem;
+                                    }
                                 }
-                                else if (_stackPanel.Children != null && _stackPanel.Children.Count > 0)
+                                else if (_stackPanel.Children.Count < 1)
                                 {
-                                    SelectedItem = _stackPanel.Children[0] as TabViewItem;
+                                    SelectedItem = null;
                                 }
-                            }
-                            else if (_stackPanel.Children.Count < 1)
-                            {
-                                SelectedItem = null;
                             }
                         }
                         break;
                     case TabViewItemClosedMode.Other:
 
+                        ///关闭其他
+                        if (SelectedItem != null)
+                            SelectedItem = self;
+
+                        ///需要关闭的窗口
                         List<object> needCloseItem = new List<object>();
                         for (int i = 0; i < _stackPanel.Children.Count; i++)
                         {
@@ -665,12 +814,12 @@ namespace LeeTeke.WpfControl.Controls
                                 needCloseItem.Add(_stackPanel.Children[i]);
                             }
                         }
-                        foreach (TabViewItem item in needCloseItem)
+                        foreach (TabViewItem needitem in needCloseItem)
                         {
-                            if (item.CanClosing && !item.IsFixed)
+                            if (needitem.CanClosing && !needitem.IsFixed)
                             {
-                                CloseItemAsync(item);
-                                ItemRemoveChanged(item);
+                                CloseItemAsync(needitem);
+                                ItemRemoveChanged(needitem);
                             }
                         }
 
@@ -681,6 +830,12 @@ namespace LeeTeke.WpfControl.Controls
                         {
                             allItem.Add(_stackPanel.Children[i]);
                         }
+                        var needSelected = allItem.Find(p => p is TabViewItem finditem && (finditem.CanClosing == false || finditem.IsFixed));
+                        if (needSelected is TabViewItem selecteditem && SelectedItem != null)
+                        {
+                            SelectedItem= selecteditem;
+                        }
+                   
                         foreach (TabViewItem item in allItem)
                         {
                             if (item.CanClosing && !item.IsFixed)
@@ -690,15 +845,7 @@ namespace LeeTeke.WpfControl.Controls
                             }
                         }
 
-                        if (_stackPanel.Children.Count > 0)
-                        {
-                            ///选择首个
-                            SelectedItem = _stackPanel.Children[0] as TabViewItem;
-                        }
-                        else
-                        {
-                            SelectedItemsAsync(null);
-                        }
+                       
                         break;
                     default:
                         break;

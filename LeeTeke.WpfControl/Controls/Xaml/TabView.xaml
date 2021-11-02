@@ -24,6 +24,7 @@
         <Setter Property="Height" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=ItemHeight,Mode=OneWay}"/>
         <Setter Property="Orientation" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=Orientation,Mode=OneWay}"/>
         <Setter Property="CornerRadius" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=ItemCornerRadius,Mode=OneWay}"/>
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:TabViewItem}" >
@@ -34,25 +35,6 @@
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Grid.ContextMenu>
-                            <ContextMenu x:Name="PART_ContextMenu">
-                                <MenuItem x:Name="PART_MenuItem_Pin"    Header="固定选项卡">
-                                    <MenuItem.Icon>
-                                        <TextBlock  x:Name="PART_PinIcon"  
-                                                            Text="&#xE718;"
-                                                             FontFamily="{DynamicResource IconFontFamily}"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
-                                <MenuItem x:Name="PART_MenuItem_CloseAll" 
-                                                  Header="关闭所有选项卡"/>
-                                <MenuItem x:Name="PART_MenuItem_CloseOther" 
-                                                  Header="关闭除此之外的选项卡"/>
-                                <MenuItem x:Name="PART_MenuItem_CloseSelf"  
-                                                  Visibility="{TemplateBinding  CanClosing,Converter={StaticResource VisibilityForBoolConverter}}" 
-                                                          Header="关闭"/>
-
-                            </ContextMenu>
-                        </Grid.ContextMenu>
                         <Border x:Name="contentBorder" 
                                 Grid.ColumnSpan="3"
                                 BorderBrush="{TemplateBinding BorderBrush}"
@@ -107,10 +89,8 @@
                             <Setter  TargetName="PART_Rectangle" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
 
-                        <Trigger Property="PinVisibly" Value="False">
-                            <Setter Property="Visibility"  TargetName="PART_MenuItem_Pin"
-                                            Value="Collapsed"/>
-                        </Trigger>
+                        
+     
                         <Trigger Property="CloseVisibly" Value="Visible">
                             <Setter TargetName="PART_CloseButton" Property="Visibility"  Value="Visible"/>
                         </Trigger>
@@ -131,23 +111,11 @@
                         </MultiTrigger>
 
                         <Trigger Property="CanClosing" Value="False">
-                            <Setter Property="Visibility"  TargetName="PART_MenuItem_Pin"
-                                            Value="Collapsed"/>
+                 
                             <Setter Property="Visibility"  TargetName="PART_CloseButton"
                                             Value="Collapsed"/>
                         </Trigger>
-                        <Trigger Property="IsFixed" Value="True">
-                            <Setter Property="Text"  TargetName="PART_PinIcon"
-                                            Value="&#xE840;"/>
-                            <Setter Property="Header"  TargetName="PART_MenuItem_Pin"
-                                            Value="解除固定"/>
-                        </Trigger>
-                        <Trigger Property="IsFixed" Value="False">
-                            <Setter Property="Text"  TargetName="PART_PinIcon"
-                                            Value="&#xE718;"/>
-                            <Setter Property="Header"  TargetName="PART_MenuItem_Pin"
-                                            Value="固定选项卡"/>
-                        </Trigger>
+ 
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=SelectedBrush,Mode=OneWay}"/>
                             <Setter Property="Foreground"  Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=SelectedForeground,Mode=OneWay}"/>
@@ -212,7 +180,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="SelectedBrush" Value="{DynamicResource LeeBrush_Theme}"/>
         <Setter Property="SelectedForeground" Value="{DynamicResource LeeBrush_TextDark}"/>
-
+        <Setter Property="ItemContxtMenuContentDock" Value="Bottom"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:TabView}">
@@ -227,7 +195,25 @@
                                 VerticalScrollBarVisibility="Disabled"
                                 Style="{x:Null}"
                                 >
-                                <ItemsPresenter x:Name="PART_ItemsPresenter" />
+                                <ItemsPresenter x:Name="PART_ItemsPresenter" >
+                                    <ItemsPresenter.ContextMenu>
+                                        <ContextMenu x:Name="PART_ContextMenu" 
+                                                    >
+                                            <MenuItem x:Name="PART_MenuItem_Pin" Header="固定选项卡" >
+                                                <MenuItem.Icon>
+                                                    <TextBlock Text="&#xE718;"
+                                                             FontFamily="{DynamicResource IconFontFamily}"/>
+                                                </MenuItem.Icon>
+                                            </MenuItem>
+                                            <MenuItem x:Name="PART_MenuItem_CloseAll" 
+                                                  Header="关闭所有选项卡"/>
+                                            <MenuItem x:Name="PART_MenuItem_CloseOther" 
+                                                  Header="关闭除此之外的选项卡"/>
+                                            <MenuItem x:Name="PART_MenuItem_CloseSelf"  
+                                                          Header="关闭"/>
+                                        </ContextMenu>
+                                    </ItemsPresenter.ContextMenu>
+                                </ItemsPresenter>
 
                             </ScrollViewer>
 

@@ -27,7 +27,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="IconDock" Value="Left"/>
-        <Setter Property="Icon" Value="&#xE74C;"/>
+        <Setter Property="Icon" Value="&#xe700;"/>
         <Setter Property="IconFontSize" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=FontSize}"/>
         <Setter Property="IconFontFamily" Value="{DynamicResource IconFontFamily}"/>
         <Setter Property="IconCanClick" Value="False"/>

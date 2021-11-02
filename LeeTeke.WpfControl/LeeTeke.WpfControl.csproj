@@ -13,8 +13,13 @@
 	<PropertyGroup Condition="'$(TargetFramework)' == 'net48'">
 		<LangVersion>8.0</LangVersion>
 	</PropertyGroup>
+
+
 	<ItemGroup>
-		<Resource Include="LeeTekeDatas\segmdl2.ttf" />
+	  <None Remove="LeeTekeDatas\Segoe Fluent Icons.ttf" />
+	</ItemGroup>
+	<ItemGroup>
+		<Resource Include="LeeTekeDatas\Segoe Fluent Icons.ttf" />
 	</ItemGroup>
 
 	<ItemGroup>
