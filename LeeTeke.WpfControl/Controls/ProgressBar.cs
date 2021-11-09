@@ -56,6 +56,7 @@ namespace LeeTeke.WpfControl.Controls
         private Storyboard _lodingSB;
         private long _lastLodingTime = 0;
 
+
         public ProgressBar()
         {
             this.SizeChanged += LodingBar_SizeChanged;
@@ -86,6 +87,13 @@ namespace LeeTeke.WpfControl.Controls
         private void LodingBar_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             LodingStoryboard(true);
+        }
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+
         }
 
         #region 属性
@@ -426,21 +434,38 @@ namespace LeeTeke.WpfControl.Controls
                 if (WatingStop)
                     return;
                 _lodingSB = new Storyboard() { RepeatBehavior = RepeatBehavior.Forever };
+
                 DoubleAnimationUsingKeyFrames eDA = new DoubleAnimationUsingKeyFrames();
                 eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                 {
-                    Value = -(ProgressGenCalculation() * 0.4),
+                    Value = -(ProgressGenCalculation() / 3),
                     KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(0)),
                 });
                 eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                 {
                     Value = ProgressGenCalculation(),
-                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(1500)),
-                    EasingFunction = this.EasingFunction,
+                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(1.3)),
                 });
+                eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+                {
+                    Value = -(ProgressGenCalculation() /3),
+                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(1.3)),
+                });
+                eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+                {
+                    Value = ProgressGenCalculation(),
+                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(2)),
+                }) ;
+                eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+                {
+                    Value = ProgressGenCalculation(),
+                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(2.3)),
+                });
+
                 _lodingSB.Children.Add(eDA);
                 Storyboard.SetTarget(eDA, this);
                 Storyboard.SetTargetProperty(eDA, new PropertyPath(ProgressBar.RectangleSiteProperty));
+            
                 _lodingSB.Begin();
             }
         }

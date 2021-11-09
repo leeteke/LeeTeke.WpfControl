@@ -120,7 +120,9 @@
                 </StackPanel>
 
                 <leecontrol:ProgressRing Height="60"
-                                         Mode="Wating"/>
+                                         Mode="Wating"
+                                         Value="50"
+                                         Margin="10"/>
 
 
 

@@ -26,7 +26,7 @@
                 <ControlTemplate TargetType="{x:Type local:ProgressRing}">
                     <Grid x:Name="PART_Grid" >
                         <Grid.Resources>
-                            <Storyboard RepeatBehavior="Forever" x:Key="SB" >
+                            <!--<Storyboard RepeatBehavior="Forever" x:Key="SB" >
                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="E1R" BeginTime="0" Storyboard.TargetProperty="Angle">
                                     <SplineDoubleKeyFrame KeyTime="0" Value="110" KeySpline="0.13,0.21,0.1,0.7" />
                                     <SplineDoubleKeyFrame KeyTime="0:0:0.433" Value="230" KeySpline="0.02,0.33,0.38,0.77" />
@@ -107,7 +107,7 @@
                                     <EasingDoubleKeyFrame KeyTime="0:0:3.217" Value="0"/>
                                 </DoubleAnimationUsingKeyFrames>
 
-                            </Storyboard>
+                            </Storyboard>-->
                         </Grid.Resources>
                         <Path x:Name="PART_OuterBorder" 
                               Stroke="{TemplateBinding BorderBrush}"
@@ -121,7 +121,7 @@
                               StrokeDashArray="0"
                               StrokeDashCap="Round"
                               Effect="{TemplateBinding RingEffect}"/>
-                        <Path x:Name="PATY_Wating5"
+                        <!--<Path x:Name="PATY_Wating5"
                                 Opacity="0"
                               Data="{Binding ElementName=PATY_Wating,Path=Data}"
                               Stroke="{TemplateBinding Stroke}"
@@ -176,19 +176,17 @@
                             <Path.RenderTransform>
                                 <RotateTransform x:Name="E2R" Angle="0"/>
                             </Path.RenderTransform>
-                        </Path>
+                        </Path>-->
                         <Path x:Name="PATY_Wating"
-                              Opacity="0"
+                              Opacity="1"
                               Stroke="{TemplateBinding Stroke}"
                               StrokeThickness="{TemplateBinding Thickness}"
                               StrokeDashArray="0"
                               StrokeDashCap="Round"
-                              Visibility="Collapsed"
+                              Visibility="Visible"
                               Effect="{TemplateBinding RingEffect}"
                               RenderTransformOrigin="0.5,0.5">
-                            <Path.RenderTransform>
-                                <RotateTransform x:Name="E1R" Angle="0"/>
-                            </Path.RenderTransform>
+                   
                         </Path>
                         <Border x:Name="PART_ContentBorder"
                                 BorderBrush="{TemplateBinding BorderBrush}">

@@ -62,6 +62,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private Storyboard _lodingSB;
         private Storyboard _watingSB;
+
         private long _lastLodingTime = 0;
 
 
@@ -94,13 +95,14 @@ namespace LeeTeke.WpfControl.Controls
             _orbit = this.GetTemplateChild("PATY_Orbit") as Path;
             _border = this.GetTemplateChild("PART_ContentBorder") as Border;
             _wating = this.GetTemplateChild("PATY_Wating") as Path;
+        
             _wating.IsVisibleChanged += _wating_IsVisibleChanged;
 
-            if (this.GetTemplateChild("PART_Grid") is Grid grid)
-            {
-                _watingSB = grid.Resources["SB"] as Storyboard;
+            //if (this.GetTemplateChild("PART_Grid") is Grid grid)
+            //{
+            //    _watingSB = grid.Resources["SB"] as Storyboard;
 
-            }
+            //}
         }
 
 
@@ -397,6 +399,7 @@ namespace LeeTeke.WpfControl.Controls
             }
             _lastLodingTime = DateTime.Now.ToFileTime();
             _lodingSB = new Storyboard() { FillBehavior = FillBehavior.Stop };
+
             DoubleAnimationUsingKeyFrames eDA = new DoubleAnimationUsingKeyFrames();
             eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
             {
@@ -404,6 +407,8 @@ namespace LeeTeke.WpfControl.Controls
                 KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(200)),
                 EasingFunction = EasingFunction,
             });
+
+
             _lodingSB.Children.Add(eDA);
             Storyboard.SetTarget(eDA, this);
             Storyboard.SetTargetProperty(eDA, new PropertyPath(ProgressRing.RingValueProperty));
@@ -417,8 +422,14 @@ namespace LeeTeke.WpfControl.Controls
 
         private void ChangeRing(double value)
         {
-
-            _orbit.Data = GetRoundPath(value, _backDiameter / 2, new Point(this.ActualWidth / 2, _orbit.StrokeThickness / 2 + BorderThickness + ThicknessPadding));
+            if (Mode == ProgressControlMode.Wating)
+            {
+                _wating.Data = GetRoundPath(value, _backDiameter / 2, new Point(this.ActualWidth / 2, _orbit.StrokeThickness / 2 + BorderThickness + ThicknessPadding));
+            }
+            else
+            {
+                _orbit.Data = GetRoundPath(value, _backDiameter / 2, new Point(this.ActualWidth / 2, _orbit.StrokeThickness / 2 + BorderThickness + ThicknessPadding));
+            }
 
         }
 
@@ -427,10 +438,54 @@ namespace LeeTeke.WpfControl.Controls
             if (!IsLoaded || Mode != ProgressControlMode.Wating || Visibility != Visibility.Visible)
                 return;
 
-            var angel = 1;
-            _wating.Data = GetRoundPath(angel, _backDiameter / 2, new Point(this.ActualWidth / 2, _orbit.StrokeThickness / 2 + BorderThickness + ThicknessPadding));
+            _watingSB?.Stop();
+            _watingSB = new Storyboard() { RepeatBehavior = RepeatBehavior.Forever };
+            DoubleAnimationUsingKeyFrames eDA = new DoubleAnimationUsingKeyFrames();
+            eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+            {
+                Value = 1,
+                KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0)),
+            });
+            eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+            {
+                Value = 180,
+                KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.75)),
+            });
+            eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+            {
+                Value = 1,
+                KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(1.5)),
+            });
+        
+            _watingSB.Children.Add(eDA);
+            Storyboard.SetTarget(eDA, this);
+            Storyboard.SetTargetProperty(eDA, new PropertyPath(ProgressRing.RingValueProperty));
+
+
+
+            _wating.RenderTransform=new RotateTransform();
+        
+
+            DoubleAnimationUsingKeyFrames rDA = new DoubleAnimationUsingKeyFrames();
+            rDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+            {
+                Value = 0,
+                KeyTime= KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0))
+            });
+            rDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+            {
+                Value = 720,
+                KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(1.5)),
+            });
+
+            _watingSB.Children.Add(rDA);
+            Storyboard.SetTarget(rDA, _wating);
+            Storyboard.SetTargetProperty(rDA, new PropertyPath("(0).(1)", new DependencyProperty[] { Path.RenderTransformProperty, RotateTransform.AngleProperty }));
+                
 
             _watingSB.Begin();
+       
+
 
         }
         private void _wating_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)

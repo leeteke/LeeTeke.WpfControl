@@ -79,7 +79,7 @@
                                 <Condition Property="Orientation" Value="Horizontal"/>
                             </MultiTrigger.Conditions>
                             <Setter TargetName="PART_Rectangle" Property="Height" Value="{Binding ElementName=PART_Canvas,Path=ActualHeight,Mode=OneWay}" />
-                            <Setter TargetName="PART_Rectangle" Property="Width" Value="{Binding ElementName=PART_Canvas,Path=ActualWidth,Converter={StaticResource DoubleFollowConverter},ConverterParameter=*0.4,Mode=OneWay}"/>
+                            <Setter TargetName="PART_Rectangle" Property="Width" Value="{Binding ElementName=PART_Canvas,Path=ActualWidth,Converter={StaticResource DoubleFollowConverter},ConverterParameter=*0.3,Mode=OneWay}"/>
                             <Setter TargetName="PART_Rectangle" Property="Canvas.Left" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=RectangleSite,Mode=OneWay}"/>
                             <Setter TargetName="PART_Rectangle" Property="Canvas.Top" Value="0"/>
                             <Setter Property="EasingFunction">
@@ -93,7 +93,7 @@
                                 <Condition Property="Mode" Value="Wating"/>
                                 <Condition Property="Orientation" Value="Vertical"/>
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="PART_Rectangle" Property="Height" Value="{Binding ElementName=PART_Canvas,Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=*0.4,Mode=OneWay}" />
+                            <Setter TargetName="PART_Rectangle" Property="Height" Value="{Binding ElementName=PART_Canvas,Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=*0.3,Mode=OneWay}" />
                             <Setter TargetName="PART_Rectangle" Property="Width" Value="{Binding ElementName=PART_Canvas,Path=ActualWidth,Mode=OneWay}" />
                             <Setter TargetName="PART_Rectangle" Property="Canvas.Top" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=RectangleSite,Mode=OneWay}"/>
                             <Setter TargetName="PART_Rectangle" Property="Canvas.Left" Value="0"/>
