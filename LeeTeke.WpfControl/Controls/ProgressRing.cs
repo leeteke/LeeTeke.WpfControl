@@ -492,11 +492,11 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (_wating.Visibility == Visibility.Visible)
             {
-                _watingSB.Begin();
+                LodingWating();
             }
             else
             {
-                _watingSB.Stop();
+                _watingSB?.Stop();
             }
         }
 
