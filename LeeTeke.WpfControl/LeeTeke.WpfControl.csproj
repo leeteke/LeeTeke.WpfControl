@@ -28,10 +28,10 @@
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-windows'">
 		<Reference Include="System.Windows.Forms">
-			<HintPath>C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.0-rc.2.21501.6\ref\net6.0\System.Windows.Forms.dll</HintPath>
+			<HintPath>C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.0\ref\net6.0\System.Windows.Forms.dll</HintPath>
 		</Reference>
 		<Reference Include="System.Drawing.Common">
-			<HintPath>C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.0-rc.2.21501.6\ref\net6.0\System.Drawing.Common.dll</HintPath>
+			<HintPath>C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.0\ref\net6.0\System.Drawing.Common.dll</HintPath>
 		</Reference>
 	</ItemGroup>
 
