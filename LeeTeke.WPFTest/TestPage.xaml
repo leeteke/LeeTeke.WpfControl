@@ -19,7 +19,6 @@
     <Grid>
 
         <ScrollViewer Grid.Row="1" 
-                 
                       HorizontalScrollBarVisibility="Disabled"
                       Background="{DynamicResource LeeBrush_Background2}"
                       BorderThickness="1"
@@ -61,6 +60,7 @@
                        IconCanClick="True"
                     IconCommand="{Binding TestCommand}"
                     AcceptsReturn="True"
+                    ToolTip="测试"
                                       >
                 
                 </leecontrol:TextBoxEx>
@@ -268,7 +268,6 @@
                                         SelectionMode="Single"
                                         SelectedMinimum="1"
                                        
-                                        Background="Red"
                                       >
                     <leecontrol:ToggleGroup.ItemTemplate>
                         <DataTemplate>
@@ -296,7 +295,7 @@
                     </leecontrol:ImageEx.DefaultContent>
                 </leecontrol:ImageEx>
 
-                <leecontrol:ProgressBar  Height="10"
+                <leecontrol:ProgressBar  
                                        Mode="Wating"
                                        />
                 <Slider  x:Name="slider"
@@ -308,6 +307,17 @@
                                        BorderThickness="1"
                                        BorderBrush="{DynamicResource LeeBrush_BorderBrush}"
                                        />
+                <leecontrol:ProgressRing Height="80"
+                                         Width="80"
+                                         Mode="Loding"
+                                Thickness="8"
+                                         BorderThickness="1"
+                                         Background="{DynamicResource LeeBrush_ForgroundActive}"
+                                         Value="{Binding ElementName=slider,Path=Value}"
+                                         VerticalContentAlignment="Center"
+                                         HorizontalContentAlignment="Center">
+                    <TextBlock Text="{Binding ElementName=slider,Path=Value}"/>
+                </leecontrol:ProgressRing>
 
 
                 <leecontrol:SlideView
@@ -329,13 +339,14 @@
                 <TextBlock Text="你好"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
-                           Foreground="{DynamicResource LeeBrush_Text}"/>
+                           Foreground="{DynamicResource LeeBrush_Text}"
+                           />
 
                 <TextBox x:Name="txt"
                          leedep:TextBoxManager.EnterCommand="{Binding   TestCommand}" 
                          SelectionBrush="#FF0078D7"
                          AcceptsReturn="True"
-                         
+                         Margin="5"
                          />
 
 
@@ -379,7 +390,6 @@
         </ScrollViewer>
         <leecontrol:NotifyBanner Grid.RowSpan="3"
                                  Content="{Binding NotifyData}"
-                                 ShowMode="OnDesktop"
                                  d:Visibility="Collapsed"
                                  />
     </Grid>

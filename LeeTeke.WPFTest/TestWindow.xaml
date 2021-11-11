@@ -10,12 +10,16 @@
         Height="450"
         Width="800"
     
-        WindowStyle="None"
+        WindowStyle="None" Background="White" BorderBrush="Black"
         >
 
-    <Grid  Margin="20">
+    <Grid  Margin="20" Background="#FF202020" >
 
-        <Rectangle Width="50" Height="50" Fill="Gainsboro"
-                   MouseMove="Rectangle_MouseMove"/>
+        <Border Width="100"
+                Height="100" 
+                BorderThickness="5" 
+                CornerRadius="5" 
+                Background="#FF272727" BorderBrush="#19000000"/>
+
     </Grid>
 </Window>

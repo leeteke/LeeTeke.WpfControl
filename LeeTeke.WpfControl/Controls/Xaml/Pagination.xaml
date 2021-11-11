@@ -16,6 +16,7 @@
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="PageIndex" Value="1"/>
+    
         <Setter Property="ButtonWidth" Value="30"/>
         <Setter Property="ButtonHeight" Value="30"/>
         <Setter Property="ButtonMargin" Value="2,0"/>

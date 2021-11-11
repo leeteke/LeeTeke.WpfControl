@@ -21,6 +21,7 @@
         <Setter Property="Mode" Value="Loding"/>
         <Setter Property="Orientation" Value="Horizontal"/>
         <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="Background" Value="{DynamicResource LeeBrush_ForgroundActive}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ProgressBar}">

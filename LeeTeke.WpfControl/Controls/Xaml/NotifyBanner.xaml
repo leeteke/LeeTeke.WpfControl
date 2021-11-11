@@ -23,7 +23,7 @@
         <Setter Property="EasingDuration" Value="0:0:0.200"/>
         <Setter Property="ShowDuration" Value="0:0:3"/>
         <Setter Property="NotifySite" Value="TopRight"/>
-        <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}"/>
+        <Setter Property="Background" Value="{DynamicResource LeeBrush_ForgroundActive}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="AutoClose" Value="True"/>

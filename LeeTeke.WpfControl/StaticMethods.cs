@@ -20,58 +20,38 @@ namespace LeeTeke.WpfControl
             if (isLight)
             {
                 #region Light
-                Application.Current.Resources["LeeBrush_Background"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Background"]);
-                Application.Current.Resources["LeeBrush_Background2"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Background2"]);
-                Application.Current.Resources["LeeBrush_Background3"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Background3"]);
-                Application.Current.Resources["LeeBrush_Forground"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_White"]);
-                Application.Current.Resources["LeeBrush_Text"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Black"]);
-                Application.Current.Resources["LeeBrush_BorderBrush"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Gray"]);
-                Application.Current.Resources["LeeBrush_BorderBrushMouseOver"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Gray191"]);
-                Application.Current.Resources["LeeBrush_Mark"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Mark"]);
-                #endregion
+                Application.Current.Resources["LeeBrush_Background"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Light_Background"]);
+                Application.Current.Resources["LeeBrush_Background2"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Light_Background2"]);
+                Application.Current.Resources["LeeBrush_Background3"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Light_Background3"]);
+                Application.Current.Resources["LeeBrush_Forground"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Light_Forground"]);
+                Application.Current.Resources["LeeBrush_ForgroundActive"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Light_ForgroundActive"]);
+                Application.Current.Resources["LeeBrush_Text"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Light_Text"]);
+                Application.Current.Resources["LeeBrush_Mark"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Light_Mark"]);
+                Application.Current.Resources["LeeBrush_BorderBrush"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Light_BorderBrush"]);
+                Application.Current.Resources["LeeBrush_BorderBrushMouseOver"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Light_BorderBrushMouseOver"]);
+                Application.Current.Resources["LeeBrush_White"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Light_White"]);
+                Application.Current.Resources["LeeBrush_Black"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Light_Black"]);
 
-                #region Dak
-
-                Application.Current.Resources["LeeBrush_BackgroundDark"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_BackgroundDark"]);
-                Application.Current.Resources["LeeBrush_BackgroundDark2"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_BackgroundDark2"]);
-                Application.Current.Resources["LeeBrush_BackgroundDark3"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_BackgroundDark3"]);
-                Application.Current.Resources["LeeBrush_ForgroundDark"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Black"]);
-                Application.Current.Resources["LeeBrush_TextDark"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_White"]);
-                Application.Current.Resources["LeeBrush_BorderBrushDark"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Gray45"]);
-                Application.Current.Resources["LeeBrush_BorderBrushMouseOverDark"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Gray51"]);
-                Application.Current.Resources["LeeBrush_MarkDark"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_MarkDark"]);
                 #endregion
             }
             else
             {
-                #region Light
-
-                Application.Current.Resources["LeeBrush_Background"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_BackgroundDark"]);
-                Application.Current.Resources["LeeBrush_Background2"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_BackgroundDark2"]);
-                Application.Current.Resources["LeeBrush_Background3"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_BackgroundDark3"]);
-                Application.Current.Resources["LeeBrush_Forground"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Black"]);
-                Application.Current.Resources["LeeBrush_Text"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_White"]);
-                Application.Current.Resources["LeeBrush_BorderBrush"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Gray45"]);
-                Application.Current.Resources["LeeBrush_BorderBrushMouseOver"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Gray51"]);
-                Application.Current.Resources["LeeBrush_Mark"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_MarkDark"]);
-
-                #endregion
-
-
 
                 #region Dak
-
-                Application.Current.Resources["LeeBrush_BackgroundDark"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Background"]);
-                Application.Current.Resources["LeeBrush_BackgroundDark2"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Background2"]);
-                Application.Current.Resources["LeeBrush_BackgroundDark3"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Background3"]);
-                Application.Current.Resources["LeeBrush_ForgroundDark"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_White"]);
-                Application.Current.Resources["LeeBrush_TextDark"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Black"]);
-                Application.Current.Resources["LeeBrush_BorderBrushDark"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Gray"]);
-                Application.Current.Resources["LeeBrush_BorderBrushMouseOverDark"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Gray191"]);
-                Application.Current.Resources["LeeBrush_MarkDark"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Mark"]);
+                Application.Current.Resources["LeeBrush_Background"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Dark_Background"]);
+                Application.Current.Resources["LeeBrush_Background2"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Dark_Background2"]);
+                Application.Current.Resources["LeeBrush_Background3"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Dark_Background3"]);
+                Application.Current.Resources["LeeBrush_Forground"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Dark_Forground"]);
+                Application.Current.Resources["LeeBrush_ForgroundActive"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Dark_ForgroundActive"]);
+                Application.Current.Resources["LeeBrush_Text"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Dark_Text"]);
+                Application.Current.Resources["LeeBrush_Mark"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Dark_Mark"]);
+                Application.Current.Resources["LeeBrush_BorderBrush"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Dark_BorderBrush"]);
+                Application.Current.Resources["LeeBrush_BorderBrushMouseOver"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Dark_BorderBrushMouseOver"]);
+                Application.Current.Resources["LeeBrush_White"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Dark_White"]);
+                Application.Current.Resources["LeeBrush_Black"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Dark_Black"]);
                 #endregion
-
             }
+
 
             ThemeChanged?.Invoke(null, isLight);
         }
@@ -669,7 +649,7 @@ namespace LeeTeke.WpfControl
             {
                 return new ValueConverModel { clear = false, result = 0.0 };
             }
-          
+
         }
 
         ///建议使用此方法

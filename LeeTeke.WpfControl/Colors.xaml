@@ -23,6 +23,12 @@
     </Style>
 
 
+    <!--默认原边-->
+    <CornerRadius x:Key="LeeCornerRadius">4</CornerRadius>
+
+    <!--Icon-->
+    <FontFamily x:Key="IconFontFamily">/LeeTeke.WpfControl;component/LeeTekeDatas/#Segoe Fluent Icons</FontFamily>
+
     <sys:Double x:Key="LeeControlMinHeight">30</sys:Double>
     <sys:Double x:Key="LeeControlMinWidth">150</sys:Double>
     <sys:Double x:Key="LeeItemMinHeight">28</sys:Double>
@@ -31,71 +37,67 @@
     <sys:Double x:Key="UnEnableOpacity">0.6</sys:Double>
     <Thickness x:Key="LeeControlPadding">2</Thickness>
 
-    <!--默认主背景色-->
-    <SolidColorBrush x:Key="LeeBrush_Background" Color="{DynamicResource LeeColor_Background}"/>
-    <Color x:Key="LeeColor_Background" R="243" G="243" B="243" A="255"/>
+    <!--可变色主题-->
+    <SolidColorBrush x:Key="LeeBrush_Background" Color="{DynamicResource LeeColor_Light_Background}"/>
+    <SolidColorBrush x:Key="LeeBrush_Background2" Color="{DynamicResource LeeColor_Light_Background2}"/>
+    <SolidColorBrush x:Key="LeeBrush_Background3" Color="{DynamicResource LeeColor_Light_Background3}"/>
+
+    <SolidColorBrush x:Key="LeeBrush_Forground" Color="{DynamicResource LeeColor_Light_Forground}"/>
+    <SolidColorBrush x:Key="LeeBrush_ForgroundActive" Color="{DynamicResource LeeColor_Light_ForgroundActive}"/>
+
+    <SolidColorBrush x:Key="LeeBrush_Text" Color="{DynamicResource LeeColor_Light_Text}" />
+    <SolidColorBrush x:Key="LeeBrush_Mark" Color="{DynamicResource LeeColor_Light_Mark}"/>
+
+    <SolidColorBrush x:Key="LeeBrush_BorderBrush"  Color="{DynamicResource LeeColor_Light_BorderBrush}" />
+    <SolidColorBrush x:Key="LeeBrush_BorderBrushMouseOver"  Color="{DynamicResource LeeColor_Light_BorderBrushMouseOver}" />
+
+    <SolidColorBrush x:Key="LeeBrush_White" Color="{DynamicResource LeeColor_Light_White}"/>
+    <SolidColorBrush x:Key="LeeBrush_Black" Color="{DynamicResource LeeColor_Light_Black}"/>
     
-    <SolidColorBrush x:Key="LeeBrush_BackgroundDark" Color="{DynamicResource LeeColor_BackgroundDark}"/>
-    <Color x:Key="LeeColor_BackgroundDark" R="32" G="32" B="32" A="255"/>
+    <!--Light模式-->
+    <Color x:Key="LeeColor_Light_Background" R="243" G="243" B="243" A="255"/>
+    <Color x:Key="LeeColor_Light_Background2" R="249" G="249" B="249" A="255"/>
+    <Color x:Key="LeeColor_Light_Background3" R="247" G="247" B="247" A="255"/>
 
-    <SolidColorBrush x:Key="LeeBrush_Background2" Color="{DynamicResource LeeColor_Background2}"/>
-    <Color x:Key="LeeColor_Background2" R="249" G="249" B="249" A="255"/>
+    <Color x:Key="LeeColor_Light_Forground" R="251" G="251" B="251" A="255"/>
+    <Color x:Key="LeeColor_Light_ForgroundActive" R="255" G="255" B="255" A="255"/>
 
- 
+    <Color x:Key="LeeColor_Light_Text" R="28" G="28" B="28" A="255" />
+    <Color x:Key="LeeColor_Light_Mark" R="9" G="7" B="0" A="30" />
+    
+    <Color x:Key="LeeColor_Light_BorderBrush" R="0" G="0" B="0" A="15"/>
+    <Color x:Key="LeeColor_Light_BorderBrushMouseOver" R="0" G="0" B="0" A="30"/>
 
-    <SolidColorBrush x:Key="LeeBrush_BackgroundDark2" Color="{DynamicResource LeeColor_BackgroundDark2}"/>
-    <Color x:Key="LeeColor_BackgroundDark2" R="39" G="39" B="39" A="255"/>
+    <Color x:Key="LeeColor_Light_White" R="251" G="251" B="251" A="255" />
+    <Color x:Key="LeeColor_Light_Black" R="28" G="28" B="28" A="255" />
+    <!--Dark模式-->
 
-    <SolidColorBrush x:Key="LeeBrush_Background3" Color="{DynamicResource LeeColor_Background3}"/>
-    <Color x:Key="LeeColor_Background3" R="247" G="247" B="247" A="255"/>
+    <Color x:Key="LeeColor_Dark_Background" R="32" G="32" B="32" A="255"/>
+    <Color x:Key="LeeColor_Dark_Background2" R="39" G="39" B="39" A="255"/>
+    <Color x:Key="LeeColor_Dark_Background3" R="46" G="46" B="46" A="255"/>
 
-    <SolidColorBrush x:Key="LeeBrush_BackgroundDark3" Color="{DynamicResource LeeColor_BackgroundDark3}"/>
-    <Color x:Key="LeeColor_BackgroundDark3" R="46" G="46" B="46" A="255"/>
+    <Color x:Key="LeeColor_Dark_Forground" R="45" G="45" B="45" A="255"/>
+    <Color x:Key="LeeColor_Dark_ForgroundActive" R="30" G="31" B="31" A="255"/>
+
+    <Color x:Key="LeeColor_Dark_Text" R="255" G="255" B="255" A="255" />
+    <Color x:Key="LeeColor_Dark_Mark" R="246" G="248" B="255" A="30" />
+
+    <Color x:Key="LeeColor_Dark_BorderBrush" R="0" G="0" B="0" A="25"/>
+    <Color x:Key="LeeColor_Dark_BorderBrushMouseOver" R="0" G="0" B="0" A="50"/>
+
+    <Color x:Key="LeeColor_Dark_White" R="28" G="28" B="28" A="255" />
+    <Color x:Key="LeeColor_Dark_Black" R="255" G="255" B="255" A="255" />
+
+    <!--默认主背景色-->
+      
+        
 
     <!--默认主题色-->
     <SolidColorBrush x:Key="LeeBrush_Theme" Color="{DynamicResource LeeColor_Theme}"/>
     <Color x:Key="LeeColor_Theme" R="50" G="108" B="243" A="255"/>
 
-
-    <!--默认主色调-->
-    <SolidColorBrush x:Key="LeeBrush_Forground" Color="{DynamicResource LeeColor_White}"/>
-    <SolidColorBrush x:Key="LeeBrush_ForgroundDark" Color="{DynamicResource LeeColor_Black}"/>
-
-
-    <!--默认文字颜色-->
-    <SolidColorBrush x:Key="LeeBrush_Text" Color="{DynamicResource LeeColor_Black}" />
-    <SolidColorBrush x:Key="LeeBrush_TextDark" Color="{DynamicResource LeeColor_White}" />
-
-    <!--默认原边-->
-    <CornerRadius x:Key="LeeCornerRadius">4</CornerRadius>
-
-    <!--默认边框颜色-->
-    <SolidColorBrush x:Key="LeeBrush_BorderBrush"  Color="{DynamicResource LeeColor_Gray}" />
-    <SolidColorBrush x:Key="LeeBrush_BorderBrushDark"  Color="{DynamicResource LeeColor_Gray45}" />
-
-    <SolidColorBrush x:Key="LeeBrush_BorderBrushMouseOver"  Color="{DynamicResource LeeColor_Gray191}" />
-    <SolidColorBrush x:Key="LeeBrush_BorderBrushMouseOverDark"  Color="{DynamicResource LeeColor_Gray51}" />
-
-
-    <SolidColorBrush x:Key="LeeBrush_Mark" Color="{DynamicResource LeeColor_Mark}"/>
-    <Color x:Key="LeeColor_Mark" R="9" G="7" B="0" A="30" />
-
-    <SolidColorBrush x:Key="LeeBrush_MarkDark" Color="{DynamicResource LeeColor_MarkDark}"/>
-    <Color x:Key="LeeColor_MarkDark" R="251" G="253" B="255" A="30" />
-
-    
-    <!--Icon-->
-    <FontFamily x:Key="IconFontFamily">/LeeTeke.WpfControl;component/LeeTekeDatas/#Segoe Fluent Icons</FontFamily>
-
-
-
-    <SolidColorBrush x:Key="LeeBrush_White" Color="{DynamicResource LeeColor_White}"/>
-    <Color x:Key="LeeColor_White" R="251" G="253" B="255" A="255" />
-
-
-
-    <SolidColorBrush x:Key="LeeBrush_Black" Color="{DynamicResource LeeColor_Black}"/>
-    <Color x:Key="LeeColor_Black" R="28" G="28" B="28" A="255" />
+    <SolidColorBrush x:Key="LeeBrush_ThemeForeground" Color="{DynamicResource LeeColor_ThemeForeground}"/>
+    <Color x:Key="LeeColor_ThemeForeground" R="255" G="255" B="255" A="255"/>
 
     <!--微软黄-->
     <SolidColorBrush x:Key="LeeBrush_RedMicrosoft" Color="{DynamicResource LeeColor_RedMicrosoft}" />

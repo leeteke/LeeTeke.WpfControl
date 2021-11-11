@@ -89,10 +89,10 @@ namespace LeeTeke.WpfControl.Controls
                     this.RenderTransform = new TranslateTransform(-200, 0);
                     break;
                 case NotifySite.TopCenter:
-                    this.RenderTransform = new TranslateTransform(0, 50);
+                    this.RenderTransform = new TranslateTransform(0, -50);
                     break;
                 case NotifySite.BottomCenter:
-                    this.RenderTransform = new TranslateTransform(0, -50);
+                    this.RenderTransform = new TranslateTransform(0, 50);
                     break;
                 default:
                     break;

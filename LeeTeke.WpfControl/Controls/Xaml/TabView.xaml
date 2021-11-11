@@ -179,7 +179,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="SelectedBrush" Value="{DynamicResource LeeBrush_Theme}"/>
-        <Setter Property="SelectedForeground" Value="{DynamicResource LeeBrush_TextDark}"/>
+        <Setter Property="SelectedForeground" Value="{DynamicResource LeeBrush_ThemeForeground}"/>
         <Setter Property="ItemContxtMenuContentDock" Value="Bottom"/>
         <Setter Property="Template">
             <Setter.Value>

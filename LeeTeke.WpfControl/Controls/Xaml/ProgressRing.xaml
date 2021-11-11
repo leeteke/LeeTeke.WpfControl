@@ -189,9 +189,12 @@
                    
                         </Path>
                         <Border x:Name="PART_ContentBorder"
-                                BorderBrush="{TemplateBinding BorderBrush}">
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                >
                             <ContentPresenter x:Name="PART_Content"
                                                Content="{TemplateBinding Content}"
+                                              HorizontalAlignment="{TemplateBinding  HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               />
                         </Border>
                     </Grid>
