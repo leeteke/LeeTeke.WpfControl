@@ -21,7 +21,7 @@
         <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}"/>
         <Setter Property="Padding" Value="2"/>
         <Setter Property="BorderBrush" Value="{DynamicResource  LeeBrush_BorderBrush}"/>
-        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}"/>
 
         <Setter Property="IsReadOnly" Value="False"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -48,14 +48,16 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:TextBoxEx}">
-                    <Border x:Name="PART_Border" Background="{TemplateBinding Background}"
+                    <Border x:Name="PART_Border" 
+                            Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}"
                             Effect="{TemplateBinding Effect}">
 
                         <DockPanel x:Name="PART_Panel">
-                            <ContentPresenter x:Name="PART_ICON" Content="{TemplateBinding Icon}"
+                            <ContentPresenter x:Name="PART_ICON"
+                                              Content="{TemplateBinding Icon}"
                                                   TextElement.FontFamily="{TemplateBinding  IconFontFamily}"
                                                   TextElement.FontSize="{TemplateBinding IconFontSize}"
                                                   TextElement.Foreground="{TemplateBinding IconForeground}"
@@ -162,6 +164,7 @@
                             <Setter TargetName="PART_Main" Property="Visibility" Value="Hidden"/>
                             <Setter TargetName="PART_Password" Property="Visibility" Value="Visible"/>
                         </Trigger>
+                        
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IconCanClick" Value="True"/>
@@ -173,12 +176,12 @@
 
                         <Trigger SourceName="PART_Main" Property="IsFocused" Value="True">
                             <Setter TargetName="PART_PreviewText" Property="Visibility" Value="Collapsed"/>
-                            <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_Theme}"/>
+                            <Setter TargetName="PART_Border" Property="Background" Value="{DynamicResource LeeBrush_ForgroundActive}"/>
                         </Trigger>
 
                         <Trigger SourceName="PART_Password" Property="IsFocused" Value="True">
                             <Setter TargetName="PART_PreviewText" Property="Visibility" Value="Collapsed"/>
-                            <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_Theme}"/>
+                            <Setter TargetName="PART_Border" Property="Background" Value="{DynamicResource LeeBrush_ForgroundActive}"/>
                         </Trigger>
 
 
@@ -198,6 +201,7 @@
                             </MultiDataTrigger.Conditions>
 
                             <Setter TargetName="PART_PreviewText" Property="Visibility" Value="Collapsed"/>
+                        
                         </MultiDataTrigger>
 
                         <Trigger Property="IsEnabled" Value="False">

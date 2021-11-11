@@ -55,6 +55,7 @@ namespace LeeTeke.WpfControl.Controls
                         content.Content = new TextBox()
                         {
                             Text = str,
+                            Background = null,
                             TextWrapping = TextWrapping.Wrap,
                             VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
                             HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,

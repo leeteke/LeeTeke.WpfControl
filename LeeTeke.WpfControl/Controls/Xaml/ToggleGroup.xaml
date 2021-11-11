@@ -32,7 +32,7 @@
         
         <Setter Property="ItemCheckedBackground" Value="{DynamicResource LeeBrush_Theme}"/>
         <Setter Property="ItemCheckedBorderBrush" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=BorderBrush,Mode=OneWay}"/>
-        <Setter Property="ItemCheckedForeground" Value="White"/>
+        <Setter Property="ItemCheckedForeground" Value="{DynamicResource LeeBrush_ThemeForeground}"/>
         <Setter Property="ItemCheckedBorderThickness" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=ItemBorderThickness,Mode=OneWay}"/>
  
         <Setter Property="ItemCorenerRadius" Value="{DynamicResource LeeCornerRadius}"/>
