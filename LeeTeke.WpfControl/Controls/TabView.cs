@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -47,7 +48,7 @@ namespace LeeTeke.WpfControl.Controls
     /// </summary>
 
     [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(TabViewItem))]
-    public class TabView : ItemsControl
+    public class TabView : Selector
     {
         static TabView()
         {
@@ -240,7 +241,11 @@ namespace LeeTeke.WpfControl.Controls
 
         }
 
+        protected override void OnSelectionChanged(SelectionChangedEventArgs e)
+        {
+            base.OnSelectionChanged(e);
 
+        }
 
 
 
@@ -329,14 +334,14 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public int SelectedIndex
+        public new int SelectedIndex
         {
             get { return (int)GetValue(SelectedIndexProperty); }
             set { SetValue(SelectedIndexProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for SelectedIndex.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SelectedIndexProperty =
+        public static new readonly DependencyProperty SelectedIndexProperty =
             DependencyProperty.Register("SelectedIndex", typeof(int), typeof(TabView), new PropertyMetadata(-1, SelectedIndexChanged));
 
         private static void SelectedIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -354,14 +359,14 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public object SelectedItem
+        public new object SelectedItem
         {
             get { return (object)GetValue(SelectedItemProperty); }
             set { SetValue(SelectedItemProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for SelectedItem.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SelectedItemProperty =
+        public static new readonly DependencyProperty SelectedItemProperty =
             DependencyProperty.Register("SelectedItem", typeof(object), typeof(TabView), new PropertyMetadata(null, SelectedItemChanged));
 
         private static void SelectedItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -378,18 +383,19 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public object SelectedValue
+        public new object SelectedValue
         {
             get { return (object)GetValue(SelectedValueProperty); }
             set { SetValue(SelectedValueProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for SelectedValue.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SelectedValueProperty =
+        public static new readonly DependencyProperty SelectedValueProperty =
             DependencyProperty.Register("SelectedValue", typeof(object), typeof(TabView), new PropertyMetadata(null, SelectedValueChanged));
 
         private static void SelectedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+           
             if (d is TabView tag && e.NewValue != e.OldValue && tag._selectedValue != e.NewValue)
             {
                 tag.SelectedValueChanged();

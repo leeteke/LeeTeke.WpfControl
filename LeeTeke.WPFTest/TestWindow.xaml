@@ -5,21 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LeeTeke.WPFTest"
         xmlns:lee="clr-namespace:LeeTeke.WpfControl.Controls;assembly=LeeTeke.WpfControl"
+        xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies;assembly=LeeTeke.WpfControl"
         mc:Ignorable="d"
         Title="TestWindow" 
         Height="450"
         Width="800"
     
-        WindowStyle="None" Background="White" BorderBrush="Black"
+         Background="White"
+
         >
 
-    <Grid  Margin="20" Background="#FF202020" >
+    <Grid  Margin="20">
 
-        <Border Width="100"
-                Height="100" 
-                BorderThickness="5" 
-                CornerRadius="5" 
-                Background="#FF272727" BorderBrush="#19000000"/>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ListBox x:Name="listbox"
+                 leedep:SelectorDragDropManager.Open="True"/>
+
+
+        <ListBox Grid.Row="1"
+                 leedep:SelectorDragDropManager.Open="True">
+            <ListBoxItem Content="1"/>
+            <ListBoxItem Content="2"/>
+            <ListBoxItem Content="3"/>
+            <ListBoxItem Content="4"/>
+            <ListBoxItem Content="5"/>
+            
+        </ListBox>
 
     </Grid>
 </Window>

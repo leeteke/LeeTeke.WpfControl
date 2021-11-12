@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +28,7 @@ namespace LeeTeke.WPFTest
 
         private void TestWindow_Loaded(object sender, RoutedEventArgs e)
         {
-   
+            listbox.ItemsSource=new ObservableCollection<string>() { "测试1", "测试2", "测试3", "测试4", };
         }
 
         private void Rectangle_MouseMove(object sender, MouseEventArgs e)

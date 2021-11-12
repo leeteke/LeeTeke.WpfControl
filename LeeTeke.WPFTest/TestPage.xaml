@@ -67,7 +67,7 @@
                 <leecontrol:TabView  CloseVisibly="MouseOver" 
                                      Orientation="Horizontal"
                                      ShowScrollToButton="True"
-                                    
+                                    leedep:SelectorDragDropManager.Open="True"
                                      ItemsSource="{Binding TestList}"
                                      ItemContxtMenuContentDock="Bottom">
                     <leecontrol:TabView.ItemContxtMenuContent>
