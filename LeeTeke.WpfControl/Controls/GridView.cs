@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -44,13 +45,26 @@ namespace LeeTeke.WpfControl.Controls
     ///     <MyNamespace:GridView/>
     ///
     /// </summary>
-    public class GridView : ItemsControl
+    [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(GridViewItem))]
+    public class GridView : Selector
     {
         static GridView()
         {
+          
             DefaultStyleKeyProperty.OverrideMetadata(typeof(GridView), new FrameworkPropertyMetadata(typeof(GridView)));
         }
 
+        #region override
+        protected override bool IsItemItsOwnContainerOverride(object item)
+        {
+            return item is GridViewItem;
+        }
+
+        protected override DependencyObject GetContainerForItemOverride()
+        {
+            return new GridViewItem();
+        }
+        #endregion
 
         #region Orientation
         /// <summary>

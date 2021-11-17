@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 
 namespace LeeTeke.WpfControl
@@ -75,22 +76,8 @@ namespace LeeTeke.WpfControl
         {
             Application.Current.Resources["LeeBrush_Theme"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Theme"]);
         }
-        /// <summary>
-        /// 改变默认文字颜色
-        /// </summary>
-        /// <param name="color"></param>
-        public static void SetDefaultTextBrush(Color color)
-        {
-            Application.Current.Resources["LeeBrush_Text"] = new SolidColorBrush(color);
-        }
-        /// <summary>
-        /// 改变默认文字颜色
-        /// </summary>
-        /// <param name="color"></param>
-        public static void SetDefaultTextBrushDefault()
-        {
-            Application.Current.Resources["LeeBrush_Text"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Black"]);
-        }
+
+
         /// <summary>
         /// 改变圆角
         /// </summary>
@@ -100,18 +87,26 @@ namespace LeeTeke.WpfControl
             Application.Current.Resources["LeeCornerRadius"] = cr;
         }
 
-        /// <summary>
-        /// 改变页面背景色
-        /// </summary>
-        /// <param name="color"></param>
-        public static void SetBackground(Brush color)
-        {
-            Application.Current.Resources["LeeBrush_Background"] = color;
-        }
+        #region ScrollViewerSlide
+        
+        #endregion
 
-        public static void SetBackgroundDefault()
+        public static void SetScrollViewerSlide(bool isEnable, IEasingFunction easing=default, Duration duration=default)
         {
-            Application.Current.Resources["LeeBrush_Background"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Background"]);
+            Application.Current.Resources["LeeScrollViewerSlideEnabled"] = isEnable;
+            if (isEnable)
+            {
+                if (easing != default)
+                {
+                    Application.Current.Resources["LeeScrollViewerSlideEasingFuncion"] = easing;
+                }
+                if (duration != default)
+                {
+                    Application.Current.Resources["LeeScrollViewerSlideDuration"] = duration;
+                }
+            }
+        
+      
         }
 
 

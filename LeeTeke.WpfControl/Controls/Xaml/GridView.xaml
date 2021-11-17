@@ -1,10 +1,42 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:leedep ="clr-namespace:LeeTeke.WpfControl.Dependencies"
                      xmlns:local="clr-namespace:LeeTeke.WpfControl.Controls">
 
+    <Style TargetType="{x:Type local:GridViewItem}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:GridViewItem}">
+                    <Border  x:Name="PART_Border" 
+                             Background="{TemplateBinding Background}"
+                             BorderBrush="{TemplateBinding BorderBrush}"
+                             BorderThickness="{TemplateBinding BorderThickness}"
+                             >
+                        <ContentPresenter x:Name="contentPresenter" 
+                                              TextElement.Foreground="{TemplateBinding Foreground}"
+                                              />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="{DynamicResource UnEnableOpacity}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
     <Style TargetType="{x:Type local:GridView}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="leedep:ScrollViewerManager.SlideEasingFunction" Value="{DynamicResource LeeScrollViewerSlideEasingFuncion}"/>
+        <Setter Property="leedep:ScrollViewerManager.SlideDuration" Value="{DynamicResource LeeScrollViewerSlideDuration}"/>
+        <Setter Property="leedep:ScrollViewerManager.SlideEnabled" Value="{DynamicResource LeeScrollViewerSlideEnabled}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:GridView}">
@@ -15,6 +47,10 @@
                                         VerticalScrollBarVisibility="{TemplateBinding  VerticalScrollBarVisibility}"
                                         HorizontalScrollBarVisibility="{TemplateBinding HorizontalScrollBarVisibility}"
                                          Padding="{TemplateBinding Padding}"
+                                         leedep:ScrollViewerManager.SlideEasingFunction="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideEasingFunction),Mode=OneWay}"
+                                           leedep:ScrollViewerManager.SlideDuration="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideDuration),Mode=OneWay}"
+                                           leedep:ScrollViewerManager.SlideMonitorMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideMonitorMode),Mode=OneWay}"
+                                           leedep:ScrollViewerManager.SlideEnabled="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideEnabled),Mode=OneWay}"
                                 >
                             <ItemsPresenter     />
                         </ScrollViewer>

@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using LeeTeke.WpfControl;
 using System.IO;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 
 namespace LeeTeke.WPFTest.ViewModels
 {
@@ -157,7 +158,13 @@ namespace LeeTeke.WPFTest.ViewModels
         /// 命令注释
         /// </summary>
         public DelegateCommand PageChangedCommand => new(PageChangedCommandExecute);
-     
+
+
+        /// <summary>
+        /// SlideChangedCommand
+        /// </summary>
+        public DelegateCommand SlideChangedCommand => new(SlideChangedCommandExecute);
+  
 
 
         #endregion
@@ -165,6 +172,7 @@ namespace LeeTeke.WPFTest.ViewModels
         private Page _testPage= new TestPage();
         private bool _switch = false;
         private bool _page = false;
+        private bool _slide = false;
         public MainWindowViewModel()
         {
             Init();
@@ -172,7 +180,14 @@ namespace LeeTeke.WPFTest.ViewModels
             TestCommand = new DelegateCommand<object>(TestCommandExecute);
         }
 
-
+        /// <summary>
+        /// SlideChangedCommand_Execute
+        /// </summary>
+        private void SlideChangedCommandExecute()
+        {
+            _slide = !_slide;
+            StaticMethods.SetScrollViewerSlide(_slide);
+        }
 
         private void Init()
         {

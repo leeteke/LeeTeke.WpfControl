@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LeeTeke.WpfControl.Dependencies;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,7 +55,7 @@ namespace LeeTeke.WpfControl.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(SlideView), new FrameworkPropertyMetadata(typeof(SlideView)));
         }
 
-        private Storyboard _sbMove;
+     
         private ScrollViewer _scrollViewer;
         private DispatcherTimer _autoPalyTime;
         public SlideView()
@@ -62,9 +63,36 @@ namespace LeeTeke.WpfControl.Controls
             EventManager.RegisterClassHandler(typeof(SlideViewItem), SlideViewItem.MouseLeftButtonUpEvent, new RoutedEventHandler(ItemMouseLeftButtonUpEvent));
             PreviewMouseWheel += SlideView_PreviewMouseWheel;
             PreviewKeyDown += SlideView_PreviewKeyDown;
+            IsVisibleChanged += SlideView_IsVisibleChanged;
+            Loaded += SlideView_Loaded;
+            SizeChanged += SlideView_SizeChanged;
         }
 
-     
+        private void SlideView_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            ToIndex(CurrentIndex);
+        }
+
+        private void SlideView_Loaded(object sender, RoutedEventArgs e)
+        {
+            SetAutoPaly(AutoPaly);
+        }
+
+        private void SlideView_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (IsVisible)
+            {
+                SetAutoPaly(AutoPaly);
+            }
+            else
+            {
+                SetAutoPaly(false);
+            }
+        }
+
+        
+
+
         #region 属性
         /// <summary>
         /// 总数量
@@ -94,7 +122,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             base.OnApplyTemplate();
             _scrollViewer = this.Template.FindName("PART_ScrollViewer", this) as ScrollViewer;
-            ToIndex(0);
+            
         }
 
         #endregion
@@ -131,16 +159,9 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for Orientation.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty OrientationProperty =
-            DependencyProperty.Register("Orientation", typeof(Orientation), typeof(SlideView), new PropertyMetadata(Orientation.Vertical, new PropertyChangedCallback(OrientationChanged)));
+            DependencyProperty.Register("Orientation", typeof(Orientation), typeof(SlideView));
 
-        private static void OrientationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is SlideView control && e.OldValue != e.NewValue)
-            {
-                if (control._sbMove != null)
-                    control._sbMove.Stop();
-            }
-        }
+     
         #endregion
 
         #region CurrentValue
@@ -189,7 +210,15 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for Interval.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IntervalProperty =
-            DependencyProperty.Register("Interval", typeof(int), typeof(SlideView), new PropertyMetadata(3000));
+            DependencyProperty.Register("Interval", typeof(int), typeof(SlideView),new PropertyMetadata(OnIntervalChanged));
+
+        private static void OnIntervalChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is SlideView control && e.OldValue != e.NewValue)
+            {
+                control.SetAutoPaly(control.AutoPaly);
+            }
+        }
 
 
 
@@ -206,26 +235,13 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for AutoPaly.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty AutoPalyProperty =
-            DependencyProperty.Register("AutoPaly", typeof(bool), typeof(SlideView), new PropertyMetadata(false, new PropertyChangedCallback(AutoPalyChanged)));
+            DependencyProperty.Register("AutoPaly", typeof(bool), typeof(SlideView), new PropertyMetadata(new PropertyChangedCallback(AutoPalyChanged)));
 
         private static void AutoPalyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is SlideView control && e.OldValue != e.NewValue)
             {
-                control.AutoPaly = (bool)e.NewValue;
-                if (control.AutoPaly)
-                {
-                    if (control._autoPalyTime == null)
-                        control._autoPalyTime = new DispatcherTimer();
-                    control._autoPalyTime.Interval = TimeSpan.FromMilliseconds(control.Interval);
-                    control._autoPalyTime.Tick += control.AutoPalyTime_Tick;
-                    control._autoPalyTime.Start();
-                }
-                else
-                {
-                    if (control._autoPalyTime != null)
-                        control._autoPalyTime.Stop();
-                }
+                control.SetAutoPaly((bool)e.NewValue);
             }
         }
 
@@ -236,92 +252,43 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-        #region TransitionDuration
+        #region Duration
 
 
         /// <summary>
         /// 过渡动画延迟
         /// </summary>
-        public int TransitionDuration
+        public Duration Duration
         {
-            get { return (int)GetValue(TransitionDurationProperty); }
-            set { SetValue(TransitionDurationProperty, value); }
+            get { return (Duration)GetValue(DurationProperty); }
+            set { SetValue(DurationProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for TransitionDuration.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TransitionDurationProperty =
-            DependencyProperty.Register("TransitionDuration", typeof(int), typeof(SlideView), new PropertyMetadata(500));
+        public static readonly DependencyProperty DurationProperty =
+            DependencyProperty.Register("Duration", typeof(Duration), typeof(SlideView));
 
 
         #endregion
 
-        #region TransitionEasing
+        #region EasingFunction
 
 
         /// <summary>
         /// 过度动画
         /// </summary>
-        public IEasingFunction TransitionEasing
+        public IEasingFunction EasingFunction
         {
-            get { return (IEasingFunction)GetValue(TransitionEasingProperty); }
-            set { SetValue(TransitionEasingProperty, value); }
+            get { return (IEasingFunction)GetValue(EasingFunctionProperty); }
+            set { SetValue(EasingFunctionProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for TransitionEasing.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TransitionEasingProperty =
-            DependencyProperty.Register("TransitionEasing", typeof(IEasingFunction), typeof(SlideView), new PropertyMetadata(null, new PropertyChangedCallback(TransitionEasingChanged)));
+        public static readonly DependencyProperty EasingFunctionProperty =
+            DependencyProperty.Register("EasingFunction", typeof(IEasingFunction), typeof(SlideView));
 
-        private static void TransitionEasingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is SlideView control && e.OldValue != e.NewValue)
-            {
-                control.TransitionEasing = (IEasingFunction)e.NewValue;
-            }
-        }
+  
 
-
-        #endregion
-
-        #region HorizontalOffset
-
-
-        public double HorizontalOffset
-        {
-            get { return (double)GetValue(HorizontalOffsetProperty); }
-            set { SetValue(HorizontalOffsetProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for HOffset.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty HorizontalOffsetProperty =
-            DependencyProperty.Register("HorizontalOffset", typeof(double), typeof(SlideView), new PropertyMetadata(0.0, new PropertyChangedCallback(HorizontalOffsetChanged)));
-
-        private static void HorizontalOffsetChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is SlideView control)
-            {
-                control._scrollViewer.ScrollToHorizontalOffset(control.HorizontalOffset);
-            }
-        }
-        #endregion
-
-        #region VerticalOffset
-        public double VerticalOffset
-        {
-            get { return (double)GetValue(VerticalOffsetProperty); }
-            set { SetValue(VerticalOffsetProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for VerticalOffset.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty VerticalOffsetProperty =
-            DependencyProperty.Register("VerticalOffset", typeof(double), typeof(SlideView), new PropertyMetadata(0.0, new PropertyChangedCallback(VerticalOffsetChanged)));
-
-        private static void VerticalOffsetChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is SlideView control && e.OldValue != e.NewValue)
-            {
-                control._scrollViewer.ScrollToVerticalOffset(control.VerticalOffset);
-            }
-        }
         #endregion
 
         #region IsCycle
@@ -333,7 +300,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for IsCycle.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsCycleProperty =
-            DependencyProperty.Register("IsCycle", typeof(bool), typeof(SlideView), new PropertyMetadata(true));
+            DependencyProperty.Register("IsCycle", typeof(bool), typeof(SlideView));
 
         #endregion
 
@@ -354,7 +321,9 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
+        #region Event
 
+   
 
         /// <summary>
         /// 请填写描述
@@ -375,10 +344,26 @@ namespace LeeTeke.WpfControl.Controls
             RaiseEvent(arg);
         }
 
-
+        #endregion
 
         #region 私有逻辑
 
+        private void SetAutoPaly(bool isAuto)
+        {
+            if (!IsLoaded)
+                return;
+
+            if (_autoPalyTime != null)
+                _autoPalyTime.Stop();
+            if (isAuto)
+            {
+                if (_autoPalyTime == null)
+                    _autoPalyTime = new DispatcherTimer();
+                _autoPalyTime.Interval = TimeSpan.FromMilliseconds(Interval);
+                _autoPalyTime.Tick += AutoPalyTime_Tick;
+                _autoPalyTime.Start();
+            }
+        }
 
         private void AutoPalyTime_Tick(object sender, EventArgs e)
         {
@@ -403,41 +388,19 @@ namespace LeeTeke.WpfControl.Controls
                         CurrentValue = Items[index];
                         CurrentIndex = index;
 
-                        _sbMove?.Stop();
+     
                         switch (Orientation)
                         {
                             case Orientation.Horizontal:
 
-                                _sbMove = new Storyboard() { FillBehavior = FillBehavior.HoldEnd };
-                                DoubleAnimationUsingKeyFrames xDA = new DoubleAnimationUsingKeyFrames();
-                                xDA.KeyFrames.Add(new EasingDoubleKeyFrame()
-                                {
-                                    Value = (this.ActualWidth-this.BorderThickness.Left-this.BorderThickness.Right) * CurrentIndex,
-                                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(TransitionDuration)),
-                                    EasingFunction = TransitionEasing,
-                                });
-                                _sbMove.Children.Add(xDA);
-                                Storyboard.SetTarget(xDA, this);
-                                Storyboard.SetTargetProperty(xDA, new PropertyPath(SlideView.HorizontalOffsetProperty));
-                                _sbMove.Begin();
+                                ScrollViewerManager.ScrollToHorizontalOffset(_scrollViewer, (this.ActualWidth - this.BorderThickness.Left - this.BorderThickness.Right) * CurrentIndex);
 
-
+                          
                                 break;
                             case Orientation.Vertical:
 
-                                _sbMove = new Storyboard() { FillBehavior = FillBehavior.HoldEnd };
-                                DoubleAnimationUsingKeyFrames yDA = new DoubleAnimationUsingKeyFrames();
-                                yDA.KeyFrames.Add(new EasingDoubleKeyFrame()
-                                {
+                                ScrollViewerManager.ScrollToVerticalOffset(_scrollViewer, (this.ActualHeight - this.BorderThickness.Top - this.BorderThickness.Bottom) * CurrentIndex);
 
-                                    Value = (this.ActualHeight-this.BorderThickness.Top-this.BorderThickness.Bottom) * CurrentIndex,
-                                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(TransitionDuration)),
-                                    EasingFunction = TransitionEasing,
-                                });
-                                _sbMove.Children.Add(yDA);
-                                Storyboard.SetTarget(yDA, this);
-                                Storyboard.SetTargetProperty(yDA, new PropertyPath(SlideView.VerticalOffsetProperty));
-                                _sbMove.Begin();
 
                                 break;
                             default:
@@ -448,12 +411,10 @@ namespace LeeTeke.WpfControl.Controls
                     {
                         if (index == Count)
                         {
-
                             ToIndex(0);
                         }
                         if (index == -1)
                         {
-
                             ToIndex(Items.Count - 1);
                         }
                     }
@@ -461,7 +422,6 @@ namespace LeeTeke.WpfControl.Controls
             }
             catch (Exception)
             {
-
             }
         }
 
@@ -516,6 +476,9 @@ namespace LeeTeke.WpfControl.Controls
                 RaiseItemClicked(content);
             }
         }
+
+
+   
     }
 
     #endregion

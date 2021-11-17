@@ -54,8 +54,6 @@ namespace LeeTeke.WpfControl.Controls
 
 
         private Storyboard _lodingSB;
-        private long _lastLodingTime = 0;
-
 
         public ProgressBar()
         {
@@ -334,7 +332,24 @@ namespace LeeTeke.WpfControl.Controls
         public static readonly DependencyProperty EasingFunctionProperty =
             DependencyProperty.Register("EasingFunction", typeof(IEasingFunction), typeof(ProgressBar));
 
+
         #endregion
+
+        #region Duration
+        /// <summary>
+        /// Duration
+        /// </summary>
+        public Duration Duration
+        {
+            get { return (Duration)GetValue(DurationProperty); }
+            set { SetValue(DurationProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Duration.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DurationProperty =
+            DependencyProperty.Register("Duration", typeof(Duration), typeof(ProgressBar));
+        #endregion
+
 
         #endregion
 
@@ -390,47 +405,33 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (size)
             {
-
+                ///勿删，用来初始化加载的
             }
-            else if (!IsLoaded)
+            else
+            if (!IsLoaded)
             {
                 return;
             }
-
-
-            if (_lodingSB != null)
-                _lodingSB.Pause();
-
             if (Mode == ProgressControlMode.Loding)
             {
                 var plc = Value * (ProgressGenCalculation() / Maximum);
-                if ((DateTime.Now.ToFileTime() - _lastLodingTime) < 2000000)
+                var animation = new DoubleAnimation(plc, Duration)
                 {
-                    _lodingSB?.Stop();
-                    _lastLodingTime = DateTime.Now.ToFileTime();
-                    this.ProgressLength = plc;
-                    return;
-                }
-                _lastLodingTime = DateTime.Now.ToFileTime();
-                _lodingSB = new Storyboard() { FillBehavior = FillBehavior.Stop };
-                DoubleAnimationUsingKeyFrames eDA = new DoubleAnimationUsingKeyFrames();
-                eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
-                {
-                    Value = plc,
-                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(200)),
                     EasingFunction = this.EasingFunction,
-                });
-                _lodingSB.Children.Add(eDA);
-                Storyboard.SetTarget(eDA, this);
-                Storyboard.SetTargetProperty(eDA, new PropertyPath(ProgressBar.ProgressLengthProperty));
-                _lodingSB.Completed += (e, s) =>
-                {
-                    this.ProgressLength = plc;
+                    FillBehavior = FillBehavior.Stop
                 };
-                _lodingSB.Begin();
+                animation.Completed += (e, s) =>
+                {
+                    ProgressLength = plc;
+                };
+                BeginAnimation(ProgressLengthProperty, animation, HandoffBehavior.Compose);
+
             }
             else
             {
+                if (_lodingSB != null)
+                    _lodingSB.Pause();
+
                 if (WatingStop)
                     return;
                 _lodingSB = new Storyboard() { RepeatBehavior = RepeatBehavior.Forever };
@@ -448,14 +449,14 @@ namespace LeeTeke.WpfControl.Controls
                 });
                 eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                 {
-                    Value = -(ProgressGenCalculation() /3),
+                    Value = -(ProgressGenCalculation() / 3),
                     KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(1.3)),
                 });
                 eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                 {
                     Value = ProgressGenCalculation(),
                     KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(2)),
-                }) ;
+                });
                 eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                 {
                     Value = ProgressGenCalculation(),
@@ -465,7 +466,7 @@ namespace LeeTeke.WpfControl.Controls
                 _lodingSB.Children.Add(eDA);
                 Storyboard.SetTarget(eDA, this);
                 Storyboard.SetTargetProperty(eDA, new PropertyPath(ProgressBar.RectangleSiteProperty));
-            
+
                 _lodingSB.Begin();
             }
         }

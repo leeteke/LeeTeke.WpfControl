@@ -16,11 +16,14 @@
                 <PowerEase EasingMode="EaseOut"/>
             </Setter.Value>
         </Setter>
+        <Setter Property="Duration" Value="0:0:0.300"/>
         <Setter Property="Stroke" Value="{DynamicResource LeeBrush_Theme}"/>
         <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}"/>
         <Setter Property="MinWidth" Value="{DynamicResource LeeControlMinHeight}"/>
         <Setter Property="Mode" Value="Loding"/>
         <Setter Property="IsClip" Value="True"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ProgressRing}">
@@ -191,11 +194,16 @@
                         <Border x:Name="PART_ContentBorder"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 >
-                            <ContentPresenter x:Name="PART_Content"
+                            <Border x:Name="PART_Content"
+                                    Background="{x:Null}"
+                                    BorderThickness="0">
+                                <ContentPresenter
                                                Content="{TemplateBinding Content}"
                                               HorizontalAlignment="{TemplateBinding  HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               />
+                            </Border>
+                         
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>

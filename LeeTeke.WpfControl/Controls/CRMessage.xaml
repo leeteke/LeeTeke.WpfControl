@@ -16,7 +16,7 @@
         leedep:CornerRadiusManager.IsClip="True"
         leedep:WindowManager.DeactivatedEffect="{DynamicResource LeeShadow1}"
         leedep:WindowManager.Effect="{DynamicResource LeeShadow}"
-        leedep:WindowManager.Open="True"
+        leedep:WindowManager.IsEnabled="True"
         BorderThickness="0"
         Background="{DynamicResource LeeBrush_Background2}"
         >

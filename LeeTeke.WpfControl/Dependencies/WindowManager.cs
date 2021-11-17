@@ -113,25 +113,25 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("DeactivatedBorderThickness", typeof(Thickness), typeof(WindowManager));
         #endregion
 
-        #region Open
+        #region IsEnabled
         /// <summary>
         /// 开关
         /// </summary>
-        public static bool GetOpen(DependencyObject obj)
+        public static bool GetIsEnabled(DependencyObject obj)
         {
-            return (bool)obj.GetValue(OpenProperty);
+            return (bool)obj.GetValue(IsEnabledProperty);
         }
 
-        public static void SetOpen(DependencyObject obj, bool value)
+        public static void SetIsEnabled(DependencyObject obj, bool value)
         {
-            obj.SetValue(OpenProperty, value);
+            obj.SetValue(IsEnabledProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for Open.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty OpenProperty =
-            DependencyProperty.RegisterAttached("Open", typeof(bool), typeof(WindowManager), new PropertyMetadata(false, new PropertyChangedCallback(OpenChanged)));
+        public static readonly DependencyProperty IsEnabledProperty =
+            DependencyProperty.RegisterAttached("IsEnabled", typeof(bool), typeof(WindowManager), new PropertyMetadata(false, new PropertyChangedCallback(OnIsEnabledChanged)));
 
-        private static void OpenChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnIsEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (!(d is Controls.Window) && d is Window window && e.NewValue != e.OldValue && e.NewValue != null)
             {

@@ -12,6 +12,7 @@
 
     <BlurEffect x:Key="LeeBlurEffect"/>
     <sys:Boolean x:Key="LeeSnapsToDevicePixels">True</sys:Boolean>
+    
     <Style x:Key="LeeFocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
@@ -22,7 +23,12 @@
         </Setter>
     </Style>
 
+    <!--默认Scroll项目-->
+    <sys:Boolean x:Key="LeeScrollViewerSlideEnabled">False</sys:Boolean>
 
+    <CubicEase x:Key="LeeScrollViewerSlideEasingFuncion" EasingMode="EaseOut"/>
+    <Duration x:Key="LeeScrollViewerSlideDuration" > 0:0:0.400</Duration>
+    
     <!--默认原边-->
     <CornerRadius x:Key="LeeCornerRadius">4</CornerRadius>
 

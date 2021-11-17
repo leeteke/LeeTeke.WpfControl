@@ -110,7 +110,7 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <!--修改默认SnapsToDevicePixels-->
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
+
     </Style>
 
     <Style TargetType="WebBrowser">
@@ -145,7 +145,7 @@
 
     </Style>
 
-    <Style x:Key="LeeButton"  TargetType="{x:Type  Button}">
+    <Style x:Key="LeeButton"  TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}" />
@@ -209,7 +209,7 @@
         </Setter>
     </Style>
 
-    <Style  x:Key="ColorButton"  TargetType="{x:Type  Button}">
+    <Style  x:Key="ColorButton"  TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Theme}" />
@@ -387,7 +387,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
                         <ScrollViewer x:Name="PART_ContentHost" 
-                                     Focusable="false" 
+                                      Focusable="false" 
                                       Background="{TemplateBinding Background}"
                                       BorderThickness="{TemplateBinding BorderThickness}"
                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
@@ -409,9 +409,9 @@
                                 <Condition Property="IsKeyboardFocused" Value="True"/>
                                 <Condition Property="IsReadOnly" Value="False"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" TargetName="PART_ContentHost" Value="{DynamicResource LeeBrush_ForgroundActive}"/>
+                            <Setter  TargetName="PART_ContentHost" Property="Background" Value="{DynamicResource LeeBrush_ForgroundActive}"/>
                         </MultiTrigger>
-                  
+
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -998,9 +998,9 @@
                                     <ControlTemplate TargetType="Thumb">
                                         <Border x:Name="PART_Border"  
                                                 BorderThickness="0"
-                                                Background="{Binding Path=(leedep:ScrollManager.ThumbBrush),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}"
-                                                CornerRadius="{Binding Path=(leedep:ScrollManager.ScrollBarCornerRadius),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}" 
-                                                Effect="{Binding Path=(leedep:ScrollManager.ScrollBarShadow),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}"
+                                                Background="{Binding Path=(leedep:ScrollViewerManager.ThumbBrush),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}"
+                                                CornerRadius="{Binding Path=(leedep:ScrollViewerManager.ScrollBarCornerRadius),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}" 
+                                                Effect="{Binding Path=(leedep:ScrollViewerManager.ScrollBarShadow),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}"
                                                        />
                                         <ControlTemplate.Triggers>
                                             <DataTrigger Binding="{Binding ElementName=PART_Border,Path=ActualWidth,Converter={StaticResource DoubleComparisonConverter},ConverterParameter=Less_4}" Value="True">
@@ -1038,10 +1038,10 @@
                                         <Thumb.Template>
                                             <ControlTemplate TargetType="Thumb">
                                                 <Border x:Name="PART_Border" 
-                                                            Background="{Binding Path=(leedep:ScrollManager.ThumbBrush),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}"
+                                                            Background="{Binding Path=(leedep:ScrollViewerManager.ThumbBrush),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}"
                                                             BorderThickness="0"
-                                                            CornerRadius="{Binding Path=(leedep:ScrollManager.ScrollBarCornerRadius),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}" 
-                                                            Effect="{Binding Path=(leedep:ScrollManager.ScrollBarShadow),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}"   
+                                                            CornerRadius="{Binding Path=(leedep:ScrollViewerManager.ScrollBarCornerRadius),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}" 
+                                                            Effect="{Binding Path=(leedep:ScrollViewerManager.ScrollBarShadow),RelativeSource={RelativeSource AncestorType=ScrollViewer},Mode=OneWay}"   
                                                             />
                                                 <ControlTemplate.Triggers>
                                                     <DataTrigger Binding="{Binding ElementName=PART_Border,Path=ActualWidth,Converter={StaticResource DoubleComparisonConverter},ConverterParameter=Less_4}" Value="True">
@@ -1062,7 +1062,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
 
     <Style x:Key="SliderRepeatButton" TargetType="{x:Type RepeatButton}">
         <Setter Property="IsTabStop" Value="False"/>
@@ -1418,7 +1417,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="CalendarDayButtonStyle"  TargetType="CalendarDayButton">
+    <Style x:Key="LeeCalendarDayButton"  TargetType="{x:Type CalendarDayButton}">
         <Setter Property="MinWidth" Value="10" />
         <Setter Property="MinHeight" Value="10" />
         <Setter Property="Width" Value="32" />
@@ -1481,7 +1480,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="CalendarButtonStyle" TargetType="{x:Type CalendarButton}">
+    <Style x:Key="LeeCalendarButton" TargetType="{x:Type CalendarButton}">
         <Setter Property="MinWidth" Value="10" />
         <Setter Property="MinHeight" Value="10" />
         <Setter Property="FontSize" Value="12" />
@@ -1533,7 +1532,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="CalendarItem">
+    <Style x:Key="LeeCalendarItem"  TargetType="{x:Type CalendarItem}">
         <Setter Property="Margin" Value="0" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="leedep:CalendarManager.TitleBackground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type Calendar}},Path=(leedep:CalendarManager.TitleBackground),Mode=OneWay}"/>
@@ -1706,8 +1705,8 @@
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="Language" Value="zh-cn" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="CalendarDayButtonStyle" Value="{StaticResource CalendarDayButtonStyle}" />
-        <Setter Property="CalendarButtonStyle" Value="{StaticResource CalendarButtonStyle}" />
+        <Setter Property="CalendarDayButtonStyle" Value="{StaticResource  LeeCalendarDayButton}" />
+        <Setter Property="CalendarButtonStyle" Value="{StaticResource LeeCalendarButton}" />
         <Setter Property="leedep:CalendarManager.TitleBackground" Value="{DynamicResource LeeBrush_Theme}" />
         <Setter Property="leedep:CalendarManager.TitleTextBrush" Value="{DynamicResource LeeBrush_ThemeForeground}"/>
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}" />
@@ -1756,10 +1755,14 @@
         <Setter Property="VerticalScrollBarVisibility"   Value="Auto" />
         <Setter Property="VerticalContentAlignment"   Value="Stretch" />
         <Setter Property="HorizontalContentAlignment"  Value="Stretch" />
-        <Setter Property="leedep:ScrollManager.TrackBrush"   Value="Transparent" />
-        <Setter Property="leedep:ScrollManager.ThumbBrush"   Value="{DynamicResource LeeBrush_Theme}" />
-        <Setter Property="leedep:ScrollManager.ScrollBarCornerRadius"  Value="{DynamicResource  LeeCornerRadius}" />
-        <Setter Property="leedep:ScrollManager.ScrollViewerHook"  Value="False" />
+        <Setter Property="leedep:ScrollViewerManager.TrackBrush"   Value="Transparent" />
+        <Setter Property="leedep:ScrollViewerManager.ThumbBrush"   Value="{DynamicResource LeeBrush_Theme}" />
+        <Setter Property="leedep:ScrollViewerManager.ScrollBarCornerRadius"  Value="{DynamicResource  LeeCornerRadius}" />
+
+        <Setter Property="leedep:ScrollViewerManager.SlideEasingFunction" Value="{DynamicResource LeeScrollViewerSlideEasingFuncion}"/>
+        <Setter Property="leedep:ScrollViewerManager.SlideDuration" Value="{DynamicResource LeeScrollViewerSlideDuration}"/>
+        <Setter Property="leedep:ScrollViewerManager.SlideEnabled" Value="{DynamicResource LeeScrollViewerSlideEnabled}"/>
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
@@ -1776,8 +1779,8 @@
                                 <RowDefinition  Height="auto"/>
                                 <RowDefinition />
                             </Grid.RowDefinitions>
-                            <ContentPresenter  Grid.Column="1"  Content="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ScrollManager.TopContent),Mode=OneWay}"/>
-                            <ContentPresenter Grid.Row="1"   Content="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ScrollManager.LeftContent),Mode=OneWay}"/>
+                            <ContentPresenter  Grid.Column="1"  Content="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.TopContent),Mode=OneWay}"/>
+                            <ContentPresenter Grid.Row="1"   Content="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.LeftContent),Mode=OneWay}"/>
                             <ScrollContentPresenter 
                                 Grid.Column="1"
                                      Grid.Row="1"
@@ -2366,10 +2369,11 @@
         <Setter Property="leedep:ComboBoxManager.MarkSize" Value="4"/>
 
 
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBox}">
-                    <Border Background="{TemplateBinding Background}"
+                    <Border x:Name="PART_Border" Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius),RelativeSource={RelativeSource AncestorType={x:Type ComboBox}},Mode=OneWay}">
@@ -2403,6 +2407,11 @@
                                                   VerticalScrollBarVisibility="{Binding  RelativeSource={RelativeSource  Mode=TemplatedParent},Path=(ScrollViewer.VerticalScrollBarVisibility),Mode=OneWay}"
                                                   CanContentScroll="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(ScrollViewer.CanContentScroll),Mode=OneWay}"
                                                   PanningMode="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(ScrollViewer.PanningMode),Mode=OneWay}"
+                                                  leedep:ScrollViewerManager.TopContent="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.TopContent),Mode=OneWay}"
+                                                  leedep:ScrollViewerManager.SlideEasingFunction="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideEasingFunction),Mode=OneWay}"
+                                                  leedep:ScrollViewerManager.SlideDuration="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideDuration),Mode=OneWay}"
+                                                  leedep:ScrollViewerManager.SlideMonitorMode="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideMonitorMode),Mode=OneWay}"
+                                                  leedep:ScrollViewerManager.SlideEnabled="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideEnabled),Mode=OneWay}"
                                                   leedep:CornerRadiusManager.CornerRadius="{Binding ElementName=dropDownBorder,Path=CornerRadius,Mode=OneWay}"
                                                   leedep:CornerRadiusManager.IsClip="True">
                                         <ItemsPresenter x:Name="ItemsPresenter"
@@ -2439,7 +2448,7 @@
                                      leedep:TextBoxManager.EscToEmpty="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ComboBoxManager.EscToEmpty),Mode=OneWay}"
                                      leedep:TextBoxManager.EnterCommand="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ComboBoxManager.EnterCommand),Mode=OneWay}"
                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                     IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent},Mode=OneWay}" 
+                                     IsReadOnly="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsReadOnly,Mode=OneWay}" 
                                      Margin="{TemplateBinding Padding}" 
                                      Style="{StaticResource ComboBoxEditableTextBox}"
                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
@@ -2569,6 +2578,11 @@
         <Setter Property="leedep:ComboBoxManager.MarkSite" Value="{Binding Path=(leedep:ComboBoxManager.MarkSite), RelativeSource={RelativeSource AncestorType={x:Type ComboBox}},Mode=OneWay}"/>
         <Setter Property="leedep:ComboBoxManager.MarkSize" Value="{Binding Path=(leedep:ComboBoxManager.MarkSize), RelativeSource={RelativeSource AncestorType={x:Type ComboBox}},Mode=OneWay}"/>
 
+
+        <Setter Property="leedep:ScrollViewerManager.SlideEasingFunction" Value="{DynamicResource LeeScrollViewerSlideEasingFuncion}"/>
+        <Setter Property="leedep:ScrollViewerManager.SlideDuration" Value="{DynamicResource LeeScrollViewerSlideDuration}"/>
+        <Setter Property="leedep:ScrollViewerManager.SlideEnabled" Value="{DynamicResource LeeScrollViewerSlideEnabled}"/>
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBoxItem}">
@@ -2680,6 +2694,9 @@
         <Setter Property="leedep:ContextMenuManager.ContentDock" Value="Bottom"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Margin" Value="8"/>
+        <Setter Property="leedep:ScrollViewerManager.SlideEasingFunction" Value="{DynamicResource LeeScrollViewerSlideEasingFuncion}"/>
+        <Setter Property="leedep:ScrollViewerManager.SlideDuration" Value="{DynamicResource LeeScrollViewerSlideDuration}"/>
+        <Setter Property="leedep:ScrollViewerManager.SlideEnabled" Value="{DynamicResource LeeScrollViewerSlideEnabled}"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -2697,6 +2714,10 @@
                                               DockPanel.Dock="{Binding Path=(leedep:ContextMenuManager.ContentDock),RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}"/>
 
                             <ScrollViewer Padding="{TemplateBinding Padding}"
+                                          leedep:ScrollViewerManager.SlideEasingFunction="{Binding  RelativeSource={ RelativeSource  AncestorType=ContextMenu},Path=(leedep:ScrollViewerManager.SlideEasingFunction),Mode=OneWay}"
+                                          leedep:ScrollViewerManager.SlideDuration="{Binding  RelativeSource={ RelativeSource  AncestorType=ContextMenu},Path=(leedep:ScrollViewerManager.SlideDuration),Mode=OneWay}"
+                                          leedep:ScrollViewerManager.SlideMonitorMode="{Binding  RelativeSource={ RelativeSource  AncestorType=ContextMenu},Path=(leedep:ScrollViewerManager.SlideMonitorMode),Mode=OneWay}"
+                                          leedep:ScrollViewerManager.SlideEnabled="{Binding  RelativeSource={ RelativeSource  AncestorType=ContextMenu},Path=(leedep:ScrollViewerManager.SlideEnabled),Mode=OneWay}"
                                        >
                                 <StackPanel IsItemsHost="True"
                                         KeyboardNavigation.DirectionalNavigation="Cycle" />
@@ -2791,19 +2812,18 @@
                                        PopupAnimation="Fade">
                                         <Grid x:Name="GrdSubmenu"
                                           Margin="10">
-                                            <Border x:Name="BdrSubmenu"
-                                                SnapsToDevicePixels="True"
-                                                BorderThickness="{Binding BorderThickness,RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}"
-                                                BorderBrush="{Binding BorderBrush,RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}"
-                                                Background="{Binding Background,RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}"
-                                               MinWidth="{Binding MinWidth,RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}"
-                                                Effect="{Binding Path=(leedep:ContextMenuManager.Shadow),RelativeSource={RelativeSource AncestorType=ContextMenu,Mode=FindAncestor},Mode=OneWay}"
-                                                CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius),RelativeSource={RelativeSource AncestorType=ContextMenu,Mode=FindAncestor},Mode=OneWay}">
-                                            </Border>
                                             <ScrollViewer Margin="{Binding Padding,RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}"
-                                                           leedep:CornerRadiusManager.CornerRadius="{Binding ElementName=BdrSubmenu,Path=CornerRadius,Mode=OneWay}"
-                                                          leedep:CornerRadiusManager.IsClip="True"
-                                                          
+                                                           leedep:CornerRadiusManager.CornerRadius="{Binding (leedep:CornerRadiusManager.CornerRadius),RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}"
+                                                          leedep:CornerRadiusManager.IsClip="{Binding Path=(leedep:CornerRadiusManager.IsClip),RelativeSource={RelativeSource AncestorType=ContextMenu,Mode=FindAncestor},Mode=OneWay}"
+                                                          BorderThickness="{Binding BorderThickness,RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}"
+                                                          BorderBrush="{Binding BorderBrush,RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}"
+                                                          Background="{Binding Background,RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}"
+                                                          MinWidth="{Binding MinWidth,RelativeSource={RelativeSource AncestorType=ContextMenu},Mode=OneWay}"
+                                                          Effect="{Binding Path=(leedep:ContextMenuManager.Shadow),RelativeSource={RelativeSource AncestorType=ContextMenu,Mode=FindAncestor},Mode=OneWay}"
+                                                          leedep:ScrollViewerManager.SlideEasingFunction="{Binding  RelativeSource={ RelativeSource  AncestorType=ContextMenu},Path=(leedep:ScrollViewerManager.SlideEasingFunction),Mode=OneWay}"
+                                                          leedep:ScrollViewerManager.SlideDuration="{Binding  RelativeSource={ RelativeSource  AncestorType=ContextMenu},Path=(leedep:ScrollViewerManager.SlideDuration),Mode=OneWay}"
+                                                          leedep:ScrollViewerManager.SlideMonitorMode="{Binding  RelativeSource={ RelativeSource  AncestorType=ContextMenu},Path=(leedep:ScrollViewerManager.SlideMonitorMode),Mode=OneWay}"
+                                                          leedep:ScrollViewerManager.SlideEnabled="{Binding  RelativeSource={ RelativeSource  AncestorType=ContextMenu},Path=(leedep:ScrollViewerManager.SlideEnabled),Mode=OneWay}"
                                                           >
 
                                                 <StackPanel IsItemsHost="True"
@@ -2817,18 +2837,7 @@
                             </Border>
                             <ControlTemplate.Triggers>
 
-                                <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
-                                    <Setter TargetName="PART_Grid" Property="Clip">
-                                        <Setter.Value>
-                                            <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
-                                                <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
-                                                <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
-                                                <Binding ElementName="border"  Path="CornerRadius" Mode="OneWay"/>
-                                                <Binding ElementName="border"  Path="BorderThickness" Mode="OneWay"/>
-                                            </MultiBinding>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Trigger>
+
                                 <Trigger Property="IsMouseOver"  Value="True">
                                     <Setter Property="Background" TargetName="border" Value="{DynamicResource LeeBrush_Mark}"/>
                                 </Trigger>
@@ -3198,6 +3207,7 @@
         <Setter Property="GridLinesVisibility" Value="None"/>
         <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
+
         <Setter Property="leedep:DataGridManager.RowMargin" Value="0,2"/>
         <Setter Property="leedep:DataGridManager.RowCornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="leedep:DataGridManager.RowIsClip" Value="True"/>
@@ -3281,6 +3291,11 @@
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="Foreground"  Value="{DynamicResource LeeBrush_Text}" />
+
+        <Setter Property="leedep:ScrollViewerManager.SlideEasingFunction" Value="{DynamicResource LeeScrollViewerSlideEasingFuncion}"/>
+        <Setter Property="leedep:ScrollViewerManager.SlideDuration" Value="{DynamicResource LeeScrollViewerSlideDuration}"/>
+        <Setter Property="leedep:ScrollViewerManager.SlideEnabled" Value="{DynamicResource LeeScrollViewerSlideEnabled}"/>
+
         <Setter Property="RowValidationErrorTemplate">
             <Setter.Value>
                 <ControlTemplate>
@@ -3305,6 +3320,10 @@
                                           BorderThickness="{TemplateBinding BorderThickness}"
                                           Background="{TemplateBinding Background}"
                                           leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:CornerRadiusManager.CornerRadius),Mode=OneWay}"
+                                          leedep:ScrollViewerManager.SlideEasingFunction="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideEasingFunction),Mode=OneWay}"
+                                           leedep:ScrollViewerManager.SlideDuration="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideDuration),Mode=OneWay}"
+                                           leedep:ScrollViewerManager.SlideMonitorMode="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideMonitorMode),Mode=OneWay}"
+                                           leedep:ScrollViewerManager.SlideEnabled="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideEnabled),Mode=OneWay}"
                                           Focusable="false">
                                 <ScrollViewer.Template>
                                     <ControlTemplate TargetType="{x:Type ScrollViewer}">
@@ -3553,16 +3572,20 @@
                     <Setter.Value>
                         <ControlTemplate  TargetType="{x:Type DataGrid}">
                             <ScrollViewer  x:Name="PART_ScrollViewer" 
-                                      HorizontalScrollBarVisibility="{Binding  RelativeSource={ RelativeSource  Mode=FindAncestor,AncestorType=DataGrid},Path=(ScrollViewer.HorizontalScrollBarVisibility),Mode=OneWay}" 
-                                      VerticalScrollBarVisibility="{Binding  RelativeSource={ RelativeSource  Mode=FindAncestor,AncestorType=DataGrid},Path=(ScrollViewer.VerticalScrollBarVisibility),Mode=OneWay}"
-                                      CanContentScroll="{Binding  RelativeSource={ RelativeSource  Mode=FindAncestor,AncestorType=DataGrid},Path=(ScrollViewer.CanContentScroll),Mode=OneWay}"
-                                      PanningMode="{Binding  RelativeSource={ RelativeSource  Mode=FindAncestor,AncestorType=DataGrid},Path=(ScrollViewer.PanningMode),Mode=OneWay}"
-                                      Background="{TemplateBinding Background}"
-                                      BorderThickness="{TemplateBinding BorderThickness}"
-                                      BorderBrush="{TemplateBinding BorderBrush}"
-                                      Margin="{TemplateBinding Margin}"
-                                      leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path= (leedep:CornerRadiusManager.CornerRadius),Mode=OneWay}"
-                                      leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path= (leedep:CornerRadiusManager.IsClip),Mode=OneWay}"
+                                           HorizontalScrollBarVisibility="{Binding  RelativeSource={ RelativeSource  Mode=FindAncestor,AncestorType=DataGrid},Path=(ScrollViewer.HorizontalScrollBarVisibility),Mode=OneWay}" 
+                                           VerticalScrollBarVisibility="{Binding  RelativeSource={ RelativeSource  Mode=FindAncestor,AncestorType=DataGrid},Path=(ScrollViewer.VerticalScrollBarVisibility),Mode=OneWay}"
+                                           CanContentScroll="{Binding  RelativeSource={ RelativeSource  Mode=FindAncestor,AncestorType=DataGrid},Path=(ScrollViewer.CanContentScroll),Mode=OneWay}"
+                                           PanningMode="{Binding  RelativeSource={ RelativeSource  Mode=FindAncestor,AncestorType=DataGrid},Path=(ScrollViewer.PanningMode),Mode=OneWay}"
+                                           Background="{TemplateBinding Background}"
+                                           BorderThickness="{TemplateBinding BorderThickness}"
+                                           BorderBrush="{TemplateBinding BorderBrush}"
+                                           Margin="{TemplateBinding Margin}"
+                                           leedep:ScrollViewerManager.SlideEasingFunction="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideEasingFunction),Mode=OneWay}"
+                                           leedep:ScrollViewerManager.SlideDuration="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideDuration),Mode=OneWay}"
+                                           leedep:ScrollViewerManager.SlideMonitorMode="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideMonitorMode),Mode=OneWay}"
+                                           leedep:ScrollViewerManager.SlideEnabled="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideEnabled),Mode=OneWay}"
+                                           leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path= (leedep:CornerRadiusManager.CornerRadius),Mode=OneWay}"
+                                           leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path= (leedep:CornerRadiusManager.IsClip),Mode=OneWay}"
                                       >
                                 <Grid Margin="{TemplateBinding Padding}">
                                     <Grid.RowDefinitions>
@@ -4348,6 +4371,7 @@
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
+
                         <DataTrigger Binding="{Binding Path=(leedep:ListBoxItemManager.MarkSite),RelativeSource={RelativeSource AncestorType={x:Type ListBox}},Mode=OneWay}"   Value="Left">
                             <Setter TargetName="PART_Mark" Property="Width" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListBoxItemManager.MarkSize),Mode=OneWay}"/>
                         </DataTrigger>
@@ -4395,7 +4419,6 @@
 
     </Style>
 
-    <!--更改了滚动条的istBox-->
     <Style x:Key="LeetekeListBox" TargetType="{x:Type ListBox}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
@@ -4461,6 +4484,9 @@
         <Setter Property="leedep:ListBoxItemManager.MarkSite" Value="Left"/>
         <Setter Property="leedep:ListBoxItemManager.MarkSize" Value="4"/>
 
+        <Setter Property="leedep:ScrollViewerManager.SlideEasingFunction" Value="{DynamicResource LeeScrollViewerSlideEasingFuncion}"/>
+        <Setter Property="leedep:ScrollViewerManager.SlideDuration" Value="{DynamicResource LeeScrollViewerSlideDuration}"/>
+        <Setter Property="leedep:ScrollViewerManager.SlideEnabled" Value="{DynamicResource LeeScrollViewerSlideEnabled}"/>
 
         <Setter Property="ItemContainerStyle"  Value="{StaticResource LeetekeListBoxItem}" />
         <Setter Property="ItemsPanel">
@@ -4486,6 +4512,10 @@
                                       Padding="{TemplateBinding Padding}"
                                       leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path= (leedep:CornerRadiusManager.CornerRadius),Mode=OneWay}"
                                       leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path= (leedep:CornerRadiusManager.IsClip),Mode=OneWay}"
+                                   leedep:ScrollViewerManager.SlideEasingFunction="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideEasingFunction),Mode=OneWay}"
+                                    leedep:ScrollViewerManager.SlideDuration="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideDuration),Mode=OneWay}"
+                                    leedep:ScrollViewerManager.SlideMonitorMode="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideMonitorMode),Mode=OneWay}"
+                                    leedep:ScrollViewerManager.SlideEnabled="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideEnabled),Mode=OneWay}"
                                       >
 
                         <Grid>
@@ -4569,7 +4599,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 
     <Style x:Key="LeetekeListViewItem" TargetType="{x:Type ListViewItem}">
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
@@ -4677,7 +4706,6 @@
         </Setter>
     </Style>
 
-    <!--更改了滚动条的istBox-->
     <Style x:Key="LeetekeListView" TargetType="{x:Type ListView}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
@@ -4735,6 +4763,9 @@
         <Setter Property="leedep:ListItemManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="leedep:ListItemManager.IsClip" Value="False"/>
 
+        <Setter Property="leedep:ScrollViewerManager.SlideEasingFunction" Value="{DynamicResource LeeScrollViewerSlideEasingFuncion}"/>
+        <Setter Property="leedep:ScrollViewerManager.SlideDuration" Value="{DynamicResource LeeScrollViewerSlideDuration}"/>
+        <Setter Property="leedep:ScrollViewerManager.SlideEnabled" Value="{DynamicResource LeeScrollViewerSlideEnabled}"/>
 
         <Setter Property="ItemContainerStyle"  Value="{StaticResource LeetekeListViewItem}" />
 
@@ -4778,6 +4809,10 @@
                                       BorderBrush="{TemplateBinding BorderBrush}"
                                       leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path= (leedep:CornerRadiusManager.CornerRadius),Mode=OneWay}"
                                       leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path= (leedep:CornerRadiusManager.IsClip),Mode=OneWay}"
+                                    leedep:ScrollViewerManager.SlideEasingFunction="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideEasingFunction),Mode=OneWay}"
+                                    leedep:ScrollViewerManager.SlideDuration="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideDuration),Mode=OneWay}"
+                                    leedep:ScrollViewerManager.SlideMonitorMode="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideMonitorMode),Mode=OneWay}"
+                                    leedep:ScrollViewerManager.SlideEnabled="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideEnabled),Mode=OneWay}"
                                       >
                                     <Grid Margin="{TemplateBinding Padding}">
                                         <Grid.RowDefinitions>
@@ -4836,6 +4871,10 @@
                                       BorderBrush="{TemplateBinding BorderBrush}"
                                       leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path= (leedep:CornerRadiusManager.CornerRadius),Mode=OneWay}"
                                       leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path= (leedep:CornerRadiusManager.IsClip),Mode=OneWay}"
+                                           leedep:ScrollViewerManager.SlideEasingFunction="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideEasingFunction),Mode=OneWay}"
+                                    leedep:ScrollViewerManager.SlideDuration="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideDuration),Mode=OneWay}"
+                                    leedep:ScrollViewerManager.SlideMonitorMode="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideMonitorMode),Mode=OneWay}"
+                                    leedep:ScrollViewerManager.SlideEnabled="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideEnabled),Mode=OneWay}"
                                       >
                                 <Grid Margin="{TemplateBinding Padding}">
                                     <Grid.RowDefinitions>
@@ -4898,9 +4937,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
-
-
 
     <Style x:Key="LeeTreeViewItem" TargetType="{x:Type TreeViewItem}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
@@ -5136,6 +5172,11 @@
         <Setter Property="leedep:TreeViewItemManager.MarkMouseOverBrush" Value="Transparent"/>
         <Setter Property="leedep:TreeViewItemManager.MarkSelectedBrush" Value="{DynamicResource LeeBrush_Theme}"/>
         <Setter Property="leedep:TreeViewItemManager.MarkSize" Value="4"/>
+
+        <Setter Property="leedep:ScrollViewerManager.SlideEasingFunction" Value="{DynamicResource LeeScrollViewerSlideEasingFuncion}"/>
+        <Setter Property="leedep:ScrollViewerManager.SlideDuration" Value="{DynamicResource LeeScrollViewerSlideDuration}"/>
+        <Setter Property="leedep:ScrollViewerManager.SlideEnabled" Value="{DynamicResource LeeScrollViewerSlideEnabled}"/>
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TreeView}">
@@ -5150,6 +5191,10 @@
                                       Padding="{TemplateBinding Padding}" 
                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                                       VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                      leedep:ScrollViewerManager.SlideEasingFunction="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideEasingFunction),Mode=OneWay}"
+                                    leedep:ScrollViewerManager.SlideDuration="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideDuration),Mode=OneWay}"
+                                    leedep:ScrollViewerManager.SlideMonitorMode="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideMonitorMode),Mode=OneWay}"
+                                    leedep:ScrollViewerManager.SlideEnabled="{Binding  RelativeSource={ RelativeSource  Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideEnabled),Mode=OneWay}"
                                       >
                             <ItemsPresenter/>
                         </ScrollViewer>
@@ -5178,37 +5223,249 @@
         </Style.Triggers>
     </Style>
 
-    <Style BasedOn="{StaticResource LeeButton}" TargetType="Button" />
-    <Style BasedOn="{StaticResource LeeCheckBox}" TargetType="CheckBox" />
-    <Style BasedOn="{StaticResource LeeScrollViewer}" TargetType="ScrollViewer" />
-    <Style BasedOn="{StaticResource LeeScrollBar }" TargetType="ScrollBar" />
-    <Style BasedOn="{StaticResource LeeContextMenu }" TargetType="ContextMenu"/>
-    <Style BasedOn="{StaticResource LeeToggleButton }" TargetType="ToggleButton"/>
-    <Style BasedOn="{StaticResource LeeComboBox}" TargetType="ComboBox"/>
-    <Style BasedOn="{StaticResource LeeRadioButton}" TargetType="RadioButton"/>
-    <Style BasedOn="{StaticResource LeetekeGridViewColumnHeader}" TargetType="GridViewColumnHeader"/>
-    <Style BasedOn="{StaticResource LeetekeListBox}" TargetType="ListBox"/>
-    <Style BasedOn="{StaticResource LeetekeListBoxItem}" TargetType="ListBoxItem"/>
-    <Style BasedOn="{StaticResource LeetekeListView}" TargetType="ListView"/>
-    <Style BasedOn="{StaticResource LeetekeListViewItem}" TargetType="ListViewItem"/>
 
-    <Style BasedOn="{StaticResource LeeDataGridColumnHeader}" TargetType="DataGridColumnHeader"/>
-    <Style BasedOn="{StaticResource LeeDataGridCell}" TargetType="DataGridCell"/>
-    <Style BasedOn="{StaticResource LeeDataGridRow}" TargetType="DataGridRow"/>
-    <Style BasedOn="{StaticResource LeeDataGridRowHeader}" TargetType="DataGridRowHeader"/>
+    <Style x:Key="LeeTabItem" TargetType="{x:Type TabItem}">
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <!--常规属性-->
+        <Setter Property="MinHeight" Value="{Binding Path=(leedep:ListItemManager.MinHeight), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="MinWidth" Value="{Binding Path=(leedep:ListItemManager.MinWidth), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="Background" Value="{Binding Path=(leedep:ListItemManager.Background), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="BorderBrush" Value="{Binding Path=(leedep:ListItemManager.BorderBrush), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="BorderThickness" Value="{Binding Path=(leedep:ListItemManager.BorderThickness), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="Margin" Value="{Binding Path=(leedep:ListItemManager.Marigin), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="Padding" Value="{Binding Path=(leedep:ListItemManager.Padding), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.Effect" Value="{Binding Path=(leedep:ListItemManager.Effect), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
 
-    <Style BasedOn="{StaticResource LeeDataGrid}" TargetType="DataGrid"/>
-    <Style BasedOn="{StaticResource LeeSlider}" TargetType="Slider"/>
-    <Style BasedOn="{StaticResource LeeGroupBox}" TargetType="GroupBox"/>
-    <Style BasedOn="{StaticResource LeeTextBox}" TargetType="TextBox"/>
-    <Style BasedOn="{StaticResource LeePasswordBox}" TargetType="PasswordBox"/>
-    <Style BasedOn="{StaticResource LeeCalendar}" TargetType="Calendar"/>
-    <Style BasedOn="{StaticResource LeeDatePicker}" TargetType="DatePicker"/>
-    <Style BasedOn="{StaticResource LeeToolTip}" TargetType="ToolTip"/>
-    <Style BasedOn="{StaticResource LeeThumb}" TargetType="Thumb"/>
-    <Style BasedOn="{StaticResource LeeExpander}" TargetType="Expander"/>
-    <Style BasedOn="{StaticResource LeeTreeViewItem}" TargetType="TreeViewItem"/>
-    <Style BasedOn="{StaticResource LeeTreeView}" TargetType="TreeView"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <!--MouseOver-->
+        <Setter Property="leedep:ListItemManager.MouseOverBackground" Value="{Binding Path=(leedep:ListItemManager.MouseOverBackground), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverBorderBrush" Value="{Binding Path=(leedep:ListItemManager.MouseOverBorderBrush), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverBorderThickness" Value="{Binding Path=(leedep:ListItemManager.MouseOverBorderThickness), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverEffect" Value="{Binding Path=(leedep:ListItemManager.MouseOverEffect), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverFontSize" Value="{Binding Path=(leedep:ListItemManager.MouseOverFontSize), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverFontWeight" Value="{Binding Path=(leedep:ListItemManager.MouseOverFontWeight), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverForeground" Value="{Binding Path=(leedep:ListItemManager.MouseOverForeground), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverMarigin" Value="{Binding Path=(leedep:ListItemManager.MouseOverMarigin), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverPadding" Value="{Binding Path=(leedep:ListItemManager.MouseOverPadding), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+
+        <!--Selected-->
+        <Setter Property="leedep:ListItemManager.SelectedBackground" Value="{Binding Path=(leedep:ListItemManager.SelectedBackground), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedBorderBrush" Value="{Binding Path=(leedep:ListItemManager.SelectedBorderBrush), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedBorderThickness" Value="{Binding Path=(leedep:ListItemManager.SelectedBorderThickness), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedEffect" Value="{Binding Path=(leedep:ListItemManager.SelectedEffect), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedFontSize" Value="{Binding Path=(leedep:ListItemManager.SelectedFontSize), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedFontWeight" Value="{Binding Path=(leedep:ListItemManager.SelectedFontWeight), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedForeground" Value="{Binding Path=(leedep:ListItemManager.SelectedForeground), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedMarigin" Value="{Binding Path=(leedep:ListItemManager.SelectedMarigin), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedPadding" Value="{Binding Path=(leedep:ListItemManager.SelectedPadding), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+
+        <!--Item的cornerRadius-->
+        <Setter Property="leedep:ListItemManager.CornerRadius" Value="{Binding Path=(leedep:ListItemManager.CornerRadius), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.IsClip" Value="{Binding Path=(leedep:ListItemManager.IsClip), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+
+
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <Grid>
+                        <Border x:Name="PART_Border"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            Margin="{TemplateBinding Margin}"
+                            CornerRadius="{Binding Path=(leedep:ListItemManager.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"
+                             Effect="{Binding Path=(leedep:ListItemManager.Effect), RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"
+                            />
+                        <ContentPresenter x:Name="contentPresenter"
+                                          Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="leedep:ListItemManager.IsClip" Value="True">
+                            <Setter TargetName="contentPresenter" Property="Clip">
+                                <Setter.Value>
+                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
+                                        <Binding ElementName="PART_Border"  Path="CornerRadius" Mode="OneWay"/>
+                                        <Binding ElementName="PART_Border"  Path="BorderThickness" Mode="OneWay"/>
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_Border" Property="Background" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.MouseOverBackground),Mode=OneWay}"/>
+                            <Setter TargetName="PART_Border" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.MouseOverBorderBrush),Mode=OneWay}"/>
+                            <Setter TargetName="PART_Border" Property="BorderThickness" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.MouseOverBorderThickness),Mode=OneWay}"/>
+                            <Setter TargetName="PART_Border" Property="Margin" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.MouseOverMarigin),Mode=OneWay}"/>
+                            <Setter  TargetName="PART_Border" Property="Effect" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.MouseOverEffect),Mode=OneWay}"/>
+                            <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.MouseOverForeground),Mode=OneWay}"/>
+                            <Setter TargetName="contentPresenter" Property="TextElement.FontSize" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.MouseOverFontSize),Mode=OneWay}"/>
+                            <Setter TargetName="contentPresenter" Property="TextElement.FontWeight" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.MouseOverFontWeight),Mode=OneWay}"/>
+                            <Setter TargetName="contentPresenter" Property="Margin" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.MouseOverPadding),Mode=OneWay}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="PART_Border" Property="Background" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.SelectedBackground),Mode=OneWay}"/>
+                            <Setter TargetName="PART_Border" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.SelectedBorderBrush),Mode=OneWay}"/>
+                            <Setter TargetName="PART_Border" Property="BorderThickness" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.SelectedBorderThickness),Mode=OneWay}"/>
+                            <Setter TargetName="PART_Border" Property="Margin" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.SelectedMarigin),Mode=OneWay}"/>
+                            <Setter TargetName="PART_Border"  Property="Effect" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.SelectedEffect),Mode=OneWay}"/>
+                            <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.SelectedForeground),Mode=OneWay}"/>
+                            <Setter TargetName="contentPresenter" Property="TextElement.FontSize" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.SelectedFontSize),Mode=OneWay}"/>
+                            <Setter TargetName="contentPresenter" Property="TextElement.FontWeight" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.SelectedFontWeight),Mode=OneWay}"/>
+                            <Setter TargetName="contentPresenter" Property="Margin" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.SelectedPadding),Mode=OneWay}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+    <Style x:Key="LeeTabControl" TargetType="{x:Type TabControl}">
+
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
+        <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
+        <Setter Property="TabStripPlacement" Value="Top"/>
+
+        <!--常规属性-->
+        <Setter Property="leedep:ListItemManager.MinHeight" Value="{DynamicResource LeeItemMinHeight}"/>
+        <Setter Property="leedep:ListItemManager.MinWidth" Value="50"/>
+        <Setter Property="leedep:ListItemManager.Background" Value="Transparent"/>
+        <Setter Property="leedep:ListItemManager.BorderBrush" Value="{x:Null}"/>
+        <Setter Property="leedep:ListItemManager.BorderThickness" Value="0"/>
+        <Setter Property="leedep:ListItemManager.Marigin" Value="0"/>
+        <Setter Property="leedep:ListItemManager.Padding" Value="10,0"/>
+        <Setter Property="leedep:ListItemManager.Effect" Value="{x:Null}"/>
+
+        <!--MouseOver-->
+        <Setter Property="leedep:ListItemManager.MouseOverBackground" Value="{DynamicResource LeeBrush_Mark}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverBorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverBorderThickness" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(leedep:ListItemManager.BorderThickness),Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverEffect" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(leedep:ListItemManager.Effect),Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverFontSize" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=FontSize,Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverFontWeight" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=FontWeight,Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverForeground" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=Foreground,Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverMarigin" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(leedep:ListItemManager.Marigin),Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.MouseOverPadding" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(leedep:ListItemManager.Padding),Mode=OneWay}"/>
+
+        <!--Selected-->
+        <Setter Property="leedep:ListItemManager.SelectedBackground" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(leedep:ListItemManager.Background),Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedBorderBrush" Value="{DynamicResource LeeBrush_Theme}"/>
+        <Setter Property="leedep:ListItemManager.SelectedBorderThickness" Value="0,0,0,2"/>
+        <Setter Property="leedep:ListItemManager.SelectedEffect" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(leedep:ListItemManager.Effect),Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedFontSize" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=FontSize, Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedFontWeight" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=FontWeight,Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedForeground" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=Foreground,Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedMarigin" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(leedep:ListItemManager.Marigin),Mode=OneWay}"/>
+        <Setter Property="leedep:ListItemManager.SelectedPadding" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=(leedep:ListItemManager.Padding),Mode=OneWay}"/>
+
+        <!--Item的cornerRadius-->
+        <Setter Property="leedep:ListItemManager.CornerRadius" Value="0"/>
+        <Setter Property="leedep:ListItemManager.IsClip" Value="False"/>
+
+
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabControl">
+                    <DockPanel>
+                        <TabPanel x:Name="headerPanel" 
+                                      DockPanel.Dock="{TemplateBinding TabStripPlacement}"
+                                      IsItemsHost="true"
+                                      Margin="0" 
+                                      Grid.Row="0" 
+                                      KeyboardNavigation.TabIndex="1" 
+                                      Panel.ZIndex="1"/>
+                        <Border x:Name="PART_Border" 
+                                    ClipToBounds="true" 
+                                    BorderThickness="{TemplateBinding BorderThickness}" 
+                                    BorderBrush="{TemplateBinding BorderBrush}" 
+                                    Background="{TemplateBinding Background}" 
+                                    CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path= (leedep:CornerRadiusManager.CornerRadius),Mode=OneWay}"
+                                    KeyboardNavigation.DirectionalNavigation="Contained" 
+                                    Grid.Row="1" 
+                                    KeyboardNavigation.TabIndex="2" 
+                                    KeyboardNavigation.TabNavigation="Local">
+                            <Border x:Name="PART_Content"
+                                    BorderThickness="0">
+                                <ContentPresenter x:Name="PART_SelectedContentHost"  
+                                                  ContentSource="SelectedContent" 
+                                                  Margin="{TemplateBinding Padding}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </Border>
+
+                        </Border>
+                    </DockPanel>
+
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="leedep:ListViewManager.HeaderIsClip" Value="True">
+                            <Setter TargetName="PART_Content" Property="Clip">
+                                <Setter.Value>
+                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
+                                        <Binding ElementName="PART_HeaderBorder"  Path="CornerRadius" Mode="OneWay"/>
+                                        <Binding ElementName="PART_HeaderBorder"  Path="BorderThickness" Mode="OneWay"/>
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--默认替换-->
+    <Style TargetType="Button" BasedOn="{StaticResource LeeButton}"  />
+    <Style TargetType="CheckBox"   BasedOn="{StaticResource LeeCheckBox}"/>
+    <Style TargetType="ScrollViewer" BasedOn="{StaticResource LeeScrollViewer}" />
+    <Style TargetType="ScrollBar"  BasedOn="{StaticResource LeeScrollBar }"/>
+    <Style TargetType="ContextMenu" BasedOn="{StaticResource LeeContextMenu }"/>
+    <Style TargetType="ToggleButton" BasedOn="{StaticResource LeeToggleButton }"/>
+    <Style TargetType="ComboBox" BasedOn="{StaticResource LeeComboBox}"/>
+    <Style TargetType="RadioButton" BasedOn="{StaticResource LeeRadioButton}"/>
+    <Style TargetType="GridViewColumnHeader" BasedOn="{StaticResource LeetekeGridViewColumnHeader}"/>
+    <Style TargetType="ListBox" BasedOn="{StaticResource LeetekeListBox}" />
+    <Style TargetType="ListBoxItem" BasedOn="{StaticResource LeetekeListBoxItem}"/>
+    <Style TargetType="ListView" BasedOn="{StaticResource LeetekeListView}" />
+    <Style TargetType="ListViewItem" BasedOn="{StaticResource LeetekeListViewItem}"/>
+
+    <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource LeeDataGridColumnHeader}" />
+    <Style TargetType="DataGridCell"  BasedOn="{StaticResource LeeDataGridCell}"/>
+    <Style TargetType="DataGridRow" BasedOn="{StaticResource LeeDataGridRow}"/>
+    <Style TargetType="DataGridRowHeader" BasedOn="{StaticResource LeeDataGridRowHeader}"/>
+
+    <Style TargetType="CalendarItem" BasedOn="{StaticResource LeeCalendarItem}"/>
+    <Style TargetType="DataGrid" BasedOn="{StaticResource LeeDataGrid}"/>
+    <Style TargetType="Slider" BasedOn="{StaticResource LeeSlider}"/>
+    <Style TargetType="GroupBox" BasedOn="{StaticResource LeeGroupBox}"/>
+    <Style TargetType="TextBox" BasedOn="{StaticResource LeeTextBox}" />
+    <Style TargetType="PasswordBox" BasedOn="{StaticResource LeePasswordBox}"/>
+    <Style TargetType="Calendar" BasedOn="{StaticResource LeeCalendar}"/>
+    <Style TargetType="DatePicker" BasedOn="{StaticResource LeeDatePicker}"/>
+    <Style TargetType="ToolTip" BasedOn="{StaticResource LeeToolTip}"/>
+    <Style TargetType="Thumb" BasedOn="{StaticResource LeeThumb}"/>
+    <Style TargetType="Expander" BasedOn="{StaticResource LeeExpander}"/>
+    <Style TargetType="TreeViewItem" BasedOn="{StaticResource LeeTreeViewItem}"/>
+    <Style TargetType="TreeView" BasedOn="{StaticResource LeeTreeView}"/>
+
+    <Style TargetType="TabItem" BasedOn="{StaticResource LeeTabItem}"/>
+    <Style TargetType="TabControl" BasedOn="{StaticResource LeeTabControl}"/>
 
 
 

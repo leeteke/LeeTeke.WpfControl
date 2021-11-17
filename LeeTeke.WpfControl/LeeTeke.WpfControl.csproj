@@ -61,6 +61,10 @@
 			<HintPath>C:\Windows\Microsoft.NET\Framework\v4.0.30319\System.Windows.Forms.dll</HintPath>
 		</Reference>
 	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="System.Management" Version="6.0.0" />
+	</ItemGroup>
 	
 
 

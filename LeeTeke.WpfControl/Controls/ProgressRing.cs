@@ -60,11 +60,8 @@ namespace LeeTeke.WpfControl.Controls
         private Border _border;
         private Path _wating;
 
-        private Storyboard _lodingSB;
+
         private Storyboard _watingSB;
-
-        private long _lastLodingTime = 0;
-
 
 
         private double _backDiameter;
@@ -344,6 +341,24 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
+
+        #region Duration
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Duration Duration
+        {
+            get { return (Duration)GetValue(DurationProperty); }
+            set { SetValue(DurationProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Duration.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DurationProperty =
+            DependencyProperty.Register("Duration", typeof(Duration), typeof(ProgressRing));
+        #endregion
+
+
+
         #endregion
 
 
@@ -389,35 +404,20 @@ namespace LeeTeke.WpfControl.Controls
 
             var angel = Value / Maximum * 360;
 
-            if ((DateTime.Now.ToFileTime() - _lastLodingTime) < 2000000)
+
+            var animation = new DoubleAnimation(angel, Duration)
             {
-                _lodingSB?.Stop();
-                _lastLodingTime = DateTime.Now.ToFileTime();
-
-                RingValue = angel;
-                return;
-            }
-            _lastLodingTime = DateTime.Now.ToFileTime();
-            _lodingSB = new Storyboard() { FillBehavior = FillBehavior.Stop };
-
-            DoubleAnimationUsingKeyFrames eDA = new DoubleAnimationUsingKeyFrames();
-            eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
-            {
-                Value = angel,
-                KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(200)),
-                EasingFunction = EasingFunction,
-            });
-
-
-            _lodingSB.Children.Add(eDA);
-            Storyboard.SetTarget(eDA, this);
-            Storyboard.SetTargetProperty(eDA, new PropertyPath(ProgressRing.RingValueProperty));
-            _lodingSB.Completed += (e, s) =>
+                EasingFunction =this.EasingFunction,
+                FillBehavior = FillBehavior.Stop
+            };
+            animation.Completed += (e, s) =>
             {
                 RingValue = angel;
             };
-            _lodingSB.Begin();
+            BeginAnimation(RingValueProperty, animation, HandoffBehavior.Compose);
 
+          
+       
         }
 
         private void ChangeRing(double value)
@@ -439,7 +439,7 @@ namespace LeeTeke.WpfControl.Controls
                 return;
 
             _watingSB?.Stop();
-            _watingSB = new Storyboard() { RepeatBehavior = RepeatBehavior.Forever };
+            _watingSB = new Storyboard() { RepeatBehavior = RepeatBehavior.Forever  };
             DoubleAnimationUsingKeyFrames eDA = new DoubleAnimationUsingKeyFrames();
             eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
             {
@@ -482,10 +482,8 @@ namespace LeeTeke.WpfControl.Controls
             Storyboard.SetTarget(rDA, _wating);
             Storyboard.SetTargetProperty(rDA, new PropertyPath("(0).(1)", new DependencyProperty[] { Path.RenderTransformProperty, RotateTransform.AngleProperty }));
                 
-
             _watingSB.Begin();
        
-
 
         }
         private void _wating_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)

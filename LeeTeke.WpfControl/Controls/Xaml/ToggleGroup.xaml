@@ -39,7 +39,11 @@
         
         <Setter Property="VerticalScrollBarVisibility" Value="Disabled"/>
         <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
-       
+
+        <Setter Property="leedep:ScrollViewerManager.SlideEasingFunction" Value="{DynamicResource LeeScrollViewerSlideEasingFuncion}"/>
+        <Setter Property="leedep:ScrollViewerManager.SlideDuration" Value="{DynamicResource LeeScrollViewerSlideDuration}"/>
+        <Setter Property="leedep:ScrollViewerManager.SlideEnabled" Value="{DynamicResource LeeScrollViewerSlideEnabled}"/>
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ToggleGroup}">
@@ -52,6 +56,11 @@
                                   HorizontalScrollBarVisibility="{TemplateBinding HorizontalScrollBarVisibility}"
                                   leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}"
                                   leedep:CornerRadiusManager.IsClip="{TemplateBinding IsClip}"
+                                  
+                                   leedep:ScrollViewerManager.SlideEasingFunction="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideEasingFunction),Mode=OneWay}"
+                                   leedep:ScrollViewerManager.SlideDuration="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideDuration),Mode=OneWay}"
+                                           leedep:ScrollViewerManager.SlideMonitorMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideMonitorMode),Mode=OneWay}"
+                                           leedep:ScrollViewerManager.SlideEnabled="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideEnabled),Mode=OneWay}"
                                   >
                    
                         <ItemsPresenter />

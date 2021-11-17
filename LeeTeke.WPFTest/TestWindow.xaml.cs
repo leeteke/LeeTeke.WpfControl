@@ -28,16 +28,9 @@ namespace LeeTeke.WPFTest
 
         private void TestWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            listbox.ItemsSource=new ObservableCollection<string>() { "测试1", "测试2", "测试3", "测试4", };
+            //listbox.ItemsSource=new ObservableCollection<string>() { "测试1", "测试2", "测试3", "测试4", };
         }
 
-        private void Rectangle_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.LeftButton== MouseButtonState.Pressed)
-            {
-         
-                DragDrop.DoDragDrop(sender as UIElement, new DataObject("UIElement", sender as UIElement, true), DragDropEffects.Move);
-            }
-        }
+     
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using LeeTeke.WpfControl.Dependencies;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +13,8 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -48,7 +52,7 @@ namespace LeeTeke.WpfControl.Controls
     /// </summary>
 
     [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(TabViewItem))]
-    public class TabView : Selector
+    public class TabView : ItemsControl
     {
         static TabView()
         {
@@ -64,7 +68,7 @@ namespace LeeTeke.WpfControl.Controls
         private MenuItem _allMenuItem;
         private MenuItem _otherMenuItem;
         private MenuItem _selfMenuItem;
-
+        private DoubleAnimation _scrollDA;
         private IList _ilist;
 
         private int _selectedIndex = -1;
@@ -86,13 +90,11 @@ namespace LeeTeke.WpfControl.Controls
         public TabView()
         {
 
-            EventManager.RegisterClassHandler(typeof(TabViewItem), TabViewItem.ClosedEvent, new RoutedEventHandler(TabViewItemClosedEventAsync));
-            EventManager.RegisterClassHandler(typeof(TabViewItem), TabViewItem.SelectedEvent, new RoutedEventHandler(TabViewItemSelectedEvent));
+
             EventManager.RegisterClassHandler(typeof(StackPanel), StackPanel.SizeChangedEvent, new RoutedEventHandler(StackPanelLoadedEvent));
-
             this.PreviewMouseRightButtonDown += TabView_PreviewMouseRightButtonDown;
+            this.PreviewMouseWheel += TabView_PreviewMouseWheel;
 
-            PreviewMouseWheel += TabView_PreviewMouseWheel;
         }
 
         private void TabView_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -133,18 +135,29 @@ namespace LeeTeke.WpfControl.Controls
         }
 
 
-
-
         #region override
 
         protected override bool IsItemItsOwnContainerOverride(object item)
         {
-            return item is TabViewItem;
+            if (item is TabViewItem tabItem)
+            {
+                tabItem.Closed += TabViewItemClosedEventAsync;
+                tabItem.Selected += TabViewItemSelectedEvent;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
         protected override DependencyObject GetContainerForItemOverride()
         {
-            return new TabViewItem();
+            var tabItem = new TabViewItem();
+            tabItem.Closed += TabViewItemClosedEventAsync;
+            tabItem.Selected += TabViewItemSelectedEvent;
+            return tabItem;
         }
 
 
@@ -166,12 +179,7 @@ namespace LeeTeke.WpfControl.Controls
             }
 
 
-            if (this.GetTemplateChild("PART_ScrollViewer") is ScrollViewer scroll)
-            {
-                _scrollViewer = scroll;
-                _scrollViewer.ScrollChanged += _scrollViewer_ScrollChanged;
-                _scrollViewer.SizeChanged += _scrollViewer_SizeChanged;
-            }
+      
             if (this.GetTemplateChild("PART_ContextMenu") is ContextMenu contextMenu)
             {
                 _contextMenu = contextMenu;
@@ -237,17 +245,14 @@ namespace LeeTeke.WpfControl.Controls
                     }
                 };
             }
-
+            if (this.GetTemplateChild("PART_ScrollViewer") is ScrollViewer scroll)
+            {
+                _scrollViewer = scroll;
+                _scrollViewer.ScrollChanged += _scrollViewer_ScrollChanged;
+                _scrollViewer.SizeChanged += _scrollViewer_SizeChanged;
+            }
 
         }
-
-        protected override void OnSelectionChanged(SelectionChangedEventArgs e)
-        {
-            base.OnSelectionChanged(e);
-
-        }
-
-
 
 
         #endregion
@@ -395,7 +400,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private static void SelectedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-           
+
             if (d is TabView tag && e.NewValue != e.OldValue && tag._selectedValue != e.NewValue)
             {
                 tag.SelectedValueChanged();
@@ -419,6 +424,41 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("Orientation", typeof(Orientation), typeof(TabView));
 
         #endregion
+
+
+
+        #region LeftButtonStyle
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Style LeftButtonStyle
+        {
+            get { return (Style)GetValue(LeftButtonStyleProperty); }
+            set { SetValue(LeftButtonStyleProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for LeftButtonStyle.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LeftButtonStyleProperty =
+            DependencyProperty.Register("LeftButtonStyle", typeof(Style), typeof(TabView));
+        #endregion
+
+
+        #region RightButtonStyle
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Style RightButtonStyle
+        {
+            get { return (Style)GetValue(RightButtonStyleProperty); }
+            set { SetValue(RightButtonStyleProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for RightButtonStyle.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RightButtonStyleProperty =
+            DependencyProperty.Register("RightButtonStyle", typeof(Style), typeof(TabView));
+        #endregion
+
+
 
         #region ItemCornerRadius
         /// <summary>
@@ -500,8 +540,6 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("ItemPadding", typeof(Thickness), typeof(TabView));
         #endregion
 
-
-
         #region ItemWidth
         /// <summary>
         /// 请添加描述
@@ -516,7 +554,6 @@ namespace LeeTeke.WpfControl.Controls
         public static readonly DependencyProperty ItemWidthProperty =
             DependencyProperty.Register("ItemWidth", typeof(double), typeof(TabView));
         #endregion
-
 
         #region ItemHeight
         /// <summary>
@@ -534,23 +571,99 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
+        #region MouseOverBackground
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Brush MouseOverBackground
+        {
+            get { return (Brush)GetValue(MouseOverBackgroundProperty); }
+            set { SetValue(MouseOverBackgroundProperty, value); }
+        }
 
-        #region SelectedBrush
+        // Using a DependencyProperty as the backing store for MouseOverBackground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MouseOverBackgroundProperty =
+            DependencyProperty.Register("MouseOverBackground", typeof(Brush), typeof(TabView));
+        #endregion
+
+        #region MouseOverForeground
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Brush MouseOverForeground
+        {
+            get { return (Brush)GetValue(MouseOverForegroundProperty); }
+            set { SetValue(MouseOverForegroundProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MouseOverForeground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MouseOverForegroundProperty =
+            DependencyProperty.Register("MouseOverForeground", typeof(Brush), typeof(TabView));
+        #endregion
+
+        #region MouseOverBorderBrush
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Brush MouseOverBorderBrush
+        {
+            get { return (Brush)GetValue(MouseOverBorderBrushProperty); }
+            set { SetValue(MouseOverBorderBrushProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MouseOverBorderBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MouseOverBorderBrushProperty =
+            DependencyProperty.Register("MouseOverBorderBrush", typeof(Brush), typeof(TabView));
+        #endregion
+
+        #region MouseOverBorderThickness
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Thickness MouseOverBorderThickness
+        {
+            get { return (Thickness)GetValue(MouseOverBorderThicknessProperty); }
+            set { SetValue(MouseOverBorderThicknessProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MouseOverBorderThickness.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MouseOverBorderThicknessProperty =
+            DependencyProperty.Register("MouseOverBorderThickness", typeof(Thickness), typeof(TabView));
+        #endregion
+
+
+        #region MouseOverEffect
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Effect MouseOverEffect
+        {
+            get { return (Effect)GetValue(MouseOverEffectProperty); }
+            set { SetValue(MouseOverEffectProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MouseOverEffect.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MouseOverEffectProperty =
+            DependencyProperty.Register("MouseOverEffect", typeof(Effect), typeof(TabView));
+        #endregion
+
+
+
+        #region SelectedBackground
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public Brush SelectedBrush
+        public Brush SelectedBackground
         {
-            get { return (Brush)GetValue(SelectedBrushProperty); }
-            set { SetValue(SelectedBrushProperty, value); }
+            get { return (Brush)GetValue(SelectedBackgroundProperty); }
+            set { SetValue(SelectedBackgroundProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for SelectedBrush.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SelectedBrushProperty =
-            DependencyProperty.Register("SelectedBrush", typeof(Brush), typeof(TabView));
+        public static readonly DependencyProperty SelectedBackgroundProperty =
+            DependencyProperty.Register("SelectedBackground", typeof(Brush), typeof(TabView));
 
         #endregion
-
 
         #region SelectedForeground
         /// <summary>
@@ -566,6 +679,54 @@ namespace LeeTeke.WpfControl.Controls
         public static readonly DependencyProperty SelectedForegroundProperty =
             DependencyProperty.Register("SelectedForeground", typeof(Brush), typeof(TabView));
         #endregion
+
+        #region SelectedBorderBrush
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Brush SelectedBorderBrush
+        {
+            get { return (Brush)GetValue(SelectedBorderBrushProperty); }
+            set { SetValue(SelectedBorderBrushProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SelectedBorderBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedBorderBrushProperty =
+            DependencyProperty.Register("SelectedBorderBrush", typeof(Brush), typeof(TabView));
+        #endregion
+
+        #region SelectedBorderThickness
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Thickness SelectedBorderThickness
+        {
+            get { return (Thickness)GetValue(SelectedBorderThicknessProperty); }
+            set { SetValue(SelectedBorderThicknessProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SelectedBorderThickness.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedBorderThicknessProperty =
+            DependencyProperty.Register("SelectedBorderThickness", typeof(Thickness), typeof(TabView));
+        #endregion
+
+
+        #region SelectedEffect
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Effect SelectedEffect
+        {
+            get { return (Effect)GetValue(SelectedEffectProperty); }
+            set { SetValue(SelectedEffectProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SelectedEffect.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedEffectProperty =
+            DependencyProperty.Register("SelectedEffect", typeof(Effect), typeof(TabView));
+        #endregion
+
+
 
 
         #region ItemClosedCommand
@@ -599,7 +760,6 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("ItemSelectedCommand", typeof(ICommand), typeof(TabView));
 
         #endregion
-
 
         #region ShowScrollToButton
         /// <summary>
@@ -714,8 +874,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (Orientation == Orientation.Horizontal && _scrollViewer != null)
             {
-
-                _scrollViewer.ScrollToHorizontalOffset(_scrollViewer.HorizontalOffset + 120);
+                ScrollViewerManager.ScrollHorizontalOffsetAdd(_scrollViewer, -120);
             }
         }
 
@@ -723,24 +882,28 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (Orientation == Orientation.Horizontal && _scrollViewer != null)
             {
-                _scrollViewer.ScrollToHorizontalOffset(_scrollViewer.HorizontalOffset - 120);
+                ScrollViewerManager.ScrollHorizontalOffsetAdd(_scrollViewer, 120);
             }
         }
 
         private void _scrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            if (Orientation == Orientation.Horizontal && ShowScrollToButton)
+            if ( Orientation == Orientation.Horizontal && ShowScrollToButton && sender is ScrollViewer scrollViewer)
             {
-                _leftBtn.Visibility = e.HorizontalOffset == 0 ? Visibility.Collapsed : Visibility.Visible;
-
-                if (e.ExtentWidth > (e.ViewportWidth + e.HorizontalOffset))
+                if (scrollViewer.ScrollableWidth > 0)
                 {
+                    _leftBtn.Visibility = Visibility.Visible;
                     _rightBtn.Visibility = Visibility.Visible;
                 }
                 else
                 {
+                    _leftBtn.Visibility = Visibility.Collapsed;
                     _rightBtn.Visibility = Visibility.Collapsed;
                 }
+
+                _leftBtn.IsEnabled = e.HorizontalOffset != 0;
+
+                _rightBtn.IsEnabled = e.HorizontalOffset! < scrollViewer.ScrollableWidth;
             }
         }
 
@@ -839,9 +1002,9 @@ namespace LeeTeke.WpfControl.Controls
                         var needSelected = allItem.Find(p => p is TabViewItem finditem && (finditem.CanClosing == false || finditem.IsFixed));
                         if (needSelected is TabViewItem selecteditem && SelectedItem != null)
                         {
-                            SelectedItem= selecteditem;
+                            SelectedItem = selecteditem;
                         }
-                   
+
                         foreach (TabViewItem item in allItem)
                         {
                             if (item.CanClosing && !item.IsFixed)
@@ -851,7 +1014,7 @@ namespace LeeTeke.WpfControl.Controls
                             }
                         }
 
-                       
+
                         break;
                     default:
                         break;
@@ -864,13 +1027,14 @@ namespace LeeTeke.WpfControl.Controls
             e.Handled = true;
             if (_scrollViewer != null)
             {
+
                 switch (Orientation)
                 {
                     case Orientation.Horizontal:
-                        _scrollViewer.ScrollToHorizontalOffset(_scrollViewer.HorizontalOffset - e.Delta);
+                        ScrollViewerManager.ScrollHorizontalOffsetAdd(_scrollViewer, e.Delta);
                         break;
                     case Orientation.Vertical:
-                        _scrollViewer.ScrollToVerticalOffset(_scrollViewer.VerticalOffset - e.Delta);
+                        ScrollViewerManager.ScrollVerticalOffsetAdd(_scrollViewer, e.Delta);
                         break;
                     default:
                         break;
@@ -888,6 +1052,8 @@ namespace LeeTeke.WpfControl.Controls
                 }
             }
         }
+
+   
 
         /// <summary>
         /// 关闭
@@ -907,6 +1073,8 @@ namespace LeeTeke.WpfControl.Controls
             {
                 ItemList.Remove(item.DataContext);
             }
+            item.Closed -= TabViewItemClosedEventAsync;
+            item.Selected -= TabViewItemSelectedEvent;
             ItemRemoveChanged(item);
 
 
@@ -1044,7 +1212,8 @@ namespace LeeTeke.WpfControl.Controls
 
                 var seto = targetPosition.X - ((_scrollViewer.ActualWidth - item.ActualWidth) / 2);
 
-                _scrollViewer.ScrollToHorizontalOffset(seto);
+                ScrollViewerManager.ScrollToHorizontalOffset(_scrollViewer, seto);
+
 
             }
             else
@@ -1057,7 +1226,7 @@ namespace LeeTeke.WpfControl.Controls
 
                 var seto = targetPosition.Y - ((_scrollViewer.ActualHeight - item.ActualHeight) / 2);
 
-                _scrollViewer.ScrollToVerticalOffset(seto);
+                ScrollViewerManager.ScrollToVerticalOffset(_scrollViewer, seto);
             }
 
 

@@ -10,30 +10,32 @@
         Title="TestWindow" 
         Height="450"
         Width="800"
-    
-         Background="White"
-
+         Background="{DynamicResource LeeBrush_Background}"
         >
 
-    <Grid  Margin="20">
+
+
+    <Grid Margin="20">
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <ListBox x:Name="listbox"
-                 leedep:SelectorDragDropManager.Open="True"/>
 
 
-        <ListBox Grid.Row="1"
-                 leedep:SelectorDragDropManager.Open="True">
-            <ListBoxItem Content="1"/>
-            <ListBoxItem Content="2"/>
-            <ListBoxItem Content="3"/>
-            <ListBoxItem Content="4"/>
-            <ListBoxItem Content="5"/>
-            
-        </ListBox>
+        <lee:TabView Grid.Row="1"
+                    leedep:SelectorDragDropManager.IsEnabled="True"
+                    leedep:SelectorDragDropManager.LockDragOrientation="Horizontal"
+                    >
+            <lee:TabViewItem Content="你好"/>
+            <lee:TabViewItem Content="你好"/>
+            <lee:TabViewItem Content="你好"/>
+            <lee:TabViewItem Content="你好"/>
+        </lee:TabView>
+
+
+  
 
     </Grid>
 </Window>

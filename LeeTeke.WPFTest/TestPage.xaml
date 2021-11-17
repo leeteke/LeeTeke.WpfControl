@@ -44,7 +44,14 @@
                                 <TextBlock Text="&#xE77F;" FontFamily="{DynamicResource IconFontFamily}"/>
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="ceshi"/>
+                        <MenuItem Header="ceshi">
+                            <MenuItem Header="123"/>
+                            <MenuItem Header="123"/>
+                            <MenuItem Header="123"/>
+                            <MenuItem Header="123">
+                                <MenuItem Header="123"/>
+                            </MenuItem>
+                        </MenuItem>
                         <MenuItem Header="ceshi"/>
                     </ContextMenu>
                 </StackPanel.ContextMenu>
@@ -67,7 +74,6 @@
                 <leecontrol:TabView  CloseVisibly="MouseOver" 
                                      Orientation="Horizontal"
                                      ShowScrollToButton="True"
-                                    leedep:SelectorDragDropManager.Open="True"
                                      ItemsSource="{Binding TestList}"
                                      ItemContxtMenuContentDock="Bottom">
                     <leecontrol:TabView.ItemContxtMenuContent>
@@ -84,9 +90,29 @@
 
                 </leecontrol:TabView>
 
+                <leecontrol:TabView  CloseVisibly="MouseOver" 
+                                     Orientation="Vertical"
+                                     Height="150"
+                                     ShowScrollToButton="True"
+                                     ItemsSource="{Binding TestList}"
+                                    ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                     ItemContxtMenuContentDock="Bottom">
+                    <leecontrol:TabView.ItemContxtMenuContent>
+                        <Grid Height="100">
+                            <Rectangle Width="50" Height="50" Fill="Red" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </leecontrol:TabView.ItemContxtMenuContent>
+
+                    <leecontrol:TabView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock leecontrol:TabViewItem.ItemCanClosing="{Binding Boolen}" Text="{Binding Title}"/>
+                        </DataTemplate>
+                    </leecontrol:TabView.ItemTemplate>
+
+                </leecontrol:TabView>
 
                 <TreeView  ItemsSource="{Binding TreeList}"
-                          
+                          Height="300"
                           >
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding Path=Child}"  
@@ -108,16 +134,7 @@
                     <Rectangle Width="50" Fill="{DynamicResource LeeBrush_Mark}" ToolTip="LeeBrush_Mark"/>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Height="50">
-                    <Rectangle Width="50" Fill="{DynamicResource LeeBrush_BackgroundDark}"  ToolTip="LeeBrush_BackgroundDark"/>
-                    <Rectangle Width="50" Fill="{DynamicResource LeeBrush_BackgroundDark2}" ToolTip="LeeBrush_BackgroundDark2"/>
-                    <Rectangle Width="50" Fill="{DynamicResource LeeBrush_BackgroundDark3}" ToolTip="LeeBrush_BackgroundDark3"/>
-                    <Rectangle Width="50" Fill="{DynamicResource LeeBrush_ForgroundDark}" ToolTip="LeeBrush_ForgroundDark"/>
-                    <Rectangle Width="50" Fill="{DynamicResource LeeBrush_TextDark}" ToolTip="LeeBrush_TextDark"/>
-                    <Rectangle Width="50" Fill="{DynamicResource LeeBrush_BorderBrushDark}" ToolTip="LeeBrush_BorderBrushDark"/>
-                    <Rectangle Width="50" Fill="{DynamicResource LeeBrush_BorderBrushMouseOverDark}" ToolTip="LeeBrush_BorderBrushMouseOverDark"/>
-                    <Rectangle Width="50" Fill="{DynamicResource LeeBrush_MarkDark}" ToolTip="LeeBrush_MarkDark"/>
-                </StackPanel>
+         
 
                 <leecontrol:ProgressRing Height="60"
                                          Mode="Wating"
@@ -191,7 +208,7 @@
                            Margin="5"
                            leedep:CheckBoxManager.CheckedContent="你选中了我"
                             leedep:EffectManager.Effect="{StaticResource  LeeBlurEffect}"
-                            leedep:EffectManager.Open="{Binding RelativeSource={RelativeSource Mode=Self},Path=IsChecked}"
+                            leedep:EffectManager.IsEnabled="{Binding RelativeSource={RelativeSource Mode=Self},Path=IsChecked}"
                             />
                 <ComboBox IsEditable="False"  
                           Margin="5"
@@ -216,6 +233,7 @@
                           CanUserDeleteRows="False"
                           Margin="5"
                           IsReadOnly="False"
+                          Height="200"
                           leedep:DataGridManager.ShowRowNumber="True"
                          >
               
@@ -224,12 +242,10 @@
 
                 <ListBox ItemsSource="{Binding TestList}"
                          VerticalContentAlignment="Center" 
-                         Height="100"
-                         SelectionMode="Multiple"
-                        leedep:ListItemManager.Marigin="2.5"
-                         leedep:ListItemManager.Effect="{DynamicResource LeeShadow}"
-                         leedep:ListItemManager.SelectedEffect="{DynamicResource LeeShadow5}"
-                         Margin="5">
+                         Height="150"
+                         SelectionMode="Single"
+                         Margin="5"
+                         leedep:SelectorDragDropManager.IsEnabled="True">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid >
@@ -314,16 +330,14 @@
                                          BorderThickness="1"
                                          Background="{DynamicResource LeeBrush_ForgroundActive}"
                                          Value="{Binding ElementName=slider,Path=Value}"
-                                         VerticalContentAlignment="Center"
-                                         HorizontalContentAlignment="Center">
-                    <TextBlock Text="{Binding ElementName=slider,Path=Value}"/>
+                                         >
+                    <TextBlock Text="{Binding ElementName=slider,Path=Value}"
+                               />
                 </leecontrol:ProgressRing>
 
 
                 <leecontrol:SlideView
                     Height="200"
-                    IsCycle="True"
-                    AutoPaly="True"
                     ItemsSource="{Binding TestList}"
                    >
                     <leecontrol:SlideView.ItemTemplate>

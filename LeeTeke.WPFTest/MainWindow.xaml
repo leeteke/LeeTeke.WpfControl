@@ -43,8 +43,12 @@
               
                 Width="60"  
                 Command="{Binding ThemeChangedCommand}"/>
+                <Button Content="滑动切换"
+              
+                Width="60"  
+                Command="{Binding SlideChangedCommand}"/>
 
-        </StackPanel>
+            </StackPanel>
 
         </Grid>
     </leecontrol:Window.TitleContent>
