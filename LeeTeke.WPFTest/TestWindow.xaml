@@ -19,23 +19,35 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
+        <lee:Navigation x:Name="test" 
+                         >
+            <lee:Navigation.ItemTemplate>
+                <DataTemplate >
+                    <TextBlock lee:NavigationItem.ItemCanClose="False" Text="{Binding}"/>
+                </DataTemplate>
+            </lee:Navigation.ItemTemplate>
+        </lee:Navigation>
 
-        <lee:TabView Grid.Row="1"
-                    leedep:SelectorDragDropManager.IsEnabled="True"
-                    leedep:SelectorDragDropManager.LockDragOrientation="Horizontal"
-                    >
-            <lee:TabViewItem Content="你好"/>
-            <lee:TabViewItem Content="你好"/>
-            <lee:TabViewItem Content="你好"/>
-            <lee:TabViewItem Content="你好"/>
-        </lee:TabView>
+        <lee:Navigation  Grid.Row="1"
+                         >
+            <lee:NavigationItem Content="测1" CanClose="False"/>
+            <lee:NavigationItem Content="测2"/>
+            <lee:NavigationItem Content="测3"/>
+            <lee:NavigationItem Content="测4"/>
+        </lee:Navigation>
+
+        <TextBlock Grid.Row="2"
+                   Text="{Binding ElementName=test,Path=SelectedIndex}"/>
 
 
-  
-
+        <Button Grid.Row="2"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Content="click"
+                Click="Button_Click"/>
     </Grid>
 </Window>

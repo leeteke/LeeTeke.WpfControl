@@ -71,45 +71,45 @@
                                       >
                 
                 </leecontrol:TextBoxEx>
-                <leecontrol:TabView  CloseVisibly="MouseOver" 
+                <leecontrol:Navigation  CloseVisibly="MouseOver" 
                                      Orientation="Horizontal"
                                      ShowScrollToButton="True"
                                      ItemsSource="{Binding TestList}"
                                      ItemContxtMenuContentDock="Bottom">
-                    <leecontrol:TabView.ItemContxtMenuContent>
+                    <leecontrol:Navigation.ItemContxtMenuContent>
                         <Grid Height="100">
                             <Rectangle Width="50" Height="50" Fill="Red" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Grid>
-                    </leecontrol:TabView.ItemContxtMenuContent>
+                    </leecontrol:Navigation.ItemContxtMenuContent>
 
-                    <leecontrol:TabView.ItemTemplate>
+                    <leecontrol:Navigation.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock leecontrol:TabViewItem.ItemCanClosing="{Binding Boolen}" Text="{Binding Title}"/>
+                            <TextBlock leecontrol:NavigationItem.ItemCanClose="{Binding Boolen}" Text="{Binding Title}"/>
                         </DataTemplate>
-                    </leecontrol:TabView.ItemTemplate>
+                    </leecontrol:Navigation.ItemTemplate>
 
-                </leecontrol:TabView>
+                </leecontrol:Navigation>
 
-                <leecontrol:TabView  CloseVisibly="MouseOver" 
+                <leecontrol:Navigation  CloseVisibly="MouseOver" 
                                      Orientation="Vertical"
                                      Height="150"
                                      ShowScrollToButton="True"
                                      ItemsSource="{Binding TestList}"
                                     ScrollViewer.VerticalScrollBarVisibility="Visible"
                                      ItemContxtMenuContentDock="Bottom">
-                    <leecontrol:TabView.ItemContxtMenuContent>
+                    <leecontrol:Navigation.ItemContxtMenuContent>
                         <Grid Height="100">
                             <Rectangle Width="50" Height="50" Fill="Red" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Grid>
-                    </leecontrol:TabView.ItemContxtMenuContent>
+                    </leecontrol:Navigation.ItemContxtMenuContent>
 
-                    <leecontrol:TabView.ItemTemplate>
+                    <leecontrol:Navigation.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock leecontrol:TabViewItem.ItemCanClosing="{Binding Boolen}" Text="{Binding Title}"/>
+                            <TextBlock leecontrol:NavigationItem.ItemCanClose="{Binding Boolen}" Text="{Binding Title}"/>
                         </DataTemplate>
-                    </leecontrol:TabView.ItemTemplate>
+                    </leecontrol:Navigation.ItemTemplate>
 
-                </leecontrol:TabView>
+                </leecontrol:Navigation>
 
                 <TreeView  ItemsSource="{Binding TreeList}"
                           Height="300"

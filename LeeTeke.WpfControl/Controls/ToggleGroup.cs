@@ -106,11 +106,7 @@ namespace LeeTeke.WpfControl.Controls
             return new ToggleButton();
         }
 
-        protected override void OnItemsPanelChanged(ItemsPanelTemplate oldItemsPanel, ItemsPanelTemplate newItemsPanel)
-        {
-            base.OnItemsPanelChanged(oldItemsPanel, newItemsPanel);
-
-        }
+   
 
 
         #endregion
@@ -199,6 +195,7 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("IsClip", typeof(bool), typeof(ToggleGroup));
         #endregion
 
+       
 
 
         #region CornerRadius
@@ -325,7 +322,6 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-
         #region SelectedMinimum
         /// <summary>
         /// 最小选择数
@@ -340,7 +336,6 @@ namespace LeeTeke.WpfControl.Controls
         public static readonly DependencyProperty SelectedMinimumProperty =
             DependencyProperty.Register("SelectedMinimum", typeof(int), typeof(ToggleGroup));
         #endregion
-
 
 
         #region VerticalScrollBarVisibility

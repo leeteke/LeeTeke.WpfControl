@@ -49,16 +49,24 @@ namespace LeeTeke.WpfControl.Controls
     ///     <MyNamespace:NotifyBannerItem/>
     ///
     /// </summary>
+    [TemplatePart(Name =ElementCloseButton,Type =typeof(Button))]
     public class NotifyBannerItem : ContentControl
     {
+        
         static NotifyBannerItem()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(NotifyBannerItem), new FrameworkPropertyMetadata(typeof(NotifyBannerItem)));
         }
 
+        private const string ElementCloseButton = "PART_CloseButton";
+
         public NotifySite Site { get; }
         private DispatcherTimer _timer;
         private bool _closing = false;
+        private Button _closeButton;
+
+    
+
         public NotifyBannerItem(NotifyBannerShowData data, NotifySite site)
         {
 
@@ -132,13 +140,24 @@ namespace LeeTeke.WpfControl.Controls
 
         public override void OnApplyTemplate()
         {
-            base.OnApplyTemplate();
-
-            if (this.Template.FindName("PART_CloseButton", this) is Button btn)
+            if (_closeButton!=null)
             {
-                btn.Click += (es, ex) => Close();
+                _closeButton.Click -= CloseButton_Clicked;
             }
 
+            base.OnApplyTemplate();
+
+            _closeButton= GetTemplateChild(ElementCloseButton) as Button;
+            if (_closeButton!=null)
+            {
+                _closeButton.Click += CloseButton_Clicked;
+            }
+
+        }
+
+        private void CloseButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
 
 

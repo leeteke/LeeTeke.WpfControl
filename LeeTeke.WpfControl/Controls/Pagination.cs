@@ -45,14 +45,26 @@ namespace LeeTeke.WpfControl.Controls
     ///     <MyNamespace:Pagination/>
     ///
     /// </summary>
+    [TemplatePart(Name = ElementPageGroup, Type = typeof(ToggleGroup))]
+    [TemplatePart(Name = ElementComboBox, Type = typeof(ComboBox))]
+    [TemplatePart(Name = ElementPreviousButton, Type = typeof(Button))]
+    [TemplatePart(Name = ElementHeadButton, Type = typeof(Button))]
+    [TemplatePart(Name = ElementNextButton, Type = typeof(Button))]
+    [TemplatePart(Name = ElementEndButton, Type = typeof(Button))]
     public class Pagination : Control
     {
         static Pagination()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Pagination), new FrameworkPropertyMetadata(typeof(Pagination)));
         }
-
-
+        #region consts
+        private const string ElementPageGroup = "PART_PageGroup";
+        private const string ElementComboBox = "PART_ComboBox";
+        private const string ElementPreviousButton = "PART_PreviousButton";
+        private const string ElementHeadButton = "PART_HeadButton";
+        private const string ElementNextButton = "PART_NextButton";
+        private const string ElementEndButton = "PART_EndButton";
+        #endregion
 
         private ToggleGroup _group;
         private ComboBox _comboBox;
@@ -71,61 +83,42 @@ namespace LeeTeke.WpfControl.Controls
 
         public override void OnApplyTemplate()
         {
+            if (_group != null)
+                _group.SelectionChanged -= _group_SelectionChanged;
+            if (_comboBox != null)
+                _comboBox.SelectionChanged -= _comboBox_SelectionChanged;
+            if (_previousButton != null)
+                _previousButton.Click -= _previousButton_Click;
+            if (_nextButton != null)
+                _nextButton.Click -= _nextButton_Click;
+            if (_headButton != null)
+                _headButton.Click -= _headButton_Click;
+            if (_endButton != null)
+                _endButton.Click -= _endButton_Click;
             base.OnApplyTemplate();
 
 
-            if (this.GetTemplateChild("PART_PageGroup") is ToggleGroup group)
-            {
-                _group = group;
+            _group = GetTemplateChild(ElementPageGroup) as ToggleGroup;
+            _comboBox= GetTemplateChild(ElementComboBox) as ComboBox;
+            _previousButton= GetTemplateChild(ElementPreviousButton) as Button;
+            _headButton= GetTemplateChild(ElementHeadButton) as Button;
+            _nextButton= GetTemplateChild(ElementNextButton) as Button;
+            _endButton= GetTemplateChild(ElementEndButton) as Button;
 
+            if (_group != null)
                 _group.SelectionChanged += _group_SelectionChanged;
-            }
-
-            if (this.GetTemplateChild("PART_ComboBox") is ComboBox box)
-            {
-                _comboBox = box; ;
+            if (_comboBox != null)
                 _comboBox.SelectionChanged += _comboBox_SelectionChanged;
-            }
+            if (_previousButton != null)
+                _previousButton.Click += _previousButton_Click;
+            if (_nextButton != null)
+                _nextButton.Click += _nextButton_Click;
+            if (_headButton != null)
+                _headButton.Click += _headButton_Click;
+            if (_endButton != null)
+                _endButton.Click += _endButton_Click;
 
-            if (this.GetTemplateChild("PART_PreviousButton") is Button pbtn)
-            {
-                _previousButton = pbtn;
-                _previousButton.Click += (ox, oe) =>
-                {
-                    this.PageIndex--;
-                };
-            }
-
-            if (this.GetTemplateChild("PART_HeadButton") is Button hbtn)
-            {
-                _headButton = hbtn;
-                _headButton.Click += (ox, oe) =>
-                {
-                    this.PageIndex = 1;
-                };
-            }
-
-            if (this.GetTemplateChild("PART_NextButton") is Button nbtn)
-            {
-                _nextButton = nbtn;
-                _nextButton.Click += (ox, oe) =>
-                {
-                    this.PageIndex++;
-                };
-            }
-
-            if (this.GetTemplateChild("PART_EndButton") is Button ebtn)
-            {
-                _endButton = ebtn;
-                _endButton.Click += (ox, oe) =>
-                {
-                    this.PageIndex = this.MaxPageCount;
-                };
-            }
         }
-
-
-
 
 
 
@@ -381,7 +374,7 @@ namespace LeeTeke.WpfControl.Controls
                 return;
 
             var pageList = ShowPagesList(MaxPageCount, DisplayPages, number);
-            if (pageList.Count>0&& _group.ItemsSource is List<int> vlist && vlist != null && vlist.Count == pageList.Count && vlist.First() == pageList.First())
+            if (pageList.Count > 0 && _group.ItemsSource is List<int> vlist && vlist != null && vlist.Count == pageList.Count && vlist.First() == pageList.First())
             {
                 _group.SelectedValue = number;
             }
@@ -390,7 +383,7 @@ namespace LeeTeke.WpfControl.Controls
                 _group.ItemsSource = pageList;
                 _group.SelectedValue = number;
             }
-        
+
 
 
             if (_comboBox.SelectedValue == null || (_comboBox.SelectedValue is int svalue && svalue != number))
@@ -420,14 +413,14 @@ namespace LeeTeke.WpfControl.Controls
                 return new List<int>() { number };
             }
 
-    
 
-           var result = new List<int>();
-            if (dispalyNumber>maxCount)
+
+            var result = new List<int>();
+            if (dispalyNumber > maxCount)
             {
                 for (int i = 0; i < maxCount; i++)
                 {
-                    result.Add(i+1);
+                    result.Add(i + 1);
                 }
                 return result;
             }
@@ -503,11 +496,32 @@ namespace LeeTeke.WpfControl.Controls
 
         private void _comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (sender is ComboBox comboBox&& comboBox.SelectedValue is int pk)
+            if (sender is ComboBox comboBox && comboBox.SelectedValue is int pk)
             {
                 PageIndex = pk;
             }
 
+        }
+
+
+        private void _endButton_Click(object sender, RoutedEventArgs e)
+        {
+            PageIndex = this.MaxPageCount;
+        }
+
+        private void _headButton_Click(object sender, RoutedEventArgs e)
+        {
+            PageIndex = 1;
+        }
+
+        private void _nextButton_Click(object sender, RoutedEventArgs e)
+        {
+            PageIndex++;
+        }
+
+        private void _previousButton_Click(object sender, RoutedEventArgs e)
+        {
+            PageIndex--;
         }
         #endregion
 

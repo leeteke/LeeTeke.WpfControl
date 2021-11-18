@@ -48,6 +48,7 @@ namespace LeeTeke.WpfControl.Controls
     ///
     /// </summary>
     [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(SlideViewItem))]
+    [TemplatePart(Name =ElementScrollViewer,Type =typeof(ScrollViewer))]
     public class SlideView : ItemsControl
     {
         static SlideView()
@@ -55,7 +56,7 @@ namespace LeeTeke.WpfControl.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(SlideView), new FrameworkPropertyMetadata(typeof(SlideView)));
         }
 
-     
+        private const string ElementScrollViewer = "PART_ScrollViewer";
         private ScrollViewer _scrollViewer;
         private DispatcherTimer _autoPalyTime;
         public SlideView()
@@ -121,7 +122,7 @@ namespace LeeTeke.WpfControl.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            _scrollViewer = this.Template.FindName("PART_ScrollViewer", this) as ScrollViewer;
+            _scrollViewer =GetTemplateChild(ElementScrollViewer) as ScrollViewer;
             
         }
 

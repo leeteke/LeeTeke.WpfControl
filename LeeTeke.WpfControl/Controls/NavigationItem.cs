@@ -16,50 +16,76 @@ using System.Windows.Shapes;
 
 namespace LeeTeke.WpfControl.Controls
 {
-    public class TabViewItem : ContentControl
+
+    [TemplatePart(Name = ElementCloseButton, Type = typeof(Button))]
+    public class NavigationItem : ContentControl
     {
-        static TabViewItem()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(TabViewItem), new FrameworkPropertyMetadata(typeof(TabViewItem)));
-        }
-
-
         #region ItemCanClosing
-        public static bool? GetItemCanClosing(DependencyObject obj)
+        public static bool? GetItemCanClose(DependencyObject obj)
         {
-            return (bool?)obj.GetValue(ItemCanClosingProperty);
+            return (bool?)obj.GetValue(ItemCanCloseProperty);
         }
 
-        public static void SetItemCanClosing(DependencyObject obj, bool? value)
+        public static void SetItemCanClose(DependencyObject obj, bool? value)
         {
-            obj.SetValue(ItemCanClosingProperty, value);
+            obj.SetValue(ItemCanCloseProperty, value);
         }
+
+
 
         // Using a DependencyProperty as the backing store for ItemCanClosing.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ItemCanClosingProperty =
-            DependencyProperty.RegisterAttached("ItemCanClosing", typeof(bool?), typeof(TabViewItem), new FrameworkPropertyMetadata(default, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, ItemCanClosingChanged) { DefaultUpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
+        public static readonly DependencyProperty ItemCanCloseProperty =
+            DependencyProperty.RegisterAttached("ItemCanClose", typeof(bool?), typeof(NavigationItem), new FrameworkPropertyMetadata(default, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, ItemCanCloseChanged) { DefaultUpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
 
-        private static void ItemCanClosingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void ItemCanCloseChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is FrameworkElement element && e.NewValue != null)
             {
-                var pd = StaticMethods.FindVisualParent<TabViewItem>(element);
+                var pd = StaticMethods.FindVisualParent<NavigationItem>(element);
                 if (pd != null)
                 {
-                    pd.SetBinding(CanClosingProperty, new Binding()
+                    pd.SetBinding(CanCloseProperty, new Binding()
                     {
                         Source = d,
-                        Path = new PropertyPath(TabViewItem.ItemCanClosingProperty),
+                        Path = new PropertyPath(NavigationItem.ItemCanCloseProperty),
                         Mode = BindingMode.TwoWay
                     });
                 }
             }
         }
         #endregion
+        static NavigationItem()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(NavigationItem), new FrameworkPropertyMetadata(typeof(NavigationItem)));
+        }
+
+        private const string ElementCloseButton = "PART_CloseButton";
+
+        #region 属性
+        /// <summary>
+        /// 是否执行了关闭
+        /// </summary>
+        public bool IsClosed => _isClosed;
+
+        //public new ContextMenu ContextMenu { get; private set; }
+        #endregion
+
+        /// <summary>
+        /// 是否自我关闭
+        /// </summary>
+        internal bool SelfClose { set; get; }
 
 
-
-        public TabViewItem()
+        private Navigation ParentNavigation
+        {
+            get
+            {
+                return ItemsControl.ItemsControlFromItemContainer(this) as Navigation;
+            }
+        }
+        private Button _closeBtn;
+        private bool _isClosed = false;
+        public NavigationItem()
         {
             MouseDown += TabViewItem_MouseDown;
             KeyDown += TabViewItem_KeyDown;
@@ -84,51 +110,72 @@ namespace LeeTeke.WpfControl.Controls
             IsSelected = true;
         }
 
-        public override void OnApplyTemplate()
+        #region Override
+
+        protected override void OnKeyDown(KeyEventArgs e)
         {
-            base.OnApplyTemplate();
-            try
+            if (Focus() && e.Key == Key.Enter)
             {
-
-                if (this.Template.FindName("PART_CloseButton", this) is Button button)
-                {
-                    button.Click += (es, ex) => RaiseClosed(TabViewItemClosedMode.Self);
-                }
-
-
-            }
-            catch
-            {
+                IsSelected = true;
             }
 
+            base.OnKeyDown(e);
+        }
+
+        protected override void OnMouseDown(MouseButtonEventArgs e)
+        {
+            if (Focus())
+            {
+                IsSelected = true;
+            }
+
+            base.OnMouseDown(e);
         }
 
 
 
-        #region 属性
-        /// <summary>
-        /// 是否执行了关闭
-        /// </summary>
-        public bool IsClosed { get; private set; }
 
-        //public new ContextMenu ContextMenu { get; private set; }
+        public override void OnApplyTemplate()
+        {
+            if (_closeBtn != null)
+            {
+                _closeBtn.Click -= _closeBtn_Click;
+            }
+
+            base.OnApplyTemplate();
+
+            _closeBtn = GetTemplateChild(ElementCloseButton) as Button;
+            if (_closeBtn != null)
+            {
+                _closeBtn.Click += _closeBtn_Click;
+            }
+        }
         #endregion
+        private void _closeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SelfClose = true;
+            Close();
+        }
+
+
+
+
 
         #region 依赖属性
 
-        #region CanClosing
+        #region CanClose
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public bool CanClosing
+        public bool CanClose
         {
-            get { return (bool)GetValue(CanClosingProperty); }
-            set { SetValue(CanClosingProperty, value); }
+            get { return (bool)GetValue(CanCloseProperty); }
+            set { SetValue(CanCloseProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for CanClosed.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty CanClosingProperty =
-            DependencyProperty.Register("CanClosing", typeof(bool), typeof(TabViewItem));
+        public static readonly DependencyProperty CanCloseProperty =
+            DependencyProperty.Register("CanClose", typeof(bool), typeof(NavigationItem));
 
         #endregion
 
@@ -144,15 +191,15 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for IsSelected.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsSelectedProperty =
-            DependencyProperty.Register("IsSelected", typeof(bool), typeof(TabViewItem), new PropertyMetadata(false, IsSelectedChanged));
+            DependencyProperty.Register("IsSelected", typeof(bool), typeof(NavigationItem), new PropertyMetadata(false, IsSelectedChanged));
 
         private static void IsSelectedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is TabViewItem item && e.NewValue != e.OldValue)
+            if (d is NavigationItem item && e.NewValue != e.OldValue)
             {
                 if ((bool)e.NewValue == true)
                 {
-                    item.RaiseSelected();
+                    item.NotifyParentSelecte();
                 }
             }
         }
@@ -171,7 +218,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for CornerRadius.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CornerRadiusProperty =
-            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(TabViewItem));
+            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(NavigationItem));
 
         #endregion
 
@@ -187,7 +234,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for PinVisibly.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PinVisiblyProperty =
-            DependencyProperty.Register("PinVisibly", typeof(bool), typeof(TabViewItem));
+            DependencyProperty.Register("PinVisibly", typeof(bool), typeof(NavigationItem));
         #endregion
 
         #region Orientation
@@ -202,23 +249,23 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for Orientation.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty OrientationProperty =
-            DependencyProperty.Register("Orientation", typeof(Orientation), typeof(TabViewItem));
+            DependencyProperty.Register("Orientation", typeof(Orientation), typeof(NavigationItem));
 
         #endregion
 
-        #region IsFixed
+        #region IsPinned
         /// <summary>
         /// 是否固定
         /// </summary>
-        public bool IsFixed
+        public bool IsPinned
         {
-            get { return (bool)GetValue(IsFixedProperty); }
-            set { SetValue(IsFixedProperty, value); }
+            get { return (bool)GetValue(IsPinnedProperty); }
+            set { SetValue(IsPinnedProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for IsFixed.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsFixedProperty =
-            DependencyProperty.Register("IsFixed", typeof(bool), typeof(TabViewItem));
+        public static readonly DependencyProperty IsPinnedProperty =
+            DependencyProperty.Register("IsPinned", typeof(bool), typeof(NavigationItem));
 
         #endregion
 
@@ -234,68 +281,20 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for CloseVisibly.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CloseVisiblyProperty =
-            DependencyProperty.Register("CloseVisibly", typeof(ShowMode), typeof(TabViewItem));
-        #endregion
-
-
-
-        #endregion
-
-        #region RouteEvent
-
-        #region Closed
-        /// <summary>
-        /// 请填写描述
-        /// </summary>
-        public event TabViewItemClosedEventHandler Closed
-        {
-            add { AddHandler(ClosedEvent, value); }
-            remove { RemoveHandler(ClosedEvent, value); }
-        }
-
-        public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent(
-        "Closed", RoutingStrategy.Bubble, typeof(TabViewItemClosedEventHandler), typeof(TabViewItem));
-
-
-        private void RaiseClosed(TabViewItemClosedMode newValue)
-        {
-            var arg = new TabViewItemClosedEventArgs(newValue, ClosedEvent);
-            RaiseEvent(arg);
-        }
-
-        #endregion
-
-        #region Selected
-        /// <summary>
-        /// 请填写描述
-        /// </summary>
-        public event TabViewItemSelectedEventHandler Selected
-        {
-            add { AddHandler(SelectedEvent, value); }
-            remove { RemoveHandler(SelectedEvent, value); }
-        }
-
-        public static readonly RoutedEvent SelectedEvent = EventManager.RegisterRoutedEvent(
-        "Selected", RoutingStrategy.Bubble, typeof(TabViewItemSelectedEventHandler), typeof(TabViewItem));
-
-
-        private void RaiseSelected()
-        {
-            var arg = new TabViewItemSelectedEventArgs(SelectedEvent);
-            RaiseEvent(arg);
-        }
-
+            DependencyProperty.Register("CloseVisibly", typeof(ShowMode), typeof(NavigationItem));
         #endregion
 
         #endregion
 
-        #region 公共方法
+
+
+        #region InternalMethod
         /// <summary>
         /// 关闭Item
         /// </summary>
-        public async Task CloseAsync()
+        internal void Close()
         {
-            if (CanClosing)
+            if (CanClose && !IsClosed)
             {
                 var hover = new DoubleAnimationUsingKeyFrames();
                 hover.KeyFrames.Add(new EasingDoubleKeyFrame()
@@ -306,7 +305,8 @@ namespace LeeTeke.WpfControl.Controls
                 });
                 hover.Completed += (ss, se) =>
                 {
-                    IsClosed = true;
+                    _isClosed = true;
+                    NotifyParentClose();
                 };
 
                 switch (Orientation)
@@ -324,13 +324,29 @@ namespace LeeTeke.WpfControl.Controls
                     default:
                         break;
                 }
-                while (!IsClosed)
-                {
-                    await Task.Delay(100);
-                }
+
             }
         }
         #endregion
 
+
+        #region PrivateMethod
+
+        /// <summary>
+        /// 通知夫组件我选择了
+        /// </summary>
+        private void NotifyParentSelecte()
+        {
+            ParentNavigation?.NotifyItemSelecte(this);
+        }
+
+        /// <summary>
+        /// 通知夫组件我关闭了要
+        /// </summary>
+        private void NotifyParentClose()
+        {
+            ParentNavigation?.NotifyItemClose(this);
+        }
+        #endregion
     }
 }

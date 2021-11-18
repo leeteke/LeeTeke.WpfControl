@@ -207,7 +207,7 @@ namespace LeeTeke.WpfControl.Controls
         private  void ChangeShowImage()
         {
             DoubleAnimation daV = new DoubleAnimation(0, 1, ShowDuration) { FillBehavior = FillBehavior.HoldEnd };
-            this.BeginAnimation(AnimationValueProperty, daV);
+            this.BeginAnimation(AnimationValueProperty, daV,HandoffBehavior.Compose);
         }
 
 

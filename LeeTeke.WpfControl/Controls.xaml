@@ -11,10 +11,10 @@
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/SlideView.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/ToggleGroup.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/TextBoxEx.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/TabView.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/NotifyBanner.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/ScrollBanner.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/Pagination.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/Navigation.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/Window.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 

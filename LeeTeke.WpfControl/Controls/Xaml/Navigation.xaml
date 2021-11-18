@@ -7,27 +7,27 @@
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type local:TabViewItem}">
+    <Style TargetType="{x:Type local:NavigationItem}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="Margin" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=ItemMargin,Mode=OneWay}"/>
-        <Setter Property="PinVisibly" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=ItemPinVisibly,Mode=OneWay}"/>
-        <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=Foreground,Mode=OneWay}"/>
-        <Setter Property="CloseVisibly" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=CloseVisibly,Mode=OneWay}"/>
+        <Setter Property="Margin" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=ItemMargin,Mode=OneWay}"/>
+        <Setter Property="PinVisibly" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=ItemPinVisibly,Mode=OneWay}"/>
+        <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=Foreground,Mode=OneWay}"/>
+        <Setter Property="CloseVisibly" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=CloseVisibly,Mode=OneWay}"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="VerticalContentAlignment" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=VerticalContentAlignment,Mode=OneWay}"/>
-        <Setter Property="HorizontalContentAlignment" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=HorizontalContentAlignment,Mode=OneWay}"/>
-        <Setter Property="Padding" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=ItemPadding,Mode=OneWay}"/>
+        <Setter Property="VerticalContentAlignment" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=VerticalContentAlignment,Mode=OneWay}"/>
+        <Setter Property="HorizontalContentAlignment" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=HorizontalContentAlignment,Mode=OneWay}"/>
+        <Setter Property="Padding" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=ItemPadding,Mode=OneWay}"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="CanClosing" Value="True"/>
-        <Setter Property="Width" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=ItemWidth,Mode=OneWay}"/>
-        <Setter Property="Height" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=ItemHeight,Mode=OneWay}"/>
-        <Setter Property="Orientation" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=Orientation,Mode=OneWay}"/>
-        <Setter Property="CornerRadius" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=ItemCornerRadius,Mode=OneWay}"/>
+        <Setter Property="CanClose" Value="True"/>
+        <Setter Property="Width" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=ItemWidth,Mode=OneWay}"/>
+        <Setter Property="Height" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=ItemHeight,Mode=OneWay}"/>
+        <Setter Property="Orientation" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=Orientation,Mode=OneWay}"/>
+        <Setter Property="CornerRadius" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=ItemCornerRadius,Mode=OneWay}"/>
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:TabViewItem}" >
+                <ControlTemplate TargetType="{x:Type local:NavigationItem}" >
                     <Grid >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -52,7 +52,7 @@
                                        Grid.Column="1"
                                        VerticalAlignment="Center"
                                        Margin="0,5,5,5"
-                                       Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=IsFixed,Converter={StaticResource VisibilityForBoolConverter},Mode=OneWay}"
+                                       Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=IsPinned,Converter={StaticResource VisibilityForBoolConverter},Mode=OneWay}"
                                        />
 
                         <Button x:Name="PART_CloseButton" 
@@ -110,18 +110,18 @@
                             <Setter TargetName="PART_CloseButton" Property="Visibility"  Value="Visible"/>
                         </MultiTrigger>
 
-                        <Trigger Property="CanClosing" Value="False">
+                        <Trigger Property="CanClose" Value="False">
 
                             <Setter Property="Visibility"  TargetName="PART_CloseButton"
                                             Value="Collapsed"/>
                         </Trigger>
 
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="contentBorder" Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=SelectedBackground,Mode=OneWay}"/>
-                            <Setter TargetName="contentBorder" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=SelectedBorderBrush,Mode=OneWay}"/>
-                            <Setter TargetName="contentBorder" Property="BorderThickness" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=SelectedBorderThickness,Mode=OneWay}"/>
-                            <Setter  TargetName="contentBorder" Property="Effect"  Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=SelectedEffect,Mode=OneWay}"/>
-                            <Setter   Property="TextElement.Foreground"  Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=SelectedForeground,Mode=OneWay}"/>
+                            <Setter TargetName="contentBorder" Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=SelectedBackground,Mode=OneWay}"/>
+                            <Setter TargetName="contentBorder" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=SelectedBorderBrush,Mode=OneWay}"/>
+                            <Setter TargetName="contentBorder" Property="BorderThickness" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=SelectedBorderThickness,Mode=OneWay}"/>
+                            <Setter  TargetName="contentBorder" Property="Effect"  Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=SelectedEffect,Mode=OneWay}"/>
+                            <Setter   Property="TextElement.Foreground"  Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=SelectedForeground,Mode=OneWay}"/>
                             <Setter Property="StackPanel.ZIndex" Value="999"/>
                             <Setter TargetName="PART_Rectangle" Property="Opacity" Value="0"/>
                         </Trigger>
@@ -132,11 +132,11 @@
                                 <Condition Property="IsSelected"  Value="False"/>
                                 <Condition  Property="IsMouseOver" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="contentBorder" Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=MouseOverBackground,Mode=OneWay}"/>
-                            <Setter TargetName="contentBorder" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=MouseOverBorderBrush,Mode=OneWay}"/>
-                            <Setter TargetName="contentBorder" Property="BorderThickness" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=MouseOverBorderThickness,Mode=OneWay}"/>
-                            <Setter  TargetName="contentBorder" Property="Effect"  Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=MouseOverEffect,Mode=OneWay}"/>
-                            <Setter   Property="TextElement.Foreground"  Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabView}},Path=MouseOverForeground,Mode=OneWay}"/>
+                            <Setter TargetName="contentBorder" Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=MouseOverBackground,Mode=OneWay}"/>
+                            <Setter TargetName="contentBorder" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=MouseOverBorderBrush,Mode=OneWay}"/>
+                            <Setter TargetName="contentBorder" Property="BorderThickness" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=MouseOverBorderThickness,Mode=OneWay}"/>
+                            <Setter  TargetName="contentBorder" Property="Effect"  Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=MouseOverEffect,Mode=OneWay}"/>
+                            <Setter   Property="TextElement.Foreground"  Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=MouseOverForeground,Mode=OneWay}"/>
                             <Setter TargetName="PART_Rectangle" Property="Opacity" Value="0"/>
                         </MultiTrigger>
 
@@ -151,7 +151,7 @@
 
     </Style>
 
-    <Style TargetType="{x:Type local:TabView}">
+    <Style TargetType="{x:Type local:Navigation}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="Orientation" Value="Horizontal"/>
@@ -213,7 +213,7 @@
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:TabView}">
+                <ControlTemplate TargetType="{x:Type local:Navigation}">
                     <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
@@ -299,7 +299,7 @@
                 <ItemsPanelTemplate>
                     <StackPanel x:Name="PART_StackPanel" 
                                 FocusVisualStyle="{x:Null}"
-                                Orientation="{Binding Orientation,  RelativeSource={ RelativeSource Mode=FindAncestor,AncestorType={x:Type local:TabView},AncestorLevel=1},Mode=OneWay}"   />
+                                Orientation="{Binding Orientation,  RelativeSource={ RelativeSource Mode=FindAncestor,AncestorType={x:Type local:Navigation},AncestorLevel=1},Mode=OneWay}"   />
                 </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>

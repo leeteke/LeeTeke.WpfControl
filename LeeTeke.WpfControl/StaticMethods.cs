@@ -88,10 +88,10 @@ namespace LeeTeke.WpfControl
         }
 
         #region ScrollViewerSlide
-        
+
         #endregion
 
-        public static void SetScrollViewerSlide(bool isEnable, IEasingFunction easing=default, Duration duration=default)
+        public static void SetScrollViewerSlide(bool isEnable, IEasingFunction easing = default, Duration duration = default)
         {
             Application.Current.Resources["LeeScrollViewerSlideEnabled"] = isEnable;
             if (isEnable)
@@ -105,8 +105,8 @@ namespace LeeTeke.WpfControl
                     Application.Current.Resources["LeeScrollViewerSlideDuration"] = duration;
                 }
             }
-        
-      
+
+
         }
 
 
@@ -524,6 +524,29 @@ namespace LeeTeke.WpfControl
         /// <typeparam name="T"></typeparam>
         /// <param name="obj"></param>
         /// <returns></returns>
+        public static (DependencyObject parent, T child) FindVisualFistChildAndParent<T>(DependencyObject obj) where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+                if (child != null && child is T)
+                    return (obj, child as T);
+                else
+                {
+                    var cp = FindVisualFistChildAndParent<T>(child);
+                    if (cp.parent != null)
+                        return cp;
+                }
+            }
+            return (null, null);
+        }
+
+        /// <summary>
+        /// 寻找子控件
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public static T FindVisualChild<T>(DependencyObject obj, string name) where T : DependencyObject
         {
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
@@ -540,6 +563,43 @@ namespace LeeTeke.WpfControl
             }
             return null;
         }
+
+        /// <summary>
+        /// 寻找ItemsControl
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="itemsControl"></param>
+        /// <returns></returns>
+        public static T[] FindItemsControlChilds<T>(DependencyObject itemsControl) where T : DependencyObject
+        {
+            try
+            {
+
+                var pc = FindVisualFistChildAndParent<T>(itemsControl);
+                if (pc.parent != null && pc.child != null)
+                {
+                    if (pc.parent is Panel panel)
+                    {
+                        List<T> reuslt = new List<T>(panel.Children.Count);
+                        foreach (var item in panel.Children)
+                        {
+                            if (item is T chlid)
+                            {
+                                reuslt.Add(chlid);
+                            }
+                        }
+                        return reuslt.ToArray();
+                    }
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+
 
         /// <summary>
         /// 寻找子控件
@@ -682,7 +742,7 @@ namespace LeeTeke.WpfControl
 
         #region 获取坐标帮助
 
-   
+
         [StructLayout(LayoutKind.Sequential)]
         private struct Win32Point
         {

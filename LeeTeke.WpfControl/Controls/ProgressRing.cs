@@ -46,6 +46,11 @@ namespace LeeTeke.WpfControl.Controls
     ///     <MyNamespace:ProgressRing/>
     ///
     /// </summary>
+    [TemplatePart(Name =ElementOuterBorder,Type =typeof(Path))]
+    [TemplatePart(Name = ElementOrbitBackground, Type = typeof(Path))]
+    [TemplatePart(Name = ElementOrbit, Type = typeof(Path))]
+    [TemplatePart(Name = ElementWating, Type = typeof(Path))]
+    [TemplatePart(Name = ElementInnerBorder, Type = typeof(Border))]
     public class ProgressRing : ContentControl
     {
         static ProgressRing()
@@ -53,17 +58,20 @@ namespace LeeTeke.WpfControl.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ProgressRing), new FrameworkPropertyMetadata(typeof(ProgressRing)));
         }
 
+        #region consts
+        private const string ElementOuterBorder = "PART_OuterBorder";
+        private const string ElementOrbitBackground = "PART_OrbitBackgound";
+        private const string ElementOrbit = "PART_Orbit";
+        private const string ElementInnerBorder = "PART_InnerBorder";
+        private const string ElementWating = "PART_Wating";
+        #endregion
 
         private Path _outer;
         private Path _orbitBackground;
         private Path _orbit;
-        private Border _border;
+        private Border _inner;
         private Path _wating;
-
-
         private Storyboard _watingSB;
-
-
         private double _backDiameter;
         public ProgressRing()
         {
@@ -86,14 +94,18 @@ namespace LeeTeke.WpfControl.Controls
 
         public override void OnApplyTemplate()
         {
+            if (_wating!=null)
+                _wating.IsVisibleChanged -= _wating_IsVisibleChanged;
+
             base.OnApplyTemplate();
-            _outer = this.GetTemplateChild("PART_OuterBorder") as Path;
-            _orbitBackground = this.GetTemplateChild("PART_OrbitBackgound") as Path;
-            _orbit = this.GetTemplateChild("PATY_Orbit") as Path;
-            _border = this.GetTemplateChild("PART_ContentBorder") as Border;
-            _wating = this.GetTemplateChild("PATY_Wating") as Path;
-        
-            _wating.IsVisibleChanged += _wating_IsVisibleChanged;
+            _outer = this.GetTemplateChild(ElementOuterBorder) as Path;
+            _orbitBackground = this.GetTemplateChild(ElementOrbitBackground) as Path;
+            _orbit = this.GetTemplateChild(ElementOrbit) as Path;
+            _inner = this.GetTemplateChild(ElementInnerBorder) as Border;
+            _wating = this.GetTemplateChild(ElementWating) as Path;
+
+            if (_wating != null)
+                _wating.IsVisibleChanged += _wating_IsVisibleChanged;
 
             //if (this.GetTemplateChild("PART_Grid") is Grid grid)
             //{
@@ -378,10 +390,10 @@ namespace LeeTeke.WpfControl.Controls
             _orbitBackground.Data = GetRoundPath(360, _backDiameter / 2, new Point(this.ActualWidth / 2, _orbitBackground.StrokeThickness / 2 + BorderThickness));
 
             ///加载边框
-            _border.BorderThickness = new Thickness(BorderThickness);
-            _border.Height = diameter - _orbitBackground.StrokeThickness * 2 - BorderThickness;
-            _border.Width = _border.Height;
-            _border.CornerRadius = new CornerRadius(_border.Width / 2);
+            _inner.BorderThickness = new Thickness(BorderThickness);
+            _inner.Height = diameter - _orbitBackground.StrokeThickness * 2 - BorderThickness;
+            _inner.Width = _inner.Height;
+            _inner.CornerRadius = new CornerRadius(_inner.Width / 2);
 
             switch (Mode)
             {

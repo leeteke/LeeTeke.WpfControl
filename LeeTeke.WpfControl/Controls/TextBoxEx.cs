@@ -45,16 +45,27 @@ namespace LeeTeke.WpfControl.Controls
     ///     <MyNamespace:TextBoxEx/>
     ///
     /// </summary>
+    /// 
+    [TemplatePart(Name = ElementPassword, Type = typeof(PasswordBox))]
+    [TemplatePart(Name = ElementMain, Type = typeof(TextBox))]
+    [TemplatePart(Name = ElementICON, Type = typeof(ContentPresenter))]
     public class TextBoxEx : Control
     {
 
-        public string SelectedText { get => Mode switch { TextMode.Password => null, _ => _textBox.SelectedText }; }
 
         static TextBoxEx()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TextBoxEx), new FrameworkPropertyMetadata(typeof(TextBoxEx)));
         }
 
+        #region consts
+
+        private const string ElementPassword = "PART_Password";
+        private const string ElementMain = "PART_Main";
+        private const string ElementICON = "PART_ICON";
+        #endregion
+
+        public string SelectedText { get => Mode switch { TextMode.Password => null, _ => _textBox.SelectedText }; }
 
         private PasswordBox _password;
         private TextBox _textBox;
@@ -69,10 +80,21 @@ namespace LeeTeke.WpfControl.Controls
 
         public override void OnApplyTemplate()
         {
+            if (_icon != null)
+                _icon.MouseDown -= _icon_MouseDown;
+            if (_password != null)
+                _password.PasswordChanged -= _password_PasswordChanged;
+            if (_textBox != null)
+            {
+                _textBox.PreviewTextInput -= _textBox_PreviewTextInput;
+                _textBox.TextChanged -= _textBox_TextChanged;
+            }
+  
+
             base.OnApplyTemplate();
-            _password = this.Template.FindName("PART_Password", this) as PasswordBox;
-            _textBox = this.Template.FindName("PART_Main", this) as TextBox;
-            _icon = this.Template.FindName("PART_ICON", this) as ContentPresenter;
+            _password = GetTemplateChild(ElementPassword) as PasswordBox;
+            _textBox = GetTemplateChild(ElementMain) as TextBox;
+            _icon = GetTemplateChild(ElementICON) as ContentPresenter;
 
             if (_password != null)
             {
@@ -828,6 +850,7 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
         #region Public
+
 
 
         public void SelectAll()

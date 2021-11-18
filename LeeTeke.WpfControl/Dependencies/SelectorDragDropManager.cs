@@ -269,19 +269,20 @@ namespace LeeTeke.WpfControl.Dependencies
                 ///泛型
                 if (sourceType.IsGenericType && sourceType.GenericTypeArguments.Length == 1 && _control.ItemsSource is IList list)
                 {
-                    if (list.Contains(_dragAdorner.AdornedItem.DataContext))
+                    var oldIndex = list.IndexOf(_dragAdorner.AdornedItem.DataContext);
+                    if (oldIndex > -1)
                     {
-                        var pd = _dragAdorner.AdornedItem.DataContext;
                         var toalIndex = GetIndexUnderDragCursor();
-                        if (toalIndex > -1&&toalIndex>FreezeIndex)
+                        if (toalIndex > -1 && toalIndex > FreezeIndex && toalIndex != oldIndex)
                         {
-
-                            list.Remove(_dragAdorner.AdornedItem.DataContext);
-                            list.Insert(toalIndex, pd);
-                            _control.SelectedIndex = toalIndex;
+                            var method = sourceType.GetMethod("Move");
+                            if (method != null)
+                                _ = method.Invoke(_control.ItemsSource, new object?[] { oldIndex, toalIndex });
                         }
                         e.Effects = DragDropEffects.Move;
                     }
+
+
 
                 }
             }
@@ -338,17 +339,17 @@ namespace LeeTeke.WpfControl.Dependencies
 
 
 
-            // Select the item the user clicked on.
+            //Select the item the user clicked on.
             if (_control.SelectedIndex != this._indexToSelect)
                 _control.SelectedIndex = this._indexToSelect;
 
-            // If the item at the selected index is null, there's nothing
-            // we can do, so just return;
+       //     If the item at the selected index is null, there's nothing
+       //      we can do, so just return;
             if (_control.SelectedItem == null)
                 return;
 
             ///锁定
-            if (_indexToSelect<= FreezeIndex)
+            if (_indexToSelect <= FreezeIndex)
             {
                 return;
             }
@@ -555,10 +556,10 @@ namespace LeeTeke.WpfControl.Dependencies
             // Create a brush which will paint the ListViewItem onto
             // a visual in the adorner layer.
             VisualBrush brush = new VisualBrush(itemToDrag);
-            
+
             // Create an element which displays the source item while it is dragged.
             _dragAdorner = new DragAdorner(_control, itemToDrag, brush);
-            
+
             // Set the drag adorner's opacity.		
             _dragAdorner.Opacity = this.DragAdornerOpacity;
 
@@ -595,13 +596,13 @@ namespace LeeTeke.WpfControl.Dependencies
         {
             try
             {
-                var selectedItem = this._control.SelectedItem;
+                var selectedItem = GetItem(_control.SelectedIndex);
                 DragDropEffects allowedEffects = DragDropEffects.Move | DragDropEffects.Move | DragDropEffects.Link;
                 if (DragDrop.DoDragDrop(_control, selectedItem, allowedEffects) != DragDropEffects.None)
                 {
                     // The item was dropped into a new location,
                     // so make it the new selected item.
-                    _control.SelectedItem = selectedItem;
+                    _control.SelectedItem=selectedItem;
                 }
             }
             catch (Exception)

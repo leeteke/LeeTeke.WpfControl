@@ -1093,7 +1093,7 @@
         <Setter Property="leedep:SliderManager.Header" Value="{x:Null}"/>
         <Setter Property="leedep:SliderManager.HeaderDock" Value="Top"/>
         <Setter Property="Orientation" Value="Horizontal"/>
-        <Setter Property="Height" Value="{DynamicResource LeeControlHeight}"/>
+        <Setter Property="Height" Value="{DynamicResource LeeControlMinHeight}"/>
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="leedep:SliderManager.TrackSize" Value="8"/>
         <Setter Property="leedep:SliderManager.RegisterMouseWheel" Value="True"/>

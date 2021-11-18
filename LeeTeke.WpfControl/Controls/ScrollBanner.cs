@@ -47,6 +47,8 @@ namespace LeeTeke.WpfControl.Controls
     ///     <MyNamespace:ScrollBanner/>
     ///
     /// </summary>
+    [TemplatePart(Name = ElementContent, Type = typeof(ContentPresenter))]
+    [TemplatePart(Name = ElementCloseButton, Type = typeof(Button))]
     public class ScrollBanner : ContentControl
     {
 
@@ -56,7 +58,14 @@ namespace LeeTeke.WpfControl.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ScrollBanner), new FrameworkPropertyMetadata(typeof(ScrollBanner)));
         }
 
+        #region consts
+
+        private const string ElementContent = "PART_Content";
+        private const string ElementCloseButton = "PART_CloseButton";
+        #endregion
+
         private Storyboard _scrollingSB;
+        private Button _closeButton;
         private ContentPresenter _content;
 
         public ScrollBanner()
@@ -72,18 +81,23 @@ namespace LeeTeke.WpfControl.Controls
 
         public override void OnApplyTemplate()
         {
+            if (_content != null)
+                _content.SizeChanged -= Presenter_SizeChanged;
+            if (_closeButton != null)
+                _closeButton.Click -= CloseBtn_Click;
+
             base.OnApplyTemplate();
 
-            if (this.Template.FindName("PART_Content", this) is ContentPresenter presenter)
-            {
-                _content = presenter;
-                _content.SizeChanged += Presenter_SizeChanged;
-            }
+            _content = GetTemplateChild(ElementContent) as ContentPresenter;
+            _closeButton = GetTemplateChild(ElementCloseButton) as Button;
 
-            if (this.Template.FindName("PART_CloseButton", this) is Button btn)
-            {
-                btn.Click += CloseBtn_Click;
-            }
+
+
+            if (_content != null)
+                _content.SizeChanged += Presenter_SizeChanged;
+            if (_closeButton != null)
+                _closeButton.Click += CloseBtn_Click;
+
 
         }
 

@@ -20,6 +20,7 @@ namespace LeeTeke.WPFTest
     /// </summary>
     public partial class TestWindow : Window
     {
+        private ObservableCollection<string>  items= new ObservableCollection<string>() { "测试1", "测试2", "测试3", "测试4", };
         public TestWindow()
         {
             InitializeComponent();
@@ -28,9 +29,22 @@ namespace LeeTeke.WPFTest
 
         private void TestWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            //listbox.ItemsSource=new ObservableCollection<string>() { "测试1", "测试2", "测试3", "测试4", };
+            test.ItemsSource = items;
         }
 
-     
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void test_SelectionChanged(object sender, WpfControl.ToggleSelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            items.Move(1, 2);
+        }
     }
 }

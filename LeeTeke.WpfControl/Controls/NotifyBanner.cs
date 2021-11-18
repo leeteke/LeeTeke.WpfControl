@@ -48,12 +48,16 @@ namespace LeeTeke.WpfControl.Controls
     ///     <MyNamespace:NotifyBanner/>
     ///
     /// </summary>
+    /// 
+    [TemplatePart (Name =ElementStackPanel,Type = typeof(StackPanel))]
     public class NotifyBanner : Control
     {
         static NotifyBanner()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(NotifyBanner), new FrameworkPropertyMetadata(typeof(NotifyBanner)));
         }
+
+        private const string ElementStackPanel = "PART_Stackpanel";
 
 
         private StackPanel _stackPanel;
@@ -70,11 +74,8 @@ namespace LeeTeke.WpfControl.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            
-            if(this.Template.FindName("PART_StackPanel",this) is StackPanel stack)
-            {
-                _stackPanel = stack;
-            }
+
+            _stackPanel = GetTemplateChild(ElementStackPanel) as StackPanel;
         }
 
         #region 依赖

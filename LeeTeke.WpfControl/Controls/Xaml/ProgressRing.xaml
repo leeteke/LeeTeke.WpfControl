@@ -28,8 +28,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ProgressRing}">
                     <Grid x:Name="PART_Grid" >
-                        <Grid.Resources>
-                            <!--<Storyboard RepeatBehavior="Forever" x:Key="SB" >
+                        <!--<Grid.Resources>
+                            <Storyboard RepeatBehavior="Forever" x:Key="SB" >
                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="E1R" BeginTime="0" Storyboard.TargetProperty="Angle">
                                     <SplineDoubleKeyFrame KeyTime="0" Value="110" KeySpline="0.13,0.21,0.1,0.7" />
                                     <SplineDoubleKeyFrame KeyTime="0:0:0.433" Value="230" KeySpline="0.02,0.33,0.38,0.77" />
@@ -110,15 +110,15 @@
                                     <EasingDoubleKeyFrame KeyTime="0:0:3.217" Value="0"/>
                                 </DoubleAnimationUsingKeyFrames>
 
-                            </Storyboard>-->
-                        </Grid.Resources>
+                            </Storyboard>
+                        </Grid.Resources>-->
                         <Path x:Name="PART_OuterBorder" 
                               Stroke="{TemplateBinding BorderBrush}"
                               StrokeThickness="{TemplateBinding BorderThickness}"
                               />
                         <Path x:Name="PART_OrbitBackgound"
                               Stroke="{TemplateBinding Background}"/>
-                        <Path x:Name="PATY_Orbit"
+                        <Path x:Name="PART_Orbit"
                               Stroke="{TemplateBinding Stroke}"
                               StrokeThickness="{TemplateBinding Thickness}"
                               StrokeDashArray="0"
@@ -180,7 +180,7 @@
                                 <RotateTransform x:Name="E2R" Angle="0"/>
                             </Path.RenderTransform>
                         </Path>-->
-                        <Path x:Name="PATY_Wating"
+                        <Path x:Name="PART_Wating"
                               Opacity="1"
                               Stroke="{TemplateBinding Stroke}"
                               StrokeThickness="{TemplateBinding Thickness}"
@@ -191,8 +191,9 @@
                               RenderTransformOrigin="0.5,0.5">
                    
                         </Path>
-                        <Border x:Name="PART_ContentBorder"
+                        <Border x:Name="PART_InnerBorder"
                                 BorderBrush="{TemplateBinding BorderBrush}"
+                                Background="{TemplateBinding Background}"
                                 >
                             <Border x:Name="PART_Content"
                                     Background="{x:Null}"
@@ -213,15 +214,15 @@
                                     <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
                                         <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
                                         <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
-                                        <Binding ElementName="PART_ContentBorder"  Path="CornerRadius" Mode="OneWay"/>
-                                        <Binding ElementName="PART_ContentBorder"  Path="BorderThickness" Mode="OneWay"/>
+                                        <Binding ElementName="PART_InnerBorder"  Path="CornerRadius" Mode="OneWay"/>
+                                        <Binding ElementName="PART_InnerBorder"  Path="BorderThickness" Mode="OneWay"/>
                                     </MultiBinding>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
                         <Trigger Property="Mode" Value="Wating">
-                            <Setter TargetName="PATY_Orbit" Property="Visibility" Value="Collapsed"/>
-                            <Setter TargetName="PATY_Wating" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="PART_Orbit" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="PART_Wating" Property="Visibility" Value="Visible"/>
                             <Setter Property="ThicknessPadding" Value="0"/>
                             <Setter Property="Background" Value="{x:Null}"/>
                             <Setter Property="BorderThickness" Value="0"/>

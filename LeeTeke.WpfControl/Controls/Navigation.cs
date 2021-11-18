@@ -3,6 +3,7 @@ using LeeTeke.WpfControl.Dependencies;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,16 +52,37 @@ namespace LeeTeke.WpfControl.Controls
     ///
     /// </summary>
 
-    [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(TabViewItem))]
-    public class TabView : ItemsControl
+    [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(NavigationItem))]
+    [TemplatePart(Name = ElementLeft, Type = typeof(Button))]
+    [TemplatePart(Name = ElementRight, Type = typeof(Button))]
+    [TemplatePart(Name = ElementScrollViewer, Type = typeof(ScrollViewer))]
+    [TemplatePart(Name = ElementContextMenu, Type = typeof(ContextMenu))]
+    [TemplatePart(Name = ElementMenuItemCloseAll, Type = typeof(MenuItem))]
+    [TemplatePart(Name = ElementMenuItemCloseOther, Type = typeof(MenuItem))]
+    [TemplatePart(Name = ElementMenuItemCloseSelf, Type = typeof(MenuItem))]
+    [TemplatePart(Name = ElementMenuItemPin, Type = typeof(MenuItem))]
+    public class Navigation : ItemsControl
     {
-        static TabView()
+        static Navigation()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(TabView), new FrameworkPropertyMetadata(typeof(TabView)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(Navigation), new FrameworkPropertyMetadata(typeof(Navigation)));
         }
 
+        #region Consts
+        private const string ElementLeft = "PART_Left";
+        private const string ElementRight = "PART_Right";
+        private const string ElementScrollViewer = "PART_ScrollViewer";
+        private const string ElementContextMenu = "PART_ContextMenu";
+        private const string ElementMenuItemCloseAll = "PART_MenuItem_CloseAll";
+        private const string ElementMenuItemCloseOther = "PART_MenuItem_CloseOther";
+        private const string ElementMenuItemCloseSelf = "PART_MenuItem_CloseSelf";
+        private const string ElementMenuItemPin = "PART_MenuItem_Pin";
+        #endregion
+
+
+
+
         private ScrollViewer _scrollViewer;
-        private StackPanel _stackPanel;
         private Button _leftBtn;
         private Button _rightBtn;
         private ContextMenu _contextMenu;
@@ -68,51 +90,63 @@ namespace LeeTeke.WpfControl.Controls
         private MenuItem _allMenuItem;
         private MenuItem _otherMenuItem;
         private MenuItem _selfMenuItem;
-        private DoubleAnimation _scrollDA;
-        private IList _ilist;
-
-        private int _selectedIndex = -1;
-        private object _selectedItem;
-        private object _selectedValue;
 
 
+        private NavigationItem[] _items;
+        private int _currentIndex = -1;
+        private NavigationItem _currentItem;
+        private object _currentValue;
 
-        private IList ItemList
+
+        public Navigation()
         {
-            get { return _ilist; }
-            set
-            {
-                _ilist = value;
-                base.ItemsSource = value;
-            }
-        }
-
-        public TabView()
-        {
-
-
-            EventManager.RegisterClassHandler(typeof(StackPanel), StackPanel.SizeChangedEvent, new RoutedEventHandler(StackPanelLoadedEvent));
-            this.PreviewMouseRightButtonDown += TabView_PreviewMouseRightButtonDown;
-            this.PreviewMouseWheel += TabView_PreviewMouseWheel;
 
         }
 
-        private void TabView_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+
+
+
+
+
+        #region override
+
+
+
+        protected override bool IsItemItsOwnContainerOverride(object item)
         {
+            return item is NavigationItem;
+        }
+
+        protected override DependencyObject GetContainerForItemOverride()
+        {
+
+            return new NavigationItem();
+        }
+
+        protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
+        {
+            _items = StaticMethods.FindItemsControlChilds<NavigationItem>(this);
+            base.OnItemsChanged(e);
+        }
+
+
+        protected override void OnMouseRightButtonDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseRightButtonDown(e);
             DependencyObject source = e.OriginalSource as DependencyObject;
-            while (source != null && source.GetType() != typeof(TabViewItem))
+            while (source != null && source.GetType() != typeof(NavigationItem))
                 source = VisualTreeHelper.GetParent(source);
-            if (source != null && source is TabViewItem item)
+            if (source != null && source is NavigationItem item)
             {
                 e.Handled = true;
                 _contextMenu.DataContext = item;
-                if (item.CanClosing)
+                if (item.CanClose)
                 {
                     _pinMenuItem.Visibility = Visibility.Visible;
                     _selfMenuItem.Visibility = Visibility.Visible;
                     if (_pinMenuItem.Icon is TextBlock tb)
                     {
-                        if (item.IsFixed)
+                        if (item.IsPinned)
                         {
                             tb.Text = "\xe77a";
                             _pinMenuItem.Header = "解除固定";
@@ -129,128 +163,124 @@ namespace LeeTeke.WpfControl.Controls
                     _pinMenuItem.Visibility = Visibility.Collapsed;
                     _selfMenuItem.Visibility = Visibility.Collapsed;
                 }
-
-
             }
+
         }
 
-
-        #region override
-
-        protected override bool IsItemItsOwnContainerOverride(object item)
+        protected override void OnPreviewMouseWheel(MouseWheelEventArgs e)
         {
-            if (item is TabViewItem tabItem)
+            e.Handled = true;
+            if (_scrollViewer != null)
             {
-                tabItem.Closed += TabViewItemClosedEventAsync;
-                tabItem.Selected += TabViewItemSelectedEvent;
-                return true;
+                switch (Orientation)
+                {
+                    case Orientation.Horizontal:
+                        ScrollViewerManager.ScrollHorizontalOffsetAdd(_scrollViewer, e.Delta);
+                        break;
+                    case Orientation.Vertical:
+                        ScrollViewerManager.ScrollVerticalOffsetAdd(_scrollViewer, e.Delta);
+                        break;
+                    default:
+                        break;
+                }
             }
-            else
-            {
-                return false;
-            }
-
         }
-
-        protected override DependencyObject GetContainerForItemOverride()
-        {
-            var tabItem = new TabViewItem();
-            tabItem.Closed += TabViewItemClosedEventAsync;
-            tabItem.Selected += TabViewItemSelectedEvent;
-            return tabItem;
-        }
-
-
 
         public override void OnApplyTemplate()
         {
-            base.OnApplyTemplate();
-            if (this.GetTemplateChild("PART_Left") is Button leftBtn)
+            if (_leftBtn != null)
             {
-                _leftBtn = leftBtn;
-                _leftBtn.Click += _leftBtn_Click;
-                _leftBtn.MouseDown += _leftBtn_MouseDown;
+                _leftBtn.Click -= _leftBtn_Click;
+            }
+            if (_rightBtn != null)
+            {
+                _rightBtn.Click -= _rightBtn_Click;
+            }
+            if (_contextMenu != null)
+            {
+                _contextMenu.Closed -= _contextMenu_Closed;
+            }
+            if (_allMenuItem != null)
+            {
+                _allMenuItem.Click -= _allMenuItem_Click;
+            }
+            if (_otherMenuItem != null)
+            {
+                _otherMenuItem.Click -= _otherMenuItem_Click;
+            }
+            if (_selfMenuItem != null)
+            {
+                _selfMenuItem.Click -= _selfMenuItem_Click;
+            }
+            if (_pinMenuItem != null)
+            {
+                _pinMenuItem.Click -= _pinMenuItem_Click;
+            }
+            if (_scrollViewer != null)
+            {
+                _scrollViewer.ScrollChanged -= _scrollViewer_ScrollChanged;
+                _scrollViewer.SizeChanged -= _scrollViewer_SizeChanged;
             }
 
-            if (this.GetTemplateChild("PART_Right") is Button rightBtn)
+            base.OnApplyTemplate();
+
+            _leftBtn = GetTemplateChild(ElementLeft) as Button;
+            _rightBtn = GetTemplateChild(ElementRight) as Button;
+            _contextMenu = GetTemplateChild(ElementContextMenu) as ContextMenu;
+            _allMenuItem = GetTemplateChild(ElementMenuItemCloseAll) as MenuItem;
+            _otherMenuItem = GetTemplateChild(ElementMenuItemCloseOther) as MenuItem;
+            _selfMenuItem = GetTemplateChild(ElementMenuItemCloseSelf) as MenuItem;
+            _pinMenuItem = GetTemplateChild(ElementMenuItemPin) as MenuItem;
+            _scrollViewer = GetTemplateChild(ElementScrollViewer) as ScrollViewer;
+
+
+            if (_leftBtn != null)
             {
-                _rightBtn = rightBtn;
+                _leftBtn.Click += _leftBtn_Click;
+            }
+            if (_rightBtn != null)
+            {
                 _rightBtn.Click += _rightBtn_Click;
             }
-
-
-      
-            if (this.GetTemplateChild("PART_ContextMenu") is ContextMenu contextMenu)
+            if (_contextMenu != null)
             {
-                _contextMenu = contextMenu;
-
                 _contextMenu.SetBinding(Dependencies.ContextMenuManager.ContentDockProperty, new Binding()
                 {
                     Source = this,
-                    Path = new PropertyPath(TabView.ItemContxtMenuContentDockProperty),
+                    Path = new PropertyPath(Navigation.ItemContxtMenuContentDockProperty),
                     Mode = BindingMode.OneWay,
                 });
                 _contextMenu.SetBinding(Dependencies.ContextMenuManager.ContentProperty, new Binding()
                 {
                     Source = this,
-                    Path = new PropertyPath(TabView.ItemContxtMenuContentProperty),
+                    Path = new PropertyPath(Navigation.ItemContxtMenuContentProperty),
                     Mode = BindingMode.OneWay,
                 });
-
-                _contextMenu.Closed += (e, s) => contextMenu.DataContext = this.DataContext;
+                _contextMenu.Closed += _contextMenu_Closed;
             }
-
-            if (this.GetTemplateChild("PART_MenuItem_CloseAll") is MenuItem allItem)
+            if (_allMenuItem != null)
             {
-                _allMenuItem = allItem;
-                _allMenuItem.Click += (es, ex) =>
-                {
-                    if (_contextMenu.DataContext is TabViewItem item)
-                    {
-                        TabViewItemClosedEventAsync(item, new TabViewItemClosedEventArgs(TabViewItemClosedMode.All, null));
-                    }
-                };
+                _allMenuItem.Click += _allMenuItem_Click;
             }
-            if (this.GetTemplateChild("PART_MenuItem_CloseOther") is MenuItem otherItem)
+            if (_otherMenuItem != null)
             {
-                _otherMenuItem = otherItem;
-                _otherMenuItem.Click += (es, ex) =>
-                {
-                    if (_contextMenu.DataContext is TabViewItem item)
-                    {
-                        TabViewItemClosedEventAsync(item, new TabViewItemClosedEventArgs(TabViewItemClosedMode.Other, null));
-                    }
-                };
+                _otherMenuItem.Click += _otherMenuItem_Click;
             }
-            if (this.GetTemplateChild("PART_MenuItem_CloseSelf") is MenuItem selftItem)
+            if (_selfMenuItem != null)
             {
-                _selfMenuItem = selftItem;
-                _selfMenuItem.Click += (es, ex) =>
-                {
-                    if (_contextMenu.DataContext is TabViewItem item)
-                    {
-                        TabViewItemClosedEventAsync(item, new TabViewItemClosedEventArgs(TabViewItemClosedMode.Self, null));
-                    }
-                };
+                _selfMenuItem.Click += _selfMenuItem_Click;
             }
-
-            if (this.GetTemplateChild("PART_MenuItem_Pin") is MenuItem btnPin)
+            if (_pinMenuItem != null)
             {
-                _pinMenuItem = btnPin;
-                btnPin.Click += (es, ex) =>
-                {
-                    if (_contextMenu.DataContext is TabViewItem item)
-                    {
-                        item.IsFixed = !item.IsFixed;
-                    }
-                };
+                _pinMenuItem.Click += _pinMenuItem_Click;
             }
-            if (this.GetTemplateChild("PART_ScrollViewer") is ScrollViewer scroll)
+            if (_scrollViewer != null)
             {
-                _scrollViewer = scroll;
                 _scrollViewer.ScrollChanged += _scrollViewer_ScrollChanged;
                 _scrollViewer.SizeChanged += _scrollViewer_SizeChanged;
             }
+
+
 
         }
 
@@ -265,42 +295,41 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public event TabViewColsedEventHandler ItemClosed
+        public event NavigationItemColsedEventHandler ItemClosed
         {
             add { AddHandler(ItemClosedEvent, value); }
             remove { RemoveHandler(ItemClosedEvent, value); }
         }
 
         public static readonly RoutedEvent ItemClosedEvent = EventManager.RegisterRoutedEvent(
-        "ItemClosed", RoutingStrategy.Bubble, typeof(TabViewColsedEventHandler), typeof(TabView));
+        "ItemClosed", RoutingStrategy.Bubble, typeof(NavigationItemColsedEventHandler), typeof(Navigation));
 
 
         private void RaiseItemClosed(object newValue)
         {
-            var arg = new TabViewColsedEventArgs(newValue, ItemClosedEvent);
+            var arg = new NavigationItemColsedEventArgs(newValue, ItemClosedEvent);
             RaiseEvent(arg);
         }
 
         #endregion
 
-
         #region ItemSelected
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public event TabViewSelectedEventHandler ItemSelected
+        public event NavigationItemSelectedEventHandler ItemSelected
         {
             add { AddHandler(ItemSelectedEvent, value); }
             remove { RemoveHandler(ItemSelectedEvent, value); }
         }
 
         public static readonly RoutedEvent ItemSelectedEvent = EventManager.RegisterRoutedEvent(
-        "ItemSelected", RoutingStrategy.Bubble, typeof(TabViewSelectedEventHandler), typeof(TabView));
+        "ItemSelected", RoutingStrategy.Bubble, typeof(NavigationItemSelectedEventHandler), typeof(Navigation));
 
 
         private void RaiseItemSelected(object newValue)
         {
-            var arg = new TabViewSelectedEventArgs(newValue, ItemSelectedEvent);
+            var arg = new NavigationItemSelectedEventArgs(newValue, ItemSelectedEvent);
             RaiseEvent(arg);
         }
 
@@ -311,49 +340,25 @@ namespace LeeTeke.WpfControl.Controls
 
         #region 依赖属性
 
-        #region ItemsSource
-        /// <summary>
-        /// 请填写描述
-        /// </summary>
-        public new IEnumerable ItemsSource
-        {
-            get { return (IEnumerable)GetValue(ItemsSourceProperty); }
-            set { SetValue(ItemsSourceProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for ItemSource.  This enables animation, styling, binding, etc...
-        public new static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(TabView), new PropertyMetadata(null, new PropertyChangedCallback(ItemsSourceChanged)));
-
-        private static void ItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is TabView tag)
-            {
-                tag.ItemList = e.NewValue as IList;
-            }
-        }
-
-        #endregion
 
         #region SelectedIndex
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public new int SelectedIndex
+        public int SelectedIndex
         {
             get { return (int)GetValue(SelectedIndexProperty); }
             set { SetValue(SelectedIndexProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for SelectedIndex.  This enables animation, styling, binding, etc...
-        public static new readonly DependencyProperty SelectedIndexProperty =
-            DependencyProperty.Register("SelectedIndex", typeof(int), typeof(TabView), new PropertyMetadata(-1, SelectedIndexChanged));
+        public static readonly DependencyProperty SelectedIndexProperty =
+            DependencyProperty.Register("SelectedIndex", typeof(int), typeof(Navigation), new PropertyMetadata(-1, SelectedIndexChanged));
 
         private static void SelectedIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is TabView tag && e.NewValue != e.OldValue && e.NewValue is int newValue && tag._selectedIndex != newValue)
+            if (d is Navigation tag && e.NewValue != e.OldValue)
             {
-                tag.SelectedIndexChanged();
 
             }
         }
@@ -364,21 +369,21 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public new object SelectedItem
+        public NavigationItem SelectedItem
         {
-            get { return (object)GetValue(SelectedItemProperty); }
+            get { return (NavigationItem)GetValue(SelectedItemProperty); }
             set { SetValue(SelectedItemProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for SelectedItem.  This enables animation, styling, binding, etc...
-        public static new readonly DependencyProperty SelectedItemProperty =
-            DependencyProperty.Register("SelectedItem", typeof(object), typeof(TabView), new PropertyMetadata(null, SelectedItemChanged));
+        public static readonly DependencyProperty SelectedItemProperty =
+            DependencyProperty.Register("SelectedItem", typeof(object), typeof(Navigation), new PropertyMetadata(null, SelectedItemChanged));
 
         private static void SelectedItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is TabView tag && e.NewValue != e.OldValue && e.NewValue is TabViewItem item && tag._selectedItem != item)
+            if (d is Navigation tag && e.NewValue != e.OldValue)
             {
-                tag.SelectedItemChanged();
+                //  tag.SelectedItemChanged();
             }
         }
 
@@ -388,22 +393,22 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public new object SelectedValue
+        public object SelectedValue
         {
             get { return (object)GetValue(SelectedValueProperty); }
             set { SetValue(SelectedValueProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for SelectedValue.  This enables animation, styling, binding, etc...
-        public static new readonly DependencyProperty SelectedValueProperty =
-            DependencyProperty.Register("SelectedValue", typeof(object), typeof(TabView), new PropertyMetadata(null, SelectedValueChanged));
+        public static readonly DependencyProperty SelectedValueProperty =
+            DependencyProperty.Register("SelectedValue", typeof(object), typeof(Navigation), new PropertyMetadata(null, SelectedValueChanged));
 
         private static void SelectedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
 
-            if (d is TabView tag && e.NewValue != e.OldValue && tag._selectedValue != e.NewValue)
+            if (d is Navigation tag && e.NewValue != e.OldValue)
             {
-                tag.SelectedValueChanged();
+
             }
         }
 
@@ -421,10 +426,9 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for Orientation.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty OrientationProperty =
-            DependencyProperty.Register("Orientation", typeof(Orientation), typeof(TabView));
+            DependencyProperty.Register("Orientation", typeof(Orientation), typeof(Navigation));
 
         #endregion
-
 
 
         #region LeftButtonStyle
@@ -439,7 +443,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for LeftButtonStyle.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LeftButtonStyleProperty =
-            DependencyProperty.Register("LeftButtonStyle", typeof(Style), typeof(TabView));
+            DependencyProperty.Register("LeftButtonStyle", typeof(Style), typeof(Navigation));
         #endregion
 
 
@@ -455,7 +459,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for RightButtonStyle.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty RightButtonStyleProperty =
-            DependencyProperty.Register("RightButtonStyle", typeof(Style), typeof(TabView));
+            DependencyProperty.Register("RightButtonStyle", typeof(Style), typeof(Navigation));
         #endregion
 
 
@@ -472,7 +476,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemCornerRadius.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemCornerRadiusProperty =
-            DependencyProperty.Register("ItemCornerRadius", typeof(CornerRadius), typeof(TabView));
+            DependencyProperty.Register("ItemCornerRadius", typeof(CornerRadius), typeof(Navigation));
 
         #endregion
 
@@ -489,7 +493,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemPinVisibly.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemPinVisiblyProperty =
-            DependencyProperty.Register("ItemPinVisibly", typeof(bool), typeof(TabView));
+            DependencyProperty.Register("ItemPinVisibly", typeof(bool), typeof(Navigation));
         #endregion
 
 
@@ -505,7 +509,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemMargin.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemMarginProperty =
-            DependencyProperty.Register("ItemMargin", typeof(Thickness), typeof(TabView));
+            DependencyProperty.Register("ItemMargin", typeof(Thickness), typeof(Navigation));
         #endregion
 
 
@@ -521,7 +525,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for CloseVisibly.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CloseVisiblyProperty =
-            DependencyProperty.Register("CloseVisibly", typeof(ShowMode), typeof(TabView));
+            DependencyProperty.Register("CloseVisibly", typeof(ShowMode), typeof(Navigation));
         #endregion
 
 
@@ -537,7 +541,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemPadding.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemPaddingProperty =
-            DependencyProperty.Register("ItemPadding", typeof(Thickness), typeof(TabView));
+            DependencyProperty.Register("ItemPadding", typeof(Thickness), typeof(Navigation));
         #endregion
 
         #region ItemWidth
@@ -552,7 +556,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemWidth.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemWidthProperty =
-            DependencyProperty.Register("ItemWidth", typeof(double), typeof(TabView));
+            DependencyProperty.Register("ItemWidth", typeof(double), typeof(Navigation));
         #endregion
 
         #region ItemHeight
@@ -567,7 +571,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemHeight.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemHeightProperty =
-            DependencyProperty.Register("ItemHeight", typeof(double), typeof(TabView));
+            DependencyProperty.Register("ItemHeight", typeof(double), typeof(Navigation));
         #endregion
 
 
@@ -583,7 +587,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for MouseOverBackground.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MouseOverBackgroundProperty =
-            DependencyProperty.Register("MouseOverBackground", typeof(Brush), typeof(TabView));
+            DependencyProperty.Register("MouseOverBackground", typeof(Brush), typeof(Navigation));
         #endregion
 
         #region MouseOverForeground
@@ -598,7 +602,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for MouseOverForeground.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MouseOverForegroundProperty =
-            DependencyProperty.Register("MouseOverForeground", typeof(Brush), typeof(TabView));
+            DependencyProperty.Register("MouseOverForeground", typeof(Brush), typeof(Navigation));
         #endregion
 
         #region MouseOverBorderBrush
@@ -613,7 +617,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for MouseOverBorderBrush.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MouseOverBorderBrushProperty =
-            DependencyProperty.Register("MouseOverBorderBrush", typeof(Brush), typeof(TabView));
+            DependencyProperty.Register("MouseOverBorderBrush", typeof(Brush), typeof(Navigation));
         #endregion
 
         #region MouseOverBorderThickness
@@ -628,9 +632,8 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for MouseOverBorderThickness.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MouseOverBorderThicknessProperty =
-            DependencyProperty.Register("MouseOverBorderThickness", typeof(Thickness), typeof(TabView));
+            DependencyProperty.Register("MouseOverBorderThickness", typeof(Thickness), typeof(Navigation));
         #endregion
-
 
         #region MouseOverEffect
         /// <summary>
@@ -644,10 +647,8 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for MouseOverEffect.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MouseOverEffectProperty =
-            DependencyProperty.Register("MouseOverEffect", typeof(Effect), typeof(TabView));
+            DependencyProperty.Register("MouseOverEffect", typeof(Effect), typeof(Navigation));
         #endregion
-
-
 
         #region SelectedBackground
         /// <summary>
@@ -661,7 +662,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for SelectedBrush.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedBackgroundProperty =
-            DependencyProperty.Register("SelectedBackground", typeof(Brush), typeof(TabView));
+            DependencyProperty.Register("SelectedBackground", typeof(Brush), typeof(Navigation));
 
         #endregion
 
@@ -677,7 +678,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for SelectedForeground.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedForegroundProperty =
-            DependencyProperty.Register("SelectedForeground", typeof(Brush), typeof(TabView));
+            DependencyProperty.Register("SelectedForeground", typeof(Brush), typeof(Navigation));
         #endregion
 
         #region SelectedBorderBrush
@@ -692,7 +693,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for SelectedBorderBrush.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedBorderBrushProperty =
-            DependencyProperty.Register("SelectedBorderBrush", typeof(Brush), typeof(TabView));
+            DependencyProperty.Register("SelectedBorderBrush", typeof(Brush), typeof(Navigation));
         #endregion
 
         #region SelectedBorderThickness
@@ -707,9 +708,8 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for SelectedBorderThickness.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedBorderThicknessProperty =
-            DependencyProperty.Register("SelectedBorderThickness", typeof(Thickness), typeof(TabView));
+            DependencyProperty.Register("SelectedBorderThickness", typeof(Thickness), typeof(Navigation));
         #endregion
-
 
         #region SelectedEffect
         /// <summary>
@@ -723,11 +723,8 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for SelectedEffect.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedEffectProperty =
-            DependencyProperty.Register("SelectedEffect", typeof(Effect), typeof(TabView));
+            DependencyProperty.Register("SelectedEffect", typeof(Effect), typeof(Navigation));
         #endregion
-
-
-
 
         #region ItemClosedCommand
         /// <summary>
@@ -741,7 +738,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemClosedCommand.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemClosedCommandProperty =
-            DependencyProperty.Register("ItemClosedCommand", typeof(ICommand), typeof(TabView));
+            DependencyProperty.Register("ItemClosedCommand", typeof(ICommand), typeof(Navigation));
 
         #endregion
 
@@ -757,7 +754,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemSelectedCommand.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemSelectedCommandProperty =
-            DependencyProperty.Register("ItemSelectedCommand", typeof(ICommand), typeof(TabView));
+            DependencyProperty.Register("ItemSelectedCommand", typeof(ICommand), typeof(Navigation));
 
         #endregion
 
@@ -773,9 +770,8 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ShowScrollToButton.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ShowScrollToButtonProperty =
-            DependencyProperty.Register("ShowScrollToButton", typeof(bool), typeof(TabView));
+            DependencyProperty.Register("ShowScrollToButton", typeof(bool), typeof(Navigation));
         #endregion
-
 
         #region ItemContxtMenuContent
         /// <summary>
@@ -789,7 +785,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemContxtMenuContent.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemContxtMenuContentProperty =
-            DependencyProperty.Register("ItemContxtMenuContent", typeof(object), typeof(TabView));
+            DependencyProperty.Register("ItemContxtMenuContent", typeof(object), typeof(Navigation));
         #endregion
 
         #region ItemContxtMenuContentDock
@@ -804,70 +800,51 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemContxtMenuContentDock.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemContxtMenuContentDockProperty =
-            DependencyProperty.Register("ItemContxtMenuContentDock", typeof(Dock), typeof(TabView));
+            DependencyProperty.Register("ItemContxtMenuContentDock", typeof(Dock), typeof(Navigation));
         #endregion
 
 
         #endregion
 
-        #region 内部逻辑
-
-
-
-        private void SelectedIndexChanged()
+        #region TemplateEvent
+        private void _pinMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedIndex < 0 || SelectedIndex > _stackPanel.Children.Count - 1)
+            if (_contextMenu.DataContext is NavigationItem item)
             {
-                SelectedInit(null);
-                return;
+                item.IsPinned = !item.IsPinned;
             }
-
-            if (!SelectedInit(SelectedIndex))
-                return;
-
-            SelectedItemsAsync(_stackPanel.Children[SelectedIndex] as TabViewItem);
-
         }
 
-        private void SelectedValueChanged()
+        private void _selfMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if (!SelectedInit(SelectedValue))
-                return;
-
-            if (ItemsSource == null)
+            if (_contextMenu.DataContext is NavigationItem item)
             {
-                SelectedItemsAsync(SelectedValue as TabViewItem);
+                ///关闭我自己
+                ItemCloseSelf(item);
             }
-            else
-            {
-                foreach (TabViewItem item in _stackPanel.Children)
-                {
-                    if (item.DataContext == SelectedValue)
-                    {
-                        SelectedItemsAsync(item);
-                        return;
-                    }
-                }
-            }
-
         }
 
-
-        private void SelectedItemChanged()
+        private void _otherMenuItem_Click(object sender, RoutedEventArgs e)
         {
-
-            if (!SelectedInit(SelectedItem))
-                return;
-
-            SelectedItemsAsync(SelectedItem as TabViewItem);
-
+            if (_contextMenu.DataContext is NavigationItem item)
+            {
+                ItemCloseOther(item);
+            }
         }
 
-
-
-        private void _leftBtn_MouseDown(object sender, MouseButtonEventArgs e)
+        private void _contextMenu_Closed(object sender, RoutedEventArgs e)
         {
+            _contextMenu.DataContext = this.DataContext;
+        }
 
+        private void _allMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            //关闭全部Item
+            if (_contextMenu.DataContext is NavigationItem item)
+            {
+                ///关闭我自己
+                ItemCloseAll(item);
+            }
         }
 
         private void _rightBtn_Click(object sender, RoutedEventArgs e)
@@ -888,7 +865,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private void _scrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            if ( Orientation == Orientation.Horizontal && ShowScrollToButton && sender is ScrollViewer scrollViewer)
+            if (Orientation == Orientation.Horizontal && ShowScrollToButton && sender is ScrollViewer scrollViewer)
             {
                 if (scrollViewer.ScrollableWidth > 0)
                 {
@@ -907,300 +884,21 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
 
-        private void StackPanelLoadedEvent(object sender, RoutedEventArgs e)
-        {
-            if (sender is StackPanel stackPanel && stackPanel.Name == "PART_StackPanel" && StaticMethods.IsInControl(this, stackPanel))
-            {
-                _stackPanel = stackPanel;
-                if (SelectedIndex > -1)
-                {
-                    SelectedIndexChanged();
-                    return;
-                }
-
-                if (SelectedValue != null)
-                {
-                    SelectedValueChanged();
-                    return;
-                }
-
-                if (SelectedItem != null)
-                {
-                    SelectedItemChanged();
-                    return;
-                }
-            }
-        }
-
-
-        private async void TabViewItemClosedEventAsync(object sender, RoutedEventArgs e)
-        {
-            if (sender is TabViewItem self)
-                switch ((e as TabViewItemClosedEventArgs).ClosedMode)
-                {
-                    case TabViewItemClosedMode.Self:
-                        if (self.CanClosing)
-                        {
-
-                            var index = _stackPanel.Children.IndexOf(self);
-                            ItemRemoveChanged(self);
-                            ///等待关闭
-                            await CloseItemAsync(self);
-                            ///如果当前是选择的
-                            if (SelectedItem == self)
-                            {
-                                if (self.IsSelected)
-                                {
-                                    if (index > 0)
-                                    {
-                                        SelectedItem = _stackPanel.Children[index - 1] as TabViewItem;
-                                    }
-                                    else if (_stackPanel.Children != null && _stackPanel.Children.Count > 0)
-                                    {
-                                        SelectedItem = _stackPanel.Children[0] as TabViewItem;
-                                    }
-                                }
-                                else if (_stackPanel.Children.Count < 1)
-                                {
-                                    SelectedItem = null;
-                                }
-                            }
-                        }
-                        break;
-                    case TabViewItemClosedMode.Other:
-
-                        ///关闭其他
-                        if (SelectedItem != null)
-                            SelectedItem = self;
-
-                        ///需要关闭的窗口
-                        List<object> needCloseItem = new List<object>();
-                        for (int i = 0; i < _stackPanel.Children.Count; i++)
-                        {
-                            ///关闭全部
-                            if (sender != _stackPanel.Children[i])
-                            {
-                                needCloseItem.Add(_stackPanel.Children[i]);
-                            }
-                        }
-                        foreach (TabViewItem needitem in needCloseItem)
-                        {
-                            if (needitem.CanClosing && !needitem.IsFixed)
-                            {
-                                CloseItemAsync(needitem);
-                                ItemRemoveChanged(needitem);
-                            }
-                        }
-
-                        break;
-                    case TabViewItemClosedMode.All:
-                        List<object> allItem = new List<object>();
-                        for (int i = 0; i < _stackPanel.Children.Count; i++)
-                        {
-                            allItem.Add(_stackPanel.Children[i]);
-                        }
-                        var needSelected = allItem.Find(p => p is TabViewItem finditem && (finditem.CanClosing == false || finditem.IsFixed));
-                        if (needSelected is TabViewItem selecteditem && SelectedItem != null)
-                        {
-                            SelectedItem = selecteditem;
-                        }
-
-                        foreach (TabViewItem item in allItem)
-                        {
-                            if (item.CanClosing && !item.IsFixed)
-                            {
-                                CloseItemAsync(item);
-                                ItemRemoveChanged(item);
-                            }
-                        }
-
-
-                        break;
-                    default:
-                        break;
-                }
-
-        }
-
-        private void TabView_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
-        {
-            e.Handled = true;
-            if (_scrollViewer != null)
-            {
-
-                switch (Orientation)
-                {
-                    case Orientation.Horizontal:
-                        ScrollViewerManager.ScrollHorizontalOffsetAdd(_scrollViewer, e.Delta);
-                        break;
-                    case Orientation.Vertical:
-                        ScrollViewerManager.ScrollVerticalOffsetAdd(_scrollViewer, e.Delta);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-        private void TabViewItemSelectedEvent(object sender, RoutedEventArgs e)
-        {
-            if (sender is TabViewItem item && StaticMethods.IsInControl(this, item))
-            {
-                if (SelectedItem != item)
-                {
-                    SelectedItem = item;
-                    ScrollToItem(item);
-                }
-            }
-        }
-
-   
-
-        /// <summary>
-        /// 关闭
-        /// </summary>
-        /// <param name="item"></param>
-        private async Task CloseItemAsync(TabViewItem item)
-        {
-
-            await item.CloseAsync();
-
-
-            if (ItemsSource == null)
-            {
-                Items.Remove(item);
-            }
-            else
-            {
-                ItemList.Remove(item.DataContext);
-            }
-            item.Closed -= TabViewItemClosedEventAsync;
-            item.Selected -= TabViewItemSelectedEvent;
-            ItemRemoveChanged(item);
-
-
-
-        }
-
-        private async void SelectedItemsAsync(TabViewItem item)
-        {
-            if (item == null)
-            {
-                ItemSelectedChanged(null);
-                return;
-            }
-
-
-            for (int i = 0; i < _stackPanel.Children.Count; i++)
-            {
-
-                if (_stackPanel.Children[i] == item)
-                {
-                    ItemSelectedChanged(item);
-                    item.IsSelected = true;
-                }
-                else
-                {
-                    (_stackPanel.Children[i] as TabViewItem).IsSelected = false;
-                }
-            }
-        }
 
         private void _scrollViewer_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (SelectedItem is TabViewItem item)
+            if (SelectedItem is NavigationItem item)
             {
                 ScrollToItem(item);
             }
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="item"></param>
-        private void ItemValueChanged(TabViewItem item)
-        {
-            _selectedValue = ItemsSource == null ? item : item?.DataContext;
-            _selectedIndex = _stackPanel.Children.IndexOf(item);
-            _selectedItem = item;
-
-            SelectedValue = _selectedValue;
-            SelectedIndex = _selectedIndex;
-            SelectedItem = _selectedItem;
-
-        }
-
-
-        /// <summary>
-        /// Item移动事件发生
-        /// </summary>
-        /// <param name="item"></param>
-        private void ItemRemoveChanged(TabViewItem item)
-        {
-            RaiseItemClosed(item);
-            try
-            {
-                ItemClosedCommand?.Execute(ItemsSource == null ? item : item.DataContext);
-            }
-            catch
-            {
-            }
-        }
-
-        /// <summary>
-        /// Item选择事件发生
-        /// </summary>
-        /// <param name="item"></param>
-        private void ItemSelectedChanged(TabViewItem item)
-        {
-            ItemValueChanged(item);
-            RaiseItemSelected(item);
-            try
-            {
-                ItemSelectedCommand?.Execute(ItemsSource == null ? item : item?.DataContext);
-            }
-            catch
-            {
-            }
-        }
-
-        /// <summary>
-        /// 清理选择
-        /// </summary>
-        private bool SelectedInit(object args)
-        {
-            if (_stackPanel == null)
-            {
-                return false;
-            }
-
-
-            _selectedIndex = -1;
-            _selectedItem = null;
-            _selectedValue = null;
-
-            if (args == null)
-            {
-                SelectedIndex = _selectedIndex;
-                SelectedValue = _selectedValue;
-                SelectedItem = _selectedItem;
-                foreach (TabViewItem chlid in _stackPanel.Children)
-                {
-                    chlid.IsSelected = false;
-                }
-                RaiseItemSelected(SelectedValue);
-                return false;
-            }
-
-            return true;
-        }
-
         #endregion
 
-        #region 公开方法
+        #region PublicMethod
 
 
-        public void ScrollToItem(TabViewItem item)
+        public void ScrollToItem(NavigationItem item)
         {
             if (Orientation == Orientation.Horizontal)
             {
@@ -1232,5 +930,448 @@ namespace LeeTeke.WpfControl.Controls
 
         }
         #endregion
+
+        #region internalMethod
+
+        /// <summary>
+        /// 通知Item关闭
+        /// </summary>
+        /// <param name="item"></param>
+        internal void NotifyItemClose(NavigationItem item)
+        {
+            var closeItem = GetItemFormItem(item);
+            if (closeItem != null)
+            {
+                ChangedCloseItem(item);
+            }
+        }
+
+        /// <summary>
+        /// 通知Item选择
+        /// </summary>
+        /// <param name="item"></param>
+        internal void NotifyItemSelecte(NavigationItem item)
+        {
+            var closeItem = GetItemFormItem(item);
+            if (closeItem != null)
+            {
+                ChangeSelectedItem(item);
+            }
+
+        }
+
+        #endregion
+
+        #region PrivateMethod
+
+
+        /// <summary>
+        /// 关闭所有的Item
+        /// </summary>
+        private void ItemCloseAll(NavigationItem self)
+        {
+            bool needSelected =(!self.CanClose ||SelectedIndex == -1);
+
+            List<NavigationItem> closeItem = new List<NavigationItem>();
+
+            ///关闭方法
+            var action = new Action<NavigationItem>(x =>
+           {
+               if (!x.CanClose && !needSelected)
+               {
+                   ///指定给他
+                   needSelected = true;
+                   ChangeSelectedItem(x);
+               }
+               else
+               {
+                   closeItem.Add(x);
+               }
+           });
+
+            if (ItemsSource == null)
+            {
+                try
+                {
+                    for (int i = 0; i < Items.Count; i++)
+                    {
+                        if (Items[i] is NavigationItem ni)
+                        {
+                            action(ni);
+                        }
+                    }
+                }
+                catch
+                {
+                }
+            }
+            else
+            {
+                for (int i = 0; i < _items.Length; i++)
+                {
+                    action(_items[i]);
+                }
+            }
+
+            if (!needSelected)
+            {
+                ChangeSelectedItem(null);
+            }
+
+
+            foreach (var item in closeItem)
+            {
+                item.Close();
+            }
+
+        }
+
+        private void ItemCloseOther(NavigationItem self)
+        {
+
+
+            List<NavigationItem> closeItem = new List<NavigationItem>();
+
+            ///关闭方法
+            var action = new Action<NavigationItem>(x =>
+            {
+                if (x.CanClose && x != self)
+                {
+                    closeItem.Add(x);
+                }
+            });
+
+            if (ItemsSource == null)
+            {
+                try
+                {
+                    for (int i = 0; i < Items.Count; i++)
+                    {
+                        if (Items[i] is NavigationItem ni)
+                        {
+                            action(ni);
+                        }
+                    }
+                }
+                catch
+                {
+                }
+            }
+            else
+            {
+                for (int i = 0; i < _items.Length; i++)
+                {
+                    action(_items[i]);
+                }
+            }
+
+
+            foreach (var item in closeItem)
+            {
+                item.Close();
+            }
+
+        }
+
+        private void ItemCloseSelf(NavigationItem self)
+        {
+
+            self.SelfClose = true;
+            self.Close();
+
+        }
+
+        /// <summary>
+        /// 关闭
+        /// </summary>
+        /// <param name="item"></param>
+        private void ChangedCloseItem(NavigationItem item)
+        {
+            if (!item.IsClosed)
+                return;
+    
+            bool needSelected = SelectedIndex == -1;
+
+            if (ItemsSource == null)
+            {
+                if (item.SelfClose)
+                {
+                    try
+                    {
+                        for (int i = 0; i < Items.Count; i++)
+                        {
+                            if (!needSelected && Items[i] is NavigationItem ni && ni == item)
+                            {
+                                if (i > 0)
+                                {
+                                    ///默认选择前一个
+                                    ChangeSelectedItem(Items[i - 1] as NavigationItem);
+                                }
+                                else if (i < Items.Count - 1)
+                                {
+                                    ///默认选择前一个
+                                    ChangeSelectedItem(Items[i + 1] as NavigationItem);
+                                }
+                                break;
+                            }
+                        }
+                    }
+                    catch
+                    {
+                    }
+                }
+
+                Items.Remove(item);
+                if (SelectedItem != null)
+                {
+                    SelectedIndex = _currentIndex = ItemContainerGenerator.IndexFromContainer(SelectedItem);
+                }
+            }
+            else
+            {
+                if (item.SelfClose)
+                {
+                    for (int i = 0; i < _items.Length; i++)
+                    {
+                        if (!needSelected && _items[i] == item)
+                        {
+                            if (i > 0)
+                            {
+                                ///默认选择前一个
+                                ChangeSelectedItem(_items[i - 1] );
+                            }
+                            else if (i < Items.Count - 1)
+                            {
+                                ///默认选择前一个
+                                ChangeSelectedItem(_items[i + 1] );
+                            }
+                            break;
+                        }
+                    }
+                }
+
+                var list = ItemsSource as IList;
+                if (list != null)
+                    list.Remove(item.DataContext);
+
+                SelectedIndex = _currentIndex = list.IndexOf(SelectedValue);
+            }
+
+
+            ItemRemoveChanged(item);
+
+
+
+        }
+
+        /// <summary>
+        /// 选择Item
+        /// </summary>
+        /// <param name="item"></param>
+        private void ChangeSelectedItem(NavigationItem item)
+        {
+            if (item == null)
+            {
+                SelectedIndex = _currentIndex = -1;
+                SelectedItem = _currentItem = null;
+                SelectedValue = _currentValue = null;
+                return;
+            }
+
+            item.IsSelected = true;
+            ScrollToItem(item);
+
+            if (ItemsSource == null)
+            {
+                try
+                {
+                    for (int i = 0; i < Items.Count; i++)
+                    {
+                        if (Items[i] is NavigationItem ni)
+                        {
+                            if (ni == item)
+                            {
+                                SelectedIndex = _currentIndex = i;
+                                SelectedItem = _currentItem = item;
+                                SelectedValue = _currentValue = item.DataContext ?? item;
+                            }
+                            else
+                            {
+                                ni.IsSelected = false;
+                            }
+                        }
+                    }
+
+                }
+                catch
+                {
+                }
+
+            }
+            else
+            {
+                for (int i = 0; i < _items.Length; i++)
+                {
+                    if (_items[i] == item)
+                    {
+                        SelectedIndex = _currentIndex = i;
+                        SelectedItem = _currentItem = item;
+                        SelectedValue = _currentValue = item.DataContext ?? item;
+                    }
+                    else
+                    {
+                        _items[i].IsSelected = false;
+                    }
+                }
+            }
+            ItemSelectedChanged(item);
+
+        }
+
+
+        /// <summary>
+        /// Item移动事件发生
+        /// </summary>
+        /// <param name="item"></param>
+        private void ItemRemoveChanged(NavigationItem item)
+        {
+            RaiseItemClosed(item);
+            try
+            {
+                if (ItemClosedCommand != null)
+                {
+                    var commandArgs = ItemsSource == null ? item : item?.DataContext;
+                    if (ItemClosedCommand.CanExecute(commandArgs))
+                    {
+                        ItemClosedCommand.Execute(commandArgs);
+                    }
+                }
+
+            }
+            catch
+            {
+            }
+        }
+        /// <summary>
+        /// Item选择事件发生
+        /// </summary>
+        /// <param name="item"></param>
+        private void ItemSelectedChanged(NavigationItem item)
+        {
+            RaiseItemSelected(item);
+            try
+            {
+                if (ItemSelectedCommand != null)
+                {
+                    var commandArgs = ItemsSource == null ? item : item?.DataContext;
+                    if (ItemSelectedCommand.CanExecute(commandArgs))
+                    {
+                        ItemSelectedCommand.Execute(commandArgs);
+                    }
+                }
+            }
+            catch
+            {
+            }
+        }
+
+
+        /// <summary>
+        /// 获取Item来自序列
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        private NavigationItem GetItemFormItem(NavigationItem item)
+        {
+            if (ItemContainerGenerator.Status != GeneratorStatus.ContainersGenerated)
+                return null;
+
+            if (ItemsSource == null)
+            {
+                return ItemContainerGenerator.ContainerFromItem(item) as NavigationItem;
+            }
+
+            if (_items == null)
+                return null;
+
+            if (_items.Contains(item))
+            {
+                return item;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// 获取Item来自序列
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        private NavigationItem GetItemFormIndex(int index)
+        {
+            if (ItemContainerGenerator.Status != GeneratorStatus.ContainersGenerated)
+                return null;
+
+            if (ItemsSource == null)
+            {
+                return ItemContainerGenerator.ContainerFromIndex(index) as NavigationItem;
+            }
+
+            if (_items == null)
+                return null;
+
+            if (index > -1 && index < _items.Length)
+            {
+                return _items[index];
+            }
+
+            return null;
+
+        }
+
+        /// <summary>
+        /// 获取Item来自DataContext
+        /// </summary>
+        /// <param name="datacontext"></param>
+        /// <returns></returns>
+        private NavigationItem GetItemFormDataContext(object dataContext)
+        {
+            try
+            {
+
+
+                if (ItemContainerGenerator.Status != GeneratorStatus.ContainersGenerated)
+                    return null;
+
+                if (ItemsSource == null)
+                {
+                    foreach (NavigationItem item in Items)
+                    {
+                        if (item.DataContext == dataContext)
+                        {
+                            return item;
+                        }
+                    }
+                }
+
+                var whereFind = _items.Where(p => p.DataContext == dataContext);
+                if (whereFind.Any())
+                    return whereFind.First();
+
+                return null;
+            }
+            catch
+            {
+                return null;
+
+            }
+        }
+
+
+
+
+        #endregion
+
+
     }
 }

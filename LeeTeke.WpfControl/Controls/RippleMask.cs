@@ -45,12 +45,15 @@ namespace LeeTeke.WpfControl.Controls
     ///     <MyNamespace:RippleMask/>
     ///
     /// </summary>
+    [TemplatePart(Name =ElementCanvas,Type =typeof(Canvas))]
     public class RippleMask : Control
     {
         static RippleMask()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(RippleMask), new FrameworkPropertyMetadata(typeof(RippleMask)));
         }
+
+        private const string ElementCanvas = "PART_Canvas";
 
         /// <summary>
         /// 鼠标当前再控件中的位置
@@ -274,7 +277,7 @@ namespace LeeTeke.WpfControl.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            _canvas = this.Template.FindName("PART_Canvas", this) as Canvas;
+            _canvas= GetTemplateChild(ElementCanvas) as Canvas;
         }
 
 
