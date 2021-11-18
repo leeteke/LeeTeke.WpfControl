@@ -20,7 +20,7 @@ namespace LeeTeke.WPFTest
     /// </summary>
     public partial class TestWindow : Window
     {
-        private ObservableCollection<string>  items= new ObservableCollection<string>() { "测试1", "测试2", "测试3", "测试4", };
+        private ObservableCollection<string>  items= new ObservableCollection<string>() { "测试1", "测试2", "测试3", "测试4", "测试5", "测试6", "测试7", "测试8", "测试9", "测试10", };
         public TestWindow()
         {
             InitializeComponent();
@@ -44,7 +44,17 @@ namespace LeeTeke.WPFTest
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            items.Move(1, 2);
+            items.RemoveAt(0);
+        }
+
+        private void Navigation_ItemSelected(object sender, WpfControl.NavigationItemSelectedEventArgs e)
+        {
+            tb.AppendText($"S__{DateTime.Now:HH:mm:ss:fff}__{e.Value}\r\n");
+        }
+
+        private void test_ItemClosed(object sender, WpfControl.NavigationItemColsedEventArgs e)
+        {
+            tb.AppendText($"C__{DateTime.Now:HH:mm:ss:fff}__{e.Value}\r\n");
         }
     }
 }

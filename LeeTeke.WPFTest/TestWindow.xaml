@@ -24,29 +24,40 @@
         </Grid.RowDefinitions>
 
         <lee:Navigation x:Name="test" 
+                        ShowScrollToButton="True"
+                        SelectedIndex="0"
+                         ItemSelected="Navigation_ItemSelected"
+                        ItemClosed="test_ItemClosed"
                          >
             <lee:Navigation.ItemTemplate>
                 <DataTemplate >
-                    <TextBlock lee:NavigationItem.ItemCanClose="False" Text="{Binding}"/>
+                    <TextBlock  Text="{Binding}"/>
                 </DataTemplate>
             </lee:Navigation.ItemTemplate>
         </lee:Navigation>
 
         <lee:Navigation  Grid.Row="1"
+                         ItemSelected="Navigation_ItemSelected"
+                         ItemClosed="test_ItemClosed"
                          >
             <lee:NavigationItem Content="测1" CanClose="False"/>
             <lee:NavigationItem Content="测2"/>
             <lee:NavigationItem Content="测3"/>
             <lee:NavigationItem Content="测4"/>
+            
         </lee:Navigation>
 
-        <TextBlock Grid.Row="2"
-                   Text="{Binding ElementName=test,Path=SelectedIndex}"/>
+        <TextBox x:Name="tb"
+                 Grid.Row="2"
+                 IsReadOnly="True"
+                 VerticalContentAlignment="Top"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                   />
 
 
         <Button Grid.Row="2"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"
                 Content="click"
                 Click="Button_Click"/>
     </Grid>

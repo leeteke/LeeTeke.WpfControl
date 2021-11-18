@@ -18,6 +18,7 @@ namespace LeeTeke.WPFTest
         {
             base.OnStartup(e);
 
+            LeeTeke.WpfControl.StaticMethods.SetScrollViewerSlide(true);
           //  LeeTeke.WpfControl.MessageBoxEx.IsDefaultShowMsgCR = false;
 
         }

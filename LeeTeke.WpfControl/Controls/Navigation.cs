@@ -100,16 +100,31 @@ namespace LeeTeke.WpfControl.Controls
 
         public Navigation()
         {
+            Loaded += Navigation_Loaded;
+        }
 
+        private void Navigation_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (SelectedIndex != -1)
+            {
+                ChangeSelectedIndex(SelectedIndex);
+                return;
+            }
+
+            if (SelectedItem != null)
+            {
+                ChangeSelectedItem(SelectedItem);
+                return;
+            }
+
+            if (SelectedValue != null)
+            {
+                ChangeSelectedValue(SelectedValue);
+            }
         }
 
 
-
-
-
-
         #region override
-
 
 
         protected override bool IsItemItsOwnContainerOverride(object item)
@@ -126,6 +141,7 @@ namespace LeeTeke.WpfControl.Controls
         protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
         {
             _items = StaticMethods.FindItemsControlChilds<NavigationItem>(this);
+            UpdateSelectedIndex();
             base.OnItemsChanged(e);
         }
 
@@ -185,6 +201,7 @@ namespace LeeTeke.WpfControl.Controls
                 }
             }
         }
+
 
         public override void OnApplyTemplate()
         {
@@ -357,9 +374,9 @@ namespace LeeTeke.WpfControl.Controls
 
         private static void SelectedIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is Navigation tag && e.NewValue != e.OldValue)
+            if (d is Navigation tag && e.NewValue != e.OldValue && tag.IsLoaded)
             {
-
+                tag.ChangeSelectedIndex((int)e.NewValue);
             }
         }
 
@@ -381,9 +398,9 @@ namespace LeeTeke.WpfControl.Controls
 
         private static void SelectedItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is Navigation tag && e.NewValue != e.OldValue)
+            if (d is Navigation tag && e.NewValue != e.OldValue && tag.IsLoaded)
             {
-                //  tag.SelectedItemChanged();
+                tag.ChangeSelectedItem(e.NewValue as NavigationItem);
             }
         }
 
@@ -406,9 +423,9 @@ namespace LeeTeke.WpfControl.Controls
         private static void SelectedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
 
-            if (d is Navigation tag && e.NewValue != e.OldValue)
+            if (d is Navigation tag && e.NewValue != e.OldValue && tag.IsLoaded)
             {
-
+                tag.ChangeSelectedValue(e.NewValue);
             }
         }
 
@@ -970,20 +987,20 @@ namespace LeeTeke.WpfControl.Controls
         /// </summary>
         private void ItemCloseAll(NavigationItem self)
         {
-            bool needSelected =(!self.CanClose ||SelectedIndex == -1);
+            bool needSelected = (!self.CanClose || SelectedIndex == -1);
 
             List<NavigationItem> closeItem = new List<NavigationItem>();
 
             ///关闭方法
             var action = new Action<NavigationItem>(x =>
            {
-               if (!x.CanClose && !needSelected)
+               if ((x.IsPinned || !x.CanClose) && !needSelected)
                {
                    ///指定给他
                    needSelected = true;
                    ChangeSelectedItem(x);
                }
-               else
+               else if (!x.IsPinned && x.CanClose)
                {
                    closeItem.Add(x);
                }
@@ -1035,7 +1052,7 @@ namespace LeeTeke.WpfControl.Controls
             ///关闭方法
             var action = new Action<NavigationItem>(x =>
             {
-                if (x.CanClose && x != self)
+                if (!x.IsPinned && x.CanClose && x != self)
                 {
                     closeItem.Add(x);
                 }
@@ -1089,7 +1106,8 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (!item.IsClosed)
                 return;
-    
+
+
             bool needSelected = SelectedIndex == -1;
 
             if (ItemsSource == null)
@@ -1122,10 +1140,6 @@ namespace LeeTeke.WpfControl.Controls
                 }
 
                 Items.Remove(item);
-                if (SelectedItem != null)
-                {
-                    SelectedIndex = _currentIndex = ItemContainerGenerator.IndexFromContainer(SelectedItem);
-                }
             }
             else
             {
@@ -1138,12 +1152,12 @@ namespace LeeTeke.WpfControl.Controls
                             if (i > 0)
                             {
                                 ///默认选择前一个
-                                ChangeSelectedItem(_items[i - 1] );
+                                ChangeSelectedItem(_items[i - 1]);
                             }
                             else if (i < Items.Count - 1)
                             {
                                 ///默认选择前一个
-                                ChangeSelectedItem(_items[i + 1] );
+                                ChangeSelectedItem(_items[i + 1]);
                             }
                             break;
                         }
@@ -1154,22 +1168,43 @@ namespace LeeTeke.WpfControl.Controls
                 if (list != null)
                     list.Remove(item.DataContext);
 
-                SelectedIndex = _currentIndex = list.IndexOf(SelectedValue);
             }
-
-
+            UpdateSelectedIndex();
             ItemRemoveChanged(item);
-
-
 
         }
 
+        /// <summary>
+        /// 选择Index
+        /// </summary>
+        /// <param name="index"></param>
+        private void ChangeSelectedIndex(int index)
+        {
+            if (index == _currentIndex)
+            {
+                return;
+            }
+
+            ChangeSelectedItem(GetItemFormIndex(index));
+
+        }
+
+        private void ChangeSelectedValue(object vaule)
+        {
+            if (vaule == _currentValue)
+            {
+                return;
+            }
+
+            ChangeSelectedItem(GetItemFormDataContext(vaule));
+        }
         /// <summary>
         /// 选择Item
         /// </summary>
         /// <param name="item"></param>
         private void ChangeSelectedItem(NavigationItem item)
         {
+
             if (item == null)
             {
                 SelectedIndex = _currentIndex = -1;
@@ -1178,7 +1213,16 @@ namespace LeeTeke.WpfControl.Controls
                 return;
             }
 
-            item.IsSelected = true;
+            if (item == _currentItem)
+                return;
+
+            if (!item.IsSelected)
+            {
+                item.IsSelected = true;
+                return;
+            }
+
+
             ScrollToItem(item);
 
             if (ItemsSource == null)
@@ -1228,6 +1272,27 @@ namespace LeeTeke.WpfControl.Controls
 
         }
 
+        /// <summary>
+        /// 更新选项
+        /// </summary>
+        private void UpdateSelectedIndex()
+        {
+            if (SelectedItem != null && SelectedValue != null)
+            {
+                if (ItemsSource == null)
+                {
+                    SelectedIndex = _currentIndex = ItemContainerGenerator.IndexFromContainer(SelectedItem);
+                }
+                else
+                {
+                    var list = ItemsSource as IList;
+                    if (list != null)
+                    {
+                        SelectedIndex = _currentIndex = list.IndexOf(SelectedValue);
+                    }
+                }
+            }
+        }
 
         /// <summary>
         /// Item移动事件发生
@@ -1338,7 +1403,8 @@ namespace LeeTeke.WpfControl.Controls
         {
             try
             {
-
+                if (dataContext == null)
+                    return null;
 
                 if (ItemContainerGenerator.Status != GeneratorStatus.ContainersGenerated)
                     return null;
@@ -1347,7 +1413,7 @@ namespace LeeTeke.WpfControl.Controls
                 {
                     foreach (NavigationItem item in Items)
                     {
-                        if (item.DataContext == dataContext)
+                        if (item == dataContext || item.DataContext == dataContext)
                         {
                             return item;
                         }
