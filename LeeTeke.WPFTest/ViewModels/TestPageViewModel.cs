@@ -115,6 +115,25 @@ namespace LeeTeke.WPFTest.ViewModels
 
 
         public DelegateCommand<object> TestCommand { get; set; }
+
+
+        /// <summary>
+        /// 命令注释
+        /// </summary>
+        public DelegateCommand ToggleButtonCommand => new(ToggleButtonCommandExecute);
+        /// <summary>
+        /// 命令注释_Execute
+        /// </summary>
+        private void ToggleButtonCommandExecute()
+        {
+            NotifyData = new NotifyBannerShowData()
+            {
+                Content = $"ToogleGroup规则选择错误",
+                Status = NotifyStatus.Warning
+            };
+        }  
+
+
         public TestPageViewModel()
         {
             TestCommand = new DelegateCommand<object>(TestCommandExecute);

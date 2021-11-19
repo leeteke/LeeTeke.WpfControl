@@ -140,21 +140,31 @@ namespace LeeTeke.WpfControl.Dependencies
 
         private static bool CanScoolViewerHandled(ScrollViewerSlideMonitorMode mode, ScrollViewer scrollViewer, int offset)
         {
+            try
+            {
 
-            if (mode != ScrollViewerSlideMonitorMode.OnlyHorizontal && scrollViewer.ScrollableHeight > 0 && scrollViewer.VerticalScrollBarVisibility != ScrollBarVisibility.Disabled)
-            {
-                if (offset > 0 ? scrollViewer.VerticalOffset == 0 : scrollViewer.ScrollableHeight == scrollViewer.VerticalOffset)
+
+                if (mode != ScrollViewerSlideMonitorMode.OnlyHorizontal && scrollViewer.ScrollableHeight > 0 && scrollViewer.VerticalScrollBarVisibility != ScrollBarVisibility.Disabled)
+                {
+                    if (offset > 0 ? scrollViewer.VerticalOffset == 0 : scrollViewer.ScrollableHeight == scrollViewer.VerticalOffset)
+                        return false;
+                    return true;
+                }
+                else if (mode != ScrollViewerSlideMonitorMode.OnlyVertical && scrollViewer.ScrollableWidth > 0 && scrollViewer.HorizontalScrollBarVisibility != ScrollBarVisibility.Disabled)
+                {
+                    if (offset > 0 ? scrollViewer.HorizontalOffset == 0 : scrollViewer.ScrollableWidth == scrollViewer.HorizontalOffset)
+                        return false;
+                    return true;
+                }
+                else
                     return false;
-                return true;
+
             }
-            else if (mode != ScrollViewerSlideMonitorMode.OnlyVertical && scrollViewer.ScrollableWidth > 0 && scrollViewer.HorizontalScrollBarVisibility != ScrollBarVisibility.Disabled)
+            catch
             {
-                if (offset > 0 ? scrollViewer.HorizontalOffset == 0 : scrollViewer.ScrollableWidth == scrollViewer.HorizontalOffset)
-                    return false;
-                return true;
-            }
-            else
+
                 return false;
+            }
         }
 
         #endregion

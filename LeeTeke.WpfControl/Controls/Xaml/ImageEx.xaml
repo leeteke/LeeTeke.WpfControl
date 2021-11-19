@@ -19,15 +19,15 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             CornerRadius="{TemplateBinding   CornerRadius}"
                             >
-                        <Grid x:Name="PART_Grid" >
-                            <Grid.Clip>
+                        <local:EasyPanel  >
+                            <local:EasyPanel.Clip>
                                 <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
                                     <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
                                     <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
                                     <Binding   RelativeSource="{RelativeSource Mode=TemplatedParent}"  Path="CornerRadius" Mode="OneWay"/>
                                     <Binding ElementName="PART_Border"  Path="BorderThickness" Mode="OneWay"/>
                                 </MultiBinding>
-                            </Grid.Clip>
+                            </local:EasyPanel.Clip>
                             <ContentPresenter x:Name="PART_DefaultContent"
                                           Content="{TemplateBinding DefaultContent}"
                                               Margin="{TemplateBinding Padding}"
@@ -42,7 +42,7 @@
                                           IsHitTestVisible="False"
                                                Margin="{TemplateBinding Padding}"
                                           Content="{TemplateBinding Watermark}"/>
-                        </Grid>
+                        </local:EasyPanel>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">

@@ -57,7 +57,7 @@ namespace LeeTeke.WpfControl.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(NotifyBanner), new FrameworkPropertyMetadata(typeof(NotifyBanner)));
         }
 
-        private const string ElementStackPanel = "PART_Stackpanel";
+        private const string ElementStackPanel = "PART_StackPanel";
 
 
         private StackPanel _stackPanel;

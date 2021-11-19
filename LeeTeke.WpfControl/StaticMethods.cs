@@ -503,7 +503,8 @@ namespace LeeTeke.WpfControl
         /// <returns></returns>
         public static T FindVisualChild<T>(DependencyObject obj) where T : DependencyObject
         {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            var childIndex = VisualTreeHelper.GetChildrenCount(obj);
+            for (int i = 0; i < childIndex; i++)
             {
                 DependencyObject child = VisualTreeHelper.GetChild(obj, i);
                 if (child != null && child is T)
@@ -526,7 +527,8 @@ namespace LeeTeke.WpfControl
         /// <returns></returns>
         public static (DependencyObject parent, T child) FindVisualFistChildAndParent<T>(DependencyObject obj) where T : DependencyObject
         {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            var childIndex = VisualTreeHelper.GetChildrenCount(obj);
+            for (int i = 0; i < childIndex; i++)
             {
                 DependencyObject child = VisualTreeHelper.GetChild(obj, i);
                 if (child != null && child is T)
@@ -549,7 +551,8 @@ namespace LeeTeke.WpfControl
         /// <returns></returns>
         public static T FindVisualChild<T>(DependencyObject obj, string name) where T : DependencyObject
         {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            var childIndex = VisualTreeHelper.GetChildrenCount(obj);
+            for (int i = 0; i < childIndex; i++)
             {
                 DependencyObject child = VisualTreeHelper.GetChild(obj, i);
                 if (child == null)
@@ -609,20 +612,27 @@ namespace LeeTeke.WpfControl
         /// <returns></returns>
         public static T FindVisualParent<T>(DependencyObject obj) where T : DependencyObject
         {
-            var p = VisualTreeHelper.GetParent(obj);
-            if (p == null)
+            try
             {
-                return null;
+                var p = VisualTreeHelper.GetParent(obj);
+                if (p == null)
+                {
+                    return null;
+                }
+                if (p is T)
+                {
+                    return (T)p;
+                }
+                else
+                {
+                    return FindVisualParent<T>(p);
+                }
             }
-            if (p is T)
+            catch
             {
-                return (T)p;
-            }
-            else
-            {
-                return FindVisualParent<T>(p);
-            }
+                return default;
 
+            }
         }
 
         /// <summary>

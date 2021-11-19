@@ -85,6 +85,7 @@ namespace LeeTeke.WpfControl.Controls
         }
         private Button _closeBtn;
         private bool _isClosed = false;
+        
         public NavigationItem()
         {
             MouseDown += TabViewItem_MouseDown;

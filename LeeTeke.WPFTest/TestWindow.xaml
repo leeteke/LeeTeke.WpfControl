@@ -28,6 +28,7 @@
                         SelectedIndex="0"
                          ItemSelected="Navigation_ItemSelected"
                         ItemClosed="test_ItemClosed"
+                        CloseVisibly="MouseOver"
                          >
             <lee:Navigation.ItemTemplate>
                 <DataTemplate >
@@ -44,7 +45,11 @@
             <lee:NavigationItem Content="测2"/>
             <lee:NavigationItem Content="测3"/>
             <lee:NavigationItem Content="测4"/>
-            
+            <lee:NavigationItem Content="测5"/>
+            <lee:NavigationItem Content="测6"/>
+            <lee:NavigationItem Content="测7"/>
+            <lee:NavigationItem Content="测8"/>
+            <lee:NavigationItem Content="测9"/>
         </lee:Navigation>
 
         <TextBox x:Name="tb"

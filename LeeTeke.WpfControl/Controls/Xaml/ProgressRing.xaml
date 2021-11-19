@@ -27,7 +27,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ProgressRing}">
-                    <Grid x:Name="PART_Grid" >
+                    <local:EasyPanel >
                         <!--<Grid.Resources>
                             <Storyboard RepeatBehavior="Forever" x:Key="SB" >
                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="E1R" BeginTime="0" Storyboard.TargetProperty="Angle">
@@ -206,7 +206,7 @@
                             </Border>
                          
                         </Border>
-                    </Grid>
+                    </local:EasyPanel>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsClip" Value="True">
                             <Setter TargetName="PART_Content" Property="Clip">

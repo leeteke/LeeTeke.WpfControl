@@ -7,72 +7,6 @@
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type local:SlideView}">
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
-        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}"/>
-        <Setter Property="MinWidth" Value="{DynamicResource  LeeControlMinWidth}"/>
-        <Setter Property="Orientation" Value="Horizontal"/>
-        <Setter Property="Padding" Value="0"/>
-        <Setter Property="Interval" Value="3000"/>
-        <Setter Property="EasingFunction">
-            <Setter.Value>
-                <PowerEase EasingMode="EaseOut"/>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Duration" Value="0:0:0.500"/>
-        <Setter Property="IsCycle" Value="True"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:SlideView}">
-                    <Border  x:Name="PART_Border" Background="{TemplateBinding Background}"
-                             BorderBrush="{TemplateBinding BorderBrush}"
-                             BorderThickness="{TemplateBinding BorderThickness}"
-                             CornerRadius="{TemplateBinding CornerRadius}"
-                             >
-                        <ScrollViewer x:Name="PART_ScrollViewer"   
-                                      HorizontalScrollBarVisibility="Hidden" 
-                                      VerticalScrollBarVisibility="Hidden"
-                                      Style="{DynamicResource LeeScrollViewer}"
-                                      leedep:ScrollViewerManager.SlideEasingFunction="{TemplateBinding EasingFunction}"
-                                      leedep:ScrollViewerManager.SlideDuration="{TemplateBinding Duration}"
-                                      leedep:ScrollViewerManager.SlideEnabled="True"
-                                      Padding="{TemplateBinding Padding}"
-                                      FocusVisualStyle="{DynamicResource LeeFocusVisual}"
-                                      IsTabStop="False">
-                            <ScrollViewer.Clip>
-                                <MultiBinding  Converter="{StaticResource  MultiValueToClipConverter}" Mode="OneWay">
-                                    <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualWidth"/>
-                                    <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualHeight"/>
-                                    <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}"  Path="CornerRadius"/>
-                                    <Binding ElementName="PART_Border"  Path="BorderThickness" Mode="OneWay"/>
-                                </MultiBinding>
-                            </ScrollViewer.Clip>
-                            <ItemsPresenter />
-                        </ScrollViewer>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="{DynamicResource UnEnableOpacity}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="ItemsPanel">
-            <Setter.Value>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="{Binding Orientation,  RelativeSource={ RelativeSource Mode=FindAncestor,AncestorType={x:Type local:SlideView},AncestorLevel=1},Mode=OneWay}"/>
-                </ItemsPanelTemplate>
-            </Setter.Value>
-        </Setter>
-
-    </Style>
-
     <Style TargetType="{x:Type local:SlideViewItem}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="IsTabStop" Value="False"/>
@@ -98,5 +32,71 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="{x:Type local:SlideView}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}"/>
+        <Setter Property="MinWidth" Value="{DynamicResource  LeeControlMinWidth}"/>
+        <Setter Property="Orientation" Value="Horizontal"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Interval" Value="3000"/>
+        <Setter Property="EasingFunction">
+            <Setter.Value>
+                <PowerEase EasingMode="EaseOut"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Duration" Value="0:0:0.500"/>
+        <Setter Property="IsCycle" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SlideView}">
+                    <ScrollViewer x:Name="PART_ScrollViewer"   
+                                      Background="{TemplateBinding Background}"
+                                      BorderBrush="{TemplateBinding BorderBrush}"
+                                      BorderThickness="{TemplateBinding BorderThickness}"
+                                      leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}"
+                                      HorizontalScrollBarVisibility="Hidden" 
+                                      VerticalScrollBarVisibility="Hidden"
+                                      Style="{DynamicResource LeeScrollViewer}"
+                                      leedep:ScrollViewerManager.SlideEasingFunction="{TemplateBinding EasingFunction}"
+                                      leedep:ScrollViewerManager.SlideDuration="{TemplateBinding Duration}"
+                                      leedep:ScrollViewerManager.SlideEnabled="True"
+                                      Padding="{TemplateBinding Padding}"
+                                      FocusVisualStyle="{DynamicResource LeeFocusVisual}"
+                                      IsTabStop="False">
+                        <ScrollViewer.Clip>
+                            <MultiBinding  Converter="{StaticResource  MultiValueToClipConverter}" Mode="OneWay">
+                                <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualWidth"/>
+                                <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualHeight"/>
+                                <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}"  Path="CornerRadius"/>
+                                <Binding ElementName="PART_Border"  Path="BorderThickness" Mode="OneWay"/>
+                            </MultiBinding>
+                        </ScrollViewer.Clip>
+                        <ItemsPresenter />
+                    </ScrollViewer>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="{DynamicResource UnEnableOpacity}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="{Binding Orientation,  RelativeSource={ RelativeSource Mode=FindAncestor,AncestorType={x:Type local:SlideView},AncestorLevel=1},Mode=OneWay}"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+
 
 </ResourceDictionary>

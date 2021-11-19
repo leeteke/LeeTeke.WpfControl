@@ -91,8 +91,9 @@ namespace LeeTeke.WpfControl.Controls
         private MenuItem _otherMenuItem;
         private MenuItem _selfMenuItem;
 
+        private UIElementCollection _items;
 
-        private NavigationItem[] _items;
+
         private int _currentIndex = -1;
         private NavigationItem _currentItem;
         private object _currentValue;
@@ -100,7 +101,21 @@ namespace LeeTeke.WpfControl.Controls
 
         public Navigation()
         {
+            #region ItemsPanelTemplate设置
+            var hfac = new FrameworkElementFactory(typeof(StackPanel));
+            hfac.SetBinding(StackPanel.OrientationProperty, new Binding() { Source = this, Path = new PropertyPath(Navigation.OrientationProperty), Mode = BindingMode.OneWay });
+            hfac.AddHandler(StackPanel.LoadedEvent, new RoutedEventHandler((es, ex) =>
+            {
+                var panel = es as Panel;
+                if (panel != null)
+                {
+                    _items = panel.Children;
+                }
+            }));
+            ItemsPanel = new ItemsPanelTemplate(hfac);
+            #endregion
             Loaded += Navigation_Loaded;
+
         }
 
         private void Navigation_Loaded(object sender, RoutedEventArgs e)
@@ -140,7 +155,6 @@ namespace LeeTeke.WpfControl.Controls
 
         protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
         {
-            _items = StaticMethods.FindItemsControlChilds<NavigationItem>(this);
             UpdateSelectedIndex();
             base.OnItemsChanged(e);
         }
@@ -592,6 +606,23 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
+        #region IsScrollToSelected
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public bool IsScrollToSelected
+        {
+            get { return (bool)GetValue(IsScrollToSelectedProperty); }
+            set { SetValue(IsScrollToSelectedProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsScrollToSelected.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsScrollToSelectedProperty =
+            DependencyProperty.Register("IsScrollToSelected", typeof(bool), typeof(Navigation));
+        #endregion
+
+
+
         #region MouseOverBackground
         /// <summary>
         /// 请添加描述
@@ -829,6 +860,14 @@ namespace LeeTeke.WpfControl.Controls
             if (_contextMenu.DataContext is NavigationItem item)
             {
                 item.IsPinned = !item.IsPinned;
+                if (item.IsPinned)
+                {
+                    PinnedMove(item);
+                }
+                else
+                {
+                    UnPinnedMove(item);
+                }
             }
         }
 
@@ -901,7 +940,6 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
 
-
         private void _scrollViewer_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (SelectedItem is NavigationItem item)
@@ -917,34 +955,43 @@ namespace LeeTeke.WpfControl.Controls
 
         public void ScrollToItem(NavigationItem item)
         {
-            if (Orientation == Orientation.Horizontal)
+            try
             {
-                // 获取要定位之前 ScrollViewer 目前的滚动位置
-                var currentScrollPosition = _scrollViewer.HorizontalOffset;
-                var point = new Point(currentScrollPosition, 0);
-                // 计算出目标位置并滚动
-                var targetPosition = item.TransformToVisual(_scrollViewer).Transform(point);
+                Dispatcher.Invoke(() =>
+                {
+                    if (!IsScrollToSelected)
+                    {
+                        return;
+                    }
 
-                var seto = targetPosition.X - ((_scrollViewer.ActualWidth - item.ActualWidth) / 2);
+                    if (Orientation == Orientation.Horizontal)
+                    {
+                        // 获取要定位之前 ScrollViewer 目前的滚动位置
+                        var currentScrollPosition = _scrollViewer.HorizontalOffset;
+                        var point = new Point(currentScrollPosition, 0);
+                        // 计算出目标位置并滚动
+                        var targetPosition = item.TransformToVisual(_scrollViewer).Transform(point);
+                        var seto = targetPosition.X - ((_scrollViewer.ActualWidth - item.ActualWidth) / 2);
+                        ScrollViewerManager.ScrollToHorizontalOffset(_scrollViewer, seto);
+                    }
+                    else
+                    {
+                        // 获取要定位之前 ScrollViewer 目前的滚动位置
+                        var currentScrollPosition = _scrollViewer.VerticalOffset;
+                        var point = new Point(0, currentScrollPosition);
+                        // 计算出目标位置并滚动
+                        var targetPosition = item.TransformToVisual(_scrollViewer).Transform(point);
 
-                ScrollViewerManager.ScrollToHorizontalOffset(_scrollViewer, seto);
+                        var seto = targetPosition.Y - ((_scrollViewer.ActualHeight - item.ActualHeight) / 2);
 
+                        ScrollViewerManager.ScrollToVerticalOffset(_scrollViewer, seto);
+                    }
+                });
+            }
+            catch
+            {
 
             }
-            else
-            {
-                // 获取要定位之前 ScrollViewer 目前的滚动位置
-                var currentScrollPosition = _scrollViewer.VerticalOffset;
-                var point = new Point(0, currentScrollPosition);
-                // 计算出目标位置并滚动
-                var targetPosition = item.TransformToVisual(_scrollViewer).Transform(point);
-
-                var seto = targetPosition.Y - ((_scrollViewer.ActualHeight - item.ActualHeight) / 2);
-
-                ScrollViewerManager.ScrollToVerticalOffset(_scrollViewer, seto);
-            }
-
-
         }
         #endregion
 
@@ -1024,9 +1071,9 @@ namespace LeeTeke.WpfControl.Controls
             }
             else
             {
-                for (int i = 0; i < _items.Length; i++)
+                for (int i = 0; i < _items.Count; i++)
                 {
-                    action(_items[i]);
+                    action(_items[i] as NavigationItem);
                 }
             }
 
@@ -1076,9 +1123,9 @@ namespace LeeTeke.WpfControl.Controls
             }
             else
             {
-                for (int i = 0; i < _items.Length; i++)
+                for (int i = 0; i < _items.Count; i++)
                 {
-                    action(_items[i]);
+                    action(_items[i] as NavigationItem);
                 }
             }
 
@@ -1145,19 +1192,19 @@ namespace LeeTeke.WpfControl.Controls
             {
                 if (item.SelfClose)
                 {
-                    for (int i = 0; i < _items.Length; i++)
+                    for (int i = 0; i < _items.Count; i++)
                     {
                         if (!needSelected && _items[i] == item)
                         {
                             if (i > 0)
                             {
                                 ///默认选择前一个
-                                ChangeSelectedItem(_items[i - 1]);
+                                ChangeSelectedItem(_items[i - 1] as NavigationItem);
                             }
                             else if (i < Items.Count - 1)
                             {
                                 ///默认选择前一个
-                                ChangeSelectedItem(_items[i + 1]);
+                                ChangeSelectedItem(_items[i + 1] as NavigationItem);
                             }
                             break;
                         }
@@ -1254,7 +1301,7 @@ namespace LeeTeke.WpfControl.Controls
             }
             else
             {
-                for (int i = 0; i < _items.Length; i++)
+                for (int i = 0; i < _items.Count; i++)
                 {
                     if (_items[i] == item)
                     {
@@ -1264,7 +1311,7 @@ namespace LeeTeke.WpfControl.Controls
                     }
                     else
                     {
-                        _items[i].IsSelected = false;
+                        ((NavigationItem)_items[i]).IsSelected = false;
                     }
                 }
             }
@@ -1291,6 +1338,7 @@ namespace LeeTeke.WpfControl.Controls
                         SelectedIndex = _currentIndex = list.IndexOf(SelectedValue);
                     }
                 }
+
             }
         }
 
@@ -1385,9 +1433,9 @@ namespace LeeTeke.WpfControl.Controls
             if (_items == null)
                 return null;
 
-            if (index > -1 && index < _items.Length)
+            if (index > -1 && index < _items.Count)
             {
-                return _items[index];
+                return _items[index] as NavigationItem;
             }
 
             return null;
@@ -1419,10 +1467,13 @@ namespace LeeTeke.WpfControl.Controls
                         }
                     }
                 }
-
-                var whereFind = _items.Where(p => p.DataContext == dataContext);
-                if (whereFind.Any())
-                    return whereFind.First();
+                foreach (var item in _items)
+                {
+                    if (item is NavigationItem element && element.DataContext == dataContext)
+                    {
+                        return element;
+                    }
+                }
 
                 return null;
             }
@@ -1433,8 +1484,194 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
 
+        /// <summary>
+        /// 固定后移动
+        /// </summary>
+        /// <param name="item"></param>
+        private void PinnedMove(NavigationItem item)
+        {
 
 
+            var toalIndex = -1;
+
+            if (ItemsSource == null)
+            {
+
+                for (int i = 0; i < Items.Count; i++)
+                {
+                    ///不用动
+                    if (Items[i] == item && toalIndex < 0)
+                    {
+                        break;
+                    }
+
+                    if (Items[i] is NavigationItem checkItem && checkItem.CanClose && !checkItem.IsPinned)
+                    {
+                        toalIndex = i;
+                        break;
+                    }
+                }
+                #region Item的移动方式
+
+
+                if (toalIndex > -1)
+                {
+                    Items.Remove(item);
+                    Items.Insert(toalIndex, item);
+                }
+
+                #endregion
+
+            }
+            else
+            {
+                for (int i = 0; i < _items.Count; i++)
+                {
+                    ///不用动
+                    if (_items[i] == item && toalIndex < 0)
+                    {
+                        break;
+                    }
+
+                    if ( _items[i] is NavigationItem checkItem && checkItem.CanClose && !checkItem.IsPinned)
+                    {
+                        toalIndex = i;
+                        break;
+                    }
+                }
+
+                if (toalIndex > -1)
+                {
+                    #region ItemSource的移动方式
+
+
+                    var sourceType = ItemsSource.GetType();
+                    ///泛型
+                    if (sourceType.IsGenericType && sourceType.GenericTypeArguments.Length == 1 && ItemsSource is IList list)
+                    {
+                        var oldIndex = list.IndexOf(item.DataContext);
+                        if (oldIndex > -1)
+                        {
+
+                            ///看看支持Move方法不，也就是是否是 ob<>
+                            var method = sourceType.GetMethod("Move");
+                            if (method != null)
+                            {
+                                _ = method.Invoke(ItemsSource, new object?[] { oldIndex, toalIndex });
+                            }
+                            else
+                            {
+                                list.Remove(item.DataContext);
+                                list.Insert(toalIndex, item.DataContext);
+                            }
+                        }
+
+                    }
+                    #endregion
+                }
+            }
+
+
+            UpdateSelectedIndex();
+            //线程错开要不然会导致获取到之前的移动
+            Task.Run(async () =>
+            {
+                await Task.Delay(60);
+                ScrollToItem(item);
+            });
+
+        }
+
+        /// <summary>
+        /// 取消固定后移动
+        /// </summary>
+        /// <param name="item"></param>
+        private void UnPinnedMove(NavigationItem item)
+        {
+
+            if (item.IsPinned)
+                return;
+
+            var toalIndex = -1;
+
+            if (ItemsSource == null)
+            {
+                for (int i = 0; i < Items.Count; i++)
+                {
+                    ///不用动
+
+                    if (Items[i] != item && Items[i] is NavigationItem checkItem && checkItem.CanClose && !checkItem.IsPinned)
+                    {
+
+                        toalIndex = i-1;
+                        break;
+                    }
+                }
+
+                #region Item的移动方式
+
+
+                if (toalIndex > -1)
+                {
+                    Items.Remove(item);
+                    Items.Insert(toalIndex, item);
+                }
+
+                #endregion
+
+            }
+            else
+            {
+                for (int i = 0; i < _items.Count; i++)
+                {
+
+                    if (_items[i] != item && _items[i] is NavigationItem checkItem && checkItem.CanClose && !checkItem.IsPinned)
+                    {
+                        toalIndex = i - 1;
+                        break;
+                    }
+                }
+
+                if (toalIndex > -1)
+                {
+                    #region ItemSource的移动方式
+
+
+                    var sourceType = ItemsSource.GetType();
+                    ///泛型
+                    if (sourceType.IsGenericType && sourceType.GenericTypeArguments.Length == 1 && ItemsSource is IList list)
+                    {
+                        var oldIndex = list.IndexOf(item.DataContext);
+                        if (oldIndex > -1)
+                        {
+
+                            ///看看支持Move方法不，也就是是否是 ob<>
+                            var method = sourceType.GetMethod("Move");
+                            if (method != null)
+                            {
+                                _ = method.Invoke(ItemsSource, new object?[] { oldIndex, toalIndex });
+                            }
+                            else
+                            {
+                                list.Remove(item.DataContext);
+                                list.Insert(toalIndex, item.DataContext);
+                            }
+                        }
+
+                    }
+                    #endregion
+                }
+            }
+
+
+            UpdateSelectedIndex();
+            //线程错开要不然会导致获取到之前的移动
+            Task.Run(async () =>
+            {
+                await Task.Delay(60);
+                ScrollToItem(item);
+            });
+        }
 
         #endregion
 

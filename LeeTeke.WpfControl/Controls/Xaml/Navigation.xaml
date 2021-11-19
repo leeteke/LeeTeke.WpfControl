@@ -172,36 +172,28 @@
         <Setter Property="ItemContxtMenuContentDock" Value="Bottom"/>
         <Setter Property="LeftButtonStyle">
             <Setter.Value>
-                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ColorButton}">
-                    <Setter Property="Width" Value="22"/>
-                    <Setter Property="Height" Value="22"/>
+                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource TextButton}">
                     <Setter Property="MinHeight" Value="0"/>
                     <Setter Property="Margin" Value="2,0"/>
-                    <Setter Property="FontSize" Value="11"/>
+                    <Setter Property="FontSize" Value="15"/>
                     <Setter Property="BorderThickness" Value="0"/>
-                    <Setter Property="Foreground" Value="{DynamicResource LeeBrush_ThemeForeground}"/>
-                    <Setter Property="Background" Value="{DynamicResource LeeBrush_Theme}"/>
-                    <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="11"/>
+                    <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Theme}"/>
                     <Setter Property="VerticalAlignment" Value="Center"/>
-                    <Setter Property="Content" Value="&#xe76b;"/>
+                    <Setter Property="Content" Value="&#xe96f;"/>
                     <Setter Property="FontFamily" Value="{DynamicResource IconFontFamily}"/>
                 </Style>
             </Setter.Value>
         </Setter>
         <Setter Property="RightButtonStyle">
             <Setter.Value>
-                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ColorButton}">
-                    <Setter Property="Width" Value="22"/>
-                    <Setter Property="Height" Value="22"/>
+                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource TextButton}">
                     <Setter Property="MinHeight" Value="0"/>
                     <Setter Property="Margin" Value="2,0"/>
-                    <Setter Property="FontSize" Value="11"/>
+                    <Setter Property="FontSize" Value="15"/>
                     <Setter Property="BorderThickness" Value="0"/>
-                    <Setter Property="Foreground" Value="{DynamicResource LeeBrush_ThemeForeground}"/>
-                    <Setter Property="Background" Value="{DynamicResource LeeBrush_Theme}"/>
-                    <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="11"/>
+                    <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Theme}"/>
                     <Setter Property="VerticalAlignment" Value="Center"/>
-                    <Setter Property="Content" Value="&#xe76c;"/>
+                    <Setter Property="Content" Value="&#xe970;"/>
                     <Setter Property="FontFamily" Value="{DynamicResource  IconFontFamily}"/>
                 </Style>
             </Setter.Value>
@@ -294,15 +286,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="ItemsPanel">
-            <Setter.Value>
-                <ItemsPanelTemplate>
-                    <StackPanel x:Name="PART_StackPanel" 
-                                FocusVisualStyle="{x:Null}"
-                                Orientation="{Binding Orientation,  RelativeSource={ RelativeSource Mode=FindAncestor,AncestorType={x:Type local:Navigation},AncestorLevel=1},Mode=OneWay}"   />
-                </ItemsPanelTemplate>
-            </Setter.Value>
-        </Setter>
+      
         <Style.Triggers>
 
             <Trigger Property="Orientation" Value="Horizontal">

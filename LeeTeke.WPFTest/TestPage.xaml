@@ -281,9 +281,11 @@
 
 
                 <leecontrol:ToggleGroup ItemsSource="{Binding TestList}"
-                                        SelectionMode="Single"
-                                        SelectedMinimum="1"
-                                       
+                                        SelectionMode="Multiple"
+                                        Margin="5"
+                                        SelectedMinimum="2"
+                                        SelectedMaximum="5"
+                                        SelectionAlertedCommand="{Binding ToggleButtonCommand}"
                                       >
                     <leecontrol:ToggleGroup.ItemTemplate>
                         <DataTemplate>

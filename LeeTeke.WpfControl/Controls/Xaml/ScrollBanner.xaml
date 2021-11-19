@@ -27,7 +27,7 @@
                             Background="{TemplateBinding Background}"
                             CornerRadius="{TemplateBinding CornerRadius}"
                             Effect="{TemplateBinding Effect}">
-                        <Grid>
+                        <local:EasyPanel>
                             <StackPanel Orientation="{TemplateBinding Orientation}">
                                 <StackPanel.Clip>
                                     <MultiBinding Converter="{StaticResource MultiValueToClipConverter}">
@@ -57,7 +57,7 @@
                                             Tag="1"
                                             Foreground="{TemplateBinding Foreground}"
                                             />
-                        </Grid>
+                        </local:EasyPanel>
                     </Border>
 
                     <ControlTemplate.Triggers>

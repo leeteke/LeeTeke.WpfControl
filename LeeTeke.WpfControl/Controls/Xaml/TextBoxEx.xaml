@@ -74,7 +74,7 @@
                                          Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=SplitterVisible,Mode=OneWay,Converter={StaticResource VisibilityForBoolConverter}}"
                                          DockPanel.Dock="{TemplateBinding IconDock}"/>
 
-                            <Grid Cursor="IBeam"  >
+                            <local:EasyPanel Cursor="IBeam"  >
                                 <TextBox x:Name="PART_Main" 
                                          Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Text,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                          Background="Transparent"
@@ -138,7 +138,7 @@
                                            TextAlignment="{TemplateBinding TextAlignment}"
                                            />
 
-                            </Grid>
+                            </local:EasyPanel>
                         </DockPanel>
                     </Border>
                     <ControlTemplate.Triggers>

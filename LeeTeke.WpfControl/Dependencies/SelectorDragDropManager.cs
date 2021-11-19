@@ -275,9 +275,18 @@ namespace LeeTeke.WpfControl.Dependencies
                         var toalIndex = GetIndexUnderDragCursor();
                         if (toalIndex > -1 && toalIndex > FreezeIndex && toalIndex != oldIndex)
                         {
+                            ///看看支持Move方法不，也就是是否是 ob<>
                             var method = sourceType.GetMethod("Move");
                             if (method != null)
+                            {
                                 _ = method.Invoke(_control.ItemsSource, new object?[] { oldIndex, toalIndex });
+                            }
+                            else
+                            {
+                                list.Remove(_dragAdorner.AdornedItem.DataContext);
+                                list.Insert(toalIndex, _dragAdorner.AdornedItem.DataContext);
+                            }
+                            
                         }
                         e.Effects = DragDropEffects.Move;
                     }
@@ -343,8 +352,8 @@ namespace LeeTeke.WpfControl.Dependencies
             if (_control.SelectedIndex != this._indexToSelect)
                 _control.SelectedIndex = this._indexToSelect;
 
-       //     If the item at the selected index is null, there's nothing
-       //      we can do, so just return;
+            //     If the item at the selected index is null, there's nothing
+            //      we can do, so just return;
             if (_control.SelectedItem == null)
                 return;
 
@@ -602,7 +611,7 @@ namespace LeeTeke.WpfControl.Dependencies
                 {
                     // The item was dropped into a new location,
                     // so make it the new selected item.
-                    _control.SelectedItem=selectedItem;
+                    _control.SelectedItem = selectedItem;
                 }
             }
             catch (Exception)
