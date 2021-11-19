@@ -85,30 +85,36 @@ namespace LeeTeke.WpfControl.Controls
         }
         private Button _closeBtn;
         private bool _isClosed = false;
-        
+
+  
+
+
         public NavigationItem()
         {
-            MouseDown += TabViewItem_MouseDown;
-            KeyDown += TabViewItem_KeyDown;
+      
         }
 
-        private void TabViewItem_KeyDown(object sender, KeyEventArgs e)
+
+        protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
+           
             switch (e.Key)
             {
                 case Key.Enter:
+                    e.Handled = true;
                     IsSelected = true;
                     break;
                 default:
+                    base.OnPreviewKeyDown(e);
                     break;
             }
-
-
+       
         }
 
-        private void TabViewItem_MouseDown(object sender, MouseButtonEventArgs e)
+        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
             IsSelected = true;
+            base.OnPreviewMouseDown(e);
         }
 
         #region Override
@@ -157,9 +163,6 @@ namespace LeeTeke.WpfControl.Controls
             SelfClose = true;
             Close();
         }
-
-
-
 
 
         #region 依赖属性
@@ -332,6 +335,8 @@ namespace LeeTeke.WpfControl.Controls
 
 
         #region PrivateMethod
+
+  
 
         /// <summary>
         /// 通知夫组件我选择了

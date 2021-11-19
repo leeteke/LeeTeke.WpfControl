@@ -24,6 +24,7 @@
         </Grid.RowDefinitions>
 
         <lee:Navigation x:Name="test" 
+                             IsScrollToSelected="True"
                         ShowScrollToButton="True"
                         SelectedIndex="0"
                          ItemSelected="Navigation_ItemSelected"
@@ -40,6 +41,7 @@
         <lee:Navigation  Grid.Row="1"
                          ItemSelected="Navigation_ItemSelected"
                          ItemClosed="test_ItemClosed"
+                         IsScrollToSelected="True"
                          >
             <lee:NavigationItem Content="测1" CanClose="False"/>
             <lee:NavigationItem Content="测2"/>

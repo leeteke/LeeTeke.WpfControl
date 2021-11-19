@@ -61,6 +61,7 @@ namespace LeeTeke.WpfControl.Controls
     [TemplatePart(Name = ElementMenuItemCloseOther, Type = typeof(MenuItem))]
     [TemplatePart(Name = ElementMenuItemCloseSelf, Type = typeof(MenuItem))]
     [TemplatePart(Name = ElementMenuItemPin, Type = typeof(MenuItem))]
+    [TemplatePart(Name = ElementMenuItemSelected, Type = typeof(MenuItem))]
     public class Navigation : ItemsControl
     {
         static Navigation()
@@ -77,6 +78,7 @@ namespace LeeTeke.WpfControl.Controls
         private const string ElementMenuItemCloseOther = "PART_MenuItem_CloseOther";
         private const string ElementMenuItemCloseSelf = "PART_MenuItem_CloseSelf";
         private const string ElementMenuItemPin = "PART_MenuItem_Pin";
+        private const string ElementMenuItemSelected = "PART_MenuItem_Selected";
         #endregion
 
 
@@ -86,6 +88,7 @@ namespace LeeTeke.WpfControl.Controls
         private Button _leftBtn;
         private Button _rightBtn;
         private ContextMenu _contextMenu;
+        private MenuItem _selectedMenuItem;
         private MenuItem _pinMenuItem;
         private MenuItem _allMenuItem;
         private MenuItem _otherMenuItem;
@@ -115,6 +118,8 @@ namespace LeeTeke.WpfControl.Controls
             ItemsPanel = new ItemsPanelTemplate(hfac);
             #endregion
             Loaded += Navigation_Loaded;
+
+
 
         }
 
@@ -160,15 +165,36 @@ namespace LeeTeke.WpfControl.Controls
         }
 
 
-        protected override void OnMouseRightButtonDown(MouseButtonEventArgs e)
+
+
+        protected override void OnContextMenuOpening(ContextMenuEventArgs e)
         {
-            base.OnMouseRightButtonDown(e);
-            DependencyObject source = e.OriginalSource as DependencyObject;
-            while (source != null && source.GetType() != typeof(NavigationItem))
-                source = VisualTreeHelper.GetParent(source);
-            if (source != null && source is NavigationItem item)
+            e.Handled = true;
+
+            NavigationItem item = e.OriginalSource as NavigationItem;
+            if (item == null)
             {
-                e.Handled = true;
+                if (SelectedItem!=null&&SelectedItem.IsMouseOver)
+                {
+                    item = SelectedItem;
+                }
+            }
+     
+            if (item!=null)
+            {
+                if (item.IsMouseOver)
+                {
+                    _selectedMenuItem.Visibility= Visibility.Collapsed;
+                    _contextMenu.Placement = PlacementMode.MousePoint;
+                }
+                else
+                {
+                    _selectedMenuItem.Visibility = Visibility.Visible;
+                    _contextMenu.PlacementTarget = item;
+                    _contextMenu.Placement = PlacementMode.Bottom;
+                    
+                }
+
                 _contextMenu.DataContext = item;
                 if (item.CanClose)
                 {
@@ -193,10 +219,18 @@ namespace LeeTeke.WpfControl.Controls
                     _pinMenuItem.Visibility = Visibility.Collapsed;
                     _selfMenuItem.Visibility = Visibility.Collapsed;
                 }
+                _contextMenu.IsOpen = true;
             }
 
         }
 
+        protected override void OnContextMenuClosing(ContextMenuEventArgs e)
+        {
+            _contextMenu.DataContext = null;
+
+            base.OnContextMenuClosing(e);
+
+        }
         protected override void OnPreviewMouseWheel(MouseWheelEventArgs e)
         {
             e.Handled = true;
@@ -247,6 +281,10 @@ namespace LeeTeke.WpfControl.Controls
             {
                 _pinMenuItem.Click -= _pinMenuItem_Click;
             }
+            if (_selectedMenuItem != null)
+            {
+                _selectedMenuItem.Click -= _selectedMenuItem_Click; ;
+            }
             if (_scrollViewer != null)
             {
                 _scrollViewer.ScrollChanged -= _scrollViewer_ScrollChanged;
@@ -262,6 +300,7 @@ namespace LeeTeke.WpfControl.Controls
             _otherMenuItem = GetTemplateChild(ElementMenuItemCloseOther) as MenuItem;
             _selfMenuItem = GetTemplateChild(ElementMenuItemCloseSelf) as MenuItem;
             _pinMenuItem = GetTemplateChild(ElementMenuItemPin) as MenuItem;
+            _selectedMenuItem = GetTemplateChild(ElementMenuItemSelected) as MenuItem;
             _scrollViewer = GetTemplateChild(ElementScrollViewer) as ScrollViewer;
 
 
@@ -305,6 +344,10 @@ namespace LeeTeke.WpfControl.Controls
             {
                 _pinMenuItem.Click += _pinMenuItem_Click;
             }
+            if (_selectedMenuItem != null)
+            {
+                _selectedMenuItem.Click += _selectedMenuItem_Click; ;
+            }
             if (_scrollViewer != null)
             {
                 _scrollViewer.ScrollChanged += _scrollViewer_ScrollChanged;
@@ -314,6 +357,8 @@ namespace LeeTeke.WpfControl.Controls
 
 
         }
+
+      
 
 
         #endregion
@@ -870,7 +915,13 @@ namespace LeeTeke.WpfControl.Controls
                 }
             }
         }
-
+        private void _selectedMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (_contextMenu.DataContext is NavigationItem item)
+            {
+                ChangeSelectedItem(item);
+            }
+        }
         private void _selfMenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (_contextMenu.DataContext is NavigationItem item)
@@ -1533,7 +1584,7 @@ namespace LeeTeke.WpfControl.Controls
                         break;
                     }
 
-                    if ( _items[i] is NavigationItem checkItem && checkItem.CanClose && !checkItem.IsPinned)
+                    if (_items[i] is NavigationItem checkItem && checkItem.CanClose && !checkItem.IsPinned)
                     {
                         toalIndex = i;
                         break;
@@ -1603,7 +1654,7 @@ namespace LeeTeke.WpfControl.Controls
                     if (Items[i] != item && Items[i] is NavigationItem checkItem && checkItem.CanClose && !checkItem.IsPinned)
                     {
 
-                        toalIndex = i-1;
+                        toalIndex = i - 1;
                         break;
                     }
                 }

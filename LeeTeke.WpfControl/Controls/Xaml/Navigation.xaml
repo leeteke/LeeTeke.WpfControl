@@ -63,6 +63,7 @@
                                             Height="22"
                                             Margin="3"
                                             MinHeight="0"
+                                           IsTabStop="False"
                                             Visibility="Collapsed"
                                             leedep:CornerRadiusManager.CornerRadius="11"
                                             FontFamily="{DynamicResource IconFontFamily}"
@@ -233,8 +234,10 @@
                                            >
                                 <ItemsPresenter x:Name="PART_ItemsPresenter" >
                                     <ItemsPresenter.ContextMenu>
-                                        <ContextMenu x:Name="PART_ContextMenu" 
-                                                    >
+                                        <ContextMenu x:Name="PART_ContextMenu"   >
+                                            <MenuItem x:Name="PART_MenuItem_Selected" Header="选择此选项"  Visibility="Collapsed"/>
+
+
                                             <MenuItem x:Name="PART_MenuItem_Pin" Header="固定选项卡" >
                                                 <MenuItem.Icon>
                                                     <TextBlock Text="&#xE718;"
