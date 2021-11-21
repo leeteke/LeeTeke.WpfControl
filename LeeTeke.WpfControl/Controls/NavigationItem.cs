@@ -54,6 +54,7 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
         #endregion
+
         static NavigationItem()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(NavigationItem), new FrameworkPropertyMetadata(typeof(NavigationItem)));
@@ -67,13 +68,23 @@ namespace LeeTeke.WpfControl.Controls
         /// </summary>
         public bool IsClosed => _isClosed;
 
-        //public new ContextMenu ContextMenu { get; private set; }
+
         #endregion
 
         /// <summary>
         /// 是否自我关闭
         /// </summary>
         internal bool SelfClose { set; get; }
+
+        internal bool IsScrolling
+        {
+            get;
+            set;
+        }
+
+        private Point? _point;
+        private NavigationItem _beExchange;
+        private bool _canDrag;
 
 
         private Navigation ParentNavigation
@@ -85,22 +96,30 @@ namespace LeeTeke.WpfControl.Controls
         }
         private Button _closeBtn;
         private bool _isClosed = false;
+        private Storyboard _moveSB;
+        private bool _isMoving = false;
 
-  
+
 
 
         public NavigationItem()
         {
-      
+            RenderTransform = new TranslateTransform();
         }
+
+
+
+
+        #region Override
 
 
         protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
-           
+
             switch (e.Key)
             {
                 case Key.Enter:
+                    Focus();
                     e.Handled = true;
                     IsSelected = true;
                     break;
@@ -108,38 +127,151 @@ namespace LeeTeke.WpfControl.Controls
                     base.OnPreviewKeyDown(e);
                     break;
             }
-       
+
         }
 
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
+            Focus();
             IsSelected = true;
-            base.OnPreviewMouseDown(e);
         }
 
-        #region Override
-
-        protected override void OnKeyDown(KeyEventArgs e)
+        protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            if (Focus() && e.Key == Key.Enter)
+            
+            _canDrag = true;
+            _point = e.GetPosition(this);
+        }
+
+        protected override void OnPreviewMouseLeftButtonUp(MouseButtonEventArgs e)
+        {
+            IsScrolling = false;
+            _canDrag = false;
+            _point = null;
+            if (_isMoving)
             {
-                IsSelected = true;
+                ReSetRenderTransform();
+            }
+        }
+
+        protected override void OnMouseLeave(MouseEventArgs e)
+        {
+            _canDrag = false;
+            _point = null;
+            IsScrolling = false;
+            if (_isMoving)
+            {
+                ReSetRenderTransform();
+            }
+            base.OnMouseLeave(e);
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            if (!IsCanDrag)
+                return;
+            _isMoving = true;
+            if (RenderTransform is TranslateTransform tt)
+            {
+                if (ParentNavigation.Orientation == Orientation.Horizontal)
+                {
+                    var newpt = Mouse.GetPosition(this);
+                    var offset = newpt.X - _point.Value.X;
+                    if (offset < 0)
+                    {
+                        _beExchange = ParentNavigation.GetBeforeItem(this);
+                        if (_beExchange == null)
+                        {
+                            if (tt.X + offset < 0)
+                            {
+                                tt.X = 0;
+                            }
+                            else
+                            {
+                                tt.X += offset;
+                            }
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        _beExchange = ParentNavigation.GetAfterItem(this);
+                        if (_beExchange == null)
+                        {
+
+                            if (tt.X + offset > 0)
+                            {
+                                tt.X = 0;
+                            }
+                            else
+                            {
+                                tt.X += offset;
+                            }
+
+                            return;
+                        }
+                    }
+                    tt.X += offset;
+
+                    var max = (_beExchange.ActualWidth + ActualWidth) / 4;
+                    if (Math.Abs(tt.X) > max)
+                    {
+                        //通知调换位置
+                        ParentNavigation.NotifyItemMove(_beExchange, tt.X > 0);
+                        tt.X = -tt.X;
+                    }
+
+                }
+                else
+                {
+                    var newpt = Mouse.GetPosition(this);
+                    var offset = newpt.Y - _point.Value.Y;
+                    if (offset < 0)
+                    {
+                        _beExchange = ParentNavigation.GetBeforeItem(this);
+                        if (_beExchange == null)
+                        {
+                            if (tt.Y + offset < 0)
+                            {
+                                tt.Y = 0;
+                            }
+                            else
+                            {
+                                tt.Y += offset;
+                            }
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        _beExchange = ParentNavigation.GetAfterItem(this);
+                        if (_beExchange == null)
+                        {
+                            if (tt.Y + offset > 0)
+                            {
+                                tt.Y = 0;
+                            }
+                            else
+                            {
+                                tt.Y += offset;
+                            }
+                            return;
+                        }
+                    }
+
+                    tt.Y += offset;
+                    var max = (_beExchange.ActualHeight + ActualHeight) / 2;
+                    if (Math.Abs(tt.Y) > max)
+                    {
+                        //通知调换位置
+                        ParentNavigation.NotifyItemMove(_beExchange, tt.Y > 0);
+                        tt.Y = -tt.Y;
+                    }
+                }
             }
 
-            base.OnKeyDown(e);
+
         }
-
-        protected override void OnMouseDown(MouseButtonEventArgs e)
-        {
-            if (Focus())
-            {
-                IsSelected = true;
-            }
-
-            base.OnMouseDown(e);
-        }
-
-
 
 
         public override void OnApplyTemplate()
@@ -336,7 +468,84 @@ namespace LeeTeke.WpfControl.Controls
 
         #region PrivateMethod
 
-  
+
+        private bool IsCanDrag
+        {
+            get
+            {
+                if (Mouse.LeftButton != MouseButtonState.Pressed)
+                    return false;
+                if (!_canDrag)
+                    return false;
+
+                if (IsScrolling)
+                    return false;
+
+
+
+                if (!IsMouseOver)
+                    return false;
+
+                if (!IsSelected)
+                    return false;
+
+                if (_point == null)
+                    return false;
+
+                if (ParentNavigation == null)
+                    return false;
+
+
+
+
+
+
+                return true;
+            }
+        }
+
+
+        private void ReSetRenderTransform()
+        {
+            _moveSB = new Storyboard() { FillBehavior = FillBehavior.Stop };
+            DoubleAnimation xCDA = new DoubleAnimation()
+            {
+                To = 0,
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut },
+                Duration = new Duration(TimeSpan.FromMilliseconds(200)),
+            };
+            DoubleAnimation yCDA = new DoubleAnimation()
+            {
+
+                To = 0,
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut },
+                Duration = new Duration(TimeSpan.FromMilliseconds(200)),
+            };
+
+            _moveSB.Children.Add(xCDA);
+            _moveSB.Children.Add(yCDA);
+
+            Storyboard.SetTarget(xCDA, this);
+            Storyboard.SetTargetProperty(xCDA, new PropertyPath("(0).(1)", new DependencyProperty[] { RenderTransformProperty, TranslateTransform.XProperty }));
+
+            Storyboard.SetTarget(yCDA, this);
+            Storyboard.SetTargetProperty(yCDA, new PropertyPath("(0).(1)", new DependencyProperty[] { RenderTransformProperty, TranslateTransform.YProperty }));
+            _moveSB.Completed += (ds, de) =>
+            {
+                _isMoving = false;
+                if (RenderTransform is TranslateTransform tt)
+                {
+                    tt.X = 0;
+                    tt.Y = 0;
+                }
+                if (ParentNavigation.IsScrollToSelected)
+                {
+                    ParentNavigation.ScrollToItem(this);
+                }
+
+            };
+            _moveSB.Begin();
+        }
 
         /// <summary>
         /// 通知夫组件我选择了

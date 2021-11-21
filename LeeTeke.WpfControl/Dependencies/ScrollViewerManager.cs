@@ -343,7 +343,6 @@ namespace LeeTeke.WpfControl.Dependencies
             {
                 SetCurrentHorizontalOffset(scrollViewr, offset);
                 SetScrollRunning(scrollViewr, false);
-
             };
             SetScrollRunning(scrollViewr, true);
 

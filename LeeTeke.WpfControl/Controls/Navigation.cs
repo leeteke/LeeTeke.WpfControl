@@ -104,6 +104,8 @@ namespace LeeTeke.WpfControl.Controls
 
         public Navigation()
         {
+
+
             #region ItemsPanelTemplate设置
             var hfac = new FrameworkElementFactory(typeof(StackPanel));
             hfac.SetBinding(StackPanel.OrientationProperty, new Binding() { Source = this, Path = new PropertyPath(Navigation.OrientationProperty), Mode = BindingMode.OneWay });
@@ -174,17 +176,17 @@ namespace LeeTeke.WpfControl.Controls
             NavigationItem item = e.OriginalSource as NavigationItem;
             if (item == null)
             {
-                if (SelectedItem!=null&&SelectedItem.IsMouseOver)
+                if (SelectedItem != null && SelectedItem.IsMouseOver)
                 {
                     item = SelectedItem;
                 }
             }
-     
-            if (item!=null)
+
+            if (item != null)
             {
                 if (item.IsMouseOver)
                 {
-                    _selectedMenuItem.Visibility= Visibility.Collapsed;
+                    _selectedMenuItem.Visibility = Visibility.Collapsed;
                     _contextMenu.Placement = PlacementMode.MousePoint;
                 }
                 else
@@ -192,7 +194,7 @@ namespace LeeTeke.WpfControl.Controls
                     _selectedMenuItem.Visibility = Visibility.Visible;
                     _contextMenu.PlacementTarget = item;
                     _contextMenu.Placement = PlacementMode.Bottom;
-                    
+
                 }
 
                 _contextMenu.DataContext = item;
@@ -358,7 +360,7 @@ namespace LeeTeke.WpfControl.Controls
 
         }
 
-      
+
 
 
         #endregion
@@ -665,7 +667,6 @@ namespace LeeTeke.WpfControl.Controls
         public static readonly DependencyProperty IsScrollToSelectedProperty =
             DependencyProperty.Register("IsScrollToSelected", typeof(bool), typeof(Navigation));
         #endregion
-
 
 
         #region MouseOverBackground
@@ -995,7 +996,10 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (SelectedItem is NavigationItem item)
             {
-                ScrollToItem(item);
+                if (IsScrollToSelected)
+                {
+                    ScrollToItem(item);
+                }
             }
         }
 
@@ -1010,11 +1014,8 @@ namespace LeeTeke.WpfControl.Controls
             {
                 Dispatcher.Invoke(() =>
                 {
-                    if (!IsScrollToSelected)
-                    {
-                        return;
-                    }
-
+                   
+                    item.IsScrolling = true;
                     if (Orientation == Orientation.Horizontal)
                     {
                         // 获取要定位之前 ScrollViewer 目前的滚动位置
@@ -1037,6 +1038,7 @@ namespace LeeTeke.WpfControl.Controls
 
                         ScrollViewerManager.ScrollToVerticalOffset(_scrollViewer, seto);
                     }
+
                 });
             }
             catch
@@ -1047,6 +1049,44 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
         #region internalMethod
+
+        /// <summary>
+        /// 获取之前的Item
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        internal NavigationItem GetBeforeItem(NavigationItem item)
+        {
+            var func = new Func<IList, NavigationItem>(items =>
+            {
+                var itemIndex = items.IndexOf(item);
+                if (itemIndex > 0)
+                    return items[itemIndex - 1] as NavigationItem;
+                else
+                    return null;
+            });
+
+            return ItemsSource == null ? func(Items) : func(_items);
+        }
+
+        /// <summary>
+        /// 获取之后的Item
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        internal NavigationItem GetAfterItem(NavigationItem item)
+        {
+            var func = new Func<IList, NavigationItem>(items =>
+            {
+                var itemIndex = items.IndexOf(item);
+                if (itemIndex < 0 || itemIndex == items.Count - 1)
+                    return null;
+                else
+                    return items[itemIndex + 1] as NavigationItem;
+            });
+
+            return ItemsSource == null ? func(Items) : func(_items);
+        }
 
         /// <summary>
         /// 通知Item关闭
@@ -1075,6 +1115,28 @@ namespace LeeTeke.WpfControl.Controls
 
         }
 
+        /// <summary>
+        /// 通知Item选择
+        /// </summary>
+        /// <param name="item"></param>
+        internal void NotifyItemMove(NavigationItem item, bool isforward)
+        {
+            var closeItem = GetItemFormItem(item);
+            if (closeItem != null)
+            {
+         
+                if (ItemsSource == null)
+                {
+                    ItemMove(item, isforward ? Items.IndexOf(item) - 1 : Items.IndexOf(item) + 1);
+                }
+                else
+                {
+                    ItemMove(item, isforward ? _items.IndexOf(item) - 1 : _items.IndexOf(item) + 1);
+                }
+
+            }
+
+        }
         #endregion
 
         #region PrivateMethod
@@ -1320,8 +1382,11 @@ namespace LeeTeke.WpfControl.Controls
                 return;
             }
 
-
-            ScrollToItem(item);
+            if (IsScrollToSelected)
+            {
+                ScrollToItem(item);
+            }
+       
 
             if (ItemsSource == null)
             {
@@ -1389,7 +1454,7 @@ namespace LeeTeke.WpfControl.Controls
                         SelectedIndex = _currentIndex = list.IndexOf(SelectedValue);
                     }
                 }
-
+                         
             }
         }
 
@@ -1544,7 +1609,6 @@ namespace LeeTeke.WpfControl.Controls
 
 
             var toalIndex = -1;
-
             if (ItemsSource == null)
             {
 
@@ -1562,17 +1626,6 @@ namespace LeeTeke.WpfControl.Controls
                         break;
                     }
                 }
-                #region Item的移动方式
-
-
-                if (toalIndex > -1)
-                {
-                    Items.Remove(item);
-                    Items.Insert(toalIndex, item);
-                }
-
-                #endregion
-
             }
             else
             {
@@ -1591,46 +1644,13 @@ namespace LeeTeke.WpfControl.Controls
                     }
                 }
 
-                if (toalIndex > -1)
-                {
-                    #region ItemSource的移动方式
 
-
-                    var sourceType = ItemsSource.GetType();
-                    ///泛型
-                    if (sourceType.IsGenericType && sourceType.GenericTypeArguments.Length == 1 && ItemsSource is IList list)
-                    {
-                        var oldIndex = list.IndexOf(item.DataContext);
-                        if (oldIndex > -1)
-                        {
-
-                            ///看看支持Move方法不，也就是是否是 ob<>
-                            var method = sourceType.GetMethod("Move");
-                            if (method != null)
-                            {
-                                _ = method.Invoke(ItemsSource, new object?[] { oldIndex, toalIndex });
-                            }
-                            else
-                            {
-                                list.Remove(item.DataContext);
-                                list.Insert(toalIndex, item.DataContext);
-                            }
-                        }
-
-                    }
-                    #endregion
-                }
             }
-
-
-            UpdateSelectedIndex();
-            //线程错开要不然会导致获取到之前的移动
-            Task.Run(async () =>
+            ItemMove(item, toalIndex);
+            if (IsScrollToSelected)
             {
-                await Task.Delay(60);
                 ScrollToItem(item);
-            });
-
+            }
         }
 
         /// <summary>
@@ -1650,7 +1670,6 @@ namespace LeeTeke.WpfControl.Controls
                 for (int i = 0; i < Items.Count; i++)
                 {
                     ///不用动
-
                     if (Items[i] != item && Items[i] is NavigationItem checkItem && checkItem.CanClose && !checkItem.IsPinned)
                     {
 
@@ -1658,17 +1677,6 @@ namespace LeeTeke.WpfControl.Controls
                         break;
                     }
                 }
-
-                #region Item的移动方式
-
-
-                if (toalIndex > -1)
-                {
-                    Items.Remove(item);
-                    Items.Insert(toalIndex, item);
-                }
-
-                #endregion
 
             }
             else
@@ -1683,12 +1691,40 @@ namespace LeeTeke.WpfControl.Controls
                     }
                 }
 
-                if (toalIndex > -1)
+
+            }
+            ItemMove(item, toalIndex);
+            if (IsScrollToSelected)
+            {
+                ScrollToItem(item);
+            }
+        }
+
+        /// <summary>
+        /// ItemMove
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="toalIndex"></param>
+        private void ItemMove(NavigationItem item, int toalIndex)
+        {
+            try
+            {
+                if (toalIndex < 0 || toalIndex >= Items.Count)
+                    return ;
+
+                if (ItemsSource == null)
+                {
+
+                    Items.Remove(item);
+                    Items.Insert(toalIndex, item);
+
+                    UpdateSelectedIndex();
+                    return ;
+                }
+                else
                 {
                     #region ItemSource的移动方式
-
-
-                    var sourceType = ItemsSource.GetType();
+                     var sourceType = ItemsSource.GetType();
                     ///泛型
                     if (sourceType.IsGenericType && sourceType.GenericTypeArguments.Length == 1 && ItemsSource is IList list)
                     {
@@ -1708,20 +1744,22 @@ namespace LeeTeke.WpfControl.Controls
                                 list.Insert(toalIndex, item.DataContext);
                             }
                         }
-
+                        UpdateSelectedIndex();
+                        return ;
+                    }
+                    else
+                    {
+                        return ;
                     }
                     #endregion
                 }
+
+
             }
-
-
-            UpdateSelectedIndex();
-            //线程错开要不然会导致获取到之前的移动
-            Task.Run(async () =>
+            catch
             {
-                await Task.Delay(60);
-                ScrollToItem(item);
-            });
+                
+            }
         }
 
         #endregion

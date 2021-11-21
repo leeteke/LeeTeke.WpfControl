@@ -41,7 +41,7 @@
         <lee:Navigation  Grid.Row="1"
                          ItemSelected="Navigation_ItemSelected"
                          ItemClosed="test_ItemClosed"
-                         IsScrollToSelected="True"
+                   
                          >
             <lee:NavigationItem Content="测1" CanClose="False"/>
             <lee:NavigationItem Content="测2"/>
