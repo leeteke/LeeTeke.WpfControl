@@ -27,5 +27,10 @@ namespace LeeTeke.WPFTest
             InitializeComponent();
             this.DataContext = new TestPageViewModel();
         }
+
+        private void Navigation_DragDropOver(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -249,7 +249,9 @@
                          Height="150"
                          SelectionMode="Single"
                          Margin="5"
-                         leedep:SelectorDragDropManager.IsEnabled="True">
+                         leedep:SelectorDragDropManager.IsEnabled="True"
+            leedep:SelectorDragDropManager.DragDropOverCommand="{Binding ToggleButtonCommand}"
+                         leedep:SelectorDragDropManager.DragDropOver="Navigation_DragDropOver">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid >

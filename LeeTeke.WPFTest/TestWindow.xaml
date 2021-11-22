@@ -46,7 +46,7 @@
                          IsScrollToSelected="True"
                          ItemSelected="Navigation_ItemSelected"
                          ItemClosed="test_ItemClosed"
-                   
+              
                          >
             <lee:NavigationItem Content="测1" CanClose="False"/>
             <lee:NavigationItem Content="测2"/>

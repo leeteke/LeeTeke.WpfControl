@@ -56,7 +56,6 @@ namespace LeeTeke.WpfControl.Dependencies
         #endregion
 
 
-
         #region DragAdornerOpacity
         public static double GetDragAdornerOpacity(DependencyObject obj)
         {
@@ -121,7 +120,6 @@ namespace LeeTeke.WpfControl.Dependencies
         }
         #endregion
 
-
         #region FreezeIndex
         public static int GetFreezeIndex(DependencyObject obj)
         {
@@ -147,7 +145,6 @@ namespace LeeTeke.WpfControl.Dependencies
         }
         #endregion
 
-
         #region SelectorDragDropService
         static SelectorDragDropService GetSelectorDragDropService(DependencyObject obj)
         {
@@ -163,6 +160,51 @@ namespace LeeTeke.WpfControl.Dependencies
         static readonly DependencyProperty SelectorDragDropServiceProperty =
            DependencyProperty.RegisterAttached("SelectorDragDropService", typeof(SelectorDragDropService), typeof(SelectorDragDropManager));
         #endregion
+
+
+
+
+
+        #region DragDropOver
+
+        public static void AddDragDropOverHandler(DependencyObject d, RoutedEventHandler handler)
+        {
+            var uie = d as UIElement;
+            if (uie != null)
+                uie.AddHandler(DragDropOverEvent, handler);
+        }
+        public static void RemoveDragDropOverHandler(DependencyObject d, RoutedEventHandler handler)
+        {
+            var uie = d as UIElement;
+            if (uie != null)
+                uie.RemoveHandler(DragDropOverEvent, handler);
+        }
+
+        public static readonly RoutedEvent DragDropOverEvent =
+            EventManager.RegisterRoutedEvent("DragDropOver", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SelectorDragDropManager));
+
+        #endregion
+
+
+
+        #region DragDropOverCommand
+        public static ICommand GetDragDropOverCommand(DependencyObject obj)
+        {
+            return (ICommand)obj.GetValue(DragDropOverCommandProperty);
+        }
+
+        public static void SetDragDropOverCommand(DependencyObject obj, ICommand value)
+        {
+            obj.SetValue(DragDropOverCommandProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for DragDropOverCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DragDropOverCommandProperty =
+            DependencyProperty.RegisterAttached("DragDropOverCommand", typeof(ICommand), typeof(SelectorDragDropManager));
+        #endregion
+
+
+
 
     }
 
@@ -286,7 +328,7 @@ namespace LeeTeke.WpfControl.Dependencies
                                 list.Remove(_dragAdorner.AdornedItem.DataContext);
                                 list.Insert(toalIndex, _dragAdorner.AdornedItem.DataContext);
                             }
-                            
+
                         }
                         e.Effects = DragDropEffects.Move;
                     }
@@ -307,7 +349,24 @@ namespace LeeTeke.WpfControl.Dependencies
                 e.Effects = DragDropEffects.Move;
             }
 
+            #region 触发命令与事件
 
+            #region Event
+            var routedArgs = new RoutedEventArgs(SelectorDragDropManager.DragDropOverEvent, _control);
+            _control.RaiseEvent(routedArgs);
+            #endregion
+            #region Command
+            if (SelectorDragDropManager.GetDragDropOverCommand(_control) is ICommand command)
+            {
+                if (command.CanExecute(_control))
+                {
+                    command.Execute(_control);
+                }
+            }
+            #endregion
+
+            #endregion
+        
 
         }
 

@@ -56,5 +56,10 @@ namespace LeeTeke.WPFTest
         {
             tb.AppendText($"C__{DateTime.Now:HH:mm:ss:fff}__{e.Value}\r\n");
         }
+
+        private void Navigation_DragDropOver(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
