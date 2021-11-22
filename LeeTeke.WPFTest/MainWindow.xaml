@@ -26,20 +26,20 @@
         >
 
 
-    
+
     <leecontrol:Window.TitleContent>
 
         <Grid>
-            
-   
+
+
             <StackPanel Orientation="Horizontal" 
                     HorizontalAlignment="Right">
 
-            <Button Content="界面切换测试"
+                <Button Content="界面切换测试"
                 HorizontalAlignment="Right"
                 Width="100"  
                 Command="{Binding PageChangedCommand}"/>
-            <Button Content="黑白切换"
+                <Button Content="黑白切换"
               
                 Width="60"  
                 Command="{Binding ThemeChangedCommand}"/>
@@ -53,8 +53,8 @@
         </Grid>
     </leecontrol:Window.TitleContent>
 
- 
-    
+
+
 
     <Grid  Background="{DynamicResource LeeBrush_Background}">
         <Grid.RowDefinitions>
@@ -72,13 +72,14 @@
         <Frame Background="{DynamicResource LeeBrush_Background2}" 
                Content="{Binding NativePage}"
                Grid.Row="1"
-               Grid.Column="1">
-
+               Grid.Column="1"
+               leedep:FrameManager.SwitchAnimationEnabled="True">
+         
         </Frame>
 
 
 
-     
+
 
 
 
@@ -98,7 +99,7 @@
             </Grid>
         </leecontrol:NotifyIconEx>
 
-       
+
 
     </Grid>
 

@@ -101,7 +101,7 @@ namespace LeeTeke.WpfControl.Controls
         private NavigationItem _currentItem;
         private object _currentValue;
 
-
+        private Point? _currentPoint;
         public Navigation()
         {
 
@@ -252,6 +252,23 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
 
+        protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            _currentPoint = e.GetPosition(this);
+            base.OnMouseLeftButtonDown(e);
+        }
+
+        protected override void OnPreviewMouseLeftButtonUp(MouseButtonEventArgs e)
+        {
+            _currentPoint = null;
+            base.OnMouseLeftButtonDown(e);
+        }
+
+        protected override void OnMouseLeave(MouseEventArgs e)
+        {
+            _currentPoint = null;
+            base.OnMouseLeave(e);
+        }
 
         public override void OnApplyTemplate()
         {
@@ -540,6 +557,21 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("RightButtonStyle", typeof(Style), typeof(Navigation));
         #endregion
 
+
+        #region CanItemDisplacement
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public bool CanItemDisplacement
+        {
+            get { return (bool)GetValue(CanItemDisplacementProperty); }
+            set { SetValue(CanItemDisplacementProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CanItemDisplacement.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CanItemDisplacementProperty =
+            DependencyProperty.Register("CanItemDisplacement", typeof(bool), typeof(Navigation));
+        #endregion
 
 
         #region ItemCornerRadius
@@ -1007,15 +1039,13 @@ namespace LeeTeke.WpfControl.Controls
 
         #region PublicMethod
 
-
         public void ScrollToItem(NavigationItem item)
         {
             try
             {
                 Dispatcher.Invoke(() =>
                 {
-                   
-                    item.IsScrolling = true;
+
                     if (Orientation == Orientation.Horizontal)
                     {
                         // 获取要定位之前 ScrollViewer 目前的滚动位置
@@ -1049,6 +1079,26 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
         #region internalMethod
+
+        internal bool CanItemMove
+        {
+            get
+            {
+                if (!CanItemDisplacement)
+                    return false;
+
+                if (_currentPoint == null)
+                    return false;
+
+                return Orientation switch
+                {
+                    Orientation.Horizontal => Math.Abs(Mouse.GetPosition(this).X - _currentPoint.Value.X) > 5,
+                    Orientation.Vertical => Math.Abs(Mouse.GetPosition(this).Y - _currentPoint.Value.Y) > 0,
+                    _ => false,
+                };
+            }
+        }
+
 
         /// <summary>
         /// 获取之前的Item
@@ -1124,10 +1174,11 @@ namespace LeeTeke.WpfControl.Controls
             var closeItem = GetItemFormItem(item);
             if (closeItem != null)
             {
-         
+
                 if (ItemsSource == null)
                 {
                     ItemMove(item, isforward ? Items.IndexOf(item) - 1 : Items.IndexOf(item) + 1);
+
                 }
                 else
                 {
@@ -1386,7 +1437,7 @@ namespace LeeTeke.WpfControl.Controls
             {
                 ScrollToItem(item);
             }
-       
+
 
             if (ItemsSource == null)
             {
@@ -1454,7 +1505,7 @@ namespace LeeTeke.WpfControl.Controls
                         SelectedIndex = _currentIndex = list.IndexOf(SelectedValue);
                     }
                 }
-                         
+
             }
         }
 
@@ -1710,7 +1761,7 @@ namespace LeeTeke.WpfControl.Controls
             try
             {
                 if (toalIndex < 0 || toalIndex >= Items.Count)
-                    return ;
+                    return;
 
                 if (ItemsSource == null)
                 {
@@ -1719,12 +1770,12 @@ namespace LeeTeke.WpfControl.Controls
                     Items.Insert(toalIndex, item);
 
                     UpdateSelectedIndex();
-                    return ;
+                    return;
                 }
                 else
                 {
                     #region ItemSource的移动方式
-                     var sourceType = ItemsSource.GetType();
+                    var sourceType = ItemsSource.GetType();
                     ///泛型
                     if (sourceType.IsGenericType && sourceType.GenericTypeArguments.Length == 1 && ItemsSource is IList list)
                     {
@@ -1745,11 +1796,11 @@ namespace LeeTeke.WpfControl.Controls
                             }
                         }
                         UpdateSelectedIndex();
-                        return ;
+                        return;
                     }
                     else
                     {
-                        return ;
+                        return;
                     }
                     #endregion
                 }
@@ -1758,7 +1809,7 @@ namespace LeeTeke.WpfControl.Controls
             }
             catch
             {
-                
+
             }
         }
 

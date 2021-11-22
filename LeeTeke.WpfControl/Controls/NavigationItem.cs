@@ -76,11 +76,8 @@ namespace LeeTeke.WpfControl.Controls
         /// </summary>
         internal bool SelfClose { set; get; }
 
-        internal bool IsScrolling
-        {
-            get;
-            set;
-        }
+        internal bool IsMoving { get; private set; }
+
 
         private Point? _point;
         private NavigationItem _beExchange;
@@ -97,8 +94,6 @@ namespace LeeTeke.WpfControl.Controls
         private Button _closeBtn;
         private bool _isClosed = false;
         private Storyboard _moveSB;
-        private bool _isMoving = false;
-
 
 
 
@@ -138,31 +133,23 @@ namespace LeeTeke.WpfControl.Controls
 
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            
             _canDrag = true;
             _point = e.GetPosition(this);
         }
 
         protected override void OnPreviewMouseLeftButtonUp(MouseButtonEventArgs e)
         {
-            IsScrolling = false;
+
             _canDrag = false;
             _point = null;
-            if (_isMoving)
-            {
-                ReSetRenderTransform();
-            }
+            ReSetRenderTransform();
         }
 
         protected override void OnMouseLeave(MouseEventArgs e)
         {
             _canDrag = false;
             _point = null;
-            IsScrolling = false;
-            if (_isMoving)
-            {
-                ReSetRenderTransform();
-            }
+            ReSetRenderTransform();
             base.OnMouseLeave(e);
         }
 
@@ -170,7 +157,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (!IsCanDrag)
                 return;
-            _isMoving = true;
+            IsMoving = true;
             if (RenderTransform is TranslateTransform tt)
             {
                 if (ParentNavigation.Orientation == Orientation.Horizontal)
@@ -217,8 +204,11 @@ namespace LeeTeke.WpfControl.Controls
                     if (Math.Abs(tt.X) > max)
                     {
                         //通知调换位置
+                        _beExchange.Opacity = 0;
                         ParentNavigation.NotifyItemMove(_beExchange, tt.X > 0);
                         tt.X = -tt.X;
+                        _beExchange.SetMoveRenderTransform(tt.X > 0 ? -this.ActualWidth: this.ActualHeight, 0);
+
                     }
 
                 }
@@ -260,12 +250,15 @@ namespace LeeTeke.WpfControl.Controls
                     }
 
                     tt.Y += offset;
-                    var max = (_beExchange.ActualHeight + ActualHeight) / 2;
+                    var max = (_beExchange.ActualHeight + ActualHeight) / 4;
                     if (Math.Abs(tt.Y) > max)
                     {
+                        _beExchange.Opacity = 0;
                         //通知调换位置
                         ParentNavigation.NotifyItemMove(_beExchange, tt.Y > 0);
                         tt.Y = -tt.Y;
+
+                        _beExchange.SetMoveRenderTransform(0, tt.Y > 0 ? -this.ActualHeight : this.ActualHeight);
                     }
                 }
             }
@@ -426,6 +419,49 @@ namespace LeeTeke.WpfControl.Controls
 
         #region InternalMethod
         /// <summary>
+        /// 设置移动动画
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        internal void SetMoveRenderTransform(double x, double y)
+        {
+            Opacity = 1;
+            _moveSB = new Storyboard() { FillBehavior = FillBehavior.Stop };
+            DoubleAnimation xCDA = new DoubleAnimation()
+            {
+                From = x,
+                To = 0,
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut },
+                Duration = new Duration(TimeSpan.FromMilliseconds(200)),
+            };
+            DoubleAnimation yCDA = new DoubleAnimation()
+            {
+                From = y,
+                To = 0,
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut },
+                Duration = new Duration(TimeSpan.FromMilliseconds(200)),
+            };
+
+            _moveSB.Children.Add(xCDA);
+            _moveSB.Children.Add(yCDA);
+
+            Storyboard.SetTarget(xCDA, this);
+            Storyboard.SetTargetProperty(xCDA, new PropertyPath("(0).(1)", new DependencyProperty[] { RenderTransformProperty, TranslateTransform.XProperty }));
+
+            Storyboard.SetTarget(yCDA, this);
+            Storyboard.SetTargetProperty(yCDA, new PropertyPath("(0).(1)", new DependencyProperty[] { RenderTransformProperty, TranslateTransform.YProperty }));
+            _moveSB.Completed += (ds, de) =>
+            {
+                if (RenderTransform is TranslateTransform tt)
+                {
+                    tt.X = 0;
+                    tt.Y = 0;
+                }
+            };
+            _moveSB.Begin();
+        }
+
+        /// <summary>
         /// 关闭Item
         /// </summary>
         internal void Close()
@@ -478,9 +514,8 @@ namespace LeeTeke.WpfControl.Controls
                 if (!_canDrag)
                     return false;
 
-                if (IsScrolling)
+                if (!ParentNavigation.CanItemMove)
                     return false;
-
 
 
                 if (!IsMouseOver)
@@ -507,6 +542,8 @@ namespace LeeTeke.WpfControl.Controls
 
         private void ReSetRenderTransform()
         {
+            if (!IsMoving)
+                return;
             _moveSB = new Storyboard() { FillBehavior = FillBehavior.Stop };
             DoubleAnimation xCDA = new DoubleAnimation()
             {
@@ -532,7 +569,7 @@ namespace LeeTeke.WpfControl.Controls
             Storyboard.SetTargetProperty(yCDA, new PropertyPath("(0).(1)", new DependencyProperty[] { RenderTransformProperty, TranslateTransform.YProperty }));
             _moveSB.Completed += (ds, de) =>
             {
-                _isMoving = false;
+                IsMoving = false;
                 if (RenderTransform is TranslateTransform tt)
                 {
                     tt.X = 0;
@@ -546,6 +583,8 @@ namespace LeeTeke.WpfControl.Controls
             };
             _moveSB.Begin();
         }
+
+
 
         /// <summary>
         /// 通知夫组件我选择了

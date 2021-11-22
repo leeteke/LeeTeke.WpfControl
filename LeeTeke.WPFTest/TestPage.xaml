@@ -72,6 +72,8 @@
                 
                 </leecontrol:TextBoxEx>
                 <leecontrol:Navigation  CloseVisibly="MouseOver" 
+                                        IsScrollToSelected="True"
+                                        CanItemDisplacement="True"
                                      Orientation="Horizontal"
                                      ShowScrollToButton="True"
                                      ItemsSource="{Binding TestList}"
@@ -92,6 +94,8 @@
 
                 <leecontrol:Navigation  CloseVisibly="MouseOver" 
                                      Orientation="Vertical"
+                                                    IsScrollToSelected="True"
+                                        CanItemDisplacement="True"
                                      Height="150"
                                      ShowScrollToButton="True"
                                      ItemsSource="{Binding TestList}"
