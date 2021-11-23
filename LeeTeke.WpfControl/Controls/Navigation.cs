@@ -1755,9 +1755,15 @@ namespace LeeTeke.WpfControl.Controls
 
             }
             ItemMove(item, toalIndex);
-            if (IsScrollToSelected)
+            if (IsScrollToSelected&&SelectedItem==item)
             {
-                ScrollToItem(item);
+                ///增加延时移动
+                Task.Run(async () =>
+                {
+                   await Task.Delay(60);
+                    ScrollToItem(item);
+                });
+         
             }
         }
 
@@ -1802,9 +1808,14 @@ namespace LeeTeke.WpfControl.Controls
 
             }
             ItemMove(item, toalIndex);
-            if (IsScrollToSelected)
+            if (IsScrollToSelected && SelectedItem == item)
             {
-                ScrollToItem(item);
+                ///增加延时移动
+                Task.Run(async () =>
+                {
+                    await Task.Delay(60);
+                    ScrollToItem(item);
+                });
             }
         }
 

@@ -24,7 +24,7 @@
         </Grid.RowDefinitions>
 
         <lee:Navigation x:Name="test" 
-                     
+                     IsScrollToSelected="True"
                          >
             <lee:Navigation.ItemTemplate>
                 <DataTemplate >
