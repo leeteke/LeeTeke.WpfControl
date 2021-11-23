@@ -703,6 +703,52 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
+        #region SeparatorVisibly
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public bool SeparatorVisibly
+        {
+            get { return (bool)GetValue(SeparatorVisiblyProperty); }
+            set { SetValue(SeparatorVisiblyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SeparatorVisibly.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SeparatorVisiblyProperty =
+            DependencyProperty.Register("SeparatorVisibly", typeof(bool), typeof(Navigation));
+        #endregion
+
+        #region SeparatorFill
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Brush SeparatorFill
+        {
+            get { return (Brush)GetValue(SeparatorFillProperty); }
+            set { SetValue(SeparatorFillProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SeparatorFill.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SeparatorFillProperty =
+            DependencyProperty.Register("SeparatorFill", typeof(Brush), typeof(Navigation));
+        #endregion
+
+        #region SeparatorSize
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public double SeparatorSize
+        {
+            get { return (double)GetValue(SeparatorSizeProperty); }
+            set { SetValue(SeparatorSizeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SeparatorSize.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SeparatorSizeProperty =
+            DependencyProperty.Register("SeparatorSize", typeof(double), typeof(Navigation));
+        #endregion
+
+
         #region MouseOverBackground
         /// <summary>
         /// 请添加描述

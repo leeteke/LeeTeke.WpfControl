@@ -23,16 +23,15 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <lee:ToggleGroup x:Name="test" 
-                         SelectionMode="Multiple"
-                       SelectionChanged="test_SelectionChanged_1"
+        <lee:Navigation x:Name="test" 
+                     
                          >
-            <lee:ToggleGroup.ItemTemplate>
+            <lee:Navigation.ItemTemplate>
                 <DataTemplate >
                     <TextBlock  Text="{Binding}"/>
                 </DataTemplate>
-            </lee:ToggleGroup.ItemTemplate>
-        </lee:ToggleGroup>
+            </lee:Navigation.ItemTemplate>
+        </lee:Navigation>
 
         <TextBlock VerticalAlignment="Top"
                    Text="{Binding ElementName=test,Path=SelectedIndex}"/>

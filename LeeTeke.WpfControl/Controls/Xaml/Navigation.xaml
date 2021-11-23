@@ -41,10 +41,13 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Background="{TemplateBinding Background}"
                                 CornerRadius="{TemplateBinding CornerRadius}" />
-                        <Rectangle x:Name="PART_Rectangle" 
+                        <Rectangle x:Name="PART_Separator" 
                                                Width="1"
-                                               Fill="{DynamicResource LeeBrush_BorderBrush}"
-                                               Margin="-1,10"
+                                               Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=SeparatorFill,Mode=OneWay}"
+                                               Margin="-1,0,0,0"
+                                               Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=SeparatorSize,Mode=OneWay}"
+                                   Visibility="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=SeparatorVisibly, Converter={StaticResource VisibilityForBoolConverter}, Mode=OneWay}"
+                                               VerticalAlignment="Center"
                                                HorizontalAlignment="Left"/>
 
                         <TextBlock Text="&#xE840;"
@@ -87,7 +90,7 @@
                     <ControlTemplate.Triggers>
 
                         <Trigger Property="Orientation" Value="Vertical">
-                            <Setter  TargetName="PART_Rectangle" Property="Visibility" Value="Collapsed"/>
+                            <Setter  TargetName="PART_Separator" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
 
 
@@ -124,7 +127,7 @@
                             <Setter  TargetName="contentBorder" Property="Effect"  Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=SelectedEffect,Mode=OneWay}"/>
                             <Setter   Property="TextElement.Foreground"  Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=SelectedForeground,Mode=OneWay}"/>
                             <Setter Property="StackPanel.ZIndex" Value="999"/>
-                            <Setter TargetName="PART_Rectangle" Property="Opacity" Value="0"/>
+                            <Setter TargetName="PART_Separator" Property="Opacity" Value="0"/>
                         </Trigger>
 
 
@@ -138,7 +141,7 @@
                             <Setter TargetName="contentBorder" Property="BorderThickness" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=MouseOverBorderThickness,Mode=OneWay}"/>
                             <Setter  TargetName="contentBorder" Property="Effect"  Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=MouseOverEffect,Mode=OneWay}"/>
                             <Setter   Property="TextElement.Foreground"  Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}},Path=MouseOverForeground,Mode=OneWay}"/>
-                            <Setter TargetName="PART_Rectangle" Property="Opacity" Value="0"/>
+                            <Setter TargetName="PART_Separator" Property="Opacity" Value="0"/>
                         </MultiTrigger>
 
                         <Trigger Property="IsEnabled" Value="False">
@@ -172,6 +175,11 @@
         <Setter Property="SelectedBackground" Value="{DynamicResource LeeBrush_Theme}"/>
         <Setter Property="SelectedForeground" Value="{DynamicResource LeeBrush_ThemeForeground}"/>
         <Setter Property="ItemContxtMenuContentDock" Value="Bottom"/>
+
+        <Setter Property="SeparatorSize" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=ItemHeight, Converter={StaticResource DoubleFollowConverter}, ConverterParameter=-20, Mode=OneWay}"/>
+        <Setter Property="SeparatorVisibly" Value="True"/>
+        <Setter Property="SeparatorFill" Value="{DynamicResource LeeBrush_BorderBrush}"/>
+        
         <Setter Property="LeftButtonStyle">
             <Setter.Value>
                 <Style TargetType="{x:Type Button}" BasedOn="{StaticResource TextButton}">
