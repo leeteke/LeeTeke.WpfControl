@@ -69,34 +69,32 @@ namespace LeeTeke.WpfControl.Controls
                 if (panel != null)
                 {
                     _items = panel.Children;
+
+                    if (SelectedIndex != null)
+                    {
+                        SelectedIndexChanged();
+                        return;
+                    }
+
+                    if (SelectedValue != null)
+                    {
+                        SelectedValueChanged();
+                        return;
+                    }
+
+                    if (SelectedItem != null)
+                    {
+                        SelectedItemChanged();
+                        return;
+                    }
                 }
 
             }));
             ItemsPanel = new ItemsPanelTemplate(hfac);
 
-            Loaded += ToggleGroup_Loaded;
         }
 
-        private void ToggleGroup_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (SelectedIndex != null)
-            {
-                SelectedIndexChanged();
-                return;
-            }
-
-            if (SelectedValue != null)
-            {
-                SelectedValueChanged();
-                return;
-            }
-
-            if (SelectedItem != null)
-            {
-                SelectedItemChanged();
-                return;
-            }
-        }
+   
 
 
 

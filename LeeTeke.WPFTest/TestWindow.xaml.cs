@@ -30,6 +30,7 @@ namespace LeeTeke.WPFTest
         private void TestWindow_Loaded(object sender, RoutedEventArgs e)
         {
             test.ItemsSource = items;
+            test.SelectedValue = new string[] { items[1] ,items[2]};
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -58,6 +59,11 @@ namespace LeeTeke.WPFTest
         }
 
         private void Navigation_DragDropOver(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void test_SelectionChanged_1(object sender, WpfControl.ToggleSelectionChangedEventArgs e)
         {
 
         }

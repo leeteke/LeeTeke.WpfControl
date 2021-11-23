@@ -23,41 +23,24 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <lee:Navigation x:Name="test" 
-                        ShowScrollToButton="True"
-                        IsScrollToSelected="True"
-                        CanItemDisplacement="True"
-                        SelectedIndex="0"
-                        ItemSelected="Navigation_ItemSelected"
-                        ItemClosed="test_ItemClosed"
-                        CloseVisibly="MouseOver"
+        <lee:ToggleGroup x:Name="test" 
+                         SelectionMode="Multiple"
+                       SelectionChanged="test_SelectionChanged_1"
                          >
-            <lee:Navigation.ItemTemplate>
+            <lee:ToggleGroup.ItemTemplate>
                 <DataTemplate >
                     <TextBlock  Text="{Binding}"/>
                 </DataTemplate>
-            </lee:Navigation.ItemTemplate>
-        </lee:Navigation>
+            </lee:ToggleGroup.ItemTemplate>
+        </lee:ToggleGroup>
 
         <TextBlock VerticalAlignment="Top"
                    Text="{Binding ElementName=test,Path=SelectedIndex}"/>
 
-        <lee:Navigation  Grid.Row="1"
-                         IsScrollToSelected="True"
-                         ItemSelected="Navigation_ItemSelected"
-                         ItemClosed="test_ItemClosed"
-              
-                         >
-            <lee:NavigationItem Content="测1" CanClose="False"/>
-            <lee:NavigationItem Content="测2"/>
-            <lee:NavigationItem Content="测3"/>
-            <lee:NavigationItem Content="测4"/>
-            <lee:NavigationItem Content="测5"/>
-            <lee:NavigationItem Content="测6"/>
-            <lee:NavigationItem Content="测7"/>
-            <lee:NavigationItem Content="测8"/>
-            <lee:NavigationItem Content="测9"/>
-        </lee:Navigation>
+
+
+
+        
 
         <TextBox x:Name="tb"
                  Grid.Row="2"

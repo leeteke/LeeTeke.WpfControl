@@ -163,6 +163,7 @@
         <Setter Property="ItemPinVisibly" Value="True"/>
         <Setter Property="ItemMargin" Value="0"/>
         <Setter Property="ItemPadding" Value="10,5"/>
+
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>

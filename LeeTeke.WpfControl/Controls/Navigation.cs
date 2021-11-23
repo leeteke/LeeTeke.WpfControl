@@ -100,8 +100,10 @@ namespace LeeTeke.WpfControl.Controls
         private int _currentIndex = -1;
         private NavigationItem _currentItem;
         private object _currentValue;
-
         private Point? _currentPoint;
+
+     
+ private bool _isLoaded=false;
         public Navigation()
         {
 
@@ -115,35 +117,35 @@ namespace LeeTeke.WpfControl.Controls
                 if (panel != null)
                 {
                     _items = panel.Children;
+
+                    _isLoaded = true;
+
+                    if (SelectedIndex != -1)
+                    {
+                        ChangeSelectedIndex(SelectedIndex);
+                        return;
+                    }
+
+                    if (SelectedItem != null)
+                    {
+                        ChangeSelectedItem(SelectedItem);
+                        return;
+                    }
+
+                    if (SelectedValue != null)
+                    {
+                        ChangeSelectedValue(SelectedValue);
+                    }
+
                 }
             }));
             ItemsPanel = new ItemsPanelTemplate(hfac);
             #endregion
-            Loaded += Navigation_Loaded;
-
-
 
         }
 
-        private void Navigation_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (SelectedIndex != -1)
-            {
-                ChangeSelectedIndex(SelectedIndex);
-                return;
-            }
 
-            if (SelectedItem != null)
-            {
-                ChangeSelectedItem(SelectedItem);
-                return;
-            }
-
-            if (SelectedValue != null)
-            {
-                ChangeSelectedValue(SelectedValue);
-            }
-        }
+    
 
 
         #region override
@@ -452,7 +454,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private static void SelectedIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is Navigation tag && e.NewValue != e.OldValue && tag.IsLoaded)
+            if (d is Navigation tag && e.NewValue != e.OldValue )
             {
                 tag.ChangeSelectedIndex((int)e.NewValue);
             }
@@ -476,7 +478,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private static void SelectedItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is Navigation tag && e.NewValue != e.OldValue && tag.IsLoaded)
+            if (d is Navigation tag && e.NewValue != e.OldValue)
             {
                 tag.ChangeSelectedItem(e.NewValue as NavigationItem);
             }
@@ -501,7 +503,7 @@ namespace LeeTeke.WpfControl.Controls
         private static void SelectedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
 
-            if (d is Navigation tag && e.NewValue != e.OldValue && tag.IsLoaded)
+            if (d is Navigation tag && e.NewValue != e.OldValue )
             {
                 tag.ChangeSelectedValue(e.NewValue);
             }
@@ -1391,6 +1393,7 @@ namespace LeeTeke.WpfControl.Controls
         /// <param name="index"></param>
         private void ChangeSelectedIndex(int index)
         {
+        
             if (index == _currentIndex)
             {
                 return;
@@ -1402,6 +1405,8 @@ namespace LeeTeke.WpfControl.Controls
 
         private void ChangeSelectedValue(object vaule)
         {
+        
+
             if (vaule == _currentValue)
             {
                 return;
@@ -1415,6 +1420,8 @@ namespace LeeTeke.WpfControl.Controls
         /// <param name="item"></param>
         private void ChangeSelectedItem(NavigationItem item)
         {
+            if (!_isLoaded)
+                return;
 
             if (item == null)
             {
@@ -1618,6 +1625,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             try
             {
+
                 if (dataContext == null)
                     return null;
 
@@ -1634,6 +1642,9 @@ namespace LeeTeke.WpfControl.Controls
                         }
                     }
                 }
+                if (_items == null)
+                    return null;
+
                 foreach (var item in _items)
                 {
                     if (item is NavigationItem element && element.DataContext == dataContext)
