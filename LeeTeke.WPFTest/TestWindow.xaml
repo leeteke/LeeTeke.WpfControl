@@ -25,6 +25,7 @@
 
         <lee:Navigation x:Name="test" 
                      IsScrollToSelected="True"
+                        CanItemDisplacement="True"
                          >
             <lee:Navigation.ItemTemplate>
                 <DataTemplate >
@@ -37,9 +38,24 @@
                    Text="{Binding ElementName=test,Path=SelectedIndex}"/>
 
 
+        <lee:Navigation  Grid.Row="1"
+                     IsScrollToSelected="True"
+                        CanItemDisplacement="True"
+                         >
+            <lee:NavigationItem Content="1"/>
+            <lee:NavigationItem Content="2"/>
+            <lee:NavigationItem Content="3" CanClose="False"/>
+            <lee:NavigationItem Content="4"/>
+            <lee:NavigationItem Content="5"/>
+            <lee:NavigationItem Content="6"/>
+            <lee:NavigationItem Content="7"/>
+        </lee:Navigation>
 
 
-        
+
+
+
+
 
         <TextBox x:Name="tb"
                  Grid.Row="2"

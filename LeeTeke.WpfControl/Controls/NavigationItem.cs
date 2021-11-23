@@ -142,6 +142,7 @@ namespace LeeTeke.WpfControl.Controls
 
             _canDrag = false;
             _point = null;
+       
             ReSetRenderTransform();
         }
 
@@ -149,6 +150,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             _canDrag = false;
             _point = null;
+         
             ReSetRenderTransform();
             base.OnMouseLeave(e);
         }
@@ -199,7 +201,6 @@ namespace LeeTeke.WpfControl.Controls
                         }
                     }
                     tt.X += offset;
-
                     var max = (_beExchange.ActualWidth + ActualWidth) / 4;
                     if (Math.Abs(tt.X) > max)
                     {
@@ -219,6 +220,7 @@ namespace LeeTeke.WpfControl.Controls
                     if (offset < 0)
                     {
                         _beExchange = ParentNavigation.GetBeforeItem(this);
+                      
                         if (_beExchange == null)
                         {
                             if (tt.Y + offset < 0)

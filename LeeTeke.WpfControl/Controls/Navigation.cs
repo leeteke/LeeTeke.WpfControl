@@ -102,8 +102,8 @@ namespace LeeTeke.WpfControl.Controls
         private object _currentValue;
         private Point? _currentPoint;
 
-     
- private bool _isLoaded=false;
+
+        private bool _isLoaded = false;
         public Navigation()
         {
 
@@ -145,7 +145,7 @@ namespace LeeTeke.WpfControl.Controls
         }
 
 
-    
+
 
 
         #region override
@@ -454,7 +454,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private static void SelectedIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is Navigation tag && e.NewValue != e.OldValue )
+            if (d is Navigation tag && e.NewValue != e.OldValue)
             {
                 tag.ChangeSelectedIndex((int)e.NewValue);
             }
@@ -503,7 +503,7 @@ namespace LeeTeke.WpfControl.Controls
         private static void SelectedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
 
-            if (d is Navigation tag && e.NewValue != e.OldValue )
+            if (d is Navigation tag && e.NewValue != e.OldValue)
             {
                 tag.ChangeSelectedValue(e.NewValue);
             }
@@ -1152,16 +1152,44 @@ namespace LeeTeke.WpfControl.Controls
         /// 获取之前的Item
         /// </summary>
         /// <param name="item"></param>
+        /// <param name="item"></param>
         /// <returns></returns>
-        internal NavigationItem GetBeforeItem(NavigationItem item)
+        internal NavigationItem GetBeforeItem(NavigationItem item, bool forMove = true)
         {
             var func = new Func<IList, NavigationItem>(items =>
             {
                 var itemIndex = items.IndexOf(item);
                 if (itemIndex > 0)
-                    return items[itemIndex - 1] as NavigationItem;
-                else
-                    return null;
+                {
+                    if (forMove)
+                    {
+                        var getItem = items[itemIndex - 1] as NavigationItem;
+                        if (getItem != null)
+                        {
+                            if (item.IsPinned || !item.CanClose)
+                            {
+                                if (getItem.IsPinned || !getItem.CanClose)
+                                {
+                                    return getItem;
+                                }
+                            }
+                            else
+                            {
+                                if (!getItem.IsPinned && getItem.CanClose)
+                                {
+                                    return getItem;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        return items[itemIndex - 1] as NavigationItem;
+                    }
+
+                }
+
+                return null;
             });
 
             return ItemsSource == null ? func(Items) : func(_items);
@@ -1172,15 +1200,41 @@ namespace LeeTeke.WpfControl.Controls
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        internal NavigationItem GetAfterItem(NavigationItem item)
+        internal NavigationItem GetAfterItem(NavigationItem item, bool forMove = true)
         {
             var func = new Func<IList, NavigationItem>(items =>
             {
                 var itemIndex = items.IndexOf(item);
-                if (itemIndex < 0 || itemIndex == items.Count - 1)
-                    return null;
-                else
-                    return items[itemIndex + 1] as NavigationItem;
+                if (itemIndex > -1 && itemIndex < items.Count - 1)
+                {
+                    if (forMove)
+                    {
+                        var getItem = items[itemIndex + 1] as NavigationItem;
+                        if (getItem != null)
+                        {
+                            if (item.IsPinned || !item.CanClose)
+                            {
+                                if (getItem.IsPinned || !getItem.CanClose)
+                                {
+                                    return getItem;
+                                }
+                            }
+                            else
+                            {
+                                if (!getItem.IsPinned && getItem.CanClose)
+                                {
+                                    return getItem;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        return items[itemIndex + 1] as NavigationItem;
+                    }
+
+                }
+                return null;
             });
 
             return ItemsSource == null ? func(Items) : func(_items);
@@ -1255,8 +1309,8 @@ namespace LeeTeke.WpfControl.Controls
            {
                if ((x.IsPinned || !x.CanClose) && !needSelected)
                {
-                   ///指定给他
-                   needSelected = true;
+                       ///指定给他
+                       needSelected = true;
                    ChangeSelectedItem(x);
                }
                else if (!x.IsPinned && x.CanClose)
@@ -1439,7 +1493,7 @@ namespace LeeTeke.WpfControl.Controls
         /// <param name="index"></param>
         private void ChangeSelectedIndex(int index)
         {
-        
+
             if (index == _currentIndex)
             {
                 return;
@@ -1451,7 +1505,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private void ChangeSelectedValue(object vaule)
         {
-        
+
 
             if (vaule == _currentValue)
             {
@@ -1755,15 +1809,15 @@ namespace LeeTeke.WpfControl.Controls
 
             }
             ItemMove(item, toalIndex);
-            if (IsScrollToSelected&&SelectedItem==item)
+            if (IsScrollToSelected && SelectedItem == item)
             {
                 ///增加延时移动
                 Task.Run(async () =>
                 {
-                   await Task.Delay(60);
+                    await Task.Delay(60);
                     ScrollToItem(item);
                 });
-         
+
             }
         }
 
