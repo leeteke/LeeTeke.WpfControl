@@ -154,15 +154,15 @@ namespace LeeTeke.WpfControl.Controls
                 Dependencies.CornerRadiusManager.SetCornerRadius(this, (CornerRadius)cornerRadius);
             }
 
-
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             try
             {
-                foreach (Window item in Application.Current.Windows)
+                foreach (var item in Application.Current.Windows)
                 {
-                    if (item.IsActive)
+                    if (item is System.Windows.Window win && win.IsActive)
                     {
-                        Owner = item;
+                        Owner = win;
                         WindowStartupLocation = WindowStartupLocation.CenterOwner;
                         break;
                     }

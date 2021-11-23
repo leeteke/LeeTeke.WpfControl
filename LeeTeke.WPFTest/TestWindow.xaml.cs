@@ -44,7 +44,7 @@ namespace LeeTeke.WPFTest
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            items.RemoveAt(0);
+            LeeTeke.WpfControl.MessageBoxEx.Show("测试");
         }
 
         private void Navigation_ItemSelected(object sender, WpfControl.NavigationItemSelectedEventArgs e)

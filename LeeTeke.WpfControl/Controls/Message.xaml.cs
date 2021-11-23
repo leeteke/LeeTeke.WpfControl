@@ -21,7 +21,7 @@ namespace LeeTeke.WpfControl.Controls
     /// <summary>
     /// MessageBoxEx.xaml 的交互逻辑
     /// </summary>
-    public partial class Message :  IMessageWin
+    public partial class Message : IMessageWin
     {
         public object Value { get; set; }
         private bool _canClose;
@@ -66,7 +66,11 @@ namespace LeeTeke.WpfControl.Controls
                         };
                     }
                 }
-                content.Content = value;
+                else
+                {
+                    content.Content = value;
+                }
+
             }
 
         }
@@ -76,7 +80,7 @@ namespace LeeTeke.WpfControl.Controls
             get => loding.Visibility == Visibility.Visible;
             set => loding.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
         }
-     
+
         public double ProcessValue
         {
             get => loding.Value;
@@ -141,22 +145,23 @@ namespace LeeTeke.WpfControl.Controls
         public Message()
         {
             InitializeComponent();
+            WindowStartupLocation=WindowStartupLocation.CenterScreen;
             try
             {
-                foreach (Window item in Application.Current.Windows)
+                foreach (var item in Application.Current.Windows)
                 {
-                    if (item.IsActive)
+                    if (item is System.Windows.Window win&& win.IsActive)
                     {
-                        Owner = item;
+                        Owner = win;
                         WindowStartupLocation = WindowStartupLocation.CenterOwner;
                         break;
                     }
                 }
             }
-            catch 
+            catch
             {
             }
-     
+
             CanClose = true;
         }
 

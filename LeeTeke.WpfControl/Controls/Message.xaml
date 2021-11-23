@@ -11,7 +11,7 @@
         Height="210"
         WindowStartupLocation="CenterOwner"
         Closing="Window_Closing"
-        WindowStyle="ToolWindow"
+        ResizeMode="NoResize"
          Background="{DynamicResource LeeBrush_Background2}"
          WinButtonPanelBackground="{DynamicResource LeeBrush_Background2}"
          WinTitlePanelBackground="{DynamicResource LeeBrush_Background2}"
