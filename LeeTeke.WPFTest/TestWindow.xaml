@@ -62,6 +62,7 @@
                  IsReadOnly="True"
                  VerticalContentAlignment="Top"
                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                 ScrollViewer.IsDeferredScrollingEnabled="True"
                    />
 
 

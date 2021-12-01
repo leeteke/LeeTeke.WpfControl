@@ -244,21 +244,21 @@
                                 <ItemsPresenter x:Name="PART_ItemsPresenter" >
                                     <ItemsPresenter.ContextMenu>
                                         <ContextMenu x:Name="PART_ContextMenu"   >
-                                            <MenuItem x:Name="PART_MenuItem_Selected" Header="选择此选项"  Visibility="Collapsed"/>
+                                            <MenuItem x:Name="PART_MenuItem_Selected" Header="选择此选项(_S)"  Visibility="Collapsed"/>
 
 
-                                            <MenuItem x:Name="PART_MenuItem_Pin" Header="固定选项卡" >
+                                            <MenuItem x:Name="PART_MenuItem_Pin" Header="固定选项卡(_P)" >
                                                 <MenuItem.Icon>
                                                     <TextBlock Text="&#xE718;"
                                                              FontFamily="{DynamicResource IconFontFamily}"/>
                                                 </MenuItem.Icon>
                                             </MenuItem>
                                             <MenuItem x:Name="PART_MenuItem_CloseAll" 
-                                                  Header="关闭所有选项卡"/>
+                                                  Header="关闭所有选项卡(_A)"/>
                                             <MenuItem x:Name="PART_MenuItem_CloseOther" 
-                                                  Header="关闭除此之外的选项卡"/>
+                                                  Header="关闭除此之外的选项卡(_O)"/>
                                             <MenuItem x:Name="PART_MenuItem_CloseSelf"  
-                                                          Header="关闭"/>
+                                                          Header="关闭(_X)"/>
                                         </ContextMenu>
                                     </ItemsPresenter.ContextMenu>
                                 </ItemsPresenter>

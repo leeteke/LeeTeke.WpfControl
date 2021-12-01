@@ -209,12 +209,12 @@ namespace LeeTeke.WpfControl.Controls
                         if (item.IsPinned)
                         {
                             tb.Text = "\xe77a";
-                            _pinMenuItem.Header = "解除固定";
+                            _pinMenuItem.Header = "解除固定(_P)";
                         }
                         else
                         {
                             tb.Text = "\xe718";
-                            _pinMenuItem.Header = "固定选项卡";
+                            _pinMenuItem.Header = "固定选项卡(_P)";
                         }
                     }
                 }

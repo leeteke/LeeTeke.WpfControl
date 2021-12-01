@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Animation;
 
 namespace LeeTeke.WPFTest
 {
@@ -17,9 +18,8 @@ namespace LeeTeke.WPFTest
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-
             LeeTeke.WpfControl.StaticMethods.SetScrollViewerSlide(true);
-      LeeTeke.WpfControl.MessageBoxEx.IsDefaultShowMsgCR = false;
+            LeeTeke.WpfControl.MessageBoxEx.IsDefaultShowMsgCR = false;
 
         }
     }

@@ -166,9 +166,6 @@ namespace LeeTeke.WpfControl.Dependencies
         #endregion
 
 
-        #region PrivateMethod
-
-
-        #endregion
+  
     }
 }

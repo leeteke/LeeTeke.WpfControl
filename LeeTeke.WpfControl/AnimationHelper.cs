@@ -48,7 +48,6 @@ namespace LeeTeke.WpfControl
 
             var grade = GetGrade(mode);
             Storyboard storyboard = new Storyboard() { FillBehavior = FillBehavior.Stop };
-
             if (mode.HasFlag(AnimationMode.Fade))
             {
                 mode = mode & ~AnimationMode.FadeOut;

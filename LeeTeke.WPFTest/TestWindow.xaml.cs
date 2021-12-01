@@ -30,6 +30,12 @@ namespace LeeTeke.WPFTest
         private void TestWindow_Loaded(object sender, RoutedEventArgs e)
         {
             test.ItemsSource = items;
+
+            for (int i = 0; i < 100; i++)
+            {
+                tb.AppendText($"{i}\r\n");
+            }
+      
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

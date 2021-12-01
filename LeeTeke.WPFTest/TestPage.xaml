@@ -28,7 +28,7 @@
                       leedep:CornerRadiusManager.IsClip="True"
                       >
 
-            <StackPanel  x:Name="stack"  >
+            <StackPanel  x:Name="stack" >
                 <StackPanel.ContextMenu>
                     <ContextMenu leedep:ContextMenuManager.ContentDock="Right" >
                         <leedep:ContextMenuManager.Content>
