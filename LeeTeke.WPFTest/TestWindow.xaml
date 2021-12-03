@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="TestWindow" 
         Height="450"
-        Width="800"
+        Width="1200"
          Background="{DynamicResource LeeBrush_Background}"
         >
 
@@ -29,7 +29,7 @@
                          >
             <lee:Navigation.ItemTemplate>
                 <DataTemplate >
-                    <TextBlock  Text="{Binding}"/>
+                    <TextBlock  lee:NavigationItem.ItemCanClose="{Binding RelativeSource={RelativeSource Mode=Self},Path=DataContext}" Text="{Binding}"/>
                 </DataTemplate>
             </lee:Navigation.ItemTemplate>
         </lee:Navigation>
@@ -42,13 +42,12 @@
                      IsScrollToSelected="True"
                         CanItemDisplacement="True"
                          >
-            <lee:NavigationItem Content="1"/>
+            <lee:NavigationItem Content="1" CanClose="False"/>
             <lee:NavigationItem Content="2"/>
-            <lee:NavigationItem Content="3" CanClose="False"/>
+            <lee:NavigationItem Content="3" />
             <lee:NavigationItem Content="4"/>
             <lee:NavigationItem Content="5"/>
-            <lee:NavigationItem Content="6"/>
-            <lee:NavigationItem Content="7"/>
+      
         </lee:Navigation>
 
 

@@ -1309,8 +1309,8 @@ namespace LeeTeke.WpfControl.Controls
            {
                if ((x.IsPinned || !x.CanClose) && !needSelected)
                {
-                       ///指定给他
-                       needSelected = true;
+                   ///指定给他
+                   needSelected = true;
                    ChangeSelectedItem(x);
                }
                else if (!x.IsPinned && x.CanClose)
@@ -1844,6 +1844,11 @@ namespace LeeTeke.WpfControl.Controls
                         toalIndex = i - 1;
                         break;
                     }
+                    ///如果没有找到则释放到最后
+                    if (toalIndex == -1)
+                    {
+                        toalIndex = _items.Count - 1;
+                    }
                 }
 
             }
@@ -1857,6 +1862,11 @@ namespace LeeTeke.WpfControl.Controls
                         toalIndex = i - 1;
                         break;
                     }
+                }
+                ///如果没有找到则释放到最后
+                if (toalIndex == -1)
+                {
+                    toalIndex = _items.Count - 1;
                 }
 
 
@@ -1887,22 +1897,24 @@ namespace LeeTeke.WpfControl.Controls
 
                 if (ItemsSource == null)
                 {
-
-                    Items.Remove(item);
-                    Items.Insert(toalIndex, item);
-
-                    UpdateSelectedIndex();
-                    return;
+                    var oldIndex = Items.IndexOf(item);
+                    if (oldIndex > -1 && oldIndex != toalIndex)
+                    {
+                        Items.Remove(item);
+                        Items.Insert(toalIndex, item);
+                        UpdateSelectedIndex();
+                        return;
+                    }
                 }
                 else
                 {
-                    #region ItemSource的移动方式
-                    var sourceType = ItemsSource.GetType();
-                    ///泛型
-                    if (sourceType.IsGenericType && sourceType.GenericTypeArguments.Length == 1 && ItemsSource is IList list)
+                    var oldIndex = _items.IndexOf(item);
+                    if (oldIndex > -1 && oldIndex != toalIndex)
                     {
-                        var oldIndex = list.IndexOf(item.DataContext);
-                        if (oldIndex > -1)
+                        #region ItemSource的移动方式
+                        var sourceType = ItemsSource.GetType();
+                        ///泛型
+                        if (sourceType.IsGenericType && sourceType.GenericTypeArguments.Length == 1 && ItemsSource is IList list)
                         {
 
                             ///看看支持Move方法不，也就是是否是 ob<>
@@ -1916,15 +1928,16 @@ namespace LeeTeke.WpfControl.Controls
                                 list.Remove(item.DataContext);
                                 list.Insert(toalIndex, item.DataContext);
                             }
+
+                            UpdateSelectedIndex();
+                            return;
                         }
-                        UpdateSelectedIndex();
-                        return;
+                        else
+                        {
+                            return;
+                        }
+                        #endregion
                     }
-                    else
-                    {
-                        return;
-                    }
-                    #endregion
                 }
 
 

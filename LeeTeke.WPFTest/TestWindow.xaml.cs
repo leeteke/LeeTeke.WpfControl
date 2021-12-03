@@ -20,7 +20,7 @@ namespace LeeTeke.WPFTest
     /// </summary>
     public partial class TestWindow : Window
     {
-        private ObservableCollection<string>  items= new ObservableCollection<string>() { "测试1", "测试2", "测试3", "测试4", "测试5", "测试6", "测试7", "测试8", "测试9", "测试10", };
+        private ObservableCollection<bool>  items= new ObservableCollection<bool>() { false,true,true,true, true,true };
         public TestWindow()
         {
             InitializeComponent();
