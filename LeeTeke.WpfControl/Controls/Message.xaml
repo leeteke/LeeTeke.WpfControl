@@ -12,9 +12,7 @@
         WindowStartupLocation="CenterOwner"
         Closing="Window_Closing"
         ResizeMode="NoResize"
-         Background="{DynamicResource LeeBrush_Background2}"
-         WinButtonPanelBackground="{DynamicResource LeeBrush_Background2}"
-         WinTitlePanelBackground="{DynamicResource LeeBrush_Background2}"
+         TitleBackground="{DynamicResource LeeBrush_Background}"
         >
     <Grid>
         <Grid.RowDefinitions>
