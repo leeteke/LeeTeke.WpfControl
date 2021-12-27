@@ -17,6 +17,7 @@
             </Setter.Value>
         </Setter>
         <Setter Property="Duration" Value="0:0:0.300"/>
+        <Setter Property="ValueDamping" Value="200"/>
         <Setter Property="Stroke" Value="{DynamicResource LeeBrush_Theme}"/>
         <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}"/>
         <Setter Property="MinWidth" Value="{DynamicResource LeeControlMinHeight}"/>

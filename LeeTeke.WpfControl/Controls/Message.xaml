@@ -73,10 +73,12 @@
         </Grid>
 
         <local:ProgressBar x:Name="loding"
-                             Visibility="Collapsed"
-                             Margin="5,0,2,5"
-                             Mode="Loding"
+                           Visibility="Collapsed"
+                           Margin="5,0,2,5"
+                           Mode="Loding"
                            Height="8"
+                           Value="{Binding ProcessValue}"
+                           Maximum="100"
                            VerticalAlignment="Bottom"
                            Grid.Row="1"
                            Grid.Column="0"
@@ -90,7 +92,7 @@
                    Margin="0,0,5,5"
                    Foreground="{DynamicResource LeeBrush_Text}"
                    Visibility="{Binding ElementName=loding,Path=Visibility}">
-            <Run Text="{Binding ElementName=loding,Path=Value}"/> %
+            <Run Text="{Binding ProcessValue}"/> %
         </TextBlock>
     </Grid>
 

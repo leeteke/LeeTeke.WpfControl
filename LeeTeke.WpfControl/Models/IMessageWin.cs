@@ -22,7 +22,7 @@ namespace LeeTeke.WpfControl.Models
         object Content { get; set; }
 
     
-        double ProcessValue { get; set; }
+        int ProcessValue { get; set; }
 
         MessageStatus Status { get; set; }
 

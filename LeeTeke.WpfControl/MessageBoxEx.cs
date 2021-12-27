@@ -145,7 +145,7 @@ namespace LeeTeke.WpfControl
         /// <summary>
         /// 设置lodingVale 范围0-100;
         /// </summary>
-        public double ProcessValue
+        public int ProcessValue
         {
             get => _msg.ProcessValue;
             set => _msg.ProcessValue = value;

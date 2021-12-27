@@ -81,11 +81,23 @@ namespace LeeTeke.WpfControl.Controls
             set => loding.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        public double ProcessValue
+
+
+        #region ProcessValue
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public int ProcessValue
         {
-            get => loding.Value;
-            set => loding.Value = value;
+            get { return (int)GetValue(ProcessValueProperty); }
+            set { SetValue(ProcessValueProperty, value); }
         }
+
+        // Using a DependencyProperty as the backing store for ProcessValue.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ProcessValueProperty =
+            DependencyProperty.Register("ProcessValue", typeof(int), typeof(Message));
+        #endregion
+
         private MessageStatus _status;
         public MessageStatus Status
         {
@@ -145,6 +157,7 @@ namespace LeeTeke.WpfControl.Controls
         public Message()
         {
             InitializeComponent();
+            this.DataContext= this;
             WindowStartupLocation=WindowStartupLocation.CenterScreen;
             try
             {

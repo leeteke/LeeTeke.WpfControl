@@ -18,6 +18,7 @@
             </Setter.Value>
         </Setter>
         <Setter Property="Duration" Value="0:0:0.300"/>
+        <Setter Property="ValueDamping" Value="200"/>
         <Setter Property="Maximum" Value="100"/>
         <Setter Property="Mode" Value="Loding"/>
         <Setter Property="Orientation" Value="Horizontal"/>

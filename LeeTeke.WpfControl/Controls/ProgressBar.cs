@@ -54,7 +54,7 @@ namespace LeeTeke.WpfControl.Controls
 
 
         private Storyboard _lodingSB;
-
+        private DateTime _lastValueTime;
         public ProgressBar()
         {
             this.SizeChanged += LodingBar_SizeChanged;
@@ -248,6 +248,17 @@ namespace LeeTeke.WpfControl.Controls
                     return;
                 }
 
+                #region 时间器阻尼
+                if ((DateTime.Now-loding._lastValueTime).TotalMilliseconds<loding.ValueDamping)
+                {
+                    return;
+                }
+                else
+                {
+                    loding._lastValueTime=DateTime.Now;
+                }
+                #endregion
+
                 loding.RaiseValueChanged(value);
                 if (loding.Mode == ProgressControlMode.Loding)
                 {
@@ -350,6 +361,20 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("Duration", typeof(Duration), typeof(ProgressBar));
         #endregion
 
+        #region ValueDamping
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public double ValueDamping
+        {
+            get { return (double)GetValue(ValueDampingProperty); }
+            set { SetValue(ValueDampingProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ValueDamping.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ValueDampingProperty =
+            DependencyProperty.Register("ValueDamping", typeof(double), typeof(ProgressBar));
+        #endregion
 
         #endregion
 

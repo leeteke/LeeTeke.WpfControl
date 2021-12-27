@@ -33,6 +33,7 @@
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <Grid  Background="Transparent"
+               Grid.ColumnSpan="2"
                 MouseMove="Rectangle_MouseMove">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -83,7 +84,7 @@
                             Width="100"
                             Height="40"
                              Thickness="6"
-                                VerticalAlignment="Center"
+                             VerticalAlignment="Center"
                             Mode="Wating"
                             Visibility="Collapsed"
                             />
@@ -108,6 +109,8 @@
                              Visibility="Collapsed"
                              Margin="5,0,2,5"
                              Mode="Loding"
+                           Value="{Binding ProcessValue}"
+                           Maximum="100"
                            Height="8"
                            VerticalAlignment="Bottom"
                            Grid.Row="2"
@@ -122,7 +125,7 @@
                    Margin="0,0,5,5"
                    Foreground="{DynamicResource LeeBrush_Text}"
                    Visibility="{Binding ElementName=loding,Path=Visibility}">
-            <Run Text="{Binding ElementName=loding,Path=Value}"/> %
+            <Run Text="{Binding ProcessValue}"/> %
         </TextBlock>
         
     </Grid>
