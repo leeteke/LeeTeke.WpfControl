@@ -265,6 +265,13 @@ namespace LeeTeke.WpfControl.Controls
             _scrollingSB?.Stop();
             IsScrolling = false;
 
+            if (Content==null || (Content is string str&& string.IsNullOrWhiteSpace(str)))
+            {
+                IsClosed = true;
+                this.Visibility = Visibility.Collapsed;
+                return;
+            }
+
             if (Content == null || !IsEnabled || _content == null || IsClosed)
             {
                 if (_content != null)

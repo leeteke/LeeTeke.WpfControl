@@ -160,7 +160,7 @@
 
 
                 <leecontrol:ScrollBanner x:Name="th"
-                    Content="你好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好" 
+                    Content="" 
                     AutoScrolling="False"
                     Margin="5"
                    >
