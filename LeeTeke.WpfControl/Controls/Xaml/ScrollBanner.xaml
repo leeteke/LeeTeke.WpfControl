@@ -37,7 +37,7 @@
                                         <Binding ElementName="PART_Border"  Path="BorderThickness" Mode="OneWay"/>
                                     </MultiBinding>
                                 </StackPanel.Clip>
-                                <ContentPresenter  x:Name="PART_Content"  CacheMode="BitmapCache" />
+                                <ContentPresenter  x:Name="PART_Content"  Content="{TemplateBinding Content}" CacheMode="BitmapCache" />
                             </StackPanel>
                             <Button x:Name="PART_CloseButton" 
                                             Grid.Column="2"

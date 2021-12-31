@@ -49,7 +49,7 @@ namespace LeeTeke.WpfControl.Controls
     /// </summary>
     [TemplatePart(Name = ElementContent, Type = typeof(ContentPresenter))]
     [TemplatePart(Name = ElementCloseButton, Type = typeof(Button))]
-    public class ScrollBanner : ContentControl
+    public class ScrollBanner : Control
     {
 
 
@@ -73,6 +73,7 @@ namespace LeeTeke.WpfControl.Controls
             SizeChanged += ScrollBanner_SizeChanged;
             IsEnabledChanged += ScrollBanner_IsEnabledChanged;
             IsVisibleChanged += ScrollBanner_IsVisibleChanged;
+
         }
 
 
@@ -101,17 +102,43 @@ namespace LeeTeke.WpfControl.Controls
 
         }
 
-        protected override void OnContentChanged(object oldContent, object newContent)
-        {
-            base.OnContentChanged(oldContent, newContent);
-            IsClosed = false;
-            ScrollingAnimationWork();
-        }
+        //protected override void OnContentChanged(object oldContent, object newContent)
+        //{
+        //    base.OnContentChanged(oldContent, newContent);
+        //    IsClosed = false;
+        //    ScrollingAnimationWork();
+        //}
 
 
         #endregion
 
         #region 依赖属性
+
+
+        #region Content
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public object Content
+        {
+            get { return (object)GetValue(ContentProperty); }
+            set { SetValue(ContentProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Content.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ContentProperty =
+            DependencyProperty.Register("Content", typeof(object), typeof(ScrollBanner), new PropertyMetadata(OnContentChanged));
+
+        private static void OnContentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is ScrollBanner sb && e.NewValue != e.OldValue)
+            {
+                sb.IsClosed = false;
+                sb.ScrollingAnimationWork();
+            }
+        }
+        #endregion
+
 
 
         #region IsClosed
@@ -265,12 +292,13 @@ namespace LeeTeke.WpfControl.Controls
             _scrollingSB?.Stop();
             IsScrolling = false;
 
-            if (Content==null || (Content is string str&& string.IsNullOrWhiteSpace(str)))
+            if (_content != null && (Content == null || (Content is string str && string.IsNullOrWhiteSpace(str))))
             {
                 IsClosed = true;
                 this.Visibility = Visibility.Collapsed;
                 return;
             }
+
 
             if (Content == null || !IsEnabled || _content == null || IsClosed)
             {

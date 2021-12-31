@@ -160,7 +160,7 @@
 
 
                 <leecontrol:ScrollBanner x:Name="th"
-                    Content="" 
+                    Content="{Binding ElementName=txt,Path=Text}" 
                     AutoScrolling="False"
                     Margin="5"
                    >
