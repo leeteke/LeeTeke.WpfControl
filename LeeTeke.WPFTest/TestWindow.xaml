@@ -38,17 +38,19 @@
                    Text="{Binding ElementName=test,Path=SelectedIndex}"/>
 
 
-        <lee:Navigation  Grid.Row="1"
-                     IsScrollToSelected="True"
-                        CanItemDisplacement="True"
-                         >
-            <lee:NavigationItem Content="1" CanClose="False"/>
-            <lee:NavigationItem Content="2"/>
-            <lee:NavigationItem Content="3" />
-            <lee:NavigationItem Content="4"/>
-            <lee:NavigationItem Content="5"/>
-      
-        </lee:Navigation>
+        <TabControl Grid.Row="1"
+              HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Stretch"
+                    >
+            <TabItem   Header="123">
+                <Grid Background="Red"    >
+                    <TextBlock Text="123123123123"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="你不好"/>
+            <TabItem Header="哈？"/>
+        </TabControl>
 
 
 

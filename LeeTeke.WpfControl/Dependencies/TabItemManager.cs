@@ -11,6 +11,42 @@ namespace LeeTeke.WpfControl.Dependencies
 {
     public class TabItemManager
     {
+
+
+        #region VerticalAlignment
+        public static VerticalAlignment GetVerticalAlignment(DependencyObject obj)
+        {
+            return (VerticalAlignment)obj.GetValue(VerticalAlignmentProperty);
+        }
+
+        public static void SetVerticalAlignment(DependencyObject obj, VerticalAlignment value)
+        {
+            obj.SetValue(VerticalAlignmentProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for VerticalAlignment.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty VerticalAlignmentProperty =
+            DependencyProperty.RegisterAttached("VerticalAlignment", typeof(VerticalAlignment), typeof(TabItemManager));
+        #endregion
+
+
+        #region HorizontalAlignment
+        public static HorizontalAlignment GetHorizontalAlignment(DependencyObject obj)
+        {
+            return (HorizontalAlignment)obj.GetValue(HorizontalAlignmentProperty);
+        }
+
+        public static void SetHorizontalAlignment(DependencyObject obj, HorizontalAlignment value)
+        {
+            obj.SetValue(HorizontalAlignmentProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for HorizontalAlignment.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HorizontalAlignmentProperty =
+            DependencyProperty.RegisterAttached("HorizontalAlignment", typeof(HorizontalAlignment), typeof(TabItemManager));
+        #endregion
+
+
         #region MarkShow
         public static bool GetMarkShow(DependencyObject obj)
         {

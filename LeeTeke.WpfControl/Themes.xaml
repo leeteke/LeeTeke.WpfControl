@@ -69,7 +69,7 @@
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
- 
+
     </Style>
 
     <Style TargetType="Rectangle">
@@ -3402,7 +3402,7 @@
                                                                ViewportSize="{TemplateBinding ViewportWidth}"
                                                                Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
                                                                />
-                                                        </lee:EasyPanel >
+                                                    </lee:EasyPanel >
                                                     <lee:EasyPanel  Width="{StaticResource ScrollViewerBarSize}"
                                                       x:Name="PART_VerticalGrid" 
                                                       HorizontalAlignment="Right"
@@ -5245,8 +5245,6 @@
         <Setter Property="Padding" Value="{Binding Path=(leedep:ListItemManager.Padding), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
         <Setter Property="leedep:ListItemManager.Effect" Value="{Binding Path=(leedep:ListItemManager.Effect), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
 
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
         <!--MouseOver-->
         <Setter Property="leedep:ListItemManager.MouseOverBackground" Value="{Binding Path=(leedep:ListItemManager.MouseOverBackground), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
         <Setter Property="leedep:ListItemManager.MouseOverBorderBrush" Value="{Binding Path=(leedep:ListItemManager.MouseOverBorderBrush), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
@@ -5274,6 +5272,17 @@
         <Setter Property="leedep:ListItemManager.IsClip" Value="{Binding Path=(leedep:ListItemManager.IsClip), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
 
 
+        <!--Mark-->
+        <Setter Property="leedep:TabItemManager.VerticalAlignment" Value="{Binding Path=(leedep:TabItemManager.VerticalAlignment), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:TabItemManager.HorizontalAlignment" Value="{Binding Path=(leedep:TabItemManager.HorizontalAlignment), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:TabItemManager.MarkShow" Value="{Binding Path=(leedep:TabItemManager.MarkShow), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:TabItemManager.MarkBrush" Value="{Binding Path=(leedep:TabItemManager.MarkBrush), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:TabItemManager.MarkCornerRadius" Value="{Binding Path=(leedep:TabItemManager.MarkCornerRadius), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:TabItemManager.MarkMargin" Value="{Binding Path=(leedep:TabItemManager.MarkMargin), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:TabItemManager.MarkMouseOverBrush" Value="{Binding Path=(leedep:TabItemManager.MarkMouseOverBrush), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:TabItemManager.MarkSelectedBrush" Value="{Binding Path=(leedep:TabItemManager.MarkSelectedBrush), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:TabItemManager.MarkSite" Value="{Binding Path=(leedep:TabItemManager.MarkSite), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
+        <Setter Property="leedep:TabItemManager.MarkSize" Value="{Binding Path=(leedep:TabItemManager.MarkSize), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -5287,11 +5296,30 @@
                             CornerRadius="{Binding Path=(leedep:ListItemManager.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"
                              Effect="{Binding Path=(leedep:ListItemManager.Effect), RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"
                             />
-                        <ContentPresenter x:Name="contentPresenter"
-                                          Margin="{TemplateBinding Padding}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          />
+                        <DockPanel x:Name="PART_DockPanel" >
+
+                            <Rectangle x:Name="PART_Mark" 
+                                       DockPanel.Dock="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TabItemManager.MarkSite),Mode=OneWay}"
+                                       Fill="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TabItemManager.MarkBrush),Mode=OneWay}"
+                                       Margin="{Binding Path=(leedep:TabItemManager.MarkMargin), RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"
+                                       Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TabItemManager.MarkShow),Mode=OneWay,Converter={StaticResource VisibilityForBoolConverter}}">
+                                <Rectangle.Clip>
+                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
+                                        <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
+                                        <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}"   Path="(leedep:TabItemManager.MarkCornerRadius)" Mode="OneWay"/>
+                                    </MultiBinding>
+                                </Rectangle.Clip>
+                            </Rectangle>
+                            <ContentPresenter x:Name="contentPresenter"
+                                              ContentSource="Header"
+                                              Margin="{TemplateBinding Padding}"
+                                              VerticalAlignment="{Binding Path=(leedep:TabItemManager.VerticalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"
+                                              HorizontalAlignment="{Binding Path=(leedep:TabItemManager.HorizontalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"
+                                              />
+                        </DockPanel>
+
+
                     </lee:EasyPanel>
                     <ControlTemplate.Triggers>
                         <Trigger Property="leedep:ListItemManager.IsClip" Value="True">
@@ -5307,7 +5335,25 @@
                             </Setter>
                         </Trigger>
 
+                        <DataTrigger Binding="{Binding Path=(leedep:TabItemManager.MarkSite),RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"   Value="Left">
+                            <Setter TargetName="PART_Mark" Property="Width" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TabItemManager.MarkSize),Mode=OneWay}"/>
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding Path=(leedep:TabItemManager.MarkSite),RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"   Value="Right">
+                            <Setter TargetName="PART_Mark" Property="Width" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TabItemManager.MarkSize),Mode=OneWay}"/>
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding Path=(leedep:TabItemManager.MarkSite),RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"   Value="Top">
+                            <Setter TargetName="PART_Mark" Property="Height" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TabItemManager.MarkSize),Mode=OneWay}"/>
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding Path=(leedep:TabItemManager.MarkSite),RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"   Value="Bottom">
+                            <Setter TargetName="PART_Mark" Property="Height" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TabItemManager.MarkSize),Mode=OneWay}"/>
+                        </DataTrigger>
+
+
                         <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_Mark" Property="Fill" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TabItemManager.MarkMouseOverBrush),Mode=OneWay}"/>
                             <Setter TargetName="PART_Border" Property="Background" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.MouseOverBackground),Mode=OneWay}"/>
                             <Setter TargetName="PART_Border" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.MouseOverBorderBrush),Mode=OneWay}"/>
                             <Setter TargetName="PART_Border" Property="BorderThickness" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.MouseOverBorderThickness),Mode=OneWay}"/>
@@ -5320,6 +5366,7 @@
                         </Trigger>
 
                         <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="PART_Mark" Property="Fill" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:TabItemManager.MarkSelectedBrush),Mode=OneWay}"/>
                             <Setter TargetName="PART_Border" Property="Background" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.SelectedBackground),Mode=OneWay}"/>
                             <Setter TargetName="PART_Border" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.SelectedBorderBrush),Mode=OneWay}"/>
                             <Setter TargetName="PART_Border" Property="BorderThickness" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ListItemManager.SelectedBorderThickness),Mode=OneWay}"/>
@@ -5345,6 +5392,7 @@
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="TabStripPlacement" Value="Top"/>
+
 
         <!--常规属性-->
         <Setter Property="leedep:ListItemManager.MinHeight" Value="{DynamicResource LeeItemMinHeight}"/>
@@ -5383,6 +5431,16 @@
         <Setter Property="leedep:ListItemManager.IsClip" Value="False"/>
 
 
+        <Setter Property="leedep:TabItemManager.HorizontalAlignment" Value="Center"/>
+        <Setter Property="leedep:TabItemManager.VerticalAlignment" Value="Center"/>
+        <Setter Property="leedep:TabItemManager.MarkShow" Value="False"/>
+        <Setter Property="leedep:TabItemManager.MarkBrush" Value="Transparent"/>
+        <Setter Property="leedep:TabItemManager.MarkCornerRadius" Value="3"/>
+        <Setter Property="leedep:TabItemManager.MarkMargin" Value="0,4"/>
+        <Setter Property="leedep:TabItemManager.MarkMouseOverBrush" Value="{DynamicResource LeeBrush_Mark}"/>
+        <Setter Property="leedep:TabItemManager.MarkSelectedBrush" Value="{DynamicResource LeeBrush_Theme}"/>
+        <Setter Property="leedep:TabItemManager.MarkSite" Value="Bottom"/>
+        <Setter Property="leedep:TabItemManager.MarkSize" Value="4"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -5402,18 +5460,15 @@
                                     Background="{TemplateBinding Background}" 
                                     CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path= (leedep:CornerRadiusManager.CornerRadius),Mode=OneWay}"
                                     KeyboardNavigation.DirectionalNavigation="Contained" 
-                                    Grid.Row="1" 
                                     KeyboardNavigation.TabIndex="2" 
                                     KeyboardNavigation.TabNavigation="Local">
-                            <Border x:Name="PART_Content"
-                                    BorderThickness="0">
-                                <ContentPresenter x:Name="PART_SelectedContentHost"  
+
+                            <ContentPresenter x:Name="PART_SelectedContentHost"  
                                                   ContentSource="SelectedContent" 
                                                   Margin="{TemplateBinding Padding}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                                  VerticalAlignment="Stretch"
+                                                  HorizontalAlignment="Stretch"
                                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                            </Border>
 
                         </Border>
                     </DockPanel>
@@ -5421,13 +5476,13 @@
                     <ControlTemplate.Triggers>
 
                         <Trigger Property="leedep:ListViewManager.HeaderIsClip" Value="True">
-                            <Setter TargetName="PART_Content" Property="Clip">
+                            <Setter TargetName="PART_Border" Property="Clip">
                                 <Setter.Value>
                                     <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
                                         <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualWidth" Mode="OneWay"/>
                                         <Binding RelativeSource="{RelativeSource Mode=Self}"   Path="ActualHeight" Mode="OneWay"/>
-                                        <Binding ElementName="PART_HeaderBorder"  Path="CornerRadius" Mode="OneWay"/>
-                                        <Binding ElementName="PART_HeaderBorder"  Path="BorderThickness" Mode="OneWay"/>
+                                        <Binding ElementName="PART_Border"  Path="CornerRadius" Mode="OneWay"/>
+                                        <Binding ElementName="PART_Border"  Path="BorderThickness" Mode="OneWay"/>
                                     </MultiBinding>
                                 </Setter.Value>
                             </Setter>
