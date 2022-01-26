@@ -39,6 +39,7 @@
 
 
         <TabControl Grid.Row="1"
+                    leedep:ListItemManager.Marigin="20,0"
               HorizontalContentAlignment="Stretch"
                     VerticalContentAlignment="Stretch"
                     >

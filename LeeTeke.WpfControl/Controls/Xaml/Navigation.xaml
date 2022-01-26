@@ -161,8 +161,8 @@
         <Setter Property="Orientation" Value="Horizontal"/>
         <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}"/>
         <Setter Property="MinWidth" Value="{DynamicResource LeeControlMinWidth}"/>
-        <Setter Property="ItemWidth" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=MinWidth,Mode=OneWay}"/>
-        <Setter Property="ItemHeight" Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=MinHeight,Mode=OneWay}"/>
+        <Setter Property="ItemWidth" Value="{DynamicResource LeeControlMinWidth}"/>
+        <Setter Property="ItemHeight" Value="{DynamicResource LeeControlMinHeight}"/>
         <Setter Property="ItemPinVisibly" Value="True"/>
         <Setter Property="ItemMargin" Value="0"/>
         <Setter Property="ItemPadding" Value="10,5"/>

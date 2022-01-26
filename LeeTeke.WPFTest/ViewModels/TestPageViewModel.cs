@@ -120,6 +120,20 @@ namespace LeeTeke.WPFTest.ViewModels
         /// <summary>
         /// 命令注释
         /// </summary>
+        public DelegateCommand<object> ItemClosedCommand => new(ItemClosedCommandExecute);
+        /// <summary>
+        /// 命令注释_Execute
+        /// </summary>
+        private void ItemClosedCommandExecute(object obj)
+        {
+
+        }
+
+
+
+        /// <summary>
+        /// 命令注释
+        /// </summary>
         public DelegateCommand ToggleButtonCommand => new(ToggleButtonCommandExecute);
         /// <summary>
         /// 命令注释_Execute

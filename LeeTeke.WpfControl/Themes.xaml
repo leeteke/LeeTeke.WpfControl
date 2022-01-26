@@ -5235,6 +5235,7 @@
     <Style x:Key="LeeTabItem" TargetType="{x:Type TabItem}">
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
+        
         <!--常规属性-->
         <Setter Property="MinHeight" Value="{Binding Path=(leedep:ListItemManager.MinHeight), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
         <Setter Property="MinWidth" Value="{Binding Path=(leedep:ListItemManager.MinWidth), RelativeSource={RelativeSource AncestorType={x:Type TabControl}},Mode=OneWay}"/>
@@ -5292,7 +5293,6 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Background="{TemplateBinding Background}"
-                            Margin="{TemplateBinding Margin}"
                             CornerRadius="{Binding Path=(leedep:ListItemManager.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"
                              Effect="{Binding Path=(leedep:ListItemManager.Effect), RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}"
                             />

@@ -1479,8 +1479,11 @@ namespace LeeTeke.WpfControl.Controls
 
                 var list = ItemsSource as IList;
                 if (list != null)
+                {
+                    var dataContent = item.DataContext;
                     list.Remove(item.DataContext);
-
+                    item.DataContext= dataContent; 
+                }
             }
             UpdateSelectedIndex();
             ItemRemoveChanged(item);

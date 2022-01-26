@@ -77,6 +77,7 @@
                                      Orientation="Horizontal"
                                      ShowScrollToButton="True"
                                      ItemsSource="{Binding TestList}"
+                                        ItemClosedCommand="{Binding ItemClosedCommand}"
                                      ItemContxtMenuContentDock="Bottom">
                     <leecontrol:Navigation.ItemContxtMenuContent>
                         <Grid Height="100">
