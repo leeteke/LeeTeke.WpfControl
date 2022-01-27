@@ -60,17 +60,19 @@
                 <leecontrol:TextBoxEx 
                     Margin="5"
                     Height="50"
-                                      Mode="IMEDispaly" 
-                                      Text="2"
+                    Width="150"
+                    Mode="IMEDispaly" 
+                    Text="2"
                     IconVisible="True"
-                                      BorderThickness="1"
-                       IconCanClick="True"
+                    BorderThickness="1"
+                    IconCanClick="True"
                     IconCommand="{Binding TestCommand}"
                     AcceptsReturn="True"
                     ToolTip="测试"
-                                      >
-                
-                </leecontrol:TextBoxEx>
+                    />
+
+                <TextBox Width="150"/>
+
                 <leecontrol:Navigation  CloseVisibly="MouseOver" 
                                         IsScrollToSelected="True"
                                         CanItemDisplacement="True"

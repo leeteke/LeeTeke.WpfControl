@@ -22,6 +22,7 @@
         <Setter Property="Padding" Value="2"/>
         <Setter Property="BorderBrush" Value="{DynamicResource  LeeBrush_BorderBrush}"/>
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}"/>
+        <Setter Property="TextWrapping" Value="NoWrap"/>
 
         <Setter Property="IsReadOnly" Value="False"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>

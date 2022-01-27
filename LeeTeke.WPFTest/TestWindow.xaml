@@ -54,11 +54,6 @@
         </TabControl>
 
 
-
-
-
-
-
         <TextBox x:Name="tb"
                  Grid.Row="2"
                  IsReadOnly="True"
