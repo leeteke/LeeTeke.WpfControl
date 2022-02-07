@@ -116,6 +116,37 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
+        #region NoItemsContent
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public object NoItemsContent
+        {
+            get { return (object)GetValue(NoItemsContentProperty); }
+            set { SetValue(NoItemsContentProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for NoItemsContent.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty NoItemsContentProperty =
+            DependencyProperty.Register("NoItemsContent", typeof(object), typeof(GridView));
+        #endregion
+
+
+        #region EndContent
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public object EndContent
+        {
+            get { return (object)GetValue(EndContentProperty); }
+            set { SetValue(EndContentProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for EndContent.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EndContentProperty =
+            DependencyProperty.Register("EndContent", typeof(object), typeof(GridView));
+        #endregion
+
 
         #region ItemClickedCommand
         /// <summary>
@@ -166,6 +197,7 @@ namespace LeeTeke.WpfControl.Controls
 
         internal void NotifyItemClicked(GridViewItem item)
         {
+
             RaiseItemClicked(item);
         }
         #endregion

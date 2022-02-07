@@ -52,9 +52,43 @@
                                            leedep:ScrollViewerManager.SlideMonitorMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideMonitorMode),Mode=OneWay}"
                                            leedep:ScrollViewerManager.SlideEnabled="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=(leedep:ScrollViewerManager.SlideEnabled),Mode=OneWay}"
                                 >
-                            <ItemsPresenter     />
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <!--背景-->
+                                <ContentPresenter Grid.Row="0" Grid.Column="0"
+                                                Content="{TemplateBinding NoItemsContent}"
+                                                Visibility="{TemplateBinding  HasItems,Converter={StaticResource VisibilityForBoolReverseConverter}}"/>
+
+                                <ItemsPresenter Grid.Row="0" 
+                                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                <!--尾部-->
+                                <ContentPresenter x:Name="PART_ListEnd" 
+                                                Grid.Row="1" 
+                                                Grid.Column="0"
+                                                Content="{TemplateBinding EndContent}"
+                                                Visibility="{TemplateBinding  HasItems,Converter={StaticResource VisibilityForBoolConverter}}"/>
+                            </Grid>
+                        
                         </ScrollViewer>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Orientation" Value="Horizontal">
+                            <Setter TargetName="PART_ListEnd" Property="Grid.Row" Value="1" />
+                            <Setter TargetName="PART_ListEnd" Property="Grid.Column" Value="0" />
+                        </Trigger>
+                        <Trigger Property="Orientation" Value="Vertical">
+                            <Setter TargetName="PART_ListEnd" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="PART_ListEnd" Property="Grid.Column" Value="1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

@@ -58,6 +58,13 @@
 
                 <leecontrol:GridView ItemsSource="{Binding  TestList}"
                                      ItemClickedCommand="{Binding TestCommand}">
+                    <leecontrol:GridView.NoItemsContent>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+                                   Text="啥都没有"/>
+                    </leecontrol:GridView.NoItemsContent>
+                    <leecontrol:GridView.EndContent>
+                        <Rectangle Width="200" Height="50" Fill="Red"/>
+                    </leecontrol:GridView.EndContent>
                     <leecontrol:GridView.ItemTemplate>
                         <DataTemplate>
                             <Image Source="{Binding Image}"
