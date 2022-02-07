@@ -56,6 +56,18 @@
                     </ContextMenu>
                 </StackPanel.ContextMenu>
 
+                <leecontrol:GridView ItemsSource="{Binding  TestList}"
+                                     ItemClickedCommand="{Binding TestCommand}">
+                    <leecontrol:GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Image}"
+                                   Width="200"
+                                   Height="100"
+                                   Margin="5"/>
+                        </DataTemplate>
+                    </leecontrol:GridView.ItemTemplate>
+                </leecontrol:GridView>
+
 
                 <leecontrol:TextBoxEx 
                     Margin="5"

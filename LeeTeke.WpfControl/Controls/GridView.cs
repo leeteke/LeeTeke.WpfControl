@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace LeeTeke.WpfControl.Controls
 {
     /// <summary>
@@ -46,11 +47,11 @@ namespace LeeTeke.WpfControl.Controls
     ///
     /// </summary>
     [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(GridViewItem))]
-    public class GridView : Selector
+    public class GridView : ItemsControl
     {
         static GridView()
         {
-          
+
             DefaultStyleKeyProperty.OverrideMetadata(typeof(GridView), new FrameworkPropertyMetadata(typeof(GridView)));
         }
 
@@ -112,6 +113,61 @@ namespace LeeTeke.WpfControl.Controls
         public static readonly DependencyProperty VerticalScrollBarVisibilityProperty =
             DependencyProperty.Register("VerticalScrollBarVisibility", typeof(ScrollBarVisibility), typeof(GridView), new PropertyMetadata(ScrollBarVisibility.Auto));
 
+        #endregion
+
+
+
+        #region ItemClickedCommand
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public ICommand ItemClickedCommand
+        {
+            get { return (ICommand)GetValue(ItemClickedCommandProperty); }
+            set { SetValue(ItemClickedCommandProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ItemClickedCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemClickedCommandProperty =
+            DependencyProperty.Register("ItemClickedCommand", typeof(ICommand), typeof(GridView));
+        #endregion
+
+
+        #region ItemClicked
+        /// <summary>
+        /// 请填写描述
+        /// </summary>
+        public event GridViewItemClickedEventHandler ItemClicked
+        {
+            add { AddHandler(ItemClickedEvent, value); }
+            remove { RemoveHandler(ItemClickedEvent, value); }
+        }
+
+        public static readonly RoutedEvent ItemClickedEvent = EventManager.RegisterRoutedEvent(
+        "ItemClicked", RoutingStrategy.Bubble, typeof(GridViewItemClickedEventHandler), typeof(GridView));
+
+
+        private void RaiseItemClicked(GridViewItem item)
+        {
+            var arg = new GridViewItemClickedEventArgs(item, ItemClickedEvent);
+            RaiseEvent(arg);
+            var contentParsm = item.DataContext ?? item;
+            if (ItemClickedCommand!=null&& ItemClickedCommand.CanExecute(contentParsm))
+            {
+                ItemClickedCommand.Execute(contentParsm);
+            }
+        }
+
+        #endregion
+
+       
+
+        #region internal
+
+        internal void NotifyItemClicked(GridViewItem item)
+        {
+            RaiseItemClicked(item);
+        }
         #endregion
     }
 }

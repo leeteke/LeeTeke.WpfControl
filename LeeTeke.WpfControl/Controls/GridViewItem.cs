@@ -50,5 +50,31 @@ namespace LeeTeke.WpfControl.Controls
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(GridViewItem), new FrameworkPropertyMetadata(typeof(GridViewItem)));
         }
+
+
+        private GridView ParentGridView
+        {
+            get
+            {
+                return ItemsControl.ItemsControlFromItemContainer(this) as GridView;
+            }
+        }
+
+
+        protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            base.OnPreviewMouseLeftButtonDown(e);
+
+            NotifyParentSelecte();
+        }
+
+        /// <summary>
+        /// 通知夫组件我选择了
+        /// </summary>
+        private void NotifyParentSelecte()
+        {
+            ParentGridView?.NotifyItemClicked(this);
+        }
+
     }
 }

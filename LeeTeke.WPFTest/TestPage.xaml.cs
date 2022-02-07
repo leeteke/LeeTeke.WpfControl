@@ -32,5 +32,10 @@ namespace LeeTeke.WPFTest
         {
 
         }
+
+        private void GridView_ItemClicked(object sender, WpfControl.GridViewItemClickedEventArgs e)
+        {
+
+        }
     }
 }
