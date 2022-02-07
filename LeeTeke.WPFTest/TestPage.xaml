@@ -349,11 +349,14 @@
 
                 <leecontrol:SlideView
                     Height="200"
+                    Orientation="Vertical"
+                  BorderThickness="5"
                     ItemsSource="{Binding TestList}"
                    >
                     <leecontrol:SlideView.ItemTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding Image}"/>
+                            <Image Source="{Binding Image}"
+                                   Stretch="Fill"/>
                         </DataTemplate>
                     </leecontrol:SlideView.ItemTemplate>
 

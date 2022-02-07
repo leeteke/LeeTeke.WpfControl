@@ -394,14 +394,13 @@ namespace LeeTeke.WpfControl.Controls
                         {
                             case Orientation.Horizontal:
 
-                                ScrollViewerManager.ScrollToHorizontalOffset(_scrollViewer, (this.ActualWidth - this.BorderThickness.Left - this.BorderThickness.Right) * CurrentIndex);
+                                ScrollViewerManager.ScrollToHorizontalOffset(_scrollViewer, this.ActualWidth * CurrentIndex);
 
                           
                                 break;
                             case Orientation.Vertical:
 
-                                ScrollViewerManager.ScrollToVerticalOffset(_scrollViewer, (this.ActualHeight - this.BorderThickness.Top - this.BorderThickness.Bottom) * CurrentIndex);
-
+                                ScrollViewerManager.ScrollToVerticalOffset(_scrollViewer, this.ActualHeight * CurrentIndex);
 
                                 break;
                             default:
