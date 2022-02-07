@@ -349,8 +349,9 @@
 
                 <leecontrol:SlideView
                     Height="200"
-                    Orientation="Vertical"
+                    Orientation="Horizontal"
                   BorderThickness="5"
+                    CornerRadius="8"
                     ItemsSource="{Binding TestList}"
                    >
                     <leecontrol:SlideView.ItemTemplate>

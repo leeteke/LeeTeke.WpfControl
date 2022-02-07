@@ -37,6 +37,7 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="IsClip" Value="True"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
@@ -60,6 +61,7 @@
                                       BorderBrush="{TemplateBinding BorderBrush}"
                                       BorderThickness="{TemplateBinding BorderThickness}"
                                       leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}"
+                                      leedep:CornerRadiusManager.IsClip="{TemplateBinding IsClip}"
                                       HorizontalScrollBarVisibility="Hidden" 
                                       VerticalScrollBarVisibility="Hidden"
                                       Style="{DynamicResource LeeScrollViewer}"
@@ -69,14 +71,7 @@
                                       Padding="{TemplateBinding Padding}"
                                       FocusVisualStyle="{DynamicResource LeeFocusVisual}"
                                       IsTabStop="False">
-                        <ScrollViewer.Clip>
-                            <MultiBinding  Converter="{StaticResource  MultiValueToClipConverter}" Mode="OneWay">
-                                <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualWidth"/>
-                                <Binding RelativeSource="{RelativeSource Mode=Self}"  Path="ActualHeight"/>
-                                <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}"  Path="CornerRadius"/>
-                                <Binding ElementName="PART_Border"  Path="BorderThickness" Mode="OneWay"/>
-                            </MultiBinding>
-                        </ScrollViewer.Clip>
+               
                         <ItemsPresenter />
                     </ScrollViewer>
                     <ControlTemplate.Triggers>

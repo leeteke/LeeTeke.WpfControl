@@ -147,6 +147,22 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
+        #region IsClip
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public bool IsClip
+        {
+            get { return (bool)GetValue(IsClipProperty); }
+            set { SetValue(IsClipProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsClip.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsClipProperty =
+            DependencyProperty.Register("IsClip", typeof(bool), typeof(SlideView));
+        #endregion
+
+
         #region Orientation
 
         /// <summary>
