@@ -2,32 +2,27 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"   
                     xmlns:local="clr-namespace:LeeTeke.WpfControl.Controls"
                     xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies"
+                    xmlns:converter="clr-namespace:LeeTeke.WpfControl.Converters"
                     >
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
+
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type local:SlideViewItem}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="Width" 
-                    Value="{Binding RelativeSource={ RelativeSource Mode=FindAncestor,AncestorType={x:Type ScrollViewer},AncestorLevel=1},Path=ActualWidth,Mode=OneWay}"/>
-        <Setter Property="Height" 
-                    Value="{Binding RelativeSource={ RelativeSource Mode=FindAncestor,AncestorType={x:Type ScrollViewer},AncestorLevel=1},Path=ActualHeight,Mode=OneWay}"/>
+
+        <Setter Property="Width"  Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:SlideView},AncestorLevel=1},Path=ItemWidth ,Mode=OneWay}"/>
+        <Setter Property="Height" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:SlideView},AncestorLevel=1},Path=ItemHeight,Mode=OneWay}"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:SlideViewItem}" >
-                    <Border x:Name="contentBorder" 
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                Background="{TemplateBinding Background}"
-                                Padding="{TemplateBinding Padding}">
-                        <ContentPresenter x:Name="contentPresenter" 
+                    <ContentPresenter x:Name="contentPresenter" 
                                               TextElement.Foreground="{TemplateBinding Foreground}"
                                               />
-                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -71,7 +66,6 @@
                                       Padding="{TemplateBinding Padding}"
                                       FocusVisualStyle="{DynamicResource LeeFocusVisual}"
                                       IsTabStop="False">
-               
                         <ItemsPresenter />
                     </ScrollViewer>
                     <ControlTemplate.Triggers>

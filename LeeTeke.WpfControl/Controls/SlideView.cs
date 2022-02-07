@@ -48,7 +48,7 @@ namespace LeeTeke.WpfControl.Controls
     ///
     /// </summary>
     [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(SlideViewItem))]
-    [TemplatePart(Name =ElementScrollViewer,Type =typeof(ScrollViewer))]
+    [TemplatePart(Name = ElementScrollViewer, Type = typeof(ScrollViewer))]
     public class SlideView : ItemsControl
     {
         static SlideView()
@@ -71,6 +71,8 @@ namespace LeeTeke.WpfControl.Controls
 
         private void SlideView_SizeChanged(object sender, SizeChangedEventArgs e)
         {
+            ItemWidth=this.ActualWidth-this.BorderThickness.Left- this.BorderThickness.Right;
+            ItemHeight=this.ActualHeight-this.BorderThickness.Top- this.BorderThickness.Bottom;
             ToIndex(CurrentIndex);
         }
 
@@ -91,7 +93,7 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
 
-        
+
 
 
         #region 属性
@@ -122,8 +124,8 @@ namespace LeeTeke.WpfControl.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            _scrollViewer =GetTemplateChild(ElementScrollViewer) as ScrollViewer;
-            
+            _scrollViewer = GetTemplateChild(ElementScrollViewer) as ScrollViewer;
+
         }
 
         #endregion
@@ -178,7 +180,7 @@ namespace LeeTeke.WpfControl.Controls
         public static readonly DependencyProperty OrientationProperty =
             DependencyProperty.Register("Orientation", typeof(Orientation), typeof(SlideView));
 
-     
+
         #endregion
 
         #region CurrentValue
@@ -227,7 +229,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for Interval.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IntervalProperty =
-            DependencyProperty.Register("Interval", typeof(int), typeof(SlideView),new PropertyMetadata(OnIntervalChanged));
+            DependencyProperty.Register("Interval", typeof(int), typeof(SlideView), new PropertyMetadata(OnIntervalChanged));
 
         private static void OnIntervalChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -304,7 +306,7 @@ namespace LeeTeke.WpfControl.Controls
         public static readonly DependencyProperty EasingFunctionProperty =
             DependencyProperty.Register("EasingFunction", typeof(IEasingFunction), typeof(SlideView));
 
-  
+
 
         #endregion
 
@@ -336,11 +338,47 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
+
+
+        #region ItemWidth
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        internal double ItemWidth
+        {
+            get { return (double)GetValue(ItemWidthProperty); }
+            set { SetValue(ItemWidthProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ItemWidth.  This enables animation, styling, binding, etc...
+        internal static readonly DependencyProperty ItemWidthProperty =
+            DependencyProperty.Register("ItemWidth", typeof(double), typeof(SlideView));
+        #endregion
+
+
+
+        #region ItemHeight
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        internal double ItemHeight
+        {
+            get { return (double)GetValue(ItemHeightProperty); }
+            set { SetValue(ItemHeightProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ItemHeight.  This enables animation, styling, binding, etc...
+        internal static readonly DependencyProperty ItemHeightProperty =
+            DependencyProperty.Register("ItemHeight", typeof(double), typeof(SlideView));
+        #endregion
+
+
+
         #endregion
 
         #region Event
 
-   
+
 
         /// <summary>
         /// 请填写描述
@@ -367,11 +405,14 @@ namespace LeeTeke.WpfControl.Controls
 
         private void SetAutoPaly(bool isAuto)
         {
+            if (_autoPalyTime != null)
+            {
+                _autoPalyTime.Tick -= AutoPalyTime_Tick;
+                _autoPalyTime.Stop();
+            }
             if (!IsLoaded)
                 return;
 
-            if (_autoPalyTime != null)
-                _autoPalyTime.Stop();
             if (isAuto)
             {
                 if (_autoPalyTime == null)
@@ -405,14 +446,14 @@ namespace LeeTeke.WpfControl.Controls
                         CurrentValue = Items[index];
                         CurrentIndex = index;
 
-     
+
                         switch (Orientation)
                         {
                             case Orientation.Horizontal:
 
                                 ScrollViewerManager.ScrollToHorizontalOffset(_scrollViewer, this.ActualWidth * CurrentIndex);
 
-                          
+
                                 break;
                             case Orientation.Vertical:
 
@@ -468,12 +509,12 @@ namespace LeeTeke.WpfControl.Controls
                 case Key.Right:
                 case Key.Down:
                     e.Handled = true;
-                    ToIndex(CurrentIndex +1);
+                    ToIndex(CurrentIndex + 1);
                     break;
                 default:
                     break;
             }
-      
+
         }
 
         private void ItemMouseLeftButtonUpEvent(object sender, RoutedEventArgs e)
@@ -494,7 +535,7 @@ namespace LeeTeke.WpfControl.Controls
         }
 
 
-   
+
     }
 
     #endregion

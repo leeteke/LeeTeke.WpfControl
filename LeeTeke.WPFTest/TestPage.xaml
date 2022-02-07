@@ -359,23 +359,60 @@
                 </leecontrol:ProgressRing>
 
 
+                <GroupBox Header="123"
+                          leedep:GroupBoxManager.BorderMode="External"
+                          >
+                    
+           
                 <leecontrol:SlideView
                     Height="200"
                     Orientation="Horizontal"
-                  BorderThickness="5"
-                    CornerRadius="8"
-                    ItemsSource="{Binding TestList}"
+                  BorderThickness="0"
+                    CornerRadius="6"
+                    AutoPaly="True"
+                    IsCycle="True"
+                   Margin="50"
                    >
-                    <leecontrol:SlideView.ItemTemplate>
+                        <leecontrol:SlideViewItem 
+                                                  >
+                            <Border Background="{DynamicResource LeeBrush_BlueOutlook}"
+                                            BorderThickness="0">
+                                <TextBlock Text="加载中" 
+                                       VerticalAlignment="Center"
+                                       Opacity="0.7"
+                                       HorizontalAlignment="Center"/>
+                            </Border>
+                        </leecontrol:SlideViewItem>
+
+                        <leecontrol:SlideViewItem >
+                            <Border Background="Red"
+                                            BorderThickness="0">
+                                <TextBlock Text="加载中" 
+                                       VerticalAlignment="Center"
+                                       Opacity="0.7"
+                                       HorizontalAlignment="Center"/>
+                            </Border>
+                        </leecontrol:SlideViewItem>
+
+                        <leecontrol:SlideViewItem  >
+                            <Border Background="Green"
+                                            BorderThickness="0">
+                                <TextBlock Text="加载中" 
+                                       VerticalAlignment="Center"
+                                       Opacity="0.7"
+                                       HorizontalAlignment="Center"/>
+                            </Border>
+                        </leecontrol:SlideViewItem>
+                        <!--<leecontrol:SlideView.ItemTemplate>
                         <DataTemplate>
                             <Image Source="{Binding Image}"
                                    Stretch="Fill"/>
                         </DataTemplate>
-                    </leecontrol:SlideView.ItemTemplate>
+                    </leecontrol:SlideView.ItemTemplate>-->
 
                 </leecontrol:SlideView>
 
-
+                </GroupBox>
 
                 <TextBlock Text="你好"
                            VerticalAlignment="Center"
