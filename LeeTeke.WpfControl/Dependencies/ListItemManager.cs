@@ -284,6 +284,24 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("MouseOverEffect", typeof(Effect), typeof(ListItemManager));
         #endregion
 
+
+        #region ActivateSelectedStyle
+        public static bool GetActivateSelectedStyle(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(ActivateSelectedStyleProperty);
+        }
+
+        public static void SetActivateSelectedStyle(DependencyObject obj, bool value)
+        {
+            obj.SetValue(ActivateSelectedStyleProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for ActivateSelectedStyle.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ActivateSelectedStyleProperty =
+            DependencyProperty.RegisterAttached("ActivateSelectedStyle", typeof(bool), typeof(ListItemManager));
+        #endregion
+
+
         #region SelectedEffect
         public static Effect GetSelectedEffect(DependencyObject obj)
         {
