@@ -2951,10 +2951,16 @@
                                         x:Name="Popup"
                                         AllowsTransparency="True"
                                         Focusable="False"
+                                        HorizontalOffset="-5"
                                         IsOpen="{TemplateBinding IsSubmenuOpen}"
                                         Placement="Right"
-                                        PopupAnimation="Fade">
-                                        <lee:EasyPanel x:Name="GrdSubmenu" Margin="10">
+                                        PopupAnimation="Fade"
+                                        VerticalOffset="-5">
+                                        <Border
+                                            x:Name="GrdSubmenu"
+                                            Padding="5"
+                                            Background="Transparent"
+                                            BorderThickness="0">
                                             <ScrollViewer
                                                 MinWidth="{Binding MinWidth, RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}"
                                                 Margin="{Binding Padding, RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}"
@@ -2971,7 +2977,7 @@
 
                                                 <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
                                             </ScrollViewer>
-                                        </lee:EasyPanel>
+                                        </Border>
 
                                     </Popup>
                                 </Grid>
