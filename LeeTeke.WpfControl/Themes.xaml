@@ -2809,6 +2809,183 @@
 
     </Style>
 
+    <Style x:Key="LeeSeparator" TargetType="{x:Type Separator}">
+        <Setter Property="Background" Value="{DynamicResource LeeBrush_BorderBrush}" />
+        <Setter Property="Margin" Value="0,2" />
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Separator}">
+                    <Border
+                        Height="1"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        SnapsToDevicePixels="true" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="{x:Static MenuItem.SeparatorStyleKey}" TargetType="Separator">
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="leedep:ContextMenuManager.SeparatorHeight" Value="{Binding Path=(leedep:ContextMenuManager.SeparatorHeight), RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}" />
+        <Setter Property="leedep:ContextMenuManager.SeparatorMargin" Value="{Binding Path=(leedep:ContextMenuManager.SeparatorMargin), RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}" />
+        <Setter Property="leedep:ContextMenuManager.SeparatorFill" Value="{Binding Path=(leedep:ContextMenuManager.SeparatorFill), RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}" />
+        <Setter Property="leedep:ContextMenuManager.SeparatorContent" Value="{Binding Path=(leedep:ContextMenuManager.SeparatorContent), RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}" />
+        <Setter Property="Focusable" Value="True" />
+        <Setter Property="IsEnabled" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Separator}">
+                    <ContentPresenter Content="{Binding Path=(leedep:ContextMenuManager.SeparatorContent), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="leedep:ContextMenuManager.SeparatorContent" Value="{x:Null}">
+                <Setter Property="Focusable" Value="False" />
+                <Setter Property="IsEnabled" Value="False" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Separator}">
+                            <Border
+                                Height="{Binding Path=(leedep:ContextMenuManager.SeparatorHeight), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
+                                Margin="{Binding Path=(leedep:ContextMenuManager.SeparatorMargin), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
+                                Background="{Binding Path=(leedep:ContextMenuManager.SeparatorFill), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
+                                BorderThickness="0" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="LeeMenuItem" TargetType="{x:Type MenuItem}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
+        <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="leedep:MenuItemManager.RippleBrush" Value="{Binding Path=(leedep:MenuItemManager.RippleBrush), RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}" />
+        <Setter Property="leedep:MenuItemManager.IconMinWidth" Value="{Binding Path=(leedep:MenuItemManager.IconMinWidth), RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}" />
+        <Setter Property="leedep:MenuItemManager.NextTagMinWidth" Value="{Binding Path=(leedep:MenuItemManager.NextTagMinWidth), RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}" />
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Height" Value="{DynamicResource LeeItemMinHeight}" />
+        <Setter Property="MinWidth" Value="{DynamicResource LeeItemMinWidth}" />
+        <Setter Property="Padding" Value="2" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type MenuItem}">
+                    <Border
+                        x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}">
+                        <Grid x:Name="PART_Grid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" MinWidth="{Binding Path=(leedep:MenuItemManager.IconMinWidth), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}" />
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="auto" MinWidth="{Binding Path=(leedep:MenuItemManager.NextTagMinWidth), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}" />
+                            </Grid.ColumnDefinitions>
+                            <controls:RippleMask
+                                Grid.ColumnSpan="3"
+                                CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
+                                IsOverflow="False"
+                                ParentElement="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                RippleBrush="{Binding Path=(leedep:MenuItemManager.RippleBrush), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" />
+                            <ContentPresenter
+                                x:Name="IconContent"
+                                Margin="5,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                ContentSource="Icon"
+                                RecognizesAccessKey="True"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                TextElement.Foreground="{TemplateBinding Foreground}" />
+                            <ContentPresenter
+                                x:Name="Presenter"
+                                Grid.Column="1"
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                ContentSource="Header"
+                                RecognizesAccessKey="True"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                TextElement.Foreground="{TemplateBinding Foreground}" />
+                            <Path
+                                x:Name="Path"
+                                Grid.Column="2"
+                                Width="5"
+                                Height="10"
+                                Margin="0,0,15,0"
+                                HorizontalAlignment="Right"
+                                Data="M0,0 L5,5 L0,10"
+                                RenderTransformOrigin="0.5,0.5"
+                                Stroke="{TemplateBinding Foreground}"
+                                Visibility="Collapsed" />
+                            <Popup
+                                x:Name="Popup"
+                                AllowsTransparency="True"
+                                Focusable="False"
+                                HorizontalOffset="-5"
+                                IsOpen="{TemplateBinding IsSubmenuOpen}"
+                                Placement="Right"
+                                PopupAnimation="Fade"
+                                VerticalOffset="-5">
+                                <Border
+                                    x:Name="GrdSubmenu"
+                                    Padding="5"
+                                    Background="Transparent"
+                                    BorderThickness="0">
+                                    <ScrollViewer
+                                        MinWidth="{Binding MinWidth, RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}"
+                                        Margin="{Binding Padding, RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}"
+                                        leedep:CornerRadiusManager.CornerRadius="{Binding (leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}"
+                                        leedep:CornerRadiusManager.IsClip="{Binding Path=(leedep:CornerRadiusManager.IsClip), RelativeSource={RelativeSource AncestorType=ContextMenu, Mode=FindAncestor}, Mode=OneWay}"
+                                        leedep:ScrollViewerManager.SlideDuration="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=(leedep:ScrollViewerManager.SlideDuration), Mode=OneWay}"
+                                        leedep:ScrollViewerManager.SlideEasingFunction="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=(leedep:ScrollViewerManager.SlideEasingFunction), Mode=OneWay}"
+                                        leedep:ScrollViewerManager.SlideEnabled="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=(leedep:ScrollViewerManager.SlideEnabled), Mode=OneWay}"
+                                        leedep:ScrollViewerManager.SlideMonitorMode="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=(leedep:ScrollViewerManager.SlideMonitorMode), Mode=OneWay}"
+                                        Background="{Binding Background, RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}"
+                                        BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}"
+                                        BorderThickness="{Binding BorderThickness, RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}"
+                                        Effect="{Binding Path=(leedep:ContextMenuManager.Shadow), RelativeSource={RelativeSource AncestorType=ContextMenu, Mode=FindAncestor}, Mode=OneWay}">
+
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
+                                    </ScrollViewer>
+                                </Border>
+
+                            </Popup>
+                        </Grid>
+
+                    </Border>
+                    <ControlTemplate.Triggers>
+
+
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="{DynamicResource LeeBrush_Mark}" />
+                        </Trigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}, Mode=OneWay}" Value="True" />
+                                <Condition Binding="{Binding Path=HasItems, RelativeSource={RelativeSource Self}, Mode=OneWay}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="Popup" Property="IsOpen" Value="True" />
+
+                        </MultiDataTrigger>
+                        <Trigger Property="HasItems" Value="True">
+                            <Setter TargetName="Path" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="{DynamicResource UnEnableOpacity}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="LeeContextMenu" TargetType="{x:Type ContextMenu}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
@@ -2821,6 +2998,15 @@
         <Setter Property="leedep:ContextMenuManager.ContentDock" Value="Bottom" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Margin" Value="8" />
+        <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="leedep:ContextMenuManager.SeparatorHeight" Value="1" />
+        <Setter Property="leedep:ContextMenuManager.SeparatorMargin" Value="5,0" />
+        <Setter Property="leedep:ContextMenuManager.SeparatorFill" Value="{DynamicResource LeeBrush_BorderBrush}" />
+        <Setter Property="leedep:ContextMenuManager.SeparatorContent" Value="{x:Null}" />
+
+        <Setter Property="leedep:MenuItemManager.RippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}" />
+        <Setter Property="leedep:MenuItemManager.IconMinWidth" Value="30" />
+        <Setter Property="leedep:MenuItemManager.NextTagMinWidth" Value="30" />
         <Setter Property="leedep:ScrollViewerManager.SlideEasingFunction" Value="{DynamicResource LeeScrollViewerSlideEasingFuncion}" />
         <Setter Property="leedep:ScrollViewerManager.SlideDuration" Value="{DynamicResource LeeScrollViewerSlideDuration}" />
         <Setter Property="leedep:ScrollViewerManager.SlideEnabled" Value="{DynamicResource LeeScrollViewerSlideEnabled}" />
@@ -2886,129 +3072,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Resources>
-            <Style TargetType="{x:Type MenuItem}">
-                <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
-                <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
-                <Setter Property="leedep:MenuItemManager.RippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}" />
-                <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
-                <Setter Property="BorderThickness" Value="0" />
-                <Setter Property="Height" Value="{DynamicResource LeeItemMinHeight}" />
-                <Setter Property="MinWidth" Value="{DynamicResource LeeItemMinWidth}" />
-                <Setter Property="Padding" Value="2" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type MenuItem}">
-                            <Border
-                                x:Name="border"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}">
-                                <Grid x:Name="PART_Grid">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto" MinWidth="30" />
-                                        <ColumnDefinition />
-                                        <ColumnDefinition Width="auto" MinWidth="30" />
-                                    </Grid.ColumnDefinitions>
-                                    <controls:RippleMask
-                                        Grid.ColumnSpan="3"
-                                        CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
-                                        IsOverflow="False"
-                                        ParentElement="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                        RippleBrush="{Binding Path=(leedep:MenuItemManager.RippleBrush), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" />
-                                    <ContentPresenter
-                                        x:Name="IconContent"
-                                        Margin="5,0"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                        ContentSource="Icon"
-                                        RecognizesAccessKey="True"
-                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                        TextElement.Foreground="{TemplateBinding Foreground}" />
-                                    <ContentPresenter
-                                        x:Name="Presenter"
-                                        Grid.Column="1"
-                                        Margin="{TemplateBinding Padding}"
-                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                        ContentSource="Header"
-                                        RecognizesAccessKey="True"
-                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                        TextElement.Foreground="{TemplateBinding Foreground}" />
-                                    <Path
-                                        x:Name="Path"
-                                        Grid.Column="2"
-                                        Width="5"
-                                        Height="10"
-                                        Margin="0,0,15,0"
-                                        HorizontalAlignment="Right"
-                                        Data="M0,0 L5,5 L0,10"
-                                        RenderTransformOrigin="0.5,0.5"
-                                        Stroke="{TemplateBinding Foreground}"
-                                        Visibility="Collapsed" />
-                                    <Popup
-                                        x:Name="Popup"
-                                        AllowsTransparency="True"
-                                        Focusable="False"
-                                        HorizontalOffset="-5"
-                                        IsOpen="{TemplateBinding IsSubmenuOpen}"
-                                        Placement="Right"
-                                        PopupAnimation="Fade"
-                                        VerticalOffset="-5">
-                                        <Border
-                                            x:Name="GrdSubmenu"
-                                            Padding="5"
-                                            Background="Transparent"
-                                            BorderThickness="0">
-                                            <ScrollViewer
-                                                MinWidth="{Binding MinWidth, RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}"
-                                                Margin="{Binding Padding, RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}"
-                                                leedep:CornerRadiusManager.CornerRadius="{Binding (leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}"
-                                                leedep:CornerRadiusManager.IsClip="{Binding Path=(leedep:CornerRadiusManager.IsClip), RelativeSource={RelativeSource AncestorType=ContextMenu, Mode=FindAncestor}, Mode=OneWay}"
-                                                leedep:ScrollViewerManager.SlideDuration="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=(leedep:ScrollViewerManager.SlideDuration), Mode=OneWay}"
-                                                leedep:ScrollViewerManager.SlideEasingFunction="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=(leedep:ScrollViewerManager.SlideEasingFunction), Mode=OneWay}"
-                                                leedep:ScrollViewerManager.SlideEnabled="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=(leedep:ScrollViewerManager.SlideEnabled), Mode=OneWay}"
-                                                leedep:ScrollViewerManager.SlideMonitorMode="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=(leedep:ScrollViewerManager.SlideMonitorMode), Mode=OneWay}"
-                                                Background="{Binding Background, RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}"
-                                                BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}"
-                                                BorderThickness="{Binding BorderThickness, RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}"
-                                                Effect="{Binding Path=(leedep:ContextMenuManager.Shadow), RelativeSource={RelativeSource AncestorType=ContextMenu, Mode=FindAncestor}, Mode=OneWay}">
 
-                                                <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
-                                            </ScrollViewer>
-                                        </Border>
-
-                                    </Popup>
-                                </Grid>
-
-                            </Border>
-                            <ControlTemplate.Triggers>
-
-
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="border" Property="Background" Value="{DynamicResource LeeBrush_Mark}" />
-                                </Trigger>
-                                <MultiDataTrigger>
-                                    <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}, Mode=OneWay}" Value="True" />
-                                        <Condition Binding="{Binding Path=HasItems, RelativeSource={RelativeSource Self}, Mode=OneWay}" Value="True" />
-                                    </MultiDataTrigger.Conditions>
-                                    <Setter TargetName="Popup" Property="IsOpen" Value="True" />
-
-                                </MultiDataTrigger>
-                                <Trigger Property="HasItems" Value="True">
-                                    <Setter TargetName="Path" Property="Visibility" Value="Visible" />
-                                </Trigger>
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Opacity" Value="{DynamicResource UnEnableOpacity}" />
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-        </Style.Resources>
     </Style>
 
 
@@ -6021,6 +6085,9 @@
     <Style BasedOn="{StaticResource LeeCheckBox}" TargetType="CheckBox" />
     <Style BasedOn="{StaticResource LeeScrollViewer}" TargetType="ScrollViewer" />
     <Style BasedOn="{StaticResource LeeScrollBar}" TargetType="ScrollBar" />
+
+    <Style BasedOn="{StaticResource LeeSeparator}" TargetType="Separator" />
+    <Style BasedOn="{StaticResource LeeMenuItem}" TargetType="MenuItem" />
     <Style BasedOn="{StaticResource LeeContextMenu}" TargetType="ContextMenu" />
     <Style BasedOn="{StaticResource LeeToggleButton}" TargetType="ToggleButton" />
     <Style BasedOn="{StaticResource LeeComboBox}" TargetType="ComboBox" />

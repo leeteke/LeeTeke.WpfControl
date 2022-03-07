@@ -64,5 +64,71 @@ namespace LeeTeke.WpfControl.Dependencies
         #endregion
 
 
+        #region SeparatorMargin
+        public static Thickness GetSeparatorMargin(DependencyObject obj)
+        {
+            return (Thickness)obj.GetValue(SeparatorMarginProperty);
+        }
+
+        public static void SetSeparatorMargin(DependencyObject obj, Thickness value)
+        {
+            obj.SetValue(SeparatorMarginProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for SeparatorMargin.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SeparatorMarginProperty =
+            DependencyProperty.RegisterAttached("SeparatorMargin", typeof(Thickness), typeof(ContextMenuManager));
+        #endregion
+
+        #region SeparatorHeight
+        public static double GetSeparatorHeight(DependencyObject obj)
+        {
+            return (double)obj.GetValue(SeparatorHeightProperty);
+        }
+
+        public static void SetSeparatorHeight(DependencyObject obj, double value)
+        {
+            obj.SetValue(SeparatorHeightProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for SeparatorHeight.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SeparatorHeightProperty =
+            DependencyProperty.RegisterAttached("SeparatorHeight", typeof(double), typeof(ContextMenuManager));
+        #endregion
+
+        #region SeparatorFill
+        public static Brush GetSeparatorFill(DependencyObject obj)
+        {
+            return (Brush)obj.GetValue(SeparatorFillProperty);
+        }
+
+        public static void SetSeparatorFill(DependencyObject obj, Brush value)
+        {
+            obj.SetValue(SeparatorFillProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for SeparatorFill.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SeparatorFillProperty =
+            DependencyProperty.RegisterAttached("SeparatorFill", typeof(Brush), typeof(ContextMenuManager));
+        #endregion
+
+
+        #region SeparatorContent
+        public static object GetSeparatorContent(DependencyObject obj)
+        {
+            return (object)obj.GetValue(SeparatorContentProperty);
+        }
+
+        public static void SetSeparatorContent(DependencyObject obj, object value)
+        {
+            obj.SetValue(SeparatorContentProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for SeparatorContent.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SeparatorContentProperty =
+            DependencyProperty.RegisterAttached("SeparatorContent", typeof(object), typeof(ContextMenuManager));
+        #endregion
+
+
     }
 }

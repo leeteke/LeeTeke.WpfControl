@@ -23,6 +23,7 @@
     WinTitlePanelVerticalAlignment="Top"
     WindowState="Normal"
     mc:Ignorable="d">
+    <leecontrol:Window.Resources />
 
 
 
@@ -68,8 +69,11 @@
 
 
         <Grid.ContextMenu>
-            <ContextMenu>
+            <ContextMenu leedep:MenuItemManager.IconMinWidth="0">
                 <MenuItem Header="你好" />
+                <Separator>
+                    
+                </Separator>
                 <MenuItem Header="你好">
                     <MenuItem Header="你好" />
                     <MenuItem Header="你好" />
