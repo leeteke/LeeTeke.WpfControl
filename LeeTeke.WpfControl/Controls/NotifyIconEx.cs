@@ -72,14 +72,14 @@ namespace LeeTeke.WpfControl.Controls
 
         public NotifyIconEx()
         {
-            Application.Current.Exit += (es,ec)=>this.Dispose();
+            Application.Current.Exit += (es, ec) => this.Dispose();
             AppDomain.CurrentDomain.ProcessExit += (es, ec) => this.Dispose();
             #region 初始化组件
             _border = new Border();
             {
                 _border.Resources = Application.Current.Resources;
             }
-           
+
             BindingOperations.SetBinding(_border, Border.MinHeightProperty, new Binding() { Source = this, Path = new PropertyPath("MinHeight"), Mode = BindingMode.OneWay });
             BindingOperations.SetBinding(_border, Border.MinWidthProperty, new Binding() { Source = this, Path = new PropertyPath("MinWidth"), Mode = BindingMode.OneWay });
             BindingOperations.SetBinding(_border, Border.CornerRadiusProperty, new Binding() { Source = this, Path = new PropertyPath("CornerRadius"), Mode = BindingMode.OneWay });
@@ -98,7 +98,7 @@ namespace LeeTeke.WpfControl.Controls
                 PopupAnimation = PopupAnimation.Fade,
                 Child = _border,
             };
-            _border.PreviewMouseUp += _border_PreviewMouseUp; 
+            _border.PreviewMouseUp += _border_PreviewMouseUp;
             #endregion
 
             #region 初始化图片
@@ -123,11 +123,11 @@ namespace LeeTeke.WpfControl.Controls
             #endregion
         }
 
-     
+
 
         protected override void OnContentChanged(object oldContent, object newContent)
         {
-           
+
 
             if (newContent == null)
             {
@@ -196,7 +196,7 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-     
+
 
         #region BalloonTipData
         /// <summary>
@@ -338,7 +338,7 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         public static readonly RoutedEvent MouseLeftClickEvent = EventManager.RegisterRoutedEvent(
-        "MouseLeftClick", RoutingStrategy.Bubble, typeof( RoutedEventHandler), typeof(NotifyIconEx));
+        "MouseLeftClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotifyIconEx));
 
 
         private void RaiseMouseLeftClick()
@@ -360,12 +360,12 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         public static readonly RoutedEvent MouseRightClickEvent = EventManager.RegisterRoutedEvent(
-        "MouseRightClick", RoutingStrategy.Bubble, typeof( RoutedEventHandler), typeof(NotifyIconEx));
+        "MouseRightClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotifyIconEx));
 
 
         private void RaiseMouseRightClick()
         {
-            var arg = new RoutedEventArgs( MouseRightClickEvent);
+            var arg = new RoutedEventArgs(MouseRightClickEvent);
             RaiseEvent(arg);
         }
 
@@ -382,12 +382,12 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         public static new readonly RoutedEvent MouseDoubleClickEvent = EventManager.RegisterRoutedEvent(
-        "MouseDoubleClick", RoutingStrategy.Bubble, typeof( RoutedEventHandler), typeof(NotifyIconEx));
+        "MouseDoubleClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotifyIconEx));
 
 
         private void RaiseMouseDoubleClick()
         {
-            var arg = new RoutedEventArgs( MouseDoubleClickEvent);
+            var arg = new RoutedEventArgs(MouseDoubleClickEvent);
             RaiseEvent(arg);
         }
 
@@ -405,12 +405,12 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         public static readonly RoutedEvent BalloonTipClickedEvent = EventManager.RegisterRoutedEvent(
-        "BalloonTipClicked", RoutingStrategy.Bubble, typeof( RoutedEventHandler), typeof(NotifyIconEx));
+        "BalloonTipClicked", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotifyIconEx));
 
 
         private void RaiseBalloonTipClicked()
         {
-            var arg = new RoutedEventArgs( BalloonTipClickedEvent);
+            var arg = new RoutedEventArgs(BalloonTipClickedEvent);
             RaiseEvent(arg);
         }
 
@@ -612,15 +612,16 @@ namespace LeeTeke.WpfControl.Controls
 
         private void AddRightContent(FrameworkElement element)
         {
-            var multiBinding = new MultiBinding() { 
-             Converter=new MultiValueToClipConverter(),
+            var multiBinding = new MultiBinding()
+            {
+                Converter = new MultiValueToClipConverter(),
             };
             multiBinding.Bindings.Add(new Binding() { Source = _border, Path = new PropertyPath("ActualWidth"), Mode = BindingMode.OneWay });
             multiBinding.Bindings.Add(new Binding() { Source = _border, Path = new PropertyPath("ActualHeight"), Mode = BindingMode.OneWay });
             multiBinding.Bindings.Add(new Binding() { Source = _border, Path = new PropertyPath("CornerRadius"), Mode = BindingMode.OneWay });
-            multiBinding.Bindings.Add(new Binding() { Source=_border,Path=new PropertyPath("BorderThickness"),Mode= BindingMode.OneWay});
+            multiBinding.Bindings.Add(new Binding() { Source = _border, Path = new PropertyPath("BorderThickness"), Mode = BindingMode.OneWay });
             BindingOperations.SetBinding(element, FrameworkElement.ClipProperty, multiBinding);
-             _border.Child = null;
+            _border.Child = null;
             _border.Child = element;
         }
 
