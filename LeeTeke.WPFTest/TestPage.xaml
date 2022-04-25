@@ -293,7 +293,7 @@
                     CanUserDeleteRows="False"
                     CanUserSortColumns="True"
                     HeadersVisibility="All"
-                    IsReadOnly="False"
+                    IsReadOnly="True"
                     ItemsSource="{Binding TestList}"
                     SelectionMode="Extended" />
 
