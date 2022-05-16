@@ -1,181 +1,194 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:LeeTeke.WpfControl.Controls"
-                    xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies"
-                    xmlns:controls="clr-namespace:LeeTeke.WpfControl.Controls"
-                    xmlns:lee="clr-namespace:LeeTeke.WpfControl.Controls">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:LeeTeke.WpfControl.Controls"
+    xmlns:lee="clr-namespace:LeeTeke.WpfControl.Controls"
+    xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies"
+    xmlns:local="clr-namespace:LeeTeke.WpfControl.Controls">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/ToggleGroup.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/ToggleGroup.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type local:Pagination}">
+    <Style x:Key="BasePagination" TargetType="{x:Type local:Pagination}">
 
-        <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}"/>
-        <Setter Property="Height" Value="{DynamicResource LeeItemHeight}"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Stretch"/>
-        <Setter Property="PageIndex" Value="1"/>
-    
-        <Setter Property="ButtonWidth" Value="30"/>
-        <Setter Property="ButtonHeight" Value="30"/>
-        <Setter Property="ButtonMargin" Value="2,0"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}"/>
-        <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}" />
+        <Setter Property="Height" Value="{DynamicResource LeeItemHeight}" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="PageIndex" Value="1" />
+
+        <Setter Property="ButtonWidth" Value="30" />
+        <Setter Property="ButtonHeight" Value="30" />
+        <Setter Property="ButtonMargin" Value="2,0" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:Pagination}">
 
-             
-                    <Grid >
+
+                    <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
 
-                        <Button x:Name="PART_HeadButton"
-                                Width="{TemplateBinding ButtonWidth}"
-                                Background="{TemplateBinding Background}"
-                                Height="{TemplateBinding ButtonHeight}"
-                                Margin="{TemplateBinding ButtonMargin}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                IsEnabled="False"
-                                ToolTip="至首页"
-                                leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}">
+                        <Button
+                            x:Name="PART_HeadButton"
+                            Width="{TemplateBinding ButtonWidth}"
+                            Height="{TemplateBinding ButtonHeight}"
+                            Margin="{TemplateBinding ButtonMargin}"
+                            leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            IsEnabled="False"
+                            ToolTip="至首页">
                             <StackPanel Orientation="Horizontal">
-                                <Rectangle Width="{Binding RelativeSource={RelativeSource Mode=Self},Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/12}"
-                                           Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}},Path=Foreground}"
-                                           VerticalAlignment="Stretch"
-                                           Margin="0,0,-3,0" />
+                                <Rectangle
+                                    Width="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight, Converter={StaticResource DoubleFollowConverter}, ConverterParameter=/12}"
+                                    Margin="0,0,-3,0"
+                                    VerticalAlignment="Stretch"
+                                    Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, Path=Foreground}" />
 
-                                <TextBlock Text="&#xE76B;"
-                                           FontFamily="{DynamicResource IconFontFamily}"
-                                           VerticalAlignment="Center"
-                                           Foreground="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}},Path=Foreground}"/>
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    FontFamily="{DynamicResource IconFontFamily}"
+                                    Foreground="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, Path=Foreground}"
+                                    Text="&#xE76B;" />
 
                             </StackPanel>
                         </Button>
 
-                        <Button x:Name="PART_PreviousButton"
-                                Content="&#xE76B;"
-                                Grid.Column="1" 
-                                IsEnabled="False"
-                                ToolTip="上一页"
-                                Width="{TemplateBinding ButtonWidth}"
-                                Background="{TemplateBinding Background}"
-                                Height="{TemplateBinding ButtonHeight}"
-                                VerticalAlignment="Center"
-                                Margin="{TemplateBinding ButtonMargin}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}"
-                                FontFamily="{DynamicResource IconFontFamily}"/>
+                        <Button
+                            x:Name="PART_PreviousButton"
+                            Grid.Column="1"
+                            Width="{TemplateBinding ButtonWidth}"
+                            Height="{TemplateBinding ButtonHeight}"
+                            Margin="{TemplateBinding ButtonMargin}"
+                            VerticalAlignment="Center"
+                            leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Content="&#xE76B;"
+                            FontFamily="{DynamicResource IconFontFamily}"
+                            IsEnabled="False"
+                            ToolTip="上一页" />
 
 
-                        <controls:ToggleGroup x:Name="PART_PageGroup"
-                                              Grid.Column="2"
-                                              SelectedMinimum="1"
-                                              SelectionMode="Single"
-                                              VerticalAlignment="Center"
-                                              Height="{TemplateBinding ButtonHeight}"
-                                              MinHeight="0"
-                                              MinWidth="0"
-                                              BorderThickness="0"
-                                              Padding="0"
-                                              Margin="0"
-                                              ItemBackground="{TemplateBinding Background}"
-                                              ItemMargin="{TemplateBinding ButtonMargin}"
-                                              ItemPadding="0"
-                                              HorizontalScrollBarVisibility="Disabled">
+                        <controls:ToggleGroup
+                            x:Name="PART_PageGroup"
+                            Grid.Column="2"
+                            Height="{TemplateBinding ButtonHeight}"
+                            MinWidth="0"
+                            MinHeight="0"
+                            Margin="0"
+                            Padding="0"
+                            VerticalAlignment="Center"
+                            BorderThickness="0"
+                            HorizontalScrollBarVisibility="Disabled"
+                            ItemBackground="{TemplateBinding Background}"
+                            ItemMargin="{TemplateBinding ButtonMargin}"
+                            ItemPadding="0"
+                            SelectedMinimum="1"
+                            SelectionMode="Single">
                             <controls:ToggleGroup.ItemTemplate>
                                 <DataTemplate>
-                                    <Border BorderThickness="0" 
-                                            Width="{Binding RelativeSource={RelativeSource   AncestorType=local:Pagination},Path=ButtonWidth,Mode=OneWay}">
-                                        <TextBlock Text="{Binding}"
-                                                   VerticalAlignment="Center"
-                                                   HorizontalAlignment="Center"/>
+                                    <Border Width="{Binding RelativeSource={RelativeSource AncestorType=local:Pagination}, Path=ButtonWidth, Mode=OneWay}" BorderThickness="0">
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Text="{Binding}" />
                                     </Border>
-                                            
+
                                 </DataTemplate>
                             </controls:ToggleGroup.ItemTemplate>
-                                
-                                
+
+
                         </controls:ToggleGroup>
 
 
 
-                        <Button x:Name="PART_NextButton"
-                                Content="&#xE76C;"
-                                Grid.Column="3"
-                                IsEnabled="False"
-                                ToolTip="下一页"
-                                Background="{TemplateBinding Background}"
-                                Width="{TemplateBinding ButtonWidth}"
-                                Height="{TemplateBinding ButtonHeight}"
-                                Margin="{TemplateBinding ButtonMargin}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}"
-                                FontFamily="{DynamicResource IconFontFamily}"/>
+                        <Button
+                            x:Name="PART_NextButton"
+                            Grid.Column="3"
+                            Width="{TemplateBinding ButtonWidth}"
+                            Height="{TemplateBinding ButtonHeight}"
+                            Margin="{TemplateBinding ButtonMargin}"
+                            leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Content="&#xE76C;"
+                            FontFamily="{DynamicResource IconFontFamily}"
+                            IsEnabled="False"
+                            ToolTip="下一页" />
 
-                        <Button x:Name="PART_EndButton"
-                                Grid.Column="4"
-                                IsEnabled="False"
-                                ToolTip="至尾页"
-                                Width="{TemplateBinding ButtonWidth}"
-                                Background="{TemplateBinding Background}"
-                                Height="{TemplateBinding ButtonHeight}"
-                                Margin="{TemplateBinding ButtonMargin}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}">
+                        <Button
+                            x:Name="PART_EndButton"
+                            Grid.Column="4"
+                            Width="{TemplateBinding ButtonWidth}"
+                            Height="{TemplateBinding ButtonHeight}"
+                            Margin="{TemplateBinding ButtonMargin}"
+                            leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            IsEnabled="False"
+                            ToolTip="至尾页">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="&#xE76C;"
-                                           FontFamily="{DynamicResource IconFontFamily}"
-                                           VerticalAlignment="Center"
-                                           Foreground="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}},Path=Foreground}"/>
-                                <Rectangle Width="{Binding RelativeSource={RelativeSource Mode=Self},Path=ActualHeight,Converter={StaticResource DoubleFollowConverter},ConverterParameter=/12}"
-                                           Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}},Path=Foreground}"
-                                           Margin="-3,0,0,0"
-                                           VerticalAlignment="Stretch"/>
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    FontFamily="{DynamicResource IconFontFamily}"
+                                    Foreground="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, Path=Foreground}"
+                                    Text="&#xE76C;" />
+                                <Rectangle
+                                    Width="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight, Converter={StaticResource DoubleFollowConverter}, ConverterParameter=/12}"
+                                    Margin="-3,0,0,0"
+                                    VerticalAlignment="Stretch"
+                                    Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, Path=Foreground}" />
                             </StackPanel>
 
                         </Button>
 
 
-                        <StackPanel Grid.Column="5"
-                                     Margin="{TemplateBinding ButtonMargin}"
-                                    Visibility="{TemplateBinding JumpVisibility}"
-                                    Orientation="Horizontal">
-                            <TextBlock Text="跳转到"
-                                       Foreground="{TemplateBinding Foreground}"
-                                       FontSize="{TemplateBinding FontSize}"
-                                       FontWeight="{TemplateBinding FontWeight}"
-                                       VerticalAlignment="Center"
-                                       Margin="5"/>
-                            <ComboBox x:Name="PART_ComboBox"
-                                leedep:ComboBoxManager.PreviewText="" 
+                        <StackPanel
+                            Grid.Column="5"
+                            Margin="{TemplateBinding ButtonMargin}"
+                            Orientation="Horizontal"
+                            Visibility="{TemplateBinding JumpVisibility}">
+                            <TextBlock
+                                Margin="5"
+                                VerticalAlignment="Center"
+                                FontSize="{TemplateBinding FontSize}"
+                                FontWeight="{TemplateBinding FontWeight}"
+                                Foreground="{TemplateBinding Foreground}"
+                                Text="跳转到" />
+                            <ComboBox
+                                x:Name="PART_ComboBox"
+                                Height="{TemplateBinding ButtonHeight}"
                                 MinWidth="60"
                                 MinHeight="0"
                                 leedep:ComboBoxManager.BanQuick="True"
+                                leedep:ComboBoxManager.PreviewText=""
+                                leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}"
                                 Background="{TemplateBinding Background}"
-                                Height="{TemplateBinding ButtonHeight}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}"/>
+                                BorderThickness="{TemplateBinding BorderThickness}" />
                         </StackPanel>
 
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="{DynamicResource UnEnableOpacity}"/>
+                            <Setter Property="Opacity" Value="{DynamicResource UnEnableOpacity}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

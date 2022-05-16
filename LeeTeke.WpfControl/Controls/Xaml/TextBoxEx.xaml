@@ -8,7 +8,7 @@
     </ResourceDictionary.MergedDictionaries>
 
 
-    <Style TargetType="{x:Type local:TextBoxEx}">
+    <Style x:Key="BaseTextBoxEx" TargetType="{x:Type local:TextBoxEx}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />

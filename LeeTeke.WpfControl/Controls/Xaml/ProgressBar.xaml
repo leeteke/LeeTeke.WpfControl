@@ -5,7 +5,7 @@
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type local:ProgressBar}">
+    <Style x:Key="BaseProgressBar" TargetType="{x:Type local:ProgressBar}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="FillBrush" Value="{DynamicResource LeeBrush_Theme}"/>

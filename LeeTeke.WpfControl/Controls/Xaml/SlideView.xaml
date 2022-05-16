@@ -9,7 +9,7 @@
 
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type local:SlideViewItem}">
+    <Style x:Key="BaseSlideViewItem" TargetType="{x:Type local:SlideViewItem}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
@@ -28,7 +28,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type local:SlideView}">
+    <Style x:Key="BaseSlideView" TargetType="{x:Type local:SlideView}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}"/>
         <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>

@@ -4,7 +4,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    <Style TargetType="{x:Type local:ProgressRing}">
+    <Style x:Key="BaseProgressRing"  TargetType="{x:Type local:ProgressRing}">
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Thickness" Value="8"/>

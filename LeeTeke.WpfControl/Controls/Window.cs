@@ -53,12 +53,11 @@ namespace LeeTeke.WpfControl.Controls
     {
         static Window()
         {
-            StyleProperty.OverrideMetadata(typeof(Window), new FrameworkPropertyMetadata(Application.Current.Resources["LeeWindow"] as Style));
         }
 
         public Window()
         {
-            this.Style = Application.Current.Resources["LeeWindow"] as Style;
+            this.Style = Application.Current.Resources["BaseWindow"] as Style;
 #if NET40
             var chrome = new WindowChrome
             {
