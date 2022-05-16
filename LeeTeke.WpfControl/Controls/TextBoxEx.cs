@@ -757,6 +757,22 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
 
+        #region EditBoxCursor
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Cursor EditBoxCursor
+        {
+            get { return (Cursor)GetValue(EditBoxCursorProperty); }
+            set { SetValue(EditBoxCursorProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for EditBoxCursor.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EditBoxCursorProperty =
+            DependencyProperty.Register("EditBoxCursor", typeof(Cursor), typeof(TextBoxEx));
+        #endregion
+
+
         #endregion
 
         #region Command
