@@ -1,72 +1,40 @@
-﻿<Window x:Class="LeeTeke.WPFTest.TestWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LeeTeke.WPFTest"
-        xmlns:lee="clr-namespace:LeeTeke.WpfControl.Controls;assembly=LeeTeke.WpfControl"
-        xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies;assembly=LeeTeke.WpfControl"
-        mc:Ignorable="d"
-        Title="TestWindow" 
-        Height="450"
-        Width="1200"
-         Background="{DynamicResource LeeBrush_Background}"
-        >
+﻿<Window
+    x:Class="LeeTeke.WPFTest.TestWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lee="clr-namespace:LeeTeke.WpfControl.Controls;assembly=LeeTeke.WpfControl"
+    xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies;assembly=LeeTeke.WpfControl"
+    xmlns:local="clr-namespace:LeeTeke.WPFTest"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="TestWindow"
+    Width="1200"
+    Height="450"
+    Background="{DynamicResource LeeBrush_Background}"
+    mc:Ignorable="d">
 
 
 
     <Grid Margin="20">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
-        <lee:Navigation x:Name="test" 
-                     IsScrollToSelected="True"
-                        CanItemDisplacement="True"
-                         >
-            <lee:Navigation.ItemTemplate>
-                <DataTemplate >
-                    <TextBlock  lee:NavigationItem.ItemCanClose="{Binding RelativeSource={RelativeSource Mode=Self},Path=DataContext}" Text="{Binding}"/>
-                </DataTemplate>
-            </lee:Navigation.ItemTemplate>
-        </lee:Navigation>
-
-        <TextBlock VerticalAlignment="Top"
-                   Text="{Binding ElementName=test,Path=SelectedIndex}"/>
-
-
-        <TabControl Grid.Row="1"
-                    leedep:ListItemManager.Marigin="20,0"
-              HorizontalContentAlignment="Stretch"
-                    VerticalContentAlignment="Stretch"
-                    >
-            <TabItem   Header="123">
-                <Grid Background="Red"    >
-                    <TextBlock Text="123123123123"/>
-                </Grid>
-            </TabItem>
-
-            <TabItem Header="你不好"/>
-            <TabItem Header="哈？"/>
-        </TabControl>
-
-
-        <TextBox x:Name="tb"
-                 Grid.Row="2"
-                 IsReadOnly="True"
-                 VerticalContentAlignment="Top"
-                 ScrollViewer.VerticalScrollBarVisibility="Auto"
-                 ScrollViewer.IsDeferredScrollingEnabled="True"
-                   />
-
-
-        <Button Grid.Row="2"
-                VerticalAlignment="Bottom"
-                HorizontalAlignment="Right"
-                Content="click"
-                Click="Button_Click"/>
+        <ListBox
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            leedep:ListItemManager.BorderBrush="Red"
+            leedep:ListItemManager.CornerRadius="6"
+            leedep:ListItemManager.Effect="{DynamicResource LeeShadow3}"
+            leedep:ListItemManager.Marigin="5"
+            leedep:ListItemManager.MinHeight="35">
+            <ListBoxItem Content="1123123123123123" />
+            <ListBoxItem Content="2" />
+            <ListBoxItem Content="3" />
+            <ListBoxItem Content="4" />
+        </ListBox>
     </Grid>
 </Window>

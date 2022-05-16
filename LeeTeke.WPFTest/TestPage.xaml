@@ -301,6 +301,7 @@
                     Height="150"
                     Margin="5"
                     VerticalContentAlignment="Center"
+                    leedep:ListItemManager.Marigin="5"
                     leedep:SelectorDragDropManager.DragDropOver="Navigation_DragDropOver"
                     leedep:SelectorDragDropManager.DragDropOverCommand="{Binding ToggleButtonCommand}"
                     leedep:SelectorDragDropManager.IsEnabled="True"
@@ -322,7 +323,7 @@
                 <ListView
                     Height="100"
                     Margin="5"
-                    leedep:ListViewManager.HeaderFreeze="False"
+                    leedep:ListViewManager.HeaderFreeze="True"
                     ItemsSource="{Binding TestList}"
                     SelectionMode="Multiple">
                     <ListView.View>
