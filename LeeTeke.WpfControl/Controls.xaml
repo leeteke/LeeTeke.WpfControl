@@ -16,6 +16,7 @@
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/ScrollBanner.xaml" />
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/Pagination.xaml" />
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/Navigation.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/MaskPanel.xaml" />
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/Window.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
@@ -36,6 +37,7 @@
     <Style BasedOn="{StaticResource BaseSlideViewItem}" TargetType="{x:Type local:SlideViewItem}" />
     <Style BasedOn="{StaticResource BaseTextBoxEx}" TargetType="{x:Type local:TextBoxEx}" />
     <Style BasedOn="{StaticResource BaseToggleGroup}" TargetType="{x:Type local:ToggleGroup}" />
+    <Style BasedOn="{StaticResource BaseMaskPanel}" TargetType="{x:Type local:MaskPanel}" />
     <Style BasedOn="{StaticResource BaseWindow}" TargetType="{x:Type local:Window}" />
 
 

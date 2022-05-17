@@ -25,5 +25,24 @@ namespace LeeTeke.WPFTest
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            mask.ContentData = new WpfControl.MaskPanelData()
+            {
+                Title = "你好a",
+                ContentSize=new Size(200,200),
+                Content = new Grid()
+                {
+                    Background=new SolidColorBrush(Colors.Red),
+                },
+                CloseCallback = () =>
+                {
+                    LeeTeke.WpfControl.MessageBoxEx.Show("1");
+
+                },
+
+            };
+        }
     }
 }

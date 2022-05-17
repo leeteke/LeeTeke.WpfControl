@@ -23,18 +23,12 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <ListBox
-            HorizontalContentAlignment="Center"
-            VerticalContentAlignment="Center"
-            leedep:ListItemManager.BorderBrush="Red"
-            leedep:ListItemManager.CornerRadius="6"
-            leedep:ListItemManager.Effect="{DynamicResource LeeShadow3}"
-            leedep:ListItemManager.Marigin="5"
-            leedep:ListItemManager.MinHeight="35">
-            <ListBoxItem Content="1123123123123123" />
-            <ListBoxItem Content="2" />
-            <ListBoxItem Content="3" />
-            <ListBoxItem Content="4" />
-        </ListBox>
+        <Button Click="Button_Click">触发按钮</Button>
+
+        <lee:MaskPanel
+            x:Name="mask"
+            Grid.RowSpan="3"
+            CanMove="True" />
+
     </Grid>
 </Window>

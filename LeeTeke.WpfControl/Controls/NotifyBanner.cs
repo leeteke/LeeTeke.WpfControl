@@ -112,9 +112,6 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("NotifyPadding", typeof(Thickness), typeof(NotifyBanner));
         #endregion
 
-
-
-
         #region CloseVisibly
         /// <summary>
         /// 请添加描述

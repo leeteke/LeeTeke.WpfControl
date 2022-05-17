@@ -111,7 +111,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for AnimationMode.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty AnimationModeProperty =
-            DependencyProperty.RegisterAttached("AnimationMode", typeof(AnimationMode), typeof(FrameManager),new PropertyMetadata(AnimationMode.Fade| AnimationMode.BottomToTop| AnimationMode.Grade_90));
+            DependencyProperty.RegisterAttached("AnimationMode", typeof(AnimationMode), typeof(FrameManager),new PropertyMetadata(AnimationMode.Fade| AnimationMode.FromBottom| AnimationMode.Grade_90));
         #endregion
 
 
