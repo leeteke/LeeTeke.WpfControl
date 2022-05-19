@@ -13,8 +13,6 @@
         <Setter Property="MinWidth" Value="200" />
         <Setter Property="MinHeight" Value="150" />
         <Setter Property="ClipToBounds" Value="True" />
-        <Setter Property="Width" Value="300" />
-        <Setter Property="Height" Value="200" />
         <Setter Property="FontSize" Value="15" />
         <Setter Property="TitleHeight" Value="35" />
         <Setter Property="TitleMargin" Value="5,0,0,0" />
@@ -42,10 +40,9 @@
                         Visibility="Collapsed">
                         <Border
                             x:Name="PART_Border"
-                            Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Width, Mode=OneWay}"
-                            Height="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Height, Mode=OneWay}"
                             MinWidth="{TemplateBinding MinWidth}"
                             MinHeight="{TemplateBinding MinHeight}"
+                            Margin="{TemplateBinding PanelMargin}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             Background="{TemplateBinding PanelBackground}"
@@ -96,8 +93,9 @@
                                         Style="{StaticResource TextButton}"
                                         Visibility="{Binding ShowClose, Converter={StaticResource VisibilityForBoolConverter}}" />
                                 </Grid>
-                                <ContentPresenter Grid.Row="1" Content="{TemplateBinding Content}" />
-
+                                <ScrollViewer Grid.Row="1" Padding="{TemplateBinding Padding}">
+                                    <ContentPresenter Content="{TemplateBinding Content}" />
+                                </ScrollViewer>
                                 <Rectangle
                                     x:Name="PART_Rectangle"
                                     Grid.RowSpan="2"

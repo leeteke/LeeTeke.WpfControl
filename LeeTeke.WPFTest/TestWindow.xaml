@@ -8,7 +8,7 @@
     xmlns:local="clr-namespace:LeeTeke.WPFTest"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="TestWindow"
-    Width="1200"
+    Width="800"
     Height="450"
     Background="{DynamicResource LeeBrush_Background}"
     mc:Ignorable="d">
@@ -23,13 +23,19 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Button Click="Button_Click">触发按钮</Button>
+        <Button
+            leedep:ObjectForBoolManager.BoolValue="{Binding ElementName=mask, Path=IsShow}"
+            leedep:ObjectForBoolManager.Property="{x:Static Button.EffectProperty}"
+            leedep:ObjectForBoolManager.TrueObject="{DynamicResource LeeBlurEffect}"
+            Click="Button_Click">
+            触发按钮
+        </Button>
 
         <lee:MaskPanel
             x:Name="mask"
             Grid.RowSpan="3"
-            BackgroundClickToClose="True"
-            CanMove="True" />
+            CanMove="True"
+            CanReSize="True" />
 
     </Grid>
 </Window>

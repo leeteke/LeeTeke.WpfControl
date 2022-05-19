@@ -80,11 +80,11 @@ namespace LeeTeke.WpfControl.Controls
         private Point _sizePoint;
         private bool _sizeTarget;
 
-       
-        private bool _isRenderEnd= false; //渲染完成
+        private bool _isPanelClick = false;//是否是面板点击
+        private bool _isRenderEnd = false; //渲染完成
         private string _defaultContent = "未加载内容";
         private MaskPanelData _maskData = null;//当前数据
-
+        private bool _isFull = false;//是否满屏
         public MaskPanel()
         {
             this.MouseMove += MaskPanel_MouseMove;
@@ -159,7 +159,11 @@ namespace LeeTeke.WpfControl.Controls
                 _rectangle.MouseLeftButtonDown -= _rectangle_MouseLeftButtonDown;
 
             if (_panel != null)
+            {
+                _panel.MouseLeftButtonDown -= _panel_MouseLeftButtonDown;
+                _panel.MouseLeave -= _panel_MouseLeave;
                 _panel.MouseLeftButtonUp -= _panel_MouseLeftButtonUp;
+            }
 
             if (_btnFull != null)
                 _btnFull.Click -= _btnFull_Click;
@@ -182,14 +186,19 @@ namespace LeeTeke.WpfControl.Controls
             _btnFull = GetTemplateChild(ElementFull) as Button;
             _btnClose = GetTemplateChild(ElementClose) as Button;
 
-            if (_border!=null)
-                _border.SizeChanged += _border_SizeChanged; 
+            if (_border != null)
+                _border.SizeChanged += _border_SizeChanged;
 
             if (_rectangle != null)
                 _rectangle.MouseLeftButtonDown += _rectangle_MouseLeftButtonDown;
 
             if (_panel != null)
+            {
+                _panel.MouseLeftButtonDown += _panel_MouseLeftButtonDown;
+                _panel.MouseLeave += _panel_MouseLeave;
                 _panel.MouseLeftButtonUp += _panel_MouseLeftButtonUp;
+            }
+
 
             if (_btnFull != null)
                 _btnFull.Click += _btnFull_Click;
@@ -273,36 +282,23 @@ namespace LeeTeke.WpfControl.Controls
         private void _btnFull_Click(object sender, RoutedEventArgs e)
         {
             IsFull = !IsFull;
-            if (IsFull)
-            {
-                if (_border != null)
-                {
-                    _border.Width = this.ActualWidth;
-                    _border.Height = this.ActualHeight;
-                    if (_border.RenderTransform is TranslateTransform tt)
-                    {
-                        tt.X = 0;
-                        tt.Y = 0;
-                    }
-                }
-                _btnFull.Content = "\xe73f";
-            }
-            else
-            {
-                if (_border != null)
-                {
-                    _border.Width = Width;
-                    _border.Height = Height;
-                }
-                _btnFull.Content = "\xe740";
-            }
+
         }
 
+        private void _panel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            _isPanelClick = true;
+        }
+
+        private void _panel_MouseLeave(object sender, MouseEventArgs e)
+        {
+            _isPanelClick = false;
+        }
         private void _panel_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (e.OriginalSource == sender && BackgroundClickToClose)
+            if (e.OriginalSource == sender && BackgroundClickToClose && _isPanelClick)
             {
-                if (_maskData != null&& _maskData.BlockClose)
+                if (_maskData != null && _maskData.BlockClose)
                 {
                     return;
                 }
@@ -312,7 +308,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private void _rectangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (CanReSize)
+            if (CanReSize && !IsFull)
             {
                 _sizePoint = e.GetPosition(this);
                 _sizeTarget = true;
@@ -357,7 +353,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (d is MaskPanel mask)
             {
-                mask.DataChanged(e.OldValue as MaskPanelData,e.NewValue as MaskPanelData);
+                mask.DataChanged(e.OldValue as MaskPanelData, e.NewValue as MaskPanelData);
             }
         }
         #endregion
@@ -494,6 +490,21 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
+        #region PanelMargin
+        /// <summary>
+        /// PanelMargin
+        /// </summary>
+        public Thickness PanelMargin
+        {
+            get { return (Thickness)GetValue(PanelMarginProperty); }
+            set { SetValue(PanelMarginProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for PanelMargin.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PanelMarginProperty =
+            DependencyProperty.Register("PanelMargin", typeof(Thickness), typeof(MaskPanel));
+        #endregion
+
         #region IsFull
         /// <summary>
         /// 请添加描述
@@ -506,7 +517,15 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for IsFull.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsFullProperty =
-            DependencyProperty.Register("IsFull", typeof(bool), typeof(MaskPanel));
+            DependencyProperty.Register("IsFull", typeof(bool), typeof(MaskPanel), new PropertyMetadata(OnIsFullChanged));
+
+        private static void OnIsFullChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is MaskPanel mask)
+            {
+                mask.IsFullChanged((bool)e.NewValue);
+            }
+        }
         #endregion
 
         #region CanMove
@@ -782,33 +801,63 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
         #region Private
+
+        private void IsFullChanged(bool isFull)
+        {
+            if (IsFull)
+            {
+                if (_border != null)
+                {
+                    _border.Width = this.ActualWidth;
+                    _border.Height = this.ActualHeight;
+                    if (_border.RenderTransform is TranslateTransform tt)
+                    {
+                        tt.X = 0;
+                        tt.Y = 0;
+                    }
+                }
+                _btnFull.Content = "\xe73f";
+            }
+            else
+            {
+                if (_border != null)
+                {
+                    //修改border尺寸
+                    ChangedBorderSize();
+                }
+                _btnFull.Content = "\xe740";
+            }
+        }
+
         /// <summary>
         /// 显示改变
         /// </summary>
         /// <param name="isShow"></param>
         private void IsShowChanged(bool isShow)
         {
-            if (_border==null)//是否加载完毕
+            if (_border == null)//是否加载完毕
                 return;
             if (isShow)
             {
                 _panel.Visibility = Visibility.Visible;
                 if (!_isRenderEnd)
-                    return;  
-               
+                    return;
+
                 if (_maskData != null)
                 {
                     Title = _maskData.Title;
                     _btnClose.Visibility = _maskData.BlockClose ? Visibility.Collapsed : Visibility.Visible;
-                    if (!_maskData.ContentSize.IsEmpty)
-                    {
-                        _border.Height = _maskData.ContentSize.Height + TitleHeight;
-                        _border.Width = _maskData.ContentSize.Width;
-                    }
+
+                    //修改border尺寸
+                    ChangedBorderSize();
+
                     Content = _maskData.Content;
                     _maskData.ClosePanel = () =>
                     {
-                        _maskData.IsActiveClose = true;
+                        if (_maskData != null)
+                        {
+                            _maskData.IsActiveClose = true;
+                        }
                         IsShow = false;
                     };
                 }
@@ -819,7 +868,7 @@ namespace LeeTeke.WpfControl.Controls
                     BeginShow();
                 }
             }
-            else 
+            else
             {
                 if (AnimationEnabled && CloseAnimationMode != 0)
                 {
@@ -857,14 +906,12 @@ namespace LeeTeke.WpfControl.Controls
                 var func = CloseAnimationCustom(_border);
                 func.Completed += Close_Completed;
                 func.Begin();
-
             }
             else
             {
                 var sb = AnimationHelper.GetStoryboard(_border, CloseAnimationMode, CloseAnimationEasingFunction, CloseAnimationDuration);
                 sb.Completed += Close_Completed;
                 sb.Begin();
-
             }
         }
         /// <summary>
@@ -883,12 +930,9 @@ namespace LeeTeke.WpfControl.Controls
         {
             ///关闭视图显示
             _panel.Visibility = Visibility.Collapsed;
-            ///恢复默认选项
-            _border.Width = Width;
-            _border.Height = Height;
             Title = _defaultContent;
             Content = _defaultContent;
-
+            IsFull= false;
             ///调用关闭内容
             if (_maskData != null)
             {
@@ -899,12 +943,14 @@ namespace LeeTeke.WpfControl.Controls
                         this.Dispatcher.Invoke(() =>
                         {
                             _maskData.CloseCallback.Invoke(true);
+                            _maskData.ClosePanel = null;
                             _maskData = null;
                         });
                     });
                 }
                 else
                 {
+                    _maskData.ClosePanel = null;
                     _maskData = null;
                 }
             }
@@ -914,23 +960,41 @@ namespace LeeTeke.WpfControl.Controls
         /// </summary>
         private void DataChanged(MaskPanelData oldData, MaskPanelData newData)
         {
-            if (newData==null)
+            if (newData == null)
             {
                 IsShow = false;
                 return;
             }
 
-            if (_maskData==null)
+            if (_maskData == null)
             {
                 _maskData = newData;
                 IsShow = true;
                 return;
             }
 
-            if (newData!=_maskData )
+            if (newData != _maskData)
             {
                 newData.CloseCallback?.Invoke(false);
                 return;
+            }
+        }
+
+        /// <summary>
+        /// 该表BorderSize
+        /// </summary>
+        private void ChangedBorderSize()
+        {
+
+            _border.Width = Width == 0 ? double.NaN : Width;
+            _border.Height = Height == 0 ? double.NaN : Height;
+            ///当panelMargin不为空时无法修改相应大小
+            if (_maskData != null && !_maskData.ContentSize.IsEmpty)
+            {
+                if (HorizontalContentAlignment != HorizontalAlignment.Stretch)
+                    _border.Width = _maskData.ContentSize.Width;
+                if (VerticalContentAlignment != VerticalAlignment.Stretch)
+                    _border.Height = _maskData.ContentSize.Height + TitleHeight;
             }
         }
 

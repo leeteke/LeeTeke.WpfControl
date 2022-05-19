@@ -28,13 +28,13 @@ namespace LeeTeke.WPFTest
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            mask.ContentData = new WpfControl.MaskPanelData()
+           var a=  new WpfControl.MaskPanelData()
             {
                 Title = "你好a",
-                ContentSize=new Size(300,200),
+                ContentSize = new Size(300, 200),
                 Content = new Grid()
                 {
-                    Background=new SolidColorBrush(Colors.Red),
+                    Background = new SolidColorBrush(Colors.Red),
                 },
                 CloseCallback = p =>
                 {
@@ -43,9 +43,10 @@ namespace LeeTeke.WPFTest
                 },
 
             };
+            mask.ContentData = a;
 
             await Task.Delay(3000);
-            mask.ContentData.ClosePanel();
+             a.ClosePanel?.Invoke();
             await Task.Delay(3000);
 
             mask.ContentData =  new WpfControl.MaskPanelData()
@@ -71,7 +72,9 @@ namespace LeeTeke.WPFTest
 
                 },
 
-            }; 
+            };
+            await Task.Delay(1000);
+          //  a.ClosePanel();
         }
     }
 }
