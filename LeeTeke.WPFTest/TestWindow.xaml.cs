@@ -26,23 +26,52 @@ namespace LeeTeke.WPFTest
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
             mask.ContentData = new WpfControl.MaskPanelData()
             {
                 Title = "你好a",
-                ContentSize=new Size(200,200),
+                ContentSize=new Size(300,200),
                 Content = new Grid()
                 {
                     Background=new SolidColorBrush(Colors.Red),
                 },
-                CloseCallback = () =>
+                CloseCallback = p =>
                 {
                     LeeTeke.WpfControl.MessageBoxEx.Show("1");
 
                 },
 
             };
+
+            await Task.Delay(3000);
+            mask.ContentData.ClosePanel();
+            await Task.Delay(3000);
+
+            mask.ContentData =  new WpfControl.MaskPanelData()
+            {
+                Title = "你好b",
+                ContentSize = new Size(300, 200),
+                Content = new Grid()
+                {
+                    Background = new SolidColorBrush(Colors.Yellow),
+                },
+                CloseCallback = p =>
+                {
+                    if (p)
+                    {
+                        LeeTeke.WpfControl.MessageBoxEx.Show("2");
+
+                    }
+                    else
+                    {
+                        LeeTeke.WpfControl.MessageBoxEx.Show("3");
+
+                    }
+
+                },
+
+            }; 
         }
     }
 }

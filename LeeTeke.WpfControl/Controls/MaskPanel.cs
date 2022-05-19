@@ -76,26 +76,82 @@ namespace LeeTeke.WpfControl.Controls
 
         private Point _movePoint;
         private bool _moveTarget;
+
         private Point _sizePoint;
         private bool _sizeTarget;
 
-        private bool? _changeValue;//防重标签
+       
+        private bool _isRenderEnd= false; //渲染完成
+        private string _defaultContent = "未加载内容";
+        private MaskPanelData _maskData = null;//当前数据
+
         public MaskPanel()
         {
             this.MouseMove += MaskPanel_MouseMove;
             this.SizeChanged += MaskPanel_SizeChanged;
             this.IsVisibleChanged += MaskPanel_IsVisibleChanged;
-
         }
 
 
+        #region Event
 
+        private void MaskPanel_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (!IsVisible)
+            {
+                if (_border != null && _border.RenderTransform is TranslateTransform tt)
+                {
+                    tt.X = 0;
+                    tt.Y = 0;
+                }
+            }
+        }
+
+        private void MaskPanel_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (_border != null && IsFull)
+            {
+                _border.Width = this.ActualWidth;
+                _border.Height = this.ActualHeight;
+            }
+
+        }
+
+        private void MaskPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_sizeTarget && e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.Cursor = Cursors.SizeNWSE;
+                var nowP = e.GetPosition(this);
+                var movwP = nowP - _sizePoint;
+                var sizeWidth = _border.ActualWidth + movwP.X;
+                var sizeHeight = _border.ActualHeight + movwP.Y;
+                if (sizeWidth < 0)
+                    sizeWidth = 0;
+                if (sizeHeight < 0)
+                    sizeHeight = 0;
+                if (sizeWidth > this.ActualWidth)
+                    sizeWidth = this.ActualWidth;
+                if (sizeHeight > this.ActualHeight)
+                    sizeHeight = this.ActualHeight;
+                _border.Width = sizeWidth;
+                _border.Height = sizeHeight;
+                _sizePoint = nowP;
+
+            }
+            else
+            {
+                _sizeTarget = false;
+                this.Cursor = Cursors.Arrow;
+            }
+        }
+
+        #endregion
 
         #region override
 
         public override void OnApplyTemplate()
         {
-
             if (_border != null)
                 _border.SizeChanged -= _border_SizeChanged;
 
@@ -104,8 +160,6 @@ namespace LeeTeke.WpfControl.Controls
 
             if (_panel != null)
                 _panel.MouseLeftButtonUp -= _panel_MouseLeftButtonUp;
-
-
 
             if (_btnFull != null)
                 _btnFull.Click -= _btnFull_Click;
@@ -129,8 +183,7 @@ namespace LeeTeke.WpfControl.Controls
             _btnClose = GetTemplateChild(ElementClose) as Button;
 
             if (_border!=null)
-                _border.SizeChanged += _border_SizeChanged;
-    
+                _border.SizeChanged += _border_SizeChanged; 
 
             if (_rectangle != null)
                 _rectangle.MouseLeftButtonDown += _rectangle_MouseLeftButtonDown;
@@ -141,7 +194,6 @@ namespace LeeTeke.WpfControl.Controls
             if (_btnFull != null)
                 _btnFull.Click += _btnFull_Click;
 
-
             if (_btnClose != null)
                 _btnClose.Click += _btnClose_Click;
 
@@ -151,18 +203,16 @@ namespace LeeTeke.WpfControl.Controls
                 _titlePanel.MouseMove += _titlePanel_MouseMove;
             }
 
-
-            this.Visibility = IsShow ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void _border_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (!_border.RenderSize.IsEmpty)
+            if (!_border.RenderSize.IsEmpty && !_isRenderEnd)
             {
-                IsShowChanged(IsShow);
+                _isRenderEnd = true;
+                IsShowChanged(true);
             }
         }
-
 
         private void _btnClose_Click(object sender, RoutedEventArgs e)
         {
@@ -252,29 +302,12 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (e.OriginalSource == sender && BackgroundClickToClose)
             {
+                if (_maskData != null&& _maskData.BlockClose)
+                {
+                    return;
+                }
                 IsShow = false;
             }
-        }
-        private void MaskPanel_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (!IsVisible)
-            {
-                if (_border != null && _border.RenderTransform is TranslateTransform tt)
-                {
-                    tt.X = 0;
-                    tt.Y = 0;
-                }
-            }
-        }
-
-        private void MaskPanel_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (_border != null && IsFull)
-            {
-                _border.Width = this.ActualWidth;
-                _border.Height = this.ActualHeight;
-            }
-
         }
 
         private void _rectangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -286,40 +319,10 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
 
-        private void MaskPanel_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (_sizeTarget && e.LeftButton == MouseButtonState.Pressed)
-            {
-                this.Cursor = Cursors.SizeNWSE;
-                var nowP = e.GetPosition(this);
-                var movwP = nowP - _sizePoint;
-                var sizeWidth = _border.ActualWidth + movwP.X;
-                var sizeHeight = _border.ActualHeight + movwP.Y;
-                if (sizeWidth < 0)
-                    sizeWidth = 0;
-                if (sizeHeight < 0)
-                    sizeHeight = 0;
-                if (sizeWidth > this.ActualWidth)
-                    sizeWidth = this.ActualWidth;
-                if (sizeHeight > this.ActualHeight)
-                    sizeHeight = this.ActualHeight;
-                _border.Width = sizeWidth;
-                _border.Height = sizeHeight;
-                _sizePoint = nowP;
-
-            }
-            else
-            {
-                _sizeTarget = false;
-                this.Cursor = Cursors.Arrow;
-            }
-        }
-
 
         #endregion
 
         #region 依赖属性
-
 
         #region Content
         /// <summary>
@@ -335,7 +338,6 @@ namespace LeeTeke.WpfControl.Controls
         public static readonly DependencyProperty ContentProperty =
             DependencyProperty.Register("Content", typeof(object), typeof(MaskPanel));
         #endregion
-
 
         #region ContentData
         /// <summary>
@@ -355,11 +357,10 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (d is MaskPanel mask)
             {
-                mask.DataChanged(e.NewValue as MaskPanelData);
+                mask.DataChanged(e.OldValue as MaskPanelData,e.NewValue as MaskPanelData);
             }
         }
         #endregion
-
 
         #region IsShow
         /// <summary>
@@ -658,8 +659,6 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("AnimationEnabled", typeof(bool), typeof(MaskPanel));
         #endregion
 
-
-
         #region ShowAnimationMode
         /// <summary>
         /// 请添加描述
@@ -780,52 +779,47 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("CloseAnimationCustom", typeof(Func<UIElement, Storyboard>), typeof(MaskPanel));
         #endregion
 
-
         #endregion
 
-
         #region Private
-
+        /// <summary>
+        /// 显示改变
+        /// </summary>
+        /// <param name="isShow"></param>
         private void IsShowChanged(bool isShow)
         {
-            if (_border == null)
+            if (_border==null)//是否加载完毕
                 return;
-
-            ///防重处理
-            if (_changeValue != null && _changeValue == isShow)
-                return;
-            _changeValue = isShow;
             if (isShow)
             {
-                if (ContentData != null)
+                _panel.Visibility = Visibility.Visible;
+                if (!_isRenderEnd)
+                    return;  
+               
+                if (_maskData != null)
                 {
-                    Title = ContentData.Title;
-                    if (!ContentData.ContentSize.IsEmpty)
+                    Title = _maskData.Title;
+                    _btnClose.Visibility = _maskData.BlockClose ? Visibility.Collapsed : Visibility.Visible;
+                    if (!_maskData.ContentSize.IsEmpty)
                     {
-                        _border.Height=ContentData.ContentSize.Height+TitleHeight;
-                        _border.Width=ContentData.ContentSize.Width;
+                        _border.Height = _maskData.ContentSize.Height + TitleHeight;
+                        _border.Width = _maskData.ContentSize.Width;
                     }
-                    Content = ContentData.Content;
-                    ContentData.ClosePanel = () =>
+                    Content = _maskData.Content;
+                    _maskData.ClosePanel = () =>
                     {
-                        ContentData.IsActiveClose = true;
+                        _maskData.IsActiveClose = true;
                         IsShow = false;
                     };
                 }
 
-
+                ///动画选项
                 if (AnimationEnabled && ShowAnimationMode != 0)
                 {
                     BeginShow();
                 }
-                else
-                {
-                    this.Visibility = Visibility.Visible;
-                    _changeValue = null;
-                }
-
             }
-            else if (this.Visibility == Visibility.Visible)
+            else 
             {
                 if (AnimationEnabled && CloseAnimationMode != 0)
                 {
@@ -833,60 +827,29 @@ namespace LeeTeke.WpfControl.Controls
                 }
                 else
                 {
-                    this.Visibility = Visibility.Collapsed;
-                    if (ContentData != null)
-                    {
-                        if (ContentData.CloseCallback != null)
-                        {
-                            Task.Run(() =>
-                            {
-                                this.Dispatcher.Invoke(() =>
-                                {
-                                    ContentData.CloseCallback.Invoke();
-                                    ContentData = null;
-                                });
-                            });
-                        }
-                        else
-                        {
-                            ContentData = null;
-                        }
-                    }
-
-                    _border.Width = Width;
-                    _border.Height= Height;
-                    Title = null;
-                    Content = null;
-                    _changeValue = null;
+                    Close();
                 }
             }
         }
-
-
+        /// <summary>
+        /// 开始动画
+        /// </summary>
         private void BeginShow()
         {
-            this.Visibility = Visibility.Visible;
             if (ShowAnimationCustom != null)
             {
                 var func = ShowAnimationCustom(_border);
-                func.Completed += Show_Completed;
                 func.Begin();
-
             }
             else
             {
                 var sb = AnimationHelper.GetStoryboard(_border, ShowAnimationMode, ShowAnimationEasingFunction, ShowAnimationDuration);
-                sb.Completed += Show_Completed;
                 sb.Begin();
-
             }
         }
-
-        private void Show_Completed(object sender, EventArgs e)
-        {
-            _changeValue = null;
-        }
-
+        /// <summary>
+        /// 开始关闭
+        /// </summary>
         private void BeginClose()
         {
             if (CloseAnimationCustom != null)
@@ -904,52 +867,72 @@ namespace LeeTeke.WpfControl.Controls
 
             }
         }
-
-
-
+        /// <summary>
+        /// 关闭动画完成时
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Close_Completed(object sender, EventArgs e)
         {
-            this.Visibility = Visibility.Collapsed;
-            if (ContentData != null)
+            Close();
+        }
+        /// <summary>
+        /// 关闭显示
+        /// </summary>
+        private void Close()
+        {
+            ///关闭视图显示
+            _panel.Visibility = Visibility.Collapsed;
+            ///恢复默认选项
+            _border.Width = Width;
+            _border.Height = Height;
+            Title = _defaultContent;
+            Content = _defaultContent;
+
+            ///调用关闭内容
+            if (_maskData != null)
             {
-                if (ContentData.CloseCallback != null)
+                if (!_maskData.IsActiveClose)
                 {
                     Task.Run(() =>
                     {
                         this.Dispatcher.Invoke(() =>
                         {
-                            ContentData.CloseCallback.Invoke();
-                            ContentData = null;
+                            _maskData.CloseCallback.Invoke(true);
+                            _maskData = null;
                         });
                     });
                 }
                 else
                 {
-                    ContentData = null;
+                    _maskData = null;
                 }
             }
-            _border.Width = Width;
-            _border.Height = Height;
-            Title = null;
-            Content = null;
-            _changeValue = null;
         }
-
         /// <summary>
         /// Data改变
         /// </summary>
-        private void DataChanged(MaskPanelData data)
+        private void DataChanged(MaskPanelData oldData, MaskPanelData newData)
         {
-            if (data == null)
+            if (newData==null)
             {
                 IsShow = false;
+                return;
             }
-            else
+
+            if (_maskData==null)
             {
+                _maskData = newData;
                 IsShow = true;
+                return;
+            }
+
+            if (newData!=_maskData )
+            {
+                newData.CloseCallback?.Invoke(false);
+                return;
             }
         }
-
 
         #endregion
 

@@ -28,6 +28,7 @@
         <lee:MaskPanel
             x:Name="mask"
             Grid.RowSpan="3"
+            BackgroundClickToClose="True"
             CanMove="True" />
 
     </Grid>
