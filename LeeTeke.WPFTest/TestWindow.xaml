@@ -31,6 +31,8 @@
             触发按钮
         </Button>
 
+        <CheckBox Grid.Row="1" leedep:CheckBoxManager.SwtichFill="Red" />
+
         <lee:MaskPanel
             x:Name="mask"
             Grid.RowSpan="3"

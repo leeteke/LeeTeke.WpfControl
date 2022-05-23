@@ -1995,6 +1995,7 @@
         <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}" />
         <Setter Property="leedep:CheckBoxManager.RippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}" />
         <Setter Property="leedep:CheckBoxManager.CheckBoxSize" Value="18" />
+        <Setter Property="leedep:CheckBoxManager.SwtichFill" Value="{DynamicResource LeeBrush_Theme}" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
@@ -2126,7 +2127,7 @@
                             <Trigger.ExitActions>
                                 <BeginStoryboard Storyboard="{StaticResource StoryboardCheckedFalse}" />
                             </Trigger.ExitActions>
-                            <Setter Property="Background" Value="{DynamicResource LeeBrush_Theme}" />
+                            <Setter TargetName="PART_Border" Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type CheckBox}}, Path=(leedep:CheckBoxManager.SwtichFill), Mode=OneWay}" />
                             <Setter Property="BorderThickness" Value="0" />
                         </Trigger>
 
