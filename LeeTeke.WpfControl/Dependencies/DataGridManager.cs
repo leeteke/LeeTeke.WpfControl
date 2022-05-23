@@ -246,6 +246,24 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("ListEndContent", typeof(object), typeof(DataGridManager));
         #endregion
 
+
+        #region RowNumberStartIndex
+        public static int GetRowNumberStartIndex(DependencyObject obj)
+        {
+            return (int)obj.GetValue(RowNumberStartIndexProperty);
+        }
+
+        public static void SetRowNumberStartIndex(DependencyObject obj, int value)
+        {
+            obj.SetValue(RowNumberStartIndexProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for RowNumberStartIndex.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RowNumberStartIndexProperty =
+            DependencyProperty.RegisterAttached("RowNumberStartIndex", typeof(int), typeof(DataGridManager), new PropertyMetadata(1));
+        #endregion
+
+
         #region ShowRowNumber
         public static bool GetShowRowNumber(DependencyObject obj)
         {
@@ -280,7 +298,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         private static void DataGrid_LoadingRow(object sender, DataGridRowEventArgs e)
         {
-            e.Row.Header = e.Row.GetIndex() + 1;
+            e.Row.Header = e.Row.GetIndex() +  GetRowNumberStartIndex(sender as DependencyObject);
         }
         #endregion
 
@@ -909,7 +927,7 @@ namespace LeeTeke.WpfControl.Dependencies
             {
                 foreach (var column in grid.Columns.OfType<DataGridComboBoxColumn>())
                 {
-               
+
 
                     column.ElementStyle = comboBoxColumnStyle;
                 }
