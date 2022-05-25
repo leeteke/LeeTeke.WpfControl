@@ -89,7 +89,7 @@ namespace LeeTeke.WpfControl.Controls
                 _textBox.PreviewTextInput -= _textBox_PreviewTextInput;
                 _textBox.TextChanged -= _textBox_TextChanged;
             }
-  
+
 
             base.OnApplyTemplate();
             _password = GetTemplateChild(ElementPassword) as PasswordBox;
@@ -120,6 +120,8 @@ namespace LeeTeke.WpfControl.Controls
 
         private void TextBoxEx_KeyDown(object sender, KeyEventArgs e)
         {
+            if (IsReadOnly)
+                return;
             switch (e.Key)
             {
                 case Key.Enter:
@@ -912,6 +914,7 @@ namespace LeeTeke.WpfControl.Controls
 
         protected override void OnGotFocus(RoutedEventArgs e)
         {
+
             switch (Mode)
             {
                 case TextMode.General:
