@@ -3424,10 +3424,13 @@
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="RowHeaderWidth" Value="50" />
         <Setter Property="GridLinesVisibility" Value="None" />
         <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
+        <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}" />
+        <Setter Property="leedep:CornerRadiusManager.IsClip" Value="False" />
 
         <Setter Property="leedep:DataGridManager.RowMargin" Value="0,2" />
         <Setter Property="leedep:DataGridManager.RowCornerRadius" Value="{DynamicResource LeeCornerRadius}" />
@@ -3542,7 +3545,9 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type DataGrid}">
                             <ScrollViewer
+                                x:Name="PART_ScrollViewer"
                                 leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
+                                leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}"
                                 leedep:ScrollViewerManager.SlideDuration="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideDuration), Mode=OneWay}"
                                 leedep:ScrollViewerManager.SlideEasingFunction="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEasingFunction), Mode=OneWay}"
                                 leedep:ScrollViewerManager.SlideEnabled="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEnabled), Mode=OneWay}"
@@ -3550,7 +3555,10 @@
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                Focusable="false">
+                                CanContentScroll="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=(ScrollViewer.CanContentScroll), Mode=OneWay}"
+                                HorizontalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=(ScrollViewer.HorizontalScrollBarVisibility), Mode=OneWay}"
+                                PanningMode="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=(ScrollViewer.PanningMode), Mode=OneWay}"
+                                VerticalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=(ScrollViewer.VerticalScrollBarVisibility), Mode=OneWay}">
                                 <ScrollViewer.Template>
                                     <ControlTemplate TargetType="{x:Type ScrollViewer}">
                                         <Grid>
@@ -3824,7 +3832,6 @@
                         <ControlTemplate TargetType="{x:Type DataGrid}">
                             <ScrollViewer
                                 x:Name="PART_ScrollViewer"
-                                Margin="{TemplateBinding Margin}"
                                 leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
                                 leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}"
                                 leedep:ScrollViewerManager.SlideDuration="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideDuration), Mode=OneWay}"
