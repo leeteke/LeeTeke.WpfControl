@@ -31,7 +31,21 @@
             触发按钮
         </Button>
 
-        <CheckBox Grid.Row="1" leedep:CheckBoxManager.SwtichFill="Red" />
+        <ComboBox
+            Grid.Row="1"
+            Width="150"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            leedep:ComboBoxManager.PreviewText="123"
+            IsEditable="True" >
+            <ComboBoxItem >
+                <Grid Background="Red"/>
+            </ComboBoxItem>
+            <ComboBoxItem Content="12"/>
+            <ComboBoxItem Content="13"/>
+            <ComboBoxItem Content="14"/>
+        </ComboBox>
+
 
         <lee:MaskPanel
             x:Name="mask"

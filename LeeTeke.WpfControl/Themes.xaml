@@ -2576,14 +2576,25 @@
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
-                        <MultiTrigger>
+
+                        <MultiDataTrigger >
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=PART_EditableTextBox, Path=IsFocused}" Value="False" />
+                                <Condition Binding="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}" Value="{x:Null}" />
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self},  Path=(leedep:ComboBoxManager.ShowPreviewText)}" Value="True" />
+                                <Condition Binding="{Binding ElementName=PART_EditableTextBox, Path=Text, Converter={StaticResource StringIsNullConverter}}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="prviewText" Property="Visibility" Value="Visible" />
+                        </MultiDataTrigger>
+
+                        <!--<MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition SourceName="PART_EditableTextBox" Property="IsFocused" Value="False" />
+                                <Condition   SourceName="PART_EditableTextBox" Property="IsFocused" Value="False" />
                                 <Condition Property="SelectedItem" Value="{x:Null}" />
                                 <Condition Property="leedep:ComboBoxManager.ShowPreviewText" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="prviewText" Property="Visibility" Value="Visible" />
-                        </MultiTrigger>
+                           <Setter TargetName="prviewText" Property="Visibility" Value="Visible" />
+                        </MultiTrigger>-->
 
                         <Trigger SourceName="PART_EditableTextBox" Property="IsFocused" Value="True">
                             <Setter TargetName="prviewText" Property="Visibility" Value="Collapsed" />
