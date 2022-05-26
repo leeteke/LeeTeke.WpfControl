@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
@@ -87,6 +88,21 @@ namespace LeeTeke.WpfControl.Dependencies
         }
         #endregion
 
+        #region ActiveBackground
+        public static Brush GetActiveBackground(DependencyObject obj)
+        {
+            return (Brush)obj.GetValue(ActiveBackgroundProperty);
+        }
+
+        public static void SetActiveBackground(DependencyObject obj, Brush value)
+        {
+            obj.SetValue(ActiveBackgroundProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for ActiveBackground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ActiveBackgroundProperty =
+            DependencyProperty.RegisterAttached("ActiveBackground", typeof(Brush), typeof(TextBoxManager));
+        #endregion
 
     }
 }

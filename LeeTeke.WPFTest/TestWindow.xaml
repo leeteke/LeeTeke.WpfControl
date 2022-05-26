@@ -31,20 +31,11 @@
             触发按钮
         </Button>
 
-        <ComboBox
-            Grid.Row="1"
-            Width="150"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            leedep:ComboBoxManager.PreviewText="123"
-            IsEditable="True" >
-            <ComboBoxItem >
-                <Grid Background="Red"/>
-            </ComboBoxItem>
-            <ComboBoxItem Content="12"/>
-            <ComboBoxItem Content="13"/>
-            <ComboBoxItem Content="14"/>
-        </ComboBox>
+        <StackPanel Grid.Row="1">
+            <TextBox leedep:TextBoxManager.ActiveBackground="red" />
+            <PasswordBox leedep:TextBoxManager.ActiveBackground="Black"/>
+            <lee:TextBoxEx ActiveBackground="Transparent"  Mode="Password"/>
+        </StackPanel>
 
 
         <lee:MaskPanel

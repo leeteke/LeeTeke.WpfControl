@@ -367,6 +367,7 @@
 
     <Style x:Key="LeeTextBox" TargetType="{x:Type TextBox}">
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}" />
+        <Setter Property="leedep:TextBoxManager.ActiveBackground" Value="{DynamicResource LeeBrush_ForgroundActive}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
         <Setter Property="BorderThickness" Value="1" />
@@ -425,7 +426,7 @@
                                 <Condition Property="IsKeyboardFocused" Value="True" />
                                 <Condition Property="IsReadOnly" Value="False" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="PART_ContentHost" Property="Background" Value="{DynamicResource LeeBrush_ForgroundActive}" />
+                            <Setter TargetName="PART_ContentHost" Property="Background" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:TextBoxManager.ActiveBackground)}" />
                         </MultiTrigger>
 
                     </ControlTemplate.Triggers>
@@ -800,6 +801,7 @@
     <Style x:Key="LeePasswordBox" TargetType="{x:Type PasswordBox}">
         <Setter Property="PasswordChar" Value="●" />
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}" />
+        <Setter Property="leedep:TextBoxManager.ActiveBackground" Value="{DynamicResource LeeBrush_ForgroundActive}" />
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
@@ -851,7 +853,7 @@
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsKeyboardFocused" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="PART_ContentHost" Property="Background" Value="{DynamicResource LeeBrush_ForgroundActive}" />
+                            <Setter TargetName="PART_ContentHost" Property="Background" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:TextBoxManager.ActiveBackground)}" />
                         </MultiTrigger>
 
                     </ControlTemplate.Triggers>
@@ -2577,11 +2579,11 @@
                             </Setter>
                         </Trigger>
 
-                        <MultiDataTrigger >
+                        <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding ElementName=PART_EditableTextBox, Path=IsFocused}" Value="False" />
                                 <Condition Binding="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}" Value="{x:Null}" />
-                                <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self},  Path=(leedep:ComboBoxManager.ShowPreviewText)}" Value="True" />
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(leedep:ComboBoxManager.ShowPreviewText)}" Value="True" />
                                 <Condition Binding="{Binding ElementName=PART_EditableTextBox, Path=Text, Converter={StaticResource StringIsNullConverter}}" Value="True" />
                             </MultiDataTrigger.Conditions>
                             <Setter TargetName="prviewText" Property="Visibility" Value="Visible" />

@@ -314,6 +314,22 @@ namespace LeeTeke.WpfControl.Controls
 
 
 
+        #region ActiveBackground
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Brush ActiveBackground
+        {
+            get { return (Brush)GetValue(ActiveBackgroundProperty); }
+            set { SetValue(ActiveBackgroundProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ActiveBackground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ActiveBackgroundProperty =
+            DependencyProperty.Register("ActiveBackground", typeof(Brush), typeof(TextBoxEx));
+        #endregion
+
+
         #region TextWrapping
         /// <summary>
         /// 请添加描述
