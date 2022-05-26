@@ -81,7 +81,7 @@ namespace LeeTeke.WpfControl.Controls
         public override void OnApplyTemplate()
         {
             if (_icon != null)
-                _icon.MouseDown -= _icon_MouseDown;
+                _icon.MouseUp -= _icon_MouseUp;
             if (_password != null)
                 _password.PasswordChanged -= _password_PasswordChanged;
             if (_textBox != null)
@@ -110,7 +110,7 @@ namespace LeeTeke.WpfControl.Controls
 
             if (_icon != null)
             {
-                _icon.MouseDown += _icon_MouseDown;
+                _icon.MouseUp += _icon_MouseUp;
             }
 
 
@@ -184,7 +184,7 @@ namespace LeeTeke.WpfControl.Controls
 
         }
 
-        private void _icon_MouseDown(object sender, MouseButtonEventArgs e)
+        private void _icon_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (IconCanClick)
             {
