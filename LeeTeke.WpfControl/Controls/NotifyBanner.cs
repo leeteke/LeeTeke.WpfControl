@@ -259,7 +259,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (d is NotifyBanner banner && e.NewValue is NotifyBannerShowData model )
             {
-                banner.HaveContentAsync(model);
+                banner.HaveContent(model);
             }
         }
 
@@ -417,7 +417,7 @@ namespace LeeTeke.WpfControl.Controls
 
         #region 私有逻辑
 
-        private async void HaveContentAsync(NotifyBannerShowData data)
+        private void HaveContent(NotifyBannerShowData data)
         {
             var control = new NotifyBannerItem(data, NotifySite);
             ItemBiding(control);

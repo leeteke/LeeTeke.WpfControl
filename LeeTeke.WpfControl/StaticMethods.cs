@@ -698,7 +698,7 @@ namespace LeeTeke.WpfControl
         /// <returns></returns>
         internal static ValueConverModel ValueConver(string value)
         {
-            var re = new ValueConverModel();
+          
 
             if (double.TryParse(value, out double result))
             {

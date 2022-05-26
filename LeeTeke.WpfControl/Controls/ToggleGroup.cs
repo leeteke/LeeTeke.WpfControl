@@ -1162,7 +1162,7 @@ namespace LeeTeke.WpfControl.Controls
 
         }
 
-        private async void ItemChanged(object item)
+        private void ItemChanged(object item)
         {
 
 

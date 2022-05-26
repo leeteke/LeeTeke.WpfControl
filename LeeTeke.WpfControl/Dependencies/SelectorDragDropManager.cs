@@ -321,7 +321,7 @@ namespace LeeTeke.WpfControl.Dependencies
                             var method = sourceType.GetMethod("Move");
                             if (method != null)
                             {
-                                _ = method.Invoke(_control.ItemsSource, new object?[] { oldIndex, toalIndex });
+                                _ = method.Invoke(_control.ItemsSource, new object[] { oldIndex, toalIndex });
                             }
                             else
                             {

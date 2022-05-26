@@ -84,7 +84,7 @@ namespace LeeTeke.WpfControl.Controls
         private bool _isRenderEnd = false; //渲染完成
         private string _defaultContent = "未加载内容";
         private MaskPanelData _maskData = null;//当前数据
-        private bool _isFull = false;//是否满屏
+  
         public MaskPanel()
         {
             this.MouseMove += MaskPanel_MouseMove;

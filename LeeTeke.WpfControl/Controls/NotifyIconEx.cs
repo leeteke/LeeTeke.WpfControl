@@ -171,7 +171,7 @@ namespace LeeTeke.WpfControl.Controls
                     notifyIconEx._notify.Icon = notifyIconEx._icon;
                     notifyIconEx._notify.Visible = true;
                 }
-                catch (Exception ex)
+                catch
                 {
                 }
             }
@@ -375,7 +375,7 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public event RoutedEventHandler MouseDoubleClick
+        public new event RoutedEventHandler MouseDoubleClick
         {
             add { AddHandler(MouseDoubleClickEvent, value); }
             remove { RemoveHandler(MouseDoubleClickEvent, value); }
