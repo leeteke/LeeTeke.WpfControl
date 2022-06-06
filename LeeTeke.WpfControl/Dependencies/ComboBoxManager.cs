@@ -11,6 +11,24 @@ namespace LeeTeke.WpfControl.Dependencies
     public class ComboBoxManager
     {
 
+
+        #region ListBackground
+        public static Brush GetListBackground(DependencyObject obj)
+        {
+            return (Brush)obj.GetValue(ListBackgroundProperty);
+        }
+
+        public static void SetListBackground(DependencyObject obj, Brush value)
+        {
+            obj.SetValue(ListBackgroundProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for ListBackground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ListBackgroundProperty =
+            DependencyProperty.RegisterAttached("ListBackground", typeof(Brush), typeof(ComboBoxManager));
+        #endregion
+
+
         #region EscToEmpty
         public static bool GetEscToEmpty(DependencyObject obj)
         {
@@ -151,7 +169,6 @@ namespace LeeTeke.WpfControl.Dependencies
         }
         #endregion
 
-
         #region MarkShow
         public static bool GetMarkShow(DependencyObject obj)
         {
@@ -289,10 +306,6 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("MarkSelectedBrush", typeof(Brush), typeof(ComboBoxManager));
         #endregion
 
-
- 
-
-
         #region IsDropCenterOnControl
         public static bool GetIsDropCenterOnControl(DependencyObject obj)
         {
@@ -308,7 +321,6 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty IsDropCenterOnControlProperty =
             DependencyProperty.RegisterAttached("IsDropCenterOnControl", typeof(bool), typeof(ComboBoxManager));
         #endregion
-
 
     }
 }

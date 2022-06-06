@@ -168,15 +168,13 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border
-                        x:Name="PART_Border"
+                    <Border x:Name="PART_Border"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}">
                         <lee:EasyPanel x:Name="PART_EasyPanel" Background="Transparent">
-                            <ContentPresenter
-                                x:Name="contentPresenter"
+                            <ContentPresenter x:Name="contentPresenter"
                                 Margin="{TemplateBinding Padding}"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -247,15 +245,13 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border
-                        x:Name="PART_Border"
+                    <Border x:Name="PART_Border"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}">
                         <lee:EasyPanel x:Name="PART_EasyPanel" Background="Transparent">
-                            <ContentPresenter
-                                x:Name="contentPresenter"
+                            <ContentPresenter x:Name="contentPresenter"
                                 Margin="{TemplateBinding Padding}"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -330,15 +326,13 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border
-                        x:Name="border"
+                    <Border x:Name="border"
                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}">
-                        <ContentPresenter
-                            x:Name="contentPresenter"
+                        <ContentPresenter x:Name="contentPresenter"
                             Margin="{TemplateBinding Padding}"
                             Focusable="False"
                             RecognizesAccessKey="True"
@@ -382,17 +376,17 @@
         <Setter Property="ContextMenu">
             <Setter.Value>
                 <ContextMenu>
-                    <MenuItem Command="ApplicationCommands.Cut" Header="剪切(_T) - Ctrl+X">
+                    <MenuItem Header="剪切(_T) - Ctrl+X" Command="ApplicationCommands.Cut">
                         <MenuItem.Icon>
                             <TextBlock FontFamily="{DynamicResource IconFontFamily}" Text="&#xE8C6;" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Command="ApplicationCommands.Copy" Header="复制(_C) - Ctrl+C">
+                    <MenuItem Header="复制(_C) - Ctrl+C" Command="ApplicationCommands.Copy">
                         <MenuItem.Icon>
                             <TextBlock FontFamily="{DynamicResource IconFontFamily}" Text="&#xE8C8;" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Command="ApplicationCommands.Paste" Header="粘贴(_P) - Ctrl+V">
+                    <MenuItem Header="粘贴(_P) - Ctrl+V" Command="ApplicationCommands.Paste">
                         <MenuItem.Icon>
                             <TextBlock FontFamily="{DynamicResource IconFontFamily}" Text="&#xE77F;" />
                         </MenuItem.Icon>
@@ -403,8 +397,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
-                    <ScrollViewer
-                        x:Name="PART_ContentHost"
+                    <ScrollViewer x:Name="PART_ContentHost"
                         leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
                         leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}"
                         Background="{TemplateBinding Background}"
@@ -462,23 +455,20 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border
-                        x:Name="PART_Border"
+                    <Border x:Name="PART_Border"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}">
                         <lee:EasyPanel x:Name="PART_EasyPanel" Background="Transparent">
-                            <ContentPresenter
-                                x:Name="contentPresenter"
+                            <ContentPresenter x:Name="contentPresenter"
                                 Margin="{TemplateBinding Padding}"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 Focusable="False"
                                 RecognizesAccessKey="True"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                            <ContentPresenter
-                                x:Name="Checked_ContentPresenter"
+                            <ContentPresenter x:Name="Checked_ContentPresenter"
                                 Margin="{TemplateBinding Padding}"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -575,8 +565,7 @@
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}">
-                        <ContentPresenter
-                            x:Name="PART_Content"
+                        <ContentPresenter x:Name="PART_Content"
                             Margin="{TemplateBinding Padding}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -755,14 +744,12 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToolTip}">
-                    <Border
-                        x:Name="PART_Border"
+                    <Border x:Name="PART_Border"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}">
-                        <ContentPresenter
-                            x:Name="PART_Content"
+                        <ContentPresenter x:Name="PART_Content"
                             Margin="{TemplateBinding Padding}"
                             RecognizesAccessKey="True"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
@@ -820,7 +807,7 @@
         <Setter Property="ContextMenu">
             <Setter.Value>
                 <ContextMenu>
-                    <MenuItem Command="ApplicationCommands.Paste" Header="粘贴(_P) - Ctrl+V">
+                    <MenuItem Header="粘贴(_P) - Ctrl+V" Command="ApplicationCommands.Paste">
                         <MenuItem.Icon>
                             <TextBlock FontFamily="{DynamicResource IconFontFamily}" Text="&#xE77F;" />
                         </MenuItem.Icon>
@@ -831,8 +818,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type PasswordBox}">
-                    <ScrollViewer
-                        x:Name="PART_ContentHost"
+                    <ScrollViewer x:Name="PART_ContentHost"
                         leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
                         leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}"
                         Background="{TemplateBinding Background}"
@@ -881,8 +867,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RadioButton}">
-                    <Grid
-                        x:Name="templateRoot"
+                    <Grid x:Name="templateRoot"
                         Background="Transparent"
                         SnapsToDevicePixels="True">
                         <Grid.ColumnDefinitions>
@@ -893,8 +878,7 @@
                             IsOverflow="True"
                             ParentElement="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}}"
                             RippleBrush="{Binding Path=(leedep:RadioButtonManager.RippleBrush), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}" />
-                        <Border
-                            x:Name="radioButtonBorder"
+                        <Border x:Name="radioButtonBorder"
                             Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:RadioButtonManager.MarkSize), Mode=OneWay}"
                             Height="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:RadioButtonManager.MarkSize), Mode=OneWay}"
                             Margin="2,0"
@@ -904,8 +888,7 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight, Converter={StaticResource DoubleFollowConverter}, ConverterParameter=/2, Mode=OneWay}">
-                            <Ellipse
-                                x:Name="optionMark"
+                            <Ellipse x:Name="optionMark"
                                 Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:RadioButtonManager.MarkMargin), Mode=OneWay}"
                                 Fill="{Binding Path=(leedep:RadioButtonManager.MarkBrush), RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Mode=OneWay}"
                                 RenderTransformOrigin="0.5,0.5">
@@ -915,8 +898,7 @@
                             </Ellipse>
                         </Border>
 
-                        <ContentPresenter
-                            x:Name="contentPresenter"
+                        <ContentPresenter x:Name="contentPresenter"
                             Grid.Column="1"
                             Margin="{TemplateBinding Padding}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -1020,22 +1002,20 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ScrollBar}">
 
-                    <Track
-                        x:Name="PART_Track"
+                    <Track x:Name="PART_Track"
                         IsDirectionReversed="true"
                         IsEnabled="{TemplateBinding IsMouseOver}">
                         <Track.DecreaseRepeatButton>
-                            <RepeatButton Command="{x:Static ScrollBar.PageUpCommand}" Style="{StaticResource ScrollBarBaseRepeatButton}" />
+                            <RepeatButton Style="{StaticResource ScrollBarBaseRepeatButton}" Command="{x:Static ScrollBar.PageUpCommand}" />
                         </Track.DecreaseRepeatButton>
                         <Track.IncreaseRepeatButton>
-                            <RepeatButton Command="{x:Static ScrollBar.PageDownCommand}" Style="{StaticResource ScrollBarBaseRepeatButton}" />
+                            <RepeatButton Style="{StaticResource ScrollBarBaseRepeatButton}" Command="{x:Static ScrollBar.PageDownCommand}" />
                         </Track.IncreaseRepeatButton>
                         <Track.Thumb>
                             <Thumb>
                                 <Thumb.Template>
                                     <ControlTemplate TargetType="Thumb">
-                                        <Border
-                                            x:Name="PART_Border"
+                                        <Border x:Name="PART_Border"
                                             Background="{Binding Path=(leedep:ScrollViewerManager.ThumbBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}"
                                             BorderThickness="0"
                                             CornerRadius="{Binding Path=(leedep:ScrollViewerManager.ScrollBarCornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}"
@@ -1065,17 +1045,16 @@
 
                             <Track x:Name="PART_Track" IsEnabled="{TemplateBinding IsMouseOver}">
                                 <Track.DecreaseRepeatButton>
-                                    <RepeatButton Command="{x:Static ScrollBar.PageLeftCommand}" Style="{StaticResource ScrollBarBaseRepeatButton}" />
+                                    <RepeatButton Style="{StaticResource ScrollBarBaseRepeatButton}" Command="{x:Static ScrollBar.PageLeftCommand}" />
                                 </Track.DecreaseRepeatButton>
                                 <Track.IncreaseRepeatButton>
-                                    <RepeatButton Command="{x:Static ScrollBar.PageRightCommand}" Style="{StaticResource ScrollBarBaseRepeatButton}" />
+                                    <RepeatButton Style="{StaticResource ScrollBarBaseRepeatButton}" Command="{x:Static ScrollBar.PageRightCommand}" />
                                 </Track.IncreaseRepeatButton>
                                 <Track.Thumb>
                                     <Thumb>
                                         <Thumb.Template>
                                             <ControlTemplate TargetType="Thumb">
-                                                <Border
-                                                    x:Name="PART_Border"
+                                                <Border x:Name="PART_Border"
                                                     Background="{Binding Path=(leedep:ScrollViewerManager.ThumbBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}"
                                                     BorderThickness="0"
                                                     CornerRadius="{Binding Path=(leedep:ScrollViewerManager.ScrollBarCornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}"
@@ -1145,16 +1124,14 @@
                                 <ControlTemplate.Resources>
                                     <QuarticEase x:Key="Easing" EasingMode="EaseOut" />
                                 </ControlTemplate.Resources>
-                                <Border
-                                    x:Name="PART_Border"
+                                <Border x:Name="PART_Border"
                                     Width="18"
                                     Height="18"
                                     Background="{Binding RelativeSource={RelativeSource AncestorType={x:Type Slider}}, Path=Background, Mode=OneWay}"
                                     BorderThickness="0"
                                     CornerRadius="8"
                                     Effect="{DynamicResource LeeShadow}">
-                                    <Ellipse
-                                        x:Name="PART_Ellipse"
+                                    <Ellipse x:Name="PART_Ellipse"
                                         Width="10"
                                         Height="10"
                                         VerticalAlignment="Center"
@@ -1223,8 +1200,7 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Slider}">
                             <DockPanel Background="Transparent">
-                                <ContentPresenter
-                                    x:Name="ContentHeader"
+                                <ContentPresenter x:Name="ContentHeader"
                                     Content="{Binding Path=(leedep:SliderManager.Header), RelativeSource={RelativeSource AncestorType=Slider}, Mode=OneWay}"
                                     DockPanel.Dock="{Binding Path=(leedep:SliderManager.HeaderDock), RelativeSource={RelativeSource AncestorType=Slider}, Mode=OneWay}" />
                                 <Grid>
@@ -1233,8 +1209,7 @@
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-                                    <TickBar
-                                        x:Name="TopTick"
+                                    <TickBar x:Name="TopTick"
                                         Height="5"
                                         Margin="0,0,0,0"
                                         VerticalAlignment="Top"
@@ -1242,8 +1217,7 @@
                                         FocusVisualStyle="{TemplateBinding FocusVisualStyle}"
                                         Placement="Top"
                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                                    <Border
-                                        x:Name="PART_Border"
+                                    <Border x:Name="PART_Border"
                                         Grid.Row="1"
                                         Height="{Binding Path=(leedep:SliderManager.TrackSize), RelativeSource={RelativeSource AncestorType=Slider}, Mode=OneWay}"
                                         VerticalAlignment="Center"
@@ -1251,8 +1225,7 @@
                                         BorderBrush="{TemplateBinding BorderBrush}"
                                         BorderThickness="{TemplateBinding BorderThickness}"
                                         CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource AncestorType=Slider}, Mode=OneWay}" />
-                                    <Track
-                                        x:Name="PART_Track"
+                                    <Track x:Name="PART_Track"
                                         Grid.Row="1"
                                         FocusVisualStyle="{TemplateBinding FocusVisualStyle}"
                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
@@ -1264,8 +1237,8 @@
                                                 Background="{Binding Path=(leedep:SliderManager.TrackBrush), RelativeSource={RelativeSource AncestorType=Slider}, Mode=OneWay}"
                                                 BorderBrush="{TemplateBinding BorderBrush}"
                                                 BorderThickness="{Binding Path=BorderThickness, RelativeSource={RelativeSource AncestorType=Slider}, Mode=OneWay, Converter={StaticResource ThicknessConverter}, ConverterParameter='0,0,N,0'}"
-                                                Command="Slider.DecreaseLarge"
-                                                Style="{StaticResource SliderRepeatButton}" />
+                                                Style="{StaticResource SliderRepeatButton}"
+                                                Command="Slider.DecreaseLarge" />
                                         </Track.DecreaseRepeatButton>
                                         <Track.Thumb>
                                             <Thumb
@@ -1277,14 +1250,13 @@
                                             <RepeatButton
                                                 Background="Transparent"
                                                 BorderThickness="0"
-                                                Command="Slider.IncreaseLarge"
-                                                Style="{StaticResource SliderRepeatButton}" />
+                                                Style="{StaticResource SliderRepeatButton}"
+                                                Command="Slider.IncreaseLarge" />
                                         </Track.IncreaseRepeatButton>
 
                                     </Track>
 
-                                    <TickBar
-                                        x:Name="BottomTick"
+                                    <TickBar x:Name="BottomTick"
                                         Grid.Row="2"
                                         Height="5"
                                         Margin="0,1,0,0"
@@ -1324,8 +1296,7 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Slider}">
                             <DockPanel Background="Transparent">
-                                <ContentPresenter
-                                    x:Name="ContentHeader"
+                                <ContentPresenter x:Name="ContentHeader"
                                     Content="{Binding Path=(leedep:SliderManager.Header), RelativeSource={RelativeSource AncestorType=Slider}, Mode=OneWay}"
                                     DockPanel.Dock="{Binding Path=(leedep:SliderManager.HeaderDock), RelativeSource={RelativeSource AncestorType=Slider}, Mode=OneWay}" />
                                 <Grid>
@@ -1334,16 +1305,14 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <TickBar
-                                        x:Name="TopTick"
+                                    <TickBar x:Name="TopTick"
                                         Width="5"
                                         Margin="0,0,0,0"
                                         HorizontalAlignment="Left"
                                         Fill="{TemplateBinding Foreground}"
                                         Placement="Left"
                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                                    <Border
-                                        x:Name="PART_Border"
+                                    <Border x:Name="PART_Border"
                                         Grid.Column="1"
                                         Width="{Binding Path=(leedep:SliderManager.TrackSize), RelativeSource={RelativeSource AncestorType=Slider}, Mode=OneWay}"
                                         HorizontalAlignment="Center"
@@ -1351,8 +1320,7 @@
                                         BorderBrush="{TemplateBinding BorderBrush}"
                                         BorderThickness="{TemplateBinding BorderThickness}"
                                         CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource AncestorType=Slider}, Mode=OneWay}" />
-                                    <Track
-                                        x:Name="PART_Track"
+                                    <Track x:Name="PART_Track"
                                         Grid.Column="1"
                                         Margin="0,0,0,0"
                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
@@ -1364,8 +1332,8 @@
                                                 Background="{Binding Path=(leedep:SliderManager.TrackBrush), RelativeSource={RelativeSource AncestorType=Slider}, Mode=OneWay}"
                                                 BorderBrush="{TemplateBinding BorderBrush}"
                                                 BorderThickness="{Binding Path=BorderThickness, RelativeSource={RelativeSource AncestorType=Slider}, Mode=OneWay, Converter={StaticResource ThicknessConverter}, ConverterParameter='0,N,0,0'}"
-                                                Command="Slider.DecreaseLarge"
-                                                Style="{StaticResource SliderRepeatButton}" />
+                                                Style="{StaticResource SliderRepeatButton}"
+                                                Command="Slider.DecreaseLarge" />
                                         </Track.DecreaseRepeatButton>
                                         <Track.Thumb>
                                             <Thumb
@@ -1377,12 +1345,11 @@
                                             <RepeatButton
                                                 Background="Transparent"
                                                 BorderThickness="0"
-                                                Command="Slider.IncreaseLarge"
-                                                Style="{StaticResource SliderRepeatButton}" />
+                                                Style="{StaticResource SliderRepeatButton}"
+                                                Command="Slider.IncreaseLarge" />
                                         </Track.IncreaseRepeatButton>
                                     </Track>
-                                    <TickBar
-                                        x:Name="BottomTick"
+                                    <TickBar x:Name="BottomTick"
                                         Grid.Column="2"
                                         Width="5"
                                         Margin="0,0,0,0"
@@ -1436,14 +1403,12 @@
             <Setter.Value>
                 <ControlTemplate TargetType="CalendarDayButton">
 
-                    <Border
-                        x:Name="PART_Border"
+                    <Border x:Name="PART_Border"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}">
-                        <ContentPresenter
-                            x:Name="PART_Content"
+                        <ContentPresenter x:Name="PART_Content"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                     </Border>
@@ -1501,14 +1466,12 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type CalendarButton}">
-                    <Border
-                        x:Name="PART_Border"
+                    <Border x:Name="PART_Border"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}">
-                        <ContentPresenter
-                            x:Name="PART_Content"
+                        <ContentPresenter x:Name="PART_Content"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                     </Border>
@@ -1579,8 +1542,7 @@
                                 VerticalAlignment="Top"
                                 Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type CalendarItem}}, Path=(leedep:CalendarManager.TitleBackground), Mode=OneWay}"
                                 Visibility="{Binding ElementName=PART_MonthView, Path=Visibility, Mode=OneWay}" />
-                            <Button
-                                x:Name="PART_HeaderButton"
+                            <Button x:Name="PART_HeaderButton"
                                 Grid.Row="0"
                                 Grid.Column="0"
                                 Background="Transparent"
@@ -1590,8 +1552,7 @@
                                 FontSize="20"
                                 Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type CalendarItem}}, Path=(leedep:CalendarManager.TitleTextBrush), Mode=OneWay}" />
 
-                            <Button
-                                x:Name="PART_PreviousButton"
+                            <Button x:Name="PART_PreviousButton"
                                 Grid.Row="0"
                                 Grid.Column="1"
                                 Width="50"
@@ -1606,8 +1567,7 @@
                                 FontFamily="{DynamicResource IconFontFamily}"
                                 Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type CalendarItem}}, Path=(leedep:CalendarManager.TitleTextBrush), Mode=OneWay}" />
 
-                            <Button
-                                x:Name="PART_NextButton"
+                            <Button x:Name="PART_NextButton"
                                 Grid.Row="0"
                                 Grid.Column="2"
                                 Width="50"
@@ -1623,8 +1583,7 @@
                                 Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type CalendarItem}}, Path=(leedep:CalendarManager.TitleTextBrush), Mode=OneWay}" />
 
 
-                            <Grid
-                                x:Name="PART_MonthView"
+                            <Grid x:Name="PART_MonthView"
                                 Grid.Row="1"
                                 Grid.Column="0"
                                 Grid.ColumnSpan="3"
@@ -1653,8 +1612,7 @@
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
                             </Grid>
-                            <Grid
-                                x:Name="PART_YearView"
+                            <Grid x:Name="PART_YearView"
                                 Grid.Row="1"
                                 Grid.Column="0"
                                 Grid.ColumnSpan="3"
@@ -1725,8 +1683,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Calendar}">
                     <lee:EasyPanel>
-                        <Border
-                            x:Name="PART_Border"
+                        <Border x:Name="PART_Border"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
@@ -1789,8 +1746,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
-                    <Border
-                        x:Name="PART_Border"
+                    <Border x:Name="PART_Border"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
@@ -1813,8 +1769,7 @@
                                 CanContentScroll="{TemplateBinding CanContentScroll}"
                                 VirtualizingStackPanel.IsVirtualizing="{Binding Path=(VirtualizingStackPanel.IsVirtualizing), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}"
                                 VirtualizingStackPanel.VirtualizationMode="{Binding Path=(VirtualizingStackPanel.VirtualizationMode), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}" />
-                            <lee:EasyPanel
-                                x:Name="PART_HorizontalGrid"
+                            <lee:EasyPanel x:Name="PART_HorizontalGrid"
                                 Grid.Row="1"
                                 Grid.Column="1"
                                 Height="{StaticResource ScrollViewerBarSize}"
@@ -1824,8 +1779,7 @@
                                 <lee:EasyPanel.Margin>
                                     <Thickness Right="{StaticResource ScrollViewerBarSize}" />
                                 </lee:EasyPanel.Margin>
-                                <ScrollBar
-                                    x:Name="PART_HorizontalScrollBar"
+                                <ScrollBar x:Name="PART_HorizontalScrollBar"
                                     Height="{DynamicResource ScrollViewerMiniBarSize}"
                                     VerticalAlignment="Bottom"
                                     Maximum="{TemplateBinding ScrollableWidth}"
@@ -1834,8 +1788,7 @@
                                     Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
                                     Value="{TemplateBinding HorizontalOffset}" />
                             </lee:EasyPanel>
-                            <lee:EasyPanel
-                                x:Name="PART_VerticalGrid"
+                            <lee:EasyPanel x:Name="PART_VerticalGrid"
                                 Grid.Row="1"
                                 Grid.Column="1"
                                 Width="{StaticResource ScrollViewerBarSize}"
@@ -1845,8 +1798,7 @@
                                 <lee:EasyPanel.Margin>
                                     <Thickness Bottom="{StaticResource ScrollViewerBarSize}" />
                                 </lee:EasyPanel.Margin>
-                                <ScrollBar
-                                    x:Name="PART_VerticalScrollBar"
+                                <ScrollBar x:Name="PART_VerticalScrollBar"
                                     Width="{DynamicResource ScrollViewerMiniBarSize}"
                                     HorizontalAlignment="Right"
                                     Maximum="{TemplateBinding ScrollableHeight}"
@@ -2029,8 +1981,7 @@
                             IsOverflow="True"
                             ParentElement="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}}"
                             RippleBrush="{Binding Path=(leedep:CheckBoxManager.RippleBrush), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" />
-                        <Border
-                            x:Name="PART_Border"
+                        <Border x:Name="PART_Border"
                             Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CheckBoxManager.CheckBoxSize), Mode=OneWay}"
                             Height="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CheckBoxManager.CheckBoxSize), Mode=OneWay}"
                             Background="{TemplateBinding Background}"
@@ -2039,8 +1990,7 @@
                             CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}">
                             <lee:EasyPanel>
                                 <Viewbox Margin="3">
-                                    <Path
-                                        x:Name="path"
+                                    <Path x:Name="path"
                                         Width="12"
                                         Height="12"
                                         Data="M 0,2 3,5 8,0"
@@ -2052,8 +2002,7 @@
                                         StrokeThickness="2"
                                         UseLayoutRounding="True" />
                                 </Viewbox>
-                                <Rectangle
-                                    x:Name="PART_CheckedNull"
+                                <Rectangle x:Name="PART_CheckedNull"
                                     Margin="1"
                                     Fill="{DynamicResource LeeBrush_Theme}"
                                     Visibility="Collapsed">
@@ -2083,8 +2032,7 @@
                         </Border>
 
 
-                        <ContentPresenter
-                            x:Name="contentPresenter"
+                        <ContentPresenter x:Name="contentPresenter"
                             Grid.Column="1"
                             Margin="{TemplateBinding Padding}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -2093,8 +2041,7 @@
                             RecognizesAccessKey="True"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
-                        <ContentPresenter
-                            x:Name="Checked_ContentPresenter"
+                        <ContentPresenter x:Name="Checked_ContentPresenter"
                             Grid.Column="1"
                             Margin="{TemplateBinding Padding}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -2225,8 +2172,7 @@
                             Margin="3"
                             ClipToBounds="False">
                             <lee:EasyPanel ClipToBounds="False">
-                                <Border
-                                    x:Name="PART_CheckedTrue"
+                                <Border x:Name="PART_CheckedTrue"
                                     Width="40"
                                     Height="20"
                                     VerticalAlignment="Center"
@@ -2234,8 +2180,7 @@
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="10" />
-                                <Border
-                                    x:Name="PART_CheckedFalse"
+                                <Border x:Name="PART_CheckedFalse"
                                     Width="40"
                                     Height="20"
                                     VerticalAlignment="Center"
@@ -2249,8 +2194,7 @@
                                     </Border.RenderTransform>
                                 </Border>
 
-                                <Ellipse
-                                    x:Name="PART_Ellipse"
+                                <Ellipse x:Name="PART_Ellipse"
                                     Width="22"
                                     Height="22"
                                     HorizontalAlignment="Left"
@@ -2266,8 +2210,7 @@
                         </Viewbox>
 
 
-                        <ContentPresenter
-                            x:Name="contentPresenter"
+                        <ContentPresenter x:Name="contentPresenter"
                             Grid.Column="1"
                             Margin="{TemplateBinding Padding}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -2276,8 +2219,7 @@
                             RecognizesAccessKey="True"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
-                        <ContentPresenter
-                            x:Name="Checked_ContentPresenter"
+                        <ContentPresenter x:Name="Checked_ContentPresenter"
                             Grid.Column="1"
                             Margin="{TemplateBinding Padding}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -2355,8 +2297,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
 
-                    <ScrollViewer
-                        x:Name="PART_ContentHost"
+                    <ScrollViewer x:Name="PART_ContentHost"
                         Background="Transparent"
                         Focusable="false"
                         HorizontalScrollBarVisibility="Hidden"
@@ -2392,6 +2333,7 @@
         <Setter Property="leedep:ComboBoxManager.PreviewText" Value="--请选择--" />
         <Setter Property="leedep:ComboBoxManager.ItemHeight" Value="{DynamicResource LeeItemMinHeight}" />
         <Setter Property="leedep:ComboBoxManager.IsDropCenterOnControl" Value="False" />
+        <Setter Property="leedep:ComboBoxManager.ListBackground" Value="{DynamicResource LeeBrush_Forground}" />
 
         <!--  常规属性  -->
         <Setter Property="leedep:ListItemManager.Background" Value="Transparent" />
@@ -2443,8 +2385,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBox}">
-                    <Border
-                        x:Name="PART_Border"
+                    <Border x:Name="PART_Border"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
@@ -2454,25 +2395,22 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="0" MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" />
                             </Grid.ColumnDefinitions>
-                            <Popup
-                                x:Name="PART_Popup"
+                            <Popup x:Name="PART_Popup"
                                 Grid.ColumnSpan="2"
                                 AllowsTransparency="True"
                                 IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                 Placement="Bottom"
                                 PopupAnimation="Fade">
-                                <Grid Margin="8">
-                                    <Border
-                                        x:Name="dropDownBorder"
+                                <lee:EasyPanel Margin="8">
+                                    <Border x:Name="dropDownBorder"
                                         MinWidth="{Binding ActualWidth, ElementName=templateRoot}"
                                         MaxHeight="{TemplateBinding MaxDropDownHeight}"
-                                        Background="{TemplateBinding Background}"
+                                        Background="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.ListBackground), Mode=OneWay}"
                                         BorderBrush="{DynamicResource LeeBrush_BorderBrush}"
                                         BorderThickness="0"
                                         CornerRadius="{DynamicResource LeeCornerRadius}"
                                         Effect="{DynamicResource LeeShadow}" />
-                                    <ScrollViewer
-                                        x:Name="DropDownScrollViewer"
+                                    <ScrollViewer x:Name="DropDownScrollViewer"
                                         Padding="0,5"
                                         leedep:CornerRadiusManager.CornerRadius="{Binding ElementName=dropDownBorder, Path=CornerRadius, Mode=OneWay}"
                                         leedep:CornerRadiusManager.IsClip="True"
@@ -2485,16 +2423,14 @@
                                         HorizontalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(ScrollViewer.HorizontalScrollBarVisibility), Mode=OneWay}"
                                         PanningMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(ScrollViewer.PanningMode), Mode=OneWay}"
                                         VerticalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(ScrollViewer.VerticalScrollBarVisibility), Mode=OneWay}">
-                                        <ItemsPresenter
-                                            x:Name="ItemsPresenter"
+                                        <ItemsPresenter x:Name="ItemsPresenter"
                                             KeyboardNavigation.DirectionalNavigation="Contained"
                                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                                     </ScrollViewer>
-                                </Grid>
+                                </lee:EasyPanel>
                             </Popup>
 
-                            <ContentPresenter
-                                x:Name="contentPresenter"
+                            <ContentPresenter x:Name="contentPresenter"
                                 Margin="{TemplateBinding Padding}"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -2504,8 +2440,7 @@
                                 ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
                                 IsHitTestVisible="false"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                            <ToggleButton
-                                x:Name="toggleButton"
+                            <ToggleButton x:Name="toggleButton"
                                 Grid.ColumnSpan="2"
                                 Padding="0,0,5,0"
                                 HorizontalContentAlignment="Right"
@@ -2513,12 +2448,10 @@
                                 ClickMode="Release"
                                 IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                 Style="{StaticResource RotateToggleButton}" />
-                            <TextBox
-                                x:Name="PART_EditableTextBox"
+                            <TextBox x:Name="PART_EditableTextBox"
                                 Margin="{TemplateBinding Padding}"
                                 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                leedep:TextBoxManager.EnterCommand="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.EnterCommand), Mode=OneWay}"
                                 leedep:TextBoxManager.EscToEmpty="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.EscToEmpty), Mode=OneWay}"
                                 BorderThickness="0"
                                 FontSize="{TemplateBinding FontSize}"
@@ -2526,10 +2459,10 @@
                                 Foreground="{TemplateBinding Foreground}"
                                 IsReadOnly="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsReadOnly, Mode=OneWay}"
                                 Style="{StaticResource ComboBoxEditableTextBox}"
-                                Visibility="Collapsed" />
+                                Visibility="Collapsed"
+                                leedep:TextBoxManager.EnterCommand="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.EnterCommand), Mode=OneWay}" />
 
-                            <TextBlock
-                                x:Name="prviewText"
+                            <TextBlock x:Name="prviewText"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 IsHitTestVisible="False"
@@ -2597,6 +2530,10 @@
                             </MultiTrigger.Conditions>
                            <Setter TargetName="prviewText" Property="Visibility" Value="Visible" />
                         </MultiTrigger>-->
+
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=SelectedItem, Converter={StaticResource IsNotNullConverter}}" Value="True">
+                            <Setter TargetName="prviewText" Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
 
                         <Trigger SourceName="PART_EditableTextBox" Property="IsFocused" Value="True">
                             <Setter TargetName="prviewText" Property="Visibility" Value="Collapsed" />
@@ -2684,8 +2621,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBoxItem}">
-                    <Border
-                        x:Name="PART_Border"
+                    <Border x:Name="PART_Border"
                         Margin="{TemplateBinding Margin}"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
@@ -2694,8 +2630,7 @@
                         Effect="{TemplateBinding Effect}">
                         <DockPanel x:Name="PART_DockPanel">
 
-                            <Rectangle
-                                x:Name="PART_Mark"
+                            <Rectangle x:Name="PART_Mark"
                                 Margin="{Binding Path=(leedep:ComboBoxManager.MarkMargin), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                                 DockPanel.Dock="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.MarkSite), Mode=OneWay}"
                                 Fill="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.MarkBrush), Mode=OneWay}"
@@ -2718,8 +2653,7 @@
                                     </MultiBinding>
                                 </Rectangle.Clip>
                             </Rectangle>
-                            <ContentPresenter
-                                x:Name="contentPresenter"
+                            <ContentPresenter x:Name="contentPresenter"
                                 Margin="{TemplateBinding Padding}"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
@@ -2890,8 +2824,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type MenuItem}">
-                    <Border
-                        x:Name="border"
+                    <Border x:Name="border"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
@@ -2908,8 +2841,7 @@
                                 IsOverflow="False"
                                 ParentElement="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                 RippleBrush="{Binding Path=(leedep:MenuItemManager.RippleBrush), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" />
-                            <ContentPresenter
-                                x:Name="IconContent"
+                            <ContentPresenter x:Name="IconContent"
                                 Margin="5,0"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -2917,8 +2849,7 @@
                                 RecognizesAccessKey="True"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                 TextElement.Foreground="{TemplateBinding Foreground}" />
-                            <ContentPresenter
-                                x:Name="Presenter"
+                            <ContentPresenter x:Name="Presenter"
                                 Grid.Column="1"
                                 Margin="{TemplateBinding Padding}"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -2927,8 +2858,7 @@
                                 RecognizesAccessKey="True"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                 TextElement.Foreground="{TemplateBinding Foreground}" />
-                            <Path
-                                x:Name="Path"
+                            <Path x:Name="Path"
                                 Grid.Column="2"
                                 Width="5"
                                 Height="10"
@@ -2938,8 +2868,7 @@
                                 RenderTransformOrigin="0.5,0.5"
                                 Stroke="{TemplateBinding Foreground}"
                                 Visibility="Collapsed" />
-                            <Popup
-                                x:Name="Popup"
+                            <Popup x:Name="Popup"
                                 AllowsTransparency="True"
                                 Focusable="False"
                                 HorizontalOffset="-5"
@@ -2947,8 +2876,7 @@
                                 Placement="Right"
                                 PopupAnimation="Fade"
                                 VerticalOffset="-5">
-                                <Border
-                                    x:Name="GrdSubmenu"
+                                <Border x:Name="GrdSubmenu"
                                     Padding="5"
                                     Background="Transparent"
                                     BorderThickness="0">
@@ -3029,8 +2957,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ContextMenu}">
                     <lee:EasyPanel>
-                        <Border
-                            x:Name="border"
+                        <Border x:Name="border"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
@@ -3119,21 +3046,18 @@
                                     HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                                <ToggleButton
-                                    x:Name="PART_Sort"
+                                <ToggleButton x:Name="PART_Sort"
                                     Grid.Column="1"
                                     Margin="2,0"
                                     IsHitTestVisible="False"
                                     Style="{DynamicResource RotateToggleButton}" />
                             </StackPanel>
-                            <Thumb
-                                x:Name="PART_LeftHeaderGripper"
+                            <Thumb x:Name="PART_LeftHeaderGripper"
                                 Grid.ColumnSpan="3"
                                 Width="2"
                                 HorizontalAlignment="Left"
                                 Cursor="SizeWE" />
-                            <Thumb
-                                x:Name="PART_RightHeaderGripper"
+                            <Thumb x:Name="PART_RightHeaderGripper"
                                 Grid.ColumnSpan="3"
                                 Width="2"
                                 HorizontalAlignment="Right"
@@ -3214,13 +3138,11 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridCell}">
-                    <Border
-                        x:Name="PART_Border"
+                    <Border x:Name="PART_Border"
                         Padding="{TemplateBinding Padding}"
                         Background="{TemplateBinding Background}"
                         BorderThickness="0">
-                        <ContentPresenter
-                            x:Name="Presenter"
+                        <ContentPresenter x:Name="Presenter"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
@@ -3285,8 +3207,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridRow}">
-                    <Border
-                        x:Name="PART_Border"
+                    <Border x:Name="PART_Border"
                         Margin="{TemplateBinding Margin}"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
@@ -3385,14 +3306,12 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridRowHeader}">
                     <Grid Margin="{TemplateBinding Margin}">
-                        <Border
-                            x:Name="PART_Border"
+                        <Border x:Name="PART_Border"
                             Padding="{TemplateBinding Padding}"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
-                            <ContentPresenter
-                                x:Name="PART_Content"
+                            <ContentPresenter x:Name="PART_Content"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 RecognizesAccessKey="True"
@@ -3404,14 +3323,12 @@
                                      Template="{Binding ValidationErrorTemplate, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}"
                                      Visibility="{Binding (Validation.HasError), Converter={StaticResource VisibilityForBoolConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" />-->
 
-                        <Thumb
-                            x:Name="PART_TopHeaderGripper"
+                        <Thumb x:Name="PART_TopHeaderGripper"
                             Height="2"
                             VerticalAlignment="Top"
                             Cursor="SizeNS" />
 
-                        <Thumb
-                            x:Name="PART_BottomHeaderGripper"
+                        <Thumb x:Name="PART_BottomHeaderGripper"
                             Height="2"
                             VerticalAlignment="Bottom"
                             Cursor="SizeNS" />
@@ -3557,8 +3474,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type DataGrid}">
-                            <ScrollViewer
-                                x:Name="PART_ScrollViewer"
+                            <ScrollViewer x:Name="PART_ScrollViewer"
                                 leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
                                 leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}"
                                 leedep:ScrollViewerManager.SlideDuration="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideDuration), Mode=OneWay}"
@@ -3579,8 +3495,7 @@
                                                 <RowDefinition Height="auto" />
                                                 <RowDefinition />
                                             </Grid.RowDefinitions>
-                                            <Border
-                                                x:Name="PART_HBorder"
+                                            <Border x:Name="PART_HBorder"
                                                 Grid.ColumnSpan="2"
                                                 Margin="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderMargin), Mode=OneWay}"
                                                 Padding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderPadding), Mode=OneWay}"
@@ -3595,8 +3510,7 @@
                                                         <ColumnDefinition />
                                                     </Grid.ColumnDefinitions>
                                                     <Border Width="{Binding CellsPanelHorizontalOffset, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}, AncestorLevel=1}}" BorderThickness="0">
-                                                        <CheckBox
-                                                            x:Name="PART_CheckBox"
+                                                        <CheckBox x:Name="PART_CheckBox"
                                                             HorizontalAlignment="Center"
                                                             leedep:DataGridManager.CheckBoxHook="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}, AncestorLevel=1}}"
                                                             FontFamily="{DynamicResource IconFontFamily}"
@@ -3604,15 +3518,13 @@
                                                             FontWeight="Bold"
                                                             Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.All}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}" />
                                                     </Border>
-                                                    <DataGridColumnHeadersPresenter
-                                                        x:Name="PART_ColumnHeadersPresenter"
+                                                    <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter"
                                                         Grid.Column="1"
                                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                                         Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Column}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}" />
                                                 </Grid>
                                             </Border>
-                                            <Border
-                                                x:Name="PART_Border"
+                                            <Border x:Name="PART_Border"
                                                 Grid.Row="1"
                                                 Background="{TemplateBinding Background}"
                                                 BorderBrush="{TemplateBinding BorderBrush}"
@@ -3626,8 +3538,7 @@
                                                         CanContentScroll="{TemplateBinding CanContentScroll}"
                                                         VirtualizingStackPanel.IsVirtualizing="{Binding Path=(VirtualizingStackPanel.IsVirtualizing), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}"
                                                         VirtualizingStackPanel.VirtualizationMode="{Binding Path=(VirtualizingStackPanel.VirtualizationMode), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}" />
-                                                    <lee:EasyPanel
-                                                        x:Name="PART_HorizontalGrid"
+                                                    <lee:EasyPanel x:Name="PART_HorizontalGrid"
                                                         Grid.Row="1"
                                                         Height="{StaticResource ScrollViewerBarSize}"
                                                         VerticalAlignment="Bottom"
@@ -3636,8 +3547,7 @@
                                                         <lee:EasyPanel.Margin>
                                                             <Thickness Right="{StaticResource ScrollViewerBarSize}" />
                                                         </lee:EasyPanel.Margin>
-                                                        <ScrollBar
-                                                            x:Name="PART_HorizontalScrollBar"
+                                                        <ScrollBar x:Name="PART_HorizontalScrollBar"
                                                             Height="{DynamicResource ScrollViewerMiniBarSize}"
                                                             VerticalAlignment="Bottom"
                                                             Maximum="{TemplateBinding ScrollableWidth}"
@@ -3646,8 +3556,7 @@
                                                             Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
                                                             Value="{TemplateBinding HorizontalOffset}" />
                                                     </lee:EasyPanel>
-                                                    <lee:EasyPanel
-                                                        x:Name="PART_VerticalGrid"
+                                                    <lee:EasyPanel x:Name="PART_VerticalGrid"
                                                         Grid.Row="1"
                                                         Width="{StaticResource ScrollViewerBarSize}"
                                                         HorizontalAlignment="Right"
@@ -3656,8 +3565,7 @@
                                                         <lee:EasyPanel.Margin>
                                                             <Thickness Bottom="{StaticResource ScrollViewerBarSize}" />
                                                         </lee:EasyPanel.Margin>
-                                                        <ScrollBar
-                                                            x:Name="PART_VerticalScrollBar"
+                                                        <ScrollBar x:Name="PART_VerticalScrollBar"
                                                             Width="{DynamicResource ScrollViewerMiniBarSize}"
                                                             HorizontalAlignment="Right"
                                                             Maximum="{TemplateBinding ScrollableHeight}"
@@ -3823,8 +3731,7 @@
                                                                      Converter={StaticResource VisibilityForBoolReverseConverter}}" />
                                     <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
-                                    <ContentPresenter
-                                        x:Name="PART_ListEnd"
+                                    <ContentPresenter x:Name="PART_ListEnd"
                                         Grid.Row="1"
                                         Content="{Binding Path=(leedep:DataGridManager.ListEndContent), RelativeSource={RelativeSource AncestorType={x:Type DataGrid}, AncestorLevel=1}, Mode=OneWay}"
                                         Visibility="{TemplateBinding HasItems,
@@ -3843,8 +3750,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type DataGrid}">
-                            <ScrollViewer
-                                x:Name="PART_ScrollViewer"
+                            <ScrollViewer x:Name="PART_ScrollViewer"
                                 leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
                                 leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}"
                                 leedep:ScrollViewerManager.SlideDuration="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideDuration), Mode=OneWay}"
@@ -3865,8 +3771,7 @@
                                         <RowDefinition Height="auto" />
                                     </Grid.RowDefinitions>
 
-                                    <Border
-                                        x:Name="PART_HBorder"
+                                    <Border x:Name="PART_HBorder"
                                         Margin="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderMargin), Mode=OneWay}"
                                         Padding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderPadding), Mode=OneWay}"
                                         Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderBackground), Mode=OneWay}"
@@ -3880,8 +3785,7 @@
                                                 <ColumnDefinition />
                                             </Grid.ColumnDefinitions>
                                             <Border Width="{Binding CellsPanelHorizontalOffset, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}, AncestorLevel=1}}" BorderThickness="0">
-                                                <CheckBox
-                                                    x:Name="PART_CheckBox"
+                                                <CheckBox x:Name="PART_CheckBox"
                                                     HorizontalAlignment="Center"
                                                     leedep:DataGridManager.CheckBoxHook="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}, AncestorLevel=1}}"
                                                     FontFamily="{DynamicResource IconFontFamily}"
@@ -3889,8 +3793,7 @@
                                                     FontWeight="Bold"
                                                     Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.All}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}" />
                                             </Border>
-                                            <DataGridColumnHeadersPresenter
-                                                x:Name="PART_ColumnHeadersPresenter"
+                                            <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter"
                                                 Grid.Column="1"
                                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                                 Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Column}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}" />
@@ -3905,8 +3808,7 @@
                                     <ItemsPresenter Grid.Row="1" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
                                     <!--  尾部  -->
-                                    <ContentPresenter
-                                        x:Name="PART_ListEnd"
+                                    <ContentPresenter x:Name="PART_ListEnd"
                                         Grid.Row="2"
                                         Content="{Binding Path=(leedep:DataGridManager.ListEndContent), RelativeSource={RelativeSource AncestorType={x:Type DataGrid}, AncestorLevel=1}, Mode=OneWay}"
                                         Visibility="{TemplateBinding HasItems,
@@ -3961,34 +3863,28 @@
 
     <ControlTemplate x:Key="LeeDatePickerTextBoxTemplate" TargetType="{x:Type DatePickerTextBox}">
         <Grid>
-            <Border
-                x:Name="Border"
+            <Border x:Name="Border"
                 Padding="{TemplateBinding Padding}"
                 Background="Transparent"
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}"
                 Opacity="1">
-                <lee:EasyPanel
-                    x:Name="WatermarkContent"
+                <lee:EasyPanel x:Name="WatermarkContent"
                     HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                    <Border
-                        x:Name="ContentElement"
+                    <Border x:Name="ContentElement"
                         BorderBrush="#FFFFFFFF"
                         BorderThickness="0" />
-                    <Border
-                        x:Name="watermark_decorator"
+                    <Border x:Name="watermark_decorator"
                         BorderBrush="#FFFFFFFF"
                         BorderThickness="0">
-                        <ContentControl
-                            x:Name="PART_Watermark"
+                        <ContentControl x:Name="PART_Watermark"
                             Padding="2"
                             Focusable="False"
                             IsHitTestVisible="False"
                             Opacity="0" />
                     </Border>
-                    <ScrollViewer
-                        x:Name="PART_ContentHost"
+                    <ScrollViewer x:Name="PART_ContentHost"
                         Margin="0"
                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                         VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
@@ -4058,8 +3954,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DatePicker}">
-                    <Border
-                        x:Name="PART_Border"
+                    <Border x:Name="PART_Border"
                         Padding="{TemplateBinding Padding}"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
@@ -4071,8 +3966,7 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <Button
-                                x:Name="PART_Button"
+                            <Button x:Name="PART_Button"
                                 Grid.Column="1"
                                 Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:DatePickerManager.ButtonWidth), Mode=OneWay}"
                                 HorizontalContentAlignment="Center"
@@ -4083,8 +3977,7 @@
                                 FontSize="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:DatePickerManager.ButtonFontSize), Mode=OneWay}"
                                 Foreground="{TemplateBinding Foreground}"
                                 Style="{StaticResource TextButton}" />
-                            <DatePickerTextBox
-                                x:Name="PART_TextBox"
+                            <DatePickerTextBox x:Name="PART_TextBox"
                                 Grid.Row="0"
                                 Grid.Column="0"
                                 Margin="{TemplateBinding Padding}"
@@ -4095,15 +3988,13 @@
                                 FontStretch="{TemplateBinding FontStretch}"
                                 Foreground="{TemplateBinding Foreground}"
                                 Template="{DynamicResource LeeDatePickerTextBoxTemplate}" />
-                            <lee:EasyPanel
-                                x:Name="PART_DisabledVisual"
+                            <lee:EasyPanel x:Name="PART_DisabledVisual"
                                 Grid.Row="0"
                                 Grid.Column="0"
                                 Grid.ColumnSpan="2"
                                 IsHitTestVisible="False"
                                 Opacity="0">
-                                <Popup
-                                    x:Name="PART_Popup"
+                                <Popup x:Name="PART_Popup"
                                     AllowsTransparency="True"
                                     Placement="Bottom"
                                     PlacementTarget="{Binding ElementName=PART_TextBox}"
@@ -4150,8 +4041,7 @@
     </Style>
 
     <ControlTemplate x:Key="ExpanderDownTemplate" TargetType="{x:Type Expander}">
-        <Border
-            x:Name="PART_Border"
+        <Border x:Name="PART_Border"
             VerticalAlignment="Stretch"
             BorderBrush="{TemplateBinding BorderBrush}"
             BorderThickness="{TemplateBinding BorderThickness}"
@@ -4171,8 +4061,7 @@
                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                         ContentSource="Header" />
-                    <ToggleButton
-                        x:Name="toggleButton"
+                    <ToggleButton x:Name="toggleButton"
                         Grid.ColumnSpan="2"
                         Padding="0,0,5,0"
                         HorizontalContentAlignment="Right"
@@ -4183,8 +4072,7 @@
                 </Grid>
 
 
-                <ContentPresenter
-                    x:Name="PART_Content"
+                <ContentPresenter x:Name="PART_Content"
                     Grid.Row="1"
                     Visibility="Collapsed" />
             </Grid>
@@ -4226,8 +4114,7 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <ControlTemplate x:Key="ExpanderUpTemplate" TargetType="{x:Type Expander}">
-        <Border
-            x:Name="PART_Border"
+        <Border x:Name="PART_Border"
             VerticalAlignment="Bottom"
             BorderBrush="{TemplateBinding BorderBrush}"
             BorderThickness="{TemplateBinding BorderThickness}"
@@ -4240,8 +4127,7 @@
 
 
 
-                <ContentPresenter
-                    x:Name="PART_Content"
+                <ContentPresenter x:Name="PART_Content"
                     Grid.Row="0"
                     Visibility="Collapsed" />
 
@@ -4258,8 +4144,7 @@
                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                         ContentSource="Header" />
-                    <ToggleButton
-                        x:Name="toggleButton"
+                    <ToggleButton x:Name="toggleButton"
                         Grid.ColumnSpan="2"
                         Padding="0,0,5,0"
                         HorizontalContentAlignment="Right"
@@ -4308,8 +4193,7 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <ControlTemplate x:Key="ExpanderLeftTemplate" TargetType="{x:Type Expander}">
-        <Border
-            x:Name="PART_Border"
+        <Border x:Name="PART_Border"
             HorizontalAlignment="Left"
             BorderBrush="{TemplateBinding BorderBrush}"
             BorderThickness="{TemplateBinding BorderThickness}"
@@ -4329,8 +4213,7 @@
                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                         ContentSource="Header" />
-                    <ToggleButton
-                        x:Name="toggleButton"
+                    <ToggleButton x:Name="toggleButton"
                         Grid.RowSpan="2"
                         Padding="0,0,0,5"
                         VerticalContentAlignment="Bottom"
@@ -4342,8 +4225,7 @@
                 </Grid>
 
 
-                <ContentPresenter
-                    x:Name="PART_Content"
+                <ContentPresenter x:Name="PART_Content"
                     Grid.Column="1"
                     Visibility="Collapsed" />
             </Grid>
@@ -4385,8 +4267,7 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <ControlTemplate x:Key="ExpanderRightTemplate" TargetType="{x:Type Expander}">
-        <Border
-            x:Name="PART_Border"
+        <Border x:Name="PART_Border"
             BorderBrush="{TemplateBinding BorderBrush}"
             BorderThickness="{TemplateBinding BorderThickness}"
             CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}">
@@ -4413,8 +4294,7 @@
                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                         ContentSource="Header" />
-                    <ToggleButton
-                        x:Name="toggleButton"
+                    <ToggleButton x:Name="toggleButton"
                         Grid.RowSpan="2"
                         Padding="0,0,0,5"
                         VerticalContentAlignment="Bottom"
@@ -4521,8 +4401,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type GroupBox}">
-                            <Border
-                                x:Name="PART_Border"
+                            <Border x:Name="PART_Border"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
@@ -4534,8 +4413,7 @@
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
 
-                                    <ContentPresenter
-                                        x:Name="Header"
+                                    <ContentPresenter x:Name="Header"
                                         Margin="{Binding Path=(leedep:GroupBoxManager.HeaderPadding), RelativeSource={RelativeSource AncestorType=GroupBox}, Mode=OneWay}"
                                         VerticalAlignment="Center"
                                         ContentSource="Header"
@@ -4608,8 +4486,7 @@
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
 
-                                <ContentPresenter
-                                    x:Name="Header"
+                                <ContentPresenter x:Name="Header"
                                     Margin="{Binding Path=(leedep:GroupBoxManager.HeaderPadding), RelativeSource={RelativeSource AncestorType=GroupBox}, Mode=OneWay}"
                                     VerticalAlignment="Center"
                                     ContentSource="Header"
@@ -4619,15 +4496,13 @@
                                     TextElement.FontSize="{Binding Path=(leedep:GroupBoxManager.HeaderFontSize), RelativeSource={RelativeSource AncestorType=GroupBox}, Mode=OneWay}"
                                     TextElement.Foreground="{Binding Path=(leedep:GroupBoxManager.HeaderForeground), RelativeSource={RelativeSource AncestorType=GroupBox}, Mode=OneWay}" />
 
-                                <Border
-                                    x:Name="PART_Border"
+                                <Border x:Name="PART_Border"
                                     Grid.Row="1"
                                     Background="{TemplateBinding Background}"
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource AncestorType=GroupBox}, Mode=OneWay}">
-                                    <ContentPresenter
-                                        x:Name="PART_Content"
+                                    <ContentPresenter x:Name="PART_Content"
                                         Margin="{TemplateBinding Padding}"
                                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -4731,21 +4606,18 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                    <lee:EasyPanel
-                        x:Name="PART_Panel"
+                    <lee:EasyPanel x:Name="PART_Panel"
                         MinWidth="{Binding Path=(leedep:ListItemManager.MinWidth), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                         MinHeight="{Binding Path=(leedep:ListItemManager.MinHeight), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                         Margin="{Binding Path=(leedep:ListItemManager.Marigin), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}">
-                        <Border
-                            x:Name="PART_Border"
+                        <Border x:Name="PART_Border"
                             Background="{Binding Path=(leedep:ListItemManager.Background), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                             BorderBrush="{Binding Path=(leedep:ListItemManager.BorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                             BorderThickness="{Binding Path=(leedep:ListItemManager.BorderThickness), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                             CornerRadius="{Binding Path=(leedep:ListItemManager.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                             Effect="{Binding Path=(leedep:ListItemManager.Effect), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}" />
                         <DockPanel x:Name="PART_DockPanel" Margin="{Binding ElementName=PART_Border, Path=BorderThickness}">
-                            <Rectangle
-                                x:Name="PART_Mark"
+                            <Rectangle x:Name="PART_Mark"
                                 Margin="{Binding Path=(leedep:ListBoxItemManager.MarkMargin), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                                 DockPanel.Dock="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ListBoxItemManager.MarkSite), Mode=OneWay}"
                                 Fill="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ListBoxItemManager.MarkBrush), Mode=OneWay}"
@@ -4767,8 +4639,7 @@
                                     </MultiBinding>
                                 </Rectangle.Clip>
                             </Rectangle>
-                            <ContentPresenter
-                                x:Name="contentPresenter"
+                            <ContentPresenter x:Name="contentPresenter"
                                 Margin="{Binding Path=(leedep:ListItemManager.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
@@ -4955,8 +4826,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBox}">
-                    <ScrollViewer
-                        x:Name="scrollviewer"
+                    <ScrollViewer x:Name="scrollviewer"
                         Padding="{TemplateBinding Padding}"
                         leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
                         leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}"
@@ -4992,8 +4862,7 @@
 
                             <ItemsPresenter Grid.Row="0" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             <!--  尾部  -->
-                            <ContentPresenter
-                                x:Name="PART_ListEnd"
+                            <ContentPresenter x:Name="PART_ListEnd"
                                 Grid.Row="1"
                                 Grid.Column="0"
                                 Content="{Binding Path=(leedep:ListManager.ListEndContent), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
@@ -5037,12 +4906,10 @@
             <Setter.Value>
                 <ControlTemplate TargetType="GridViewColumnHeader">
                     <lee:EasyPanel>
-                        <Border
-                            x:Name="HeaderBorder"
+                        <Border x:Name="HeaderBorder"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
-                            <ContentPresenter
-                                x:Name="HeaderContent"
+                            <ContentPresenter x:Name="HeaderContent"
                                 Margin="{TemplateBinding Padding}"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -5050,8 +4917,7 @@
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
 
-                        <Thumb
-                            x:Name="PART_HeaderGripper"
+                        <Thumb x:Name="PART_HeaderGripper"
                             Width="3"
                             Margin="0,4"
                             HorizontalAlignment="Right"
@@ -5111,13 +4977,11 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListViewItem}">
-                    <lee:EasyPanel
-                        x:Name="PART_Panel"
+                    <lee:EasyPanel x:Name="PART_Panel"
                         MinWidth="{Binding Path=(leedep:ListItemManager.MinWidth), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                         MinHeight="{Binding Path=(leedep:ListItemManager.MinHeight), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                         Margin="{Binding Path=(leedep:ListItemManager.Marigin), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}">
-                        <Border
-                            x:Name="PART_Border"
+                        <Border x:Name="PART_Border"
                             Background="{Binding Path=(leedep:ListItemManager.Background), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                             BorderBrush="{Binding Path=(leedep:ListItemManager.BorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                             BorderThickness="{Binding Path=(leedep:ListItemManager.BorderThickness), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
@@ -5125,8 +4989,7 @@
                             Effect="{Binding Path=(leedep:ListItemManager.Effect), RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}, Mode=OneWay}" />
 
                         <lee:EasyPanel Margin="{Binding ElementName=PART_Border, Path=BorderThickness}">
-                            <GridViewRowPresenter
-                                x:Name="contentPresenter"
+                            <GridViewRowPresenter x:Name="contentPresenter"
                                 Margin="{Binding Path=(leedep:ListItemManager.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -5288,8 +5151,7 @@
                                     <RowDefinition Height="auto" />
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
-                                <Border
-                                    x:Name="PART_HeaderBorder"
+                                <Border x:Name="PART_HeaderBorder"
                                     Grid.ColumnSpan="2"
                                     Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ListViewManager.HeaderMargin), Mode=OneWay}"
                                     Padding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ListViewManager.HeaderPadding), Mode=OneWay}"
@@ -5297,8 +5159,7 @@
                                     BorderBrush="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ListViewManager.HeaderBorderBursh), Mode=OneWay}"
                                     BorderThickness="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ListViewManager.HeaderBorderThickness), Mode=OneWay}"
                                     CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ListViewManager.HeaderCornerRadius), Mode=OneWay}">
-                                    <GridViewHeaderRowPresenter
-                                        x:Name="PART_Header"
+                                    <GridViewHeaderRowPresenter x:Name="PART_Header"
                                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                         AllowsColumnReorder="{Binding View.AllowsColumnReorder, RelativeSource={RelativeSource TemplatedParent}}"
@@ -5310,8 +5171,7 @@
                                         Columns="{Binding View.Columns, RelativeSource={RelativeSource TemplatedParent}}"
                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                                 </Border>
-                                <ScrollViewer
-                                    x:Name="PART_ScrollViewer"
+                                <ScrollViewer x:Name="PART_ScrollViewer"
                                     Grid.Row="1"
                                     Grid.ColumnSpan="2"
                                     leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
@@ -5342,8 +5202,7 @@
                                         <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
                                         <!--  尾部  -->
-                                        <ContentControl
-                                            x:Name="PART_ListEnd"
+                                        <ContentControl x:Name="PART_ListEnd"
                                             Grid.Row="1"
                                             Content="{Binding Path=(leedep:ListViewManager.ListEndContent), RelativeSource={RelativeSource AncestorType={x:Type ListView}, AncestorLevel=1}, Mode=OneWay}"
                                             Visibility="{TemplateBinding HasItems,
@@ -5390,8 +5249,7 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ListView}">
 
-                            <ScrollViewer
-                                x:Name="PART_ScrollViewer"
+                            <ScrollViewer x:Name="PART_ScrollViewer"
                                 leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
                                 leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}"
                                 leedep:ScrollViewerManager.SlideDuration="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideDuration), Mode=OneWay}"
@@ -5412,16 +5270,14 @@
                                         <RowDefinition Height="auto" />
                                     </Grid.RowDefinitions>
 
-                                    <Border
-                                        x:Name="PART_HeaderBorder"
+                                    <Border x:Name="PART_HeaderBorder"
                                         Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ListViewManager.HeaderMargin), Mode=OneWay}"
                                         Padding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ListViewManager.HeaderPadding), Mode=OneWay}"
                                         Background="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ListViewManager.HeaderBackground), Mode=OneWay}"
                                         BorderBrush="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ListViewManager.HeaderBorderBursh), Mode=OneWay}"
                                         BorderThickness="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ListViewManager.HeaderBorderThickness), Mode=OneWay}"
                                         CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ListViewManager.HeaderCornerRadius), Mode=OneWay}">
-                                        <GridViewHeaderRowPresenter
-                                            x:Name="PART_Header"
+                                        <GridViewHeaderRowPresenter x:Name="PART_Header"
                                             AllowsColumnReorder="{Binding View.AllowsColumnReorder, RelativeSource={RelativeSource TemplatedParent}}"
                                             ColumnHeaderContainerStyle="{Binding View.ColumnHeaderContainerStyle, RelativeSource={RelativeSource TemplatedParent}}"
                                             ColumnHeaderContextMenu="{Binding View.ColumnHeaderContextMenu, RelativeSource={RelativeSource TemplatedParent}}"
@@ -5440,8 +5296,7 @@
                                     <ItemsPresenter Grid.Row="1" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
                                     <!--  尾部  -->
-                                    <ContentControl
-                                        x:Name="PART_ListEnd"
+                                    <ContentControl x:Name="PART_ListEnd"
                                         Grid.Row="2"
                                         Content="{Binding Path=(leedep:ListViewManager.ListEndContent), RelativeSource={RelativeSource AncestorType={x:Type ListView}, AncestorLevel=1}, Mode=OneWay}"
                                         Visibility="{TemplateBinding HasItems,
@@ -5537,8 +5392,7 @@
                         </Grid.RowDefinitions>
 
 
-                        <Border
-                            x:Name="PART_HeaderPanel"
+                        <Border x:Name="PART_HeaderPanel"
                             Grid.ColumnSpan="2"
                             Height="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:TreeViewItemManager.MinHeight), Mode=OneWay}"
                             Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:TreeViewItemManager.Margin), Mode=OneWay}"
@@ -5552,8 +5406,7 @@
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
 
-                                <Rectangle
-                                    x:Name="PART_Mark"
+                                <Rectangle x:Name="PART_Mark"
                                     Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:TreeViewItemManager.MarkSize), Mode=OneWay}"
                                     Margin="{Binding Path=(leedep:TreeViewItemManager.MarkMargin), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                                     HorizontalAlignment="Left"
@@ -5577,8 +5430,7 @@
                                     </Rectangle.Clip>
                                 </Rectangle>
 
-                                <ToggleButton
-                                    x:Name="Expander"
+                                <ToggleButton x:Name="Expander"
                                     Grid.Column="1"
                                     leedep:ToggleButtonManager.RotateMode="Positive90"
                                     ClickMode="Press"
@@ -5586,8 +5438,7 @@
                                     FontSize="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:TreeViewItemManager.SwitchSize), Mode=OneWay}"
                                     IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
                                     Style="{StaticResource RotateToggleButton}" />
-                                <ContentPresenter
-                                    x:Name="PART_Header"
+                                <ContentPresenter x:Name="PART_Header"
                                     Grid.Column="2"
                                     Margin="{TemplateBinding Padding}"
                                     HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -5598,8 +5449,7 @@
                         </Border>
 
 
-                        <ItemsPresenter
-                            x:Name="ItemsHost"
+                        <ItemsPresenter x:Name="ItemsHost"
                             Grid.Row="1"
                             Grid.Column="1" />
                     </Grid>
@@ -5741,8 +5591,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TreeView}">
-                    <ScrollViewer
-                        x:Name="PART_ScrollViewer"
+                    <ScrollViewer x:Name="PART_ScrollViewer"
                         Padding="{TemplateBinding Padding}"
                         leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
                         leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}"
@@ -5842,13 +5691,11 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
-                    <lee:EasyPanel
-                        x:Name="PART_Panel"
+                    <lee:EasyPanel x:Name="PART_Panel"
                         MinWidth="{Binding Path=(leedep:ListItemManager.MinWidth), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                         MinHeight="{Binding Path=(leedep:ListItemManager.MinHeight), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                         Margin="{Binding Path=(leedep:ListItemManager.Marigin), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}">
-                        <Border
-                            x:Name="PART_Border"
+                        <Border x:Name="PART_Border"
                             Background="{Binding Path=(leedep:ListItemManager.Background), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                             BorderBrush="{Binding Path=(leedep:ListItemManager.BorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                             BorderThickness="{Binding Path=(leedep:ListItemManager.BorderThickness), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
@@ -5856,8 +5703,7 @@
                             Effect="{Binding Path=(leedep:ListItemManager.Effect), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}" />
                         <DockPanel x:Name="PART_DockPanel" Margin="{Binding ElementName=PART_Border, Path=BorderThickness}">
 
-                            <Rectangle
-                                x:Name="PART_Mark"
+                            <Rectangle x:Name="PART_Mark"
                                 Margin="{Binding Path=(leedep:TabItemManager.MarkMargin), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                                 DockPanel.Dock="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:TabItemManager.MarkSite), Mode=OneWay}"
                                 Fill="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:TabItemManager.MarkBrush), Mode=OneWay}"
@@ -5879,8 +5725,7 @@
                                     </MultiBinding>
                                 </Rectangle.Clip>
                             </Rectangle>
-                            <ContentPresenter
-                                x:Name="contentPresenter"
+                            <ContentPresenter x:Name="contentPresenter"
                                 Margin="{Binding Path=(leedep:ListItemManager.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                                 HorizontalAlignment="{Binding Path=(leedep:TabItemManager.HorizontalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                                 VerticalAlignment="{Binding Path=(leedep:TabItemManager.VerticalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
@@ -6055,16 +5900,14 @@
             <Setter.Value>
                 <ControlTemplate TargetType="TabControl">
                     <DockPanel>
-                        <TabPanel
-                            x:Name="headerPanel"
+                        <TabPanel x:Name="headerPanel"
                             Grid.Row="0"
                             Margin="0"
                             Panel.ZIndex="1"
                             DockPanel.Dock="{TemplateBinding TabStripPlacement}"
                             IsItemsHost="true"
                             KeyboardNavigation.TabIndex="1" />
-                        <Border
-                            x:Name="PART_Border"
+                        <Border x:Name="PART_Border"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
@@ -6074,8 +5917,7 @@
                             KeyboardNavigation.TabIndex="2"
                             KeyboardNavigation.TabNavigation="Local">
 
-                            <ContentPresenter
-                                x:Name="PART_SelectedContentHost"
+                            <ContentPresenter x:Name="PART_SelectedContentHost"
                                 Margin="{TemplateBinding Padding}"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"
