@@ -84,7 +84,7 @@ namespace LeeTeke.WpfControl.Controls
         private bool _isRenderEnd = false; //渲染完成
         private string _defaultContent = "未加载内容";
         private MaskPanelData _maskData = null;//当前数据
-  
+
         public MaskPanel()
         {
             this.MouseMove += MaskPanel_MouseMove;
@@ -353,7 +353,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (d is MaskPanel mask)
             {
-                mask.DataChanged(e.OldValue as MaskPanelData, e.NewValue as MaskPanelData);
+                mask.DataChanged(e.NewValue as MaskPanelData);
             }
         }
         #endregion
@@ -932,39 +932,37 @@ namespace LeeTeke.WpfControl.Controls
             _panel.Visibility = Visibility.Collapsed;
             Title = _defaultContent;
             Content = _defaultContent;
-            IsFull= false;
+            IsFull = false;
             ///调用关闭内容
             if (_maskData != null)
             {
-                if (!_maskData.IsActiveClose)
+                _maskData.ClosePanel = null;
+                var closeData = _maskData;
+                Task.Run(() =>
                 {
-                    Task.Run(() =>
+                    this.Dispatcher.Invoke(() =>
                     {
-                        this.Dispatcher.Invoke(() =>
-                        {
-                            _maskData.CloseCallback.Invoke(true);
-                            _maskData.ClosePanel = null;
-                            _maskData = null;
-                        });
+                        closeData.CloseCallback?.Invoke(closeData.IsActiveClose ? MaskPanelCloseStatus.Self:MaskPanelCloseStatus.Trigger);
                     });
-                }
-                else
-                {
-                    _maskData.ClosePanel = null;
-                    _maskData = null;
-                }
+                });
+
+
+                _maskData = null;
             }
         }
         /// <summary>
         /// Data改变
         /// </summary>
-        private void DataChanged(MaskPanelData oldData, MaskPanelData newData)
+        private void DataChanged(MaskPanelData newData)
         {
             if (newData == null)
             {
                 IsShow = false;
                 return;
             }
+
+            ///初始化的参数
+            newData.IsActiveClose = false;
 
             if (_maskData == null)
             {
@@ -975,7 +973,7 @@ namespace LeeTeke.WpfControl.Controls
 
             if (newData != _maskData)
             {
-                newData.CloseCallback?.Invoke(false);
+                newData.CloseCallback?.Invoke(MaskPanelCloseStatus.BlockDisplay);
                 return;
             }
         }

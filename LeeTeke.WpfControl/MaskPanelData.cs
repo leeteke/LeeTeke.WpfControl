@@ -25,21 +25,26 @@ namespace LeeTeke.WpfControl
         public Size ContentSize { get; set; }
 
         /// <summary>
-        /// 关闭Panle
-        /// </summary>
-        public Action ClosePanel { get; internal set; }
-        /// <summary>
         /// 关闭回调
         /// 如果时通过ClosePanel则无回调
         /// 如果返回true则代表正常关闭
-        /// 否则代表非正常关闭。例如当前显示委托关闭
+        /// 否则代表非正常关闭
         /// </summary>
-        public Action<bool> CloseCallback { get; set; }
+        public Action<MaskPanelCloseStatus> CloseCallback { internal get; set; }
 
         /// <summary>
         /// 非公开属性
         /// </summary>
         internal bool IsActiveClose { get; set; }
+
+        /// <summary>
+        /// 关闭Panle
+        /// </summary>
+        internal Action ClosePanel { get; set; }
+        public void Close()
+        {
+            ClosePanel?.Invoke();
+        }
 
     }
 }

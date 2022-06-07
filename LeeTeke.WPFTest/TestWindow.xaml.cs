@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LeeTeke.WPFTest.UserControls;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -28,53 +29,55 @@ namespace LeeTeke.WPFTest
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-           var a=  new WpfControl.MaskPanelData()
+            var a = new WpfControl.MaskPanelData()
             {
-                Title = "你好a",
+                Title = "控件A",
                 ContentSize = new Size(300, 200),
-                Content = new Grid()
-                {
-                    Background = new SolidColorBrush(Colors.Red),
-                },
-                CloseCallback = p =>
-                {
-                    LeeTeke.WpfControl.MessageBoxEx.Show("1");
-
-                },
 
             };
+            var aControl = new TestCotnrolA();
+            aControl.GoNextEvent += (ao, ae) =>
+            {
+                a.Close();
+            };
+
+            a.Content = aControl;
+            a.CloseCallback = p =>
+            {
+                if (p == WpfControl.MaskPanelCloseStatus.Self)
+                {
+
+                    string result = null;
+                    var b = new WpfControl.MaskPanelData()
+                    {
+                        Title = "控件b",
+                        ContentSize = new Size(300, 200),
+                    };
+
+                    var bControl = new TestControlB();
+
+                    bControl.ReturnEvent += (bo, be) =>
+                    {
+                        b.Close();
+                        result = be;
+                    };
+
+                    b.Content = bControl;
+
+                    b.CloseCallback = bp =>
+                    {
+                        mask.ContentData = a;
+                        if (bp == WpfControl.MaskPanelCloseStatus.Self)
+                        {
+                            aControl.SetValue(result);
+                        }
+                    };
+
+                    mask.ContentData = b;
+                }
+            };
+
             mask.ContentData = a;
-
-            await Task.Delay(3000);
-             a.ClosePanel?.Invoke();
-            await Task.Delay(3000);
-
-            mask.ContentData =  new WpfControl.MaskPanelData()
-            {
-                Title = "你好b",
-                ContentSize = new Size(300, 200),
-                Content = new Grid()
-                {
-                    Background = new SolidColorBrush(Colors.Yellow),
-                },
-                CloseCallback = p =>
-                {
-                    if (p)
-                    {
-                        LeeTeke.WpfControl.MessageBoxEx.Show("2");
-
-                    }
-                    else
-                    {
-                        LeeTeke.WpfControl.MessageBoxEx.Show("3");
-
-                    }
-
-                },
-
-            };
-            await Task.Delay(1000);
-          //  a.ClosePanel();
         }
     }
 }
