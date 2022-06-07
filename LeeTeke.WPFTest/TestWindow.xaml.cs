@@ -76,7 +76,7 @@ namespace LeeTeke.WPFTest
                     mask.ContentData = b;
                 }
             };
-
+     
             mask.ContentData = a;
         }
     }

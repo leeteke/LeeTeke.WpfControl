@@ -32,6 +32,15 @@ namespace LeeTeke.WpfControl
         /// </summary>
         public Action<MaskPanelCloseStatus> CloseCallback { internal get; set; }
 
+
+        /// <summary>
+        /// 视图显示动作
+        /// 用来资源加载调整的
+        /// true为视图显示完毕后，泛指开始动画显示后的
+        /// false为视图不显示前，泛指结束动画之前的
+        /// </summary>
+        public Action <bool> ViewDisplayAction { internal get; set; }
+
         /// <summary>
         /// 非公开属性
         /// </summary>
@@ -41,6 +50,7 @@ namespace LeeTeke.WpfControl
         /// 关闭Panle
         /// </summary>
         internal Action ClosePanel { get; set; }
+
         public void Close()
         {
             ClosePanel?.Invoke();

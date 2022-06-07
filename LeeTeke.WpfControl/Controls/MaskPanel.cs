@@ -867,9 +867,15 @@ namespace LeeTeke.WpfControl.Controls
                 {
                     BeginShow();
                 }
+                else
+                {
+                    //直接调用显示
+                    _maskData.ViewDisplayAction?.Invoke(true);
+                }
             }
             else
             {
+                _maskData.ViewDisplayAction?.Invoke(false);
                 if (AnimationEnabled && CloseAnimationMode != 0)
                 {
                     BeginClose();
@@ -888,14 +894,23 @@ namespace LeeTeke.WpfControl.Controls
             if (ShowAnimationCustom != null)
             {
                 var func = ShowAnimationCustom(_border);
+                func.Completed += Sb_Completed;
                 func.Begin();
             }
             else
             {
                 var sb = AnimationHelper.GetStoryboard(_border, ShowAnimationMode, ShowAnimationEasingFunction, ShowAnimationDuration);
+                sb.Completed += Sb_Completed;
                 sb.Begin();
             }
         }
+
+        private void Sb_Completed(object sender, EventArgs e)
+        {
+            _maskData.ViewDisplayAction?.Invoke(true);
+        }
+
+
         /// <summary>
         /// 开始关闭
         /// </summary>
