@@ -30,9 +30,6 @@ namespace LeeTeke.WPFTest
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
 
-
-
-
             var a = new WpfControl.MaskPanelData()
             {
                 Title = "控件A",

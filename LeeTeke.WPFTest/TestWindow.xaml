@@ -53,6 +53,7 @@
             Grid.RowSpan="3"
             CanMove="True"
             CanResize="True" />
+        <lee:NotifyBanner x:Name="notify"/>
 
     </Grid>
 </Window>

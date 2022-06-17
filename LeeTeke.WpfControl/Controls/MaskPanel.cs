@@ -839,8 +839,8 @@ namespace LeeTeke.WpfControl.Controls
             {
                 if (_border != null)
                 {
-                    _border.Width = this.ActualWidth-PanelMargin.Left-PanelMargin.Right;
-                    _border.Height = this.ActualHeight-PanelMargin.Top-PanelMargin.Bottom;
+                    _border.Width = this.ActualWidth - PanelMargin.Left - PanelMargin.Right;
+                    _border.Height = this.ActualHeight - PanelMargin.Top - PanelMargin.Bottom;
                     if (_border.RenderTransform is TranslateTransform tt)
                     {
                         tt.X = 0;
@@ -882,7 +882,21 @@ namespace LeeTeke.WpfControl.Controls
                     //修改border尺寸
                     ChangedBorderSize();
 
-                    Content = _maskData.Content;
+                    if (_maskData.Content is Page)
+                    {
+                        Content = new Frame()
+                        {
+                            Content = _maskData.Content,
+                            NavigationUIVisibility = NavigationUIVisibility.Hidden,
+                            Background = null,
+                            BorderThickness = new Thickness(0)
+                        };
+                    }
+                    else
+                    {
+                        Content = _maskData.Content;
+
+                    }
                     _maskData.ClosePanel = () =>
                     {
                         if (_maskData != null)
@@ -917,6 +931,8 @@ namespace LeeTeke.WpfControl.Controls
                 }
             }
         }
+
+
         /// <summary>
         /// 开始动画
         /// </summary>
@@ -930,7 +946,7 @@ namespace LeeTeke.WpfControl.Controls
             }
             else
             {
-                var sb = AnimationHelper.GetStoryboard(_border, ShowAnimationMode, ShowAnimationEasingFunction, ShowAnimationDuration,ShowAnimationRenderTransformOrigin);
+                var sb = AnimationHelper.GetStoryboard(_border, ShowAnimationMode, ShowAnimationEasingFunction, ShowAnimationDuration, ShowAnimationRenderTransformOrigin);
                 sb.Completed += Sb_Completed;
                 sb.Begin();
             }
@@ -955,7 +971,7 @@ namespace LeeTeke.WpfControl.Controls
             }
             else
             {
-                var sb = AnimationHelper.GetStoryboard(_border, CloseAnimationMode, CloseAnimationEasingFunction, CloseAnimationDuration,CloseAnimationRenderTransformOrigin);
+                var sb = AnimationHelper.GetStoryboard(_border, CloseAnimationMode, CloseAnimationEasingFunction, CloseAnimationDuration, CloseAnimationRenderTransformOrigin);
                 sb.Completed += Close_Completed;
                 sb.Begin();
             }
@@ -1059,14 +1075,14 @@ namespace LeeTeke.WpfControl.Controls
 
         private double BoderWidthCalculation(double changeSize)
         {
-            var result = changeSize + BorderThickness.Left + BorderThickness.Right+Padding.Left+Padding.Right;
+            var result = changeSize + BorderThickness.Left + BorderThickness.Right + Padding.Left + Padding.Right;
             var aWidht = this.ActualWidth - PanelMargin.Left - PanelMargin.Right;
             return result > aWidht ? aWidht : result;
         }
 
         private double BoderHeightCalculation(double changeSize)
         {
-            var result = changeSize + TitleHeight + BorderThickness.Top + BorderThickness.Bottom+Padding.Top+Padding.Bottom;
+            var result = changeSize + TitleHeight + BorderThickness.Top + BorderThickness.Bottom + Padding.Top + Padding.Bottom;
             var aHeight = this.ActualHeight - PanelMargin.Top - PanelMargin.Bottom;
             return result > aHeight ? aHeight : result;
         }
