@@ -81,16 +81,16 @@ namespace LeeTeke.WpfControl.Dependencies
 
         private static void Frame_Navigating(object sender, System.Windows.Navigation.NavigatingCancelEventArgs e)
         {
-            if (e.Content is UIElement element)
+            if (sender is Frame frame&& e.Content is UIElement element)
             {
-                var func = GetAnimationCustom(sender as Frame);
+                var func = GetAnimationCustom(frame);
                 if (func != null)
                 {
                     func(element)?.Begin();
                 }
                 else
                 {
-                    var sb = AnimationHelper.GetStoryboard(element, GetAnimationMode(sender as Frame), GetAnimationEasingFunction(sender as Frame), GetAnimationDuration(sender as Frame));
+                    var sb = AnimationHelper.GetStoryboard(element, GetAnimationMode(frame), GetAnimationEasingFunction(frame), GetAnimationDuration(frame),GetAnimationRenderTransformOrigin(frame));
                     sb.Begin();
                 }
             }
@@ -146,6 +146,23 @@ namespace LeeTeke.WpfControl.Dependencies
         // Using a DependencyProperty as the backing store for AnimationDuration.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty AnimationDurationProperty =
             DependencyProperty.RegisterAttached("AnimationDuration", typeof(Duration), typeof(FrameManager),new PropertyMetadata(new Duration(TimeSpan.FromMilliseconds(120))));
+        #endregion
+
+
+        #region AnimationRenderTransformOrigin
+        public static Point GetAnimationRenderTransformOrigin(DependencyObject obj)
+        {
+            return (Point)obj.GetValue(AnimationRenderTransformOriginProperty);
+        }
+
+        public static void SetAnimationRenderTransformOrigin(DependencyObject obj, Point value)
+        {
+            obj.SetValue(AnimationRenderTransformOriginProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for AnimationRenderTransformOrigin.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty AnimationRenderTransformOriginProperty =
+            DependencyProperty.RegisterAttached("AnimationRenderTransformOrigin", typeof(Point), typeof(FrameManager),new PropertyMetadata(AnimationHelper.DefaultRenderTransformOrigin));
         #endregion
 
 

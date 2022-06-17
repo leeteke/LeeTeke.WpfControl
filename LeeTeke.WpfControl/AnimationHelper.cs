@@ -53,7 +53,7 @@ namespace LeeTeke.WpfControl
                 mode = mode & ~AnimationMode.FadeOut;
                 DoubleAnimation da = new DoubleAnimation()
                 {
-                    From = 1 * (mode.HasFlag(AnimationMode.Grabe_NoFade)?0: grade),
+                    From = 1 * (mode.HasFlag(AnimationMode.Grabe_NoFade) ? 0 : grade),
                     To = 1,
                     EasingFunction = easingFunction,
                     Duration = duration,
@@ -97,10 +97,10 @@ namespace LeeTeke.WpfControl
 
             if (mode.HasFlag(AnimationMode.ToTop))
             {
-                mode = mode  & ~AnimationMode.FromBottom & ~AnimationMode.ToBottom;
+                mode = mode & ~AnimationMode.FromBottom & ~AnimationMode.ToBottom;
                 DoubleAnimation da = new DoubleAnimation()
                 {
-                    From = 0 ,
+                    From = 0,
                     To = -(element.RenderSize.Height - (element.RenderSize.Height * grade)),
                     EasingFunction = easingFunction,
                     Duration = duration,
@@ -117,7 +117,7 @@ namespace LeeTeke.WpfControl
                 DoubleAnimation da = new DoubleAnimation()
                 {
                     From = element.RenderSize.Height - (element.RenderSize.Height * grade),
-                    To =0,
+                    To = 0,
                     EasingFunction = easingFunction,
                     Duration = duration,
                 };
@@ -129,10 +129,10 @@ namespace LeeTeke.WpfControl
 
             if (mode.HasFlag(AnimationMode.ToBottom))
             {
-             
+
                 DoubleAnimation da = new DoubleAnimation()
                 {
-                    From =0 ,
+                    From = 0,
                     To = element.RenderSize.Height - (element.RenderSize.Height * grade),
                     EasingFunction = easingFunction,
                     Duration = duration,
@@ -164,7 +164,7 @@ namespace LeeTeke.WpfControl
                 mode = mode & ~AnimationMode.FromRight & ~AnimationMode.ToRight;
                 DoubleAnimation da = new DoubleAnimation()
                 {
-                    From = 0 ,
+                    From = 0,
                     To = -(element.RenderSize.Width - (element.RenderSize.Width * grade)),
                     EasingFunction = easingFunction,
                     Duration = duration,
@@ -205,7 +205,7 @@ namespace LeeTeke.WpfControl
                 Storyboard.SetTarget(da, element);
                 Storyboard.SetTargetProperty(da, new PropertyPath("(0).(1)[0].(2)", new DependencyProperty[] { UIElement.RenderTransformProperty, TransformGroup.ChildrenProperty, TranslateTransform.XProperty }));
             }
-         
+
 
             if (mode.HasFlag(AnimationMode.Expansion))
             {
@@ -240,14 +240,14 @@ namespace LeeTeke.WpfControl
                 DoubleAnimation da = new DoubleAnimation()
                 {
                     From = 1,
-                    To = 1*grade,
+                    To = 1 * grade,
                     EasingFunction = easingFunction,
                     Duration = duration,
                 };
 
                 storyboard.Children.Add(da);
                 Storyboard.SetTarget(da, element);
-                Storyboard.SetTargetProperty(da, new PropertyPath("(0).(1)[1].(2)", new DependencyProperty[] { UIElement.RenderTransformProperty, TransformGroup.ChildrenProperty, TranslateTransform.XProperty }));
+                Storyboard.SetTargetProperty(da, new PropertyPath("(0).(1)[1].(2)", new DependencyProperty[] { UIElement.RenderTransformProperty, TransformGroup.ChildrenProperty, ScaleTransform.ScaleXProperty }));
 
                 DoubleAnimation db = new DoubleAnimation()
                 {
@@ -259,7 +259,7 @@ namespace LeeTeke.WpfControl
 
                 storyboard.Children.Add(db);
                 Storyboard.SetTarget(db, element);
-                Storyboard.SetTargetProperty(db, new PropertyPath("(0).(1)[1].(2)", new DependencyProperty[] { UIElement.RenderTransformProperty, TransformGroup.ChildrenProperty, TranslateTransform.XProperty }));
+                Storyboard.SetTargetProperty(db, new PropertyPath("(0).(1)[1].(2)", new DependencyProperty[] { UIElement.RenderTransformProperty, TransformGroup.ChildrenProperty, ScaleTransform.ScaleYProperty }));
             }
 
             return storyboard;

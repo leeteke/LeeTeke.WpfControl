@@ -22,7 +22,7 @@ namespace LeeTeke.WpfControl
         /// <summary>
         /// 内容大小
         /// </summary>
-        public Size ContentSize { get; set; }
+        public Size ContentSize { get; set; } = Size.Empty;
 
         /// <summary>
         /// 关闭回调

@@ -308,7 +308,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private void _rectangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (CanReSize && !IsFull)
+            if (CanResize && !IsFull)
             {
                 _sizePoint = e.GetPosition(this);
                 _sizeTarget = true;
@@ -543,19 +543,19 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("CanMove", typeof(bool), typeof(MaskPanel));
         #endregion
 
-        #region CanReSize
+        #region CanResize
         /// <summary>
         /// 请添加描述
         /// </summary>
-        public bool CanReSize
+        public bool CanResize
         {
-            get { return (bool)GetValue(CanReSizeProperty); }
-            set { SetValue(CanReSizeProperty, value); }
+            get { return (bool)GetValue(CanResizeProperty); }
+            set { SetValue(CanResizeProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for CanReSize.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty CanReSizeProperty =
-            DependencyProperty.Register("CanReSize", typeof(bool), typeof(MaskPanel));
+        public static readonly DependencyProperty CanResizeProperty =
+            DependencyProperty.Register("CanResize", typeof(bool), typeof(MaskPanel));
         #endregion
 
         #region Title
@@ -738,6 +738,21 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("ShowAnimationCustom", typeof(Func<UIElement, Storyboard>), typeof(MaskPanel));
         #endregion
 
+        #region ShowAnimationRenderTransformOrigin
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Point ShowAnimationRenderTransformOrigin
+        {
+            get { return (Point)GetValue(ShowAnimationRenderTransformOriginProperty); }
+            set { SetValue(ShowAnimationRenderTransformOriginProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ShowAnimationRenderTransformOrigin.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ShowAnimationRenderTransformOriginProperty =
+            DependencyProperty.Register("ShowAnimationRenderTransformOrigin", typeof(Point), typeof(MaskPanel));
+        #endregion
+
         #region CloseAnimationMode
         /// <summary>
         /// 请添加描述
@@ -798,6 +813,22 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("CloseAnimationCustom", typeof(Func<UIElement, Storyboard>), typeof(MaskPanel));
         #endregion
 
+        #region CloseAnimationRenderTransformOrigin
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Point CloseAnimationRenderTransformOrigin
+        {
+            get { return (Point)GetValue(CloseAnimationRenderTransformOriginProperty); }
+            set { SetValue(CloseAnimationRenderTransformOriginProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CloseAnimationRenderTransformOrigin.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CloseAnimationRenderTransformOriginProperty =
+            DependencyProperty.Register("CloseAnimationRenderTransformOrigin", typeof(Point), typeof(MaskPanel));
+        #endregion
+
+
         #endregion
 
         #region Private
@@ -808,8 +839,8 @@ namespace LeeTeke.WpfControl.Controls
             {
                 if (_border != null)
                 {
-                    _border.Width = this.ActualWidth;
-                    _border.Height = this.ActualHeight;
+                    _border.Width = this.ActualWidth-PanelMargin.Left-PanelMargin.Right;
+                    _border.Height = this.ActualHeight-PanelMargin.Top-PanelMargin.Bottom;
                     if (_border.RenderTransform is TranslateTransform tt)
                     {
                         tt.X = 0;
@@ -899,7 +930,7 @@ namespace LeeTeke.WpfControl.Controls
             }
             else
             {
-                var sb = AnimationHelper.GetStoryboard(_border, ShowAnimationMode, ShowAnimationEasingFunction, ShowAnimationDuration);
+                var sb = AnimationHelper.GetStoryboard(_border, ShowAnimationMode, ShowAnimationEasingFunction, ShowAnimationDuration,ShowAnimationRenderTransformOrigin);
                 sb.Completed += Sb_Completed;
                 sb.Begin();
             }
@@ -924,7 +955,7 @@ namespace LeeTeke.WpfControl.Controls
             }
             else
             {
-                var sb = AnimationHelper.GetStoryboard(_border, CloseAnimationMode, CloseAnimationEasingFunction, CloseAnimationDuration);
+                var sb = AnimationHelper.GetStoryboard(_border, CloseAnimationMode, CloseAnimationEasingFunction, CloseAnimationDuration,CloseAnimationRenderTransformOrigin);
                 sb.Completed += Close_Completed;
                 sb.Begin();
             }
@@ -957,7 +988,7 @@ namespace LeeTeke.WpfControl.Controls
                 {
                     this.Dispatcher.Invoke(() =>
                     {
-                        closeData.CloseCallback?.Invoke(closeData.IsActiveClose ? MaskPanelCloseStatus.Self:MaskPanelCloseStatus.Trigger);
+                        closeData.CloseCallback?.Invoke(closeData.IsActiveClose ? MaskPanelCloseStatus.Self : MaskPanelCloseStatus.Trigger);
                     });
                 });
 
@@ -1002,14 +1033,44 @@ namespace LeeTeke.WpfControl.Controls
             _border.Width = Width == 0 ? double.NaN : Width;
             _border.Height = Height == 0 ? double.NaN : Height;
             ///当panelMargin不为空时无法修改相应大小
-            if (_maskData != null && !_maskData.ContentSize.IsEmpty)
+            if (_maskData != null)
             {
-                if (HorizontalContentAlignment != HorizontalAlignment.Stretch)
-                    _border.Width = _maskData.ContentSize.Width;
-                if (VerticalContentAlignment != VerticalAlignment.Stretch)
-                    _border.Height = _maskData.ContentSize.Height + TitleHeight;
+                if (!_maskData.ContentSize.IsEmpty)
+                {
+                    if (HorizontalContentAlignment != HorizontalAlignment.Stretch)
+                    {
+                        _border.Width = BoderWidthCalculation(_maskData.ContentSize.Width);
+                    }
+
+                    if (VerticalContentAlignment != VerticalAlignment.Stretch)
+                        _border.Height = BoderHeightCalculation(_maskData.ContentSize.Height);
+                }
+                else if (_maskData.Content is FrameworkElement element)
+                {
+                    if (!double.IsNaN(element.Width) && HorizontalContentAlignment != HorizontalAlignment.Stretch)
+                        _border.Width = BoderWidthCalculation(element.Width);
+
+                    if (!double.IsNaN(element.Height) && VerticalContentAlignment != VerticalAlignment.Stretch)
+                        _border.Height = BoderHeightCalculation(element.Height);
+                }
             }
         }
+
+
+        private double BoderWidthCalculation(double changeSize)
+        {
+            var result = changeSize + BorderThickness.Left + BorderThickness.Right+Padding.Left+Padding.Right;
+            var aWidht = this.ActualWidth - PanelMargin.Left - PanelMargin.Right;
+            return result > aWidht ? aWidht : result;
+        }
+
+        private double BoderHeightCalculation(double changeSize)
+        {
+            var result = changeSize + TitleHeight + BorderThickness.Top + BorderThickness.Bottom+Padding.Top+Padding.Bottom;
+            var aHeight = this.ActualHeight - PanelMargin.Top - PanelMargin.Bottom;
+            return result > aHeight ? aHeight : result;
+        }
+
 
         #endregion
 

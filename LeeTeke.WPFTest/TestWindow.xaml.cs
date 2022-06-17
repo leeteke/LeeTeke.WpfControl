@@ -29,10 +29,13 @@ namespace LeeTeke.WPFTest
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
+
+
+
+
             var a = new WpfControl.MaskPanelData()
             {
                 Title = "控件A",
-                ContentSize = new Size(300, 200),
 
             };
             var aControl = new TestCotnrolA();
@@ -51,7 +54,6 @@ namespace LeeTeke.WPFTest
                     var b = new WpfControl.MaskPanelData()
                     {
                         Title = "控件b",
-                        ContentSize = new Size(300, 200),
                     };
 
                     var bControl = new TestControlB();
@@ -76,7 +78,7 @@ namespace LeeTeke.WPFTest
                     mask.ContentData = b;
                 }
             };
-     
+
             mask.ContentData = a;
         }
     }

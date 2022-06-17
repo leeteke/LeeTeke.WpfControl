@@ -118,7 +118,7 @@ namespace LeeTeke.WpfControl.Dependencies
             if (mm != ScrollViewerSlideMonitorMode.Both)
             {
                 var ps = StaticMethods.FindVisualParent<ScrollViewer>(e.OriginalSource as DependencyObject);
-                if (ps != scrollViewer && CanScoolViewerHandled(mm, ps, e.Delta))
+                if (ps != null && ps != scrollViewer && CanScoolViewerHandled(mm, ps, e.Delta))
                 {
                     return;
                 }
@@ -142,7 +142,6 @@ namespace LeeTeke.WpfControl.Dependencies
         {
             try
             {
-
 
                 if (mode != ScrollViewerSlideMonitorMode.OnlyHorizontal && scrollViewer.ScrollableHeight > 0 && scrollViewer.VerticalScrollBarVisibility != ScrollBarVisibility.Disabled)
                 {

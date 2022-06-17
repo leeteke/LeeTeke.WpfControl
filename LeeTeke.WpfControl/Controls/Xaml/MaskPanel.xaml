@@ -19,9 +19,11 @@
         <Setter Property="ShowAnimationEasingFunction" Value="{StaticResource LeeScrollViewerSlideEasingFuncion}" />
         <Setter Property="ShowAnimationDuration" Value="{StaticResource LeeScrollViewerSlideDuration}" />
         <Setter Property="ShowAnimationMode" Value="FromTop,Grade_50" />
+        <Setter Property="ShowAnimationRenderTransformOrigin" Value="0.5,0.5" />
         <Setter Property="CloseAnimationEasingFunction" Value="{StaticResource LeeScrollViewerSlideEasingFuncion}" />
         <Setter Property="CloseAnimationDuration" Value="0:0:0.2" />
         <Setter Property="CloseAnimationMode" Value="FadeOut,ToTop,Grade_50,Grabe_NoFade" />
+        <Setter Property="CloseAnimationRenderTransformOrigin" Value="0.5,0.5" />
         <Setter Property="AnimationEnabled" Value="True" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -34,12 +36,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:MaskPanel}">
-                    <lee:EasyPanel
-                        x:Name="PART_Panel"
+                    <lee:EasyPanel x:Name="PART_Panel"
                         Background="{TemplateBinding Background}"
                         Visibility="Collapsed">
-                        <Border
-                            x:Name="PART_Border"
+                        <Border x:Name="PART_Border"
                             MinWidth="{TemplateBinding MinWidth}"
                             MinHeight="{TemplateBinding MinHeight}"
                             Margin="{TemplateBinding PanelMargin}"
@@ -56,8 +56,7 @@
                                     <RowDefinition Height="auto" />
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
-                                <Grid
-                                    x:Name="PART_TitlePanel"
+                                <Grid x:Name="PART_TitlePanel"
                                     Height="{TemplateBinding TitleHeight}"
                                     Background="Transparent">
                                     <Grid.ColumnDefinitions>
@@ -65,26 +64,23 @@
                                         <ColumnDefinition Width="auto" />
                                         <ColumnDefinition Width="auto" />
                                     </Grid.ColumnDefinitions>
-                                    <ContentPresenter
-                                        x:Name="PART_Ttile"
+                                    <ContentPresenter x:Name="PART_Ttile"
                                         Grid.ColumnSpan="3"
                                         Margin="{TemplateBinding TitleMargin}"
                                         HorizontalAlignment="{TemplateBinding TitleHorizontalAlignment}"
                                         VerticalAlignment="{TemplateBinding TitleVerticalAlignment}"
                                         Content="{TemplateBinding Title}"
                                         TextElement.FontStyle="{TemplateBinding FontStyle}" />
-                                    <Button
-                                        x:Name="PART_Full"
+                                    <Button x:Name="PART_Full"
                                         Grid.Column="1"
                                         Width="35"
                                         Content="&#xe740;"
                                         FontFamily="{StaticResource IconFontFamily}"
                                         FontSize="12"
                                         Style="{StaticResource TextButton}"
-                                        Visibility="{TemplateBinding CanReSize,
+                                        Visibility="{TemplateBinding CanResize,
                                                                      Converter={StaticResource VisibilityForBoolConverter}}" />
-                                    <Button
-                                        x:Name="PART_Close"
+                                    <Button x:Name="PART_Close"
                                         Grid.Column="2"
                                         Width="35"
                                         Content="&#xe8bb;"
@@ -96,8 +92,7 @@
                                 <ScrollViewer Grid.Row="1" Padding="{TemplateBinding Padding}">
                                     <ContentPresenter Content="{TemplateBinding Content}" />
                                 </ScrollViewer>
-                                <Rectangle
-                                    x:Name="PART_Rectangle"
+                                <Rectangle x:Name="PART_Rectangle"
                                     Grid.RowSpan="2"
                                     Width="5"
                                     Height="5"
@@ -105,7 +100,7 @@
                                     VerticalAlignment="Bottom"
                                     Cursor="SizeNWSE"
                                     Fill="Transparent"
-                                    Visibility="{TemplateBinding CanReSize,
+                                    Visibility="{TemplateBinding CanResize,
                                                                  Converter={StaticResource VisibilityForBoolConverter}}" />
                             </Grid>
 
