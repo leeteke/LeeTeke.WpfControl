@@ -18,9 +18,9 @@
     <Grid Margin="20">
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <Button
@@ -46,6 +46,10 @@
                 <ComboBoxItem Content="2" />
                 <ComboBoxItem Content="3" />
             </ComboBox>
+
+            <lee:ProgressRing x:Name="ring"
+                Height="50"
+                Value="0" />
         </StackPanel>
 
 
@@ -53,7 +57,7 @@
             Grid.RowSpan="3"
             CanMove="True"
             CanResize="True" />
-        <lee:NotifyBanner x:Name="notify"/>
+        <lee:NotifyBanner x:Name="notify" />
 
     </Grid>
 </Window>

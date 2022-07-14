@@ -30,53 +30,20 @@ namespace LeeTeke.WPFTest
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
 
-            var a = new WpfControl.MaskPanelData()
-            {
-                Title = "控件A",
 
-            };
-            var aControl = new TestCotnrolA();
-            aControl.GoNextEvent += (ao, ae) =>
+            int value = 0;
+            while (value<100)
             {
-                a.Close();
-            };
-
-            a.Content = aControl;
-            a.CloseCallback = p =>
-            {
-                if (p == WpfControl.MaskPanelCloseStatus.Self)
+                await Task.Delay(50);
+                this.Dispatcher.Invoke(() =>
                 {
+                    value++;
+                    ring.Value++;
+                });
 
-                    string result = null;
-                    var b = new WpfControl.MaskPanelData()
-                    {
-                        Title = "控件b",
-                    };
+            }
 
-                    var bControl = new TestControlB();
-
-                    bControl.ReturnEvent += (bo, be) =>
-                    {
-                        b.Close();
-                        result = be;
-                    };
-
-                    b.Content = bControl;
-
-                    b.CloseCallback = bp =>
-                    {
-                        mask.ContentData = a;
-                        if (bp == WpfControl.MaskPanelCloseStatus.Self)
-                        {
-                            aControl.SetValue(result);
-                        }
-                    };
-
-                    mask.ContentData = b;
-                }
-            };
-
-            mask.ContentData = a;
+           
         }
     }
 }

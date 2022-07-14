@@ -73,7 +73,6 @@ namespace LeeTeke.WpfControl.Controls
         private Path _wating;
         private Storyboard _watingSB;
         private double _backDiameter;
-        private DateTime _lastValueTime;
         public ProgressRing()
         {
             SizeChanged += ProgressRing_SizeChanged;
@@ -254,17 +253,7 @@ namespace LeeTeke.WpfControl.Controls
                     return;
                 }
 
-                #region 时间器阻尼
-                if ((DateTime.Now - ring._lastValueTime).TotalMilliseconds < ring.ValueDamping)
-                {
-                    return;
-                }
-                else
-                {
-                    ring._lastValueTime = DateTime.Now;
-                }
-                #endregion
-
+  
                 ring.RaiseValueChanged(value);
                 ring.LodingRing();
             }
@@ -394,21 +383,7 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("Duration", typeof(Duration), typeof(ProgressRing));
         #endregion
 
-
-        #region ValueDamping
-        /// <summary>
-        /// 请添加描述
-        /// </summary>
-        public double ValueDamping
-        {
-            get { return (double)GetValue(ValueDampingProperty); }
-            set { SetValue(ValueDampingProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for ValueDamping.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ValueDampingProperty =
-            DependencyProperty.Register("ValueDamping", typeof(double), typeof(ProgressRing));
-        #endregion
+            
 
 
         #endregion
