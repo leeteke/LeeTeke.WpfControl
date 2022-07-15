@@ -59,25 +59,40 @@
 
     <SolidColorBrush x:Key="LeeBrush_White" Color="{DynamicResource LeeColor_Light_White}"/>
     <SolidColorBrush x:Key="LeeBrush_Black" Color="{DynamicResource LeeColor_Light_Black}"/>
-    
+
+    <SolidColorBrush x:Key="LeeBrush_Gray50" Color="{DynamicResource LeeColor_Light_Gray50}"/>
+    <SolidColorBrush x:Key="LeeBrush_Gray100" Color="{DynamicResource LeeColor_Light_Gray100}"/>
+    <SolidColorBrush x:Key="LeeBrush_Gray200" Color="{DynamicResource LeeColor_Light_Gray200}"/>
+    <SolidColorBrush x:Key="LeeBrush_Gray300" Color="{DynamicResource LeeColor_Light_Gray300}"/>
+    <SolidColorBrush x:Key="LeeBrush_Gray400" Color="{DynamicResource LeeColor_Light_Gray400}"/>
+    <SolidColorBrush x:Key="LeeBrush_Gray500" Color="{DynamicResource LeeColor_Light_Gray500}"/>
+    <SolidColorBrush x:Key="LeeBrush_Gray600" Color="{DynamicResource LeeColor_Light_Gray600}"/>
+    <SolidColorBrush x:Key="LeeBrush_Gray900" Color="{DynamicResource LeeColor_Light_Gray900}"/>
+    <SolidColorBrush x:Key="LeeBrush_Gray950" Color="{DynamicResource LeeColor_Light_Gray950}"/>
+
     <!--Light模式-->
     <Color x:Key="LeeColor_Light_Background" R="243" G="243" B="243" A="255"/>
     <Color x:Key="LeeColor_Light_Background2" R="249" G="249" B="249" A="255"/>
     <Color x:Key="LeeColor_Light_Background3" R="247" G="247" B="247" A="255"/>
-
     <Color x:Key="LeeColor_Light_Forground" R="251" G="251" B="251" A="255"/>
     <Color x:Key="LeeColor_Light_ForgroundActive" R="255" G="255" B="255" A="255"/>
-
     <Color x:Key="LeeColor_Light_Text" R="28" G="28" B="28" A="255" />
     <Color x:Key="LeeColor_Light_Mark" R="9" G="7" B="0" A="30" />
-    
     <Color x:Key="LeeColor_Light_BorderBrush" R="0" G="0" B="0" A="15"/>
     <Color x:Key="LeeColor_Light_BorderBrushMouseOver" R="0" G="0" B="0" A="30"/>
-
     <Color x:Key="LeeColor_Light_White" R="255" G="255" B="255" A="255" />
     <Color x:Key="LeeColor_Light_Black" R="0" G="0" B="0" A="255" />
-    <!--Dark模式-->
 
+    <Color x:Key="LeeColor_Light_Gray50">#F0F0F0</Color>
+    <Color x:Key="LeeColor_Light_Gray100">#E1E1E1</Color>
+    <Color x:Key="LeeColor_Light_Gray200">#C8C8C8</Color>
+    <Color x:Key="LeeColor_Light_Gray300">#ACACAC</Color>
+    <Color x:Key="LeeColor_Light_Gray400">#919191</Color>
+    <Color x:Key="LeeColor_Light_Gray500">#6E6E6E</Color>
+    <Color x:Key="LeeColor_Light_Gray600">#404040</Color>
+    <Color x:Key="LeeColor_Light_Gray900">#212121</Color>
+    <Color x:Key="LeeColor_Light_Gray950">#141414</Color>
+    <!--Dark模式-->
     <Color x:Key="LeeColor_Dark_Background" R="32" G="32" B="32" A="255"/>
     <Color x:Key="LeeColor_Dark_Background2" R="39" G="39" B="39" A="255"/>
     <Color x:Key="LeeColor_Dark_Background3" R="46" G="46" B="46" A="255"/>
@@ -94,7 +109,17 @@
     <Color x:Key="LeeColor_Dark_White" R="28" G="28" B="28" A="255" />
     <Color x:Key="LeeColor_Dark_Black" R="255" G="255" B="255" A="255" />
 
-    <!--默认主背景色-->
+    <Color x:Key="LeeColor_Dark_Gray950">#F0F0F0</Color>
+    <Color x:Key="LeeColor_Dark_Gray900">#E1E1E1</Color>
+    <Color x:Key="LeeColor_Dark_Gray600">#C8C8C8</Color>
+    <Color x:Key="LeeColor_Dark_Gray500">#ACACAC</Color>
+    <Color x:Key="LeeColor_Dark_Gray400">#919191</Color>
+    <Color x:Key="LeeColor_Dark_Gray300">#6E6E6E</Color>
+    <Color x:Key="LeeColor_Dark_Gray200">#404040</Color>
+    <Color x:Key="LeeColor_Dark_Gray100">#212121</Color>
+    <Color x:Key="LeeColor_Dark_Gray50">#141414</Color>
+
+
       
         
 
@@ -204,42 +229,8 @@
 
     <SolidColorBrush x:Key="LeeBrush_Gray" Color="{DynamicResource LeeColor_Gray}"/>
     <Color x:Key="LeeColor_Gray"  R="221" G="223" B="227" A="255"  />
-    <!--242灰-->
-    <SolidColorBrush x:Key="LeeBrush_Gray242" Color="{DynamicResource LeeColor_Gray242}"/>
-    <Color x:Key="LeeColor_Gray242"  R="242" G="242" B="245" A="255"  />
-
-    <SolidColorBrush x:Key="LeeBrush_Gray233" Color="{DynamicResource LeeColor_Gray233}"/>
-    <Color x:Key="LeeColor_Gray233"  R="233" G="233" B="233" A="255"  />
-    <!--224灰-->
-    <SolidColorBrush x:Key="LeeBrush_Gray224" Color="{DynamicResource LeeColor_Gray224}"/>
-    <Color x:Key="LeeColor_Gray224"  R="224" G="224" B="224" A="255"  />
-    <!--204灰-->
-    <SolidColorBrush x:Key="LeeBrush_Gray204" Color="{DynamicResource LeeColor_Gray204}"/>
-    <Color x:Key="LeeColor_Gray204"  R="204" G="204" B="204" A="255"  />
-
-    <!--153灰-->
-    <SolidColorBrush x:Key="LeeBrush_Gray191" Color="{DynamicResource LeeColor_Gray191}"/>
-    <Color x:Key="LeeColor_Gray191"  R="191" G="191" B="191" A="255"  />
-
-    <!--153灰-->
-    <SolidColorBrush x:Key="LeeBrush_Gray153" Color="{DynamicResource LeeColor_Gray153}"/>
-    <Color x:Key="LeeColor_Gray153"  R="153" G="153" B="153" A="255"  />
-    <!--102灰-->
-    <SolidColorBrush x:Key="LeeBrush_Gray102" Color="{DynamicResource LeeColor_Gray102}"/>
-    <Color x:Key="LeeColor_Gray102"  R="103" G="102" B="102" A="255"  />
-    <!--76灰-->
-    <SolidColorBrush x:Key="LeeBrush_Gray76" Color="{DynamicResource LeeColor_Gray76}"/>
-    <Color x:Key="LeeColor_Gray76"  R="76" G="76" B="76" A="255"  />
-    <!--51灰-->
-    <SolidColorBrush x:Key="LeeBrush_Gray51" Color="{DynamicResource LeeColor_Gray51}"/>
-    <Color x:Key="LeeColor_Gray51"  R="51" G="51" B="51" A="255"  />
-    <!--45灰-->
-    <SolidColorBrush x:Key="LeeBrush_Gray45" Color="{DynamicResource LeeColor_Gray45}"/>
-    <Color x:Key="LeeColor_Gray45"  R="35" G="35" B="35" A="255"  />
-
-    <!--35灰-->
-    <SolidColorBrush x:Key="LeeBrush_Gray35" Color="{DynamicResource LeeColor_Gray35}"/>
-    <Color x:Key="LeeColor_Gray35"  R="35" G="35" B="35" A="255"  />
+  
+    
     <!--默认阴影灰-->
     <Color x:Key="LeeBrush_GrayShadow">#7FB6B6B6</Color>
 

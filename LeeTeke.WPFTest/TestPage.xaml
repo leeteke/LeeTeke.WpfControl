@@ -55,7 +55,7 @@
                     </ContextMenu>
                 </StackPanel.ContextMenu>
 
-                <leecontrol:GridView ItemClickedCommand="{Binding TestCommand}" ItemsSource="{Binding TestList}">
+                <leecontrol:GridView ItemsSource="{Binding TestList}" ItemClickedCommand="{Binding TestCommand}">
                     <leecontrol:GridView.NoItemsContent>
                         <TextBlock
                             HorizontalAlignment="Center"
@@ -87,11 +87,11 @@
                     AcceptsReturn="True"
                     BorderThickness="1"
                     IconCanClick="True"
-                    IconCommand="{Binding TestCommand}"
                     IconVisible="True"
                     Mode="IMEDispaly"
                     Text="2"
-                    ToolTip="测试" />
+                    ToolTip="测试"
+                    IconCommand="{Binding TestCommand}" />
 
                 <TextBox Width="150" />
 
@@ -99,11 +99,11 @@
                     CanItemDisplacement="True"
                     CloseVisibly="MouseOver"
                     IsScrollToSelected="True"
-                    ItemClosedCommand="{Binding ItemClosedCommand}"
                     ItemContxtMenuContentDock="Bottom"
                     ItemsSource="{Binding TestList}"
                     Orientation="Horizontal"
-                    ShowScrollToButton="True">
+                    ShowScrollToButton="True"
+                    ItemClosedCommand="{Binding ItemClosedCommand}">
                     <leecontrol:Navigation.ItemContxtMenuContent>
                         <Grid Height="100">
                             <Rectangle
@@ -194,6 +194,47 @@
                         Width="50"
                         Fill="{DynamicResource LeeBrush_Mark}"
                         ToolTip="LeeBrush_Mark" />
+
+                    <Rectangle
+                        Width="50"
+                        Fill="{DynamicResource LeeBrush_Gray50}"
+                        ToolTip="LeeBrush_Mark" />
+
+                    <Rectangle
+                        Width="50"
+                        Fill="{DynamicResource LeeBrush_Gray100}"
+                        ToolTip="LeeBrush_Mark" />
+
+                    <Rectangle
+                        Width="50"
+                        Fill="{DynamicResource LeeBrush_Gray200}"
+                        ToolTip="LeeBrush_Mark" />
+
+                    <Rectangle
+                        Width="50"
+                        Fill="{DynamicResource LeeBrush_Gray300}"
+                        ToolTip="LeeBrush_Mark" />
+
+                    <Rectangle
+                        Width="50"
+                        Fill="{DynamicResource LeeBrush_Gray400}"
+                        ToolTip="LeeBrush_Mark" />
+                    <Rectangle
+                        Width="50"
+                        Fill="{DynamicResource LeeBrush_Gray500}"
+                        ToolTip="LeeBrush_Mark" />
+                    <Rectangle
+                        Width="50"
+                        Fill="{DynamicResource LeeBrush_Gray600}"
+                        ToolTip="LeeBrush_Mark" />
+                    <Rectangle
+                        Width="50"
+                        Fill="{DynamicResource LeeBrush_Gray900}"
+                        ToolTip="LeeBrush_Mark" />
+                    <Rectangle
+                        Width="50"
+                        Fill="{DynamicResource LeeBrush_Gray950}"
+                        ToolTip="LeeBrush_Mark" />
                 </StackPanel>
 
 
@@ -218,20 +259,18 @@
                 </Expander>
 
 
-                <leecontrol:ScrollBanner
-                    x:Name="th"
+                <leecontrol:ScrollBanner x:Name="th"
                     Margin="5"
                     AutoScrolling="False"
                     Content="{Binding ElementName=txt, Path=Text}">
                     <leecontrol:ScrollBanner.Resources>
-                        <leecommand:CommandReference
-                            x:Key="CopyCommand"
+                        <leecommand:CommandReference x:Key="CopyCommand"
                             Command="{x:Static leecommand:ClipboardCommand.CopyCommand}"
                             CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type leecontrol:ScrollBanner}}, Path=Content}" />
                     </leecontrol:ScrollBanner.Resources>
                     <leecontrol:ScrollBanner.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Command="{StaticResource CopyCommand}" Header="ceshi" />
+                            <MenuItem Header="ceshi" Command="{StaticResource CopyCommand}" />
                         </ContextMenu>
                     </leecontrol:ScrollBanner.ContextMenu>
                 </leecontrol:ScrollBanner>
@@ -245,8 +284,8 @@
                     Height="30"
                     Margin="5"
                     Padding="0"
-                    Command="{Binding TestCommand}"
-                    ToolTip="黑白切换">
+                    ToolTip="黑白切换"
+                    Command="{Binding TestCommand}">
                     <leecontrol:ImageEx Effect="{DynamicResource LeeShadow}" Source="/Datas/myicon.jpg">
                         <leecontrol:ImageEx.DefaultContent>
                             <Image Source="/Datas/test.ico" />
@@ -303,10 +342,10 @@
                     VerticalContentAlignment="Center"
                     leedep:ListItemManager.Marigin="5"
                     leedep:SelectorDragDropManager.DragDropOver="Navigation_DragDropOver"
-                    leedep:SelectorDragDropManager.DragDropOverCommand="{Binding ToggleButtonCommand}"
                     leedep:SelectorDragDropManager.IsEnabled="True"
                     ItemsSource="{Binding TestList}"
-                    SelectionMode="Single">
+                    SelectionMode="Single"
+                    leedep:SelectorDragDropManager.DragDropOverCommand="{Binding ToggleButtonCommand}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -348,8 +387,8 @@
                     ItemsSource="{Binding TestList}"
                     SelectedMaximum="5"
                     SelectedMinimum="2"
-                    SelectionAlertedCommand="{Binding ToggleButtonCommand}"
-                    SelectionMode="Multiple">
+                    SelectionMode="Multiple"
+                    SelectionAlertedCommand="{Binding ToggleButtonCommand}">
                     <leecontrol:ToggleGroup.ItemTemplate>
                         <DataTemplate>
                             <TextBlock
@@ -378,8 +417,7 @@
                 </leecontrol:ImageEx>
 
                 <leecontrol:ProgressBar Mode="Wating" />
-                <Slider
-                    x:Name="slider"
+                <Slider x:Name="slider"
                     AutoToolTipPlacement="TopLeft"
                     AutoToolTipPrecision="2"
                     Maximum="100" />
@@ -458,22 +496,20 @@
                     Foreground="{DynamicResource LeeBrush_Text}"
                     Text="你好" />
 
-                <TextBox
-                    x:Name="txt"
+                <TextBox x:Name="txt"
                     Margin="5"
-                    leedep:TextBoxManager.EnterCommand="{Binding TestCommand}"
                     AcceptsReturn="True"
-                    SelectionBrush="#FF0078D7" />
+                    SelectionBrush="#FF0078D7"
+                    leedep:TextBoxManager.EnterCommand="{Binding TestCommand}" />
 
 
                 <PasswordBox
                     leedep:PasswordManager.Attach="True"
-                    leedep:PasswordManager.EnterCommand="{Binding TestCommand}"
                     leedep:PasswordManager.EscToEmpty="True"
-                    leedep:PasswordManager.Password="{Binding ElementName=txt, Path=Text, Mode=TwoWay}" />
+                    leedep:PasswordManager.Password="{Binding ElementName=txt, Path=Text, Mode=TwoWay}"
+                    leedep:PasswordManager.EnterCommand="{Binding TestCommand}" />
 
-                <leecontrol:TextBoxEx
-                    x:Name="textEx"
+                <leecontrol:TextBoxEx x:Name="textEx"
                     BorderBrush="Red"
                     BorderThickness="1"
                     Mode="Password"

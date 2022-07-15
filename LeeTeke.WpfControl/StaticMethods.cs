@@ -32,7 +32,15 @@ namespace LeeTeke.WpfControl
                 Application.Current.Resources["LeeBrush_BorderBrushMouseOver"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Light_BorderBrushMouseOver"]);
                 Application.Current.Resources["LeeBrush_White"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Light_White"]);
                 Application.Current.Resources["LeeBrush_Black"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Light_Black"]);
-
+                Application.Current.Resources["LeeBrush_Gray50"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Light_Gray50"]);
+                Application.Current.Resources["LeeBrush_Gray100"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Light_Gray100"]);
+                Application.Current.Resources["LeeBrush_Gray200"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Light_Gray200"]);
+                Application.Current.Resources["LeeBrush_Gray300"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Light_Gray300"]);
+                Application.Current.Resources["LeeBrush_Gray400"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Light_Gray400"]);
+                Application.Current.Resources["LeeBrush_Gray500"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Light_Gray500"]);
+                Application.Current.Resources["LeeBrush_Gray600"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Light_Gray600"]);
+                Application.Current.Resources["LeeBrush_Gray900"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Light_Gray900"]);
+                Application.Current.Resources["LeeBrush_Gray950"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Light_Gray950"]);
                 #endregion
             }
             else
@@ -50,6 +58,15 @@ namespace LeeTeke.WpfControl
                 Application.Current.Resources["LeeBrush_BorderBrushMouseOver"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Dark_BorderBrushMouseOver"]);
                 Application.Current.Resources["LeeBrush_White"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Dark_White"]);
                 Application.Current.Resources["LeeBrush_Black"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Dark_Black"]);
+                Application.Current.Resources["LeeBrush_Gray50"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Dark_Gray50"]);
+                Application.Current.Resources["LeeBrush_Gray100"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Dark_Gray100"]);
+                Application.Current.Resources["LeeBrush_Gray200"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Dark_Gray200"]);
+                Application.Current.Resources["LeeBrush_Gray300"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Dark_Gray300"]);
+                Application.Current.Resources["LeeBrush_Gray400"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Dark_Gray400"]);
+                Application.Current.Resources["LeeBrush_Gray500"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Dark_Gray500"]);
+                Application.Current.Resources["LeeBrush_Gray600"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Dark_Gray600"]);
+                Application.Current.Resources["LeeBrush_Gray900"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Dark_Gray900"]);
+                Application.Current.Resources["LeeBrush_Gray950"] = new SolidColorBrush((Color)Application.Current.Resources["LeeColor_Dark_Gray950"]);
                 #endregion
             }
 
