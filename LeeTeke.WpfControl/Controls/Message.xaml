@@ -12,6 +12,7 @@
     Closing="Window_Closing"
     ResizeMode="NoResize"
     TitleBackground="{DynamicResource LeeBrush_Background}"
+    UseLayoutRounding="{DynamicResource LeeUseLayoutRounding}"
     WindowStartupLocation="CenterOwner"
     mc:Ignorable="d">
     <Grid>

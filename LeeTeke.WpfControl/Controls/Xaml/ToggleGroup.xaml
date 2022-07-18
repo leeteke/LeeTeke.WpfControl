@@ -9,7 +9,10 @@
 
     <Style x:Key="BaseToggleGroup" TargetType="{x:Type local:ToggleGroup}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-        <Setter Property="SnapsToDevicePixels"   Value="{DynamicResource LeeSnapsToDevicePixels}" />
+
+        <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
+
         <Setter Property="IsTabStop" Value="True"/>
         <Setter Property="Orientation" Value="Horizontal"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>

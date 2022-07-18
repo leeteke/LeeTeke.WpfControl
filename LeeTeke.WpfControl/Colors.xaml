@@ -12,7 +12,7 @@
 
     <BlurEffect x:Key="LeeBlurEffect"/>
     <sys:Boolean x:Key="LeeSnapsToDevicePixels">True</sys:Boolean>
-    
+    <sys:Boolean x:Key="LeeUseLayoutRounding">True</sys:Boolean>
     <Style x:Key="LeeFocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>

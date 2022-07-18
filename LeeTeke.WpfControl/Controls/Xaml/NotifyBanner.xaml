@@ -15,6 +15,7 @@
     <Style x:Key="BaseNotifyBanner" TargetType="{x:Type local:NotifyBanner}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="EasingFunction">
             <Setter.Value>
                 <QuadraticEase EasingMode="EaseOut" />

@@ -12,6 +12,9 @@
 
     <Style x:Key="BasePagination" TargetType="{x:Type local:Pagination}">
 
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
+        <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}" />
         <Setter Property="Height" Value="{DynamicResource LeeItemHeight}" />
         <Setter Property="HorizontalAlignment" Value="Center" />

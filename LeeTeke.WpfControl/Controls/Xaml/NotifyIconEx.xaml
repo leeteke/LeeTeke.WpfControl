@@ -16,7 +16,7 @@
         <Setter Property="Margin" Value="10" />
         <Setter Property="Effect" Value="{DynamicResource LeeShadow}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
-
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
     </Style>
 
 </ResourceDictionary>

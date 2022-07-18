@@ -9,6 +9,7 @@
     <Style x:Key="BaseProgressBar" TargetType="{x:Type local:ProgressBar}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="FillBrush" Value="{DynamicResource LeeBrush_Theme}" />
         <Setter Property="MinHeight" Value="8" />
         <Setter Property="Padding" Value="0" />

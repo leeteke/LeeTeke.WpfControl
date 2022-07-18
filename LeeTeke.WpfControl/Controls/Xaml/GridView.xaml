@@ -7,6 +7,7 @@
     <Style x:Key="BaseGridViewItem" TargetType="{x:Type local:GridViewItem}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Template">
@@ -33,6 +34,7 @@
     <Style x:Key="BaseGridView" TargetType="{x:Type local:GridView}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="leedep:ScrollViewerManager.SlideEasingFunction" Value="{DynamicResource LeeScrollViewerSlideEasingFuncion}" />
         <Setter Property="leedep:ScrollViewerManager.SlideDuration" Value="{DynamicResource LeeScrollViewerSlideDuration}" />
         <Setter Property="leedep:ScrollViewerManager.SlideEnabled" Value="{DynamicResource LeeScrollViewerSlideEnabled}" />
@@ -70,7 +72,7 @@
                                     Visibility="{TemplateBinding HasItems,
                                                                  Converter={StaticResource VisibilityForBoolReverseConverter}}" />
 
-                                <ItemsPresenter Grid.Row="0" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                <ItemsPresenter Grid.Row="0"  />
                                 <!--  尾部  -->
                                 <ContentPresenter
                                     x:Name="PART_ListEnd"

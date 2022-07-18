@@ -16,8 +16,7 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <!--  修改默认SnapsToDevicePixels  -->
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
-
-        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
 
     </Style>
 
@@ -26,7 +25,7 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <!--  修改默认SnapsToDevicePixels  -->
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
-
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
     </Style>
 
     <Style TargetType="ContentPresenter">
@@ -34,6 +33,8 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <!--  修改默认FocusVisualStyle  -->
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
+        
     </Style>
 
     <Style TargetType="Frame">
@@ -43,6 +44,8 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <!--  修改默认FocusVisualStyle  -->
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
+
 
     </Style>
 
@@ -51,6 +54,8 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <!--  修改默认SnapsToDevicePixels  -->
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
+
 
     </Style>
 
@@ -60,6 +65,7 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <!--  修改默认SnapsToDevicePixels  -->
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
 
     </Style>
 
@@ -68,6 +74,7 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <!--  修改默认SnapsToDevicePixels  -->
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
 
@@ -78,6 +85,7 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <!--  修改默认SnapsToDevicePixels  -->
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
 
     </Style>
 
@@ -86,6 +94,7 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <!--  修改默认SnapsToDevicePixels  -->
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
 
     </Style>
 
@@ -94,7 +103,7 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <!--  修改默认SnapsToDevicePixels  -->
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
-
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
     </Style>
 
     <Style TargetType="Ellipse">
@@ -102,6 +111,7 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <!--  修改默认SnapsToDevicePixels  -->
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
     </Style>
 
     <Style TargetType="Image">
@@ -109,6 +119,7 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <!--  修改默认SnapsToDevicePixels  -->
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
     </Style>
 
     <Style TargetType="Viewbox">
@@ -116,6 +127,7 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <!--  修改默认SnapsToDevicePixels  -->
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
 
     </Style>
 
@@ -124,6 +136,7 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <!--  修改默认SnapsToDevicePixels  -->
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
 
     </Style>
 
@@ -132,6 +145,7 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <!--  修改默认FocusVisualStyle  -->
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
 
     </Style>
 
@@ -140,6 +154,7 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <!--  修改默认FocusVisualStyle  -->
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
 
     </Style>
 
@@ -148,12 +163,14 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <!--  修改默认FocusVisualStyle  -->
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
 
     </Style>
 
     <Style x:Key="LeeButton" TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
@@ -180,7 +197,7 @@
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 Focusable="False"
                                 RecognizesAccessKey="True"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                 />
                             <controls:RippleMask
                                 CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource AncestorType={x:Type Button}}, Mode=OneWay}"
                                 IsOverflow="False"
@@ -228,6 +245,7 @@
     <Style x:Key="ColorButton" TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Theme}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_ThemeForeground}" />
@@ -257,7 +275,7 @@
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 Focusable="False"
                                 RecognizesAccessKey="True"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                 />
                             <controls:RippleMask
                                 CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
                                 IsOverflow="False"
@@ -312,6 +330,7 @@
     <Style x:Key="TextButton" TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
@@ -336,7 +355,7 @@
                             Margin="{TemplateBinding Padding}"
                             Focusable="False"
                             RecognizesAccessKey="True"
-                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                            
                             TextElement.Foreground="{TemplateBinding Foreground}" />
                     </Border>
                     <ControlTemplate.Triggers>
@@ -362,6 +381,7 @@
     <Style x:Key="LeeTextBox" TargetType="{x:Type TextBox}">
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}" />
         <Setter Property="leedep:TextBoxManager.ActiveBackground" Value="{DynamicResource LeeBrush_ForgroundActive}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
         <Setter Property="BorderThickness" Value="1" />
@@ -405,7 +425,7 @@
                         BorderThickness="{TemplateBinding BorderThickness}"
                         Focusable="false"
                         HorizontalScrollBarVisibility="Hidden"
-                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                        
                         VerticalScrollBarVisibility="Hidden" />
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
@@ -431,6 +451,7 @@
     <Style x:Key="LeeToggleButton" TargetType="{x:Type ToggleButton}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
@@ -467,7 +488,7 @@
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 Focusable="False"
                                 RecognizesAccessKey="True"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                 />
                             <ContentPresenter x:Name="Checked_ContentPresenter"
                                 Margin="{TemplateBinding Padding}"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -475,7 +496,7 @@
                                 Content="{Binding RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}, Path=(leedep:ToggleButtonManager.CheckedContent)}"
                                 Focusable="False"
                                 RecognizesAccessKey="True"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                
                                 TextElement.Foreground="{Binding ElementName=contentPresenter, Path=(TextElement.Foreground)}"
                                 Visibility="Collapsed" />
                             <controls:RippleMask
@@ -547,6 +568,7 @@
     <Style x:Key="RotateToggleButton" TargetType="{x:Type ToggleButton}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="OverridesDefaultStyle" Value="true" />
         <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}" />
         <Setter Property="IsTabStop" Value="false" />
@@ -734,6 +756,8 @@
     <Style x:Key="LeeToolTip" TargetType="{x:Type ToolTip}">
         <Setter Property="Background" Value="{DynamicResource LeeBrush_ForgroundActive}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
+        <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}" />
@@ -752,7 +776,7 @@
                         <ContentPresenter x:Name="PART_Content"
                             Margin="{TemplateBinding Padding}"
                             RecognizesAccessKey="True"
-                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                             />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
@@ -789,6 +813,7 @@
         <Setter Property="PasswordChar" Value="●" />
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}" />
         <Setter Property="leedep:TextBoxManager.ActiveBackground" Value="{DynamicResource LeeBrush_ForgroundActive}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
@@ -826,7 +851,7 @@
                         BorderThickness="{TemplateBinding BorderThickness}"
                         Focusable="false"
                         HorizontalScrollBarVisibility="Hidden"
-                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                        
                         VerticalScrollBarVisibility="Hidden" />
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
@@ -852,6 +877,7 @@
     <Style x:Key="LeeRadioButton" TargetType="{x:Type RadioButton}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="Background" Value="{DynamicResource LeeBrush_ForgroundActive}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
@@ -869,7 +895,7 @@
                 <ControlTemplate TargetType="{x:Type RadioButton}">
                     <Grid x:Name="templateRoot"
                         Background="Transparent"
-                        SnapsToDevicePixels="True">
+                        >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
@@ -905,7 +931,7 @@
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             Focusable="False"
                             RecognizesAccessKey="True"
-                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                             />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="HasContent" Value="true">
@@ -1097,6 +1123,7 @@
     <Style x:Key="LeeSlider" TargetType="{x:Type Slider}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="FontSize" Value="12" />
         <Setter Property="Background" Value="{DynamicResource LeeBrush_ForgroundActive}" />
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
@@ -1216,7 +1243,7 @@
                                         Fill="{TemplateBinding Foreground}"
                                         FocusVisualStyle="{TemplateBinding FocusVisualStyle}"
                                         Placement="Top"
-                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                         />
                                     <Border x:Name="PART_Border"
                                         Grid.Row="1"
                                         Height="{Binding Path=(leedep:SliderManager.TrackSize), RelativeSource={RelativeSource AncestorType=Slider}, Mode=OneWay}"
@@ -1228,7 +1255,7 @@
                                     <Track x:Name="PART_Track"
                                         Grid.Row="1"
                                         FocusVisualStyle="{TemplateBinding FocusVisualStyle}"
-                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                        >
                                         <Track.DecreaseRepeatButton>
                                             <RepeatButton
                                                 Height="{Binding Path=(leedep:SliderManager.TrackSize), RelativeSource={RelativeSource AncestorType=Slider}, Mode=OneWay}"
@@ -1263,7 +1290,7 @@
                                         VerticalAlignment="Top"
                                         Fill="{TemplateBinding Foreground}"
                                         Placement="Bottom"
-                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                         />
                                 </Grid>
                             </DockPanel>
                             <ControlTemplate.Triggers>
@@ -1311,7 +1338,7 @@
                                         HorizontalAlignment="Left"
                                         Fill="{TemplateBinding Foreground}"
                                         Placement="Left"
-                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                         />
                                     <Border x:Name="PART_Border"
                                         Grid.Column="1"
                                         Width="{Binding Path=(leedep:SliderManager.TrackSize), RelativeSource={RelativeSource AncestorType=Slider}, Mode=OneWay}"
@@ -1323,7 +1350,7 @@
                                     <Track x:Name="PART_Track"
                                         Grid.Column="1"
                                         Margin="0,0,0,0"
-                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                        >
                                         <Track.DecreaseRepeatButton>
                                             <RepeatButton
                                                 Width="{Binding Path=(leedep:SliderManager.TrackSize), RelativeSource={RelativeSource AncestorType=Slider}, Mode=OneWay}"
@@ -1356,7 +1383,7 @@
                                         HorizontalAlignment="Right"
                                         Fill="{TemplateBinding Foreground}"
                                         Placement="Right"
-                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                         />
                                 </Grid>
                             </DockPanel>
                             <ControlTemplate.Triggers>
@@ -1502,6 +1529,8 @@
     </Style>
 
     <Style x:Key="LeeCalendarItem" TargetType="{x:Type CalendarItem}">
+        <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="Margin" Value="0" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="leedep:CalendarManager.TitleBackground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type Calendar}}, Path=(leedep:CalendarManager.TitleBackground), Mode=OneWay}" />
@@ -1668,6 +1697,7 @@
     <Style x:Key="LeeCalendar" TargetType="{x:Type Calendar}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
@@ -1729,6 +1759,7 @@
     <Style x:Key="LeeScrollViewer" TargetType="{x:Type ScrollViewer}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
@@ -1945,6 +1976,7 @@
     <Style x:Key="LeeCheckBox" TargetType="{x:Type CheckBox}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="Background" Value="{DynamicResource LeeBrush_ForgroundActive}" />
         <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}" />
         <Setter Property="leedep:CheckBoxManager.RippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}" />
@@ -2039,7 +2071,7 @@
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             Focusable="False"
                             RecognizesAccessKey="True"
-                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                             />
 
                         <ContentPresenter x:Name="Checked_ContentPresenter"
                             Grid.Column="1"
@@ -2049,7 +2081,7 @@
                             Content="{Binding RelativeSource={RelativeSource AncestorType={x:Type CheckBox}}, Path=(leedep:CheckBoxManager.CheckedContent)}"
                             Focusable="False"
                             RecognizesAccessKey="True"
-                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                            
                             Visibility="Collapsed" />
 
 
@@ -2103,6 +2135,7 @@
     <Style x:Key="SwitchCheckBox" TargetType="{x:Type CheckBox}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="Background" Value="{DynamicResource LeeBrush_ForgroundActive}" />
         <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}" />
         <Setter Property="leedep:CheckBoxManager.RippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}" />
@@ -2217,7 +2250,7 @@
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             Focusable="False"
                             RecognizesAccessKey="True"
-                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                             />
 
                         <ContentPresenter x:Name="Checked_ContentPresenter"
                             Grid.Column="1"
@@ -2227,7 +2260,7 @@
                             Content="{Binding RelativeSource={RelativeSource AncestorType={x:Type CheckBox}}, Path=(leedep:CheckBoxManager.CheckedContent), Mode=OneWay}"
                             Focusable="False"
                             RecognizesAccessKey="True"
-                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                            
                             Visibility="Collapsed" />
 
 
@@ -2291,6 +2324,7 @@
         <Setter Property="MinHeight" Value="0" />
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
         <Setter Property="Template">
@@ -2311,6 +2345,7 @@
     <Style x:Key="LeeComboBox" TargetType="{x:Type ComboBox}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
@@ -2390,7 +2425,7 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}, Mode=OneWay}">
-                        <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
+                        <Grid x:Name="templateRoot" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="0" MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" />
@@ -2425,7 +2460,7 @@
                                         VerticalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(ScrollViewer.VerticalScrollBarVisibility), Mode=OneWay}">
                                         <ItemsPresenter x:Name="ItemsPresenter"
                                             KeyboardNavigation.DirectionalNavigation="Contained"
-                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                             />
                                     </ScrollViewer>
                                 </lee:EasyPanel>
                             </Popup>
@@ -2439,7 +2474,7 @@
                                 ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
                                 ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
                                 IsHitTestVisible="false"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                 />
                             <ToggleButton x:Name="toggleButton"
                                 Grid.ColumnSpan="2"
                                 Padding="0,0,5,0"
@@ -2566,6 +2601,7 @@
     </Style>
     <Style x:Key="LeeComboBoxItem" TargetType="{x:Type ComboBoxItem}">
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <!--  常规属性  -->
         <Setter Property="Height" Value="{Binding Path=(leedep:ComboBoxManager.ItemHeight), RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}, Mode=OneWay}" />
@@ -2758,6 +2794,8 @@
     </Style>
 
     <Style x:Key="LeeSeparator" TargetType="{x:Type Separator}">
+        <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="Background" Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="Margin" Value="0,2" />
         <Setter Property="Focusable" Value="false" />
@@ -2769,7 +2807,7 @@
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
-                        SnapsToDevicePixels="true" />
+                         />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -2777,6 +2815,8 @@
 
     <Style x:Key="{x:Static MenuItem.SeparatorStyleKey}" TargetType="Separator">
         <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="leedep:ContextMenuManager.SeparatorHeight" Value="{Binding Path=(leedep:ContextMenuManager.SeparatorHeight), RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}" />
         <Setter Property="leedep:ContextMenuManager.SeparatorMargin" Value="{Binding Path=(leedep:ContextMenuManager.SeparatorMargin), RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}" />
         <Setter Property="leedep:ContextMenuManager.SeparatorFill" Value="{Binding Path=(leedep:ContextMenuManager.SeparatorFill), RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}" />
@@ -2813,6 +2853,7 @@
     <Style x:Key="LeeMenuItem" TargetType="{x:Type MenuItem}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="leedep:MenuItemManager.RippleBrush" Value="{Binding Path=(leedep:MenuItemManager.RippleBrush), RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}" />
         <Setter Property="leedep:MenuItemManager.IconMinWidth" Value="{Binding Path=(leedep:MenuItemManager.IconMinWidth), RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}" />
         <Setter Property="leedep:MenuItemManager.NextTagMinWidth" Value="{Binding Path=(leedep:MenuItemManager.NextTagMinWidth), RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}" />
@@ -2847,7 +2888,7 @@
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 ContentSource="Icon"
                                 RecognizesAccessKey="True"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                
                                 TextElement.Foreground="{TemplateBinding Foreground}" />
                             <ContentPresenter x:Name="Presenter"
                                 Grid.Column="1"
@@ -2856,7 +2897,7 @@
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 ContentSource="Header"
                                 RecognizesAccessKey="True"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                
                                 TextElement.Foreground="{TemplateBinding Foreground}" />
                             <Path x:Name="Path"
                                 Grid.Column="2"
@@ -2931,6 +2972,7 @@
     <Style x:Key="LeeContextMenu" TargetType="{x:Type ContextMenu}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}" />
         <Setter Property="leedep:CornerRadiusManager.IsClip" Value="True" />
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}" />
@@ -2967,7 +3009,7 @@
                             <ContentPresenter
                                 Content="{Binding Path=(leedep:ContextMenuManager.Content), RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}"
                                 DockPanel.Dock="{Binding Path=(leedep:ContextMenuManager.ContentDock), RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                 />
 
                             <ScrollViewer
                                 Padding="{TemplateBinding Padding}"
@@ -3020,6 +3062,7 @@
     <Style x:Key="LeeDataGridColumnHeader" TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
         <Setter Property="Background" Value="{Binding Path=(leedep:DataGridManager.HeaderBackground), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Theme}" />
@@ -3045,7 +3088,7 @@
                                 <ContentPresenter
                                     HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                     />
                                 <ToggleButton x:Name="PART_Sort"
                                     Grid.Column="1"
                                     Margin="2,0"
@@ -3127,6 +3170,7 @@
     <Style x:Key="LeeDataGridCell" TargetType="{x:Type DataGridCell}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Padding" Value="{Binding Path=(leedep:DataGridManager.CellPadding), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
@@ -3145,7 +3189,7 @@
                         <ContentPresenter x:Name="Presenter"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                             />
                     </Border>
                     <ControlTemplate.Triggers>
 
@@ -3190,6 +3234,7 @@
     <Style x:Key="LeeDataGridRow" TargetType="{x:Type DataGridRow}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
         <Setter Property="MinHeight" Value="{Binding Path=(leedep:DataGridManager.RowMinHeight), RelativeSource={RelativeSource AncestorType=DataGrid}, Mode=OneWay}" />
         <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.RowBackground), Mode=OneWay}" />
@@ -3226,7 +3271,7 @@
                             <DataGridCellsPresenter
                                 Grid.Column="1"
                                 ItemsPanel="{TemplateBinding ItemsPanel}"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                 />
                             <DataGridDetailsPresenter
                                 Grid.Row="1"
                                 Grid.Column="1"
@@ -3299,6 +3344,7 @@
     <Style x:Key="LeeDataGridRowHeader" TargetType="{x:Type DataGridRowHeader}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="VerticalContentAlignment" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.RowHeaderVerticalContentAlignment), Mode=OneWay}" />
         <Setter Property="HorizontalContentAlignment" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.RowHeaderHorizontalContentAlignment), Mode=OneWay}" />
@@ -3315,7 +3361,7 @@
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 RecognizesAccessKey="True"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                 />
                         </Border>
                         <!--<Control SnapsToDevicePixels="false"
                                      VerticalAlignment="Center"
@@ -3349,6 +3395,7 @@
     <Style x:Key="LeeDataGrid" TargetType="{x:Type DataGrid}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="SelectionUnit" Value="FullRow" />
         <Setter Property="FontSize" Value="13" />
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
@@ -3520,7 +3567,7 @@
                                                     </Border>
                                                     <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter"
                                                         Grid.Column="1"
-                                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                        
                                                         Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Column}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}" />
                                                 </Grid>
                                             </Border>
@@ -3729,7 +3776,7 @@
                                         Content="{Binding Path=(leedep:DataGridManager.NoItemsContent), RelativeSource={RelativeSource AncestorType={x:Type DataGrid}, AncestorLevel=1}, Mode=OneWay}"
                                         Visibility="{TemplateBinding HasItems,
                                                                      Converter={StaticResource VisibilityForBoolReverseConverter}}" />
-                                    <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                    <ItemsPresenter  />
 
                                     <ContentPresenter x:Name="PART_ListEnd"
                                         Grid.Row="1"
@@ -3795,7 +3842,7 @@
                                             </Border>
                                             <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter"
                                                 Grid.Column="1"
-                                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                
                                                 Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Column}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}" />
                                         </Grid>
                                     </Border>
@@ -3805,7 +3852,7 @@
                                         Content="{Binding Path=(leedep:DataGridManager.NoItemsContent), RelativeSource={RelativeSource AncestorType={x:Type DataGrid}, AncestorLevel=1}, Mode=OneWay}"
                                         Visibility="{TemplateBinding HasItems,
                                                                      Converter={StaticResource VisibilityForBoolReverseConverter}}" />
-                                    <ItemsPresenter Grid.Row="1" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                    <ItemsPresenter Grid.Row="1"  />
 
                                     <!--  尾部  -->
                                     <ContentPresenter x:Name="PART_ListEnd"
@@ -3928,6 +3975,7 @@
     </ControlTemplate>
     <Style x:Key="LeeDatePicker" TargetType="{x:Type DatePicker}">
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}" />
         <Setter Property="leedep:CornerRadiusManager.IsClip" Value="True" />
@@ -4344,6 +4392,7 @@
     </ControlTemplate>
     <Style x:Key="LeeExpander" TargetType="{x:Type Expander}">
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}" />
@@ -4379,6 +4428,7 @@
 
     <Style x:Key="LeeGroupBox" TargetType="{x:Type GroupBox}">
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
         <Setter Property="Background" Value="Transparent" />
@@ -4427,7 +4477,6 @@
                                         Height="{Binding Path=(leedep:GroupBoxManager.SplitLineSize), RelativeSource={RelativeSource AncestorType=GroupBox}, Mode=OneWay}"
                                         Margin="{Binding Path=(leedep:GroupBoxManager.SplitLineMargin), RelativeSource={RelativeSource AncestorType=GroupBox}, Mode=OneWay}"
                                         Fill="{Binding Path=(leedep:GroupBoxManager.SplitLineBrush), RelativeSource={RelativeSource AncestorType=GroupBox}, Mode=OneWay}"
-                                        SnapsToDevicePixels="{DynamicResource LeeSnapsToDevicePixels}"
                                         Visibility="{Binding Path=(leedep:GroupBoxManager.SplitLineVisibility), RelativeSource={RelativeSource AncestorType=GroupBox}, Mode=OneWay}" />
                                     <ContentPresenter
                                         Grid.Row="2"
@@ -4551,6 +4600,7 @@
 
     <Style x:Key="LeetekeListBoxItem" TargetType="{x:Type ListBoxItem}">
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <!--  常规属性  -->
 
@@ -4748,6 +4798,7 @@
     <Style x:Key="LeetekeListBox" TargetType="{x:Type ListBox}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="BorderThickness" Value="1" />
@@ -4860,7 +4911,7 @@
                                 Visibility="{TemplateBinding HasItems,
                                                              Converter={StaticResource VisibilityForBoolReverseConverter}}" />
 
-                            <ItemsPresenter Grid.Row="0" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            <ItemsPresenter Grid.Row="0"  />
                             <!--  尾部  -->
                             <ContentPresenter x:Name="PART_ListEnd"
                                 Grid.Row="1"
@@ -4896,6 +4947,8 @@
     </Style>
 
     <Style x:Key="LeetekeGridViewColumnHeader" TargetType="{x:Type GridViewColumnHeader}">
+        <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="VerticalContentAlignment" Value="{Binding Path=(leedep:ListViewManager.HeaderVerticalAlignment), RelativeSource={RelativeSource AncestorType={x:Type ListView}}, Mode=OneWay}" />
         <Setter Property="HorizontalContentAlignment" Value="{Binding Path=(leedep:ListViewManager.HeaderHorizontalAlignment), RelativeSource={RelativeSource AncestorType={x:Type ListView}}, Mode=OneWay}" />
 
@@ -4914,7 +4967,7 @@
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 RecognizesAccessKey="True"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                 />
                         </Border>
 
                         <Thumb x:Name="PART_HeaderGripper"
@@ -4930,6 +4983,7 @@
     </Style>
     <Style x:Key="LeetekeListViewItem" TargetType="{x:Type ListViewItem}">
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
@@ -5079,6 +5133,7 @@
     <Style x:Key="LeetekeListView" TargetType="{x:Type ListView}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="BorderThickness" Value="0" />
@@ -5169,7 +5224,7 @@
                                         ColumnHeaderTemplateSelector="{Binding View.ColumnHeaderTemplateSelector, RelativeSource={RelativeSource TemplatedParent}}"
                                         ColumnHeaderToolTip="{Binding View.ColumnHeaderToolTip, RelativeSource={RelativeSource TemplatedParent}}"
                                         Columns="{Binding View.Columns, RelativeSource={RelativeSource TemplatedParent}}"
-                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                         />
                                 </Border>
                                 <ScrollViewer x:Name="PART_ScrollViewer"
                                     Grid.Row="1"
@@ -5199,7 +5254,7 @@
                                             Content="{Binding Path=(leedep:ListViewManager.NoItemsContent), RelativeSource={RelativeSource AncestorType={x:Type ListView}, AncestorLevel=1}, Mode=OneWay}"
                                             Visibility="{TemplateBinding HasItems,
                                                                          Converter={StaticResource VisibilityForBoolReverseConverter}}" />
-                                        <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                        <ItemsPresenter  />
 
                                         <!--  尾部  -->
                                         <ContentControl x:Name="PART_ListEnd"
@@ -5285,7 +5340,7 @@
                                             ColumnHeaderTemplateSelector="{Binding View.ColumnHeaderTemplateSelector, RelativeSource={RelativeSource TemplatedParent}}"
                                             ColumnHeaderToolTip="{Binding View.ColumnHeaderToolTip, RelativeSource={RelativeSource TemplatedParent}}"
                                             Columns="{Binding View.Columns, RelativeSource={RelativeSource TemplatedParent}}"
-                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                             />
                                     </Border>
                                     <!--  背景  -->
                                     <ContentControl
@@ -5293,7 +5348,7 @@
                                         Content="{Binding Path=(leedep:ListViewManager.NoItemsContent), RelativeSource={RelativeSource AncestorType={x:Type ListView}, AncestorLevel=1}, Mode=OneWay}"
                                         Visibility="{TemplateBinding HasItems,
                                                                      Converter={StaticResource VisibilityForBoolReverseConverter}}" />
-                                    <ItemsPresenter Grid.Row="1" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                    <ItemsPresenter Grid.Row="1"  />
 
                                     <!--  尾部  -->
                                     <ContentControl x:Name="PART_ListEnd"
@@ -5341,6 +5396,8 @@
 
     <Style x:Key="LeeTreeViewItem" TargetType="{x:Type TreeViewItem}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
+        <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type TreeView}}, Mode=OneWay}" />
         <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type TreeView}}, Mode=OneWay}" />
@@ -5444,7 +5501,7 @@
                                     HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                     ContentSource="Header"
-                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                     />
                             </Grid>
                         </Border>
 
@@ -5540,6 +5597,7 @@
     </Style>
     <Style x:Key="LeeTreeView" TargetType="{x:Type TreeView}">
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
@@ -5605,7 +5663,7 @@
                         CanContentScroll="false"
                         Focusable="false"
                         HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
-                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                        
                         VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
                         <ItemsPresenter />
                     </ScrollViewer>
@@ -5636,6 +5694,7 @@
 
     <Style x:Key="LeeTabItem" TargetType="{x:Type TabItem}">
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
 
         <!--  常规属性  -->
@@ -5845,7 +5904,9 @@
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}" />
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
         <Setter Property="TabStripPlacement" Value="Top" />
-
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
+        <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}"/>
 
         <!--  常规属性  -->
         <Setter Property="leedep:ListItemManager.MinHeight" Value="{DynamicResource LeeItemMinHeight}" />
@@ -5922,7 +5983,7 @@
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"
                                 ContentSource="SelectedContent"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                 />
 
                         </Border>
                     </DockPanel>

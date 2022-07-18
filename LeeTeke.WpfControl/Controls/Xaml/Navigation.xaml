@@ -10,6 +10,7 @@
     <Style x:Key="BaseNavigationItem" TargetType="{x:Type local:NavigationItem}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="Margin" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}}, Path=ItemMargin, Mode=OneWay}" />
         <Setter Property="PinVisibly" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}}, Path=ItemPinVisibly, Mode=OneWay}" />
         <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}}, Path=Foreground, Mode=OneWay}" />

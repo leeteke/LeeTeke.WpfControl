@@ -7,6 +7,7 @@
     <Style x:Key="BaseMaskPanel" TargetType="{x:Type local:MaskPanel}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Mark}" />
         <Setter Property="PanelBackground" Value="{DynamicResource LeeBrush_Background3}" />
         <Setter Property="IsClip" Value="True" />

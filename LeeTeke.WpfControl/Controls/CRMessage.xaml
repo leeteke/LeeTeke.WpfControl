@@ -18,6 +18,7 @@
     BorderThickness="0"
     Closing="Window_Closing"
     WindowStartupLocation="CenterScreen"
+    UseLayoutRounding="{DynamicResource LeeUseLayoutRounding}"
     mc:Ignorable="d">
 
     <Grid>

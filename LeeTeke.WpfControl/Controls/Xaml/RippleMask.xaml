@@ -8,6 +8,9 @@
 
     <Style x:Key="BaseRippleMask" TargetType="{x:Type local:RippleMask}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+
+        <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="IsOverflow" Value="False"/>

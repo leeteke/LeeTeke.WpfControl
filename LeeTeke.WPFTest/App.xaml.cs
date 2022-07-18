@@ -21,10 +21,10 @@ namespace LeeTeke.WPFTest
             base.OnStartup(e);
 
             #region 全局默认属性
-            //字体相关设置
-          //  TextOptions.TextFormattingModeProperty.OverrideMetadata(typeof(UIElement), new FrameworkPropertyMetadata(TextFormattingMode.Display, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.Inherits));
-            //字体相关设置
-         //   TextOptions.TextRenderingModeProperty.OverrideMetadata(typeof(UIElement), new FrameworkPropertyMetadata(TextRenderingMode.ClearType, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.Inherits));
+         //   字体相关设置
+        //    TextOptions.TextFormattingModeProperty.OverrideMetadata(typeof(UIElement), new FrameworkPropertyMetadata(TextFormattingMode.Display, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.Inherits));
+    //        字体相关设置
+     //       TextOptions.TextRenderingModeProperty.OverrideMetadata(typeof(UIElement), new FrameworkPropertyMetadata(TextRenderingMode.ClearType, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.Inherits));
             #endregion
 
             LeeTeke.WpfControl.StaticMethods.SetScrollViewerSlide(true);

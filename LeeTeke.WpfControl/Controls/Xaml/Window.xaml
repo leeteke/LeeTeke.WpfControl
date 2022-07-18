@@ -9,6 +9,8 @@
 
 
     <Style x:Key="BaseWindow" TargetType="{x:Type local:Window}">
+        <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Background}" />
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
@@ -28,18 +30,16 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:Window}">
-                    <Border
-                        x:Name="WIN_Border"
+                    <Border x:Name="WIN_Border"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         ClipToBounds="True"
                         CornerRadius="{TemplateBinding CornerRadius}"
-                        SnapsToDevicePixels="True">
+                        >
 
                         <Border.Resources>
-                            <Style
-                                x:Key="TitleButton"
+                            <Style x:Key="TitleButton"
                                 BasedOn="{StaticResource ColorButton}"
                                 TargetType="{x:Type Button}">
                                 <Setter Property="FontSize" Value="10" />
@@ -62,8 +62,7 @@
                                 <ContentPresenter ClipToBounds="True" />
                             </AdornerDecorator>
 
-                            <Grid
-                                x:Name="WIN_TitleGrid"
+                            <Grid x:Name="WIN_TitleGrid"
                                 Height="{TemplateBinding TitleHeight}"
                                 Background="{TemplateBinding TitleBackground}">
                                 <Grid.ColumnDefinitions>
@@ -71,8 +70,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <StackPanel
-                                    x:Name="WIN_TitlePanel"
+                                <StackPanel x:Name="WIN_TitlePanel"
                                     Grid.Column="0"
                                     MinHeight="30"
                                     VerticalAlignment="{TemplateBinding WinTitlePanelVerticalAlignment}"
@@ -86,8 +84,8 @@
                                         VerticalAlignment="Center"
                                         Background="Transparent"
                                         BorderThickness="0"
-                                        Command="{x:Static SystemCommands.ShowSystemMenuCommand}"
-                                        WindowChrome.IsHitTestVisibleInChrome="True">
+                                        WindowChrome.IsHitTestVisibleInChrome="True"
+                                        Command="{x:Static SystemCommands.ShowSystemMenuCommand}">
                                         <Image
                                             Width="16"
                                             Height="16"
@@ -96,8 +94,7 @@
                                             IsHitTestVisible="False"
                                             Source="{TemplateBinding Icon}" />
                                     </Button>
-                                    <TextBlock
-                                        x:Name="WIN_Title"
+                                    <TextBlock x:Name="WIN_Title"
                                         Padding="10,0,0,0"
                                         VerticalAlignment="Center"
                                         Foreground="{TemplateBinding TitleForeground}"
@@ -105,15 +102,13 @@
 
                                 </StackPanel>
 
-                                <ContentPresenter
-                                    x:Name="ContentPresenterMain"
+                                <ContentPresenter x:Name="ContentPresenterMain"
                                     Grid.Column="1"
                                     HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                     Content="{TemplateBinding TitleContent}"
                                     WindowChrome.IsHitTestVisibleInChrome="True" />
-                                <StackPanel
-                                    x:Name="WIN_ButtonPanel"
+                                <StackPanel x:Name="WIN_ButtonPanel"
                                     Grid.Column="2"
                                     MinHeight="30"
                                     VerticalAlignment="{TemplateBinding WinButtonPanelVerticalAlignment}"
@@ -122,50 +117,45 @@
                                     UseLayoutRounding="True"
                                     WindowChrome.IsHitTestVisibleInChrome="True">
 
-                                    <Button
-                                        x:Name="WIN_Mini"
+                                    <Button x:Name="WIN_Mini"
                                         Width="{TemplateBinding TitleButtonWidth}"
-                                        Command="SystemCommands.MinimizeWindowCommand"
                                         Content="&#xE921;"
                                         Foreground="{TemplateBinding TitleForeground}"
                                         Style="{StaticResource TitleButton}"
-                                        ToolTip="最小化" />
+                                        ToolTip="最小化"
+                                        Command="SystemCommands.MinimizeWindowCommand" />
 
-                                    <Button
-                                        x:Name="WIN_Max"
+                                    <Button x:Name="WIN_Max"
                                         Width="{TemplateBinding TitleButtonWidth}"
-                                        Command="SystemCommands.MaximizeWindowCommand"
                                         Content="&#xE922;"
                                         Foreground="{TemplateBinding TitleForeground}"
                                         Style="{StaticResource TitleButton}"
-                                        ToolTip="最大化" />
+                                        ToolTip="最大化"
+                                        Command="SystemCommands.MaximizeWindowCommand" />
 
-                                    <Button
-                                        x:Name="WIN_Restore"
+                                    <Button x:Name="WIN_Restore"
                                         Width="{TemplateBinding TitleButtonWidth}"
-                                        Command="SystemCommands.RestoreWindowCommand"
                                         Content="&#xE923;"
                                         Foreground="{TemplateBinding TitleForeground}"
                                         Style="{StaticResource TitleButton}"
-                                        ToolTip="向下还原" />
+                                        ToolTip="向下还原"
+                                        Command="SystemCommands.RestoreWindowCommand" />
 
-                                    <Button
-                                        x:Name="WIN_Close"
+                                    <Button x:Name="WIN_Close"
                                         Width="{TemplateBinding TitleButtonWidth}"
                                         leedep:ButtonManager.MouseOverBackground="{DynamicResource LeeBrush_RedOffice}"
                                         leedep:ButtonManager.MouseOverForeground="White"
-                                        Command="SystemCommands.CloseWindowCommand"
                                         Content="&#xE8BB;"
                                         Foreground="{TemplateBinding TitleForeground}"
                                         IsEnabled="{TemplateBinding CloseButtonIsEnable}"
                                         Style="{StaticResource TitleButton}"
                                         ToolTip="关闭"
-                                        Visibility="{TemplateBinding CloseButtonVisibility}" />
+                                        Visibility="{TemplateBinding CloseButtonVisibility}"
+                                        Command="SystemCommands.CloseWindowCommand" />
                                 </StackPanel>
                             </Grid>
 
-                            <ResizeGrip
-                                x:Name="WIN_ResizeGrip"
+                            <ResizeGrip x:Name="WIN_ResizeGrip"
                                 Grid.Row="1"
                                 Width="10"
                                 Height="10"
