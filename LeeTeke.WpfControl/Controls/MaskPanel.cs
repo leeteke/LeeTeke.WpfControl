@@ -1045,30 +1045,38 @@ namespace LeeTeke.WpfControl.Controls
         /// </summary>
         private void ChangedBorderSize()
         {
-
-            _border.Width = Width == 0 ? double.NaN : Width;
-            _border.Height = Height == 0 ? double.NaN : Height;
-            ///当panelMargin不为空时无法修改相应大小
-            if (_maskData != null)
+            try
             {
-                if (!_maskData.ContentSize.IsEmpty)
+
+                _border.Width = Width == 0 ? double.NaN : Width;
+                _border.Height = Height == 0 ? double.NaN : Height;
+                ///当panelMargin不为空时无法修改相应大小
+                if (_maskData != null)
                 {
-                    if (HorizontalContentAlignment != HorizontalAlignment.Stretch)
+                    if (!_maskData.ContentSize.IsEmpty)
                     {
-                        _border.Width = BoderWidthCalculation(_maskData.ContentSize.Width);
+                        if (HorizontalContentAlignment != HorizontalAlignment.Stretch)
+                        {
+                            _border.Width = BoderWidthCalculation(_maskData.ContentSize.Width);
+                        }
+
+                        if (VerticalContentAlignment != VerticalAlignment.Stretch)
+                            _border.Height = BoderHeightCalculation(_maskData.ContentSize.Height);
                     }
+                    else if (_maskData.Content is FrameworkElement element)
+                    {
+                        if (!double.IsNaN(element.Width) && HorizontalContentAlignment != HorizontalAlignment.Stretch)
+                            _border.Width = BoderWidthCalculation(element.Width);
 
-                    if (VerticalContentAlignment != VerticalAlignment.Stretch)
-                        _border.Height = BoderHeightCalculation(_maskData.ContentSize.Height);
+                        if (!double.IsNaN(element.Height) && VerticalContentAlignment != VerticalAlignment.Stretch)
+                            _border.Height = BoderHeightCalculation(element.Height);
+                    }
                 }
-                else if (_maskData.Content is FrameworkElement element)
-                {
-                    if (!double.IsNaN(element.Width) && HorizontalContentAlignment != HorizontalAlignment.Stretch)
-                        _border.Width = BoderWidthCalculation(element.Width);
+            }
+            catch
+            {
 
-                    if (!double.IsNaN(element.Height) && VerticalContentAlignment != VerticalAlignment.Stretch)
-                        _border.Height = BoderHeightCalculation(element.Height);
-                }
+
             }
         }
 

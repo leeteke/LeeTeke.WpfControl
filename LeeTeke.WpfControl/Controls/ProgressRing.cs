@@ -46,7 +46,7 @@ namespace LeeTeke.WpfControl.Controls
     ///     <MyNamespace:ProgressRing/>
     ///
     /// </summary>
-    [TemplatePart(Name =ElementOuterBorder,Type =typeof(Path))]
+    [TemplatePart(Name = ElementOuterBorder, Type = typeof(Path))]
     [TemplatePart(Name = ElementOrbitBackground, Type = typeof(Path))]
     [TemplatePart(Name = ElementOrbit, Type = typeof(Path))]
     [TemplatePart(Name = ElementWating, Type = typeof(Path))]
@@ -94,7 +94,7 @@ namespace LeeTeke.WpfControl.Controls
 
         public override void OnApplyTemplate()
         {
-            if (_wating!=null)
+            if (_wating != null)
                 _wating.IsVisibleChanged -= _wating_IsVisibleChanged;
 
             base.OnApplyTemplate();
@@ -253,7 +253,7 @@ namespace LeeTeke.WpfControl.Controls
                     return;
                 }
 
-  
+
                 ring.RaiseValueChanged(value);
                 ring.LodingRing();
             }
@@ -383,7 +383,7 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("Duration", typeof(Duration), typeof(ProgressRing));
         #endregion
 
-            
+
 
 
         #endregion
@@ -418,34 +418,40 @@ namespace LeeTeke.WpfControl.Controls
 
         private void LodingIntView()
         {
-            if (!IsLoaded || Visibility != Visibility.Visible)
-                return;
-
-            ///直径 =最小单位-边框厚度
-            var diameter = (this.ActualWidth >= this.ActualHeight ? this.ActualHeight : this.ActualWidth) - BorderThickness;
-            _outer.Data = GetRoundPath(360, diameter / 2, new Point(this.ActualWidth / 2, BorderThickness / 2));
-
-            ///背景直径
-            _orbitBackground.StrokeThickness = Thickness + (ThicknessPadding * 2);
-            _backDiameter = diameter - _orbitBackground.StrokeThickness - BorderThickness;
-            _orbitBackground.Data = GetRoundPath(360, _backDiameter / 2, new Point(this.ActualWidth / 2, _orbitBackground.StrokeThickness / 2 + BorderThickness));
-
-            ///加载边框
-            _inner.BorderThickness = new Thickness(BorderThickness);
-            _inner.Height = diameter - _orbitBackground.StrokeThickness * 2 - BorderThickness;
-            _inner.Width = _inner.Height;
-            _inner.CornerRadius = new CornerRadius(_inner.Width / 2);
-
-            switch (Mode)
+            try
             {
-                case ProgressControlMode.Loding:
-                    LodingRing();
-                    break;
-                case ProgressControlMode.Wating:
-                    LodingWating();
-                    break;
-                default:
-                    break;
+                if (!IsLoaded || Visibility != Visibility.Visible)
+                    return;
+
+                ///直径 =最小单位-边框厚度
+                var diameter = (this.ActualWidth >= this.ActualHeight ? this.ActualHeight : this.ActualWidth) - BorderThickness;
+                _outer.Data = GetRoundPath(360, diameter / 2, new Point(this.ActualWidth / 2, BorderThickness / 2));
+
+                ///背景直径
+                _orbitBackground.StrokeThickness = Thickness + (ThicknessPadding * 2);
+                _backDiameter = diameter - _orbitBackground.StrokeThickness - BorderThickness;
+                _orbitBackground.Data = GetRoundPath(360, _backDiameter / 2, new Point(this.ActualWidth / 2, _orbitBackground.StrokeThickness / 2 + BorderThickness));
+
+                ///加载边框
+                _inner.BorderThickness = new Thickness(BorderThickness);
+                _inner.Height = diameter - _orbitBackground.StrokeThickness * 2 - BorderThickness;
+                _inner.Width = _inner.Height;
+                _inner.CornerRadius = new CornerRadius(_inner.Width / 2);
+
+                switch (Mode)
+                {
+                    case ProgressControlMode.Loding:
+                        LodingRing();
+                        break;
+                    case ProgressControlMode.Wating:
+                        LodingWating();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch
+            {
             }
 
         }
@@ -460,7 +466,7 @@ namespace LeeTeke.WpfControl.Controls
 
             var animation = new DoubleAnimation(angel, Duration)
             {
-                EasingFunction =this.EasingFunction,
+                EasingFunction = this.EasingFunction,
                 FillBehavior = FillBehavior.Stop
             };
             animation.Completed += (e, s) =>
@@ -469,8 +475,6 @@ namespace LeeTeke.WpfControl.Controls
             };
             BeginAnimation(RingValueProperty, animation, HandoffBehavior.Compose);
 
-          
-       
         }
 
         private void ChangeRing(double value)
@@ -492,7 +496,7 @@ namespace LeeTeke.WpfControl.Controls
                 return;
 
             _watingSB?.Stop();
-            _watingSB = new Storyboard() { RepeatBehavior = RepeatBehavior.Forever  };
+            _watingSB = new Storyboard() { RepeatBehavior = RepeatBehavior.Forever };
             DoubleAnimationUsingKeyFrames eDA = new DoubleAnimationUsingKeyFrames();
             eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
             {
@@ -509,21 +513,21 @@ namespace LeeTeke.WpfControl.Controls
                 Value = 1,
                 KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(1.5)),
             });
-        
+
             _watingSB.Children.Add(eDA);
             Storyboard.SetTarget(eDA, this);
             Storyboard.SetTargetProperty(eDA, new PropertyPath(ProgressRing.RingValueProperty));
 
 
 
-            _wating.RenderTransform=new RotateTransform();
-        
+            _wating.RenderTransform = new RotateTransform();
+
 
             DoubleAnimationUsingKeyFrames rDA = new DoubleAnimationUsingKeyFrames();
             rDA.KeyFrames.Add(new EasingDoubleKeyFrame()
             {
                 Value = 0,
-                KeyTime= KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0))
+                KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0))
             });
             rDA.KeyFrames.Add(new EasingDoubleKeyFrame()
             {
@@ -534,9 +538,9 @@ namespace LeeTeke.WpfControl.Controls
             _watingSB.Children.Add(rDA);
             Storyboard.SetTarget(rDA, _wating);
             Storyboard.SetTargetProperty(rDA, new PropertyPath("(0).(1)", new DependencyProperty[] { Path.RenderTransformProperty, RotateTransform.AngleProperty }));
-                
+
             _watingSB.Begin();
-       
+
 
         }
         private void _wating_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
