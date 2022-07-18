@@ -939,7 +939,7 @@
                         </Trigger>
 
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="radioButtonBorder" Property="Background" Value="{DynamicResource LeeBrush_Gray204}" />
+                            <Setter TargetName="radioButtonBorder" Property="Background" Value="{DynamicResource LeeBrush_Gray200}" />
                             <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="{x:Null}" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="true">
