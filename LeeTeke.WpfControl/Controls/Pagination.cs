@@ -133,21 +133,21 @@ namespace LeeTeke.WpfControl.Controls
 
         #region 依赖
 
-        #region MaxPageCount
+        #region PageCount
         /// <summary>
         /// 请添加描述
         /// </summary>
-        public int MaxPageCount
+        public int PageCount
         {
-            get { return (int)GetValue(MaxPageCountProperty); }
-            set { SetValue(MaxPageCountProperty, value); }
+            get { return (int)GetValue(PageCountProperty); }
+            set { SetValue(PageCountProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for MaxPageCount.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty MaxPageCountProperty =
-            DependencyProperty.Register("MaxPageCount", typeof(int), typeof(Pagination), new PropertyMetadata(MaxPageCountChanged));
+        public static readonly DependencyProperty PageCountProperty =
+            DependencyProperty.Register("PageCount", typeof(int), typeof(Pagination), new PropertyMetadata(PageCountChanged));
 
-        private static void MaxPageCountChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void PageCountChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is Pagination pagination && e.NewValue is int _value)
             {
@@ -180,8 +180,6 @@ namespace LeeTeke.WpfControl.Controls
         }
         #endregion
 
-
-
         #region ButtonWidth
         /// <summary>
         /// 请添加描述
@@ -197,7 +195,6 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("ButtonWidth", typeof(double), typeof(Pagination));
         #endregion
 
-
         #region ButtonMargin
         /// <summary>
         /// 请添加描述
@@ -212,8 +209,6 @@ namespace LeeTeke.WpfControl.Controls
         public static readonly DependencyProperty ButtonMarginProperty =
             DependencyProperty.Register("ButtonMargin", typeof(Thickness), typeof(Pagination));
         #endregion
-
-
 
         #region ButtonHeight
         /// <summary>
@@ -245,7 +240,6 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(Pagination));
         #endregion
 
-
         #region DisplayPages
         /// <summary>
         /// 请添加描述
@@ -269,8 +263,6 @@ namespace LeeTeke.WpfControl.Controls
         }
         #endregion
 
-
-
         #region JumpVisibility
         /// <summary>
         /// 请添加描述
@@ -286,7 +278,6 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("JumpVisibility", typeof(Visibility), typeof(Pagination));
         #endregion
 
-
         #region PageIndexChangedCommand
         /// <summary>
         /// 请添加描述
@@ -301,7 +292,6 @@ namespace LeeTeke.WpfControl.Controls
         public static readonly DependencyProperty PageIndexChangedCommandProperty =
             DependencyProperty.Register("PageIndexChangedCommand", typeof(ICommand), typeof(Pagination));
         #endregion
-
 
         #endregion
 
@@ -337,7 +327,7 @@ namespace LeeTeke.WpfControl.Controls
 
 
         /// <summary>
-        /// 试图加载
+        /// 视图
         /// </summary>
         private void ViewLoding()
         {
@@ -345,7 +335,7 @@ namespace LeeTeke.WpfControl.Controls
                 return;
 
             _group.ItemsSource = null;
-            if (MaxPageCount < 1)
+            if (PageCount < 1)
             {
                 this.Visibility = Visibility.Collapsed;
                 return;
@@ -358,7 +348,7 @@ namespace LeeTeke.WpfControl.Controls
             ///如果小于1 则进行判断 自动
 
             var pages = new List<int>();
-            for (int i = 0; i < MaxPageCount; i++)
+            for (int i = 0; i < PageCount; i++)
             {
                 pages.Add(i + 1);
             }
@@ -373,7 +363,7 @@ namespace LeeTeke.WpfControl.Controls
             if (!IsLoaded)
                 return;
 
-            var pageList = ShowPagesList(MaxPageCount, DisplayPages, number);
+            var pageList = ShowPagesList(PageCount, DisplayPages, number);
             if (pageList.Count > 0 && _group.ItemsSource is List<int> vlist && vlist != null && vlist.Count == pageList.Count && vlist.First() == pageList.First())
             {
                 _group.SelectedValue = number;
@@ -506,7 +496,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private void _endButton_Click(object sender, RoutedEventArgs e)
         {
-            PageIndex = this.MaxPageCount;
+            PageIndex = this.PageCount;
         }
 
         private void _headButton_Click(object sender, RoutedEventArgs e)
@@ -524,8 +514,6 @@ namespace LeeTeke.WpfControl.Controls
             PageIndex--;
         }
         #endregion
-
-
 
     }
 

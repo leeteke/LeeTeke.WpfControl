@@ -277,7 +277,7 @@
 
                 <leecontrol:Pagination
                     DisplayPages="4"
-                    MaxPageCount="2"
+                    PageCount="2"
                     PageIndex="3" />
 
                 <Button
