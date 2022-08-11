@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0-windows;net5.0-windows;net48</TargetFrameworks>
+		<TargetFrameworks>net6.0-windows;net5.0-windows;net48;net481</TargetFrameworks>
 		<UseWPF>true</UseWPF>
 		<UseWindowsForms>true</UseWindowsForms>
 		<Description>LeeTeke出品的Wpf控件系列</Description>
@@ -12,9 +12,11 @@
 		<GenerateDocumentationFile>False</GenerateDocumentationFile>	
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(TargetFramework)' == 'net48'">
-		<LangVersion>8.0</LangVersion>
+	<PropertyGroup>
+		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
+
+
 	
 	<ItemGroup>
 		<Resource Include="LeeTekeDatas\Segoe Fluent Icons.ttf" />
