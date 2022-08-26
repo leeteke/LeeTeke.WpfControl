@@ -18,22 +18,7 @@ namespace LeeTeke.WpfControl.Dependencies
     public class DataGridManager
     {
 
-        #region HeaderFreeze
-        public static bool GetHeaderFreeze(DependencyObject obj)
-        {
-            return (bool)obj.GetValue(HeaderFreezeProperty);
-        }
-
-        public static void SetHeaderFreeze(DependencyObject obj, bool value)
-        {
-            obj.SetValue(HeaderFreezeProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for HeaderFreeze.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty HeaderFreezeProperty =
-            DependencyProperty.RegisterAttached("HeaderFreeze", typeof(bool), typeof(DataGridManager));
-        #endregion
-
+       
         #region HeaderBackground
         public static Brush GetHeaderBackground(DependencyObject obj)
         {
@@ -146,6 +131,22 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("HeaderIsClip", typeof(bool), typeof(DataGridManager));
         #endregion
 
+        #region HeaderEffect
+        public static Effect GetHeaderEffect(DependencyObject obj)
+        {
+            return (Effect)obj.GetValue(HeaderEffectProperty);
+        }
+
+        public static void SetHeaderEffect(DependencyObject obj, Effect value)
+        {
+            obj.SetValue(HeaderEffectProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for HeaderEffect.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HeaderEffectProperty =
+            DependencyProperty.RegisterAttached("HeaderEffect", typeof(Effect), typeof(DataGridManager));
+        #endregion
+
         #region HeaderForeground
         public static Brush GetHeaderForeground(DependencyObject obj)
         {
@@ -159,6 +160,21 @@ namespace LeeTeke.WpfControl.Dependencies
 
         public static readonly DependencyProperty HeaderForegroundProperty =
             DependencyProperty.RegisterAttached("HeaderForeground", typeof(Brush), typeof(DataGridManager));
+        #endregion
+
+        #region HeaderMinHeight
+        public static double GetHeaderMinHeight(DependencyObject obj)
+        {
+            return (double)obj.GetValue(HeaderMinHeightProperty);
+        }
+
+        public static void SetHeaderMinHeight(DependencyObject obj, double value)
+        {
+            obj.SetValue(HeaderMinHeightProperty, value);
+        }
+
+        public static readonly DependencyProperty HeaderMinHeightProperty =
+            DependencyProperty.RegisterAttached("HeaderMinHeight", typeof(double), typeof(DataGridManager));
         #endregion
 
         #region HeaderFontSize
@@ -194,24 +210,133 @@ namespace LeeTeke.WpfControl.Dependencies
         #endregion
 
 
-
-        #region HeaderEffect
-        public static Effect GetHeaderEffect(DependencyObject obj)
+        #region MainBackground
+        public static Brush GetMainBackground(DependencyObject obj)
         {
-            return (Effect)obj.GetValue(HeaderEffectProperty);
+            return (Brush)obj.GetValue(MainBackgroundProperty);
         }
 
-        public static void SetHeaderEffect(DependencyObject obj, Effect value)
+        public static void SetMainBackground(DependencyObject obj, Brush value)
         {
-            obj.SetValue(HeaderEffectProperty, value);
+            obj.SetValue(MainBackgroundProperty, value);
         }
 
-        // Using a DependencyProperty as the backing store for HeaderEffect.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty HeaderEffectProperty =
-            DependencyProperty.RegisterAttached("HeaderEffect", typeof(Effect), typeof(DataGridManager));
+        // Using a DependencyProperty as the backing store for MainBackground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MainBackgroundProperty =
+            DependencyProperty.RegisterAttached("MainBackground", typeof(Brush), typeof(DataGridManager));
         #endregion
 
+        #region MainBorderThickness
+        public static Thickness GetMainBorderThickness(DependencyObject obj)
+        {
+            return (Thickness)obj.GetValue(MainBorderThicknessProperty);
+        }
 
+        public static void SetMainBorderThickness(DependencyObject obj, Thickness value)
+        {
+            obj.SetValue(MainBorderThicknessProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MainBorderThickness.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MainBorderThicknessProperty =
+            DependencyProperty.RegisterAttached("MainBorderThickness", typeof(Thickness), typeof(DataGridManager));
+        #endregion
+
+        #region MainBorderBursh
+        public static Brush GetMainBorderBursh(DependencyObject obj)
+        {
+            return (Brush)obj.GetValue(MainBorderBurshProperty);
+        }
+
+        public static void SetMainBorderBursh(DependencyObject obj, Brush value)
+        {
+            obj.SetValue(MainBorderBurshProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MainBorderBursh.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MainBorderBurshProperty =
+            DependencyProperty.RegisterAttached("MainBorderBursh", typeof(Brush), typeof(DataGridManager));
+        #endregion
+
+        #region MainMargin
+        public static Thickness GetMainMargin(DependencyObject obj)
+        {
+            return (Thickness)obj.GetValue(MainMarginProperty);
+        }
+
+        public static void SetMainMargin(DependencyObject obj, Thickness value)
+        {
+            obj.SetValue(MainMarginProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MainMargin.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MainMarginProperty =
+            DependencyProperty.RegisterAttached("MainMargin", typeof(Thickness), typeof(DataGridManager));
+        #endregion
+
+        #region MainPadding
+        public static Thickness GetMainPadding(DependencyObject obj)
+        {
+            return (Thickness)obj.GetValue(MainPaddingProperty);
+        }
+
+        public static void SetMainPadding(DependencyObject obj, Thickness value)
+        {
+            obj.SetValue(MainPaddingProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MainPadding.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MainPaddingProperty =
+            DependencyProperty.RegisterAttached("MainPadding", typeof(Thickness), typeof(DataGridManager));
+        #endregion
+
+        #region MainCornerRadius
+        public static CornerRadius GetMainCornerRadius(DependencyObject obj)
+        {
+            return (CornerRadius)obj.GetValue(MainCornerRadiusProperty);
+        }
+
+        public static void SetMainCornerRadius(DependencyObject obj, CornerRadius value)
+        {
+            obj.SetValue(MainCornerRadiusProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MainCornerRadius.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MainCornerRadiusProperty =
+            DependencyProperty.RegisterAttached("MainCornerRadius", typeof(CornerRadius), typeof(DataGridManager));
+        #endregion
+
+        #region MainIsClip
+        public static bool GetMainIsClip(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(MainIsClipProperty);
+        }
+
+        public static void SetMainIsClip(DependencyObject obj, bool value)
+        {
+            obj.SetValue(MainIsClipProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MainIsClip.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MainIsClipProperty =
+            DependencyProperty.RegisterAttached("MainIsClip", typeof(bool), typeof(DataGridManager));
+        #endregion
+
+        #region MainEffect
+        public static Effect GetMainEffect(DependencyObject obj)
+        {
+            return (Effect)obj.GetValue(MainEffectProperty);
+        }
+
+        public static void SetMainEffect(DependencyObject obj, Effect value)
+        {
+            obj.SetValue(MainEffectProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for MainEffect.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MainEffectProperty =
+            DependencyProperty.RegisterAttached("MainEffect", typeof(Effect), typeof(DataGridManager));
+        #endregion
 
         #region NoItemsContent
         public static object GetNoItemsContent(DependencyObject obj)
@@ -229,24 +354,7 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("NoItemsContent", typeof(object), typeof(DataGridManager));
 
         #endregion
-
-        #region ListEndContent
-        public static object GetListEndContent(DependencyObject obj)
-        {
-            return (object)obj.GetValue(ListEndContentProperty);
-        }
-
-        public static void SetListEndContent(DependencyObject obj, object value)
-        {
-            obj.SetValue(ListEndContentProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for ListEndContent.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ListEndContentProperty =
-            DependencyProperty.RegisterAttached("ListEndContent", typeof(object), typeof(DataGridManager));
-        #endregion
-
-
+           
         #region RowNumberStartIndex
         public static int GetRowNumberStartIndex(DependencyObject obj)
         {
@@ -262,7 +370,6 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty RowNumberStartIndexProperty =
             DependencyProperty.RegisterAttached("RowNumberStartIndex", typeof(int), typeof(DataGridManager), new PropertyMetadata(1));
         #endregion
-
 
         #region ShowRowNumber
         public static bool GetShowRowNumber(DependencyObject obj)
@@ -342,7 +449,6 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("RowHeaderHorizontalContentAlignment", typeof(HorizontalAlignment), typeof(DataGridManager));
         #endregion
 
-
         #region CellPadding
         public static Thickness GetCellPadding(DependencyObject obj)
         {
@@ -356,21 +462,6 @@ namespace LeeTeke.WpfControl.Dependencies
 
         public static readonly DependencyProperty CellPaddingProperty =
             DependencyProperty.RegisterAttached("CellPadding", typeof(Thickness), typeof(DataGridManager));
-        #endregion
-
-        #region HeaderMinHeight
-        public static double GetHeaderMinHeight(DependencyObject obj)
-        {
-            return (double)obj.GetValue(HeaderMinHeightProperty);
-        }
-
-        public static void SetHeaderMinHeight(DependencyObject obj, double value)
-        {
-            obj.SetValue(HeaderMinHeightProperty, value);
-        }
-
-        public static readonly DependencyProperty HeaderMinHeightProperty =
-            DependencyProperty.RegisterAttached("HeaderMinHeight", typeof(double), typeof(DataGridManager));
         #endregion
 
         #region RowMinHeight
@@ -503,7 +594,6 @@ namespace LeeTeke.WpfControl.Dependencies
         #endregion
 
 
-
         #region ColumnVerticalContentAlignment
         public static VerticalAlignment GetColumnVerticalContentAlignment(DependencyObject obj)
         {
@@ -533,7 +623,6 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty ColumnHorizontalContentAlignmentProperty =
             DependencyProperty.RegisterAttached("ColumnHorizontalContentAlignment", typeof(HorizontalAlignment), typeof(DataGridManager));
         #endregion
-
 
 
         #region MouseOverBackground
@@ -649,22 +738,22 @@ namespace LeeTeke.WpfControl.Dependencies
         #endregion
 
 
-        #region (internal)CheckBoxHook
-        internal static object GetCheckBoxHook(DependencyObject obj)
+        #region CheckBoxHook
+        public static object GetCheckBoxHook(DependencyObject obj)
         {
             return (object)obj.GetValue(CheckBoxHookProperty);
         }
 
-        internal static void SetCheckBoxHook(DependencyObject obj, object value)
+        public static void SetCheckBoxHook(DependencyObject obj, object value)
         {
             obj.SetValue(CheckBoxHookProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for CheckBoxHook.  This enables animation, styling, binding, etc...
-        internal static readonly DependencyProperty CheckBoxHookProperty =
+        public static readonly DependencyProperty CheckBoxHookProperty =
             DependencyProperty.RegisterAttached("CheckBoxHook", typeof(object), typeof(DataGridManager), new PropertyMetadata(CheckBoxHookChanged));
 
-        private static void CheckBoxHookChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        public static void CheckBoxHookChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is CheckBox check)
             {

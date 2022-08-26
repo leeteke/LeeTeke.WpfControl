@@ -21,29 +21,10 @@ namespace LeeTeke.WPFTest
     /// </summary>
     public partial class TestWindow : Window
     {
-        private ObservableCollection<bool> items = new ObservableCollection<bool>() { false, true, true, true, true, true };
         public TestWindow()
         {
             InitializeComponent();
-        }
-
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-
-            int value = 0;
-            while (value<100)
-            {
-                await Task.Delay(50);
-                this.Dispatcher.Invoke(() =>
-                {
-                    value++;
-                    ring.Value++;
-                });
-
-            }
-
-           
+            this.DataContext = new ViewModels.TestWindowViewModel();
         }
     }
 }

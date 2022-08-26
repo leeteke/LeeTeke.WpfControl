@@ -1739,6 +1739,7 @@
     <!--  默认scrollviewbar的大小  -->
     <sys:Double x:Key="ScrollViewerBarSize">8</sys:Double>
     <sys:Double x:Key="ScrollViewerMiniBarSize">2</sys:Double>
+
     <Style x:Key="LeeScrollViewer" TargetType="{x:Type ScrollViewer}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
@@ -2462,6 +2463,7 @@
                                 Margin="{TemplateBinding Padding}"
                                 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                leedep:TextBoxManager.EnterCommand="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.EnterCommand), Mode=OneWay}"
                                 leedep:TextBoxManager.EscToEmpty="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.EscToEmpty), Mode=OneWay}"
                                 BorderThickness="0"
                                 FontSize="{TemplateBinding FontSize}"
@@ -2469,8 +2471,7 @@
                                 Foreground="{TemplateBinding Foreground}"
                                 IsReadOnly="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsReadOnly, Mode=OneWay}"
                                 Style="{StaticResource ComboBoxEditableTextBox}"
-                                Visibility="Collapsed"
-                                leedep:TextBoxManager.EnterCommand="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.EnterCommand), Mode=OneWay}" />
+                                Visibility="Collapsed" />
 
                             <TextBlock x:Name="prviewText"
                                 HorizontalAlignment="Center"
@@ -3032,49 +3033,37 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
-        <Setter Property="FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-        <Setter Property="Background" Value="{Binding Path=(leedep:DataGridManager.HeaderBackground), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="FontSize" Value="{Binding Path=(leedep:DataGridManager.HeaderFontSize), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="FontWeight" Value="{Binding Path=(leedep:DataGridManager.HeaderFontWeight), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Theme}" />
-        <Setter Property="MinHeight" Value="{Binding Path=(leedep:DataGridManager.HeaderMinHeight), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
         <Setter Property="VerticalContentAlignment" Value="{Binding Path=(leedep:DataGridManager.ColumnVerticalContentAlignment), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
         <Setter Property="HorizontalContentAlignment" Value="{Binding Path=(leedep:DataGridManager.ColumnHorizontalContentAlignment), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-        <Setter Property="leedep:DataGridManager.HeaderPadding" Value="{Binding Path=(leedep:DataGridManager.HeaderPadding), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
-                    <Border
-                        Margin="{TemplateBinding Margin}"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
+                    <lee:EasyPanel Background="Transparent">
+                        <StackPanel
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Orientation="Horizontal">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            <ToggleButton x:Name="PART_Sort"
+                                Margin="2,0"
+                                IsHitTestVisible="False"
+                                Style="{DynamicResource RotateToggleButton}" />
+                        </StackPanel>
+                        <Thumb x:Name="PART_LeftHeaderGripper"
+                            Grid.ColumnSpan="3"
+                            Width="2"
+                            HorizontalAlignment="Left"
+                            Cursor="SizeWE" />
+                        <Thumb x:Name="PART_RightHeaderGripper"
+                            Grid.ColumnSpan="3"
+                            Width="2"
+                            HorizontalAlignment="Right"
+                            Cursor="SizeWE" />
+                    </lee:EasyPanel>
 
-                        <lee:EasyPanel>
-                            <StackPanel
-                                Margin="{TemplateBinding Padding}"
-                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                Orientation="Horizontal">
-                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                                <ToggleButton x:Name="PART_Sort"
-                                    Grid.Column="1"
-                                    Margin="2,0"
-                                    IsHitTestVisible="False"
-                                    Style="{DynamicResource RotateToggleButton}" />
-                            </StackPanel>
-                            <Thumb x:Name="PART_LeftHeaderGripper"
-                                Grid.ColumnSpan="3"
-                                Width="2"
-                                HorizontalAlignment="Left"
-                                Cursor="SizeWE" />
-                            <Thumb x:Name="PART_RightHeaderGripper"
-                                Grid.ColumnSpan="3"
-                                Width="2"
-                                HorizontalAlignment="Right"
-                                Cursor="SizeWE" />
-                        </lee:EasyPanel>
-
-
-                    </Border>
                     <ControlTemplate.Triggers>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
@@ -3307,26 +3296,16 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
-        <Setter Property="Background" Value="Transparent" />
         <Setter Property="VerticalContentAlignment" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.RowHeaderVerticalContentAlignment), Mode=OneWay}" />
         <Setter Property="HorizontalContentAlignment" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.RowHeaderHorizontalContentAlignment), Mode=OneWay}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridRowHeader}">
-                    <Grid Margin="{TemplateBinding Margin}">
-                        <Border x:Name="PART_Border"
-                            Padding="{TemplateBinding Padding}"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                            <ContentPresenter x:Name="PART_Content"
-                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                RecognizesAccessKey="True" />
-                        </Border>
-
-
-
+                    <lee:EasyPanel>
+                        <ContentPresenter x:Name="PART_Content"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            RecognizesAccessKey="True" />
                         <Thumb x:Name="PART_TopHeaderGripper"
                             Height="2"
                             VerticalAlignment="Top"
@@ -3336,7 +3315,7 @@
                             Height="2"
                             VerticalAlignment="Bottom"
                             Cursor="SizeNS" />
-                    </Grid>
+                    </lee:EasyPanel>
 
 
 
@@ -3366,12 +3345,13 @@
         <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}" />
         <Setter Property="leedep:CornerRadiusManager.IsClip" Value="False" />
-
+        <Setter Property="EnableColumnVirtualization" Value="True" />
+        <Setter Property="EnableRowVirtualization" Value="True" />
         <Setter Property="leedep:DataGridManager.RowMargin" Value="0,2" />
         <Setter Property="leedep:DataGridManager.RowCornerRadius" Value="{DynamicResource LeeCornerRadius}" />
         <Setter Property="leedep:DataGridManager.RowIsClip" Value="True" />
         <Setter Property="leedep:DataGridManager.RowBackground" Value="{DynamicResource LeeBrush_Forground}" />
-        <Setter Property="leedep:DataGridManager.HeaderFreeze" Value="True" />
+
         <Setter Property="leedep:DataGridManager.RowHeaderVerticalContentAlignment" Value="Center" />
         <Setter Property="leedep:DataGridManager.RowHeaderHorizontalContentAlignment" Value="Center" />
         <Setter Property="leedep:DataGridManager.CellPadding" Value="0" />
@@ -3446,16 +3426,19 @@
             </Setter.Value>
         </Setter>
         <Setter Property="leedep:DataGridManager.EditingCheckBoxColumnStyle" Value="{StaticResource LeeCheckBox}" />
-
         <Setter Property="leedep:DataGridManager.ApplyAutoGeneratedStyle" Value="True" />
 
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
-        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+        <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True" />
+        <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling" />
 
         <Setter Property="leedep:ScrollViewerManager.SlideEasingFunction" Value="{DynamicResource LeeScrollViewerSlideEasingFuncion}" />
         <Setter Property="leedep:ScrollViewerManager.SlideDuration" Value="{DynamicResource LeeScrollViewerSlideDuration}" />
-        <Setter Property="leedep:ScrollViewerManager.SlideEnabled" Value="{DynamicResource LeeScrollViewerSlideEnabled}" />
+        <Setter Property="leedep:ScrollViewerManager.SlideEnabled" Value="False" />
+
 
         <Setter Property="RowValidationErrorTemplate">
             <Setter.Value>
@@ -3472,388 +3455,201 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
 
-            <Trigger Property="leedep:DataGridManager.HeaderFreeze" Value="True">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type DataGrid}">
-                            <ScrollViewer x:Name="PART_ScrollViewer"
-                                leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
-                                leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}"
-                                leedep:ScrollViewerManager.SlideDuration="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideDuration), Mode=OneWay}"
-                                leedep:ScrollViewerManager.SlideEasingFunction="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEasingFunction), Mode=OneWay}"
-                                leedep:ScrollViewerManager.SlideEnabled="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEnabled), Mode=OneWay}"
-                                leedep:ScrollViewerManager.SlideMonitorMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideMonitorMode), Mode=OneWay}"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CanContentScroll="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=(ScrollViewer.CanContentScroll), Mode=OneWay}"
-                                HorizontalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=(ScrollViewer.HorizontalScrollBarVisibility), Mode=OneWay}"
-                                PanningMode="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=(ScrollViewer.PanningMode), Mode=OneWay}"
-                                VerticalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=(ScrollViewer.VerticalScrollBarVisibility), Mode=OneWay}">
-                                <ScrollViewer.Template>
-                                    <ControlTemplate TargetType="{x:Type ScrollViewer}">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="auto" />
-                                                <RowDefinition />
-                                            </Grid.RowDefinitions>
-                                            <Border x:Name="PART_HBorder"
-                                                Grid.ColumnSpan="2"
-                                                Margin="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderMargin), Mode=OneWay}"
-                                                Padding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderPadding), Mode=OneWay}"
-                                                Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderBackground), Mode=OneWay}"
-                                                BorderBrush="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderBorderBursh), Mode=OneWay}"
-                                                BorderThickness="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderBorderThickness), Mode=OneWay}"
-                                                CornerRadius="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderCornerRadius), Mode=OneWay}"
-                                                Effect="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderEffect), Mode=OneWay}">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="auto" />
-                                                        <ColumnDefinition />
-                                                    </Grid.ColumnDefinitions>
-                                                    <Border Width="{Binding CellsPanelHorizontalOffset, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}, AncestorLevel=1}}" BorderThickness="0">
-                                                        <CheckBox x:Name="PART_CheckBox"
-                                                            HorizontalAlignment="Center"
-                                                            leedep:DataGridManager.CheckBoxHook="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}, AncestorLevel=1}}"
-                                                            FontFamily="{DynamicResource IconFontFamily}"
-                                                            FontSize="17"
-                                                            FontWeight="Bold"
-                                                            Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.All}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}" />
-                                                    </Border>
-                                                    <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter"
-                                                        Grid.Column="1"
-                                                        Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Column}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}" />
-                                                </Grid>
-                                            </Border>
-                                            <Border x:Name="PART_Border"
-                                                Grid.Row="1"
-                                                Background="{TemplateBinding Background}"
-                                                BorderBrush="{TemplateBinding BorderBrush}"
-                                                BorderThickness="{TemplateBinding BorderThickness}"
-                                                CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}">
-                                                <lee:EasyPanel x:Name="PART_EasyPanel">
-                                                    <ScrollContentPresenter
-                                                        Grid.Row="1"
-                                                        Grid.Column="1"
-                                                        Margin="{TemplateBinding Padding}"
-                                                        CanContentScroll="{TemplateBinding CanContentScroll}"
-                                                        VirtualizingStackPanel.IsVirtualizing="{Binding Path=(VirtualizingStackPanel.IsVirtualizing), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}"
-                                                        VirtualizingStackPanel.VirtualizationMode="{Binding Path=(VirtualizingStackPanel.VirtualizationMode), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}" />
-                                                    <lee:EasyPanel x:Name="PART_HorizontalGrid"
-                                                        Grid.Row="1"
-                                                        Height="{StaticResource ScrollViewerBarSize}"
-                                                        VerticalAlignment="Bottom"
-                                                        Background="Transparent"
-                                                        Opacity="0">
-                                                        <lee:EasyPanel.Margin>
-                                                            <Thickness Right="{StaticResource ScrollViewerBarSize}" />
-                                                        </lee:EasyPanel.Margin>
-                                                        <ScrollBar x:Name="PART_HorizontalScrollBar"
-                                                            Height="{DynamicResource ScrollViewerMiniBarSize}"
-                                                            VerticalAlignment="Bottom"
-                                                            Maximum="{TemplateBinding ScrollableWidth}"
-                                                            Orientation="Horizontal"
-                                                            ViewportSize="{TemplateBinding ViewportWidth}"
-                                                            Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
-                                                            Value="{TemplateBinding HorizontalOffset}" />
-                                                    </lee:EasyPanel>
-                                                    <lee:EasyPanel x:Name="PART_VerticalGrid"
-                                                        Grid.Row="1"
-                                                        Width="{StaticResource ScrollViewerBarSize}"
-                                                        HorizontalAlignment="Right"
-                                                        Background="Transparent"
-                                                        Opacity="0">
-                                                        <lee:EasyPanel.Margin>
-                                                            <Thickness Bottom="{StaticResource ScrollViewerBarSize}" />
-                                                        </lee:EasyPanel.Margin>
-                                                        <ScrollBar x:Name="PART_VerticalScrollBar"
-                                                            Width="{DynamicResource ScrollViewerMiniBarSize}"
-                                                            HorizontalAlignment="Right"
-                                                            Maximum="{TemplateBinding ScrollableHeight}"
-                                                            ViewportSize="{TemplateBinding ViewportHeight}"
-                                                            Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
-                                                            Value="{TemplateBinding VerticalOffset}" />
-                                                    </lee:EasyPanel>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGrid}">
+                    <Border x:Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}">
+
+                        <ScrollViewer x:Name="DG_ScrollViewer"
+                            Margin="{TemplateBinding Padding}"
+                            Focusable="false">
+                            <ScrollViewer.Template>
+                                <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Border x:Name="PART_HBorder"
+                                            Margin="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderMargin), Mode=OneWay}"
+                                            Padding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderPadding), Mode=OneWay}"
+                                            Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderBackground), Mode=OneWay}"
+                                            BorderBrush="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderBorderBursh), Mode=OneWay}"
+                                            BorderThickness="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderBorderThickness), Mode=OneWay}"
+                                            CornerRadius="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderCornerRadius), Mode=OneWay}"
+                                            Effect="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderEffect), Mode=OneWay}">
+                                            <Grid x:Name="PART_HPanel">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <lee:EasyPanel Width="{Binding CellsPanelHorizontalOffset, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}, AncestorLevel=1}}">
+                                                    <CheckBox x:Name="PART_CheckBox"
+                                                        HorizontalAlignment="Center"
+                                                        leedep:DataGridManager.CheckBoxHook="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}"
+                                                        FontFamily="{DynamicResource IconFontFamily}"
+                                                        Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.All}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}" />
                                                 </lee:EasyPanel>
-                                            </Border>
-                                        </Grid>
-                                        <ControlTemplate.Triggers>
-                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=SelectionMode}" Value="Single">
-                                                <Setter TargetName="PART_CheckBox" Property="Visibility" Value="Collapsed" />
-                                            </DataTrigger>
-
-                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderIsClip)}" Value="True">
-                                                <Setter TargetName="PART_HBorder" Property="Clip">
-                                                    <Setter.Value>
-                                                        <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
-                                                            <Binding
-                                                                Mode="OneWay"
-                                                                Path="ActualWidth"
-                                                                RelativeSource="{RelativeSource Mode=Self}" />
-                                                            <Binding
-                                                                Mode="OneWay"
-                                                                Path="ActualHeight"
-                                                                RelativeSource="{RelativeSource Mode=Self}" />
-                                                            <Binding
-                                                                Mode="OneWay"
-                                                                Path="CornerRadius"
-                                                                RelativeSource="{RelativeSource Mode=Self}" />
-                                                            <Binding
-                                                                Mode="OneWay"
-                                                                Path="BorderThickness"
-                                                                RelativeSource="{RelativeSource Mode=Self}" />
-                                                        </MultiBinding>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </DataTrigger>
-
-                                            <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
-                                                <Setter TargetName="PART_EasyPanel" Property="Clip">
-                                                    <Setter.Value>
-                                                        <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
-                                                            <Binding Path="ActualWidth" RelativeSource="{RelativeSource Mode=Self}" />
-                                                            <Binding Path="ActualHeight" RelativeSource="{RelativeSource Mode=Self}" />
-                                                            <Binding ElementName="PART_Border" Path="CornerRadius" />
-                                                            <Binding
-                                                                ElementName="PART_Border"
-                                                                Mode="OneWay"
-                                                                Path="BorderThickness" />
-                                                        </MultiBinding>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </Trigger>
-                                            <Trigger SourceName="PART_HorizontalScrollBar" Property="IsVisible" Value="False">
-                                                <Setter TargetName="PART_HorizontalGrid" Property="Height" Value="0" />
-                                                <Setter TargetName="PART_VerticalGrid" Property="Margin" Value="0" />
-                                            </Trigger>
-                                            <Trigger SourceName="PART_VerticalScrollBar" Property="IsVisible" Value="False">
-                                                <Setter TargetName="PART_VerticalGrid" Property="Width" Value="0" />
-                                                <Setter TargetName="PART_HorizontalGrid" Property="Margin" Value="0" />
-                                            </Trigger>
-                                            <EventTrigger RoutedEvent="MouseEnter" SourceName="PART_VerticalGrid">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation
-                                                            Storyboard.TargetName="PART_VerticalScrollBar"
-                                                            Storyboard.TargetProperty="Width"
-                                                            To="{StaticResource ScrollViewerBarSize}"
-                                                            Duration="0:0:0.15" />
-
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                            <EventTrigger RoutedEvent="MouseLeave" SourceName="PART_VerticalGrid">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation
-                                                            BeginTime="0:0:2"
-                                                            Storyboard.TargetName="PART_VerticalScrollBar"
-                                                            Storyboard.TargetProperty="Width"
-                                                            To="{StaticResource ScrollViewerMiniBarSize}"
-                                                            Duration="0:0:0.15" />
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                            <EventTrigger RoutedEvent="MouseEnter" SourceName="PART_HorizontalGrid">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation
-                                                            Storyboard.TargetName="PART_HorizontalScrollBar"
-                                                            Storyboard.TargetProperty="Height"
-                                                            To="{StaticResource ScrollViewerBarSize}"
-                                                            Duration="0:0:0.15" />
-
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                            <EventTrigger RoutedEvent="MouseLeave" SourceName="PART_HorizontalGrid">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation
-                                                            BeginTime="0:0:2"
-                                                            Storyboard.TargetName="PART_HorizontalScrollBar"
-                                                            Storyboard.TargetProperty="Height"
-                                                            To="{StaticResource ScrollViewerMiniBarSize}"
-                                                            Duration="0:0:0.15" />
-
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                            <EventTrigger RoutedEvent="MouseEnter">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation
-                                                            Storyboard.TargetName="PART_VerticalGrid"
-                                                            Storyboard.TargetProperty="Opacity"
-                                                            To="1"
-                                                            Duration="0:0:0.15" />
-                                                        <DoubleAnimation
-                                                            Storyboard.TargetName="PART_HorizontalGrid"
-                                                            Storyboard.TargetProperty="Opacity"
-                                                            To="1"
-                                                            Duration="0:0:0.15" />
-
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                            <EventTrigger RoutedEvent="MouseLeave">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation
-                                                            BeginTime="0:0:2"
-                                                            Storyboard.TargetName="PART_VerticalGrid"
-                                                            Storyboard.TargetProperty="Opacity"
-                                                            To="0"
-                                                            Duration="0:0:0.15" />
-                                                        <DoubleAnimation
-                                                            BeginTime="0:0:2"
-                                                            Storyboard.TargetName="PART_HorizontalGrid"
-                                                            Storyboard.TargetProperty="Opacity"
-                                                            To="0"
-                                                            Duration="0:0:0.15" />
-
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </ScrollViewer.Template>
-
-                                <Grid Margin="{TemplateBinding Padding}">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition />
-                                        <RowDefinition Height="auto" />
-                                    </Grid.RowDefinitions>
-
-                                    <ContentPresenter
-                                        Grid.Row="0"
-                                        Content="{Binding Path=(leedep:DataGridManager.NoItemsContent), RelativeSource={RelativeSource AncestorType={x:Type DataGrid}, AncestorLevel=1}, Mode=OneWay}"
-                                        Visibility="{TemplateBinding HasItems,
-                                                                     Converter={StaticResource VisibilityForBoolReverseConverter}}" />
-                                    <ItemsPresenter />
-
-                                    <ContentPresenter x:Name="PART_ListEnd"
-                                        Grid.Row="1"
-                                        Content="{Binding Path=(leedep:DataGridManager.ListEndContent), RelativeSource={RelativeSource AncestorType={x:Type DataGrid}, AncestorLevel=1}, Mode=OneWay}"
-                                        Visibility="{TemplateBinding HasItems,
-                                                                     Converter={StaticResource VisibilityForBoolConverter}}" />
-
-                                </Grid>
-                            </ScrollViewer>
-
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Trigger>
+                                                <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter"
+                                                    Grid.Column="1"
+                                                    Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Column}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                                                <Rectangle
+                                                    Grid.Column="2"
+                                                    Width="8"
+                                                    Visibility="{Binding ElementName=PART_VerticalScrollBar, Path=Visibility}" />
+                                            </Grid>
 
 
-            <Trigger Property="leedep:DataGridManager.HeaderFreeze" Value="False">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type DataGrid}">
-                            <ScrollViewer x:Name="PART_ScrollViewer"
-                                leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
-                                leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}"
-                                leedep:ScrollViewerManager.SlideDuration="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideDuration), Mode=OneWay}"
-                                leedep:ScrollViewerManager.SlideEasingFunction="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEasingFunction), Mode=OneWay}"
-                                leedep:ScrollViewerManager.SlideEnabled="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEnabled), Mode=OneWay}"
-                                leedep:ScrollViewerManager.SlideMonitorMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideMonitorMode), Mode=OneWay}"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CanContentScroll="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=(ScrollViewer.CanContentScroll), Mode=OneWay}"
-                                HorizontalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=(ScrollViewer.HorizontalScrollBarVisibility), Mode=OneWay}"
-                                PanningMode="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=(ScrollViewer.PanningMode), Mode=OneWay}"
-                                VerticalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=(ScrollViewer.VerticalScrollBarVisibility), Mode=OneWay}">
-                                <Grid Margin="{TemplateBinding Padding}">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="auto" />
-                                        <RowDefinition />
-                                        <RowDefinition Height="auto" />
-                                    </Grid.RowDefinitions>
+                                        </Border>
 
-                                    <Border x:Name="PART_HBorder"
-                                        Margin="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderMargin), Mode=OneWay}"
-                                        Padding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderPadding), Mode=OneWay}"
-                                        Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderBackground), Mode=OneWay}"
-                                        BorderBrush="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderBorderBursh), Mode=OneWay}"
-                                        BorderThickness="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderBorderThickness), Mode=OneWay}"
-                                        CornerRadius="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderCornerRadius), Mode=OneWay}"
-                                        Effect="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderEffect), Mode=OneWay}">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="auto" />
-                                                <ColumnDefinition />
-                                            </Grid.ColumnDefinitions>
-                                            <Border Width="{Binding CellsPanelHorizontalOffset, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}, AncestorLevel=1}}" BorderThickness="0">
-                                                <CheckBox x:Name="PART_CheckBox"
-                                                    HorizontalAlignment="Center"
-                                                    leedep:DataGridManager.CheckBoxHook="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}, AncestorLevel=1}}"
-                                                    FontFamily="{DynamicResource IconFontFamily}"
-                                                    FontSize="17"
-                                                    FontWeight="Bold"
-                                                    Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.All}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}" />
-                                            </Border>
-                                            <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter"
-                                                Grid.Column="1"
-                                                Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Column}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}" />
-                                        </Grid>
-                                    </Border>
-                                    <!--  背景  -->
-                                    <ContentPresenter
-                                        Grid.Row="1"
-                                        Content="{Binding Path=(leedep:DataGridManager.NoItemsContent), RelativeSource={RelativeSource AncestorType={x:Type DataGrid}, AncestorLevel=1}, Mode=OneWay}"
-                                        Visibility="{TemplateBinding HasItems,
-                                                                     Converter={StaticResource VisibilityForBoolReverseConverter}}" />
-                                    <ItemsPresenter Grid.Row="1" />
+                                        <Border x:Name="PART_MBorder"
+                                            Grid.Row="1"
+                                            Margin="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.MainMargin), Mode=OneWay}"
+                                            Padding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.MainPadding), Mode=OneWay}"
+                                            Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.MainBackground), Mode=OneWay}"
+                                            BorderBrush="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.MainBorderBursh), Mode=OneWay}"
+                                            BorderThickness="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.MainBorderThickness), Mode=OneWay}"
+                                            CornerRadius="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.MainCornerRadius), Mode=OneWay}"
+                                            Effect="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.MainEffect), Mode=OneWay}">
+                                            <Grid x:Name="PART_MPanel">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="auto" />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="auto" />
+                                                </Grid.ColumnDefinitions>
 
-                                    <!--  尾部  -->
-                                    <ContentPresenter x:Name="PART_ListEnd"
-                                        Grid.Row="2"
-                                        Content="{Binding Path=(leedep:DataGridManager.ListEndContent), RelativeSource={RelativeSource AncestorType={x:Type DataGrid}, AncestorLevel=1}, Mode=OneWay}"
-                                        Visibility="{TemplateBinding HasItems,
-                                                                     Converter={StaticResource VisibilityForBoolConverter}}" />
+                                                <ContentPresenter Content="{Binding Path=(leedep:DataGridManager.NoItemsContent), RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Mode=OneWay}" Visibility="{Binding HasItems, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Converter={StaticResource VisibilityForBoolReverseConverter}}" />
+                                                <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
+                                                    Grid.ColumnSpan="2"
+                                                    CanContentScroll="{TemplateBinding CanContentScroll}" />
+                                                <ScrollBar x:Name="PART_VerticalScrollBar"
+                                                    Grid.Column="2"
+                                                    Width="8"
+                                                    Maximum="{TemplateBinding ScrollableHeight}"
+                                                    Orientation="Vertical"
+                                                    ViewportSize="{TemplateBinding ViewportHeight}"
+                                                    Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                                                    Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                                                <Grid Grid.Row="1" Grid.Column="1">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="{Binding NonFrozenColumnsViewportHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <ScrollBar x:Name="PART_HorizontalScrollBar"
+                                                        Grid.Column="1"
+                                                        Height="8"
+                                                        Maximum="{TemplateBinding ScrollableWidth}"
+                                                        Orientation="Horizontal"
+                                                        ViewportSize="{TemplateBinding ViewportWidth}"
+                                                        Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                                                        Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                                                </Grid>
 
-                                </Grid>
-                            </ScrollViewer>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="leedep:DataGridManager.HeaderIsClip" Value="True">
-                                    <Setter TargetName="PART_HBorder" Property="Clip">
-                                        <Setter.Value>
-                                            <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
-                                                <Binding
-                                                    Mode="OneWay"
-                                                    Path="ActualWidth"
-                                                    RelativeSource="{RelativeSource Mode=Self}" />
-                                                <Binding
-                                                    Mode="OneWay"
-                                                    Path="ActualHeight"
-                                                    RelativeSource="{RelativeSource Mode=Self}" />
-                                                <Binding
-                                                    Mode="OneWay"
-                                                    Path="CornerRadius"
-                                                    RelativeSource="{RelativeSource Mode=Self}" />
-                                                <Binding
-                                                    Mode="OneWay"
-                                                    Path="BorderThickness"
-                                                    RelativeSource="{RelativeSource Mode=Self}" />
-                                            </MultiBinding>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Trigger>
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
 
-                                <Trigger Property="SelectionMode" Value="Single">
-                                    <Setter TargetName="PART_CheckBox" Property="Visibility" Value="Collapsed" />
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Trigger>
+                                    <ControlTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=SelectionMode}" Value="Single">
+                                            <Setter TargetName="PART_CheckBox" Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderIsClip)}" Value="True">
+                                            <Setter TargetName="PART_HPanel" Property="Clip">
+                                                <Setter.Value>
+                                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="ActualWidth"
+                                                            RelativeSource="{RelativeSource Mode=Self}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="ActualHeight"
+                                                            RelativeSource="{RelativeSource Mode=Self}" />
+                                                        <Binding
+                                                            ElementName="PART_HBorder"
+                                                            Mode="OneWay"
+                                                            Path="CornerRadius" />
+                                                        <Binding
+                                                            ElementName="PART_HBorder"
+                                                            Mode="OneWay"
+                                                            Path="BorderThickness" />
+                                                    </MultiBinding>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.MainIsClip)}" Value="True">
+                                            <Setter TargetName="PART_MPanel" Property="Clip">
+                                                <Setter.Value>
+                                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="ActualWidth"
+                                                            RelativeSource="{RelativeSource Mode=Self}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="ActualHeight"
+                                                            RelativeSource="{RelativeSource Mode=Self}" />
+                                                        <Binding
+                                                            ElementName="PART_MBorder"
+                                                            Mode="OneWay"
+                                                            Path="CornerRadius" />
+                                                        <Binding
+                                                            ElementName="PART_MBorder"
+                                                            Mode="OneWay"
+                                                            Path="BorderThickness" />
+                                                    </MultiBinding>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </ScrollViewer.Template>
+                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </ScrollViewer>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
+                            <Setter TargetName="PART_Border" Property="Clip">
+                                <Setter.Value>
+                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                        <Binding
+                                            Mode="OneWay"
+                                            Path="ActualWidth"
+                                            RelativeSource="{RelativeSource Mode=Self}" />
+                                        <Binding
+                                            Mode="OneWay"
+                                            Path="ActualHeight"
+                                            RelativeSource="{RelativeSource Mode=Self}" />
+                                        <Binding
+                                            ElementName="PART_Border"
+                                            Mode="OneWay"
+                                            Path="CornerRadius" />
+                                        <Binding
+                                            ElementName="PART_Border"
+                                            Mode="OneWay"
+                                            Path="BorderThickness" />
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
 
 
+        <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value="0.4" />
             </Trigger>
@@ -4825,7 +4621,7 @@
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
-                    <VirtualizingStackPanel FocusVisualStyle="{x:Null}" Orientation="{Binding Path=(leedep:ListManager.Orientation), RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Mode=OneWay}" />
+                    <VirtualizingStackPanel Orientation="{Binding Path=(leedep:ListManager.Orientation), RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Mode=OneWay}" />
                 </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>
@@ -5845,8 +5641,6 @@
         </Setter>
     </Style>
 
-
-
     <Style x:Key="LeeTabControl" TargetType="{x:Type TabControl}">
 
         <Setter Property="BorderThickness" Value="1" />
@@ -5906,7 +5700,16 @@
         <Setter Property="leedep:TabItemManager.MarkSelectedBrush" Value="{DynamicResource LeeBrush_Theme}" />
         <Setter Property="leedep:TabItemManager.MarkSite" Value="Bottom" />
         <Setter Property="leedep:TabItemManager.MarkSize" Value="4" />
-
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel
+                        IsItemsHost="True"
+                        VirtualizingStackPanel.IsVirtualizing="True"
+                        VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TabControl">
