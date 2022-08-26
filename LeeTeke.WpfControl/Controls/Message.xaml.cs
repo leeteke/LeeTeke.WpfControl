@@ -23,7 +23,7 @@ namespace LeeTeke.WpfControl.Controls
     /// </summary>
     public partial class Message : IMessageWin
     {
-        public object Value { get; set; }
+        public object? Value { get; set; }
         private bool _canClose;
         private bool _isDialog = false;
 

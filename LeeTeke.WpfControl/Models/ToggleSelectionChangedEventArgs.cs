@@ -9,10 +9,10 @@ namespace LeeTeke.WpfControl
 {
     public class ToggleSelectionChangedEventArgs : RoutedEventArgs
     {
-        public object Value { get;  }
+        public object? Value { get;  }
 
 
-        public ToggleSelectionChangedEventArgs(object value, RoutedEvent routedEvent) : base(routedEvent)
+        public ToggleSelectionChangedEventArgs(object? value, RoutedEvent routedEvent) : base(routedEvent)
         {
             Value = value;
         }

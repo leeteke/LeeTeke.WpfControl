@@ -9,9 +9,9 @@ namespace LeeTeke.WpfControl
 {
     public class TextBoxExEventArgs : RoutedEventArgs
     {
-        public string Text { get;  }
+        public string? Text { get;  }
 
-        public TextBoxExEventArgs(string text,RoutedEvent routedEvent):base(routedEvent)
+        public TextBoxExEventArgs(string? text,RoutedEvent routedEvent):base(routedEvent)
         {
             Text = text;
         }

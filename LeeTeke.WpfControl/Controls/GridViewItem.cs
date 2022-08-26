@@ -52,7 +52,7 @@ namespace LeeTeke.WpfControl.Controls
         }
 
 
-        private GridView ParentGridView
+        private GridView? ParentGridView
         {
             get
             {

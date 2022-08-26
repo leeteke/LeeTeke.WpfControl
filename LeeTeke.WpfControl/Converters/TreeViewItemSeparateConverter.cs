@@ -17,7 +17,7 @@ namespace LeeTeke.WpfControl.Converters
         {
 
             double left = 0.0;
-            UIElement element = value as TreeViewItem;
+            UIElement? element = value as TreeViewItem;
             while (element != null && element.GetType() != typeof(TreeView))
             {
                 element = (UIElement)VisualTreeHelper.GetParent(element);
@@ -39,7 +39,7 @@ namespace LeeTeke.WpfControl.Converters
         }
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            return default;
+            return DependencyProperty.UnsetValue;
         }
     }
 }

@@ -13,11 +13,11 @@ namespace LeeTeke.WpfControl
         /// <summary>
         /// 标题
         /// </summary>
-        public string Title { get; set; }
+        public string Title { get; set; } = null!;
         /// <summary>
         /// 内容
         /// </summary>
-        public string Content { get; set; }
+        public string Content { get; set; } = null!;
         /// <summary>
         /// Icon
         /// </summary>

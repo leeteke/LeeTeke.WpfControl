@@ -11,7 +11,7 @@ namespace LeeTeke.WpfControl.Models
     {
         Window Window { get; }
 
-        object Value { get; set; }
+        object? Value { get; set; }
 
         bool ShowProcess { get; set; }
 

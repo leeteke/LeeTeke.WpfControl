@@ -7,10 +7,10 @@ using System.Windows;
 
 namespace LeeTeke.WpfControl
 {
-    public class NotifyClickedEventArgs:RoutedEventArgs
+    public class NotifyClickedEventArgs : RoutedEventArgs
     {
-        public   object Value { get; }
-        public NotifyClickedEventArgs(object value, RoutedEvent @event):base(@event)
+        public object? Value { get; }
+        public NotifyClickedEventArgs(object? value, RoutedEvent @event) : base(@event)
         {
             Value = value;
         }

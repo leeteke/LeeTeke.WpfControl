@@ -8,8 +8,8 @@ namespace LeeTeke.WpfControl
 {
     internal class ValueConverModel
     {
-        public bool clear { get; set; }
+        public bool Clear { get; set; }
 
-        public  double result { get; set; }
+        public  double Result { get; set; }
     }
 }

@@ -36,15 +36,13 @@
                             <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
 
-                        <Border
-                            x:Name="contentBorder"
+                        <Border x:Name="contentBorder"
                             Grid.ColumnSpan="3"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}" />
-                        <Rectangle
-                            x:Name="PART_Separator"
+                        <Rectangle x:Name="PART_Separator"
                             Width="1"
                             Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}}, Path=SeparatorSize, Mode=OneWay}"
                             Margin="-1,0,0,0"
@@ -61,8 +59,7 @@
                             Text="&#xE840;"
                             Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsPinned, Converter={StaticResource VisibilityForBoolConverter}, Mode=OneWay}" />
 
-                        <Button
-                            x:Name="PART_CloseButton"
+                        <Button x:Name="PART_CloseButton"
                             Grid.Column="2"
                             Width="22"
                             Height="22"
@@ -79,8 +76,7 @@
                             Style="{DynamicResource ColorButton}"
                             Tag="1"
                             Visibility="Collapsed" />
-                        <ContentPresenter
-                            x:Name="PART_ContentPresenter"
+                        <ContentPresenter x:Name="PART_ContentPresenter"
                             Margin="{TemplateBinding Padding}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -230,12 +226,10 @@
                                 <ColumnDefinition />
                                 <ColumnDefinition Width="auto" />
                             </Grid.ColumnDefinitions>
-                            <Button
-                                x:Name="PART_Left"
+                            <Button x:Name="PART_Left"
                                 Style="{TemplateBinding LeftButtonStyle}"
                                 Visibility="Collapsed" />
-                            <ScrollViewer
-                                x:Name="PART_ScrollViewer"
+                            <ScrollViewer x:Name="PART_ScrollViewer"
                                 Grid.Column="1"
                                 leedep:ScrollViewerManager.SlideDuration="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideDuration), Mode=OneWay}"
                                 leedep:ScrollViewerManager.SlideEasingFunction="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEasingFunction), Mode=OneWay}"
@@ -247,12 +241,9 @@
                                 <ItemsPresenter x:Name="PART_ItemsPresenter">
                                     <ItemsPresenter.ContextMenu>
                                         <ContextMenu x:Name="PART_ContextMenu">
-                                            <MenuItem
-                                                x:Name="PART_MenuItem_Selected"
+                                            <MenuItem x:Name="PART_MenuItem_Selected"
                                                 Header="选择此选项(_S)"
                                                 Visibility="Collapsed" />
-
-
                                             <MenuItem x:Name="PART_MenuItem_Pin" Header="固定选项卡(_P)">
                                                 <MenuItem.Icon>
                                                     <TextBlock FontFamily="{DynamicResource IconFontFamily}" Text="&#xE718;" />
@@ -266,8 +257,7 @@
                                 </ItemsPresenter>
 
                             </ScrollViewer>
-                            <Button
-                                x:Name="PART_Right"
+                            <Button x:Name="PART_Right"
                                 Grid.Column="2"
                                 Style="{TemplateBinding RightButtonStyle}"
                                 Visibility="Collapsed" />

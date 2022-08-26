@@ -6,7 +6,7 @@ using System.Windows;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-    public class EventToBoolManager 
+    public class EventToBoolManager
     {
         #region Element
 
@@ -29,12 +29,13 @@ namespace LeeTeke.WpfControl.Dependencies
         {
             if (d is UIElement em)
             {
-                if (e.NewValue is UIElement element)
+                if (e.NewValue is UIElement element && GetEventName(d) != null && GetBoolValue(d) != null)
                 {
-                    if (GetEventName(d)!=null&& GetBoolValue(d) != null)
-                    {
-                        new EventToBoolClass(GetBoolValue(d), em, element, GetEventName(d));
-                    }
+                    SetHelpClass(d, new EventToBoolClass(GetBoolValue(d), em, element, GetEventName(d)));
+                }
+                else
+                {
+                    SetHelpClass(d, null);
                 }
             }
         }
@@ -58,7 +59,6 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("EventName", typeof(string), typeof(EventToBoolManager));
         #endregion
 
-
         #region BoolValue
 
 
@@ -78,6 +78,22 @@ namespace LeeTeke.WpfControl.Dependencies
 
         #endregion
 
+        #region HelpClass
+        internal static EventToBoolClass? GetHelpClass(DependencyObject obj)
+        {
+            return (EventToBoolClass?)obj.GetValue(HelpClassProperty);
+        }
+
+        internal static void SetHelpClass(DependencyObject obj, EventToBoolClass? value)
+        {
+            obj.SetValue(HelpClassProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for HelpClass.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HelpClassProperty =
+            DependencyProperty.RegisterAttached("HelpClass", typeof(EventToBoolClass), typeof(EventToBoolManager));
+        #endregion
+
     }
 
     class EventToBoolClass
@@ -90,17 +106,16 @@ namespace LeeTeke.WpfControl.Dependencies
             _em = em;
             EventHandler clickHandler = Test;
             Type type = obj.GetType();
-            EventInfo @event = type.GetEvent(eventName);
-            if (@event != null)
+            EventInfo? @event = type.GetEvent(eventName);
+            if (@event != null && @event.EventHandlerType != null)
             {
-                var pd = @event.GetAddMethod();
                 @event.AddEventHandler(obj, Delegate.CreateDelegate(@event.EventHandlerType, this, clickHandler.Method));
             }
         }
 
-        private void Test(object send, EventArgs e)
+        private void Test(object? send, EventArgs e)
         {
-            
+
             if (_em.GetValue(_value) is bool result)
             {
                 _em.SetValue(_value, !result);

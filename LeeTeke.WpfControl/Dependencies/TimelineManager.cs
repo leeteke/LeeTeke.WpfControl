@@ -9,7 +9,7 @@ using System.Windows.Media.Animation;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
-   public class TimelineManager 
+    public class TimelineManager
     {
         #region EventName
 
@@ -28,7 +28,6 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty EventNameProperty =
             DependencyProperty.RegisterAttached("EventName", typeof(string), typeof(TimelineManager));
         #endregion
-
 
 
         #region Command
@@ -53,16 +52,35 @@ namespace LeeTeke.WpfControl.Dependencies
         {
             if (d is Timeline em)
             {
-                if (e.NewValue is ICommand element && e.NewValue != e.OldValue)
+                if (e.NewValue is ICommand element && e.NewValue != e.OldValue && GetEventName(d) != null)
                 {
-                    if (GetEventName(d) != null)
-                    {
-                         new TimelineHelpClass(em, GetEventName(d), element);
-                    }
+                    SetHelpClass(d, new TimelineHelpClass(em, GetEventName(d), element));
+                }
+                else
+                {
+                    SetHelpClass(d, null);
                 }
             }
         }
         #endregion
+
+
+        #region HelpClass
+        internal static TimelineHelpClass? GetHelpClass(DependencyObject obj)
+        {
+            return (TimelineHelpClass?)obj.GetValue(HelpClassProperty);
+        }
+
+        internal static void SetHelpClass(DependencyObject obj, TimelineHelpClass? value)
+        {
+            obj.SetValue(HelpClassProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for HelpClass.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HelpClassProperty =
+            DependencyProperty.RegisterAttached("HelpClass", typeof(TimelineHelpClass), typeof(TimelineManager));
+        #endregion
+
 
     }
 
@@ -77,18 +95,16 @@ namespace LeeTeke.WpfControl.Dependencies
             _em = em;
             EventHandler clickHandler = Test;
             Type type = em.GetType();
-            System.Reflection.EventInfo @event = type.GetEvent(eventName);
-            if (@event != null)
+            var @event = type.GetEvent(eventName);
+            if (@event != null && @event.EventHandlerType != null)
             {
-                var pd = @event.GetAddMethod();
                 @event.AddEventHandler(em, Delegate.CreateDelegate(@event.EventHandlerType, this, clickHandler.Method));
             }
         }
 
-        private void Test(object send, EventArgs e)
+        private void Test(object? send, EventArgs e)
         {
             _command?.Execute(_em);
         }
-
     }
 }

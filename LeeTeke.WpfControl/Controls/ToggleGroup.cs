@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,10 +55,10 @@ namespace LeeTeke.WpfControl.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ToggleGroup), new FrameworkPropertyMetadata(typeof(ToggleGroup)));
         }
 
-        private UIElementCollection _items;
-        private object _selectedValue;
-        private object _selectedItem;
-        private object _selectedIndex;
+        private UIElementCollection? _items;
+        private object? _selectedValue;
+        private object? _selectedItem;
+        private object? _selectedIndex;
 
         public ToggleGroup()
         {
@@ -65,8 +66,7 @@ namespace LeeTeke.WpfControl.Controls
             hfac.SetValue(StackPanel.OrientationProperty, System.Windows.Controls.Orientation.Horizontal);
             hfac.AddHandler(StackPanel.LoadedEvent, new RoutedEventHandler((es, ex) =>
             {
-                var panel = es as Panel;
-                if (panel != null)
+                if (es is Panel panel)
                 {
                     _items = panel.Children;
 
@@ -94,7 +94,7 @@ namespace LeeTeke.WpfControl.Controls
 
         }
 
-   
+
 
 
 
@@ -149,8 +149,7 @@ namespace LeeTeke.WpfControl.Controls
                         hfac.SetValue(StackPanel.OrientationProperty, System.Windows.Controls.Orientation.Horizontal);
                         hfac.AddHandler(StackPanel.LoadedEvent, new RoutedEventHandler((es, ex) =>
                         {
-                            var panel = es as Panel;
-                            if (panel != null)
+                            if (es is Panel panel)
                             {
                                 toggleGroup._items = panel.Children;
                             }
@@ -163,8 +162,7 @@ namespace LeeTeke.WpfControl.Controls
                         vfac.SetValue(StackPanel.OrientationProperty, System.Windows.Controls.Orientation.Vertical);
                         vfac.AddHandler(StackPanel.LoadedEvent, new RoutedEventHandler((es, ex) =>
                         {
-                            var panel = es as Panel;
-                            if (panel != null)
+                            if (es is Panel panel)
                             {
                                 toggleGroup._items = panel.Children;
                             }
@@ -177,8 +175,7 @@ namespace LeeTeke.WpfControl.Controls
                         whfac.SetValue(WrapPanel.OrientationProperty, System.Windows.Controls.Orientation.Horizontal);
                         whfac.AddHandler(WrapPanel.LoadedEvent, new RoutedEventHandler((es, ex) =>
                         {
-                            var panel = es as Panel;
-                            if (panel != null)
+                            if (es is Panel panel)
                             {
                                 toggleGroup._items = panel.Children;
                             }
@@ -190,8 +187,7 @@ namespace LeeTeke.WpfControl.Controls
                         wvfac.SetValue(WrapPanel.OrientationProperty, System.Windows.Controls.Orientation.Vertical);
                         wvfac.AddHandler(WrapPanel.LoadedEvent, new RoutedEventHandler((es, ex) =>
                         {
-                            var panel = es as Panel;
-                            if (panel != null)
+                            if (es is Panel panel)
                             {
                                 toggleGroup._items = panel.Children;
                             }
@@ -246,9 +242,9 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 选择的Item
         /// </summary>
-        public object SelectedItem
+        public object? SelectedItem
         {
-            get { return (object)GetValue(SelectedItemProperty); }
+            get { return (object?)GetValue(SelectedItemProperty); }
             set { SetValue(SelectedItemProperty, value); }
         }
 
@@ -273,9 +269,9 @@ namespace LeeTeke.WpfControl.Controls
         #region SelectedValue
 
 
-        public object SelectedValue
+        public object? SelectedValue
         {
-            get { return (object)GetValue(SelectedValueProperty); }
+            get { return (object?)GetValue(SelectedValueProperty); }
             set { SetValue(SelectedValueProperty, value); }
         }
 
@@ -303,9 +299,9 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public object SelectedIndex
+        public object? SelectedIndex
         {
-            get { return (object)GetValue(SelectedIndexProperty); }
+            get { return (object?)GetValue(SelectedIndexProperty); }
             set { SetValue(SelectedIndexProperty, value); }
         }
 
@@ -774,11 +770,11 @@ namespace LeeTeke.WpfControl.Controls
         "SelectionChanged", RoutingStrategy.Bubble, typeof(ToggleSelectionChangedEventHandler), typeof(ToggleGroup));
 
 
-        private void RaiseSelectionChanged(object newValue)
+        private void RaiseSelectionChanged(object? newValue)
         {
             try
             {
-                if (SelectionChangedCommand!=null&& SelectionChangedCommand.CanExecute(newValue))
+                if (SelectionChangedCommand != null && SelectionChangedCommand.CanExecute(newValue))
                 {
                     SelectionChangedCommand.Execute(SelectedValue);
                 }
@@ -841,16 +837,16 @@ namespace LeeTeke.WpfControl.Controls
             switch (SelectionMode)
             {
                 case ToggleGroupMode.Single:
-                    if (int.TryParse(SelectedIndex.ToString(), out int value))
+                    if (int.TryParse(SelectedIndex?.ToString(), out int value))
                     {
                         IndexChanged(value);
                     }
                     break;
                 case ToggleGroupMode.Multiple:
 
-                    if (!(SelectedIndex is IList))
+                    if (SelectedIndex is not IList)
                     {
-                        if (int.TryParse(SelectedIndex.ToString(), out int value2))
+                        if (int.TryParse(SelectedIndex?.ToString(), out int value2))
                         {
                             IndexChanged(new List<int>() { value2 });
                         }
@@ -873,9 +869,9 @@ namespace LeeTeke.WpfControl.Controls
                     ValueChanged(SelectedValue);
                     break;
                 case ToggleGroupMode.Multiple:
-                    if (!(SelectedValue is IList))
+                    if (SelectedValue is not IList)
                     {
-                        ValueChanged(new List<object>() { SelectedValue });
+                        ValueChanged(new List<object?>() { SelectedValue });
                     }
                     else
                     {
@@ -932,10 +928,7 @@ namespace LeeTeke.WpfControl.Controls
                             SelectedItem = button;
                             break;
                         case ToggleGroupMode.Multiple:
-                            if (SelectedItem == null)
-                            {
-                                SelectedItem = new List<ToggleButton>() { button };
-                            }
+                            SelectedItem ??= new List<ToggleButton>() { button };
 
                             if (((List<ToggleButton>)SelectedItem).IndexOf(button) < 0)
                             {
@@ -948,9 +941,11 @@ namespace LeeTeke.WpfControl.Controls
                                 }
 
 
-                                var newValue = (List<ToggleButton>)SelectedValue;
-                                newValue.Add(button);
-                                ItemChanged(newValue);
+                                if (SelectedValue is List<ToggleButton> newValue)
+                                {
+                                    newValue.Add(button);
+                                    ItemChanged(newValue);
+                                }
 
                             }
                             break;
@@ -1081,7 +1076,7 @@ namespace LeeTeke.WpfControl.Controls
         }
 
 
-        private void ValueChanged(object value)
+        private void ValueChanged(object? value)
         {
 
             if (ItemsSource == null)
@@ -1090,9 +1085,13 @@ namespace LeeTeke.WpfControl.Controls
                 return;
             }
 
+
             if (!SelectedInit(value))
                 return;
 
+
+            if (_items == null)
+                return;
 
             //单选项
             if (SelectionMode == ToggleGroupMode.Single)
@@ -1136,14 +1135,16 @@ namespace LeeTeke.WpfControl.Controls
                         if (child.DataContext.Equals(singleList))
                         {
                             #region 如果没有初始化Value值
-                            if (_selectedValue == null)
-                            {
-                                _selectedValue = new List<object>();
+                            _selectedValue ??= new List<object>();
+
+                            if (_selectedItem == null || _selectedItem is not List<ToggleButton>)
                                 _selectedItem = new List<ToggleButton>();
+
+                            if (_selectedIndex == null || _selectedIndex is not List<int>)
                                 _selectedIndex = new List<int>();
-                            }
                             #endregion
-                                ((List<object>)_selectedValue).Add(child.DataContext);
+
+                            ((IList)_selectedValue).Add(child.DataContext);
                             ((List<ToggleButton>)_selectedItem).Add(child);
                             ((List<int>)_selectedIndex).Add(_items.IndexOf(child));
                             SelectedIndex = _selectedIndex;
@@ -1155,20 +1156,19 @@ namespace LeeTeke.WpfControl.Controls
                     }
                 }
 
-
                 RaiseSelectionChanged(SelectedValue);
                 return;
             }
 
         }
 
-        private void ItemChanged(object item)
+        private void ItemChanged(object? item)
         {
-
-
             if (!SelectedInit(item))
                 return;
 
+            if (_items == null)
+                return;
 
             //单选项
             if (SelectionMode == ToggleGroupMode.Single && item is ToggleButton toggle)
@@ -1209,15 +1209,20 @@ namespace LeeTeke.WpfControl.Controls
                         if (child.Equals(singleList))
                         {
                             #region 如果没有初始化Value值
-                            if (_selectedValue == null)
-                            {
+                            if (_selectedValue == null || _selectedValue is not List<ToggleButton>)
                                 _selectedValue = new List<ToggleButton>();
+
+                            if (_selectedItem == null || _selectedItem is not List<ToggleButton>)
                                 _selectedItem = new List<ToggleButton>();
+
+                            if (_selectedIndex == null || _selectedIndex is not List<int>)
                                 _selectedIndex = new List<int>();
-                            }
+
                             #endregion
-                                ((List<ToggleButton>)_selectedValue).Add(child);
+                            ((List<ToggleButton>)_selectedValue).Add(child);
+
                             ((List<ToggleButton>)_selectedItem).Add(child);
+
                             ((List<int>)_selectedIndex).Add(_items.IndexOf(child));
 
                             SelectedIndex = _selectedIndex;
@@ -1236,16 +1241,18 @@ namespace LeeTeke.WpfControl.Controls
 
         }
 
-        private void IndexChanged(object value)
+        private void IndexChanged(object? value)
         {
 
             if (!SelectedInit(value))
                 return;
 
+            if (_items == null)
+                return;
+
             //单选项
             if (SelectionMode == ToggleGroupMode.Single && value is int index)
             {
-
 
 
                 foreach (ToggleButton chlid in _items)
@@ -1284,15 +1291,17 @@ namespace LeeTeke.WpfControl.Controls
                         {
 
                             #region 如果没有初始化Value值
-                            if (_selectedValue == null)
-                            {
+                            if (_selectedValue == null || _selectedValue is not List<ToggleButton>)
                                 _selectedValue = new List<ToggleButton>();
+
+                            if (_selectedItem == null || _selectedItem is not List<ToggleButton>)
                                 _selectedItem = new List<ToggleButton>();
+
+                            if (_selectedIndex == null || _selectedIndex is not List<int>)
                                 _selectedIndex = new List<int>();
-                            }
                             #endregion
 
-                             ((List<ToggleButton>)_selectedValue).Add(child);
+                            ((List<ToggleButton>)_selectedValue).Add(child);
                             ((List<ToggleButton>)_selectedItem).Add(child);
                             ((List<int>)_selectedIndex).Add(_items.IndexOf(child));
 
@@ -1315,12 +1324,10 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 清理选择
         /// </summary>
-        private bool SelectedInit(object args)
+        private bool SelectedInit(object? args)
         {
             if (_items == null)
-            {
                 return false;
-            }
 
             _selectedIndex = null;
             _selectedItem = null;

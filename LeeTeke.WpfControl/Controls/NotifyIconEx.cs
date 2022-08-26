@@ -59,7 +59,7 @@ namespace LeeTeke.WpfControl.Controls
         }
         #region 字段
         private NotifyIcon _notify;
-        private Icon _icon;
+        private Icon? _icon;
         private Icon _nullInon;
 
         private Popup _popup;
@@ -167,9 +167,12 @@ namespace LeeTeke.WpfControl.Controls
                 try
                 {
                     using var bitmap = StaticMethods.ImageSourceToBitmap(source);
-                    notifyIconEx._icon = System.Drawing.Icon.FromHandle(bitmap.GetHicon());
-                    notifyIconEx._notify.Icon = notifyIconEx._icon;
-                    notifyIconEx._notify.Visible = true;
+                    if (bitmap != null)
+                    {
+                        notifyIconEx._icon = System.Drawing.Icon.FromHandle(bitmap.GetHicon());
+                        notifyIconEx._notify.Icon = notifyIconEx._icon;
+                        notifyIconEx._notify.Visible = true;
+                    }
                 }
                 catch
                 {
@@ -531,7 +534,7 @@ namespace LeeTeke.WpfControl.Controls
 
         #region 私有逻辑
 
-        private void FlashTimer_Tick(object sender, EventArgs e)
+        private void FlashTimer_Tick(object? sender, EventArgs e)
         {
             if (_notify.Icon == _nullInon)
             {
@@ -544,13 +547,13 @@ namespace LeeTeke.WpfControl.Controls
         }
 
 
-        private void ContextMenuStrip_Closed(object sender, System.Windows.Forms.ToolStripDropDownClosedEventArgs e)
+        private void ContextMenuStrip_Closed(object? sender, System.Windows.Forms.ToolStripDropDownClosedEventArgs e)
         {
             if (_popup.IsOpen && !_popup.IsMouseOver)
                 _popup.IsOpen = false;
         }
 
-        private void NotifyIcon_BalloonTipClicked(object sender, EventArgs e)
+        private void NotifyIcon_BalloonTipClicked(object? sender, EventArgs e)
         {
             if (sender is NotifyIconEx)
             {
@@ -565,7 +568,7 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
 
-        private void NotifyIcon_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void NotifyIcon_MouseClick(object? sender, System.Windows.Forms.MouseEventArgs e)
         {
             switch (e.Button)
             {
@@ -596,7 +599,7 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
 
-        private void NotifyIcon_DoubleClick(object sender, EventArgs e)
+        private void NotifyIcon_DoubleClick(object? sender, EventArgs e)
         {
             RaiseMouseDoubleClick();
             try

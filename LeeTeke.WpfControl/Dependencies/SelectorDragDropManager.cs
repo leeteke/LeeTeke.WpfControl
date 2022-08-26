@@ -169,14 +169,12 @@ namespace LeeTeke.WpfControl.Dependencies
 
         public static void AddDragDropOverHandler(DependencyObject d, RoutedEventHandler handler)
         {
-            var uie = d as UIElement;
-            if (uie != null)
+            if (d is UIElement uie)
                 uie.AddHandler(DragDropOverEvent, handler);
         }
         public static void RemoveDragDropOverHandler(DependencyObject d, RoutedEventHandler handler)
         {
-            var uie = d as UIElement;
-            if (uie != null)
+            if (d is UIElement uie)
                 uie.RemoveHandler(DragDropOverEvent, handler);
         }
 
@@ -259,11 +257,11 @@ namespace LeeTeke.WpfControl.Dependencies
 
         private Selector _control;
         private bool _canInitiateDrag;
-        private DragAdorner _dragAdorner;
+        private DragAdorner? _dragAdorner;
         private double _dragAdornerOpacity;
         private int _indexToSelect;
         private bool _isDragInProgress;
-        private FrameworkElement _itemUnderDragCursor;
+        private FrameworkElement? _itemUnderDragCursor;
         private Point _ptMouseDown;
 
 
@@ -366,7 +364,7 @@ namespace LeeTeke.WpfControl.Dependencies
             #endregion
 
             #endregion
-        
+
 
         }
 
@@ -426,7 +424,7 @@ namespace LeeTeke.WpfControl.Dependencies
             if (itemToDrag == null)
                 return;
 
-            AdornerLayer adornerLayer = _dragAdornerOpacity > 0.0 ? this.InitializeAdornerLayer(itemToDrag) : null;
+            AdornerLayer? adornerLayer = _dragAdornerOpacity > 0.0 ? this.InitializeAdornerLayer(itemToDrag) : null;
 
 
             this.InitializeDragOperation(itemToDrag);
@@ -570,7 +568,7 @@ namespace LeeTeke.WpfControl.Dependencies
             int index = -1;
             for (int i = 0; i < _control.Items.Count; ++i)
             {
-                FrameworkElement item = this.GetItem(i);
+                var item = this.GetItem(i);
                 if (IsMouseOver(item))
                 {
                     index = i;
@@ -585,7 +583,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         #region GetItem
 
-        private FrameworkElement GetItem(int index)
+        private FrameworkElement? GetItem(int index)
         {
             if (_control.ItemContainerGenerator.Status != GeneratorStatus.ContainersGenerated)
                 return null;
@@ -593,7 +591,7 @@ namespace LeeTeke.WpfControl.Dependencies
             return _control.ItemContainerGenerator.ContainerFromIndex(index) as FrameworkElement;
         }
 
-        private FrameworkElement GetItem(FrameworkElement dataItem)
+        private FrameworkElement? GetItem(FrameworkElement dataItem)
         {
             if (_control.ItemContainerGenerator.Status != GeneratorStatus.ContainersGenerated)
                 return null;
@@ -605,8 +603,10 @@ namespace LeeTeke.WpfControl.Dependencies
 
         #region IsMouseOver
 
-        bool IsMouseOver(Visual target)
+        bool IsMouseOver(Visual? target)
         {
+            if (target == null)
+                return false;
             // We need to use MouseUtilities to figure out the cursor
             // coordinates because, during a drag-drop operation, the WPF
             // mechanisms for getting the coordinates behave strangely.
@@ -685,7 +685,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         #region FinishDragOperation
 
-        void FinishDragOperation(FrameworkElement draggedItem, AdornerLayer adornerLayer)
+        void FinishDragOperation(FrameworkElement draggedItem, AdornerLayer? adornerLayer)
         {
             // Let the ListViewItem know that it is not being dragged anymore.
             SelectorItemDragState.SetIsBeingDragged(draggedItem, false);
@@ -707,7 +707,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         #region ItemUnderDragCursor
 
-        private FrameworkElement ItemUnderDragCursor
+        private FrameworkElement? ItemUnderDragCursor
         {
             get { return _itemUnderDragCursor; }
             set
@@ -743,24 +743,29 @@ namespace LeeTeke.WpfControl.Dependencies
                 Point ptCursor = StaticMethods.GetMousePosition(_control);
                 // 4/13/2007 - Made the top offset relative to the item being dragged.
                 var itemBeingDragged = this.GetItem(_indexToSelect);
-                Point itemLoc = itemBeingDragged.TranslatePoint(new Point(0, 0), _control);
-                double top = 0, left = 0;
-                //添加锁定
-                switch (LockDragOrientation)
+                if (itemBeingDragged != null)
                 {
-                    case Orientation.Horizontal:
-                        left = ptCursor.X + itemLoc.X - this._ptMouseDown.X;
-                        break;
-                    case Orientation.Vertical:
-                        left = _control.BorderThickness.Left + _control.Padding.Left;
-                        top = itemLoc.Y + ptCursor.Y - this._ptMouseDown.Y;
-                        break;
-                    default:
-                        left = ptCursor.X + itemLoc.X - this._ptMouseDown.X;
-                        top = itemLoc.Y + ptCursor.Y - this._ptMouseDown.Y;
-                        break;
+
+                    Point itemLoc = itemBeingDragged.TranslatePoint(new Point(0, 0), _control);
+                    double top = 0;
+                    double left;
+                    //添加锁定
+                    switch (LockDragOrientation)
+                    {
+                        case Orientation.Horizontal:
+                            left = ptCursor.X + itemLoc.X - this._ptMouseDown.X;
+                            break;
+                        case Orientation.Vertical:
+                            left = _control.BorderThickness.Left + _control.Padding.Left;
+                            top = itemLoc.Y + ptCursor.Y - this._ptMouseDown.Y;
+                            break;
+                        default:
+                            left = ptCursor.X + itemLoc.X - this._ptMouseDown.X;
+                            top = itemLoc.Y + ptCursor.Y - this._ptMouseDown.Y;
+                            break;
+                    }
+                    _dragAdorner.SetOffsets(left, top);
                 }
-                _dragAdorner.SetOffsets(left, top);
             }
         }
 
@@ -819,7 +824,7 @@ namespace LeeTeke.WpfControl.Dependencies
     {
         #region Data
 
-        private Rectangle _child = null;
+        private Rectangle? _child = null;
         private double _offsetLeft = 0;
         private double _offsetTop = 0;
 
@@ -930,8 +935,8 @@ namespace LeeTeke.WpfControl.Dependencies
         /// <returns></returns>
         protected override Size MeasureOverride(Size constraint)
         {
-            this._child.Measure(constraint);
-            return this._child.DesiredSize;
+            this._child?.Measure(constraint);
+            return this._child == null ? Size.Empty : this._child.DesiredSize;
         }
 
         /// <summary>
@@ -941,7 +946,7 @@ namespace LeeTeke.WpfControl.Dependencies
         /// <returns></returns>
         protected override Size ArrangeOverride(Size finalSize)
         {
-            this._child.Arrange(new Rect(finalSize));
+            this._child?.Arrange(new Rect(finalSize));
             return finalSize;
         }
 
@@ -950,7 +955,7 @@ namespace LeeTeke.WpfControl.Dependencies
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        protected override Visual GetVisualChild(int index)
+        protected override Visual? GetVisualChild(int index)
         {
             return this._child;
         }
@@ -969,8 +974,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         private void UpdateLocation()
         {
-            AdornerLayer adornerLayer = this.Parent as AdornerLayer;
-            if (adornerLayer != null)
+            if (this.Parent is AdornerLayer adornerLayer)
                 adornerLayer.Update(this.AdornedElement);
         }
 

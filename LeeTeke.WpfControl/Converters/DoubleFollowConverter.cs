@@ -10,17 +10,17 @@ namespace LeeTeke.WpfControl.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (double.TryParse($"{value}",out double lord))
+            if (double.TryParse($"{value}", out double lord)&& parameter is string pValue)
             {
-                if (double.TryParse(parameter.ToString(), out double change))
+                if (double.TryParse(pValue, out double change))
                 {
                     return lord += change;
                 }
-                else if (parameter.ToString().StartsWith("*") && double.TryParse(parameter.ToString().TrimStart('*'), out double product))
+                else if (pValue.StartsWith("*") && double.TryParse(pValue.TrimStart('*'), out double product))
                 {
                     return lord *= product;
                 }
-                else if (parameter.ToString().StartsWith("/") && double.TryParse(parameter.ToString().TrimStart('/'), out double divisor))
+                else if (pValue.StartsWith("/") && double.TryParse(pValue.TrimStart('/'), out double divisor))
                 {
                     return lord /= divisor;
                 }
@@ -31,21 +31,21 @@ namespace LeeTeke.WpfControl.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (double.TryParse($"{value}", out double lord))
+            if (double.TryParse($"{value}", out double lord)&& parameter is string pValue)
             {
-                if (double.TryParse(parameter.ToString(), out double change))
+                if (double.TryParse(pValue, out double change))
                 {
                     return lord -= change;
                 }
-                else if (parameter.ToString().StartsWith("*") && double.TryParse(parameter.ToString().TrimStart('*'), out double product))
+                else if (pValue.StartsWith("*") && double.TryParse(pValue.TrimStart('*'), out double product))
                 {
                     return lord /= product;
                 }
-                else if (parameter.ToString().StartsWith("/") && double.TryParse(parameter.ToString().TrimStart('/'), out double divisor))
+                else if (pValue.StartsWith("/") && double.TryParse(pValue.TrimStart('/'), out double divisor))
                 {
                     return lord *= divisor;
                 }
-             
+
             }
             return value;
         }

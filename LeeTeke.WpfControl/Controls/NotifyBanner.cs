@@ -60,11 +60,11 @@ namespace LeeTeke.WpfControl.Controls
         private const string ElementStackPanel = "PART_StackPanel";
 
 
-        private StackPanel _stackPanel;
+        private StackPanel? _stackPanel;
         /// <summary>
         /// 通知窗口
         /// </summary>
-        private Window _notifyWindow;
+        private Window? _notifyWindow;
 
 
         public NotifyBanner()
@@ -74,7 +74,6 @@ namespace LeeTeke.WpfControl.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-
             _stackPanel = GetTemplateChild(ElementStackPanel) as StackPanel;
         }
 
@@ -376,7 +375,7 @@ namespace LeeTeke.WpfControl.Controls
         "Closed", RoutingStrategy.Bubble, typeof(NotifyClosedEventHandler), typeof(NotifyBanner));
 
 
-        private void RaiseNotifyBannerClosed(object newValue)
+        private void RaiseNotifyBannerClosed(object? newValue)
         {
             var arg = new NotifyClosedEventArgs(newValue, NotifyBannerClosedEvent);
             RaiseEvent(arg);
@@ -401,7 +400,7 @@ namespace LeeTeke.WpfControl.Controls
         "Clicked", RoutingStrategy.Bubble, typeof(NotifyBannerClickedEventHandler), typeof(NotifyBanner));
 
 
-        private void RaiseNotifyBannerClicked(object newValue)
+        private void RaiseNotifyBannerClicked(object? newValue)
         {
             var arg = new NotifyBannerClickedEventArgs(newValue, NotifyBannerClickedEvent);
             RaiseEvent(arg);
@@ -426,12 +425,12 @@ namespace LeeTeke.WpfControl.Controls
             {
                 control.Clicked += (es, ex) =>
                 {
-                    RaiseNotifyBannerClicked(ex.Value);
+                    RaiseNotifyBannerClicked(ex?.Value);
                 };
                 control.Closed += (es, ex) =>
                 {
                     UXRemove(control);
-                    RaiseNotifyBannerClosed(ex.Value);
+                    RaiseNotifyBannerClosed(ex?.Value);
                 };
             }
         }
@@ -490,7 +489,7 @@ namespace LeeTeke.WpfControl.Controls
                 sp.Children.Remove(item);
                 if (sp.Children.Count < 1 && ShowMode == NotifyBannerShowMode.OnDesktop)
                 {
-                    _notifyWindow.Close();
+                    _notifyWindow?.Close();
                 }
                 return true;
             }

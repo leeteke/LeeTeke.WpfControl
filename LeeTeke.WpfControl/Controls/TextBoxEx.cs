@@ -65,11 +65,11 @@ namespace LeeTeke.WpfControl.Controls
         private const string ElementICON = "PART_ICON";
         #endregion
 
-        public string SelectedText { get => Mode switch { TextMode.Password => null, _ => _textBox.SelectedText }; }
+        public string? SelectedText { get => Mode switch { TextMode.Password => null, _ => _textBox?.SelectedText }; }
 
-        private PasswordBox _password;
-        private TextBox _textBox;
-        private ContentPresenter _icon;
+        private PasswordBox? _password;
+        private TextBox? _textBox;
+        private ContentPresenter? _icon;
         public TextBoxEx()
         {
             KeyDown += TextBoxEx_KeyDown;
@@ -159,7 +159,7 @@ namespace LeeTeke.WpfControl.Controls
                 case TextMode.Password:
                 case TextMode.Number:
                 case TextMode.IMEDispaly:
-                    if (_password.Password != Text)
+                    if (_password != null && _password.Password != Text)
                     {
                         _password.Password = Text;
                     }
@@ -201,7 +201,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private void _password_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if (Text != _password.Password && Mode == TextMode.Password)
+            if (_password != null && Text != _password.Password && Mode == TextMode.Password)
             {
                 Text = _password.Password;
             }
@@ -250,9 +250,9 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public string Text
+        public string? Text
         {
-            get { return (string)GetValue(TextProperty); }
+            get { return (string?)GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
         }
 
@@ -849,7 +849,7 @@ namespace LeeTeke.WpfControl.Controls
         "Entered", RoutingStrategy.Bubble, typeof(TextBoxExEventHandler), typeof(TextBoxEx));
 
 
-        private void RaiseEntered(string newValue)
+        private void RaiseEntered(string? newValue)
         {
             var arg = new TextBoxExEventArgs(newValue, EnteredEvent);
             RaiseEvent(arg);
@@ -872,7 +872,7 @@ namespace LeeTeke.WpfControl.Controls
         "IconClicked", RoutingStrategy.Bubble, typeof(TextBoxExEventHandler), typeof(TextBoxEx));
 
 
-        private void RaiseIconClicked(string newValue)
+        private void RaiseIconClicked(string? newValue)
         {
             var arg = new TextBoxExEventArgs(newValue, IconClickedEvent);
             RaiseEvent(arg);
@@ -894,10 +894,10 @@ namespace LeeTeke.WpfControl.Controls
                 case TextMode.General:
                 case TextMode.Number:
                 case TextMode.IMEDispaly:
-                    _textBox.SelectAll();
+                    _textBox?.SelectAll();
                     break;
                 case TextMode.Password:
-                    _password.SelectAll();
+                    _password?.SelectAll();
                     break;
                 default:
                     break;
@@ -912,10 +912,10 @@ namespace LeeTeke.WpfControl.Controls
                 case TextMode.General:
                 case TextMode.Number:
                 case TextMode.IMEDispaly:
-                    _textBox.Paste();
+                    _textBox?.Paste();
                     break;
                 case TextMode.Password:
-                    _password.Paste();
+                    _password?.Paste();
                     break;
                 default:
                     break;
@@ -936,10 +936,10 @@ namespace LeeTeke.WpfControl.Controls
                 case TextMode.General:
                 case TextMode.IMEDispaly:
                 case TextMode.Number:
-                    _textBox.Focus();
+                    _textBox?.Focus();
                     break;
                 case TextMode.Password:
-                    _password.Focus();
+                    _password?.Focus();
                     break;
                 default:
                     break;

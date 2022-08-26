@@ -49,10 +49,10 @@ namespace LeeTeke.WpfControl.Controls
     ///     <MyNamespace:NotifyBannerItem/>
     ///
     /// </summary>
-    [TemplatePart(Name =ElementCloseButton,Type =typeof(Button))]
+    [TemplatePart(Name = ElementCloseButton, Type = typeof(Button))]
     public class NotifyBannerItem : ContentControl
     {
-        
+
         static NotifyBannerItem()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(NotifyBannerItem), new FrameworkPropertyMetadata(typeof(NotifyBannerItem)));
@@ -61,11 +61,11 @@ namespace LeeTeke.WpfControl.Controls
         private const string ElementCloseButton = "PART_CloseButton";
 
         public NotifySite Site { get; }
-        private DispatcherTimer _timer;
+        private DispatcherTimer? _timer;
         private bool _closing = false;
-        private Button _closeButton;
+        private Button? _closeButton;
 
-    
+
 
         public NotifyBannerItem(NotifyBannerShowData data, NotifySite site)
         {
@@ -91,7 +91,7 @@ namespace LeeTeke.WpfControl.Controls
                 case NotifySite.BottomRight:
                     this.RenderTransform = new TranslateTransform(200, 0);
                     break;
-       
+
                 case NotifySite.TopLeft:
                 case NotifySite.BottomLeft:
                     this.RenderTransform = new TranslateTransform(-200, 0);
@@ -119,7 +119,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private void NotifyBannerItem_MouseLeave(object sender, MouseEventArgs e)
         {
-            if (Status!= NotifyStatus.Callback&& AutoClose&&!_closing&&_timer!=null)
+            if (Status != NotifyStatus.Callback && AutoClose && !_closing && _timer != null)
             {
 
                 _timer.Interval = Duration.TimeSpan;
@@ -135,20 +135,20 @@ namespace LeeTeke.WpfControl.Controls
         private void NotifyBannerItem_Loaded(object sender, RoutedEventArgs e)
         {
             Show();
-          
+
         }
 
         public override void OnApplyTemplate()
         {
-            if (_closeButton!=null)
+            if (_closeButton != null)
             {
                 _closeButton.Click -= CloseButton_Clicked;
             }
 
             base.OnApplyTemplate();
 
-            _closeButton= GetTemplateChild(ElementCloseButton) as Button;
-            if (_closeButton!=null)
+            _closeButton = GetTemplateChild(ElementCloseButton) as Button;
+            if (_closeButton != null)
             {
                 _closeButton.Click += CloseButton_Clicked;
             }
@@ -169,9 +169,9 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 请添加描述
         /// </summary>
-        public new Effect Effect
+        public new Effect? Effect
         {
-            get { return (Effect)GetValue(EffectProperty); }
+            get { return (Effect?)GetValue(EffectProperty); }
             set { SetValue(EffectProperty, value); }
         }
 
@@ -247,9 +247,9 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 声音
         /// </summary>
-        public Stream Sound
+        public Stream? Sound
         {
-            get { return (Stream)GetValue(SoundProperty); }
+            get { return (Stream?)GetValue(SoundProperty); }
             set { SetValue(SoundProperty, value); }
         }
 
@@ -392,7 +392,7 @@ namespace LeeTeke.WpfControl.Controls
 
         public void Show()
         {
-            Effect shadow=null;
+            Effect? shadow = null;
             if (this.Effect != null)
             {
                 shadow = Effect;
@@ -417,7 +417,7 @@ namespace LeeTeke.WpfControl.Controls
                 case NotifySite.BottomRight:
 
                     DoubleAnimationUsingKeyFrames rDA = new DoubleAnimationUsingKeyFrames();
-             
+
                     rDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                     {
                         Value = 0,
@@ -432,7 +432,7 @@ namespace LeeTeke.WpfControl.Controls
                 case NotifySite.BottomLeft:
 
                     DoubleAnimationUsingKeyFrames lDA = new DoubleAnimationUsingKeyFrames();
-         
+
                     lDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                     {
                         Value = 0,
@@ -446,7 +446,7 @@ namespace LeeTeke.WpfControl.Controls
                 case NotifySite.TopCenter:
 
                     DoubleAnimationUsingKeyFrames tDA = new DoubleAnimationUsingKeyFrames();
-               
+
                     tDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                     {
                         Value = 0,
@@ -460,7 +460,7 @@ namespace LeeTeke.WpfControl.Controls
                 case NotifySite.BottomCenter:
 
                     DoubleAnimationUsingKeyFrames bDA = new DoubleAnimationUsingKeyFrames();
-           
+
                     bDA.KeyFrames.Add(new EasingDoubleKeyFrame()
                     {
                         Value = 0,
@@ -478,7 +478,7 @@ namespace LeeTeke.WpfControl.Controls
 
             storyboard.Completed += (so, se) =>
             {
-                if (Status != NotifyStatus.Callback&& AutoClose)
+                if (Status != NotifyStatus.Callback && AutoClose)
                 {
                     _timer = new DispatcherTimer();
                     _timer.Interval = Duration.TimeSpan;

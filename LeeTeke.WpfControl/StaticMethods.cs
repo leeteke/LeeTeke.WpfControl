@@ -13,7 +13,7 @@ using System.Windows.Media.Effects;
 
 namespace LeeTeke.WpfControl
 {
-    public class StaticMethods
+    public static class StaticMethods
     {
 
         public static void ChangeTheme(bool isLight)
@@ -74,7 +74,7 @@ namespace LeeTeke.WpfControl
             ThemeChanged?.Invoke(null, isLight);
         }
 
-        public static event EventHandler<bool> ThemeChanged;
+        public static event EventHandler<bool>? ThemeChanged;
 
         /// <summary>
         /// 改变主题色
@@ -108,16 +108,16 @@ namespace LeeTeke.WpfControl
 
         #endregion
 
-        public static void SetScrollViewerSlide(bool isEnable, IEasingFunction easing = default, Duration duration = default)
+        public static void SetScrollViewerSlide(bool isEnable, IEasingFunction? easing = null, Duration? duration = null)
         {
             Application.Current.Resources["LeeScrollViewerSlideEnabled"] = isEnable;
             if (isEnable)
             {
-                if (easing != default)
+                if (easing != null)
                 {
                     Application.Current.Resources["LeeScrollViewerSlideEasingFuncion"] = easing;
                 }
-                if (duration != default)
+                if (duration != null)
                 {
                     Application.Current.Resources["LeeScrollViewerSlideDuration"] = duration;
                 }
@@ -136,7 +136,7 @@ namespace LeeTeke.WpfControl
             Application.Current.Resources["LeeFocusVisual"] = focusVisual;
 
         }
-        private static Style _defousVisual;
+        private static Style? _defousVisual;
         public static void SetFocusVisualDefault()
         {
             Application.Current.Resources["LeeFocusVisual"] = _defousVisual;
@@ -489,7 +489,7 @@ namespace LeeTeke.WpfControl
         /// <param name="imageSource"></param>
         /// <returns></returns>
         // ImageSource --> Bitmap
-        public static System.Drawing.Bitmap ImageSourceToBitmap(ImageSource imageSource)
+        public static System.Drawing.Bitmap? ImageSourceToBitmap(ImageSource imageSource)
         {
             try
             {
@@ -518,17 +518,17 @@ namespace LeeTeke.WpfControl
         /// <typeparam name="T"></typeparam>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static T FindVisualChild<T>(DependencyObject obj) where T : DependencyObject
+        public static T? FindVisualChild<T>(DependencyObject? obj) where T : DependencyObject
         {
             var childIndex = VisualTreeHelper.GetChildrenCount(obj);
             for (int i = 0; i < childIndex; i++)
             {
-                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
-                if (child != null && child is T)
+                var child = VisualTreeHelper.GetChild(obj, i);
+                if (child is not null and T)
                     return (T)child;
                 else
                 {
-                    T childOfChild = FindVisualChild<T>(child);
+                    var childOfChild = FindVisualChild<T>(child);
                     if (childOfChild != null)
                         return childOfChild;
                 }
@@ -542,12 +542,14 @@ namespace LeeTeke.WpfControl
         /// <typeparam name="T"></typeparam>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static (DependencyObject parent, T child) FindVisualFistChildAndParent<T>(DependencyObject obj) where T : DependencyObject
+        public static (DependencyObject? parent, T? child) FindVisualFistChildAndParent<T>(DependencyObject? obj) where T : DependencyObject
         {
+            if (obj == null)
+                return (null, null);
             var childIndex = VisualTreeHelper.GetChildrenCount(obj);
             for (int i = 0; i < childIndex; i++)
             {
-                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+                var child = VisualTreeHelper.GetChild(obj, i);
                 if (child != null && child is T)
                     return (obj, child as T);
                 else
@@ -566,16 +568,16 @@ namespace LeeTeke.WpfControl
         /// <typeparam name="T"></typeparam>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static T FindVisualChild<T>(DependencyObject obj, string name) where T : DependencyObject
+        public static T? FindVisualChild<T>(DependencyObject? obj, string name) where T : DependencyObject
         {
             var childIndex = VisualTreeHelper.GetChildrenCount(obj);
             for (int i = 0; i < childIndex; i++)
             {
-                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+                var child = VisualTreeHelper.GetChild(obj, i);
                 if (child == null)
                     continue;
-                if (child.GetValue(FrameworkElement.NameProperty) == name && child is T)
-                    return (T)child;
+                if (child.GetValue(FrameworkElement.NameProperty) as string == name && child is T t)
+                    return t;
 
                 child = FindVisualChild<T>(child, name);
                 if (child != null)
@@ -590,7 +592,7 @@ namespace LeeTeke.WpfControl
         /// <typeparam name="T"></typeparam>
         /// <param name="itemsControl"></param>
         /// <returns></returns>
-        public static T[] FindItemsControlChilds<T>(DependencyObject itemsControl) where T : DependencyObject
+        public static T[]? FindItemsControlChilds<T>(DependencyObject itemsControl) where T : DependencyObject
         {
             try
             {
@@ -627,18 +629,22 @@ namespace LeeTeke.WpfControl
         /// <typeparam name="T"></typeparam>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static T FindVisualParent<T>(DependencyObject obj) where T : DependencyObject
+        public static T? FindVisualParent<T>(DependencyObject? obj) where T : DependencyObject
         {
             try
             {
+                if (obj == null)
+                    return default;
+
                 var p = VisualTreeHelper.GetParent(obj);
                 if (p == null)
                 {
-                    return null;
+                    return default;
                 }
-                if (p is T)
+
+                if (p is T t)
                 {
-                    return (T)p;
+                    return t;
                 }
                 else
                 {
@@ -715,21 +721,19 @@ namespace LeeTeke.WpfControl
         /// <returns></returns>
         internal static ValueConverModel ValueConver(string value)
         {
-          
-
             if (double.TryParse(value, out double result))
             {
-                return new ValueConverModel { clear = false, result = result };
+                return new ValueConverModel { Clear = false, Result = result };
 
             }
 
             if (value == "N")
             {
-                return new ValueConverModel { clear = true, result = 0 };
+                return new ValueConverModel { Clear = true, Result = 0 };
             }
             else
             {
-                return new ValueConverModel { clear = false, result = 0.0 };
+                return new ValueConverModel { Clear = false, Result = 0.0 };
             }
 
         }

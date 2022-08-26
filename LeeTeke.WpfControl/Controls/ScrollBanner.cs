@@ -64,9 +64,9 @@ namespace LeeTeke.WpfControl.Controls
         private const string ElementCloseButton = "PART_CloseButton";
         #endregion
 
-        private Storyboard _scrollingSB;
-        private Button _closeButton;
-        private ContentPresenter _content;
+        private Storyboard? _scrollingSB;
+        private Button? _closeButton;
+        private ContentPresenter? _content;
 
         public ScrollBanner()
         {
@@ -333,7 +333,8 @@ namespace LeeTeke.WpfControl.Controls
 
         private void HScrollingAnimationWork()
         {
-
+            if (_content == null)
+                return;
 
             _content.RenderTransformOrigin = new Point(0, 0.5);
             _content.RenderTransform = new TranslateTransform() { X = this.ActualWidth + 5 };
@@ -360,6 +361,9 @@ namespace LeeTeke.WpfControl.Controls
 
         private void VScrollingAnimationWork()
         {
+            if (_content == null)
+                return;
+
             _content.RenderTransformOrigin = new Point(0.5, 0);
             _content.RenderTransform = new TranslateTransform() { Y = this.ActualHeight + 5 };
             _scrollingSB = new Storyboard()

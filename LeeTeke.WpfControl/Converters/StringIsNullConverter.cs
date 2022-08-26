@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 
 namespace LeeTeke.WpfControl.Converters
@@ -19,7 +20,7 @@ namespace LeeTeke.WpfControl.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return default;
+            return DependencyProperty.UnsetValue;
         }
     }
 
@@ -34,7 +35,7 @@ namespace LeeTeke.WpfControl.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return default;
+            return DependencyProperty.UnsetValue;
         }
     }
 }

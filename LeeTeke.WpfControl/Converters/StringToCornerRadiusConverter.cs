@@ -18,23 +18,18 @@ namespace LeeTeke.WpfControl.Converters
             try
             {
 
-        
-            if (value == null)
-                return new CornerRadius();
-            var input = value.ToString()?.Split(',');
-            switch (input.Length)
-            {
-                case 1:
-                    return new CornerRadius(double.Parse(input[0]));
-                case 2:
-                    return new CornerRadius(double.Parse(input[0]), double.Parse(input[1]), double.Parse(input[0]), double.Parse(input[1]));
-                case 3:
-                    return new CornerRadius(double.Parse(input[0]), double.Parse(input[1]), double.Parse(input[2]), double.Parse(input[1]));
-                case 4:
-                    return new CornerRadius(double.Parse(input[0]), double.Parse(input[1]), double.Parse(input[2]), double.Parse(input[4]));
-                default:
+
+                if (value == null)
                     return new CornerRadius();
-            }
+                var input = value.ToString()?.Split(',');
+                return (input?.Length) switch
+                {
+                    1 => new CornerRadius(double.Parse(input[0])),
+                    2 => new CornerRadius(double.Parse(input[0]), double.Parse(input[1]), double.Parse(input[0]), double.Parse(input[1])),
+                    3 => new CornerRadius(double.Parse(input[0]), double.Parse(input[1]), double.Parse(input[2]), double.Parse(input[1])),
+                    4 => new CornerRadius(double.Parse(input[0]), double.Parse(input[1]), double.Parse(input[2]), double.Parse(input[4])),
+                    _ => (object)new CornerRadius(),
+                };
             }
             catch (Exception)
             {

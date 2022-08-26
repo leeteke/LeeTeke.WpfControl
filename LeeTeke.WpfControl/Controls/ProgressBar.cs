@@ -53,7 +53,7 @@ namespace LeeTeke.WpfControl.Controls
         }
 
 
-        private Storyboard _lodingSB;
+        private Storyboard? _lodingSB;
         public ProgressBar()
         {
             this.SizeChanged += LodingBar_SizeChanged;

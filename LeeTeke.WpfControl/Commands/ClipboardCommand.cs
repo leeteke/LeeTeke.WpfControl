@@ -15,14 +15,14 @@ namespace LeeTeke.WpfControl.Commands
 
     public class ClipboardCopyValue : ICommand
     {
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged;
 
-        public bool CanExecute(object parameter)
+        public bool CanExecute(object? parameter)
         {
             return true;
         }
 
-        public void Execute(object parameter)
+        public void Execute(object? parameter)
         {
             try
             {

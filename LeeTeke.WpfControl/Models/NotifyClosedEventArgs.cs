@@ -10,9 +10,9 @@ namespace LeeTeke.WpfControl
    public class NotifyClosedEventArgs: RoutedEventArgs
     {
 
-        public object Value { get;  }
+        public object? Value { get;  }
 
-        public NotifyClosedEventArgs(object value ,RoutedEvent @event):base(@event)
+        public NotifyClosedEventArgs(object? value ,RoutedEvent @event):base(@event)
         {
             Value = value;
         }

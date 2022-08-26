@@ -20,14 +20,14 @@ namespace LeeTeke.WpfControl.Commands
 
     public class MaximizeWindowCommand : ICommand
     {
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged;
 
-        public bool CanExecute(object parameter)
+        public bool CanExecute(object? parameter)
         {
             return true;
         }
 
-        public void Execute(object parameter)
+        public void Execute(object? parameter)
         {
             if (parameter is DependencyObject dependencyObject)
             {
@@ -41,14 +41,14 @@ namespace LeeTeke.WpfControl.Commands
 
     public class ShowSystemMenuCommand : ICommand
     {
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged;
 
-        public bool CanExecute(object parameter)
+        public bool CanExecute(object? parameter)
         {
             return true;
         }
 
-        public void Execute(object parameter)
+        public void Execute(object? parameter)
         {
             if (parameter is DependencyObject dependencyObject)
             {
@@ -62,14 +62,14 @@ namespace LeeTeke.WpfControl.Commands
 
     public class MinimizeWindowCommand : ICommand
     {
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged;
 
-        public bool CanExecute(object parameter)
+        public bool CanExecute(object? parameter)
         {
             return true;
         }
 
-        public void Execute(object parameter)
+        public void Execute(object? parameter)
         {
             if (parameter is DependencyObject dependencyObject)
             {
@@ -83,14 +83,14 @@ namespace LeeTeke.WpfControl.Commands
 
     public class RestoreWindowCommand : ICommand
     {
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged;
 
-        public bool CanExecute(object parameter)
+        public bool CanExecute(object? parameter)
         {
             return true;
         }
 
-        public void Execute(object parameter)
+        public void Execute(object? parameter)
         {
             if (parameter is DependencyObject dependencyObject)
             {
@@ -104,14 +104,14 @@ namespace LeeTeke.WpfControl.Commands
 
     public class CloseWindowCommand : ICommand
     {
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged;
 
-        public bool CanExecute(object parameter)
+        public bool CanExecute(object? parameter)
         {
             return true;
         }
 
-        public void Execute(object parameter)
+        public void Execute(object? parameter)
         {
             if (parameter is DependencyObject dependencyObject)
             {

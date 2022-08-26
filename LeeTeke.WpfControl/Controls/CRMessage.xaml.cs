@@ -19,7 +19,7 @@ namespace LeeTeke.WpfControl.Controls
     /// </summary>
     public partial class CRMessage : System.Windows.Window, IMessageWin
     {
-        public object Value { get; set; }
+        public object? Value { get; set; }
         private bool _canClose;
         private bool _isDialog = false;
 
@@ -75,6 +75,7 @@ namespace LeeTeke.WpfControl.Controls
             }
 
         }
+
         public System.Windows.Window Window { get => this; }
         public bool ShowProcess
         {

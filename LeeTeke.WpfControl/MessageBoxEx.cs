@@ -171,10 +171,10 @@ namespace LeeTeke.WpfControl
 
         public bool? ShowDialog() => _msg.ShowDialog();
 
-        public async Task<object> ShowDialogAsync()
+        public async Task<object?> ShowDialogAsync()
         {
 
-            var task = Task<object>.Factory.StartNew(() =>
+            var task = Task<object?>.Factory.StartNew(() =>
              {
                  _msg.Window.Dispatcher.Invoke(() =>
                 {

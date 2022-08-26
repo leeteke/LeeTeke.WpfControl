@@ -15,7 +15,7 @@ namespace LeeTeke.WpfControl
         /// <summary>
         /// 值
         /// </summary>
-        public object Value { get; set; }
+        public object? Value { get; set; }
 
         /// <summary>
         /// 状态
@@ -25,12 +25,12 @@ namespace LeeTeke.WpfControl
         /// <summary>
         /// 内容，默认文本可以是FE
         /// </summary>
-        public object Content { get; set; }
+        public object? Content { get; set; }
 
         /// <summary>
         /// 背景音，默认没有
         /// </summary>
-        public Stream Sound { get; set; }
+        public Stream? Sound { get; set; }
 
         /// <summary>
         /// 持续时间，可为空，毫秒
@@ -39,7 +39,7 @@ namespace LeeTeke.WpfControl
 
         public bool CanClick { get; set; }
 
-        public Action CloseAction { get; internal set; }
+        public Action? CloseAction { get; internal set; }
 
         public NotifyBannerShowData(object content, NotifyStatus status = NotifyStatus.Primary)
         {

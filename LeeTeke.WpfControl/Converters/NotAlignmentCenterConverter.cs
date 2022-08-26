@@ -30,7 +30,7 @@ namespace LeeTeke.WpfControl.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return default;
+            return DependencyProperty.UnsetValue;
         }
     }
     #endregion

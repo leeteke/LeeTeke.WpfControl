@@ -59,19 +59,19 @@ namespace LeeTeke.WpfControl.Commands
 
         #region ICommand 
 
-        public bool CanExecute(object parameter)
+        public bool CanExecute(object? parameter)
         {
             if (Command != null)
                 return Command.CanExecute(CommandParameter);
             return false;
         }
 
-        public void Execute(object parameter)
+        public void Execute(object? parameter)
         {
             Command.Execute(CommandParameter);
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged;
 
         private static void OnCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

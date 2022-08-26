@@ -133,7 +133,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         private static void OnIsEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (!(d is Controls.Window) && d is Window window && e.NewValue != e.OldValue && e.NewValue != null)
+            if (d is not Controls.Window && d is Window window && e.NewValue != e.OldValue && e.NewValue != null)
             {
                 window.StateChanged -= NoCorWindow_StateChanged;
                 window.Loaded -= Window_Loaded;
@@ -198,138 +198,141 @@ namespace LeeTeke.WpfControl.Dependencies
 
         #region 私有
 
-        private static void NoCorWindow_StateChanged(object sender, EventArgs e)
+        private static void NoCorWindow_StateChanged(object? sender, EventArgs e)
         {
-
             if (sender is Window window)
             {
                 var border = StaticMethods.FindVisualChild<Border>(window);
-                if (window.WindowState == WindowState.Maximized)
+                if (border != null)
                 {
+                    if (window.WindowState == WindowState.Maximized)
+                    {
 
-                    border.Margin = new Thickness(7);
+                        border.Margin = new Thickness(7);
 
-                }
-                if (window.WindowState == WindowState.Normal)
-                {
-                    border.Margin = new Thickness(0);
+                    }
+                    if (window.WindowState == WindowState.Normal)
+                    {
+                        border.Margin = new Thickness(0);
+                    }
                 }
             }
-
-
         }
 
-        private static void Window_StateChanged(object sender, EventArgs e)
+        private static void Window_StateChanged(object? sender, EventArgs e)
         {
             if (sender is Window window && window.IsLoaded)
             {
-                var border = window.Content as Grid;
-                if (window.WindowState == WindowState.Maximized)
+                if (window.Content is Grid panel)
                 {
-                    var bounds = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
-                    var taskbarRect = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea;
-                    var mar = new Thickness();
-                    if (taskbarRect.X == 0)
+                    if (window.WindowState == WindowState.Maximized)
                     {
-                        mar.Left = 7;
-                        mar.Right = bounds.Width - taskbarRect.Width + 7;
+                        var bounds = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
+                        var taskbarRect = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea;
+                        var mar = new Thickness();
+                        if (taskbarRect.X == 0)
+                        {
+                            mar.Left = 7;
+                            mar.Right = bounds.Width - taskbarRect.Width + 7;
+                        }
+                        else
+                        {
+                            mar.Left = taskbarRect.X + 7;
+                            mar.Right = 7;
+                        }
+                        if (taskbarRect.Y == 0)
+                        {
+                            mar.Top = 7;
+                            mar.Bottom = bounds.Height - taskbarRect.Height + 7;
+                        }
+                        else
+                        {
+                            mar.Top = taskbarRect.Y + 7;
+                            mar.Bottom = 7;
+                        }
+                        panel.Margin = mar;
                     }
-                    else
+                    if (window.WindowState == WindowState.Normal)
                     {
-                        mar.Left = taskbarRect.X + 7;
-                        mar.Right = 7;
+                        panel.Margin = new Thickness(7);
                     }
-                    if (taskbarRect.Y == 0)
-                    {
-                        mar.Top = 7;
-                        mar.Bottom = bounds.Height - taskbarRect.Height + 7;
-                    }
-                    else
-                    {
-                        mar.Top = taskbarRect.Y + 7;
-                        mar.Bottom = 7;
-                    }
-                    border.Margin = mar;
                 }
-                if (window.WindowState == WindowState.Normal)
-                {
-                    border.Margin = new Thickness(7);
-                }
-
 
             }
 
 
         }
 
-        private static void Window_Deactivated(object sender, EventArgs e)
+        private static void Window_Deactivated(object? sender, EventArgs e)
         {
             if (sender is Window window && window.IsLoaded)
             {
                 var border = StaticMethods.FindVisualChild<Border>(window.Content as FrameworkElement, "PART_WinBGBorder");
+                if (border != null)
+                {
+                    if (GetDeactivatedEffect(window) != null)
+                    {
+                        border.SetBinding(Border.EffectProperty, new Binding()
+                        {
+                            Source = window,
+                            Path = new PropertyPath(WindowManager.DeactivatedEffectProperty),
+                            Mode = BindingMode.OneWay
+                        });
+                    }
 
-                if (GetDeactivatedEffect(window) != null)
+                    if (GetDeactivatedBorderBrush(window) != null)
+                    {
+                        border.SetBinding(Border.BorderBrushProperty, new Binding()
+                        {
+                            Source = window,
+                            Path = new PropertyPath(WindowManager.DeactivatedBorderBrushProperty),
+                            Mode = BindingMode.OneWay
+                        });
+                    }
+
+                    if (GetDeactivatedBorderThickness(window) != default)
+                    {
+                        border.SetBinding(Border.BorderThicknessProperty, new Binding()
+                        {
+                            Source = window,
+                            Path = new PropertyPath(WindowManager.DeactivatedBorderThicknessProperty),
+                            Mode = BindingMode.OneWay
+                        });
+                    }
+                }
+            }
+        }
+
+        private static void Window_Activated(object? sender, EventArgs e)
+        {
+
+            if (sender is Window window && window.IsLoaded)
+            {
+                var border = StaticMethods.FindVisualChild<Border>(window.Content as FrameworkElement, "PART_WinBGBorder");
+
+                if (border != null)
                 {
                     border.SetBinding(Border.EffectProperty, new Binding()
                     {
                         Source = window,
-                        Path = new PropertyPath(WindowManager.DeactivatedEffectProperty),
+                        Path = new PropertyPath(WindowManager.EffectProperty),
                         Mode = BindingMode.OneWay
                     });
-                }
 
-                if (GetDeactivatedBorderBrush(window) != null)
-                {
                     border.SetBinding(Border.BorderBrushProperty, new Binding()
                     {
                         Source = window,
-                        Path = new PropertyPath(WindowManager.DeactivatedBorderBrushProperty),
+                        Path = new PropertyPath(WindowManager.BorderBrushProperty),
                         Mode = BindingMode.OneWay
                     });
-                }
 
-
-                if (GetDeactivatedBorderThickness(window) != default)
-                {
                     border.SetBinding(Border.BorderThicknessProperty, new Binding()
                     {
                         Source = window,
-                        Path = new PropertyPath(WindowManager.DeactivatedBorderThicknessProperty),
+                        Path = new PropertyPath(WindowManager.BorderThicknessProperty),
                         Mode = BindingMode.OneWay
                     });
                 }
-
-
-            }
-        }
-
-        private static void Window_Activated(object sender, EventArgs e)
-        {
-
-            if (sender is Window window && window.IsLoaded)
-            {
-                var border = StaticMethods.FindVisualChild<Border>(window.Content as FrameworkElement, "PART_WinBGBorder");
-
-                border.SetBinding(Border.EffectProperty, new Binding()
-                {
-                    Source = window,
-                    Path = new PropertyPath(WindowManager.EffectProperty),
-                    Mode = BindingMode.OneWay
-                });
-
-                border.SetBinding(Border.BorderBrushProperty, new Binding()
-                {
-                    Source = window,
-                    Path = new PropertyPath(WindowManager.BorderBrushProperty),
-                    Mode = BindingMode.OneWay
-                });
-
-                border.SetBinding(Border.BorderThicknessProperty, new Binding()
-                {
-                    Source = window,
-                    Path = new PropertyPath(WindowManager.BorderThicknessProperty),
-                    Mode = BindingMode.OneWay
-                });
             }
         }
 
@@ -340,10 +343,12 @@ namespace LeeTeke.WpfControl.Dependencies
             if (sender is Window window && window.Content is FrameworkElement element)
             {
                 var border = StaticMethods.FindVisualChild<Border>(window);
-                BindingOperations.ClearAllBindings(border);
-                border.Background = null;
-                border.BorderThickness = new Thickness(0);
-
+                if (border != null)
+                {
+                    BindingOperations.ClearAllBindings(border);
+                    border.Background = null;
+                    border.BorderThickness = new Thickness(0);
+                }
 
                 var bgBorder = new Border() { Name = "PART_WinBGBorder" };
                 bgBorder.SetBinding(Border.BorderBrushProperty, new Binding()
@@ -430,7 +435,6 @@ namespace LeeTeke.WpfControl.Dependencies
                 }
             }
         }
-
 
         #endregion
 

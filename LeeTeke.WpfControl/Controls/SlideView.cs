@@ -57,8 +57,8 @@ namespace LeeTeke.WpfControl.Controls
         }
 
         private const string ElementScrollViewer = "PART_ScrollViewer";
-        private ScrollViewer _scrollViewer;
-        private DispatcherTimer _autoPalyTime;
+        private ScrollViewer? _scrollViewer;
+        private DispatcherTimer? _autoPalyTime;
         public SlideView()
         {
             EventManager.RegisterClassHandler(typeof(SlideViewItem), SlideViewItem.MouseLeftButtonUpEvent, new RoutedEventHandler(ItemMouseLeftButtonUpEvent));
@@ -423,7 +423,7 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
 
-        private void AutoPalyTime_Tick(object sender, EventArgs e)
+        private void AutoPalyTime_Tick(object? sender, EventArgs e)
         {
             ToIndex(CurrentIndex + 1);
         }

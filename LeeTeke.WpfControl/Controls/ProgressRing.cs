@@ -66,12 +66,12 @@ namespace LeeTeke.WpfControl.Controls
         private const string ElementWating = "PART_Wating";
         #endregion
 
-        private Path _outer;
-        private Path _orbitBackground;
-        private Path _orbit;
-        private Border _inner;
-        private Path _wating;
-        private Storyboard _watingSB;
+        private Path? _outer;
+        private Path? _orbitBackground;
+        private Path? _orbit;
+        private Border? _inner;
+        private Path? _wating;
+        private Storyboard? _watingSB;
         private double _backDiameter;
         public ProgressRing()
         {
@@ -420,7 +420,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             try
             {
-                if (!IsLoaded || Visibility != Visibility.Visible)
+                if (!IsVisible || _outer == null || _orbitBackground == null || _inner == null)
                     return;
 
                 ///直径 =最小单位-边框厚度
@@ -458,7 +458,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private void LodingRing()
         {
-            if (!IsLoaded || Mode != ProgressControlMode.Loding || Visibility != Visibility.Visible)
+            if (!IsVisible || Mode != ProgressControlMode.Loding)
                 return;
 
             var angel = Value / Maximum * 360;
@@ -479,11 +479,12 @@ namespace LeeTeke.WpfControl.Controls
 
         private void ChangeRing(double value)
         {
-            if (Mode == ProgressControlMode.Wating)
+            if (Mode == ProgressControlMode.Wating && _wating != null)
             {
-                _wating.Data = GetRoundPath(value, _backDiameter / 2, new Point(this.ActualWidth / 2, _orbit.StrokeThickness / 2 + BorderThickness + ThicknessPadding));
+
+                _wating.Data = GetRoundPath(value, _backDiameter / 2, new Point(this.ActualWidth / 2, _wating.StrokeThickness / 2 + BorderThickness + ThicknessPadding));
             }
-            else
+            else if (_orbit != null)
             {
                 _orbit.Data = GetRoundPath(value, _backDiameter / 2, new Point(this.ActualWidth / 2, _orbit.StrokeThickness / 2 + BorderThickness + ThicknessPadding));
             }
@@ -519,33 +520,34 @@ namespace LeeTeke.WpfControl.Controls
             Storyboard.SetTargetProperty(eDA, new PropertyPath(ProgressRing.RingValueProperty));
 
 
-
-            _wating.RenderTransform = new RotateTransform();
-
-
-            DoubleAnimationUsingKeyFrames rDA = new DoubleAnimationUsingKeyFrames();
-            rDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+            if (_wating != null)
             {
-                Value = 0,
-                KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0))
-            });
-            rDA.KeyFrames.Add(new EasingDoubleKeyFrame()
-            {
-                Value = 720,
-                KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(1.5)),
-            });
+                _wating.RenderTransform = new RotateTransform();
 
-            _watingSB.Children.Add(rDA);
-            Storyboard.SetTarget(rDA, _wating);
-            Storyboard.SetTargetProperty(rDA, new PropertyPath("(0).(1)", new DependencyProperty[] { Path.RenderTransformProperty, RotateTransform.AngleProperty }));
 
-            _watingSB.Begin();
+                DoubleAnimationUsingKeyFrames rDA = new DoubleAnimationUsingKeyFrames();
+                rDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+                {
+                    Value = 0,
+                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0))
+                });
+                rDA.KeyFrames.Add(new EasingDoubleKeyFrame()
+                {
+                    Value = 720,
+                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(1.5)),
+                });
 
+                _watingSB.Children.Add(rDA);
+                Storyboard.SetTarget(rDA, _wating);
+                Storyboard.SetTargetProperty(rDA, new PropertyPath("(0).(1)", new DependencyProperty[] { Path.RenderTransformProperty, RotateTransform.AngleProperty }));
+
+                _watingSB.Begin();
+            }
 
         }
         private void _wating_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (_wating.Visibility == Visibility.Visible)
+            if (_wating != null && _wating.IsVisible)
             {
                 LodingWating();
             }

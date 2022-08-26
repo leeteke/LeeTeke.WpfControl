@@ -19,23 +19,23 @@ namespace LeeTeke.WpfControl.Converters
                 if (args.Length == 4)
                 {
                     var left = StaticMethods.ValueConver(args[0]);
-                    thickness.TopLeft = left.clear ? 0 : thickness.TopLeft + left.result;
+                    thickness.TopLeft = left.Clear ? 0 : thickness.TopLeft + left.Result;
                     var top = StaticMethods.ValueConver(args[1]);
-                    thickness.TopRight = top.clear ? 0 : thickness.TopRight + top.result;
+                    thickness.TopRight = top.Clear ? 0 : thickness.TopRight + top.Result;
                     var right = StaticMethods.ValueConver(args[2]);
-                    thickness.BottomRight = right.clear ? 0 : thickness.BottomRight + right.result;
+                    thickness.BottomRight = right.Clear ? 0 : thickness.BottomRight + right.Result;
                     var bottom = StaticMethods.ValueConver(args[3]);
-                    thickness.BottomLeft = bottom.clear ? 0 : thickness.BottomLeft + bottom.result;
+                    thickness.BottomLeft = bottom.Clear ? 0 : thickness.BottomLeft + bottom.Result;
                     return thickness;
                 }
             }
        
-            return default;
+            return DependencyProperty.UnsetValue;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return default;
+            return DependencyProperty.UnsetValue;
         }
     }
 }

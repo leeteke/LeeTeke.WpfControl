@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -84,24 +85,22 @@ namespace LeeTeke.WpfControl.Controls
 
 
 
-        private ScrollViewer _scrollViewer;
-        private Button _leftBtn;
-        private Button _rightBtn;
-        private ContextMenu _contextMenu;
-        private MenuItem _selectedMenuItem;
-        private MenuItem _pinMenuItem;
-        private MenuItem _allMenuItem;
-        private MenuItem _otherMenuItem;
-        private MenuItem _selfMenuItem;
+        private ScrollViewer? _scrollViewer;
+        private Button? _leftBtn;
+        private Button? _rightBtn;
+        private ContextMenu? _contextMenu;
+        private MenuItem? _selectedMenuItem;
+        private MenuItem? _pinMenuItem;
+        private MenuItem? _allMenuItem;
+        private MenuItem? _otherMenuItem;
+        private MenuItem? _selfMenuItem;
 
-        private UIElementCollection _items;
-
+        private UIElementCollection? _items;
 
         private int _currentIndex = -1;
-        private NavigationItem _currentItem;
-        private object _currentValue;
+        private NavigationItem? _currentItem;
+        private object? _currentValue;
         private Point? _currentPoint;
-
 
         private bool _isLoaded = false;
         public Navigation()
@@ -113,8 +112,7 @@ namespace LeeTeke.WpfControl.Controls
             hfac.SetBinding(StackPanel.OrientationProperty, new Binding() { Source = this, Path = new PropertyPath(Navigation.OrientationProperty), Mode = BindingMode.OneWay });
             hfac.AddHandler(StackPanel.LoadedEvent, new RoutedEventHandler((es, ex) =>
             {
-                var panel = es as Panel;
-                if (panel != null)
+                if (es is Panel panel)
                 {
                     _items = panel.Children;
 
@@ -173,9 +171,11 @@ namespace LeeTeke.WpfControl.Controls
 
         protected override void OnContextMenuOpening(ContextMenuEventArgs e)
         {
+
             e.Handled = true;
 
-            NavigationItem item = e.OriginalSource as NavigationItem;
+            NavigationItem? item = e.OriginalSource as NavigationItem;
+            //如果Item==null那就查找一下
             if (item == null)
             {
                 if (SelectedItem != null && SelectedItem.IsMouseOver)
@@ -184,54 +184,60 @@ namespace LeeTeke.WpfControl.Controls
                 }
             }
 
-            if (item != null)
+            if (item != null && _contextMenu != null)
             {
+                //改变选择按钮显示
+                if (_selectedMenuItem != null)
+                    _selectedMenuItem.Visibility = item.IsSelected ? Visibility.Collapsed : Visibility.Visible;
+                //改变contenxtMenu的未知
                 if (item.IsMouseOver)
                 {
-                    _selectedMenuItem.Visibility = Visibility.Collapsed;
                     _contextMenu.Placement = PlacementMode.MousePoint;
                 }
                 else
                 {
-                    _selectedMenuItem.Visibility = Visibility.Visible;
                     _contextMenu.PlacementTarget = item;
                     _contextMenu.Placement = PlacementMode.Bottom;
-
                 }
-
                 _contextMenu.DataContext = item;
-                if (item.CanClose)
+                //改变相关按钮形状
+                if (_pinMenuItem != null && _selfMenuItem != null)
                 {
-                    _pinMenuItem.Visibility = Visibility.Visible;
-                    _selfMenuItem.Visibility = Visibility.Visible;
-                    if (_pinMenuItem.Icon is TextBlock tb)
+                    if (item.CanClose)
                     {
-                        if (item.IsPinned)
+                        _pinMenuItem.Visibility = Visibility.Visible;
+                        _selfMenuItem.Visibility = Visibility.Visible;
+                        if (_pinMenuItem.Icon is TextBlock tb)
                         {
-                            tb.Text = "\xe77a";
-                            _pinMenuItem.Header = "解除固定(_P)";
-                        }
-                        else
-                        {
-                            tb.Text = "\xe718";
-                            _pinMenuItem.Header = "固定选项卡(_P)";
+                            if (item.IsPinned)
+                            {
+                                tb.Text = "\xe77a";
+                                _pinMenuItem.Header = "解除固定(_P)";
+                            }
+                            else
+                            {
+                                tb.Text = "\xe718";
+                                _pinMenuItem.Header = "固定选项卡(_P)";
+                            }
                         }
                     }
-                }
-                else
-                {
-                    _pinMenuItem.Visibility = Visibility.Collapsed;
-                    _selfMenuItem.Visibility = Visibility.Collapsed;
+                    else
+                    {
+                        _pinMenuItem.Visibility = Visibility.Collapsed;
+                        _selfMenuItem.Visibility = Visibility.Collapsed;
+                    }
                 }
                 _contextMenu.IsOpen = true;
-            }
 
+            }
         }
 
         protected override void OnContextMenuClosing(ContextMenuEventArgs e)
         {
-            _contextMenu.DataContext = null;
-
+            if (_contextMenu != null)
+            {
+                _contextMenu.DataContext = null;
+            }
             base.OnContextMenuClosing(e);
 
         }
@@ -466,9 +472,9 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public NavigationItem SelectedItem
+        public NavigationItem? SelectedItem
         {
-            get { return (NavigationItem)GetValue(SelectedItemProperty); }
+            get { return (NavigationItem?)GetValue(SelectedItemProperty); }
             set { SetValue(SelectedItemProperty, value); }
         }
 
@@ -490,9 +496,9 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public object SelectedValue
+        public object? SelectedValue
         {
-            get { return (object)GetValue(SelectedValueProperty); }
+            get { return (object?)GetValue(SelectedValueProperty); }
             set { SetValue(SelectedValueProperty, value); }
         }
 
@@ -904,9 +910,9 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public ICommand ItemClosedCommand
+        public ICommand? ItemClosedCommand
         {
-            get { return (ICommand)GetValue(ItemClosedCommandProperty); }
+            get { return (ICommand?)GetValue(ItemClosedCommandProperty); }
             set { SetValue(ItemClosedCommandProperty, value); }
         }
 
@@ -920,9 +926,9 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public ICommand ItemSelectedCommand
+        public ICommand? ItemSelectedCommand
         {
-            get { return (ICommand)GetValue(ItemSelectedCommandProperty); }
+            get { return (ICommand?)GetValue(ItemSelectedCommandProperty); }
             set { SetValue(ItemSelectedCommandProperty, value); }
         }
 
@@ -981,9 +987,9 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
         #region TemplateEvent
-        private void _pinMenuItem_Click(object sender, RoutedEventArgs e)
+        private void _pinMenuItem_Click(object? sender, RoutedEventArgs e)
         {
-            if (_contextMenu.DataContext is NavigationItem item)
+            if (_contextMenu != null && _contextMenu.DataContext is NavigationItem item)
             {
                 item.IsPinned = !item.IsPinned;
                 if (item.IsPinned)
@@ -996,46 +1002,48 @@ namespace LeeTeke.WpfControl.Controls
                 }
             }
         }
-        private void _selectedMenuItem_Click(object sender, RoutedEventArgs e)
+        private void _selectedMenuItem_Click(object? sender, RoutedEventArgs e)
         {
-            if (_contextMenu.DataContext is NavigationItem item)
+            if (_contextMenu != null && _contextMenu.DataContext is NavigationItem item)
             {
                 ChangeSelectedItem(item);
             }
         }
-        private void _selfMenuItem_Click(object sender, RoutedEventArgs e)
+        private void _selfMenuItem_Click(object? sender, RoutedEventArgs e)
         {
-            if (_contextMenu.DataContext is NavigationItem item)
+            if (_contextMenu != null && _contextMenu.DataContext is NavigationItem item)
             {
                 ///关闭我自己
-                ItemCloseSelf(item);
+                item.SelfClose = true;
+                item.Close();
             }
         }
 
-        private void _otherMenuItem_Click(object sender, RoutedEventArgs e)
+        private void _otherMenuItem_Click(object? sender, RoutedEventArgs e)
         {
-            if (_contextMenu.DataContext is NavigationItem item)
+            if (_contextMenu != null && _contextMenu.DataContext is NavigationItem item)
             {
                 ItemCloseOther(item);
             }
         }
 
-        private void _contextMenu_Closed(object sender, RoutedEventArgs e)
+        private void _contextMenu_Closed(object? sender, RoutedEventArgs e)
         {
-            _contextMenu.DataContext = this.DataContext;
+            if (_contextMenu != null)
+                _contextMenu.DataContext = this.DataContext;
         }
 
-        private void _allMenuItem_Click(object sender, RoutedEventArgs e)
+        private void _allMenuItem_Click(object? sender, RoutedEventArgs e)
         {
             //关闭全部Item
-            if (_contextMenu.DataContext is NavigationItem item)
+            if (_contextMenu != null && _contextMenu.DataContext is NavigationItem item)
             {
                 ///关闭我自己
                 ItemCloseAll(item);
             }
         }
 
-        private void _rightBtn_Click(object sender, RoutedEventArgs e)
+        private void _rightBtn_Click(object? sender, RoutedEventArgs e)
         {
             if (Orientation == Orientation.Horizontal && _scrollViewer != null)
             {
@@ -1043,7 +1051,7 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
 
-        private void _leftBtn_Click(object sender, RoutedEventArgs e)
+        private void _leftBtn_Click(object? sender, RoutedEventArgs e)
         {
             if (Orientation == Orientation.Horizontal && _scrollViewer != null)
             {
@@ -1051,9 +1059,9 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
 
-        private void _scrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        private void _scrollViewer_ScrollChanged(object? sender, ScrollChangedEventArgs e)
         {
-            if (Orientation == Orientation.Horizontal && ShowScrollToButton && sender is ScrollViewer scrollViewer)
+            if (Orientation == Orientation.Horizontal && ShowScrollToButton && sender is ScrollViewer scrollViewer && _leftBtn != null && _rightBtn != null)
             {
                 if (scrollViewer.ScrollableWidth > 0)
                 {
@@ -1089,11 +1097,10 @@ namespace LeeTeke.WpfControl.Controls
 
         public void ScrollToItem(NavigationItem item)
         {
-            try
+            if (_scrollViewer != null)
             {
                 Dispatcher.Invoke(() =>
                 {
-
                     if (Orientation == Orientation.Horizontal)
                     {
                         // 获取要定位之前 ScrollViewer 目前的滚动位置
@@ -1116,13 +1123,9 @@ namespace LeeTeke.WpfControl.Controls
 
                         ScrollViewerManager.ScrollToVerticalOffset(_scrollViewer, seto);
                     }
-
                 });
             }
-            catch
-            {
 
-            }
         }
         #endregion
 
@@ -1154,45 +1157,42 @@ namespace LeeTeke.WpfControl.Controls
         /// <param name="item"></param>
         /// <param name="item"></param>
         /// <returns></returns>
-        internal NavigationItem GetBeforeItem(NavigationItem item, bool forMove = true)
+        internal NavigationItem? GetBeforeItem(NavigationItem item, bool forMove = true)
         {
-            var func = new Func<IList, NavigationItem>(items =>
+            var items = GetItems();
+            if (items == null)
+                return null;
+
+            var itemIndex = items.IndexOf(item);
+            if (itemIndex > 0)
             {
-                var itemIndex = items.IndexOf(item);
-                if (itemIndex > 0)
+                if (forMove)
                 {
-                    if (forMove)
+                    if (items[itemIndex - 1] is NavigationItem getItem)
                     {
-                        var getItem = items[itemIndex - 1] as NavigationItem;
-                        if (getItem != null)
+                        if (item.IsPinned || !item.CanClose)
                         {
-                            if (item.IsPinned || !item.CanClose)
+                            if (getItem.IsPinned || !getItem.CanClose)
                             {
-                                if (getItem.IsPinned || !getItem.CanClose)
-                                {
-                                    return getItem;
-                                }
+                                return getItem;
                             }
-                            else
+                        }
+                        else
+                        {
+                            if (!getItem.IsPinned && getItem.CanClose)
                             {
-                                if (!getItem.IsPinned && getItem.CanClose)
-                                {
-                                    return getItem;
-                                }
+                                return getItem;
                             }
                         }
                     }
-                    else
-                    {
-                        return items[itemIndex - 1] as NavigationItem;
-                    }
-
                 }
+                else
+                {
+                    return items[itemIndex - 1] as NavigationItem;
+                }
+            }
 
-                return null;
-            });
-
-            return ItemsSource == null ? func(Items) : func(_items);
+            return null;
         }
 
         /// <summary>
@@ -1200,44 +1200,41 @@ namespace LeeTeke.WpfControl.Controls
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        internal NavigationItem GetAfterItem(NavigationItem item, bool forMove = true)
+        internal NavigationItem? GetAfterItem(NavigationItem item, bool forMove = true)
         {
-            var func = new Func<IList, NavigationItem>(items =>
+            var items = GetItems();
+            if (items == null)
+                return null;
+
+            var itemIndex = items.IndexOf(item);
+            if (itemIndex > -1 && itemIndex < items.Count - 1)
             {
-                var itemIndex = items.IndexOf(item);
-                if (itemIndex > -1 && itemIndex < items.Count - 1)
+                if (forMove)
                 {
-                    if (forMove)
+                    if (items[itemIndex + 1] is NavigationItem getItem)
                     {
-                        var getItem = items[itemIndex + 1] as NavigationItem;
-                        if (getItem != null)
+                        if (item.IsPinned || !item.CanClose)
                         {
-                            if (item.IsPinned || !item.CanClose)
+                            if (getItem.IsPinned || !getItem.CanClose)
                             {
-                                if (getItem.IsPinned || !getItem.CanClose)
-                                {
-                                    return getItem;
-                                }
+                                return getItem;
                             }
-                            else
+                        }
+                        else
+                        {
+                            if (!getItem.IsPinned && getItem.CanClose)
                             {
-                                if (!getItem.IsPinned && getItem.CanClose)
-                                {
-                                    return getItem;
-                                }
+                                return getItem;
                             }
                         }
                     }
-                    else
-                    {
-                        return items[itemIndex + 1] as NavigationItem;
-                    }
-
                 }
-                return null;
-            });
-
-            return ItemsSource == null ? func(Items) : func(_items);
+                else
+                {
+                    return items[itemIndex + 1] as NavigationItem;
+                }
+            }
+            return null;
         }
 
         /// <summary>
@@ -1276,17 +1273,11 @@ namespace LeeTeke.WpfControl.Controls
             var closeItem = GetItemFormItem(item);
             if (closeItem != null)
             {
+                var items = GetItems();
+                if (items == null)
+                    return;
 
-                if (ItemsSource == null)
-                {
-                    ItemMove(item, isforward ? Items.IndexOf(item) - 1 : Items.IndexOf(item) + 1);
-
-                }
-                else
-                {
-                    ItemMove(item, isforward ? _items.IndexOf(item) - 1 : _items.IndexOf(item) + 1);
-                }
-
+                ItemMove(item, isforward ? items.IndexOf(item) - 1 : items.IndexOf(item) + 1);
             }
 
         }
@@ -1296,105 +1287,77 @@ namespace LeeTeke.WpfControl.Controls
 
 
         /// <summary>
+        /// 获取Items
+        /// </summary>
+        /// <returns></returns>
+        private IList? GetItems()
+        {
+            return ItemsSource == null ? Items : _items;
+        }
+
+        /// <summary>
         /// 关闭所有的Item
         /// </summary>
         private void ItemCloseAll(NavigationItem self)
         {
+            var items = GetItems();
+            if (items == null)
+                return;
+
             bool needSelected = (!self.CanClose || SelectedIndex == -1);
 
             List<NavigationItem> closeItem = new List<NavigationItem>();
 
-            ///关闭方法
-            var action = new Action<NavigationItem>(x =>
-           {
-               if ((x.IsPinned || !x.CanClose) && !needSelected)
-               {
-                   ///指定给他
-                   needSelected = true;
-                   ChangeSelectedItem(x);
-               }
-               else if (!x.IsPinned && x.CanClose)
-               {
-                   closeItem.Add(x);
-               }
-           });
-
-            if (ItemsSource == null)
+            for (int i = 0; i < items.Count; i++)
             {
-                try
+                if (items[i] is NavigationItem nav)
                 {
-                    for (int i = 0; i < Items.Count; i++)
+                    if ((nav.IsPinned || !nav.CanClose) && !needSelected)
                     {
-                        if (Items[i] is NavigationItem ni)
-                        {
-                            action(ni);
-                        }
+                        ///指定给他
+                        needSelected = true;
+                        ChangeSelectedItem(nav);
+                    }
+                    else if (!nav.IsPinned && nav.CanClose)
+                    {
+                        closeItem.Add(nav);
                     }
                 }
-                catch
-                {
-                }
             }
-            else
-            {
-                for (int i = 0; i < _items.Count; i++)
-                {
-                    action(_items[i] as NavigationItem);
-                }
-            }
+
 
             if (!needSelected)
             {
                 ChangeSelectedItem(null);
             }
 
-
             foreach (var item in closeItem)
             {
                 item.Close();
             }
-
         }
+
+
+
 
         private void ItemCloseOther(NavigationItem self)
         {
-
+            var items = GetItems();
+            if (items == null)
+                return;
 
             List<NavigationItem> closeItem = new List<NavigationItem>();
 
-            ///关闭方法
-            var action = new Action<NavigationItem>(x =>
+            for (int i = 0; i < items.Count; i++)
             {
-                if (!x.IsPinned && x.CanClose && x != self)
+                if (items[i] is NavigationItem nav)
                 {
-                    closeItem.Add(x);
-                }
-            });
-
-            if (ItemsSource == null)
-            {
-                try
-                {
-                    for (int i = 0; i < Items.Count; i++)
+                    if (!nav.IsPinned && nav.CanClose && nav != self)
                     {
-                        if (Items[i] is NavigationItem ni)
-                        {
-                            action(ni);
-                        }
+                        closeItem.Add(nav);
                     }
                 }
-                catch
-                {
-                }
             }
-            else
-            {
-                for (int i = 0; i < _items.Count; i++)
-                {
-                    action(_items[i] as NavigationItem);
-                }
-            }
-
 
             foreach (var item in closeItem)
             {
@@ -1403,13 +1366,6 @@ namespace LeeTeke.WpfControl.Controls
 
         }
 
-        private void ItemCloseSelf(NavigationItem self)
-        {
-
-            self.SelfClose = true;
-            self.Close();
-
-        }
 
         /// <summary>
         /// 关闭
@@ -1420,9 +1376,7 @@ namespace LeeTeke.WpfControl.Controls
             if (!item.IsClosed)
                 return;
 
-
             bool needSelected = SelectedIndex == -1;
-
             if (ItemsSource == null)
             {
                 if (item.SelfClose)
@@ -1431,7 +1385,7 @@ namespace LeeTeke.WpfControl.Controls
                     {
                         for (int i = 0; i < Items.Count; i++)
                         {
-                            if (!needSelected && Items[i] is NavigationItem ni && ni == item)
+                            if (!needSelected && Items[i] == item)
                             {
                                 if (i > 0)
                                 {
@@ -1454,7 +1408,7 @@ namespace LeeTeke.WpfControl.Controls
 
                 Items.Remove(item);
             }
-            else
+            else if (_items != null)
             {
                 if (item.SelfClose)
                 {
@@ -1477,12 +1431,11 @@ namespace LeeTeke.WpfControl.Controls
                     }
                 }
 
-                var list = ItemsSource as IList;
-                if (list != null)
+                if (ItemsSource is IList list)
                 {
                     var dataContent = item.DataContext;
                     list.Remove(item.DataContext);
-                    item.DataContext= dataContent; 
+                    item.DataContext = dataContent;
                 }
             }
             UpdateSelectedIndex();
@@ -1508,8 +1461,6 @@ namespace LeeTeke.WpfControl.Controls
 
         private void ChangeSelectedValue(object vaule)
         {
-
-
             if (vaule == _currentValue)
             {
                 return;
@@ -1521,7 +1472,7 @@ namespace LeeTeke.WpfControl.Controls
         /// 选择Item
         /// </summary>
         /// <param name="item"></param>
-        private void ChangeSelectedItem(NavigationItem item)
+        private void ChangeSelectedItem(NavigationItem? item)
         {
             if (!_isLoaded)
                 return;
@@ -1549,46 +1500,23 @@ namespace LeeTeke.WpfControl.Controls
             }
 
 
-            if (ItemsSource == null)
+            var items = GetItems();
+            if (items != null)
             {
-                try
+                for (int i = 0; i < items.Count; i++)
                 {
-                    for (int i = 0; i < Items.Count; i++)
+                    if (items[i] is NavigationItem nav)
                     {
-                        if (Items[i] is NavigationItem ni)
+                        if (nav == item)
                         {
-                            if (ni == item)
-                            {
-                                SelectedIndex = _currentIndex = i;
-                                SelectedItem = _currentItem = item;
-                                SelectedValue = _currentValue = item.DataContext ?? item;
-                            }
-                            else
-                            {
-                                ni.IsSelected = false;
-                            }
+                            SelectedIndex = _currentIndex = i;
+                            SelectedItem = _currentItem = item;
+                            SelectedValue = _currentValue = item.DataContext ?? item;
                         }
-                    }
-
-                }
-                catch
-                {
-                }
-
-            }
-            else
-            {
-                for (int i = 0; i < _items.Count; i++)
-                {
-                    if (_items[i] == item)
-                    {
-                        SelectedIndex = _currentIndex = i;
-                        SelectedItem = _currentItem = item;
-                        SelectedValue = _currentValue = item.DataContext ?? item;
-                    }
-                    else
-                    {
-                        ((NavigationItem)_items[i]).IsSelected = false;
+                        else
+                        {
+                            nav.IsSelected = false;
+                        }
                     }
                 }
             }
@@ -1609,8 +1537,7 @@ namespace LeeTeke.WpfControl.Controls
                 }
                 else
                 {
-                    var list = ItemsSource as IList;
-                    if (list != null)
+                    if (ItemsSource is IList list)
                     {
                         SelectedIndex = _currentIndex = list.IndexOf(SelectedValue);
                     }
@@ -1671,7 +1598,7 @@ namespace LeeTeke.WpfControl.Controls
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        private NavigationItem GetItemFormItem(NavigationItem item)
+        private NavigationItem? GetItemFormItem(NavigationItem item)
         {
             if (ItemContainerGenerator.Status != GeneratorStatus.ContainersGenerated)
                 return null;
@@ -1697,7 +1624,7 @@ namespace LeeTeke.WpfControl.Controls
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        private NavigationItem GetItemFormIndex(int index)
+        private NavigationItem? GetItemFormIndex(int index)
         {
             if (ItemContainerGenerator.Status != GeneratorStatus.ContainersGenerated)
                 return null;
@@ -1724,45 +1651,29 @@ namespace LeeTeke.WpfControl.Controls
         /// </summary>
         /// <param name="datacontext"></param>
         /// <returns></returns>
-        private NavigationItem GetItemFormDataContext(object dataContext)
+        private NavigationItem? GetItemFormDataContext(object dataContext)
         {
-            try
-            {
 
-                if (dataContext == null)
-                    return null;
-
-                if (ItemContainerGenerator.Status != GeneratorStatus.ContainersGenerated)
-                    return null;
-
-                if (ItemsSource == null)
-                {
-                    foreach (NavigationItem item in Items)
-                    {
-                        if (item == dataContext || item.DataContext == dataContext)
-                        {
-                            return item;
-                        }
-                    }
-                }
-                if (_items == null)
-                    return null;
-
-                foreach (var item in _items)
-                {
-                    if (item is NavigationItem element && element.DataContext == dataContext)
-                    {
-                        return element;
-                    }
-                }
-
-                return null;
-            }
-            catch
-            {
+            if (dataContext == null)
                 return null;
 
+            if (ItemContainerGenerator.Status != GeneratorStatus.ContainersGenerated)
+                return null;
+
+            var items = GetItems();
+            if (items == null)
+                return null;
+
+            foreach (var item in items)
+            {
+                if (item is NavigationItem nav && (nav == dataContext || nav.DataContext == DataContext))
+                {
+                    return nav;
+                }
             }
+
+            return null;
+
         }
 
         /// <summary>
@@ -1772,45 +1683,28 @@ namespace LeeTeke.WpfControl.Controls
         private void PinnedMove(NavigationItem item)
         {
 
+            var items = GetItems();
+            if (items == null)
+                return;
 
             var toalIndex = -1;
-            if (ItemsSource == null)
+
+            for (int i = 0; i < items.Count; i++)
             {
-
-                for (int i = 0; i < Items.Count; i++)
+                ///不用动
+                if (items[i] == item && toalIndex < 0)
                 {
-                    ///不用动
-                    if (Items[i] == item && toalIndex < 0)
-                    {
-                        break;
-                    }
-
-                    if (Items[i] is NavigationItem checkItem && checkItem.CanClose && !checkItem.IsPinned)
-                    {
-                        toalIndex = i;
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                for (int i = 0; i < _items.Count; i++)
-                {
-                    ///不用动
-                    if (_items[i] == item && toalIndex < 0)
-                    {
-                        break;
-                    }
-
-                    if (_items[i] is NavigationItem checkItem && checkItem.CanClose && !checkItem.IsPinned)
-                    {
-                        toalIndex = i;
-                        break;
-                    }
+                    break;
                 }
 
-
+                if (items[i] is NavigationItem checkItem && checkItem.CanClose && !checkItem.IsPinned)
+                {
+                    toalIndex = i;
+                    break;
+                }
             }
+
+
             ItemMove(item, toalIndex);
             if (IsScrollToSelected && SelectedItem == item)
             {
@@ -1830,50 +1724,33 @@ namespace LeeTeke.WpfControl.Controls
         /// <param name="item"></param>
         private void UnPinnedMove(NavigationItem item)
         {
-
             if (item.IsPinned)
+                return;
+
+
+
+            var items = GetItems();
+            if (items == null)
                 return;
 
             var toalIndex = -1;
 
-            if (ItemsSource == null)
+            for (int i = 0; i < items.Count; i++)
             {
-                for (int i = 0; i < Items.Count; i++)
-                {
-                    ///不用动
-                    if (Items[i] != item && Items[i] is NavigationItem checkItem && checkItem.CanClose && !checkItem.IsPinned)
-                    {
-
-                        toalIndex = i - 1;
-                        break;
-                    }
-                    ///如果没有找到则释放到最后
-                    if (toalIndex == -1)
-                    {
-                        toalIndex = _items.Count - 1;
-                    }
-                }
-
-            }
-            else
-            {
-                for (int i = 0; i < _items.Count; i++)
+                ///不用动
+                if (items[i] != item && items[i] is NavigationItem checkItem && checkItem.CanClose && !checkItem.IsPinned)
                 {
 
-                    if (_items[i] != item && _items[i] is NavigationItem checkItem && checkItem.CanClose && !checkItem.IsPinned)
-                    {
-                        toalIndex = i - 1;
-                        break;
-                    }
+                    toalIndex = i - 1;
+                    break;
                 }
                 ///如果没有找到则释放到最后
                 if (toalIndex == -1)
                 {
-                    toalIndex = _items.Count - 1;
+                    toalIndex = items.Count - 1;
                 }
-
-
             }
+
             ItemMove(item, toalIndex);
             if (IsScrollToSelected && SelectedItem == item)
             {
@@ -1909,7 +1786,7 @@ namespace LeeTeke.WpfControl.Controls
                         return;
                     }
                 }
-                else
+                else if (_items != null)
                 {
                     var oldIndex = _items.IndexOf(item);
                     if (oldIndex > -1 && oldIndex != toalIndex)

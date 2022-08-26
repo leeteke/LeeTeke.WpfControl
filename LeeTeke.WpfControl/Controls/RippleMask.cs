@@ -45,7 +45,7 @@ namespace LeeTeke.WpfControl.Controls
     ///     <MyNamespace:RippleMask/>
     ///
     /// </summary>
-    [TemplatePart(Name =ElementCanvas,Type =typeof(Canvas))]
+    [TemplatePart(Name = ElementCanvas, Type = typeof(Canvas))]
     public class RippleMask : Control
     {
         static RippleMask()
@@ -64,9 +64,10 @@ namespace LeeTeke.WpfControl.Controls
         /// </summary>
         public double _maxRadius;
 
-        private Storyboard _sbOpen;
-        private Storyboard _sbClose;
-        private Path _ripplePath;
+        private Storyboard? _sbOpen;
+        private Storyboard? _sbClose;
+        private Path? _ripplePath;
+        private Canvas? _canvas;
         /// <summary>
         /// 点击状态 0-未点击 1按下 2-按下并松开
         /// </summary>
@@ -76,7 +77,6 @@ namespace LeeTeke.WpfControl.Controls
         private RoutedEventHandler _routedLeftLevelEvent;
         private RoutedEventHandler _routedMoveEvent;
 
-        private Canvas _canvas;
 
         public RippleMask()
         {
@@ -184,7 +184,7 @@ namespace LeeTeke.WpfControl.Controls
                         element.RemoveHandler(MouseLeaveEvent, mask._routedLeftLevelEvent);
                         element.RemoveHandler(MouseMoveEvent, mask._routedMoveEvent);
                     }
-                    catch 
+                    catch
                     {
                     }
                 }
@@ -197,7 +197,7 @@ namespace LeeTeke.WpfControl.Controls
                         newelement.AddHandler(MouseLeaveEvent, mask._routedLeftLevelEvent, true);
                         newelement.AddHandler(MouseMoveEvent, mask._routedMoveEvent, true);
                     }
-                    catch 
+                    catch
                     {
                     }
                 }
@@ -277,7 +277,7 @@ namespace LeeTeke.WpfControl.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            _canvas= GetTemplateChild(ElementCanvas) as Canvas;
+            _canvas = GetTemplateChild(ElementCanvas) as Canvas;
         }
 
 
@@ -339,7 +339,7 @@ namespace LeeTeke.WpfControl.Controls
                         Storyboard.SetTargetProperty(yCDA, new PropertyPath("(0).(1)", new DependencyProperty[] { Path.RenderTransformProperty, ScaleTransform.ScaleYProperty }));
                         _sbClose.Completed += (ds, de) =>
                         {
-                            _canvas.Children.Clear();
+                            _canvas?.Children.Clear();
 
                         };
                         _sbClose.Begin();
@@ -352,7 +352,7 @@ namespace LeeTeke.WpfControl.Controls
             }
             else
             {
-                _canvas.Children.Clear();
+                _canvas?.Children.Clear();
             }
         }
 
@@ -361,6 +361,10 @@ namespace LeeTeke.WpfControl.Controls
             _clickStates = 1;
             if (_sbOpen != null)
                 _sbOpen.Stop();
+
+            if (_canvas == null)
+                return;
+
             _canvas.Children.Clear();
             _ripplePath = new Path
             {
@@ -408,19 +412,23 @@ namespace LeeTeke.WpfControl.Controls
             if (_clickStates == 1)
             {
                 _clickStates = 3;
-                _sbOpen.Pause();
-                _sbOpen.SpeedRatio = 10;
-                _sbOpen.Begin();
+                if (_sbOpen != null)
+                {
+                    _sbOpen.Pause();
+                    _sbOpen.SpeedRatio = 10;
+                    _sbOpen.Begin();
+                }
+
             }
         }
 
 
-        private void OpenSB_Completed(object sender, EventArgs e)
+        private void OpenSB_Completed(object? sender, EventArgs e)
         {
             if (_clickStates == 3)
             {
                 _clickStates = 2;
-                if (_ripplePath.Visibility == Visibility.Visible)
+                if (_ripplePath?.IsVisible == true)
                 {
                     DoubleAnimation exit = new DoubleAnimation()
                     {
@@ -464,7 +472,7 @@ namespace LeeTeke.WpfControl.Controls
                         Storyboard.SetTargetProperty(yCDA, new PropertyPath("(0).(1)", new DependencyProperty[] { Path.RenderTransformProperty, ScaleTransform.ScaleYProperty }));
                         _sbClose.Completed += (ds, de) =>
                         {
-                            _canvas.Children.Clear();
+                            _canvas?.Children.Clear();
 
                         };
                         _sbClose.Begin();
@@ -477,7 +485,7 @@ namespace LeeTeke.WpfControl.Controls
             }
             else
             {
-                _canvas.Children.Clear();
+                _canvas?.Children.Clear();
             }
         }
 

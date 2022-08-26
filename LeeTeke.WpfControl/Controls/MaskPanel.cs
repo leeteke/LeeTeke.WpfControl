@@ -67,12 +67,12 @@ namespace LeeTeke.WpfControl.Controls
         private const string ElementTitlePanel = "PART_TitlePanel";
         #endregion
 
-        private Border _border;
-        private Rectangle _rectangle;
-        private Panel _panel;
-        private Button _btnClose;
-        private Button _btnFull;
-        private Panel _titlePanel;
+        private Border? _border;
+        private Rectangle? _rectangle;
+        private Panel? _panel;
+        private Button? _btnClose;
+        private Button? _btnFull;
+        private Panel? _titlePanel;
 
         private Point _movePoint;
         private bool _moveTarget;
@@ -83,7 +83,7 @@ namespace LeeTeke.WpfControl.Controls
         private bool _isPanelClick = false;//是否是面板点击
         private bool _isRenderEnd = false; //渲染完成
         private string _defaultContent = "未加载内容";
-        private MaskPanelData _maskData = null;//当前数据
+        private MaskPanelData? _maskData = null;//当前数据
 
         public MaskPanel()
         {
@@ -119,7 +119,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private void MaskPanel_MouseMove(object sender, MouseEventArgs e)
         {
-            if (_sizeTarget && e.LeftButton == MouseButtonState.Pressed)
+            if (_sizeTarget && e.LeftButton == MouseButtonState.Pressed && _border != null)
             {
                 this.Cursor = Cursors.SizeNWSE;
                 var nowP = e.GetPosition(this);
@@ -216,7 +216,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private void _border_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (!_border.RenderSize.IsEmpty && !_isRenderEnd)
+            if (_border?.RenderSize.IsEmpty == false && !_isRenderEnd)
             {
                 _isRenderEnd = true;
                 IsShowChanged(true);
@@ -239,7 +239,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private void _titlePanel_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed && _moveTarget)
+            if (e.LeftButton == MouseButtonState.Pressed && _moveTarget && _border != null)
             {
                 var nowP = e.GetPosition(this);
                 var moveP = nowP - _movePoint;
@@ -324,9 +324,9 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 请添加描述
         /// </summary>
-        public object Content
+        public object? Content
         {
-            get { return (object)GetValue(ContentProperty); }
+            get { return (object?)GetValue(ContentProperty); }
             set { SetValue(ContentProperty, value); }
         }
 
@@ -562,9 +562,9 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 请添加描述
         /// </summary>
-        public object Title
+        public object? Title
         {
-            get { return (object)GetValue(TitleProperty); }
+            get { return (object?)GetValue(TitleProperty); }
             set { SetValue(TitleProperty, value); }
         }
 
@@ -847,16 +847,16 @@ namespace LeeTeke.WpfControl.Controls
                         tt.Y = 0;
                     }
                 }
-                _btnFull.Content = "\xe73f";
+                if (_btnFull != null)
+                    _btnFull.Content = "\xe73f";
             }
             else
             {
+                //修改border尺寸
                 if (_border != null)
-                {
-                    //修改border尺寸
                     ChangedBorderSize();
-                }
-                _btnFull.Content = "\xe740";
+                if (_btnFull != null)
+                    _btnFull.Content = "\xe740";
             }
         }
 
@@ -870,14 +870,16 @@ namespace LeeTeke.WpfControl.Controls
                 return;
             if (isShow)
             {
-                _panel.Visibility = Visibility.Visible;
+                if (_panel != null)
+                    _panel.Visibility = Visibility.Visible;
                 if (!_isRenderEnd)
                     return;
 
                 if (_maskData != null)
                 {
                     Title = _maskData.Title;
-                    _btnClose.Visibility = _maskData.BlockClose ? Visibility.Collapsed : Visibility.Visible;
+                    if (_btnClose != null)
+                        _btnClose.Visibility = _maskData.BlockClose ? Visibility.Collapsed : Visibility.Visible;
 
                     //修改border尺寸
                     ChangedBorderSize();
@@ -915,12 +917,12 @@ namespace LeeTeke.WpfControl.Controls
                 else
                 {
                     //直接调用显示
-                    _maskData.ViewDisplayAction?.Invoke(true);
+                    _maskData?.ViewDisplayAction?.Invoke(true);
                 }
             }
             else
             {
-                _maskData.ViewDisplayAction?.Invoke(false);
+                _maskData?.ViewDisplayAction?.Invoke(false);
                 if (AnimationEnabled && CloseAnimationMode != 0)
                 {
                     BeginClose();
@@ -938,6 +940,12 @@ namespace LeeTeke.WpfControl.Controls
         /// </summary>
         private void BeginShow()
         {
+            //这里如果为空则直接触发
+            if (_border == null)
+            {
+                _maskData?.ViewDisplayAction?.Invoke(true);
+                return;
+            }
             if (ShowAnimationCustom != null)
             {
                 var func = ShowAnimationCustom(_border);
@@ -946,15 +954,17 @@ namespace LeeTeke.WpfControl.Controls
             }
             else
             {
+
                 var sb = AnimationHelper.GetStoryboard(_border, ShowAnimationMode, ShowAnimationEasingFunction, ShowAnimationDuration, ShowAnimationRenderTransformOrigin);
                 sb.Completed += Sb_Completed;
                 sb.Begin();
             }
         }
 
-        private void Sb_Completed(object sender, EventArgs e)
+
+        private void Sb_Completed(object? sender, EventArgs e)
         {
-            _maskData.ViewDisplayAction?.Invoke(true);
+            _maskData?.ViewDisplayAction?.Invoke(true);
         }
 
 
@@ -963,6 +973,12 @@ namespace LeeTeke.WpfControl.Controls
         /// </summary>
         private void BeginClose()
         {
+            if (_border == null)
+            {
+                Close();
+                return;
+            }
+
             if (CloseAnimationCustom != null)
             {
                 var func = CloseAnimationCustom(_border);
@@ -981,7 +997,7 @@ namespace LeeTeke.WpfControl.Controls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Close_Completed(object sender, EventArgs e)
+        private void Close_Completed(object? sender, EventArgs e)
         {
             Close();
         }
@@ -991,7 +1007,8 @@ namespace LeeTeke.WpfControl.Controls
         private void Close()
         {
             ///关闭视图显示
-            _panel.Visibility = Visibility.Collapsed;
+            if (_panel != null)
+                _panel.Visibility = Visibility.Collapsed;
             Title = _defaultContent;
             Content = _defaultContent;
             IsFull = false;
@@ -1002,7 +1019,7 @@ namespace LeeTeke.WpfControl.Controls
                 var closeData = _maskData;
                 Task.Run(() =>
                 {
-                    this.Dispatcher.Invoke(() =>
+                    Dispatcher.Invoke(() =>
                     {
                         closeData.CloseCallback?.Invoke(closeData.IsActiveClose ? MaskPanelCloseStatus.Self : MaskPanelCloseStatus.Trigger);
                     });
@@ -1015,7 +1032,7 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// Data改变
         /// </summary>
-        private void DataChanged(MaskPanelData newData)
+        private void DataChanged(MaskPanelData? newData)
         {
             if (newData == null)
             {
@@ -1047,12 +1064,11 @@ namespace LeeTeke.WpfControl.Controls
         {
             try
             {
-
-                _border.Width = Width == 0 ? double.NaN : Width;
-                _border.Height = Height == 0 ? double.NaN : Height;
                 ///当panelMargin不为空时无法修改相应大小
-                if (_maskData != null)
+                if (_maskData != null &&_border!=null)
                 {
+                    _border.Width = Width == 0 ? double.NaN : Width;
+                    _border.Height = Height == 0 ? double.NaN : Height;
                     if (!_maskData.ContentSize.IsEmpty)
                     {
                         if (HorizontalContentAlignment != HorizontalAlignment.Stretch)
@@ -1075,8 +1091,6 @@ namespace LeeTeke.WpfControl.Controls
             }
             catch
             {
-
-
             }
         }
 

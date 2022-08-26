@@ -73,6 +73,7 @@ namespace LeeTeke.WPFTest.ViewModels
         }
 
 
+
         private double _testDouble;
         /// <summary>
         /// 请填写属性名
@@ -145,7 +146,7 @@ namespace LeeTeke.WPFTest.ViewModels
                 Content = $"ToogleGroup规则选择错误",
                 Status = NotifyStatus.Warning
             };
-        }  
+        }
 
 
         public TestPageViewModel()
@@ -272,14 +273,16 @@ namespace LeeTeke.WPFTest.ViewModels
                 Content = $"1",
                 Status = NotifyStatus.Warning
             };
-         
+
             NotifyData = new NotifyBannerShowData()
             {
                 Content = $"1",
                 Status = NotifyStatus.None
             };
 
-         
+
+            await Task.CompletedTask;
+
         }
     }
 }

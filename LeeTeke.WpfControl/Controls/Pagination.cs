@@ -66,12 +66,12 @@ namespace LeeTeke.WpfControl.Controls
         private const string ElementEndButton = "PART_EndButton";
         #endregion
 
-        private ToggleGroup _group;
-        private ComboBox _comboBox;
-        private Button _headButton;
-        private Button _endButton;
-        private Button _previousButton;
-        private Button _nextButton;
+        private ToggleGroup? _group;
+        private ComboBox? _comboBox;
+        private Button? _headButton;
+        private Button? _endButton;
+        private Button? _previousButton;
+        private Button? _nextButton;
         public Pagination()
         {
             Loaded += Pagination_Loaded;
@@ -99,11 +99,11 @@ namespace LeeTeke.WpfControl.Controls
 
 
             _group = GetTemplateChild(ElementPageGroup) as ToggleGroup;
-            _comboBox= GetTemplateChild(ElementComboBox) as ComboBox;
-            _previousButton= GetTemplateChild(ElementPreviousButton) as Button;
-            _headButton= GetTemplateChild(ElementHeadButton) as Button;
-            _nextButton= GetTemplateChild(ElementNextButton) as Button;
-            _endButton= GetTemplateChild(ElementEndButton) as Button;
+            _comboBox = GetTemplateChild(ElementComboBox) as ComboBox;
+            _previousButton = GetTemplateChild(ElementPreviousButton) as Button;
+            _headButton = GetTemplateChild(ElementHeadButton) as Button;
+            _nextButton = GetTemplateChild(ElementNextButton) as Button;
+            _endButton = GetTemplateChild(ElementEndButton) as Button;
 
             if (_group != null)
                 _group.SelectionChanged += _group_SelectionChanged;
@@ -256,7 +256,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private static void DisplayPagesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is Pagination pagination && e.NewValue is int _value)
+            if (d is Pagination pagination && e.NewValue is int)
             {
                 pagination.ViewLoding();
             }
@@ -331,8 +331,9 @@ namespace LeeTeke.WpfControl.Controls
         /// </summary>
         private void ViewLoding()
         {
-            if (!IsLoaded)
+            if (_group == null)
                 return;
+
 
             _group.ItemsSource = null;
             if (PageCount < 1)
@@ -352,7 +353,9 @@ namespace LeeTeke.WpfControl.Controls
             {
                 pages.Add(i + 1);
             }
-            _comboBox.ItemsSource = pages;
+
+            if (_comboBox != null)
+                _comboBox.ItemsSource = pages;
 
             GropShowNumber(PageIndex);
         }
@@ -360,7 +363,8 @@ namespace LeeTeke.WpfControl.Controls
 
         private void GropShowNumber(int number)
         {
-            if (!IsLoaded)
+
+            if (_group == null)
                 return;
 
             var pageList = ShowPagesList(PageCount, DisplayPages, number);
@@ -376,10 +380,8 @@ namespace LeeTeke.WpfControl.Controls
 
 
 
-            if (_comboBox.SelectedValue == null || (_comboBox.SelectedValue is int svalue && svalue != number))
-            {
+            if (_comboBox != null && (_comboBox.SelectedValue == null || (_comboBox.SelectedValue is int svalue && svalue != number)))
                 _comboBox.SelectedValue = number;
-            }
 
             RaisePageIndexChanged(number);
         }
@@ -453,34 +455,18 @@ namespace LeeTeke.WpfControl.Controls
 
             if (sender is ToggleGroup group && group.SelectedIndex is int selectedIndex)
             {
+                if (_headButton != null)
+                    _headButton.IsEnabled = selectedIndex != 0;
 
-                if (selectedIndex == 0)
-                {
-                    _headButton.IsEnabled = false;
-                    _previousButton.IsEnabled = false;
-                }
-                else
-                {
-                    _headButton.IsEnabled = true;
-                    _previousButton.IsEnabled = true;
-                }
+                if (_previousButton != null)
+                    _previousButton.IsEnabled = selectedIndex != 0;
 
-                if (selectedIndex == _group.Items.Count - 1)
-                {
-                    _endButton.IsEnabled = false;
-                    _nextButton.IsEnabled = false;
-                }
-                else
-                {
-                    _endButton.IsEnabled = true;
-                    _nextButton.IsEnabled = true;
-                }
+                if (_endButton != null)
+                    _endButton.IsEnabled = selectedIndex != _group?.Items.Count - 1;
 
-                if (selectedIndex > -1)
-                {
-                    if (group.SelectedValue is int pk)
-                        PageIndex = pk;
-                }
+                if (_nextButton != null)
+                    _nextButton.IsEnabled = selectedIndex != _group?.Items.Count - 1;
+
             }
         }
 

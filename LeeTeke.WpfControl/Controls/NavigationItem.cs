@@ -80,20 +80,20 @@ namespace LeeTeke.WpfControl.Controls
 
 
         private Point? _point;
-        private NavigationItem _beExchange;
+        private NavigationItem? _beExchange;
         private bool _canDrag;
 
 
-        private Navigation ParentNavigation
+        private Navigation? ParentNavigation
         {
             get
             {
                 return ItemsControl.ItemsControlFromItemContainer(this) as Navigation;
             }
         }
-        private Button _closeBtn;
+        private Button? _closeBtn;
         private bool _isClosed = false;
-        private Storyboard _moveSB;
+        private Storyboard? _moveSB;
 
 
 
@@ -142,7 +142,7 @@ namespace LeeTeke.WpfControl.Controls
 
             _canDrag = false;
             _point = null;
-       
+
             ReSetRenderTransform();
         }
 
@@ -150,7 +150,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             _canDrag = false;
             _point = null;
-         
+
             ReSetRenderTransform();
             base.OnMouseLeave(e);
         }
@@ -160,8 +160,10 @@ namespace LeeTeke.WpfControl.Controls
             if (!IsCanDrag)
                 return;
             IsMoving = true;
-            if (RenderTransform is TranslateTransform tt)
+            if (RenderTransform is TranslateTransform tt && ParentNavigation != null && _point != null)
             {
+
+
                 if (ParentNavigation.Orientation == Orientation.Horizontal)
                 {
                     var newpt = Mouse.GetPosition(this);
@@ -208,7 +210,7 @@ namespace LeeTeke.WpfControl.Controls
                         _beExchange.Opacity = 0;
                         ParentNavigation.NotifyItemMove(_beExchange, tt.X > 0);
                         tt.X = -tt.X;
-                        _beExchange.SetMoveRenderTransform(tt.X > 0 ? -this.ActualWidth: this.ActualHeight, 0);
+                        _beExchange.SetMoveRenderTransform(tt.X > 0 ? -this.ActualWidth : this.ActualHeight, 0);
 
                     }
 
@@ -220,7 +222,7 @@ namespace LeeTeke.WpfControl.Controls
                     if (offset < 0)
                     {
                         _beExchange = ParentNavigation.GetBeforeItem(this);
-                      
+
                         if (_beExchange == null)
                         {
                             if (tt.Y + offset < 0)
@@ -516,6 +518,9 @@ namespace LeeTeke.WpfControl.Controls
                 if (!_canDrag)
                     return false;
 
+                if (ParentNavigation == null)
+                    return false;
+
                 if (!ParentNavigation.CanItemMove)
                     return false;
 
@@ -529,8 +534,7 @@ namespace LeeTeke.WpfControl.Controls
                 if (_point == null)
                     return false;
 
-                if (ParentNavigation == null)
-                    return false;
+
 
 
 
@@ -577,7 +581,7 @@ namespace LeeTeke.WpfControl.Controls
                     tt.X = 0;
                     tt.Y = 0;
                 }
-                if (ParentNavigation.IsScrollToSelected)
+                if (ParentNavigation?.IsScrollToSelected == true)
                 {
                     ParentNavigation.ScrollToItem(this);
                 }
