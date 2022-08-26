@@ -3396,7 +3396,6 @@
             </Setter.Value>
         </Setter>
 
-
         <Setter Property="leedep:DataGridManager.TextColumnStyle">
             <Setter.Value>
                 <Style TargetType="{x:Type TextBlock}">
@@ -5992,9 +5991,9 @@
     <Style BasedOn="{StaticResource LeeDataGridCell}" TargetType="DataGridCell" />
     <Style BasedOn="{StaticResource LeeDataGridRow}" TargetType="DataGridRow" />
     <Style BasedOn="{StaticResource LeeDataGridRowHeader}" TargetType="DataGridRowHeader" />
+    <Style BasedOn="{StaticResource LeeDataGrid}" TargetType="DataGrid" />
 
     <Style BasedOn="{StaticResource LeeCalendarItem}" TargetType="CalendarItem" />
-    <Style BasedOn="{StaticResource LeeDataGrid}" TargetType="DataGrid" />
     <Style BasedOn="{StaticResource LeeSlider}" TargetType="Slider" />
     <Style BasedOn="{StaticResource LeeGroupBox}" TargetType="GroupBox" />
     <Style BasedOn="{StaticResource LeeTextBox}" TargetType="TextBox" />
