@@ -466,7 +466,11 @@ namespace LeeTeke.WpfControl.Controls
 
                 if (_nextButton != null)
                     _nextButton.IsEnabled = selectedIndex != _group?.Items.Count - 1;
-
+                if (selectedIndex > -1)
+                {
+                    if (group.SelectedValue is int pk)
+                        PageIndex = pk;
+                }
             }
         }
 

@@ -2415,10 +2415,9 @@
                                 IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                 Placement="Bottom"
                                 PopupAnimation="Fade">
-                                <lee:EasyPanel Margin="8">
+                                <lee:EasyPanel MaxHeight="{TemplateBinding MaxDropDownHeight}" Margin="8">
                                     <Border x:Name="dropDownBorder"
                                         MinWidth="{Binding ActualWidth, ElementName=templateRoot}"
-                                        MaxHeight="{TemplateBinding MaxDropDownHeight}"
                                         Background="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.ListBackground), Mode=OneWay}"
                                         BorderBrush="{DynamicResource LeeBrush_BorderBrush}"
                                         BorderThickness="0"
