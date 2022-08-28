@@ -5,29 +5,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
     public class ComboBoxManager
     {
-
-
-        #region ListBackground
-        public static Brush GetListBackground(DependencyObject obj)
-        {
-            return (Brush)obj.GetValue(ListBackgroundProperty);
-        }
-
-        public static void SetListBackground(DependencyObject obj, Brush value)
-        {
-            obj.SetValue(ListBackgroundProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for ListBackground.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ListBackgroundProperty =
-            DependencyProperty.RegisterAttached("ListBackground", typeof(Brush), typeof(ComboBoxManager));
-        #endregion
-
 
         #region EscToEmpty
         public static bool GetEscToEmpty(DependencyObject obj)
@@ -321,6 +304,137 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty IsDropCenterOnControlProperty =
             DependencyProperty.RegisterAttached("IsDropCenterOnControl", typeof(bool), typeof(ComboBoxManager));
         #endregion
+
+        #region DropBackground
+        public static Brush GetDropBackground(DependencyObject obj)
+        {
+            return (Brush)obj.GetValue(DropBackgroundProperty);
+        }
+
+        public static void SetDropBackground(DependencyObject obj, Brush value)
+        {
+            obj.SetValue(DropBackgroundProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for DropBackground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DropBackgroundProperty =
+            DependencyProperty.RegisterAttached("DropBackground", typeof(Brush), typeof(ComboBoxManager));
+        #endregion
+
+        #region DropEffect
+        public static Effect GetDropEffect(DependencyObject obj)
+        {
+            return (Effect)obj.GetValue(DropEffectProperty);
+        }
+
+        public static void SetDropEffect(DependencyObject obj, Effect value)
+        {
+            obj.SetValue(DropEffectProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for DropEffect.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DropEffectProperty =
+            DependencyProperty.RegisterAttached("DropEffect", typeof(Effect), typeof(ComboBoxManager));
+        #endregion
+
+        #region DropBorderBrush
+        public static Brush GetDropBorderBrush(DependencyObject obj)
+        {
+            return (Brush)obj.GetValue(DropBorderBrushProperty);
+        }
+
+        public static void SetDropBorderBrush(DependencyObject obj, Brush value)
+        {
+            obj.SetValue(DropBorderBrushProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for DropBorderBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DropBorderBrushProperty =
+            DependencyProperty.RegisterAttached("DropBorderBrush", typeof(Brush), typeof(ComboBoxManager));
+        #endregion
+
+        #region DropBorderThinckness
+        public static Thickness GetDropBorderThinckness(DependencyObject obj)
+        {
+            return (Thickness)obj.GetValue(DropBorderThincknessProperty);
+        }
+
+        public static void SetDropBorderThinckness(DependencyObject obj, Thickness value)
+        {
+            obj.SetValue(DropBorderThincknessProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for DropBorderThinckness.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DropBorderThincknessProperty =
+            DependencyProperty.RegisterAttached("DropBorderThinckness", typeof(Thickness), typeof(ComboBoxManager));
+        #endregion
+
+        #region DropCornerRadius
+        public static CornerRadius GetDropCornerRadius(DependencyObject obj)
+        {
+            return (CornerRadius)obj.GetValue(DropCornerRadiusProperty);
+        }
+
+        public static void SetDropCornerRadius(DependencyObject obj, CornerRadius value)
+        {
+            obj.SetValue(DropCornerRadiusProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for DropCornerRadius.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DropCornerRadiusProperty =
+            DependencyProperty.RegisterAttached("DropCornerRadius", typeof(CornerRadius), typeof(ComboBoxManager));
+        #endregion
+
+        #region DropMargin
+        public static Thickness GetDropMargin(DependencyObject obj)
+        {
+            return (Thickness)obj.GetValue(DropMarginProperty);
+        }
+
+        public static void SetDropMargin(DependencyObject obj, Thickness value)
+        {
+            obj.SetValue(DropMarginProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for DropMargin.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DropMarginProperty =
+            DependencyProperty.RegisterAttached("DropMargin", typeof(Thickness), typeof(ComboBoxManager));
+        #endregion
+
+        #region DropPadding
+        public static Thickness GetDropPadding(DependencyObject obj)
+        {
+            return (Thickness)obj.GetValue(DropPaddingProperty);
+        }
+
+        public static void SetDropPadding(DependencyObject obj, Thickness value)
+        {
+            obj.SetValue(DropPaddingProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for DropPadding.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DropPaddingProperty =
+            DependencyProperty.RegisterAttached("DropPadding", typeof(Thickness), typeof(ComboBoxManager));
+        #endregion
+
+
+        #region DropIsClip
+        public static bool GetDropIsClip(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(DropIsClipProperty);
+        }
+
+        public static void SetDropIsClip(DependencyObject obj, bool value)
+        {
+            obj.SetValue(DropIsClipProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for DropIsClip.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DropIsClipProperty =
+            DependencyProperty.RegisterAttached("DropIsClip", typeof(bool), typeof(ComboBoxManager));
+        #endregion
+
+
 
     }
 }

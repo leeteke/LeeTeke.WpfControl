@@ -18,7 +18,7 @@ namespace LeeTeke.WpfControl.Converters
                 double value = 0;
                 foreach (var item in values)
                 {
-                    if (double.TryParse($"{values}", out double itemValue))
+                    if (double.TryParse($"{item}", out double itemValue))
                     {
                         value += itemValue;
                     }
@@ -41,7 +41,7 @@ namespace LeeTeke.WpfControl.Converters
                     }
                 }
             }
-            return DependencyProperty.UnsetValue;
+            return 0;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

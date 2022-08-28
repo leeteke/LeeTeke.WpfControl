@@ -25,7 +25,6 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("RippleBrush", typeof(Brush), typeof(MenuItemManager));
         #endregion
 
-
         #region IconMinWidth
         public static double GetIconMinWidth(DependencyObject obj)
         {
@@ -42,7 +41,6 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("IconMinWidth", typeof(double), typeof(MenuItemManager));
         #endregion
 
-
         #region NextTagMinWidth
         public static double GetNextTagMinWidth(DependencyObject obj)
         {
@@ -58,7 +56,6 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty NextTagMinWidthProperty =
             DependencyProperty.RegisterAttached("NextTagMinWidth", typeof(double), typeof(MenuItemManager));
         #endregion
-
 
     }
 }

@@ -12,104 +12,6 @@
     Height="450"
     Background="{DynamicResource LeeBrush_Background}"
     mc:Ignorable="d">
-    <Window.Resources>
-        <Style x:Key="{ComponentResourceKey ResourceId=DataGridSelectAllButtonStyle, TypeInTargetAssembly={x:Type DataGrid}}" TargetType="{x:Type Button}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid>
-                            <Rectangle x:Name="Border"
-                                Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
-                                SnapsToDevicePixels="True" />
-                            <Polygon x:Name="Arrow"
-                                Margin="8,8,3,3"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Bottom"
-                                Fill="Black"
-                                Opacity="0.15"
-                                Points="0,10 10,10 10,0"
-                                Stretch="Uniform" />
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Border" Property="Stroke" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="Border" Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="Arrow" Property="Visibility" Value="Collapsed" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <ControlTemplate x:Key="DataGridTemplate1" TargetType="{x:Type DataGrid}">
-            <Border
-                Padding="{TemplateBinding Padding}"
-                Background="{TemplateBinding Background}"
-                BorderBrush="{TemplateBinding BorderBrush}"
-                BorderThickness="{TemplateBinding BorderThickness}"
-                SnapsToDevicePixels="True">
-                <ScrollViewer x:Name="DG_ScrollViewer" Focusable="false">
-                    <ScrollViewer.Template>
-                        <ControlTemplate TargetType="{x:Type ScrollViewer}">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <lee:EasyPanel Width="{Binding CellsPanelHorizontalOffset, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}, AncestorLevel=1}}">
-                                    <CheckBox x:Name="PART_CheckBox"
-                                        HorizontalAlignment="Center"
-                                        leedep:DataGridManager.CheckBoxHook="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}, AncestorLevel=1}}"
-                                        FontFamily="{DynamicResource IconFontFamily}"
-                                        Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.All}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}" />
-                                </lee:EasyPanel>
-                                <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter"
-                                    Grid.Column="1"
-                                    Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Column}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
-                                <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
-                                    Grid.Row="1"
-                                    Grid.ColumnSpan="2"
-                                    CanContentScroll="{TemplateBinding CanContentScroll}" />
-                                <ScrollBar x:Name="PART_VerticalScrollBar"
-                                    Grid.Row="1"
-                                    Grid.Column="2"
-                                    Maximum="{TemplateBinding ScrollableHeight}"
-                                    Orientation="Vertical"
-                                    ViewportSize="{TemplateBinding ViewportHeight}"
-                                    Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
-                                    Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
-                                <Grid Grid.Row="2" Grid.Column="1">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="{Binding NonFrozenColumnsViewportHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <ScrollBar x:Name="PART_HorizontalScrollBar"
-                                        Grid.Column="1"
-                                        Maximum="{TemplateBinding ScrollableWidth}"
-                                        Orientation="Horizontal"
-                                        ViewportSize="{TemplateBinding ViewportWidth}"
-                                        Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
-                                        Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
-                                </Grid>
-                            </Grid>
-                        </ControlTemplate>
-                    </ScrollViewer.Template>
-                    <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                </ScrollViewer>
-            </Border>
-        </ControlTemplate>
-    </Window.Resources>
-
 
 
     <Grid Margin="20">
@@ -124,26 +26,84 @@
                 Width="50"
                 Content="触发"
                 Command="{Binding TragetCommand}" />
-            <Button Width="50" Content="清除" />
+            <Button
+                Width="50"
+                Content="清除"
+                Command="{Binding ClearCommand}" />
+
+            <ComboBox Width="180">
+                <ComboBoxItem Content="1" />
+                <ComboBoxItem Content="2" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="3" />
+            </ComboBox>
+
+            <Menu Width="100" IsMainMenu="True">
+                <MenuItem Header="nihao">
+                    <MenuItem Header="测试"/>
+                </MenuItem>
+            </Menu>
+
+
         </StackPanel>
 
+        <ScrollViewer Grid.Row="1" ScrollViewer.CanContentScroll="False" />
 
-        <DataGrid
+        <!--<DataGrid
             Grid.Row="1"
             leedep:DataGridManager.MainBackground="{DynamicResource LeeBrush_Background3}"
-            leedep:DataGridManager.RowBackground="Transparent"
-            leedep:DataGridManager.ShowRowNumber="True"
-            leedep:DataGridManager.MainBorderThickness="1"
             leedep:DataGridManager.MainBorderBursh="{DynamicResource LeeBrush_BorderBrush}"
+            leedep:DataGridManager.MainBorderThickness="1"
             leedep:DataGridManager.MainCornerRadius="6"
             leedep:DataGridManager.MainEffect="{DynamicResource LeeShadow}"
             leedep:DataGridManager.MainIsClip="True"
+            leedep:DataGridManager.RowBackground="Transparent"
+            leedep:DataGridManager.ShowRowNumber="True"
             AutoGenerateColumns="True"
             BorderThickness="0"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
             HeadersVisibility="All"
-            
             ItemsSource="{Binding TestList, IsAsync=True}"
-            RowHeaderWidth="50" />
+            RowHeaderWidth="50">
+            <leedep:DataGridManager.NoItemsContent>
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="25"
+                    FontWeight="Bold"
+                    Foreground="{DynamicResource LeeBrush_Mark}"
+                    Text="未查找到任何数据" />
+
+            </leedep:DataGridManager.NoItemsContent>
+        </DataGrid>-->
 
     </Grid>
 </Window>

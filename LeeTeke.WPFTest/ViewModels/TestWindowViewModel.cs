@@ -64,6 +64,19 @@ namespace LeeTeke.WPFTest.ViewModels
         }
 
 
+        /// <summary>
+        /// ClearCommand
+        /// </summary>
+        public DelegateCommand ClearCommand => new(ClearCommandExecute);
+        /// <summary>
+        /// ClearCommand_Execute
+        /// </summary>
+        private void ClearCommandExecute()
+        {
+            TestList.Clear();
+        }  
+
+
 
     }
 }

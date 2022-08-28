@@ -18,7 +18,7 @@ namespace LeeTeke.WpfControl.Dependencies
     public class DataGridManager
     {
 
-       
+
         #region HeaderBackground
         public static Brush GetHeaderBackground(DependencyObject obj)
         {
@@ -190,7 +190,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for HeaderFontSize.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty HeaderFontSizeProperty =
-            DependencyProperty.RegisterAttached("HeaderFontSize", typeof(double), typeof(DataGridManager));
+            DependencyProperty.RegisterAttached("HeaderFontSize", typeof(double), typeof(DataGridManager),new PropertyMetadata(13.0));
         #endregion
 
         #region HeaderFontWeight
@@ -208,7 +208,6 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty HeaderFontWeightProperty =
             DependencyProperty.RegisterAttached("HeaderFontWeight", typeof(FontWeight), typeof(DataGridManager));
         #endregion
-
 
         #region MainBackground
         public static Brush GetMainBackground(DependencyObject obj)
@@ -354,7 +353,7 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("NoItemsContent", typeof(object), typeof(DataGridManager));
 
         #endregion
-           
+
         #region RowNumberStartIndex
         public static int GetRowNumberStartIndex(DependencyObject obj)
         {
@@ -761,9 +760,9 @@ namespace LeeTeke.WpfControl.Dependencies
                 {
                     check.Click += Check_Click;
 
-                    data.SelectedCellsChanged += (es, ew) =>
+                    data.SelectedCellsChanged += (_, _) =>
                     {
-                        check.IsChecked = data.SelectedItems.Count == data.Items.Count;
+                        check.IsChecked = data.Items.Count != 0 && data.SelectedItems.Count == data.Items.Count;
                     };
                 }
                 else
@@ -960,7 +959,7 @@ namespace LeeTeke.WpfControl.Dependencies
             }
         }
 
-        private static void Grid_AutoGeneratingColumn(object ?sender, DataGridAutoGeneratingColumnEventArgs e)
+        private static void Grid_AutoGeneratingColumn(object? sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             if (e.PropertyType == typeof(ImageSource) && sender is DataGrid dataGrid)
             {

@@ -50,7 +50,7 @@ namespace LeeTeke.WpfControl.Converters
                 return geometry;
             }
 
-            return DependencyProperty.UnsetValue;
+            return Geometry.Empty;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
