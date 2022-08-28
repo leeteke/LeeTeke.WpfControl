@@ -3240,7 +3240,7 @@
 
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" Value="True">
-                            <Setter TargetName="PART_Content" Property="TextElement.Foreground" Value="{Binding Path=(leedep:DataGridManager.SelectedForeground), RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Mode=OneWay}" />
+                            <Setter TargetName="PART_Content" Property="TextElement.Foreground" Value="{Binding Path=(leedep:DataGridManager.SelectedForeground), RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Mode=OneWay}" />
                         </DataTrigger>
 
                     </ControlTemplate.Triggers>
@@ -5097,9 +5097,9 @@
         <Setter Property="FontSize" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeView}}, Path=FontSize, Mode=OneWay}" />
         <Setter Property="FontWeight" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeView}}, Path=FontWeight, Mode=OneWay}" />
 
+        <Setter Property="leedep:TreeViewItemManager.SwitchWidth" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeView}}, Path=(leedep:TreeViewItemManager.SwitchWidth), Mode=OneWay}" />
         <Setter Property="leedep:TreeViewItemManager.SelectedMode" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeView}}, Path=(leedep:TreeViewItemManager.SelectedMode), Mode=OneWay}" />
         <Setter Property="leedep:TreeViewItemManager.NoItemsModeParentSign" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeView}}, Path=(leedep:TreeViewItemManager.NoItemsModeParentSign), Mode=OneWay}" />
-
 
         <Setter Property="Template">
             <Setter.Value>
@@ -5120,8 +5120,8 @@
                             CornerRadius="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeView}}, Path=(leedep:TreeViewItemManager.CornerRadius), Mode=OneWay}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto" MinWidth="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeView}}, Mode=OneWay, Converter={StaticResource TreeViewItemSeparateConverter}}" />
-                                    <ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeView}}, Path=(leedep:TreeViewItemManager.SwitchWidth), Mode=OneWay}" />
+                                    <ColumnDefinition Width="auto" MinWidth="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={StaticResource TreeViewItemSeparateConverter}}" />
+                                    <ColumnDefinition Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:TreeViewItemManager.SwitchWidth), Mode=OneWay}" />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
 
@@ -5159,6 +5159,7 @@
                                     Style="{StaticResource RotateToggleButton}" />
                                 <ContentPresenter x:Name="PART_Header"
                                     Grid.Column="2"
+                                    Margin="{TemplateBinding Padding}"
                                     HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type TreeView}}, Mode=OneWay}"
                                     VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type TreeView}}, Mode=OneWay}"
                                     ContentSource="Header" />

@@ -74,9 +74,9 @@
 
         </StackPanel>
 
-        <ScrollViewer Grid.Row="1" ScrollViewer.CanContentScroll="False" />
+    
 
-        <!--<DataGrid
+        <DataGrid
             Grid.Row="1"
             leedep:DataGridManager.MainBackground="{DynamicResource LeeBrush_Background3}"
             leedep:DataGridManager.MainBorderBursh="{DynamicResource LeeBrush_BorderBrush}"
@@ -103,7 +103,7 @@
                     Text="未查找到任何数据" />
 
             </leedep:DataGridManager.NoItemsContent>
-        </DataGrid>-->
+        </DataGrid>
 
     </Grid>
 </Window>
