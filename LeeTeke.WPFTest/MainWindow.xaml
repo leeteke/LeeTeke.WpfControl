@@ -72,7 +72,7 @@
 
 
         <Grid.ContextMenu>
-            <ContextMenu leedep:MenuItemManager.IconMinWidth="0">
+            <ContextMenu>
                 <MenuItem Header="你好" />
                 <Separator />
                 <MenuItem Header="你好">

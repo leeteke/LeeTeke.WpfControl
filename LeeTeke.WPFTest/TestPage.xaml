@@ -55,7 +55,7 @@
                     </ContextMenu>
                 </StackPanel.ContextMenu>
 
-                <leecontrol:GridView ItemsSource="{Binding TestList}" ItemClickedCommand="{Binding TestCommand}">
+                <leecontrol:GridView ItemsSource="{Binding TestList}" ItemClickedCommand="{Binding TestCommand}" RenderOptions.BitmapScalingMode="HighQuality" >
                     <leecontrol:GridView.NoItemsContent>
                         <TextBlock
                             HorizontalAlignment="Center"

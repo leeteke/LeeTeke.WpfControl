@@ -16,8 +16,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ImageEx}">
-                    <Border
-                        x:Name="PART_Border"
+                    <Border x:Name="PART_Border"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
@@ -43,18 +42,15 @@
                                         Path="BorderThickness" />
                                 </MultiBinding>
                             </local:EasyPanel.Clip>
-                            <ContentPresenter
-                                x:Name="PART_DefaultContent"
+                            <ContentPresenter x:Name="PART_DefaultContent"
                                 Margin="{TemplateBinding Padding}"
                                 Content="{TemplateBinding DefaultContent}" />
-                            <Image
-                                x:Name="PART_Image"
+                            <Image x:Name="PART_Image"
                                 Margin="{TemplateBinding Padding}"
                                 Opacity="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=AnimationValue, Mode=OneWay}"
                                 Source="{TemplateBinding Source}"
                                 Stretch="{TemplateBinding Stretch}" />
-                            <ContentPresenter
-                                x:Name="PART_Watermark"
+                            <ContentPresenter x:Name="PART_Watermark"
                                 Margin="{TemplateBinding Padding}"
                                 Content="{TemplateBinding Watermark}"
                                 IsHitTestVisible="False" />

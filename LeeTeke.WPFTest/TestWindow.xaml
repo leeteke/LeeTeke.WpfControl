@@ -16,9 +16,34 @@
 
     <Grid Margin="20">
 
+        <Grid.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="ceshi" Icon="&#xe709;">
+                    <MenuItem Header="ceshi" />
+                    <MenuItem Header="ceshi">
+                        <MenuItem Header="ceshi" />
+                        <MenuItem Header="ceshi" />
+                        <MenuItem Header="ceshi" />
+                        <MenuItem Header="ceshi" />
+                        <MenuItem Header="ceshi" />
+                        <MenuItem Header="ceshi" />
+                        <MenuItem Header="ceshi" />
+                        <MenuItem Header="ceshi" />
+                        <MenuItem Header="ceshi" />
+                        <MenuItem Header="ceshi" />
+                        <MenuItem Header="ceshi" />
+                        <MenuItem Header="ceshi" />
+                    </MenuItem>
+                </MenuItem>
+
+                <MenuItem Header="ceshi(_C)" />
+
+            </ContextMenu>
+        </Grid.ContextMenu>
         <Grid.RowDefinitions>
             <RowDefinition Height="35" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="35" />
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal">
@@ -31,7 +56,10 @@
                 Content="清除"
                 Command="{Binding ClearCommand}" />
 
-            <ComboBox Width="180">
+            <ComboBox
+                Width="180"
+                IsEditable="False"
+                IsReadOnly="True">
                 <ComboBoxItem Content="1" />
                 <ComboBoxItem Content="2" />
                 <ComboBoxItem Content="3" />
@@ -64,22 +92,45 @@
                 <ComboBoxItem Content="3" />
                 <ComboBoxItem Content="3" />
             </ComboBox>
+            <TextBox Width="150" />
 
-            <Menu Width="100" IsMainMenu="True">
-                <MenuItem Header="nihao">
-                    <MenuItem Header="测试"/>
+            <Menu VerticalAlignment="Center">
+                <MenuItem Header="测试专栏">
+                    <MenuItem
+                        leedep:MenuItemManager.CheckedBackground="{DynamicResource LeeBrush_BlueOutlook}"
+                        Header="1"
+                        IsCheckable="True" />
                 </MenuItem>
+
+                <MenuItem Header="3">
+                    <MenuItem Header="1" />
+                </MenuItem>
+                <MenuItem Header="1" />
             </Menu>
 
 
+
+            <lee:ToggleGroup>
+                <ToggleButton Content="nihao " />
+                <ToggleButton Content="nihao " />
+                <ToggleButton Content="nihao " />
+            </lee:ToggleGroup>
+
         </StackPanel>
 
-    
 
-        <DataGrid
+
+        <GroupBox Grid.Row="1" Header="123">
+            <ListBox>
+                <ListBoxItem Content="1" />
+                <ListBoxItem Content="2" />
+            </ListBox>
+        </GroupBox>
+
+
+        <!--<DataGrid
             Grid.Row="1"
-            leedep:DataGridManager.MainBackground="{DynamicResource LeeBrush_Background3}"
-            leedep:DataGridManager.MainBorderBursh="{DynamicResource LeeBrush_BorderBrush}"
+            leedep:DataGridManager.MainBackground="{DynamicResource LeeBrush_BorderBrush}"
             leedep:DataGridManager.MainBorderThickness="1"
             leedep:DataGridManager.MainCornerRadius="6"
             leedep:DataGridManager.MainEffect="{DynamicResource LeeShadow}"
@@ -103,7 +154,13 @@
                     Text="未查找到任何数据" />
 
             </leedep:DataGridManager.NoItemsContent>
-        </DataGrid>
+        </DataGrid>-->
+
+        <lee:Pagination
+            Grid.Row="2"
+            DisplayPages="4"
+            PageCount="2"
+            PageIndex="1" />
 
     </Grid>
 </Window>

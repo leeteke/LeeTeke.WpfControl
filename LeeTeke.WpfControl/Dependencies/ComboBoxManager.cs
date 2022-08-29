@@ -416,8 +416,6 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty DropPaddingProperty =
             DependencyProperty.RegisterAttached("DropPadding", typeof(Thickness), typeof(ComboBoxManager));
         #endregion
-
-
         #region DropIsClip
         public static bool GetDropIsClip(DependencyObject obj)
         {

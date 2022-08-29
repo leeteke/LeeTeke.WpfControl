@@ -157,8 +157,6 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-
-
         #region CornerRadius
         /// <summary>
         /// CornerRadius
@@ -175,9 +173,6 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-
-
-
         #region AnimationValue
         /// <summary>
         /// 请填写描述
@@ -193,8 +188,6 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("AnimationValue", typeof(double), typeof(ImageEx),new PropertyMetadata(0.0));
 
         #endregion
-
-
 
         #endregion
 

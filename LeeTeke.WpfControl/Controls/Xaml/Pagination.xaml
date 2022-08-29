@@ -43,8 +43,7 @@
                             <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
 
-                        <Button
-                            x:Name="PART_HeadButton"
+                        <Button x:Name="PART_HeadButton"
                             Width="{TemplateBinding ButtonWidth}"
                             Height="{TemplateBinding ButtonHeight}"
                             Margin="{TemplateBinding ButtonMargin}"
@@ -70,8 +69,7 @@
                             </StackPanel>
                         </Button>
 
-                        <Button
-                            x:Name="PART_PreviousButton"
+                        <Button x:Name="PART_PreviousButton"
                             Grid.Column="1"
                             Width="{TemplateBinding ButtonWidth}"
                             Height="{TemplateBinding ButtonHeight}"
@@ -87,8 +85,7 @@
                             ToolTip="上一页" />
 
 
-                        <controls:ToggleGroup
-                            x:Name="PART_PageGroup"
+                        <controls:ToggleGroup x:Name="PART_PageGroup"
                             Grid.Column="2"
                             Height="{TemplateBinding ButtonHeight}"
                             MinWidth="0"
@@ -120,8 +117,7 @@
 
 
 
-                        <Button
-                            x:Name="PART_NextButton"
+                        <Button x:Name="PART_NextButton"
                             Grid.Column="3"
                             Width="{TemplateBinding ButtonWidth}"
                             Height="{TemplateBinding ButtonHeight}"
@@ -135,8 +131,7 @@
                             IsEnabled="False"
                             ToolTip="下一页" />
 
-                        <Button
-                            x:Name="PART_EndButton"
+                        <Button x:Name="PART_EndButton"
                             Grid.Column="4"
                             Width="{TemplateBinding ButtonWidth}"
                             Height="{TemplateBinding ButtonHeight}"
@@ -175,8 +170,7 @@
                                 FontWeight="{TemplateBinding FontWeight}"
                                 Foreground="{TemplateBinding Foreground}"
                                 Text="跳转到" />
-                            <ComboBox
-                                x:Name="PART_ComboBox"
+                            <ComboBox x:Name="PART_ComboBox"
                                 Height="{TemplateBinding ButtonHeight}"
                                 MinWidth="60"
                                 MinHeight="0"

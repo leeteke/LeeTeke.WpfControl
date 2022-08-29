@@ -86,6 +86,17 @@ namespace LeeTeke.WpfControl.Controls
             _routedMoveEvent = new RoutedEventHandler(RoutedMoveEventHandler);
             SizeChanged += RippleMask_SizeChanged;
             MouseLeave += RippleMask_MouseLeave;
+            IsVisibleChanged += RippleMask_IsVisibleChanged;
+        }
+
+        private void RippleMask_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (!IsVisible)
+            {
+                _sbOpen?.Stop();
+                _sbClose?.Stop();
+                _canvas?.Children.Clear();
+            }
         }
 
 
@@ -280,9 +291,6 @@ namespace LeeTeke.WpfControl.Controls
             _canvas = GetTemplateChild(ElementCanvas) as Canvas;
         }
 
-
-
-
         private void RoutedMoveEventHandler(object sender, RoutedEventArgs e)
         {
             ///设置点位
@@ -304,7 +312,6 @@ namespace LeeTeke.WpfControl.Controls
                 }
             }
         }
-
 
         private void MouseLeaveEventHandler(object sender, RoutedEventArgs e)
         {
@@ -422,7 +429,6 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
 
-
         private void OpenSB_Completed(object? sender, EventArgs e)
         {
             if (_clickStates == 3)
@@ -488,7 +494,6 @@ namespace LeeTeke.WpfControl.Controls
                 _canvas?.Children.Clear();
             }
         }
-
 
         private void RippleMask_SizeChanged(object sender, SizeChangedEventArgs e)
         {
