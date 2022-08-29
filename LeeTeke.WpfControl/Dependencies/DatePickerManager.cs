@@ -62,7 +62,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for ButtonFontSize.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ButtonFontSizeProperty =
-            DependencyProperty.RegisterAttached("ButtonFontSize", typeof(double), typeof(DatePickerManager));
+            DependencyProperty.RegisterAttached("ButtonFontSize", typeof(double), typeof(DatePickerManager),new PropertyMetadata(DependencyConst.FontSize));
         #endregion
 
 

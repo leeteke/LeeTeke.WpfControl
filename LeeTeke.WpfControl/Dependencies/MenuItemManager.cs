@@ -89,7 +89,6 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("BorderBrush", typeof(Brush), typeof(MenuItemManager));
         #endregion
 
-
         #region BorderThickness
         public static Thickness GetBorderThickness(DependencyObject obj)
         {
@@ -105,7 +104,6 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty BorderThicknessProperty =
             DependencyProperty.RegisterAttached("BorderThickness", typeof(Thickness), typeof(MenuItemManager));
         #endregion
-
 
         #region Margin
         public static Thickness GetMargin(DependencyObject obj)
@@ -424,7 +422,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for IconFontFamily.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IconFontFamilyProperty =
-            DependencyProperty.RegisterAttached("IconFontFamily", typeof(FontFamily), typeof(MenuItemManager));
+            DependencyProperty.RegisterAttached("IconFontFamily", typeof(FontFamily), typeof(MenuItemManager),new PropertyMetadata(DependencyConst.FontFamily));
         #endregion
 
         #region IconForeground
@@ -456,7 +454,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for IconFontSize.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IconFontSizeProperty =
-            DependencyProperty.RegisterAttached("IconFontSize", typeof(double), typeof(MenuItemManager));
+            DependencyProperty.RegisterAttached("IconFontSize", typeof(double), typeof(MenuItemManager),new PropertyMetadata(DependencyConst.FontSize));
         #endregion
 
         #region IconFontWeight

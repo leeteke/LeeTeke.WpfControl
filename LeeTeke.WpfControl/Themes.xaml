@@ -1572,6 +1572,7 @@
         <Setter Property="CalendarDayButtonStyle" Value="{StaticResource LeeCalendarDayButton}" />
         <Setter Property="CalendarButtonStyle" Value="{StaticResource LeeCalendarButton}" />
         <Setter Property="CalendarItemStyle" Value="{StaticResource LeeCalendarItem}" />
+
         <Setter Property="leedep:CalendarManager.TitleBackground" Value="{DynamicResource LeeBrush_Theme}" />
         <Setter Property="leedep:CalendarManager.TitleTextBrush" Value="{DynamicResource LeeBrush_ThemeForeground}" />
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}" />
@@ -1586,7 +1587,7 @@
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}"
                             Effect="{StaticResource LeeShadow}" />
-                        <CalendarItem x:Name="PART_CalendarItem" />
+                        <CalendarItem x:Name="PART_CalendarItem" Style="{TemplateBinding CalendarItemStyle}" />
                     </lee:EasyPanel>
 
                     <ControlTemplate.Triggers>
@@ -2462,21 +2463,27 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
+
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
+
         <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="Padding" Value="6,3" />
-        <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+        <Setter Property="Stylus.IsFlicksEnabled" Value="True" />
+
         <Setter Property="ItemContainerStyle" Value="{DynamicResource LeeComboBoxItem}" />
+
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+
         <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True" />
         <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling" />
+
 
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}" />
         <Setter Property="leedep:ComboBoxManager.EscToEmpty" Value="True" />
@@ -2535,7 +2542,6 @@
         <Setter Property="leedep:ComboBoxManager.MarkSize" Value="4" />
 
 
-        <Setter Property="ItemContainerStyle" Value="{StaticResource LeeComboBoxItem}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBox}">
@@ -2544,13 +2550,9 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}, Mode=OneWay}">
-                        <Grid x:Name="templateRoot">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="0" MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" />
-                            </Grid.ColumnDefinitions>
+                        <lee:EasyPanel x:Name="templateRoot">
+
                             <Popup x:Name="PART_Popup"
-                                Grid.ColumnSpan="2"
                                 AllowsTransparency="True"
                                 IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                 Placement="Bottom"
@@ -2580,7 +2582,7 @@
                                         VerticalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(ScrollViewer.VerticalScrollBarVisibility), Mode=OneWay}"
                                         VirtualizingStackPanel.IsVirtualizing="{Binding Path=(VirtualizingPanel.IsVirtualizing), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                                         VirtualizingStackPanel.VirtualizationMode="{Binding Path=(VirtualizingPanel.VirtualizationMode), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}">
-                                        <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                        <ItemsPresenter KeyboardNavigation.ControlTabNavigation="Cycle" />
                                     </ScrollViewer>
                                 </lee:EasyPanel>
                             </Popup>
@@ -2595,7 +2597,6 @@
                                 ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
                                 IsHitTestVisible="false" />
                             <ToggleButton x:Name="toggleButton"
-                                Grid.ColumnSpan="2"
                                 Padding="0,0,5,0"
                                 HorizontalContentAlignment="Right"
                                 Background="Transparent"
@@ -2606,14 +2607,14 @@
                                 Margin="{TemplateBinding Padding}"
                                 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                leedep:TextBoxManager.EnterCommand="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.EnterCommand), Mode=OneWay}"
                                 leedep:TextBoxManager.EscToEmpty="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.EscToEmpty), Mode=OneWay}"
                                 BorderThickness="0"
                                 FontSize="{TemplateBinding FontSize}"
                                 FontWeight="{TemplateBinding FontWeight}"
                                 Foreground="{TemplateBinding Foreground}"
                                 Style="{StaticResource ComboBoxEditableTextBox}"
-                                Visibility="Collapsed"
-                                leedep:TextBoxManager.EnterCommand="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.EnterCommand), Mode=OneWay}" />
+                                Visibility="Collapsed" />
 
                             <TextBlock x:Name="prviewText"
                                 HorizontalAlignment="Center"
@@ -2622,7 +2623,7 @@
                                 Text="{Binding Path=(leedep:ComboBoxManager.PreviewText), RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}, Mode=OneWay}"
                                 Visibility="Collapsed" />
 
-                        </Grid>
+                        </lee:EasyPanel>
                     </Border>
                     <ControlTemplate.Triggers>
 
@@ -2733,7 +2734,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 
     <Style x:Key="LeeMenuItem" TargetType="{x:Type MenuItem}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
@@ -2996,7 +2996,7 @@
                 <Setter Property="leedep:MenuItemManager.CornerRadius" Value="{Binding Path=(leedep:MenuItemManager.CornerRadius), RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Mode=OneWay}" />
 
                 <Setter Property="leedep:MenuItemManager.IconFontFamily" Value="{Binding Path=(leedep:MenuItemManager.IconFontFamily), RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Mode=OneWay}" />
-                <Setter Property="leedep:MenuItemManager.IconFontSize" Value="{Binding Path=(leedep:MenuItemManager.IconFontSize), RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Mode=OneWay}" />
+                <Setter Property="leedep:MenuItemManager.IconFontSize" Value="{Binding Path=(leedep:MenuItemManager.IconFontSize), RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Mode=OneWay, FallbackValue=12.0}" />
                 <Setter Property="leedep:MenuItemManager.IconFontWeight" Value="{Binding Path=(leedep:MenuItemManager.IconFontWeight), RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Mode=OneWay}" />
                 <Setter Property="leedep:MenuItemManager.IconForeground" Value="{Binding Path=(leedep:MenuItemManager.IconForeground), RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Mode=OneWay}" />
                 <Setter Property="leedep:MenuItemManager.IconMinWidth" Value="{Binding Path=(leedep:MenuItemManager.IconMinWidth), RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Mode=OneWay}" />

@@ -64,7 +64,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for MarkSize.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MarkSizeProperty =
-            DependencyProperty.RegisterAttached("MarkSize", typeof(double), typeof(RadioButtonManager));
+            DependencyProperty.RegisterAttached("MarkSize", typeof(double), typeof(RadioButtonManager), new PropertyMetadata(DependencyConst.FontSize));
         #endregion
 
         #region MarkMargin

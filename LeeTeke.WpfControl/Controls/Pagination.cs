@@ -67,7 +67,6 @@ namespace LeeTeke.WpfControl.Controls
         #endregion
 
         private ToggleGroup? _group;
-        private ComboBox? _comboBox;
         private Button? _headButton;
         private Button? _endButton;
         private Button? _previousButton;
@@ -85,8 +84,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (_group != null)
                 _group.SelectionChanged -= _group_SelectionChanged;
-            if (_comboBox != null)
-                _comboBox.SelectionChanged -= _comboBox_SelectionChanged;
+
             if (_previousButton != null)
                 _previousButton.Click -= _previousButton_Click;
             if (_nextButton != null)
@@ -99,7 +97,7 @@ namespace LeeTeke.WpfControl.Controls
 
 
             _group = GetTemplateChild(ElementPageGroup) as ToggleGroup;
-            _comboBox = GetTemplateChild(ElementComboBox) as ComboBox;
+
             _previousButton = GetTemplateChild(ElementPreviousButton) as Button;
             _headButton = GetTemplateChild(ElementHeadButton) as Button;
             _nextButton = GetTemplateChild(ElementNextButton) as Button;
@@ -107,8 +105,7 @@ namespace LeeTeke.WpfControl.Controls
 
             if (_group != null)
                 _group.SelectionChanged += _group_SelectionChanged;
-            if (_comboBox != null)
-                _comboBox.SelectionChanged += _comboBox_SelectionChanged;
+
             if (_previousButton != null)
                 _previousButton.Click += _previousButton_Click;
             if (_nextButton != null)
@@ -293,6 +290,39 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("PageIndexChangedCommand", typeof(ICommand), typeof(Pagination));
         #endregion
 
+        #region PageIndexList
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        internal int[] PageIndexList
+        {
+            get { return (int[])GetValue(PageIndexListProperty); }
+            set { SetValue(PageIndexListProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for PageIndexList.  This enables animation, styling, binding, etc...
+        internal static readonly DependencyProperty PageIndexListProperty =
+            DependencyProperty.Register(nameof(PageIndexList), typeof(int[]), typeof(Pagination));
+        #endregion
+
+        #region SelectedItem(只是为了解决一个很名莫名奇妙的错误问题而添加的属性)
+        /// <summary>
+        /// 该属性实际意义，主要是Combox不为何老是寻找本控件的SelectedItem，单是又无任何操作，一直在报错绑定失败。
+        /// 故此加之
+        /// </summary>
+        internal object? SelectedItem
+        {
+            get;
+            set;
+        }
+
+        //// Using a DependencyProperty as the backing store for SelectedItem.  This enables animation, styling, binding, etc...
+        internal static readonly DependencyProperty SelectedItemProperty =
+            DependencyProperty.Register(nameof(SelectedItem), typeof(object), typeof(Pagination));
+
+
+        #endregion
+
         #endregion
 
         #region RouteEvent
@@ -334,7 +364,6 @@ namespace LeeTeke.WpfControl.Controls
             if (_group == null)
                 return;
 
-
             _group.ItemsSource = null;
             if (PageCount < 1)
             {
@@ -347,16 +376,12 @@ namespace LeeTeke.WpfControl.Controls
             }
 
             ///如果小于1 则进行判断 自动
-
-            var pages = new List<int>();
+            var pages = new int[PageCount];
             for (int i = 0; i < PageCount; i++)
             {
-                pages.Add(i + 1);
+                pages[i] = (i + 1);
             }
-
-            if (_comboBox != null)
-                _comboBox.ItemsSource = pages;
-
+            PageIndexList = pages;
             GropShowNumber(PageIndex);
         }
 
@@ -378,10 +403,6 @@ namespace LeeTeke.WpfControl.Controls
                 _group.SelectedValue = number;
             }
 
-
-
-            if (_comboBox != null && (_comboBox.SelectedValue == null || (_comboBox.SelectedValue is int svalue && svalue != number)))
-                _comboBox.SelectedValue = number;
 
             RaisePageIndexChanged(number);
         }
@@ -474,14 +495,6 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
 
-        private void _comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (sender is ComboBox comboBox && comboBox.SelectedValue is int pk)
-            {
-                PageIndex = pk;
-            }
-
-        }
 
 
         private void _endButton_Click(object sender, RoutedEventArgs e)

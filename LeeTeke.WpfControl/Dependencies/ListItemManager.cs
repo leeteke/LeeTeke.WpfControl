@@ -249,7 +249,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for MouseOverFontSize.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MouseOverFontSizeProperty =
-            DependencyProperty.RegisterAttached("MouseOverFontSize", typeof(double), typeof(ListItemManager));
+            DependencyProperty.RegisterAttached("MouseOverFontSize", typeof(double), typeof(ListItemManager), new PropertyMetadata(DependencyConst.FontSize));
         #endregion
 
         #region MouseOverFontWeight
@@ -395,7 +395,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for SelectedFontSize.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedFontSizeProperty =
-            DependencyProperty.RegisterAttached("SelectedFontSize", typeof(double), typeof(ListItemManager));
+            DependencyProperty.RegisterAttached("SelectedFontSize", typeof(double), typeof(ListItemManager), new PropertyMetadata(DependencyConst.FontSize));
         #endregion
 
         #region SelectedFontWeight

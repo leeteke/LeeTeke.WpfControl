@@ -59,39 +59,9 @@
             <ComboBox
                 Width="180"
                 IsEditable="False"
-                IsReadOnly="True">
-                <ComboBoxItem Content="1" />
-                <ComboBoxItem Content="2" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-                <ComboBoxItem Content="3" />
-            </ComboBox>
+                IsReadOnly="True" />
+
+
             <TextBox Width="150" />
 
             <Menu VerticalAlignment="Center">
@@ -102,10 +72,7 @@
                         IsCheckable="True" />
                 </MenuItem>
 
-                <MenuItem Header="3">
-                    <MenuItem Header="1" />
-                </MenuItem>
-                <MenuItem Header="1" />
+           
             </Menu>
 
 
@@ -120,12 +87,7 @@
 
 
 
-        <GroupBox Grid.Row="1" Header="123">
-            <ListBox>
-                <ListBoxItem Content="1" />
-                <ListBoxItem Content="2" />
-            </ListBox>
-        </GroupBox>
+        <GroupBox Grid.Row="1" Header="123" />
 
 
         <!--<DataGrid

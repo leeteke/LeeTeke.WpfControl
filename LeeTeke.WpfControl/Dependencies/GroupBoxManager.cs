@@ -89,7 +89,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for HeaderFontSize.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty HeaderFontSizeProperty =
-            DependencyProperty.RegisterAttached("HeaderFontSize", typeof(double), typeof(GroupBoxManager));
+            DependencyProperty.RegisterAttached("HeaderFontSize", typeof(double), typeof(GroupBoxManager),new PropertyMetadata(DependencyConst.FontSize));
         #endregion
 
 

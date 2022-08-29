@@ -99,58 +99,6 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("ItemHeight", typeof(double), typeof(ComboBoxManager));
         #endregion
 
-        #region BanQuick
-        public static bool GetBanQuick(DependencyObject obj)
-        {
-            return (bool)obj.GetValue(BanQuickProperty);
-        }
-
-        public static void SetBanQuick(DependencyObject obj, bool value)
-        {
-            obj.SetValue(BanQuickProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for BanQuick.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty BanQuickProperty =
-            DependencyProperty.RegisterAttached("BanQuick", typeof(bool), typeof(ComboBoxManager), new PropertyMetadata(BanQuickChanged));
-
-        private static void BanQuickChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is ComboBox box)
-            {
-                if (e.NewValue is bool _value && _value)
-                {
-                    box.PreviewKeyDown += Box_PreviewKeyDown;
-                    box.PreviewMouseWheel += Box_PreviewMouseWheel; 
-                }
-                else
-                {
-                    box.PreviewKeyDown -= Box_PreviewKeyDown;
-                    box.PreviewMouseWheel -= Box_PreviewMouseWheel;
-                }
-            }
-        }
-
-        private static void Box_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
-        {
-            e.Handled = true;
-        }
-
-        private static void Box_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            switch (e.Key)
-            {
-                case Key.Left:
-                case Key.Right:
-                case Key.Up:
-                case Key.Down:
-                        e.Handled = true;
-                    return;
-                default:
-                    break;
-            }
-        }
-        #endregion
 
         #region MarkShow
         public static bool GetMarkShow(DependencyObject obj)

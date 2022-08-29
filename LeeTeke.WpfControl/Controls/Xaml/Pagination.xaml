@@ -1,13 +1,11 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:LeeTeke.WpfControl.Controls"
-    xmlns:lee="clr-namespace:LeeTeke.WpfControl.Controls"
     xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies"
     xmlns:local="clr-namespace:LeeTeke.WpfControl.Controls">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/ToggleGroup.xaml" />
+
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="BasePagination" TargetType="{x:Type local:Pagination}">
@@ -85,7 +83,7 @@
                             ToolTip="上一页" />
 
 
-                        <controls:ToggleGroup x:Name="PART_PageGroup"
+                        <local:ToggleGroup x:Name="PART_PageGroup"
                             Grid.Column="2"
                             Height="{TemplateBinding ButtonHeight}"
                             MinWidth="0"
@@ -100,7 +98,7 @@
                             ItemPadding="0"
                             SelectedMinimum="1"
                             SelectionMode="Single">
-                            <controls:ToggleGroup.ItemTemplate>
+                            <local:ToggleGroup.ItemTemplate>
                                 <DataTemplate>
                                     <Border Width="{Binding RelativeSource={RelativeSource AncestorType=local:Pagination}, Path=ButtonWidth, Mode=OneWay}" BorderThickness="0">
                                         <TextBlock
@@ -110,10 +108,10 @@
                                     </Border>
 
                                 </DataTemplate>
-                            </controls:ToggleGroup.ItemTemplate>
+                            </local:ToggleGroup.ItemTemplate>
 
 
-                        </controls:ToggleGroup>
+                        </local:ToggleGroup>
 
 
 
@@ -154,9 +152,7 @@
                                     VerticalAlignment="Stretch"
                                     Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, Path=Foreground}" />
                             </StackPanel>
-
                         </Button>
-
 
                         <StackPanel
                             Grid.Column="5"
@@ -170,16 +166,20 @@
                                 FontWeight="{TemplateBinding FontWeight}"
                                 Foreground="{TemplateBinding Foreground}"
                                 Text="跳转到" />
-                            <ComboBox x:Name="PART_ComboBox"
+
+
+                            <ComboBox
                                 Height="{TemplateBinding ButtonHeight}"
                                 MinWidth="60"
                                 MinHeight="0"
-                                leedep:ComboBoxManager.BanQuick="True"
                                 leedep:ComboBoxManager.PreviewText=""
                                 leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}"
+                                leedep:KeyboardNavigationManager.Ban="True"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}" />
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                ItemsSource="{TemplateBinding PageIndexList}"
+                                SelectedValue="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=PageIndex, Mode=TwoWay}" />
                         </StackPanel>
 
                     </Grid>
