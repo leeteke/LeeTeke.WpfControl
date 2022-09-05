@@ -34,14 +34,14 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
 
-        public new string Title
+        public new string? Title
         {
             get => textTitle.Text;
             set => textTitle.Text = value;
 
         }
 
-        public new object Content
+        public new object? Content
         {
             get => content.Content;
             set
@@ -255,7 +255,7 @@ namespace LeeTeke.WpfControl.Controls
             Height = height;
         }
 
-        public void AddOptions(string name, object value, CornerRadius cornerRadius = default)
+        public void AddOptions(string name, object? value, CornerRadius cornerRadius = default)
         {
             var theButton = new Button()
             {

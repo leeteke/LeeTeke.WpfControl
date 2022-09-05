@@ -17,9 +17,9 @@ namespace LeeTeke.WpfControl.Models
 
         bool CanClose { get; set; }
 
-        string Title { get; set; }
+        string? Title { get; set; }
 
-        object Content { get; set; }
+        object? Content { get; set; }
 
     
         int ProcessValue { get; set; }
@@ -28,7 +28,7 @@ namespace LeeTeke.WpfControl.Models
 
         void SetSize(double width = 320, double height = 200);
 
-        void AddOptions(string name, object value, CornerRadius cornerRadius = default);
+        void AddOptions(string name, object? value, CornerRadius cornerRadius = default);
 
         void Show();
 

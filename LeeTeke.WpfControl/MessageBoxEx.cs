@@ -120,7 +120,7 @@ namespace LeeTeke.WpfControl
         /// <summary>
         /// 标题
         /// </summary>
-        public string Title
+        public string? Title
         {
             get => _msg.Title;
             set => _msg.Title = value;
@@ -134,7 +134,7 @@ namespace LeeTeke.WpfControl
         /// <summary>
         /// 内容
         /// </summary>
-        public object Content
+        public object? Content
         {
             get => _msg.Content;
             set => _msg.Content = value;
@@ -158,7 +158,7 @@ namespace LeeTeke.WpfControl
         /// <param name="name"></param>
         /// <param name="vale"></param>
         /// <param name="btnCornerRadius">圆角值</param>
-        public void AddOptions(string name, object vale, CornerRadius btnCornerRadius = default) => _msg.AddOptions(name, vale, btnCornerRadius);
+        public void AddOptions(string name, object? vale, CornerRadius btnCornerRadius = default) => _msg.AddOptions(name, vale, btnCornerRadius);
 
         /// <summary>
         /// 设置大小
