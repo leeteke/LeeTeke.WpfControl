@@ -101,14 +101,14 @@
         </Grid>
 
 
-        <local:ProgressBar x:Name="loding"
+        <local:ProgressBar x:Name="loading"
             Grid.Row="2"
             Grid.Column="0"
             Height="8"
             Margin="5,0,2,5"
             VerticalAlignment="Bottom"
             Maximum="100"
-            Mode="Loding"
+            Mode="Loading"
             Visibility="Collapsed"
             Value="{Binding ProcessValue}" />
 
@@ -121,7 +121,7 @@
             FontSize="12"
             Foreground="{DynamicResource LeeBrush_Text}"
             Text="{Binding ProcessValue, StringFormat={}{0}%}"
-            Visibility="{Binding ElementName=loding, Path=Visibility}" />
+            Visibility="{Binding ElementName=loading, Path=Visibility}" />
 
 
     </Grid>

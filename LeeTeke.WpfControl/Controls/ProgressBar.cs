@@ -42,7 +42,7 @@ namespace LeeTeke.WpfControl.Controls
     /// 步骤 2)
     /// 继续操作并在 XAML 文件中使用控件。
     ///
-    ///     <MyNamespace:LodingBar/>
+    ///     <MyNamespace:LoadingBar/>
     ///
     /// </summary>
     public class ProgressBar : Control
@@ -53,21 +53,21 @@ namespace LeeTeke.WpfControl.Controls
         }
 
 
-        private Storyboard? _lodingSB;
+        private Storyboard? _loadingSB;
         public ProgressBar()
         {
-            this.SizeChanged += LodingBar_SizeChanged;
-            this.IsVisibleChanged += LodingBar_IsVisibleChanged;
+            this.SizeChanged += LoadingBar_SizeChanged;
+            this.IsVisibleChanged += LoadingBar_IsVisibleChanged;
         }
 
-        private void LodingBar_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void LoadingBar_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (IsVisible)
             {
                 switch (Mode)
                 {
                     case ProgressControlMode.Wating:
-                        LodingStoryboard(true);
+                        LoadingStoryboard(true);
                         break;
                     default:
                         break;
@@ -75,15 +75,15 @@ namespace LeeTeke.WpfControl.Controls
             }
             else
             {
-                if (_lodingSB != null)
-                    _lodingSB.Stop();
+
+                _loadingSB?.Stop();
             }
 
         }
 
-        private void LodingBar_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void LoadingBar_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            LodingStoryboard(true);
+            LoadingStoryboard(true);
         }
 
         public override void OnApplyTemplate()
@@ -151,17 +151,17 @@ namespace LeeTeke.WpfControl.Controls
 
         private static void WatinStopChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is ProgressBar loding && e.NewValue is bool isStop)
+            if (d is ProgressBar loading && e.NewValue is bool isStop)
             {
-                if (loding.Mode == ProgressControlMode.Wating)
+                if (loading.Mode == ProgressControlMode.Wating)
                 {
                     if (isStop)
                     {
-                        loding._lodingSB?.Stop();
+                        loading._loadingSB?.Stop();
                     }
                     else
                     {
-                        loding.LodingStoryboard();
+                        loading.LoadingStoryboard();
                     }
                 }
             }
@@ -203,7 +203,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private static void MaximumChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is ProgressBar loding && e.NewValue != e.OldValue)
+            if (d is ProgressBar loading && e.NewValue != e.OldValue)
             {
                 if (e.NewValue is double value && value >= 0)
                 {
@@ -211,7 +211,7 @@ namespace LeeTeke.WpfControl.Controls
                 }
                 else
                 {
-                    loding.Maximum = 1;
+                    loading.Maximum = 1;
                 }
             }
         }
@@ -234,23 +234,23 @@ namespace LeeTeke.WpfControl.Controls
 
         private static void ValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is ProgressBar loding && e.NewValue != e.OldValue && e.NewValue is double value)
+            if (d is ProgressBar loading && e.NewValue != e.OldValue && e.NewValue is double value)
             {
                 if (value < 0)
                 {
-                    loding.Value = 0;
+                    loading.Value = 0;
                     return;
                 }
-                if (value > loding.Maximum)
+                if (value > loading.Maximum)
                 {
-                    loding.Value = loding.Maximum;
+                    loading.Value = loading.Maximum;
                     return;
                 }
-                             
-                loding.RaiseValueChanged(value);
-                if (loding.Mode == ProgressControlMode.Loding)
+
+                loading.RaiseValueChanged(value);
+                if (loading.Mode == ProgressControlMode.Loading)
                 {
-                    loding.LodingStoryboard();
+                    loading.LoadingStoryboard();
                 }
 
             }
@@ -287,13 +287,13 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for Mode.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ModeProperty =
-            DependencyProperty.Register("Mode", typeof(ProgressControlMode), typeof(ProgressBar), new PropertyMetadata(ProgressControlMode.Loding, ModeChanged));
+            DependencyProperty.Register("Mode", typeof(ProgressControlMode), typeof(ProgressBar), new PropertyMetadata(ProgressControlMode.Loading, ModeChanged));
 
         private static void ModeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is ProgressBar loding)
+            if (d is ProgressBar loading)
             {
-                loding.LodingStoryboard();
+                loading.LoadingStoryboard();
             }
         }
 
@@ -349,7 +349,7 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("Duration", typeof(Duration), typeof(ProgressBar));
         #endregion
 
-   
+
         #endregion
 
         #region RouteEvent
@@ -400,21 +400,20 @@ namespace LeeTeke.WpfControl.Controls
         }
 
 
-        private void LodingStoryboard(bool size = false)
+        private void LoadingStoryboard(bool size = false)
         {
             if (size)
             {
                 ///勿删，用来初始化加载的
             }
-            else
-            if (!IsLoaded)
+            else if (!IsLoaded)
             {
                 return;
             }
-            if (Mode == ProgressControlMode.Loding)
+            if (Mode == ProgressControlMode.Loading)
             {
                 var plc = Value * (ProgressGenCalculation() / Maximum);
-        
+
                 var animation = new DoubleAnimation(plc, Duration)
                 {
                     EasingFunction = this.EasingFunction,
@@ -429,12 +428,12 @@ namespace LeeTeke.WpfControl.Controls
             }
             else
             {
-                if (_lodingSB != null)
-                    _lodingSB.Pause();
+                if (_loadingSB != null)
+                    _loadingSB.Pause();
 
                 if (WatingStop)
                     return;
-                _lodingSB = new Storyboard() { RepeatBehavior = RepeatBehavior.Forever };
+                _loadingSB = new Storyboard() { RepeatBehavior = RepeatBehavior.Forever };
 
                 DoubleAnimationUsingKeyFrames eDA = new DoubleAnimationUsingKeyFrames();
                 eDA.KeyFrames.Add(new EasingDoubleKeyFrame()
@@ -463,11 +462,11 @@ namespace LeeTeke.WpfControl.Controls
                     KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(2.3)),
                 });
 
-                _lodingSB.Children.Add(eDA);
+                _loadingSB.Children.Add(eDA);
                 Storyboard.SetTarget(eDA, this);
                 Storyboard.SetTargetProperty(eDA, new PropertyPath(ProgressBar.RectangleSiteProperty));
 
-                _lodingSB.Begin();
+                _loadingSB.Begin();
             }
         }
         #endregion

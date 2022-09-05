@@ -77,8 +77,8 @@ namespace LeeTeke.WpfControl.Controls
         public System.Windows.Window Window { get => this; }
         public bool ShowProcess
         {
-            get => loding.Visibility == Visibility.Visible;
-            set => loding.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
+            get => loading.Visibility == Visibility.Visible;
+            set => loading.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
         }
 
 

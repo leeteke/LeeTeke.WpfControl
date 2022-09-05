@@ -57,58 +57,58 @@
             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "M:LeeTeke.WpfControl.Controls.ImageEx.ChangeShowImage" -->
-        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.LodingBar" -->
-        <member name="P:LeeTeke.WpfControl.Controls.LodingBar.ProgressLength">
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.LoadingBar" -->
+        <member name="P:LeeTeke.WpfControl.Controls.LoadingBar.ProgressLength">
             <summary>
             请填写描述
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.LodingBar.RectangleSite">
+        <member name="P:LeeTeke.WpfControl.Controls.LoadingBar.RectangleSite">
             <summary>
             请填写描述
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.LodingBar.WatingStop">
+        <member name="P:LeeTeke.WpfControl.Controls.LoadingBar.WatingStop">
             <summary>
             WatingStop
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.LodingBar.CornerRadius">
+        <member name="P:LeeTeke.WpfControl.Controls.LoadingBar.CornerRadius">
             <summary>
             CornerRadius
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.LodingBar.Maximum">
+        <member name="P:LeeTeke.WpfControl.Controls.LoadingBar.Maximum">
             <summary>
             Maximum
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.LodingBar.Value">
+        <member name="P:LeeTeke.WpfControl.Controls.LoadingBar.Value">
             <summary>
             Value
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.LodingBar.FillBrush">
+        <member name="P:LeeTeke.WpfControl.Controls.LoadingBar.FillBrush">
             <summary>
             FillBrsh
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.LodingBar.Mode">
+        <member name="P:LeeTeke.WpfControl.Controls.LoadingBar.Mode">
             <summary>
             Mode
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.LodingBar.Orientation">
+        <member name="P:LeeTeke.WpfControl.Controls.LoadingBar.Orientation">
             <summary>
             Orientation
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.LodingBar.EasingFunction">
+        <member name="P:LeeTeke.WpfControl.Controls.LoadingBar.EasingFunction">
             <summary>
             请填写描述
             </summary>
         </member>
-        <member name="E:LeeTeke.WpfControl.Controls.LodingBar.ValueChanged">
+        <member name="E:LeeTeke.WpfControl.Controls.LoadingBar.ValueChanged">
             <summary>
             请填写描述
             </summary>
@@ -1089,14 +1089,14 @@
             </summary>
             <param name="element"></param>
         </member>
-        <member name="P:LeeTeke.WpfControl.MessageBoxEx.LodingBarModel">
+        <member name="P:LeeTeke.WpfControl.MessageBoxEx.LoadingBarModel">
             <summary>
-            lodingbar模式
+            loadingbar模式
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.MessageBoxEx.LodingBarValue">
+        <member name="P:LeeTeke.WpfControl.MessageBoxEx.LoadingBarValue">
             <summary>
-            设置lodingVale 范围0-100;
+            设置loadingVale 范围0-100;
             </summary>
         </member>
         <member name="M:LeeTeke.WpfControl.MessageBoxEx.SetIcon(LeeTeke.WpfControl.MessageBoxExEnum)">

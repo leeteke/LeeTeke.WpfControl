@@ -148,7 +148,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (d is Pagination pagination && e.NewValue is int _value)
             {
-                pagination.ViewLoding();
+                pagination.ViewLoading();
             }
         }
         #endregion
@@ -255,7 +255,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (d is Pagination pagination && e.NewValue is int)
             {
-                pagination.ViewLoding();
+                pagination.ViewLoading();
             }
         }
         #endregion
@@ -359,7 +359,7 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 视图
         /// </summary>
-        private void ViewLoding()
+        private void ViewLoading()
         {
             if (_group == null)
                 return;
@@ -468,7 +468,7 @@ namespace LeeTeke.WpfControl.Controls
         /// <param name="e"></param>
         private void Pagination_Loaded(object sender, RoutedEventArgs e)
         {
-            ViewLoding();
+            ViewLoading();
         }
 
         private void _group_SelectionChanged(object sender, ToggleSelectionChangedEventArgs e)

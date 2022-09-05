@@ -143,7 +143,7 @@ namespace LeeTeke.WpfControl
 
         
         /// <summary>
-        /// 设置lodingVale 范围0-100;
+        /// 设置loadingVale 范围0-100;
         /// </summary>
         public int ProcessValue
         {

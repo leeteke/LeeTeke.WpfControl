@@ -12,16 +12,16 @@
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="FillBrush" Value="{DynamicResource LeeBrush_Theme}" />
         <Setter Property="MinHeight" Value="8" />
+        <Setter Property="Maximum" Value="100" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="Value" Value="0" />
         <Setter Property="EasingFunction">
             <Setter.Value>
                 <PowerEase EasingMode="EaseOut" />
             </Setter.Value>
         </Setter>
         <Setter Property="Duration" Value="0:0:0.300" />
-        <Setter Property="Maximum" Value="100" />
-        <Setter Property="Mode" Value="Loding" />
+
+        <Setter Property="Mode" Value="Loading" />
         <Setter Property="Orientation" Value="Horizontal" />
         <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}" />
         <Setter Property="Background" Value="{DynamicResource LeeBrush_ForgroundActive}" />
@@ -60,7 +60,7 @@
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="Mode" Value="Loding" />
+                                <Condition Property="Mode" Value="Loading" />
                                 <Condition Property="Orientation" Value="Horizontal" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="PART_Rectangle" Property="Clip" Value="{x:Null}" />
@@ -69,7 +69,7 @@
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="Mode" Value="Loding" />
+                                <Condition Property="Mode" Value="Loading" />
                                 <Condition Property="Orientation" Value="Vertical" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="PART_Rectangle" Property="Clip" Value="{x:Null}" />

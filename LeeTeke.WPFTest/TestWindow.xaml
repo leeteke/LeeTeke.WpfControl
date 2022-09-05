@@ -72,7 +72,7 @@
                         IsCheckable="True" />
                 </MenuItem>
 
-           
+
             </Menu>
 
 
@@ -89,6 +89,15 @@
 
         <GroupBox Grid.Row="1" Header="123" />
 
+        <lee:ProgressRing
+            Grid.Row="1"
+            Width="100"
+            Height="100"
+            Effect="{DynamicResource  LeeShadow5}"
+            Maximum="20"
+            Mode="Wating"
+            Thickness="8"
+            Value="30" />
 
         <!--<DataGrid
             Grid.Row="1"

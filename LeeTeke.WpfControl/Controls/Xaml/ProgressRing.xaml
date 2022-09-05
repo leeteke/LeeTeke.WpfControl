@@ -25,7 +25,7 @@
         <Setter Property="Stroke" Value="{DynamicResource LeeBrush_Theme}" />
         <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}" />
         <Setter Property="MinWidth" Value="{DynamicResource LeeControlMinHeight}" />
-        <Setter Property="Mode" Value="Loding" />
+        <Setter Property="Mode" Value="Loading" />
         <Setter Property="IsClip" Value="True" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -33,165 +33,17 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ProgressRing}">
                     <local:EasyPanel>
-                        <!--<Grid.Resources>
-                            <Storyboard RepeatBehavior="Forever" x:Key="SB" >
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="E1R" BeginTime="0" Storyboard.TargetProperty="Angle">
-                                    <SplineDoubleKeyFrame KeyTime="0" Value="110" KeySpline="0.13,0.21,0.1,0.7" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:0.433" Value="230" KeySpline="0.02,0.33,0.38,0.77" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:1.2" Value="313" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:1.617" Value="425" KeySpline="0.57,0.17,0.95,0.75" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:2.017" Value="577" KeySpline="0,0.19,0.07,0.72" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:2.783" Value="659" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:3.217" Value="805" KeySpline="0,0,0.95,0.37" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:3.5" Value="805" />
-                                </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="E2R" BeginTime="0:0:0.200" Storyboard.TargetProperty="Angle">
-                                    <SplineDoubleKeyFrame KeyTime="0" Value="110" KeySpline="0.13,0.21,0.1,0.7" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:0.433" Value="230" KeySpline="0.02,0.33,0.38,0.77" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:1.2" Value="313" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:1.617" Value="425" KeySpline="0.57,0.17,0.95,0.75" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:2.017" Value="577" KeySpline="0,0.19,0.07,0.72" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:2.783" Value="659" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:3.217" Value="805" KeySpline="0,0,0.95,0.37" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:3.5" Value="805" />
-                                </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="E3R" BeginTime="0:0:0.400" Storyboard.TargetProperty="Angle">
-                                    <SplineDoubleKeyFrame KeyTime="0" Value="110" KeySpline="0.13,0.21,0.1,0.7" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:0.433" Value="230" KeySpline="0.02,0.33,0.38,0.77" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:1.2" Value="313" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:1.617" Value="425" KeySpline="0.57,0.17,0.95,0.75" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:2.017" Value="577" KeySpline="0,0.19,0.07,0.72" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:2.783" Value="659" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:3.217" Value="805" KeySpline="0,0,0.95,0.37" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:3.5" Value="805" />
-                                </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="E4R" BeginTime="0:0:0.600" Storyboard.TargetProperty="Angle">
-                                    <SplineDoubleKeyFrame KeyTime="0" Value="110" KeySpline="0.13,0.21,0.1,0.7" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:0.433" Value="230" KeySpline="0.02,0.33,0.38,0.77" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:1.2" Value="313" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:1.617" Value="425" KeySpline="0.57,0.17,0.95,0.75" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:2.017" Value="577" KeySpline="0,0.19,0.07,0.72" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:2.783" Value="659" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:3.217" Value="805" KeySpline="0,0,0.95,0.37" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:3.5" Value="805" />
-                                </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="E5R" BeginTime="0:0:0.800" Storyboard.TargetProperty="Angle">
-                                    <SplineDoubleKeyFrame KeyTime="0" Value="110" KeySpline="0.13,0.21,0.1,0.7" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:0.433" Value="230" KeySpline="0.02,0.33,0.38,0.77" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:1.2" Value="313" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:1.617" Value="425" KeySpline="0.57,0.17,0.95,0.75" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:2.017" Value="577" KeySpline="0,0.19,0.07,0.72" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:2.783" Value="659" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:3.217" Value="805" KeySpline="0,0,0.95,0.37" />
-                                    <SplineDoubleKeyFrame KeyTime="0:0:3.5" Value="805" />
-                                </DoubleAnimationUsingKeyFrames>
-
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PATY_Wating" BeginTime="0:0:0.000" Storyboard.TargetProperty="Opacity">
-                                    <EasingDoubleKeyFrame KeyTime="0:0:0.050" Value="1"/>
-                                    <EasingDoubleKeyFrame KeyTime="0:0:3.210" Value="1"/>
-                                    <EasingDoubleKeyFrame KeyTime="0:0:3.217" Value="0"/>
-                                </DoubleAnimationUsingKeyFrames>
-
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PATY_Wating2" BeginTime="0:0:0.200" Storyboard.TargetProperty="Opacity">
-                                    <EasingDoubleKeyFrame KeyTime="0:0:0.050" Value="1"/>
-                                    <EasingDoubleKeyFrame KeyTime="0:0:3.210" Value="1"/>
-                                    <EasingDoubleKeyFrame KeyTime="0:0:3.217" Value="0"/>
-                                </DoubleAnimationUsingKeyFrames>
-
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PATY_Wating3" BeginTime="0:0:0.400" Storyboard.TargetProperty="Opacity">
-                                    <EasingDoubleKeyFrame KeyTime="0:0:0.050" Value="1"/>
-                                    <EasingDoubleKeyFrame KeyTime="0:0:3.210" Value="1"/>
-                                    <EasingDoubleKeyFrame KeyTime="0:0:3.217" Value="0"/>
-                                </DoubleAnimationUsingKeyFrames>
-
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PATY_Wating4" BeginTime="0:0:0.600" Storyboard.TargetProperty="Opacity">
-                                    <EasingDoubleKeyFrame KeyTime="0:0:0.050" Value="1"/>
-                                    <EasingDoubleKeyFrame KeyTime="0:0:3.210" Value="1"/>
-                                    <EasingDoubleKeyFrame KeyTime="0:0:3.217" Value="0"/>
-                                </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PATY_Wating5" BeginTime="0:0:0.800" Storyboard.TargetProperty="Opacity">
-                                    <EasingDoubleKeyFrame KeyTime="0:0:0.050" Value="1"/>
-                                    <EasingDoubleKeyFrame KeyTime="0:0:3.210" Value="1"/>
-                                    <EasingDoubleKeyFrame KeyTime="0:0:3.217" Value="0"/>
-                                </DoubleAnimationUsingKeyFrames>
-
-                            </Storyboard>
-                        </Grid.Resources>-->
                         <Path x:Name="PART_OuterBorder"
                             Stroke="{TemplateBinding BorderBrush}"
                             StrokeThickness="{TemplateBinding BorderThickness}" />
                         <Path x:Name="PART_OrbitBackgound" Stroke="{TemplateBinding Background}" />
                         <Path x:Name="PART_Orbit"
                             Effect="{TemplateBinding RingEffect}"
-                            Stroke="{TemplateBinding Stroke}"
-                            StrokeDashArray="0"
-                            StrokeDashCap="Round"
-                            StrokeThickness="{TemplateBinding Thickness}" />
-                        <!--<Path x:Name="PATY_Wating5"
-                                Opacity="0"
-                              Data="{Binding ElementName=PATY_Wating,Path=Data}"
-                              Stroke="{TemplateBinding Stroke}"
-                              StrokeThickness="{TemplateBinding Thickness}"
-                              StrokeDashArray="0"
-                              StrokeDashCap="Round"
-                               Visibility="{Binding ElementName=PATY_Wating_1,Path=Visibility}"
-                              Effect="{TemplateBinding RingEffect}"
-                              RenderTransformOrigin="0.5,0.5">
-                            <Path.RenderTransform>
-                                <RotateTransform  x:Name="E5R" Angle="0"/>
-                            </Path.RenderTransform>
-                        </Path>
-                        <Path x:Name="PATY_Wating4"
-                                Opacity="0"
-                              Data="{Binding ElementName=PATY_Wating,Path=Data}"
-                              Stroke="{TemplateBinding Stroke}"
-                              StrokeThickness="{TemplateBinding Thickness}"
-                              StrokeDashArray="0"
-                              StrokeDashCap="Round"
-                              Visibility="{Binding ElementName=PATY_Wating_1,Path=Visibility}"
-                              Effect="{TemplateBinding RingEffect}"
-                              RenderTransformOrigin="0.5,0.5">
-                            <Path.RenderTransform>
-                                <RotateTransform x:Name="E4R" Angle="0"/>
-                            </Path.RenderTransform>
-                        </Path>
-                        <Path  x:Name="PATY_Wating3"
-                                 Opacity="0"
-                               Data="{Binding ElementName=PATY_Wating,Path=Data}"
-                              Stroke="{TemplateBinding Stroke}"
-                              StrokeThickness="{TemplateBinding Thickness}"
-                              StrokeDashArray="0"
-                              StrokeDashCap="Round"
-                               Visibility="{Binding ElementName=PATY_Wating_1,Path=Visibility}"
-                              Effect="{TemplateBinding RingEffect}"
-                              RenderTransformOrigin="0.5,0.5">
-                            <Path.RenderTransform>
-                                <RotateTransform  x:Name="E3R" Angle="0"/>
-                            </Path.RenderTransform>
-                        </Path>
-                        <Path x:Name="PATY_Wating2"
-                                Opacity="0"
-                              Data="{Binding ElementName=PATY_Wating,Path=Data}"
-                              Stroke="{TemplateBinding Stroke}"
-                              StrokeThickness="{TemplateBinding Thickness}"
-                              StrokeDashArray="0"
-                              StrokeDashCap="Round"
-                              Visibility="{Binding ElementName=PATY_Wating_1,Path=Visibility}"
-                              Effect="{TemplateBinding RingEffect}"
-                              RenderTransformOrigin="0.5,0.5">
-                            <Path.RenderTransform>
-                                <RotateTransform x:Name="E2R" Angle="0"/>
-                            </Path.RenderTransform>
-                        </Path>-->
-                        <Path x:Name="PART_Wating"
-                            Effect="{TemplateBinding RingEffect}"
-                            Opacity="1"
                             RenderTransformOrigin="0.5,0.5"
                             Stroke="{TemplateBinding Stroke}"
                             StrokeDashArray="0"
                             StrokeDashCap="Round"
-                            StrokeThickness="{TemplateBinding Thickness}"
-                            Visibility="Visible" />
+                            StrokeThickness="{TemplateBinding Thickness}" />
                         <Border x:Name="PART_InnerBorder"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}">
@@ -231,13 +83,7 @@
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
-                        <Trigger Property="Mode" Value="Wating">
-                            <Setter TargetName="PART_Orbit" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="PART_Wating" Property="Visibility" Value="Visible" />
-                            <Setter Property="ThicknessPadding" Value="0" />
-                            <Setter Property="Background" Value="{x:Null}" />
-                            <Setter Property="BorderThickness" Value="0" />
-                        </Trigger>
+
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

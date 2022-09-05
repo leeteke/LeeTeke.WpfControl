@@ -8,7 +8,7 @@ namespace LeeTeke.WpfControl
 {
     public enum ProgressControlMode
     {
-        Loding,
+        Loading,
         Wating
     }
 }

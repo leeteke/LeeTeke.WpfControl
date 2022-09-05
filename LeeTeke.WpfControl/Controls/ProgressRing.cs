@@ -70,51 +70,43 @@ namespace LeeTeke.WpfControl.Controls
         private Path? _orbitBackground;
         private Path? _orbit;
         private Border? _inner;
-        private Path? _wating;
         private Storyboard? _watingSB;
         private double _backDiameter;
         public ProgressRing()
         {
-            SizeChanged += ProgressRing_SizeChanged;
-            Loaded += ProgressRing_Loaded;
-
+            this.SizeChanged += ProgressRing_SizeChanged;
+            this.IsVisibleChanged += ProgressRing_IsVisibleChanged;
         }
 
-
-
-        private void ProgressRing_Loaded(object sender, RoutedEventArgs e)
+        private void ProgressRing_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            LodingIntView();
+            if (IsVisible)
+            {
+                LoadingView();
+            }
+            else
+            {
+                _watingSB?.Stop();
+            }
         }
+
 
         private void ProgressRing_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            LodingIntView();
+            LoadingView(true);
         }
 
         public override void OnApplyTemplate()
         {
-            if (_wating != null)
-                _wating.IsVisibleChanged -= _wating_IsVisibleChanged;
 
             base.OnApplyTemplate();
             _outer = this.GetTemplateChild(ElementOuterBorder) as Path;
             _orbitBackground = this.GetTemplateChild(ElementOrbitBackground) as Path;
             _orbit = this.GetTemplateChild(ElementOrbit) as Path;
             _inner = this.GetTemplateChild(ElementInnerBorder) as Border;
-            _wating = this.GetTemplateChild(ElementWating) as Path;
-
-            if (_wating != null)
-                _wating.IsVisibleChanged += _wating_IsVisibleChanged;
-
-            //if (this.GetTemplateChild("PART_Grid") is Grid grid)
-            //{
-            //    _watingSB = grid.Resources["SB"] as Storyboard;
-
-            //}
         }
 
-
+   
 
 
         #region 依赖
@@ -138,11 +130,10 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (d is ProgressRing progress)
             {
-                progress.LodingIntView();
+                progress.LoadingView(true);
             }
         }
         #endregion
-
 
         #region Thickness
         /// <summary>
@@ -162,11 +153,10 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (d is ProgressRing progress)
             {
-                progress.LodingIntView();
+                progress.LoadingView(true);
             }
         }
         #endregion
-
 
         #region ThicknessPadding
         /// <summary>
@@ -186,11 +176,10 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (d is ProgressRing progress)
             {
-                progress.LodingIntView();
+                progress.LoadingView(true);
             }
         }
         #endregion
-
 
         #region Effect
         /// <summary>
@@ -222,7 +211,6 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("IsClip", typeof(bool), typeof(ProgressRing));
         #endregion
 
-
         #region Value
         /// <summary>
         /// 请添加描述
@@ -235,7 +223,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(double), typeof(ProgressRing), new PropertyMetadata(OnValueChanged));
+            DependencyProperty.Register("Value", typeof(double), typeof(ProgressRing), new PropertyMetadata(0.0,OnValueChanged));
 
         private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -255,12 +243,10 @@ namespace LeeTeke.WpfControl.Controls
 
 
                 ring.RaiseValueChanged(value);
-                ring.LodingRing();
+                ring.LoadingView();
             }
         }
         #endregion
-
-
 
         #region RingValue
         /// <summary>
@@ -285,8 +271,6 @@ namespace LeeTeke.WpfControl.Controls
         }
         #endregion
 
-
-
         #region Maximum
         /// <summary>
         /// 请添加描述
@@ -299,18 +283,16 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for Maximum.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MaximumProperty =
-            DependencyProperty.Register("Maximum", typeof(double), typeof(ProgressRing), new PropertyMetadata(OnMaximumChanged));
+            DependencyProperty.Register("Maximum", typeof(double), typeof(ProgressRing), new PropertyMetadata(100.0,OnMaximumChanged));
 
         private static void OnMaximumChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is ProgressRing ring)
             {
-                ring.LodingRing();
+                ring.LoadingView();
             }
         }
         #endregion
-
-
 
         #region Stroke
         /// <summary>
@@ -326,7 +308,6 @@ namespace LeeTeke.WpfControl.Controls
         public static readonly DependencyProperty StrokeProperty =
             DependencyProperty.Register("Stroke", typeof(Brush), typeof(ProgressRing));
         #endregion
-
 
         #region Mode
         /// <summary>
@@ -346,7 +327,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (d is ProgressRing progress)
             {
-                progress.LodingWating();
+                progress.LoadingView();
             }
         }
         #endregion
@@ -416,50 +397,71 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-        private void LodingIntView()
+        /// <summary>
+        /// 加载视图
+        /// </summary>
+        private void LoadingView(bool size = false)
         {
-            try
+            if (size)
             {
-                if (!IsVisible || _outer == null || _orbitBackground == null || _inner == null)
-                    return;
+                ///勿删，用来初始化加载的
+            }
+            else if (!IsLoaded)
+            {
+                return;
+            }
 
-                ///直径 =最小单位-边框厚度
-                var diameter = (this.ActualWidth >= this.ActualHeight ? this.ActualHeight : this.ActualWidth) - BorderThickness;
-                _outer.Data = GetRoundPath(360, diameter / 2, new Point(this.ActualWidth / 2, BorderThickness / 2));
+            if (_outer == null || _orbitBackground == null || _inner == null)
+                return;
 
-                ///背景直径
-                _orbitBackground.StrokeThickness = Thickness + (ThicknessPadding * 2);
-                _backDiameter = diameter - _orbitBackground.StrokeThickness - BorderThickness;
-                _orbitBackground.Data = GetRoundPath(360, _backDiameter / 2, new Point(this.ActualWidth / 2, _orbitBackground.StrokeThickness / 2 + BorderThickness));
-
-                ///加载边框
-                _inner.BorderThickness = new Thickness(BorderThickness);
-                _inner.Height = diameter - _orbitBackground.StrokeThickness * 2 - BorderThickness;
-                _inner.Width = _inner.Height;
-                _inner.CornerRadius = new CornerRadius(_inner.Width / 2);
-
-                switch (Mode)
+            if (size)
+            {
+                ///初始化其它数据
+                try
                 {
-                    case ProgressControlMode.Loding:
-                        LodingRing();
-                        break;
-                    case ProgressControlMode.Wating:
-                        LodingWating();
-                        break;
-                    default:
-                        break;
+                    ///直径 =最小单位-边框厚度
+                    var diameter = (this.ActualWidth >= this.ActualHeight ? this.ActualHeight : this.ActualWidth) - BorderThickness;
+                    _outer.Data = GetRoundPath(360, diameter / 2, new Point(this.ActualWidth / 2, BorderThickness / 2));
+
+                    ///背景直径
+                    _orbitBackground.StrokeThickness = Thickness + (ThicknessPadding * 2);
+                    _backDiameter = diameter - _orbitBackground.StrokeThickness - BorderThickness;
+                    _orbitBackground.Data = GetRoundPath(360, _backDiameter / 2, new Point(this.ActualWidth / 2, _orbitBackground.StrokeThickness / 2 + BorderThickness));
+
+                    ///加载边框
+                    _inner.BorderThickness = new Thickness(BorderThickness);
+                    _inner.Height = diameter - _orbitBackground.StrokeThickness * 2 - BorderThickness;
+                    _inner.Width = _inner.Height;
+                    _inner.CornerRadius = new CornerRadius(_inner.Width / 2);
+                }
+                catch
+                {
                 }
             }
-            catch
-            {
-            }
 
+
+            switch (Mode)
+            {
+                case ProgressControlMode.Loading:
+                    RingMode();
+                    break;
+                case ProgressControlMode.Wating:
+                    WatingModel();
+                    break;
+                default:
+                    break;
+            }
         }
 
-        private void LodingRing()
+
+
+        private void RingMode()
         {
-            if (!IsVisible || Mode != ProgressControlMode.Loding)
+
+            if (!IsVisible || Mode != ProgressControlMode.Loading)
                 return;
+
+            _watingSB?.Stop();
 
             var angel = Value / Maximum * 360;
 
@@ -479,22 +481,23 @@ namespace LeeTeke.WpfControl.Controls
 
         private void ChangeRing(double value)
         {
-            if (Mode == ProgressControlMode.Wating && _wating != null)
-            {
-
-                _wating.Data = GetRoundPath(value, _backDiameter / 2, new Point(this.ActualWidth / 2, _wating.StrokeThickness / 2 + BorderThickness + ThicknessPadding));
-            }
-            else if (_orbit != null)
-            {
+            if (_orbit != null)
                 _orbit.Data = GetRoundPath(value, _backDiameter / 2, new Point(this.ActualWidth / 2, _orbit.StrokeThickness / 2 + BorderThickness + ThicknessPadding));
-            }
+            //if (Mode == ProgressControlMode.Wating && _wating != null)
+            //{
+
+
+            //}
+            //else if (_orbit != null)
+            //{
+            //    _orbit.Data = GetRoundPath(value, _backDiameter / 2, new Point(this.ActualWidth / 2, _orbit.StrokeThickness / 2 + BorderThickness + ThicknessPadding));
+            //}
 
         }
 
-        private void LodingWating()
+        private void WatingModel()
         {
-            if (!IsLoaded || Mode != ProgressControlMode.Wating || Visibility != Visibility.Visible)
-                return;
+
 
             _watingSB?.Stop();
             _watingSB = new Storyboard() { RepeatBehavior = RepeatBehavior.Forever };
@@ -520,9 +523,9 @@ namespace LeeTeke.WpfControl.Controls
             Storyboard.SetTargetProperty(eDA, new PropertyPath(ProgressRing.RingValueProperty));
 
 
-            if (_wating != null)
+            if (_orbit != null)
             {
-                _wating.RenderTransform = new RotateTransform();
+                _orbit.RenderTransform = new RotateTransform();
 
 
                 DoubleAnimationUsingKeyFrames rDA = new DoubleAnimationUsingKeyFrames();
@@ -538,24 +541,14 @@ namespace LeeTeke.WpfControl.Controls
                 });
 
                 _watingSB.Children.Add(rDA);
-                Storyboard.SetTarget(rDA, _wating);
+                Storyboard.SetTarget(rDA, _orbit);
                 Storyboard.SetTargetProperty(rDA, new PropertyPath("(0).(1)", new DependencyProperty[] { Path.RenderTransformProperty, RotateTransform.AngleProperty }));
 
                 _watingSB.Begin();
             }
 
         }
-        private void _wating_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (_wating != null && _wating.IsVisible)
-            {
-                LodingWating();
-            }
-            else
-            {
-                _watingSB?.Stop();
-            }
-        }
+
 
         /// <summary>
         /// 
