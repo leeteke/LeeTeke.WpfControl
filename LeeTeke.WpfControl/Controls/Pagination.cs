@@ -45,7 +45,7 @@ namespace LeeTeke.WpfControl.Controls
     ///     <MyNamespace:Pagination/>
     ///
     /// </summary>
-    [TemplatePart(Name = ElementPageGroup, Type = typeof(ToggleGroup))]
+    [TemplatePart(Name = ElementPageGroup, Type = typeof(ListBox))]
     [TemplatePart(Name = ElementComboBox, Type = typeof(ComboBox))]
     [TemplatePart(Name = ElementPreviousButton, Type = typeof(Button))]
     [TemplatePart(Name = ElementHeadButton, Type = typeof(Button))]
@@ -66,7 +66,7 @@ namespace LeeTeke.WpfControl.Controls
         private const string ElementEndButton = "PART_EndButton";
         #endregion
 
-        private ToggleGroup? _group;
+        private ListBox? _group;
         private Button? _headButton;
         private Button? _endButton;
         private Button? _previousButton;
@@ -96,7 +96,7 @@ namespace LeeTeke.WpfControl.Controls
             base.OnApplyTemplate();
 
 
-            _group = GetTemplateChild(ElementPageGroup) as ToggleGroup;
+            _group = GetTemplateChild(ElementPageGroup) as ListBox;
 
             _previousButton = GetTemplateChild(ElementPreviousButton) as Button;
             _headButton = GetTemplateChild(ElementHeadButton) as Button;
@@ -104,7 +104,7 @@ namespace LeeTeke.WpfControl.Controls
             _endButton = GetTemplateChild(ElementEndButton) as Button;
 
             if (_group != null)
-                _group.SelectionChanged += _group_SelectionChanged;
+                _group.SelectionChanged += _group_SelectionChanged; ;
 
             if (_previousButton != null)
                 _previousButton.Click += _previousButton_Click;
@@ -117,7 +117,48 @@ namespace LeeTeke.WpfControl.Controls
 
         }
 
+        private void _group_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is ListBox group && group.SelectedIndex is int selectedIndex)
+            {
+                if (_headButton != null)
+                    _headButton.IsEnabled = selectedIndex != 0;
 
+                if (_previousButton != null)
+                    _previousButton.IsEnabled = selectedIndex != 0;
+
+                if (_endButton != null)
+                    _endButton.IsEnabled = selectedIndex != _group?.Items.Count - 1;
+
+                if (_nextButton != null)
+                    _nextButton.IsEnabled = selectedIndex != _group?.Items.Count - 1;
+                if (selectedIndex > -1)
+                {
+                    if (group.SelectedValue is int pk)
+                        PageIndex = pk;
+                }
+            }
+        }
+
+        private void _endButton_Click(object sender, RoutedEventArgs e)
+        {
+            PageIndex = this.PageCount;
+        }
+
+        private void _headButton_Click(object sender, RoutedEventArgs e)
+        {
+            PageIndex = 1;
+        }
+
+        private void _nextButton_Click(object sender, RoutedEventArgs e)
+        {
+            PageIndex++;
+        }
+
+        private void _previousButton_Click(object sender, RoutedEventArgs e)
+        {
+            PageIndex--;
+        }
 
 
 
@@ -471,51 +512,8 @@ namespace LeeTeke.WpfControl.Controls
             ViewLoading();
         }
 
-        private void _group_SelectionChanged(object sender, ToggleSelectionChangedEventArgs e)
-        {
-
-            if (sender is ToggleGroup group && group.SelectedIndex is int selectedIndex)
-            {
-                if (_headButton != null)
-                    _headButton.IsEnabled = selectedIndex != 0;
-
-                if (_previousButton != null)
-                    _previousButton.IsEnabled = selectedIndex != 0;
-
-                if (_endButton != null)
-                    _endButton.IsEnabled = selectedIndex != _group?.Items.Count - 1;
-
-                if (_nextButton != null)
-                    _nextButton.IsEnabled = selectedIndex != _group?.Items.Count - 1;
-                if (selectedIndex > -1)
-                {
-                    if (group.SelectedValue is int pk)
-                        PageIndex = pk;
-                }
-            }
-        }
 
 
-
-        private void _endButton_Click(object sender, RoutedEventArgs e)
-        {
-            PageIndex = this.PageCount;
-        }
-
-        private void _headButton_Click(object sender, RoutedEventArgs e)
-        {
-            PageIndex = 1;
-        }
-
-        private void _nextButton_Click(object sender, RoutedEventArgs e)
-        {
-            PageIndex++;
-        }
-
-        private void _previousButton_Click(object sender, RoutedEventArgs e)
-        {
-            PageIndex--;
-        }
         #endregion
 
     }

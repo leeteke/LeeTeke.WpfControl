@@ -102,7 +102,6 @@ namespace LeeTeke.WpfControl.Controls
         private object? _currentValue;
         private Point? _currentPoint;
 
-        private bool _isLoaded = false;
         public Navigation()
         {
 
@@ -116,7 +115,7 @@ namespace LeeTeke.WpfControl.Controls
                 {
                     _items = panel.Children;
 
-                    _isLoaded = true;
+
 
                     if (SelectedIndex != -1)
                     {
@@ -1474,7 +1473,7 @@ namespace LeeTeke.WpfControl.Controls
         /// <param name="item"></param>
         private void ChangeSelectedItem(NavigationItem? item)
         {
-            if (!_isLoaded)
+            if (_items == null)
                 return;
 
             if (item == null)
@@ -1666,7 +1665,7 @@ namespace LeeTeke.WpfControl.Controls
 
             foreach (var item in items)
             {
-                if (item is NavigationItem nav && (nav == dataContext || nav.DataContext == DataContext))
+                if (item is NavigationItem nav && (nav == dataContext || nav.DataContext == dataContext))
                 {
                     return nav;
                 }

@@ -44,6 +44,21 @@ namespace LeeTeke.WPFTest.ViewModels
         }
 
 
+
+        #region 请填写属性名
+        private List<TestListModel> _TestGroupList;
+        /// <summary>
+        /// 请填写属性名
+        /// </summary>
+        public List<TestListModel> TestGroupList
+        {
+            get => _TestGroupList;
+            set => SetProperty(ref _TestGroupList, value);
+        }
+        #endregion
+
+
+
         private List<object> _SelectedList;
         /// <summary>
         /// 请填写属性名
@@ -232,11 +247,20 @@ namespace LeeTeke.WPFTest.ViewModels
             };
 
             Text = "123123123";
+
+            TestGroupList = new List<TestListModel>();
+            TestGroupList.Add(TestList[0]);
+            TestGroupList.Add(TestList[1]);
+            TestGroupList.Add(TestList[2]);
         }
 
 
         private async void TestCommandExecute(object obj)
         {
+
+
+            return;
+
             _ = MessageBoxEx.Show("1", "1", MessageStatus.Question);
             _ = MessageBoxEx.Show("1", "1", MessageStatus.Stop);
             _ = MessageBoxEx.Show("1", "1", MessageStatus.None);

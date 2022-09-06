@@ -83,36 +83,28 @@
                             ToolTip="上一页" />
 
 
-                        <local:ToggleGroup x:Name="PART_PageGroup"
+                        <ListBox x:Name="PART_PageGroup"
                             Grid.Column="2"
                             Height="{TemplateBinding ButtonHeight}"
                             MinWidth="0"
                             MinHeight="0"
                             Margin="0"
                             Padding="0"
-                            VerticalAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            leedep:ListItemManager.Background="{TemplateBinding Background}"
+                            leedep:ListItemManager.BorderBrush="{TemplateBinding BorderBrush}"
+                            leedep:ListItemManager.BorderThickness="{TemplateBinding BorderThickness}"
+                            leedep:ListItemManager.CornerRadius="{TemplateBinding CornerRadius}"
+                            leedep:ListItemManager.Marigin="{TemplateBinding ButtonMargin}"
+                            leedep:ListItemManager.MinHeight="0"
+                            leedep:ListItemManager.MinWidth="{TemplateBinding ButtonWidth}"
+                            leedep:ListManager.Orientation="Horizontal"
+                            Background="{x:Null}"
                             BorderThickness="0"
-                            HorizontalScrollBarVisibility="Disabled"
-                            ItemBackground="{TemplateBinding Background}"
-                            ItemMargin="{TemplateBinding ButtonMargin}"
-                            ItemPadding="0"
-                            SelectedMinimum="1"
-                            SelectionMode="Single">
-                            <local:ToggleGroup.ItemTemplate>
-                                <DataTemplate>
-                                    <Border Width="{Binding RelativeSource={RelativeSource AncestorType=local:Pagination}, Path=ButtonWidth, Mode=OneWay}" BorderThickness="0">
-                                        <TextBlock
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            Text="{Binding}" />
-                                    </Border>
-
-                                </DataTemplate>
-                            </local:ToggleGroup.ItemTemplate>
-
-
-                        </local:ToggleGroup>
-
+                            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                            ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                            Style="{StaticResource LeeListBox}" />
 
 
                         <Button x:Name="PART_NextButton"

@@ -55,7 +55,10 @@
                     </ContextMenu>
                 </StackPanel.ContextMenu>
 
-                <leecontrol:GridView ItemsSource="{Binding TestList}" ItemClickedCommand="{Binding TestCommand}" RenderOptions.BitmapScalingMode="HighQuality" >
+                <leecontrol:GridView
+                    ItemsSource="{Binding TestList}"
+                    RenderOptions.BitmapScalingMode="HighQuality"
+                    ItemClickedCommand="{Binding TestCommand}">
                     <leecontrol:GridView.NoItemsContent>
                         <TextBlock
                             HorizontalAlignment="Center"
@@ -95,13 +98,14 @@
 
                 <TextBox Width="150" />
 
-                <leecontrol:Navigation
+                <leecontrol:Navigation x:Name="navi"
                     CanItemDisplacement="True"
                     CloseVisibly="MouseOver"
                     IsScrollToSelected="True"
                     ItemContxtMenuContentDock="Bottom"
                     ItemsSource="{Binding TestList}"
                     Orientation="Horizontal"
+                    SelectedValue="{Binding SelectedData}"
                     ShowScrollToButton="True"
                     ItemClosedCommand="{Binding ItemClosedCommand}">
                     <leecontrol:Navigation.ItemContxtMenuContent>
@@ -382,22 +386,6 @@
 
 
 
-                <leecontrol:ToggleGroup
-                    Margin="5"
-                    ItemsSource="{Binding TestList}"
-                    SelectedMaximum="5"
-                    SelectedMinimum="2"
-                    SelectionMode="Multiple"
-                    SelectionAlertedCommand="{Binding ToggleButtonCommand}">
-                    <leecontrol:ToggleGroup.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Text="{Binding Title}" />
-                        </DataTemplate>
-                    </leecontrol:ToggleGroup.ItemTemplate>
-                </leecontrol:ToggleGroup>
 
 
 
@@ -425,14 +413,14 @@
                     Height="10"
                     BorderBrush="{DynamicResource LeeBrush_BorderBrush}"
                     BorderThickness="1"
-                    Mode="Loding"
+                    Mode="Loading"
                     Value="{Binding ElementName=slider, Path=Value}" />
                 <leecontrol:ProgressRing
                     Width="80"
                     Height="80"
                     Background="{DynamicResource LeeBrush_ForgroundActive}"
                     BorderThickness="1"
-                    Mode="Loding"
+                    Mode="Loading"
                     Thickness="8"
                     Value="{Binding ElementName=slider, Path=Value}">
                     <TextBlock Text="{Binding ElementName=slider, Path=Value}" />

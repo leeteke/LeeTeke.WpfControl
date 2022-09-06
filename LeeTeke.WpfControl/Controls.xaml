@@ -10,7 +10,6 @@
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/NotifyIconEx.xaml" />
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/RippleMask.xaml" />
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/SlideView.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/ToggleGroup.xaml" />
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/TextBoxEx.xaml" />
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/NotifyBanner.xaml" />
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/ScrollBanner.xaml" />
@@ -36,7 +35,7 @@
     <Style BasedOn="{StaticResource BaseSlideView}" TargetType="{x:Type local:SlideView}" />
     <Style BasedOn="{StaticResource BaseSlideViewItem}" TargetType="{x:Type local:SlideViewItem}" />
     <Style BasedOn="{StaticResource BaseTextBoxEx}" TargetType="{x:Type local:TextBoxEx}" />
-    <Style BasedOn="{StaticResource BaseToggleGroup}" TargetType="{x:Type local:ToggleGroup}" />
+
     <Style BasedOn="{StaticResource BaseMaskPanel}" TargetType="{x:Type local:MaskPanel}" />
     <Style BasedOn="{StaticResource BaseWindow}" TargetType="{x:Type local:Window}" />
 

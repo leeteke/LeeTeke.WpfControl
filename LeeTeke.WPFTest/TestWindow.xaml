@@ -77,11 +77,6 @@
 
 
 
-            <lee:ToggleGroup>
-                <ToggleButton Content="nihao " />
-                <ToggleButton Content="nihao " />
-                <ToggleButton Content="nihao " />
-            </lee:ToggleGroup>
 
         </StackPanel>
 
@@ -93,7 +88,7 @@
             Grid.Row="1"
             Width="100"
             Height="100"
-            Effect="{DynamicResource  LeeShadow5}"
+            Effect="{DynamicResource LeeShadow5}"
             Maximum="20"
             Mode="Wating"
             Thickness="8"
@@ -129,8 +124,10 @@
 
         <lee:Pagination
             Grid.Row="2"
+            Background="Transparent"
+            BorderThickness="0"
             DisplayPages="4"
-            PageCount="2"
+            PageCount="15"
             PageIndex="1" />
 
     </Grid>
