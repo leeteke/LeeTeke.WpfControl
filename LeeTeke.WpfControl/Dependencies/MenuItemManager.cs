@@ -166,7 +166,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
         // Using a DependencyProperty as the backing store for SubCornerRadius.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SubCornerRadiusProperty =
-            DependencyProperty.RegisterAttached("SubCornerRadius", typeof(CornerRadius), typeof(MenuItemManager));
+            DependencyProperty.RegisterAttached("SubCornerRadius", typeof(CornerRadius), typeof( MenuItemManager));
         #endregion
 
         #region SubIsClip

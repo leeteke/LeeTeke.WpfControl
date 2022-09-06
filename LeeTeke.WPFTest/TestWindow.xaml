@@ -27,21 +27,25 @@
                         <MenuItem Header="ceshi" />
                         <MenuItem Header="ceshi" />
                         <MenuItem Header="ceshi" />
-                        <MenuItem Header="ceshi" />
-                        <MenuItem Header="ceshi" />
-                        <MenuItem Header="ceshi" />
-                        <MenuItem Header="ceshi" />
-                        <MenuItem Header="ceshi" />
-                        <MenuItem Header="ceshi" />
                     </MenuItem>
                 </MenuItem>
 
                 <MenuItem Header="ceshi(_C)" />
 
+                <leedep:ContextMenuManager.Content>
+                    <MenuItem Header="nihao " IsSubmenuOpen="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsMouseOver, Mode=OneWay}">
+                        <MenuItem Header="1" />
+                        <MenuItem Header="2" />
+                    </MenuItem>
+
+                </leedep:ContextMenuManager.Content>
+
+
             </ContextMenu>
         </Grid.ContextMenu>
         <Grid.RowDefinitions>
             <RowDefinition Height="35" />
+
             <RowDefinition Height="*" />
             <RowDefinition Height="35" />
         </Grid.RowDefinitions>
@@ -56,24 +60,17 @@
                 Content="清除"
                 Command="{Binding ClearCommand}" />
 
-            <ComboBox
-                Width="180"
-                IsEditable="False"
-                IsReadOnly="True" />
 
-
-            <TextBox Width="150" />
-
-            <Menu VerticalAlignment="Center">
-                <MenuItem Header="测试专栏">
-                    <MenuItem
-                        leedep:MenuItemManager.CheckedBackground="{DynamicResource LeeBrush_BlueOutlook}"
-                        Header="1"
-                        IsCheckable="True" />
-                </MenuItem>
-
-
-            </Menu>
+            <lee:Navigation Width="500" Background="Red">
+                <lee:NavigationItem Content="你好" />
+                <lee:NavigationItem Content="你好1" />
+                <lee:NavigationItem Content="你好2" />
+                <lee:Navigation.ItemContxtMenuContent>
+                    <MenuItem Header="测试" IsSubmenuOpen="{Binding RelativeSource={RelativeSource Mode=Self}, Mode=OneWay, Path=IsMouseOver}">
+                        <MenuItem Header="ceshi2" />
+                    </MenuItem>
+                </lee:Navigation.ItemContxtMenuContent>
+            </lee:Navigation>
 
 
 
@@ -84,15 +81,7 @@
 
         <GroupBox Grid.Row="1" Header="123" />
 
-        <lee:ProgressRing
-            Grid.Row="1"
-            Width="100"
-            Height="100"
-            Effect="{DynamicResource LeeShadow5}"
-            Maximum="20"
-            Mode="Wating"
-            Thickness="8"
-            Value="30" />
+
 
         <!--<DataGrid
             Grid.Row="1"
@@ -128,7 +117,7 @@
             BorderThickness="0"
             DisplayPages="4"
             PageCount="15"
-            PageIndex="1" />
+            PageIndex="2" />
 
     </Grid>
 </Window>

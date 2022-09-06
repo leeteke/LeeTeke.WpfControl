@@ -2607,14 +2607,14 @@
                                 Margin="{TemplateBinding Padding}"
                                 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                leedep:TextBoxManager.EnterCommand="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.EnterCommand), Mode=OneWay}"
                                 leedep:TextBoxManager.EscToEmpty="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.EscToEmpty), Mode=OneWay}"
                                 BorderThickness="0"
                                 FontSize="{TemplateBinding FontSize}"
                                 FontWeight="{TemplateBinding FontWeight}"
                                 Foreground="{TemplateBinding Foreground}"
                                 Style="{StaticResource ComboBoxEditableTextBox}"
-                                Visibility="Collapsed" />
+                                Visibility="Collapsed"
+                                leedep:TextBoxManager.EnterCommand="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.EnterCommand), Mode=OneWay}" />
 
                             <TextBlock x:Name="prviewText"
                                 HorizontalAlignment="Center"
@@ -2745,16 +2745,18 @@
         <Setter Property="MinHeight" Value="{DynamicResource LeeItemMinHeight}" />
         <Setter Property="MinWidth" Value="{DynamicResource LeeItemMinWidth}" />
         <Setter Property="Padding" Value="2" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="leedep:MenuItemManager.IconFontFamily" Value="{DynamicResource IconFontFamily}" />
         <Setter Property="leedep:MenuItemManager.IconFontSize" Value="12" />
         <Setter Property="leedep:MenuItemManager.RippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}" />
         <Setter Property="leedep:MenuItemManager.IconMinWidth" Value="30" />
+        <Setter Property="leedep:MenuItemManager.SubCornerRadius" Value="{DynamicResource LeeCornerRadius}" />
         <Setter Property="leedep:MenuItemManager.HighlightedBackground" Value="{DynamicResource LeeBrush_Mark}" />
         <Setter Property="leedep:MenuItemManager.HighlightedForeground" Value="{DynamicResource LeeBrush_Text}" />
         <Setter Property="leedep:MenuItemManager.CheckedBackground" Value="{DynamicResource LeeBrush_Theme}" />
         <Setter Property="leedep:MenuItemManager.CheckedBackground" Value="{DynamicResource LeeBrush_ThemeForeground}" />
         <Setter Property="leedep:MenuItemManager.SubBackground" Value="{DynamicResource LeeBrush_Forground}" />
-        <Setter Property="leedep:MenuItemManager.SubCornerRadius" Value="{DynamicResource LeeCornerRadius}" />
         <Setter Property="leedep:MenuItemManager.SubIsClip" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -2817,7 +2819,7 @@
                                     <ScrollViewer x:Name="PART_Scroll"
                                         MaxHeight="600"
                                         Padding="{Binding Path=(leedep:MenuItemManager.SubPadding), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
-                                        leedep:CornerRadiusManager.CornerRadius="{Binding (leedep:MenuItemManager.SubCornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
+                                        leedep:CornerRadiusManager.CornerRadius="{Binding Path=(leedep:MenuItemManager.SubCornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                                         leedep:CornerRadiusManager.IsClip="{Binding Path=(leedep:MenuItemManager.SubIsClip), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                                         Background="{Binding Path=(leedep:MenuItemManager.SubBackground), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                                         BorderBrush="{Binding Path=(leedep:MenuItemManager.SubBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
@@ -2876,7 +2878,6 @@
                         <Trigger Property="Role" Value="SubmenuItem">
                             <Setter TargetName="PART_Path" Property="Visibility" Value="Collapsed" />
                         </Trigger>
-
 
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="{DynamicResource UnEnableOpacity}" />
@@ -5866,6 +5867,8 @@
 
     <Style BasedOn="{StaticResource LeeSeparator}" TargetType="Separator" />
 
+    <Style BasedOn="{StaticResource LeeMenuItem}" TargetType="MenuItem" />
+
     <Style BasedOn="{StaticResource LeeMenu}" TargetType="Menu" />
     <Style BasedOn="{StaticResource LeeContextMenu}" TargetType="ContextMenu" />
 
@@ -5876,6 +5879,7 @@
     <Style BasedOn="{StaticResource LeeListBox}" TargetType="ListBox" />
 
     <Style BasedOn="{StaticResource LeeGridViewColumnHeader}" TargetType="GridViewColumnHeader" />
+
     <Style BasedOn="{StaticResource LeeListView}" TargetType="ListView" />
 
     <Style BasedOn="{StaticResource LeeDataGrid}" TargetType="DataGrid" />

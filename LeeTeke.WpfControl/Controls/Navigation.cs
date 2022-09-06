@@ -340,18 +340,7 @@ namespace LeeTeke.WpfControl.Controls
             }
             if (_contextMenu != null)
             {
-                _contextMenu.SetBinding(Dependencies.ContextMenuManager.ContentDockProperty, new Binding()
-                {
-                    Source = this,
-                    Path = new PropertyPath(Navigation.ItemContxtMenuContentDockProperty),
-                    Mode = BindingMode.OneWay,
-                });
-                _contextMenu.SetBinding(Dependencies.ContextMenuManager.ContentProperty, new Binding()
-                {
-                    Source = this,
-                    Path = new PropertyPath(Navigation.ItemContxtMenuContentProperty),
-                    Mode = BindingMode.OneWay,
-                });
+          
                 _contextMenu.Closed += _contextMenu_Closed;
             }
             if (_allMenuItem != null)

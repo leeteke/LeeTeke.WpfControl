@@ -138,14 +138,9 @@
                     ScrollViewer.VerticalScrollBarVisibility="Visible"
                     ShowScrollToButton="True">
                     <leecontrol:Navigation.ItemContxtMenuContent>
-                        <Grid Height="100">
-                            <Rectangle
-                                Width="50"
-                                Height="50"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Fill="Red" />
-                        </Grid>
+                        <StackPanel Height="100">
+                            <MenuItem Header="ceshi" />
+                        </StackPanel>
                     </leecontrol:Navigation.ItemContxtMenuContent>
 
                     <leecontrol:Navigation.ItemTemplate>
