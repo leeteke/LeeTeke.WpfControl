@@ -287,10 +287,7 @@ namespace LeeTeke.WpfControl.Controls
             {
                 _rightBtn.Click -= _rightBtn_Click;
             }
-            if (_contextMenu != null)
-            {
-                _contextMenu.Closed -= _contextMenu_Closed;
-            }
+         
             if (_allMenuItem != null)
             {
                 _allMenuItem.Click -= _allMenuItem_Click;
@@ -338,11 +335,7 @@ namespace LeeTeke.WpfControl.Controls
             {
                 _rightBtn.Click += _rightBtn_Click;
             }
-            if (_contextMenu != null)
-            {
-          
-                _contextMenu.Closed += _contextMenu_Closed;
-            }
+         
             if (_allMenuItem != null)
             {
                 _allMenuItem.Click += _allMenuItem_Click;
@@ -1015,11 +1008,7 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
 
-        private void _contextMenu_Closed(object? sender, RoutedEventArgs e)
-        {
-            if (_contextMenu != null)
-                _contextMenu.DataContext = this.DataContext;
-        }
+     
 
         private void _allMenuItem_Click(object? sender, RoutedEventArgs e)
         {
