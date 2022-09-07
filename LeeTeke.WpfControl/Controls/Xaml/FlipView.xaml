@@ -9,19 +9,19 @@
 
     </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="BaseSlideViewItem" TargetType="{x:Type local:SlideViewItem}">
+    <Style x:Key="BaseFlipViewItem" TargetType="{x:Type local:FlipViewItem}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
 
-        <Setter Property="Width"  Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:SlideView},AncestorLevel=1},Path=ItemWidth ,Mode=OneWay}"/>
-        <Setter Property="Height" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:SlideView},AncestorLevel=1},Path=ItemHeight,Mode=OneWay}"/>
+        <Setter Property="Width"  Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:FlipView},AncestorLevel=1},Path=ItemWidth ,Mode=OneWay}"/>
+        <Setter Property="Height" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:FlipView},AncestorLevel=1},Path=ItemHeight,Mode=OneWay}"/>
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:SlideViewItem}" >
+                <ControlTemplate TargetType="{x:Type local:FlipViewItem}" >
                     <ContentPresenter x:Name="contentPresenter" 
                                               TextElement.Foreground="{TemplateBinding Foreground}"
                                               />
@@ -30,7 +30,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="BaseSlideView" TargetType="{x:Type local:SlideView}">
+    <Style x:Key="BaseFlipView" TargetType="{x:Type local:FlipView}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -53,7 +53,7 @@
         <Setter Property="IsCycle" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:SlideView}">
+                <ControlTemplate TargetType="{x:Type local:FlipView}">
                     <ScrollViewer x:Name="PART_ScrollViewer"   
                                       Background="{TemplateBinding Background}"
                                       BorderBrush="{TemplateBinding BorderBrush}"
@@ -82,7 +82,7 @@
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="{Binding Orientation,  RelativeSource={ RelativeSource Mode=FindAncestor,AncestorType={x:Type local:SlideView},AncestorLevel=1},Mode=OneWay}"/>
+                    <StackPanel Orientation="{Binding Orientation,  RelativeSource={ RelativeSource Mode=FindAncestor,AncestorType={x:Type local:FlipView},AncestorLevel=1},Mode=OneWay}"/>
                 </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>

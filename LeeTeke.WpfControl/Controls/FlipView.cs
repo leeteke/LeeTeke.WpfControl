@@ -44,44 +44,44 @@ namespace LeeTeke.WpfControl.Controls
     /// 步骤 2)
     /// 继续操作并在 XAML 文件中使用控件。
     ///
-    ///     <MyNamespace:SlideView/>
+    ///     <MyNamespace:FlipView/>
     ///
     /// </summary>
-    [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(SlideViewItem))]
+    [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(FlipViewItem))]
     [TemplatePart(Name = ElementScrollViewer, Type = typeof(ScrollViewer))]
-    public class SlideView : ItemsControl
+    public class FlipView : ItemsControl
     {
-        static SlideView()
+        static FlipView()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(SlideView), new FrameworkPropertyMetadata(typeof(SlideView)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(FlipView), new FrameworkPropertyMetadata(typeof(FlipView)));
         }
 
         private const string ElementScrollViewer = "PART_ScrollViewer";
         private ScrollViewer? _scrollViewer;
         private DispatcherTimer? _autoPalyTime;
-        public SlideView()
+        public FlipView()
         {
-            EventManager.RegisterClassHandler(typeof(SlideViewItem), SlideViewItem.MouseLeftButtonUpEvent, new RoutedEventHandler(ItemMouseLeftButtonUpEvent));
-            PreviewMouseWheel += SlideView_PreviewMouseWheel;
-            PreviewKeyDown += SlideView_PreviewKeyDown;
-            IsVisibleChanged += SlideView_IsVisibleChanged;
-            Loaded += SlideView_Loaded;
-            SizeChanged += SlideView_SizeChanged;
+            EventManager.RegisterClassHandler(typeof(FlipViewItem), FlipViewItem.MouseLeftButtonUpEvent, new RoutedEventHandler(ItemMouseLeftButtonUpEvent));
+            PreviewMouseWheel += FlipView_PreviewMouseWheel;
+            PreviewKeyDown += FlipView_PreviewKeyDown;
+            IsVisibleChanged += FlipView_IsVisibleChanged;
+            Loaded += FlipView_Loaded;
+            SizeChanged += FlipView_SizeChanged;
         }
 
-        private void SlideView_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void FlipView_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ItemWidth=this.ActualWidth-this.BorderThickness.Left- this.BorderThickness.Right;
             ItemHeight=this.ActualHeight-this.BorderThickness.Top- this.BorderThickness.Bottom;
             ToIndex(CurrentIndex);
         }
 
-        private void SlideView_Loaded(object sender, RoutedEventArgs e)
+        private void FlipView_Loaded(object sender, RoutedEventArgs e)
         {
             SetAutoPaly(AutoPaly);
         }
 
-        private void SlideView_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void FlipView_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (IsVisible)
             {
@@ -113,12 +113,12 @@ namespace LeeTeke.WpfControl.Controls
         #region override
         protected override bool IsItemItsOwnContainerOverride(object item)
         {
-            return item is SlideViewItem;
+            return item is FlipViewItem;
         }
 
         protected override DependencyObject GetContainerForItemOverride()
         {
-            return new SlideViewItem();
+            return new FlipViewItem();
         }
 
         public override void OnApplyTemplate()
@@ -145,7 +145,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for CornerRadius.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CornerRadiusProperty =
-            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(SlideView));
+            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(FlipView));
         #endregion
 
 
@@ -161,7 +161,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for IsClip.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsClipProperty =
-            DependencyProperty.Register("IsClip", typeof(bool), typeof(SlideView));
+            DependencyProperty.Register("IsClip", typeof(bool), typeof(FlipView));
         #endregion
 
 
@@ -178,7 +178,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for Orientation.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty OrientationProperty =
-            DependencyProperty.Register("Orientation", typeof(Orientation), typeof(SlideView));
+            DependencyProperty.Register("Orientation", typeof(Orientation), typeof(FlipView));
 
 
         #endregion
@@ -195,7 +195,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for CurrentValue.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CurrentValueProperty =
-            DependencyProperty.Register("CurrentValue", typeof(object), typeof(SlideView), new PropertyMetadata(null));
+            DependencyProperty.Register("CurrentValue", typeof(object), typeof(FlipView), new PropertyMetadata(null));
 
         #endregion
 
@@ -212,7 +212,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for CurrentIndex.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CurrentIndexProperty =
-            DependencyProperty.Register("CurrentIndex", typeof(int), typeof(SlideView), new PropertyMetadata(0));
+            DependencyProperty.Register("CurrentIndex", typeof(int), typeof(FlipView), new PropertyMetadata(0));
 
         #endregion
 
@@ -229,11 +229,11 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for Interval.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IntervalProperty =
-            DependencyProperty.Register("Interval", typeof(int), typeof(SlideView), new PropertyMetadata(OnIntervalChanged));
+            DependencyProperty.Register("Interval", typeof(int), typeof(FlipView), new PropertyMetadata(OnIntervalChanged));
 
         private static void OnIntervalChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is SlideView control && e.OldValue != e.NewValue)
+            if (d is FlipView control && e.OldValue != e.NewValue)
             {
                 control.SetAutoPaly(control.AutoPaly);
             }
@@ -254,11 +254,11 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for AutoPaly.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty AutoPalyProperty =
-            DependencyProperty.Register("AutoPaly", typeof(bool), typeof(SlideView), new PropertyMetadata(new PropertyChangedCallback(AutoPalyChanged)));
+            DependencyProperty.Register("AutoPaly", typeof(bool), typeof(FlipView), new PropertyMetadata(new PropertyChangedCallback(AutoPalyChanged)));
 
         private static void AutoPalyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is SlideView control && e.OldValue != e.NewValue)
+            if (d is FlipView control && e.OldValue != e.NewValue)
             {
                 control.SetAutoPaly((bool)e.NewValue);
             }
@@ -285,7 +285,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for TransitionDuration.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DurationProperty =
-            DependencyProperty.Register("Duration", typeof(Duration), typeof(SlideView));
+            DependencyProperty.Register("Duration", typeof(Duration), typeof(FlipView));
 
 
         #endregion
@@ -304,7 +304,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for TransitionEasing.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty EasingFunctionProperty =
-            DependencyProperty.Register("EasingFunction", typeof(IEasingFunction), typeof(SlideView));
+            DependencyProperty.Register("EasingFunction", typeof(IEasingFunction), typeof(FlipView));
 
 
 
@@ -319,7 +319,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for IsCycle.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsCycleProperty =
-            DependencyProperty.Register("IsCycle", typeof(bool), typeof(SlideView));
+            DependencyProperty.Register("IsCycle", typeof(bool), typeof(FlipView));
 
         #endregion
 
@@ -334,7 +334,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemClickCommand.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemClickCommandProperty =
-            DependencyProperty.Register("ItemClickCommand", typeof(ICommand), typeof(SlideView), new PropertyMetadata(default));
+            DependencyProperty.Register("ItemClickCommand", typeof(ICommand), typeof(FlipView), new PropertyMetadata(default));
 
         #endregion
 
@@ -352,7 +352,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemWidth.  This enables animation, styling, binding, etc...
         internal static readonly DependencyProperty ItemWidthProperty =
-            DependencyProperty.Register("ItemWidth", typeof(double), typeof(SlideView));
+            DependencyProperty.Register("ItemWidth", typeof(double), typeof(FlipView));
         #endregion
 
 
@@ -369,7 +369,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for ItemHeight.  This enables animation, styling, binding, etc...
         internal static readonly DependencyProperty ItemHeightProperty =
-            DependencyProperty.Register("ItemHeight", typeof(double), typeof(SlideView));
+            DependencyProperty.Register("ItemHeight", typeof(double), typeof(FlipView));
         #endregion
 
 
@@ -383,19 +383,19 @@ namespace LeeTeke.WpfControl.Controls
         /// <summary>
         /// 请填写描述
         /// </summary>
-        public event SlideViewItemClickedEventHandler ItemClicked
+        public event FlipViewItemClickedEventHandler ItemClicked
         {
             add { AddHandler(ItemClickedEvent, value); }
             remove { RemoveHandler(ItemClickedEvent, value); }
         }
 
         public static readonly RoutedEvent ItemClickedEvent = EventManager.RegisterRoutedEvent(
-        "ItemClicked", RoutingStrategy.Bubble, typeof(SlideViewItemClickedEventHandler), typeof(SlideView));
+        "ItemClicked", RoutingStrategy.Bubble, typeof(FlipViewItemClickedEventHandler), typeof(FlipView));
 
 
         private void RaiseItemClicked(object newValue)
         {
-            var arg = new SlideViewItemClickedEventArgs(newValue, ItemClickedEvent);
+            var arg = new FlipViewItemClickedEventArgs(newValue, ItemClickedEvent);
             RaiseEvent(arg);
         }
 
@@ -482,7 +482,7 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
 
-        private void SlideView_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        private void FlipView_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             e.Handled = true;
             if (e.Delta > 0)
@@ -495,7 +495,7 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
 
-        private void SlideView_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void FlipView_PreviewKeyDown(object sender, KeyEventArgs e)
         {
 
             switch (e.Key)
@@ -519,7 +519,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private void ItemMouseLeftButtonUpEvent(object sender, RoutedEventArgs e)
         {
-            if (sender is SlideViewItem content && StaticMethods.IsInControl(this, content))
+            if (sender is FlipViewItem content && StaticMethods.IsInControl(this, content))
             {
                 try
                 {

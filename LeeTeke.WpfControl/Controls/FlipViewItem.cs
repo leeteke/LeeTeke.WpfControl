@@ -41,14 +41,14 @@ namespace LeeTeke.WpfControl.Controls
     /// 步骤 2)
     /// 继续操作并在 XAML 文件中使用控件。
     ///
-    ///     <MyNamespace:SlideViewItem/>
+    ///     <MyNamespace:FlipViewItem/>
     ///
     /// </summary>
-    public class SlideViewItem : ContentControl
+    public class FlipViewItem : ContentControl
     {
-        static SlideViewItem()
+        static FlipViewItem()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(SlideViewItem), new FrameworkPropertyMetadata(typeof(SlideViewItem)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(FlipViewItem), new FrameworkPropertyMetadata(typeof(FlipViewItem)));
         }
 
     }

@@ -7,14 +7,14 @@ using System.Windows;
 
 namespace LeeTeke.WpfControl
 {
-    public class SlideViewItemClickedEventArgs:RoutedEventArgs
+    public class FlipViewItemClickedEventArgs:RoutedEventArgs
     {
         public object Item { get;  }
-        public SlideViewItemClickedEventArgs(object item,RoutedEvent routedEvent):base(routedEvent)
+        public FlipViewItemClickedEventArgs(object item,RoutedEvent routedEvent):base(routedEvent)
         {
             Item = item;
         }
     }
 
-    public delegate void SlideViewItemClickedEventHandler(object sender, SlideViewItemClickedEventArgs e);
+    public delegate void FlipViewItemClickedEventHandler(object sender, FlipViewItemClickedEventArgs e);
 }

@@ -425,7 +425,7 @@
                 <GroupBox leedep:GroupBoxManager.BorderMode="External" Header="123">
 
 
-                    <leecontrol:SlideView
+                    <leecontrol:FlipView
                         Height="200"
                         Margin="50"
                         AutoPaly="True"
@@ -433,7 +433,7 @@
                         CornerRadius="6"
                         IsCycle="True"
                         Orientation="Horizontal">
-                        <leecontrol:SlideViewItem>
+                        <leecontrol:FlipViewItem>
                             <Border Background="{DynamicResource LeeBrush_BlueOutlook}" BorderThickness="0">
                                 <TextBlock
                                     HorizontalAlignment="Center"
@@ -441,9 +441,9 @@
                                     Opacity="0.7"
                                     Text="加载中" />
                             </Border>
-                        </leecontrol:SlideViewItem>
+                        </leecontrol:FlipViewItem>
 
-                        <leecontrol:SlideViewItem>
+                        <leecontrol:FlipViewItem>
                             <Border Background="Red" BorderThickness="0">
                                 <TextBlock
                                     HorizontalAlignment="Center"
@@ -451,9 +451,9 @@
                                     Opacity="0.7"
                                     Text="加载中" />
                             </Border>
-                        </leecontrol:SlideViewItem>
+                        </leecontrol:FlipViewItem>
 
-                        <leecontrol:SlideViewItem>
+                        <leecontrol:FlipViewItem>
                             <Border Background="Green" BorderThickness="0">
                                 <TextBlock
                                     HorizontalAlignment="Center"
@@ -461,7 +461,7 @@
                                     Opacity="0.7"
                                     Text="加载中" />
                             </Border>
-                        </leecontrol:SlideViewItem>
+                        </leecontrol:FlipViewItem>
                         <!--<leecontrol:SlideView.ItemTemplate>
                         <DataTemplate>
                             <Image Source="{Binding Image}"
@@ -469,7 +469,7 @@
                         </DataTemplate>
                     </leecontrol:SlideView.ItemTemplate>-->
 
-                    </leecontrol:SlideView>
+                    </leecontrol:FlipView>
 
                 </GroupBox>
 

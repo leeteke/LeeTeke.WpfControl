@@ -452,54 +452,54 @@
             请添加描述
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.SlideView" -->
-        <member name="P:LeeTeke.WpfControl.Controls.SlideView.Count">
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.FlipView" -->
+        <member name="P:LeeTeke.WpfControl.Controls.FlipView.Count">
             <summary>
             总数量
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.SlideView.Orientation">
+        <member name="P:LeeTeke.WpfControl.Controls.FlipView.Orientation">
             <summary>
             方向
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.SlideView.CurrentValue">
+        <member name="P:LeeTeke.WpfControl.Controls.FlipView.CurrentValue">
             <summary>
             当前值
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.SlideView.CurrentIndex">
+        <member name="P:LeeTeke.WpfControl.Controls.FlipView.CurrentIndex">
             <summary>
             当前值下表
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.SlideView.Interval">
+        <member name="P:LeeTeke.WpfControl.Controls.FlipView.Interval">
             <summary>
             自动轮播间隔时间
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.SlideView.TransitionDuration">
+        <member name="P:LeeTeke.WpfControl.Controls.FlipView.TransitionDuration">
             <summary>
             过渡动画延迟
             </summary>
         </member>
-        <member name="P:LeeTeke.WpfControl.Controls.SlideView.TransitionEasing">
+        <member name="P:LeeTeke.WpfControl.Controls.FlipView.TransitionEasing">
             <summary>
             过度动画
             </summary>
         </member>
-        <member name="E:LeeTeke.WpfControl.Controls.SlideView.ItemClicked">
+        <member name="E:LeeTeke.WpfControl.Controls.FlipView.ItemClicked">
             <summary>
             请填写描述
             </summary>
         </member>
-        <member name="M:LeeTeke.WpfControl.Controls.SlideView.ToIndex(System.Int32)">
+        <member name="M:LeeTeke.WpfControl.Controls.FlipView.ToIndex(System.Int32)">
             <summary>
             去选项
             </summary>
             <param name="index"></param>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.SlideViewItem" -->
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.FlipViewItem" -->
         <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.SwitchButton" -->
         <member name="E:LeeTeke.WpfControl.Controls.SwitchButton.SwitchChanged">
             <summary>

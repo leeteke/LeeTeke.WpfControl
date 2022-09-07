@@ -9,7 +9,7 @@
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/ProgressRing.xaml" />
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/NotifyIconEx.xaml" />
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/RippleMask.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/SlideView.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/FlipView.xaml" />
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/TextBoxEx.xaml" />
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/NotifyBanner.xaml" />
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/ScrollBanner.xaml" />
@@ -32,8 +32,8 @@
     <Style BasedOn="{StaticResource BaseProgressRing}" TargetType="{x:Type local:ProgressRing}" />
     <Style BasedOn="{StaticResource BaseRippleMask}" TargetType="{x:Type local:RippleMask}" />
     <Style BasedOn="{StaticResource BaseScrollBanner}" TargetType="{x:Type local:ScrollBanner}" />
-    <Style BasedOn="{StaticResource BaseSlideView}" TargetType="{x:Type local:SlideView}" />
-    <Style BasedOn="{StaticResource BaseSlideViewItem}" TargetType="{x:Type local:SlideViewItem}" />
+    <Style BasedOn="{StaticResource BaseFlipView}" TargetType="{x:Type local:FlipView}" />
+    <Style BasedOn="{StaticResource BaseFlipViewItem}" TargetType="{x:Type local:FlipViewItem}" />
     <Style BasedOn="{StaticResource BaseTextBoxEx}" TargetType="{x:Type local:TextBoxEx}" />
 
     <Style BasedOn="{StaticResource BaseMaskPanel}" TargetType="{x:Type local:MaskPanel}" />
