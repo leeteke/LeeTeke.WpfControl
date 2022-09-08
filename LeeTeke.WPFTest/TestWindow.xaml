@@ -59,21 +59,7 @@
                 Width="50"
                 Content="清除"
                 Command="{Binding ClearCommand}" />
-
-
-            <lee:Navigation
-                Width="500"
-                leedep:ClipManager.CornerRadius="8"
-                Background="Red">
-                <lee:NavigationItem Content="你好" />
-                <lee:NavigationItem Content="你好1" />
-                <lee:NavigationItem Content="你好2" />
-                <lee:Navigation.ItemContxtMenuContent>
-                    <MenuItem Header="测试" IsSubmenuOpen="{Binding RelativeSource={RelativeSource Mode=Self}, Mode=OneWay, Path=IsMouseOver}">
-                        <MenuItem Header="ceshi2" />
-                    </MenuItem>
-                </lee:Navigation.ItemContxtMenuContent>
-            </lee:Navigation>
+            <ComboBox Height="20" MinHeight="0"></ComboBox>
 
 
 

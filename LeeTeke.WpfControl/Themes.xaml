@@ -2597,6 +2597,8 @@
                                 ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
                                 IsHitTestVisible="false" />
                             <ToggleButton x:Name="toggleButton"
+                                MinWidth="0"
+                                MinHeight="0"
                                 Padding="0,0,5,0"
                                 HorizontalContentAlignment="Right"
                                 Background="Transparent"
@@ -2604,6 +2606,8 @@
                                 IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                 Style="{StaticResource RotateToggleButton}" />
                             <TextBox x:Name="PART_EditableTextBox"
+                                MinWidth="0"
+                                MinHeight="0"
                                 Margin="{TemplateBinding Padding}"
                                 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -2617,6 +2621,7 @@
                                 leedep:TextBoxManager.EnterCommand="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.EnterCommand), Mode=OneWay}" />
 
                             <TextBlock x:Name="prviewText"
+                                MinHeight="0"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 IsHitTestVisible="False"
