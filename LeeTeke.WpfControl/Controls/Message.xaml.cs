@@ -157,13 +157,13 @@ namespace LeeTeke.WpfControl.Controls
         public Message()
         {
             InitializeComponent();
-            this.DataContext= this;
-            WindowStartupLocation=WindowStartupLocation.CenterScreen;
+            this.DataContext = this;
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             try
             {
                 foreach (var item in Application.Current.Windows)
                 {
-                    if (item is System.Windows.Window win&& win.IsActive)
+                    if (item is System.Windows.Window win && win.IsActive)
                     {
                         Owner = win;
                         WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -246,7 +246,7 @@ namespace LeeTeke.WpfControl.Controls
             Height = height;
         }
 
-        public void AddOptions(string name, object? value, Brush? background = null, CornerRadius? cornerRadius = null)
+        public void AddOptions(string name, object? value, CornerRadius? cornerRadius = null)
         {
             var theButton = new Button()
             {
@@ -256,7 +256,7 @@ namespace LeeTeke.WpfControl.Controls
                 Margin = new Thickness(5, 5, 5, 0),
                 Height = 30,
             };
-
+             
             if (StaticMethods.MessageBoxExBtnCR != null)
             {
                 Dependencies.CornerRadiusManager.SetCornerRadius(theButton, (CornerRadius)StaticMethods.MessageBoxExBtnCR);
@@ -268,6 +268,14 @@ namespace LeeTeke.WpfControl.Controls
             }
             theButton.Click += TheButton_Click;
             btnPanle.Children.Add(theButton);
+        }
+
+        public void AddOptions(Button btn, object? value)
+        {
+            if (value != null)
+                btn.DataContext = value;
+            btn.Click += TheButton_Click;
+            btnPanle.Children.Add(btn);
         }
     }
 }

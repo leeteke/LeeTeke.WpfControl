@@ -259,7 +259,7 @@ namespace LeeTeke.WPFTest.ViewModels
         {
 
 
-            return;
+    
 
             _ = MessageBoxEx.Show("1", "1", MessageStatus.Question);
             _ = MessageBoxEx.Show("1", "1", MessageStatus.Stop);

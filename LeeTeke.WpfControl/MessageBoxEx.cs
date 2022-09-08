@@ -24,28 +24,35 @@ namespace LeeTeke.WpfControl
             IMessageWin message;
             if (IsDefaultShowMsgCR)
             {
-                message=new CRMessage();
+                message = new CRMessage();
             }
             else
             {
-                message=new Message();
+                message = new Message();
             }
-            message.Content = content; 
+            message.Content = content;
             message.Status = status;
             switch (status)
             {
                 case MessageStatus.None:
                     break;
                 case MessageStatus.Question:
-                    message.AddOptions("是", true);
+                    message.AddOptions(new Button() { Background = Application.Current.Resources["LeeBrush_Theme"] as Brush, Foreground = Application.Current.Resources["LeeBrush_ThemeForeground"] as Brush, Content = "是" }, true);
                     message.AddOptions("否", false);
                     break;
                 default:
-                    message.AddOptions("确定", true);
+                    message.AddOptions(new Button() { Background = Application.Current.Resources["LeeBrush_Theme"] as Brush, Foreground = Application.Current.Resources["LeeBrush_ThemeForeground"] as Brush, Content = "确定" }, null);
                     break;
             }
             _ = message.ShowDialog();
-            return message.Value == null ? false : (bool)message.Value;
+            if (message.Value is bool @value)
+            {
+                return value;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public static bool Show(string title, string content, MessageStatus status = MessageStatus.None)
@@ -68,23 +75,42 @@ namespace LeeTeke.WpfControl
                     break;
 
                 case MessageStatus.Question:
-                    message.AddOptions("是", true);
+                    message.AddOptions(new Button()
+                    {
+                        Background = Application.Current.Resources["LeeBrush_Theme"] as Brush,
+                        Foreground = Application.Current.Resources["LeeBrush_ThemeForeground"] as Brush,
+                        BorderThickness = new Thickness(0),
+                        Content = "是",
+                        MinWidth = 80,
+                        Margin = new Thickness(5, 5, 5, 0),
+                        Height = 30,
+                    }, true) ;
                     message.AddOptions("否", false);
                     break;
                 default:
-                    message.AddOptions("确定", true);
+                    message.AddOptions("确定", null);
                     break;
             }
 
             _ = message.ShowDialog();
-            return message.Value == null ? false : (bool)message.Value;
+
+            if (message.Value is bool @value)
+            {
+                return value;
+            }
+            else
+            {
+                return false;
+            }
+
+
         }
 
         private IMessageWin _msg;
 
         public MessageBoxEx(CornerRadius cornerRadius = default)
         {
-  
+
             if (IsDefaultShowMsgCR)
             {
                 _msg = new CRMessage(cornerRadius);
@@ -141,7 +167,7 @@ namespace LeeTeke.WpfControl
         }
 
 
-        
+
         /// <summary>
         /// 设置loadingVale 范围0-100;
         /// </summary>
@@ -158,7 +184,13 @@ namespace LeeTeke.WpfControl
         /// <param name="name"></param>
         /// <param name="vale"></param>
         /// <param name="btnCornerRadius">圆角值</param>
-        public void AddOptions(string name, object? vale, Brush?  background=null, CornerRadius? btnCornerRadius = default) => _msg.AddOptions(name, vale, background, btnCornerRadius);
+        public void AddOptions(string name, object? value, CornerRadius? btnCornerRadius = default) => _msg.AddOptions(name, value, btnCornerRadius);
+        /// <summary>
+        /// 设置选项
+        /// </summary>
+        /// <param name="button"></param>
+        /// <param name="value"></param>
+        public void AddOptions(Button button, object? value) => _msg.AddOptions(button, value);
 
         /// <summary>
         /// 设置大小

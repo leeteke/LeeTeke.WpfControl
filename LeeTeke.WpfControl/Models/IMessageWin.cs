@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace LeeTeke.WpfControl.Models
@@ -29,8 +30,8 @@ namespace LeeTeke.WpfControl.Models
 
         void SetSize(double width = 320, double height = 200);
 
-        void AddOptions(string name, object? value, Brush? background = null, CornerRadius? cornerRadius = null);
-
+        void AddOptions(string name, object? value, CornerRadius? cornerRadius = null);
+        void AddOptions(Button btn, object? value);
         void Show();
 
         bool? ShowDialog();

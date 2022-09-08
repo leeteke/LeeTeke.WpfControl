@@ -255,7 +255,7 @@ namespace LeeTeke.WpfControl.Controls
             Height = height;
         }
 
-        public void AddOptions(string name, object? value, Brush? background = null, CornerRadius? cornerRadius = null)
+        public void AddOptions(string name, object? value, CornerRadius? cornerRadius = null)
         {
             var theButton = new Button()
             {
@@ -266,8 +266,7 @@ namespace LeeTeke.WpfControl.Controls
                 Height = 30,
             };
 
-            if (background != null)
-                theButton.Background = background;
+
 
             if (StaticMethods.MessageBoxExBtnCR != null)
             {
@@ -280,6 +279,14 @@ namespace LeeTeke.WpfControl.Controls
             }
             theButton.Click += TheButton_Click;
             btnPanle.Children.Add(theButton);
+        }
+
+        public void AddOptions(Button btn, object? value)
+        {
+            if (value != null)
+                btn.DataContext = value;
+            btn.Click += TheButton_Click;
+            btnPanle.Children.Add(btn);
         }
     }
 }
