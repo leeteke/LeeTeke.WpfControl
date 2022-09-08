@@ -56,9 +56,9 @@
                 </StackPanel.ContextMenu>
 
                 <leecontrol:GridView
+                    ItemClickedCommand="{Binding TestCommand}"
                     ItemsSource="{Binding TestList}"
-                    RenderOptions.BitmapScalingMode="HighQuality"
-                    ItemClickedCommand="{Binding TestCommand}">
+                    RenderOptions.BitmapScalingMode="HighQuality">
                     <leecontrol:GridView.NoItemsContent>
                         <TextBlock
                             HorizontalAlignment="Center"
@@ -90,11 +90,11 @@
                     AcceptsReturn="True"
                     BorderThickness="1"
                     IconCanClick="True"
+                    IconCommand="{Binding TestCommand}"
                     IconVisible="True"
                     Mode="IMEDispaly"
                     Text="2"
-                    ToolTip="测试"
-                    IconCommand="{Binding TestCommand}" />
+                    ToolTip="测试" />
 
                 <TextBox Width="150" />
 
@@ -102,12 +102,12 @@
                     CanItemDisplacement="True"
                     CloseVisibly="MouseOver"
                     IsScrollToSelected="True"
+                    ItemClosedCommand="{Binding ItemClosedCommand}"
                     ItemContxtMenuContentDock="Bottom"
                     ItemsSource="{Binding TestList}"
                     Orientation="Horizontal"
                     SelectedValue="{Binding SelectedData}"
-                    ShowScrollToButton="True"
-                    ItemClosedCommand="{Binding ItemClosedCommand}">
+                    ShowScrollToButton="True">
                     <leecontrol:Navigation.ItemContxtMenuContent>
                         <Grid Height="100">
                             <Rectangle
@@ -269,7 +269,7 @@
                     </leecontrol:ScrollBanner.Resources>
                     <leecontrol:ScrollBanner.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="ceshi" Command="{StaticResource CopyCommand}" />
+                            <MenuItem Command="{StaticResource CopyCommand}" Header="ceshi" />
                         </ContextMenu>
                     </leecontrol:ScrollBanner.ContextMenu>
                 </leecontrol:ScrollBanner>
@@ -283,8 +283,8 @@
                     Height="30"
                     Margin="5"
                     Padding="0"
-                    ToolTip="黑白切换"
-                    Command="{Binding TestCommand}">
+                    Command="{Binding TestCommand}"
+                    ToolTip="黑白切换">
                     <leecontrol:ImageEx Effect="{DynamicResource LeeShadow}" Source="/Datas/myicon.jpg">
                         <leecontrol:ImageEx.DefaultContent>
                             <Image Source="/Datas/test.ico" />
@@ -341,10 +341,10 @@
                     VerticalContentAlignment="Center"
                     leedep:ListItemManager.Marigin="5"
                     leedep:SelectorDragDropManager.DragDropOver="Navigation_DragDropOver"
+                    leedep:SelectorDragDropManager.DragDropOverCommand="{Binding ToggleButtonCommand}"
                     leedep:SelectorDragDropManager.IsEnabled="True"
                     ItemsSource="{Binding TestList}"
-                    SelectionMode="Single"
-                    leedep:SelectorDragDropManager.DragDropOverCommand="{Binding ToggleButtonCommand}">
+                    SelectionMode="Single">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -481,16 +481,16 @@
 
                 <TextBox x:Name="txt"
                     Margin="5"
+                    leedep:TextBoxManager.EnterCommand="{Binding TestCommand}"
                     AcceptsReturn="True"
-                    SelectionBrush="#FF0078D7"
-                    leedep:TextBoxManager.EnterCommand="{Binding TestCommand}" />
+                    SelectionBrush="#FF0078D7" />
 
 
                 <PasswordBox
                     leedep:PasswordManager.Attach="True"
+                    leedep:PasswordManager.EnterCommand="{Binding TestCommand}"
                     leedep:PasswordManager.EscToEmpty="True"
-                    leedep:PasswordManager.Password="{Binding ElementName=txt, Path=Text, Mode=TwoWay}"
-                    leedep:PasswordManager.EnterCommand="{Binding TestCommand}" />
+                    leedep:PasswordManager.Password="{Binding ElementName=txt, Path=Text, Mode=TwoWay}" />
 
                 <leecontrol:TextBoxEx x:Name="textEx"
                     BorderBrush="Red"
