@@ -4460,7 +4460,8 @@
                                     Background="{TemplateBinding Background}"
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
-                                    CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource AncestorType=GroupBox}, Mode=OneWay}">
+                                    CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource AncestorType=GroupBox}, Mode=OneWay}"
+                                    Effect="{Binding Path=(leedep:GroupBoxManager.ContentEffect), RelativeSource={RelativeSource AncestorType=GroupBox}}">
                                     <ContentPresenter x:Name="PART_Content"
                                         Margin="{TemplateBinding Padding}"
                                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"

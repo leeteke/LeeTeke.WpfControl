@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 
 namespace LeeTeke.WpfControl.Dependencies
 {
@@ -194,6 +195,24 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("SplitLineMargin", typeof(Thickness), typeof(GroupBoxManager));
         #endregion
 
+
+
+
+        #region ContentEffect
+        public static Effect GetContentEffect(DependencyObject obj)
+        {
+            return (Effect)obj.GetValue(ContentEffectProperty);
+        }
+
+        public static void SetContentEffect(DependencyObject obj, Effect value)
+        {
+            obj.SetValue(ContentEffectProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for ContentEffect.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ContentEffectProperty =
+            DependencyProperty.RegisterAttached("ContentEffect", typeof(Effect), typeof(GroupBoxManager));
+        #endregion
 
 
 
