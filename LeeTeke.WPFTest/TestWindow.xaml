@@ -61,7 +61,10 @@
                 Command="{Binding ClearCommand}" />
 
 
-            <lee:Navigation Width="500" Background="Red">
+            <lee:Navigation
+                Width="500"
+                leedep:ClipManager.CornerRadius="8"
+                Background="Red">
                 <lee:NavigationItem Content="你好" />
                 <lee:NavigationItem Content="你好1" />
                 <lee:NavigationItem Content="你好2" />
