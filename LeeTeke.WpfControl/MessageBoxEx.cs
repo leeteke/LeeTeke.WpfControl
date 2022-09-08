@@ -158,7 +158,7 @@ namespace LeeTeke.WpfControl
         /// <param name="name"></param>
         /// <param name="vale"></param>
         /// <param name="btnCornerRadius">圆角值</param>
-        public void AddOptions(string name, object? vale, CornerRadius btnCornerRadius = default) => _msg.AddOptions(name, vale, btnCornerRadius);
+        public void AddOptions(string name, object? vale, Brush?  background=null, CornerRadius? btnCornerRadius = default) => _msg.AddOptions(name, vale, background, btnCornerRadius);
 
         /// <summary>
         /// 设置大小

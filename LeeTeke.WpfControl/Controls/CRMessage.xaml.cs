@@ -155,9 +155,9 @@ namespace LeeTeke.WpfControl.Controls
 
         public CRMessage(CornerRadius? cornerRadius = null)
         {
-            if (StaticMethods.MessageBoxExCR != default)
+            if (StaticMethods.MessageBoxExCR != null)
             {
-                Dependencies.CornerRadiusManager.SetCornerRadius(this, StaticMethods.MessageBoxExCR);
+                Dependencies.CornerRadiusManager.SetCornerRadius(this, (CornerRadius)StaticMethods.MessageBoxExCR);
             }
             else if (cornerRadius != null)
             {
@@ -255,7 +255,7 @@ namespace LeeTeke.WpfControl.Controls
             Height = height;
         }
 
-        public void AddOptions(string name, object? value, CornerRadius cornerRadius = default)
+        public void AddOptions(string name, object? value, Brush? background = null, CornerRadius? cornerRadius = null)
         {
             var theButton = new Button()
             {
@@ -266,14 +266,17 @@ namespace LeeTeke.WpfControl.Controls
                 Height = 30,
             };
 
-            if (StaticMethods.MessageBoxExBtnCR != default)
+            if (background != null)
+                theButton.Background = background;
+
+            if (StaticMethods.MessageBoxExBtnCR != null)
             {
-                Dependencies.CornerRadiusManager.SetCornerRadius(theButton, StaticMethods.MessageBoxExBtnCR);
+                Dependencies.CornerRadiusManager.SetCornerRadius(theButton, (CornerRadius)StaticMethods.MessageBoxExBtnCR);
             }
 
-            if (cornerRadius != default)
+            if (cornerRadius != null)
             {
-                Dependencies.CornerRadiusManager.SetCornerRadius(theButton, cornerRadius);
+                Dependencies.CornerRadiusManager.SetCornerRadius(theButton, (CornerRadius)cornerRadius);
             }
             theButton.Click += TheButton_Click;
             btnPanle.Children.Add(theButton);

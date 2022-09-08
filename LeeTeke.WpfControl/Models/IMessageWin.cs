@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace LeeTeke.WpfControl.Models
 {
@@ -21,14 +22,14 @@ namespace LeeTeke.WpfControl.Models
 
         object? Content { get; set; }
 
-    
+
         int ProcessValue { get; set; }
 
         MessageStatus Status { get; set; }
 
         void SetSize(double width = 320, double height = 200);
 
-        void AddOptions(string name, object? value, CornerRadius cornerRadius = default);
+        void AddOptions(string name, object? value, Brush? background = null, CornerRadius? cornerRadius = null);
 
         void Show();
 
