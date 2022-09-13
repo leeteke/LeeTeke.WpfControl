@@ -37,11 +37,20 @@ namespace LeeTeke.WpfControl
                 case MessageStatus.None:
                     break;
                 case MessageStatus.Question:
-                    message.AddOptions(new Button() { Background = Application.Current.Resources["LeeBrush_Theme"] as Brush, Foreground = Application.Current.Resources["LeeBrush_ThemeForeground"] as Brush, Content = "是" }, true);
+                    message.AddOptions(new Button()
+                    {
+                        Background = Application.Current.Resources["LeeBrush_Theme"] as Brush,
+                        Foreground = Application.Current.Resources["LeeBrush_ThemeForeground"] as Brush,
+                        BorderThickness = new Thickness(0),
+                        Content = "是",
+                        MinWidth = 80,
+                        Margin = new Thickness(5, 5, 5, 0),
+                        Height = 30,
+                    }, true);
                     message.AddOptions("否", false);
                     break;
                 default:
-                    message.AddOptions(new Button() { Background = Application.Current.Resources["LeeBrush_Theme"] as Brush, Foreground = Application.Current.Resources["LeeBrush_ThemeForeground"] as Brush, Content = "确定" }, null);
+                    message.AddOptions("确定", null);
                     break;
             }
             _ = message.ShowDialog();
