@@ -203,7 +203,7 @@ namespace LeeTeke.WpfControl.Controls
                         }
                     }
                     tt.X += offset;
-                    var max = (_beExchange.ActualWidth+ _beExchange.Margin.Left+_beExchange.Margin.Right + ActualWidth+ Margin.Left + Margin.Right) / 4 + 1;
+                    var max = (_beExchange.ActualWidth + ActualWidth) / 4;
                     if (Math.Abs(tt.X) > max)
                     {
                         //通知调换位置
@@ -254,7 +254,7 @@ namespace LeeTeke.WpfControl.Controls
                     }
 
                     tt.Y += offset;
-                    var max = (_beExchange.ActualHeight+_beExchange.Margin.Top + _beExchange.Margin.Bottom + ActualHeight+Margin.Top+Margin.Bottom) / 4 +1;
+                    var max = (_beExchange.ActualHeight + ActualHeight) / 4;
                     if (Math.Abs(tt.Y) > max)
                     {
                         _beExchange.Opacity = 0;
