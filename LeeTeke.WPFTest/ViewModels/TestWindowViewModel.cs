@@ -39,27 +39,23 @@ namespace LeeTeke.WPFTest.ViewModels
         /// </summary>
         private void TragetCommandExecute()
         {
-            TestList = new ObservableCollection<TestDataGridModel>();
-
-            for (int i = 0; i < 1000; i++)
+            TestList ??= new ObservableCollection<TestDataGridModel>();
+            TestList.Add(new()
             {
-                TestList.Add(new()
-                {
-                    No = i,
-                    Id = Guid.NewGuid().ToString(),
-                    CreateTIme = DateTime.Now,
-                    Group = Guid.NewGuid().ToString(),
-                    Intro = Guid.NewGuid().ToString(),
-                    Name = Guid.NewGuid().ToString(),
-                    StatusA = Guid.NewGuid().ToString(),
-                    StatusB = Guid.NewGuid().ToString(),
-                    StatusC = Guid.NewGuid().ToString(),
-                    StatusD = Guid.NewGuid().ToString(),
-                    StatusE = Guid.NewGuid().ToString(),
-                    StatusF = Guid.NewGuid().ToString(),
-                    TEnum = TestAEnum.A
-                });
-            }
+                No = 1,
+                Id = Guid.NewGuid().ToString(),
+                CreateTIme = DateTime.Now,
+                Group = Guid.NewGuid().ToString(),
+                Intro = Guid.NewGuid().ToString(),
+                Name = Guid.NewGuid().ToString(),
+                StatusA = Guid.NewGuid().ToString(),
+                StatusB = Guid.NewGuid().ToString(),
+                StatusC = Guid.NewGuid().ToString(),
+                StatusD = Guid.NewGuid().ToString(),
+                StatusE = Guid.NewGuid().ToString(),
+                StatusF = Guid.NewGuid().ToString(),
+                TEnum = TestAEnum.A
+            });
 
         }
 

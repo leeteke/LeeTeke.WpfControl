@@ -203,14 +203,14 @@ namespace LeeTeke.WpfControl.Controls
                         }
                     }
                     tt.X += offset;
-                    var max = (_beExchange.ActualWidth + ActualWidth) / 4;
+                    var max = (_beExchange.ActualWidth+ _beExchange.Margin.Left+_beExchange.Margin.Right + ActualWidth+ Margin.Left + Margin.Right) / 4;
                     if (Math.Abs(tt.X) > max)
                     {
                         //通知调换位置
                         _beExchange.Opacity = 0;
                         ParentNavigation.NotifyItemMove(_beExchange, tt.X > 0);
                         tt.X = -tt.X;
-                        _beExchange.SetMoveRenderTransform(tt.X > 0 ? -this.ActualWidth : this.ActualHeight, 0);
+                        _beExchange.SetMoveRenderTransform(tt.X > 0 ? -(ActualWidth + Margin.Left + Margin.Right) : (ActualWidth + Margin.Left + Margin.Right), 0);
 
                     }
 
@@ -254,7 +254,7 @@ namespace LeeTeke.WpfControl.Controls
                     }
 
                     tt.Y += offset;
-                    var max = (_beExchange.ActualHeight + ActualHeight) / 4;
+                    var max = (_beExchange.ActualHeight+_beExchange.Margin.Top + _beExchange.Margin.Bottom + ActualHeight+Margin.Top+Margin.Bottom) / 4;
                     if (Math.Abs(tt.Y) > max)
                     {
                         _beExchange.Opacity = 0;
@@ -262,7 +262,7 @@ namespace LeeTeke.WpfControl.Controls
                         ParentNavigation.NotifyItemMove(_beExchange, tt.Y > 0);
                         tt.Y = -tt.Y;
 
-                        _beExchange.SetMoveRenderTransform(0, tt.Y > 0 ? -this.ActualHeight : this.ActualHeight);
+                        _beExchange.SetMoveRenderTransform(0, tt.Y > 0 ? -(ActualHeight + Margin.Top + Margin.Bottom) : ActualHeight + Margin.Top + Margin.Bottom);
                     }
                 }
             }
