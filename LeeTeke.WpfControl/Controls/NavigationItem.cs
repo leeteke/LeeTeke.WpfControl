@@ -210,7 +210,7 @@ namespace LeeTeke.WpfControl.Controls
                         _beExchange.Opacity = 0;
                         ParentNavigation.NotifyItemMove(_beExchange, tt.X > 0);
                         tt.X = -tt.X;
-                        _beExchange.SetMoveRenderTransform(tt.X > 0 ? -(ActualWidth + Margin.Left + Margin.Right) : (ActualWidth + Margin.Left + Margin.Right), 0);
+                        _beExchange.SetMoveRenderTransform(tt.X > 0 ? -this.ActualWidth : this.ActualHeight, 0);
 
                     }
 
@@ -262,7 +262,7 @@ namespace LeeTeke.WpfControl.Controls
                         ParentNavigation.NotifyItemMove(_beExchange, tt.Y > 0);
                         tt.Y = -tt.Y;
 
-                        _beExchange.SetMoveRenderTransform(0, tt.Y > 0 ? -(ActualHeight + Margin.Top + Margin.Bottom) : ActualHeight + Margin.Top + Margin.Bottom);
+                        _beExchange.SetMoveRenderTransform(0, tt.Y > 0 ? -this.ActualHeight : this.ActualHeight);
                     }
                 }
             }

@@ -7,7 +7,6 @@
     xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies;assembly=LeeTeke.WpfControl"
     xmlns:local="clr-namespace:LeeTeke.WPFTest"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     Title="TestWindow"
     Width="800"
     Height="450"
@@ -132,21 +131,14 @@
         <StackPanel Orientation="Horizontal">
             <Button
                 Width="50"
-                Content="触发"
-                Command="{Binding TragetCommand}" />
+                Command="{Binding TragetCommand}"
+                Content="触发" />
             <Button
                 Width="50"
-                Content="清除"
-                Command="{Binding ClearCommand}" />
+                Command="{Binding ClearCommand}"
+                Content="清除" />
             <ComboBox Height="20" MinHeight="0" />
 
-
-
-            <TextBlock Text="{Binding ElementName=border, Path=ActualWidth}" />
-
-            <Border x:Name="border"
-              
-                Background="Red" />
 
 
 
@@ -154,43 +146,56 @@
 
 
 
-        <GroupBox
-            Grid.Row="1"
-            Background="{DynamicResource LeeBrush_Theme}"
-            Header="123">
-            <lee:Navigation
-                Padding="5"
-                HorizontalContentAlignment="Stretch"
-                VerticalContentAlignment="Stretch"
-                CanItemDisplacement="True"
-                CloseVisibly="Collapsed"
-                FontSize="13"
-                Foreground="{DynamicResource LeeBrush_ThemeForeground}"
-                IsScrollToSelected="True"
-                ItemCornerRadius="4"
-                ItemHeight="40"
-                ItemMargin="10"
-                ItemPadding="2"
-                ItemWidth="{x:Static sys:Double.NaN}"
-                ItemsSource="{Binding TestList}"
-                MouseOverForeground="{DynamicResource LeeBrush_ThemeForeground}"
-                Orientation="Horizontal"
-                ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                SelectedBackground="{DynamicResource LeeBrush_Background}"
-                SelectedForeground="{DynamicResource LeeBrush_Theme}"
-                SelectedValue="{Binding SelectedNative, Mode=TwoWay}"
-                SeparatorFill="{DynamicResource LeeBrush_ThemeForeground}"
-                ShowScrollToButton="True"
-                ItemClosedCommand="{Binding ItemClosedCommand}">
-                <lee:Navigation.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Id}" />
-                    </DataTemplate>
-                </lee:Navigation.ItemTemplate>
-            </lee:Navigation>
+        <GroupBox Grid.Row="1" Header="123">
+            <ListView
+                Margin="5"
+                SelectionMode="Multiple" >
+                <ListViewItem Content="1">
+                    
+                </ListViewItem>
+                <ListViewItem Content="2">
+
+                </ListViewItem>
+            </ListView>
         </GroupBox>
 
 
+
+        <!--<DataGrid
+            Grid.Row="1"
+            leedep:DataGridManager.MainBackground="{DynamicResource LeeBrush_BorderBrush}"
+            leedep:DataGridManager.MainBorderThickness="1"
+            leedep:DataGridManager.MainCornerRadius="6"
+            leedep:DataGridManager.MainEffect="{DynamicResource LeeShadow}"
+            leedep:DataGridManager.MainIsClip="True"
+            leedep:DataGridManager.RowBackground="Transparent"
+            leedep:DataGridManager.ShowRowNumber="True"
+            AutoGenerateColumns="True"
+            BorderThickness="0"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            HeadersVisibility="All"
+            ItemsSource="{Binding TestList, IsAsync=True}"
+            RowHeaderWidth="50">
+            <leedep:DataGridManager.NoItemsContent>
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="25"
+                    FontWeight="Bold"
+                    Foreground="{DynamicResource LeeBrush_Mark}"
+                    Text="未查找到任何数据" />
+
+            </leedep:DataGridManager.NoItemsContent>
+        </DataGrid>-->
+
+        <lee:Pagination
+            Grid.Row="2"
+            Background="Transparent"
+            BorderThickness="0"
+            DisplayPages="4"
+            PageCount="15"
+            PageIndex="2" />
 
     </Grid>
 </Window>
