@@ -383,17 +383,17 @@
         <Setter Property="ContextMenu">
             <Setter.Value>
                 <ContextMenu>
-                    <MenuItem Command="ApplicationCommands.Cut" Header="剪切(_T) - Ctrl+X">
+                    <MenuItem Header="剪切(_T) - Ctrl+X" Command="ApplicationCommands.Cut">
                         <MenuItem.Icon>
                             <TextBlock FontFamily="{DynamicResource IconFontFamily}" Text="&#xE8C6;" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Command="ApplicationCommands.Copy" Header="复制(_C) - Ctrl+C">
+                    <MenuItem Header="复制(_C) - Ctrl+C" Command="ApplicationCommands.Copy">
                         <MenuItem.Icon>
                             <TextBlock FontFamily="{DynamicResource IconFontFamily}" Text="&#xE8C8;" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Command="ApplicationCommands.Paste" Header="粘贴(_P) - Ctrl+V">
+                    <MenuItem Header="粘贴(_P) - Ctrl+V" Command="ApplicationCommands.Paste">
                         <MenuItem.Icon>
                             <TextBlock FontFamily="{DynamicResource IconFontFamily}" Text="&#xE77F;" />
                         </MenuItem.Icon>
@@ -405,14 +405,14 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
                     <ScrollViewer x:Name="PART_ContentHost"
-                        leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
-                        leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         Focusable="false"
                         HorizontalScrollBarVisibility="Hidden"
-                        VerticalScrollBarVisibility="Hidden" />
+                        VerticalScrollBarVisibility="Hidden"
+                        leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
+                        leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}" />
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter TargetName="PART_ContentHost" Property="Opacity" Value="{DynamicResource UnEnableOpacity}" />
@@ -815,7 +815,7 @@
         <Setter Property="ContextMenu">
             <Setter.Value>
                 <ContextMenu>
-                    <MenuItem Command="ApplicationCommands.Paste" Header="粘贴(_P) - Ctrl+V">
+                    <MenuItem Header="粘贴(_P) - Ctrl+V" Command="ApplicationCommands.Paste">
                         <MenuItem.Icon>
                             <TextBlock FontFamily="{DynamicResource IconFontFamily}" Text="&#xE77F;" />
                         </MenuItem.Icon>
@@ -827,14 +827,14 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type PasswordBox}">
                     <ScrollViewer x:Name="PART_ContentHost"
-                        leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
-                        leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         Focusable="false"
                         HorizontalScrollBarVisibility="Hidden"
-                        VerticalScrollBarVisibility="Hidden" />
+                        VerticalScrollBarVisibility="Hidden"
+                        leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
+                        leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}" />
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter TargetName="PART_ContentHost" Property="Opacity" Value="{DynamicResource UnEnableOpacity}" />
@@ -1130,12 +1130,12 @@
                                             <RepeatButton
                                                 Height="{Binding Path=(leedep:SliderManager.TrackSize), RelativeSource={RelativeSource AncestorType=Slider}, Mode=OneWay}"
                                                 VerticalAlignment="Center"
-                                                leedep:CornerRadiusManager.CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource AncestorType=Slider}, Mode=OneWay, Converter={StaticResource CornerRadiusConverter}, ConverterParameter='0,N,N,0'}"
                                                 Background="{Binding Path=(leedep:SliderManager.TrackBrush), RelativeSource={RelativeSource AncestorType=Slider}, Mode=OneWay}"
                                                 BorderBrush="{TemplateBinding BorderBrush}"
                                                 BorderThickness="{Binding Path=BorderThickness, RelativeSource={RelativeSource AncestorType=Slider}, Mode=OneWay, Converter={StaticResource ThicknessConverter}, ConverterParameter='0,0,N,0'}"
-                                                Command="Slider.DecreaseLarge"
-                                                Style="{StaticResource SliderRepeatButton}" />
+                                                Style="{StaticResource SliderRepeatButton}"
+                                                leedep:CornerRadiusManager.CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource AncestorType=Slider}, Mode=OneWay, Converter={StaticResource CornerRadiusConverter}, ConverterParameter='0,N,N,0'}"
+                                                Command="Slider.DecreaseLarge" />
                                         </Track.DecreaseRepeatButton>
                                         <Track.Thumb>
                                             <Thumb
@@ -1147,8 +1147,8 @@
                                             <RepeatButton
                                                 Background="Transparent"
                                                 BorderThickness="0"
-                                                Command="Slider.IncreaseLarge"
-                                                Style="{StaticResource SliderRepeatButton}" />
+                                                Style="{StaticResource SliderRepeatButton}"
+                                                Command="Slider.IncreaseLarge" />
                                         </Track.IncreaseRepeatButton>
 
                                     </Track>
@@ -1222,12 +1222,12 @@
                                             <RepeatButton
                                                 Width="{Binding Path=(leedep:SliderManager.TrackSize), RelativeSource={RelativeSource AncestorType=Slider}, Mode=OneWay}"
                                                 HorizontalAlignment="Center"
-                                                leedep:CornerRadiusManager.CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource AncestorType=Slider}, Mode=OneWay, Converter={StaticResource CornerRadiusConverter}, ConverterParameter='N,N,0,0'}"
                                                 Background="{Binding Path=(leedep:SliderManager.TrackBrush), RelativeSource={RelativeSource AncestorType=Slider}, Mode=OneWay}"
                                                 BorderBrush="{TemplateBinding BorderBrush}"
                                                 BorderThickness="{Binding Path=BorderThickness, RelativeSource={RelativeSource AncestorType=Slider}, Mode=OneWay, Converter={StaticResource ThicknessConverter}, ConverterParameter='0,N,0,0'}"
-                                                Command="Slider.DecreaseLarge"
-                                                Style="{StaticResource SliderRepeatButton}" />
+                                                Style="{StaticResource SliderRepeatButton}"
+                                                leedep:CornerRadiusManager.CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource AncestorType=Slider}, Mode=OneWay, Converter={StaticResource CornerRadiusConverter}, ConverterParameter='N,N,0,0'}"
+                                                Command="Slider.DecreaseLarge" />
                                         </Track.DecreaseRepeatButton>
                                         <Track.Thumb>
                                             <Thumb
@@ -1239,8 +1239,8 @@
                                             <RepeatButton
                                                 Background="Transparent"
                                                 BorderThickness="0"
-                                                Command="Slider.IncreaseLarge"
-                                                Style="{StaticResource SliderRepeatButton}" />
+                                                Style="{StaticResource SliderRepeatButton}"
+                                                Command="Slider.IncreaseLarge" />
                                         </Track.IncreaseRepeatButton>
                                     </Track>
                                     <TickBar x:Name="BottomTick"
@@ -1659,10 +1659,10 @@
                         IsDirectionReversed="true"
                         IsEnabled="{TemplateBinding IsMouseOver}">
                         <Track.DecreaseRepeatButton>
-                            <RepeatButton Command="{x:Static ScrollBar.PageUpCommand}" Style="{StaticResource ScrollBarBaseRepeatButton}" />
+                            <RepeatButton Style="{StaticResource ScrollBarBaseRepeatButton}" Command="{x:Static ScrollBar.PageUpCommand}" />
                         </Track.DecreaseRepeatButton>
                         <Track.IncreaseRepeatButton>
-                            <RepeatButton Command="{x:Static ScrollBar.PageDownCommand}" Style="{StaticResource ScrollBarBaseRepeatButton}" />
+                            <RepeatButton Style="{StaticResource ScrollBarBaseRepeatButton}" Command="{x:Static ScrollBar.PageDownCommand}" />
                         </Track.IncreaseRepeatButton>
                         <Track.Thumb>
                             <Thumb>
@@ -1698,10 +1698,10 @@
 
                             <Track x:Name="PART_Track" IsEnabled="{TemplateBinding IsMouseOver}">
                                 <Track.DecreaseRepeatButton>
-                                    <RepeatButton Command="{x:Static ScrollBar.PageLeftCommand}" Style="{StaticResource ScrollBarBaseRepeatButton}" />
+                                    <RepeatButton Style="{StaticResource ScrollBarBaseRepeatButton}" Command="{x:Static ScrollBar.PageLeftCommand}" />
                                 </Track.DecreaseRepeatButton>
                                 <Track.IncreaseRepeatButton>
-                                    <RepeatButton Command="{x:Static ScrollBar.PageRightCommand}" Style="{StaticResource ScrollBarBaseRepeatButton}" />
+                                    <RepeatButton Style="{StaticResource ScrollBarBaseRepeatButton}" Command="{x:Static ScrollBar.PageRightCommand}" />
                                 </Track.IncreaseRepeatButton>
                                 <Track.Thumb>
                                     <Thumb>
@@ -2565,13 +2565,6 @@
                                         MaxHeight="{TemplateBinding MaxDropDownHeight}"
                                         Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.DropMargin), Mode=OneWay}"
                                         Padding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.DropPadding), Mode=OneWay}"
-                                        leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.DropCornerRadius), Mode=OneWay}"
-                                        leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.DropIsClip), Mode=OneWay}"
-                                        leedep:ScrollViewerManager.SlideDuration="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideDuration), Mode=OneWay}"
-                                        leedep:ScrollViewerManager.SlideEasingFunction="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEasingFunction), Mode=OneWay}"
-                                        leedep:ScrollViewerManager.SlideEnabled="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEnabled), Mode=OneWay}"
-                                        leedep:ScrollViewerManager.SlideMonitorMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideMonitorMode), Mode=OneWay}"
-                                        leedep:ScrollViewerManager.TopContent="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.TopContent), Mode=OneWay}"
                                         Background="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.DropBackground), Mode=OneWay}"
                                         BorderBrush="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.DropBorderBrush), Mode=OneWay}"
                                         BorderThickness="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.DropBorderThinckness), Mode=OneWay}"
@@ -2581,7 +2574,14 @@
                                         PanningMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(ScrollViewer.PanningMode), Mode=OneWay}"
                                         VerticalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(ScrollViewer.VerticalScrollBarVisibility), Mode=OneWay}"
                                         VirtualizingStackPanel.IsVirtualizing="{Binding Path=(VirtualizingPanel.IsVirtualizing), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
-                                        VirtualizingStackPanel.VirtualizationMode="{Binding Path=(VirtualizingPanel.VirtualizationMode), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}">
+                                        VirtualizingStackPanel.VirtualizationMode="{Binding Path=(VirtualizingPanel.VirtualizationMode), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
+                                        leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.DropCornerRadius), Mode=OneWay}"
+                                        leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.DropIsClip), Mode=OneWay}"
+                                        leedep:ScrollViewerManager.SlideDuration="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideDuration), Mode=OneWay}"
+                                        leedep:ScrollViewerManager.SlideEasingFunction="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEasingFunction), Mode=OneWay}"
+                                        leedep:ScrollViewerManager.SlideEnabled="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEnabled), Mode=OneWay}"
+                                        leedep:ScrollViewerManager.SlideMonitorMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideMonitorMode), Mode=OneWay}"
+                                        leedep:ScrollViewerManager.TopContent="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.TopContent), Mode=OneWay}">
                                         <ItemsPresenter KeyboardNavigation.ControlTabNavigation="Cycle" />
                                     </ScrollViewer>
                                 </lee:EasyPanel>
@@ -2611,14 +2611,14 @@
                                 Margin="{TemplateBinding Padding}"
                                 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                leedep:TextBoxManager.EnterCommand="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.EnterCommand), Mode=OneWay}"
-                                leedep:TextBoxManager.EscToEmpty="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.EscToEmpty), Mode=OneWay}"
                                 BorderThickness="0"
                                 FontSize="{TemplateBinding FontSize}"
                                 FontWeight="{TemplateBinding FontWeight}"
                                 Foreground="{TemplateBinding Foreground}"
                                 Style="{StaticResource ComboBoxEditableTextBox}"
-                                Visibility="Collapsed" />
+                                Visibility="Collapsed"
+                                leedep:TextBoxManager.EnterCommand="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.EnterCommand), Mode=OneWay}"
+                                leedep:TextBoxManager.EscToEmpty="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.EscToEmpty), Mode=OneWay}" />
 
                             <TextBlock x:Name="prviewText"
                                 MinHeight="0"
@@ -2824,15 +2824,15 @@
                                     <ScrollViewer x:Name="PART_Scroll"
                                         MaxHeight="600"
                                         Padding="{Binding Path=(leedep:MenuItemManager.SubPadding), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
-                                        leedep:CornerRadiusManager.CornerRadius="{Binding Path=(leedep:MenuItemManager.SubCornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
-                                        leedep:CornerRadiusManager.IsClip="{Binding Path=(leedep:MenuItemManager.SubIsClip), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                                         Background="{Binding Path=(leedep:MenuItemManager.SubBackground), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                                         BorderBrush="{Binding Path=(leedep:MenuItemManager.SubBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                                         BorderThickness="{Binding Path=(leedep:MenuItemManager.SubBorderThickness), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                                         CanContentScroll="True"
                                         Effect="{Binding Path=(leedep:MenuItemManager.SubEffect), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                                         VirtualizingPanel.IsVirtualizing="True"
-                                        VirtualizingPanel.VirtualizationMode="Recycling">
+                                        VirtualizingPanel.VirtualizationMode="Recycling"
+                                        leedep:CornerRadiusManager.CornerRadius="{Binding Path=(leedep:MenuItemManager.SubCornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
+                                        leedep:CornerRadiusManager.IsClip="{Binding Path=(leedep:MenuItemManager.SubIsClip), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}">
                                         <ItemsPresenter Grid.IsSharedSizeScope="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
                                     </ScrollViewer>
                                 </Border>
@@ -3649,9 +3649,9 @@
                                                 <lee:EasyPanel Width="{Binding CellsPanelHorizontalOffset, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}, AncestorLevel=1}}">
                                                     <CheckBox x:Name="PART_CheckBox"
                                                         HorizontalAlignment="Center"
-                                                        leedep:DataGridManager.CheckBoxHook="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}"
                                                         FontFamily="{DynamicResource IconFontFamily}"
-                                                        Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.All}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}" />
+                                                        Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.All}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}"
+                                                        leedep:DataGridManager.CheckBoxHook="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}}" />
                                                 </lee:EasyPanel>
                                                 <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter"
                                                     Grid.Column="1"
@@ -4849,12 +4849,6 @@
                 <ControlTemplate TargetType="{x:Type ListBox}">
                     <ScrollViewer x:Name="scrollviewer"
                         Padding="{TemplateBinding Padding}"
-                        leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
-                        leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}"
-                        leedep:ScrollViewerManager.SlideDuration="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideDuration), Mode=OneWay}"
-                        leedep:ScrollViewerManager.SlideEasingFunction="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEasingFunction), Mode=OneWay}"
-                        leedep:ScrollViewerManager.SlideEnabled="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEnabled), Mode=OneWay}"
-                        leedep:ScrollViewerManager.SlideMonitorMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideMonitorMode), Mode=OneWay}"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
@@ -4864,7 +4858,13 @@
                         PanningMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(ScrollViewer.PanningMode), Mode=OneWay}"
                         VerticalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(ScrollViewer.VerticalScrollBarVisibility), Mode=OneWay}"
                         VirtualizingPanel.IsVirtualizing="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(VirtualizingPanel.IsVirtualizing), Mode=OneWay}"
-                        VirtualizingPanel.VirtualizationMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(VirtualizingPanel.VirtualizationMode), Mode=OneWay}">
+                        VirtualizingPanel.VirtualizationMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(VirtualizingPanel.VirtualizationMode), Mode=OneWay}"
+                        leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
+                        leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}"
+                        leedep:ScrollViewerManager.SlideDuration="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideDuration), Mode=OneWay}"
+                        leedep:ScrollViewerManager.SlideEasingFunction="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEasingFunction), Mode=OneWay}"
+                        leedep:ScrollViewerManager.SlideEnabled="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEnabled), Mode=OneWay}"
+                        leedep:ScrollViewerManager.SlideMonitorMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideMonitorMode), Mode=OneWay}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition />
@@ -5248,19 +5248,19 @@
                                 <ScrollViewer x:Name="PART_ScrollViewer"
                                     Grid.Row="1"
                                     Grid.ColumnSpan="2"
-                                    leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
-                                    leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}"
-                                    leedep:ScrollViewerManager.SlideDuration="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideDuration), Mode=OneWay}"
-                                    leedep:ScrollViewerManager.SlideEasingFunction="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEasingFunction), Mode=OneWay}"
-                                    leedep:ScrollViewerManager.SlideEnabled="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEnabled), Mode=OneWay}"
-                                    leedep:ScrollViewerManager.SlideMonitorMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideMonitorMode), Mode=OneWay}"
                                     Background="{TemplateBinding Background}"
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     CanContentScroll="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}, Path=(ScrollViewer.CanContentScroll), Mode=OneWay}"
                                     HorizontalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}, Path=(ScrollViewer.HorizontalScrollBarVisibility), Mode=OneWay}"
                                     PanningMode="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}, Path=(ScrollViewer.PanningMode), Mode=OneWay}"
-                                    VerticalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}, Path=(ScrollViewer.VerticalScrollBarVisibility), Mode=OneWay}">
+                                    VerticalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}, Path=(ScrollViewer.VerticalScrollBarVisibility), Mode=OneWay}"
+                                    leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
+                                    leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}"
+                                    leedep:ScrollViewerManager.SlideDuration="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideDuration), Mode=OneWay}"
+                                    leedep:ScrollViewerManager.SlideEasingFunction="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEasingFunction), Mode=OneWay}"
+                                    leedep:ScrollViewerManager.SlideEnabled="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEnabled), Mode=OneWay}"
+                                    leedep:ScrollViewerManager.SlideMonitorMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideMonitorMode), Mode=OneWay}">
                                     <Grid Margin="{TemplateBinding Padding}">
                                         <Grid.RowDefinitions>
                                             <RowDefinition />
@@ -5324,19 +5324,19 @@
                         <ControlTemplate TargetType="{x:Type ListView}">
 
                             <ScrollViewer x:Name="PART_ScrollViewer"
-                                leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
-                                leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}"
-                                leedep:ScrollViewerManager.SlideDuration="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideDuration), Mode=OneWay}"
-                                leedep:ScrollViewerManager.SlideEasingFunction="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEasingFunction), Mode=OneWay}"
-                                leedep:ScrollViewerManager.SlideEnabled="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEnabled), Mode=OneWay}"
-                                leedep:ScrollViewerManager.SlideMonitorMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideMonitorMode), Mode=OneWay}"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CanContentScroll="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}, Path=(ScrollViewer.CanContentScroll), Mode=OneWay}"
                                 HorizontalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}, Path=(ScrollViewer.HorizontalScrollBarVisibility), Mode=OneWay}"
                                 PanningMode="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}, Path=(ScrollViewer.PanningMode), Mode=OneWay}"
-                                VerticalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}, Path=(ScrollViewer.VerticalScrollBarVisibility), Mode=OneWay}">
+                                VerticalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}, Path=(ScrollViewer.VerticalScrollBarVisibility), Mode=OneWay}"
+                                leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
+                                leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}"
+                                leedep:ScrollViewerManager.SlideDuration="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideDuration), Mode=OneWay}"
+                                leedep:ScrollViewerManager.SlideEasingFunction="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEasingFunction), Mode=OneWay}"
+                                leedep:ScrollViewerManager.SlideEnabled="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEnabled), Mode=OneWay}"
+                                leedep:ScrollViewerManager.SlideMonitorMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideMonitorMode), Mode=OneWay}">
                                 <Grid Margin="{TemplateBinding Padding}">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="auto" />
@@ -5479,12 +5479,12 @@
 
                                 <ToggleButton x:Name="Expander"
                                     Grid.Column="1"
-                                    leedep:ToggleButtonManager.RotateMode="Positive90"
                                     ClickMode="Press"
                                     Content="&#xE76C;"
                                     FontSize="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeView}}, Path=(leedep:TreeViewItemManager.SwitchSize), Mode=OneWay}"
                                     IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
-                                    Style="{StaticResource RotateToggleButton}" />
+                                    Style="{StaticResource RotateToggleButton}"
+                                    leedep:ToggleButtonManager.RotateMode="Positive90" />
                                 <ContentPresenter x:Name="PART_Header"
                                     Grid.Column="2"
                                     Margin="{TemplateBinding Padding}"
@@ -5641,19 +5641,19 @@
                 <ControlTemplate TargetType="{x:Type TreeView}">
                     <ScrollViewer x:Name="PART_ScrollViewer"
                         Padding="{TemplateBinding Padding}"
-                        leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
-                        leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}"
-                        leedep:ScrollViewerManager.SlideDuration="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideDuration), Mode=OneWay}"
-                        leedep:ScrollViewerManager.SlideEasingFunction="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEasingFunction), Mode=OneWay}"
-                        leedep:ScrollViewerManager.SlideEnabled="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEnabled), Mode=OneWay}"
-                        leedep:ScrollViewerManager.SlideMonitorMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideMonitorMode), Mode=OneWay}"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CanContentScroll="false"
                         Focusable="false"
                         HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
-                        VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+                        VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                        leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
+                        leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}"
+                        leedep:ScrollViewerManager.SlideDuration="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideDuration), Mode=OneWay}"
+                        leedep:ScrollViewerManager.SlideEasingFunction="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEasingFunction), Mode=OneWay}"
+                        leedep:ScrollViewerManager.SlideEnabled="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEnabled), Mode=OneWay}"
+                        leedep:ScrollViewerManager.SlideMonitorMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideMonitorMode), Mode=OneWay}">
                         <ItemsPresenter />
                     </ScrollViewer>
 
@@ -5685,7 +5685,9 @@
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
-
+        <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Path=Foreground, Mode=OneWay}" />
+        <Setter Property="FontSize" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Path=FontSize, Mode=OneWay}" />
+        <Setter Property="FontWeight" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Path=FontWeight, Mode=OneWay}" />
 
         <Setter Property="Template">
             <Setter.Value>
