@@ -9,14 +9,15 @@
     </ResourceDictionary.MergedDictionaries>
 
 
-    <Style x:Key="BaseTextBoxEx" TargetType="{x:Type local:TextBoxEx}">
+    <Style x:Key="BaseTextBoxEx"
+        TargetType="{x:Type local:TextBoxEx}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+        <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="IsTabStop" Value="False" />
 
         <Setter Property="Mode" Value="General" />
-        <Setter Property="PreviewText" Value="请输入" />
+        <Setter Property="Placeholder" Value="" />
         <Setter Property="PasswordChar" Value="●" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}" />
@@ -56,8 +57,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:TextBoxEx}">
-                    <Border
-                        x:Name="PART_Border"
+                    <Border x:Name="PART_Border"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
@@ -65,8 +65,7 @@
                         Effect="{TemplateBinding Effect}">
 
                         <DockPanel x:Name="PART_Panel">
-                            <ContentPresenter
-                                x:Name="PART_ICON"
+                            <ContentPresenter x:Name="PART_ICON"
                                 Margin="{TemplateBinding IconMargin}"
                                 HorizontalAlignment="{TemplateBinding IconHorizontalAlignment}"
                                 VerticalAlignment="{TemplateBinding IconVerticalAlignment}"
@@ -82,17 +81,15 @@
                                 Margin="{TemplateBinding SplitterMargin}"
                                 DockPanel.Dock="{TemplateBinding IconDock}"
                                 Fill="{TemplateBinding SplitterFill}"
+                               
                                 Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=SplitterVisible, Mode=OneWay, Converter={StaticResource VisibilityForBoolConverter}}" />
 
                             <local:EasyPanel Cursor="IBeam">
-                                <TextBox
-                                    x:Name="PART_Main"
+                                <TextBox x:Name="PART_Main"
                                     MinHeight="0"
                                     Padding="{TemplateBinding Padding}"
                                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                    input:InputMethod.IsInputMethodEnabled="False"
-                                    leedep:TextBoxManager.ActiveBackground="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=ActiveBackground}"
                                     AcceptsReturn="{TemplateBinding AcceptsReturn}"
                                     AcceptsTab="{TemplateBinding AcceptsTab}"
                                     AutoWordSelection="{TemplateBinding AutoWordSelection}"
@@ -113,14 +110,14 @@
                                     SelectionTextBrush="{TemplateBinding SelectionTextBrush}"
                                     Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     TextAlignment="{TemplateBinding TextAlignment}"
-                                    TextWrapping="{TemplateBinding TextWrapping}" />
-                                <PasswordBox
-                                    x:Name="PART_Password"
+                                    TextWrapping="{TemplateBinding TextWrapping}"
+                                    input:InputMethod.IsInputMethodEnabled="False"
+                                    leedep:TextBoxManager.ActiveBackground="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=ActiveBackground}" />
+                                <PasswordBox x:Name="PART_Password"
                                     MinHeight="0"
                                     Padding="{TemplateBinding Padding}"
                                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                    leedep:TextBoxManager.ActiveBackground="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=ActiveBackground}"
                                     Background="Transparent"
                                     BorderThickness="0"
                                     CaretBrush="{TemplateBinding CaretBrush}"
@@ -137,22 +134,18 @@
                                     SelectionOpacity="{TemplateBinding SelectionOpacity}"
                                     SelectionTextBrush="{TemplateBinding SelectionTextBrush}"
                                     TextBlock.TextAlignment="{TemplateBinding TextAlignment}"
-                                    Visibility="Collapsed" />
-                                <TextBlock
-                                    x:Name="PART_PreviewText"
+                                    Visibility="Collapsed"
+                                    leedep:TextBoxManager.ActiveBackground="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=ActiveBackground}" />
+
+                                <ContentPresenter x:Name="PART_Placeholder"
                                     MinHeight="0"
-                                    Padding="{TemplateBinding Padding}"
+                                    Margin="{TemplateBinding Padding}"
                                     HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                    Background="{x:Null}"
+                                    Content="{TemplateBinding Placeholder}"
                                     Cursor="{TemplateBinding EditBoxCursor}"
-                                    Foreground="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Foreground, Converter={StaticResource BrushOpacityConverter}, ConverterParameter=0.5, Mode=OneWay}"
                                     IsHitTestVisible="False"
-                                    Text="{TemplateBinding PreviewText}"
-                                    TextAlignment="{TemplateBinding TextAlignment}"
-                                    TextWrapping="{TemplateBinding TextWrapping}"
-                                    Visibility="Visible" />
-
+                                    TextElement.Foreground="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Foreground, Converter={StaticResource BrushOpacityConverter}, ConverterParameter=0.5, Mode=OneWay}" />
                             </local:EasyPanel>
                         </DockPanel>
                     </Border>
@@ -161,7 +154,9 @@
                         <Trigger Property="IsClip" Value="True">
                             <Setter TargetName="PART_Panel" Property="Clip">
                                 <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                    <MultiBinding
+                                        Converter="{StaticResource MultiValueToClipConverter}"
+                                        Mode="OneWay">
                                         <Binding
                                             Mode="OneWay"
                                             Path="ActualWidth"
@@ -207,7 +202,7 @@
                                 <Condition Property="IsReadOnly" Value="False" />
                                 <Condition SourceName="PART_Main" Property="IsFocused" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="PART_PreviewText" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_Placeholder" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="PART_Border" Property="Background" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=ActiveBackground}" />
                         </MultiTrigger>
 
@@ -216,7 +211,7 @@
                                 <Condition Property="IsReadOnly" Value="False" />
                                 <Condition SourceName="PART_Password" Property="IsFocused" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="PART_PreviewText" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_Placeholder" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="PART_Border" Property="Background" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=ActiveBackground}" />
                         </MultiTrigger>
 
@@ -228,7 +223,7 @@
                                 <Condition Binding="{Binding ElementName=PART_Main, Path=Text, Mode=OneWay, Converter={StaticResource StringIsNullConverter}}" Value="True" />
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Mode, Converter={StaticResource EnumBoolReverseConverter}, ConverterParameter=data:TextMode.Password}" Value="True" />
                             </MultiDataTrigger.Conditions>
-                            <Setter TargetName="PART_PreviewText" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_Placeholder" Property="Visibility" Value="Visible" />
                         </MultiDataTrigger>
 
                         <MultiDataTrigger>
@@ -237,7 +232,7 @@
                                 <Condition Binding="{Binding ElementName=PART_Main, Path=Text, Mode=OneWay, Converter={StaticResource StringIsNullConverter}}" Value="False" />
                             </MultiDataTrigger.Conditions>
 
-                            <Setter TargetName="PART_PreviewText" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_Placeholder" Property="Visibility" Value="Collapsed" />
 
                         </MultiDataTrigger>
 

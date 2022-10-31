@@ -20,27 +20,33 @@
         <ScrollViewer
             Grid.Row="1"
             Padding="0"
-            leedep:CornerRadiusManager.CornerRadius="8,0,0,0"
-            leedep:CornerRadiusManager.IsClip="True"
             Background="{DynamicResource LeeBrush_Background2}"
             BorderBrush="{DynamicResource LeeBrush_BorderBrush}"
             BorderThickness="1"
-            HorizontalScrollBarVisibility="Disabled">
+            HorizontalScrollBarVisibility="Disabled"
+            leedep:CornerRadiusManager.CornerRadius="8,0,0,0"
+            leedep:CornerRadiusManager.IsClip="True">
 
             <StackPanel x:Name="stack">
                 <StackPanel.ContextMenu>
                     <ContextMenu leedep:ContextMenuManager.ContentDock="Right">
                         <leedep:ContextMenuManager.Content>
-                            <Border Width="100" Background="Red" />
+                            <Border
+                                Width="100"
+                                Background="Red" />
                         </leedep:ContextMenuManager.Content>
                         <MenuItem Header="ceshi">
                             <MenuItem.Icon>
-                                <TextBlock FontFamily="{DynamicResource IconFontFamily}" Text="&#xE8C6;" />
+                                <TextBlock
+                                    FontFamily="{DynamicResource IconFontFamily}"
+                                    Text="&#xE8C6;" />
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Header="ceshi">
                             <MenuItem.Icon>
-                                <TextBlock FontFamily="{DynamicResource IconFontFamily}" Text="&#xE77F;" />
+                                <TextBlock
+                                    FontFamily="{DynamicResource IconFontFamily}"
+                                    Text="&#xE77F;" />
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Header="ceshi">
@@ -93,7 +99,7 @@
                     IconCommand="{Binding TestCommand}"
                     IconVisible="True"
                     Mode="IMEDispaly"
-                    Text="2"
+                    Placeholder="121212121"
                     ToolTip="测试" />
 
                 <TextBox Width="150" />
@@ -121,7 +127,9 @@
 
                     <leecontrol:Navigation.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock leecontrol:NavigationItem.ItemCanClose="{Binding Boolen}" Text="{Binding Title}" />
+                            <TextBlock
+                                Text="{Binding Title}"
+                                leecontrol:NavigationItem.ItemCanClose="{Binding Boolen}" />
                         </DataTemplate>
                     </leecontrol:Navigation.ItemTemplate>
 
@@ -145,13 +153,17 @@
 
                     <leecontrol:Navigation.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock leecontrol:NavigationItem.ItemCanClose="{Binding Boolen}" Text="{Binding Title}" />
+                            <TextBlock
+                                Text="{Binding Title}"
+                                leecontrol:NavigationItem.ItemCanClose="{Binding Boolen}" />
                         </DataTemplate>
                     </leecontrol:Navigation.ItemTemplate>
 
                 </leecontrol:Navigation>
 
-                <TreeView Height="300" ItemsSource="{Binding TreeList}">
+                <TreeView
+                    Height="300"
+                    ItemsSource="{Binding TreeList}">
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding Path=Child}">
                             <TextBlock Text="{Binding Title}" />
@@ -160,7 +172,9 @@
                 </TreeView>
 
 
-                <StackPanel Height="50" Orientation="Horizontal">
+                <StackPanel
+                    Height="50"
+                    Orientation="Horizontal">
                     <Rectangle
                         Width="50"
                         Fill="{DynamicResource LeeBrush_Background}"
@@ -246,7 +260,9 @@
 
 
 
-                <Expander Margin="5" ExpandDirection="Down">
+                <Expander
+                    Margin="5"
+                    ExpandDirection="Down">
                     <Expander.Header>
                         <TextBlock
                             Margin="0,0"
@@ -254,7 +270,9 @@
                             Text="你好"
                             TextWrapping="Wrap" />
                     </Expander.Header>
-                    <Grid Width="50" Height="100" />
+                    <Grid
+                        Width="50"
+                        Height="100" />
                 </Expander>
 
 
@@ -269,7 +287,9 @@
                     </leecontrol:ScrollBanner.Resources>
                     <leecontrol:ScrollBanner.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Command="{StaticResource CopyCommand}" Header="ceshi" />
+                            <MenuItem
+                                Header="ceshi"
+                                Command="{StaticResource CopyCommand}" />
                         </ContextMenu>
                     </leecontrol:ScrollBanner.ContextMenu>
                 </leecontrol:ScrollBanner>
@@ -283,9 +303,11 @@
                     Height="30"
                     Margin="5"
                     Padding="0"
-                    Command="{Binding TestCommand}"
-                    ToolTip="黑白切换">
-                    <leecontrol:ImageEx Effect="{DynamicResource LeeShadow}" Source="/Datas/myicon.jpg">
+                    ToolTip="黑白切换"
+                    Command="{Binding TestCommand}">
+                    <leecontrol:ImageEx
+                        Effect="{DynamicResource LeeShadow}"
+                        Source="/Datas/myicon.jpg">
                         <leecontrol:ImageEx.DefaultContent>
                             <Image Source="/Datas/test.ico" />
                         </leecontrol:ImageEx.DefaultContent>
@@ -297,26 +319,28 @@
 
                 <CheckBox
                     Margin="5"
-                    leedep:CheckBoxManager.CheckedContent="你选中了我"
                     Content="你好"
-                    Style="{StaticResource SwitchCheckBox}" />
+                    Style="{StaticResource SwitchCheckBox}"
+                    leedep:CheckBoxManager.CheckedContent="你选中了我" />
 
                 <CheckBox
                     Margin="5"
+                    Content="你好"
                     leedep:CheckBoxManager.CheckedContent="你选中了我"
                     leedep:EffectManager.Effect="{StaticResource LeeBlurEffect}"
-                    leedep:EffectManager.IsEnabled="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsChecked}"
-                    Content="你好" />
+                    leedep:EffectManager.IsEnabled="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsChecked}" />
                 <ComboBox
                     Height="35"
                     Margin="5"
-                    leedep:ComboBoxManager.IsDropCenterOnControl="True"
-                    leedep:CornerRadiusManager.IsClip="True"
                     IsEditable="False"
-                    ItemsSource="{Binding TestList}">
+                    ItemsSource="{Binding TestList}"
+                    leedep:ComboBoxManager.IsDropCenterOnControl="True"
+                    leedep:CornerRadiusManager.IsClip="True">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding Image}" Stretch="UniformToFill" />
+                            <Image
+                                Source="{Binding Image}"
+                                Stretch="UniformToFill" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
@@ -325,7 +349,6 @@
                     Height="200"
                     Margin="5"
                     HorizontalAlignment="Stretch"
-                    leedep:DataGridManager.ShowRowNumber="True"
                     AutoGenerateColumns="True"
                     CanUserAddRows="False"
                     CanUserDeleteRows="False"
@@ -333,18 +356,19 @@
                     HeadersVisibility="All"
                     IsReadOnly="True"
                     ItemsSource="{Binding TestList}"
-                    SelectionMode="Extended" />
+                    SelectionMode="Extended"
+                    leedep:DataGridManager.ShowRowNumber="True" />
 
                 <ListBox
                     Height="150"
                     Margin="5"
                     VerticalContentAlignment="Center"
+                    ItemsSource="{Binding TestList}"
+                    SelectionMode="Single"
                     leedep:ListItemManager.Marigin="5"
                     leedep:SelectorDragDropManager.DragDropOver="Navigation_DragDropOver"
                     leedep:SelectorDragDropManager.DragDropOverCommand="{Binding ToggleButtonCommand}"
-                    leedep:SelectorDragDropManager.IsEnabled="True"
-                    ItemsSource="{Binding TestList}"
-                    SelectionMode="Single">
+                    leedep:SelectorDragDropManager.IsEnabled="True">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -361,12 +385,14 @@
                 <ListView
                     Height="100"
                     Margin="5"
-                    leedep:ListViewManager.HeaderFreeze="True"
                     ItemsSource="{Binding TestList}"
-                    SelectionMode="Multiple">
+                    SelectionMode="Multiple"
+                    leedep:ListViewManager.HeaderFreeze="True">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Width="auto" DisplayMemberBinding="{Binding Title}">
+                            <GridViewColumn
+                                Width="auto"
+                                DisplayMemberBinding="{Binding Title}">
                                 <GridViewColumn.Header>
                                     <TextBlock Text="你好" />
                                 </GridViewColumn.Header>
@@ -422,7 +448,9 @@
                 </leecontrol:ProgressRing>
 
 
-                <GroupBox leedep:GroupBoxManager.BorderMode="External" Header="123">
+                <GroupBox
+                    Header="123"
+                    leedep:GroupBoxManager.BorderMode="External">
 
 
                     <leecontrol:FlipView
@@ -434,7 +462,9 @@
                         IsCycle="True"
                         Orientation="Horizontal">
                         <leecontrol:FlipViewItem>
-                            <Border Background="{DynamicResource LeeBrush_BlueOutlook}" BorderThickness="0">
+                            <Border
+                                Background="{DynamicResource LeeBrush_BlueOutlook}"
+                                BorderThickness="0">
                                 <TextBlock
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
@@ -444,7 +474,9 @@
                         </leecontrol:FlipViewItem>
 
                         <leecontrol:FlipViewItem>
-                            <Border Background="Red" BorderThickness="0">
+                            <Border
+                                Background="Red"
+                                BorderThickness="0">
                                 <TextBlock
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
@@ -454,7 +486,9 @@
                         </leecontrol:FlipViewItem>
 
                         <leecontrol:FlipViewItem>
-                            <Border Background="Green" BorderThickness="0">
+                            <Border
+                                Background="Green"
+                                BorderThickness="0">
                                 <TextBlock
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
@@ -481,9 +515,9 @@
 
                 <TextBox x:Name="txt"
                     Margin="5"
-                    leedep:TextBoxManager.EnterCommand="{Binding TestCommand}"
                     AcceptsReturn="True"
-                    SelectionBrush="#FF0078D7" />
+                    SelectionBrush="#FF0078D7"
+                    leedep:TextBoxManager.EnterCommand="{Binding TestCommand}" />
 
 
                 <PasswordBox
@@ -500,7 +534,9 @@
 
 
 
-                <ToggleButton leedep:ToggleButtonManager.CheckedContent="你好1" Content="你好" />
+                <ToggleButton
+                    Content="你好"
+                    leedep:ToggleButtonManager.CheckedContent="你好1" />
                 <RadioButton Content="RadioButton" />
                 <RadioButton Content="RadioButton" />
 
@@ -508,9 +544,9 @@
 
                 <GroupBox
                     Height="200"
+                    Header="00"
                     leedep:GroupBoxManager.BorderMode="External"
-                    leedep:GroupBoxManager.SplitLineVisibility="Visible"
-                    Header="00" />
+                    leedep:GroupBoxManager.SplitLineVisibility="Visible" />
 
 
 
@@ -520,7 +556,7 @@
         </ScrollViewer>
         <leecontrol:NotifyBanner
             Grid.RowSpan="3"
-            d:Visibility="Collapsed"
-            Content="{Binding NotifyData}" />
+            Content="{Binding NotifyData}"
+            d:Visibility="Collapsed" />
     </Grid>
 </Page>

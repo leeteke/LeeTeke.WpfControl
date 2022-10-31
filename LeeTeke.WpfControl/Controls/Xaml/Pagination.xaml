@@ -8,7 +8,8 @@
 
     </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="BasePagination" TargetType="{x:Type local:Pagination}">
+    <Style x:Key="BasePagination"
+        TargetType="{x:Type local:Pagination}">
 
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
@@ -45,12 +46,12 @@
                             Width="{TemplateBinding ButtonWidth}"
                             Height="{TemplateBinding ButtonHeight}"
                             Margin="{TemplateBinding ButtonMargin}"
-                            leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             IsEnabled="False"
-                            ToolTip="至首页">
+                            ToolTip="至首页"
+                            leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}">
                             <StackPanel Orientation="Horizontal">
                                 <Rectangle
                                     Width="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight, Converter={StaticResource DoubleFollowConverter}, ConverterParameter=/12}"
@@ -73,14 +74,14 @@
                             Height="{TemplateBinding ButtonHeight}"
                             Margin="{TemplateBinding ButtonMargin}"
                             VerticalAlignment="Center"
-                            leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Content="&#xE76B;"
                             FontFamily="{DynamicResource IconFontFamily}"
                             IsEnabled="False"
-                            ToolTip="上一页" />
+                            ToolTip="上一页"
+                            leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}" />
 
 
                         <ListBox x:Name="PART_PageGroup"
@@ -92,6 +93,11 @@
                             Padding="0"
                             HorizontalContentAlignment="Center"
                             VerticalContentAlignment="Center"
+                            Background="{x:Null}"
+                            BorderThickness="0"
+                            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                            ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                            Style="{StaticResource LeeListBox}"
                             leedep:ListItemManager.Background="{TemplateBinding Background}"
                             leedep:ListItemManager.BorderBrush="{TemplateBinding BorderBrush}"
                             leedep:ListItemManager.BorderThickness="{TemplateBinding BorderThickness}"
@@ -99,12 +105,7 @@
                             leedep:ListItemManager.Marigin="{TemplateBinding ButtonMargin}"
                             leedep:ListItemManager.MinHeight="0"
                             leedep:ListItemManager.MinWidth="{TemplateBinding ButtonWidth}"
-                            leedep:ListManager.Orientation="Horizontal"
-                            Background="{x:Null}"
-                            BorderThickness="0"
-                            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                            ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                            Style="{StaticResource LeeListBox}" />
+                            leedep:ListManager.Orientation="Horizontal" />
 
 
                         <Button x:Name="PART_NextButton"
@@ -112,26 +113,26 @@
                             Width="{TemplateBinding ButtonWidth}"
                             Height="{TemplateBinding ButtonHeight}"
                             Margin="{TemplateBinding ButtonMargin}"
-                            leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Content="&#xE76C;"
                             FontFamily="{DynamicResource IconFontFamily}"
                             IsEnabled="False"
-                            ToolTip="下一页" />
+                            ToolTip="下一页"
+                            leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}" />
 
                         <Button x:Name="PART_EndButton"
                             Grid.Column="4"
                             Width="{TemplateBinding ButtonWidth}"
                             Height="{TemplateBinding ButtonHeight}"
                             Margin="{TemplateBinding ButtonMargin}"
-                            leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             IsEnabled="False"
-                            ToolTip="至尾页">
+                            ToolTip="至尾页"
+                            leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock
                                     VerticalAlignment="Center"
@@ -164,14 +165,14 @@
                                 Height="{TemplateBinding ButtonHeight}"
                                 MinWidth="60"
                                 MinHeight="0"
-                                leedep:ComboBoxManager.PreviewText=""
-                                leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}"
-                                leedep:KeyboardNavigationManager.Ban="True"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 ItemsSource="{TemplateBinding PageIndexList}"
-                                SelectedValue="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=PageIndex, Mode=TwoWay}" />
+                                SelectedValue="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=PageIndex, Mode=TwoWay}"
+                                leedep:ComboBoxManager.PlaceholderVisibility="False"
+                                leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}"
+                                leedep:KeyboardNavigationManager.Ban="True" />
                         </StackPanel>
 
                     </Grid>

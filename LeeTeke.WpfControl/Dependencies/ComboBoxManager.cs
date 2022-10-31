@@ -51,36 +51,39 @@ namespace LeeTeke.WpfControl.Dependencies
 
         #endregion
 
-        #region ShowPreviewText
-        public static bool GetShowPreviewText(DependencyObject obj)
+
+        #region PlaceholderVisibility
+        public static bool GetPlaceholderVisibility(DependencyObject obj)
         {
-            return (bool)obj.GetValue(ShowPreviewTextProperty);
+            return (bool)obj.GetValue(PlaceholderVisibilityProperty);
         }
 
-        public static void SetShowPreviewText(DependencyObject obj, bool value)
+        public static void SetPlaceholderVisibility(DependencyObject obj, bool value)
         {
-            obj.SetValue(ShowPreviewTextProperty, value);
+            obj.SetValue(PlaceholderVisibilityProperty, value);
         }
 
-        // Using a DependencyProperty as the backing store for ShowPreviewText.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ShowPreviewTextProperty =
-            DependencyProperty.RegisterAttached("ShowPreviewText", typeof(bool), typeof(ComboBoxManager));
+        // Using a DependencyProperty as the backing store for PlaceholderVisibility.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PlaceholderVisibilityProperty =
+            DependencyProperty.RegisterAttached("PlaceholderVisibility", typeof(bool), typeof(ComboBoxManager));
         #endregion
 
-        #region PreviewText
-        public static string GetPreviewText(DependencyObject obj)
+
+
+        #region Placeholder
+        public static object GetPlaceholder(DependencyObject obj)
         {
-            return (string)obj.GetValue(PreviewTextProperty);
+            return (object)obj.GetValue(PlaceholderProperty);
         }
 
-        public static void SetPreviewText(DependencyObject obj, string value)
+        public static void SetPlaceholder(DependencyObject obj, object value)
         {
-            obj.SetValue(PreviewTextProperty, value);
+            obj.SetValue(PlaceholderProperty, value);
         }
 
-        // Using a DependencyProperty as the backing store for PreviewText.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty PreviewTextProperty =
-            DependencyProperty.RegisterAttached("PreviewText", typeof(string), typeof(ComboBoxManager));
+        // Using a DependencyProperty as the backing store for Placeholder.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PlaceholderProperty =
+            DependencyProperty.RegisterAttached("Placeholder", typeof(object), typeof(ComboBoxManager));
         #endregion
 
         #region ItemHeight

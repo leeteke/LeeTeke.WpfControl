@@ -329,7 +329,6 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("ActiveBackground", typeof(Brush), typeof(TextBoxEx));
         #endregion
 
-
         #region TextWrapping
         /// <summary>
         /// 请添加描述
@@ -344,7 +343,6 @@ namespace LeeTeke.WpfControl.Controls
         public static readonly DependencyProperty TextWrappingProperty =
             DependencyProperty.Register("TextWrapping", typeof(TextWrapping), typeof(TextBoxEx));
         #endregion
-
 
         #region PasswordChar
         /// <summary>
@@ -362,19 +360,19 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-        #region PreviewText
+        #region Placeholder
         /// <summary>
-        /// 请填写描述
+        /// 占位符号
         /// </summary>
-        public string PreviewText
+        public object Placeholder
         {
-            get { return (string)GetValue(PreviewTextProperty); }
-            set { SetValue(PreviewTextProperty, value); }
+            get { return (object)GetValue(PlaceholderProperty); }
+            set { SetValue(PlaceholderProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for PreviewText.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty PreviewTextProperty =
-            DependencyProperty.Register("PreviewText", typeof(string), typeof(TextBoxEx));
+        // Using a DependencyProperty as the backing store for Placeholder.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PlaceholderProperty =
+            DependencyProperty.Register(nameof(Placeholder), typeof(object), typeof(TextBoxEx));
         #endregion
 
         #region AcceptsReturn
@@ -408,7 +406,6 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("AcceptsTab", typeof(bool), typeof(TextBoxEx));
         #endregion
 
-
         #region CaretBrush
         /// <summary>
         /// 请添加描述
@@ -438,7 +435,6 @@ namespace LeeTeke.WpfControl.Controls
         public static readonly DependencyProperty IsInactiveSelectionHighlightEnabledProperty =
             DependencyProperty.Register("IsInactiveSelectionHighlightEnabled", typeof(bool), typeof(TextBoxEx));
         #endregion
-
 
         #region SelectionBrush
         /// <summary>
@@ -485,7 +481,6 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("SelectionTextBrush", typeof(Brush), typeof(TextBoxEx));
         #endregion
 
-
         #region CharacterCasing
         /// <summary>
         /// 请添加描述
@@ -515,7 +510,6 @@ namespace LeeTeke.WpfControl.Controls
         public static readonly DependencyProperty AutoWordSelectionProperty =
             DependencyProperty.Register("AutoWordSelection", typeof(bool), typeof(TextBoxEx));
         #endregion
-
 
         #region MaxLength
         /// <summary>
@@ -628,8 +622,6 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("IconHorizontalAlignment", typeof(HorizontalAlignment), typeof(TextBoxEx));
         #endregion
 
-
-
         #region IconForeground
         /// <summary>
         /// 请添加描述
@@ -644,7 +636,6 @@ namespace LeeTeke.WpfControl.Controls
         public static readonly DependencyProperty IconForegroundProperty =
             DependencyProperty.Register("IconForeground", typeof(Brush), typeof(TextBoxEx));
         #endregion
-
 
         #region IconVisible
         /// <summary>
@@ -773,7 +764,6 @@ namespace LeeTeke.WpfControl.Controls
             DependencyProperty.Register("EscToClear", typeof(bool), typeof(TextBoxEx));
 
         #endregion
-
 
         #region EditBoxCursor
         /// <summary>

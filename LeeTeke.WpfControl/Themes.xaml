@@ -157,7 +157,8 @@
 
     </Style>
 
-    <Style x:Key="LeeButton" TargetType="{x:Type Button}">
+    <Style x:Key="LeeButton"
+        TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -180,7 +181,8 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}">
-                        <lee:EasyPanel x:Name="PART_EasyPanel" Background="Transparent">
+                        <lee:EasyPanel x:Name="PART_EasyPanel"
+                            Background="Transparent">
                             <ContentPresenter x:Name="contentPresenter"
                                 Margin="{TemplateBinding Padding}"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -198,7 +200,9 @@
                         <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
                             <Setter TargetName="PART_EasyPanel" Property="Clip">
                                 <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                    <MultiBinding
+                                        Converter="{StaticResource MultiValueToClipConverter}"
+                                        Mode="OneWay">
                                         <Binding
                                             Mode="OneWay"
                                             Path="ActualWidth"
@@ -231,7 +235,8 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ColorButton" TargetType="{x:Type Button}">
+    <Style x:Key="ColorButton"
+        TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -257,7 +262,8 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}">
-                        <lee:EasyPanel x:Name="PART_EasyPanel" Background="Transparent">
+                        <lee:EasyPanel x:Name="PART_EasyPanel"
+                            Background="Transparent">
                             <ContentPresenter x:Name="contentPresenter"
                                 Margin="{TemplateBinding Padding}"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -275,7 +281,9 @@
                         <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
                             <Setter TargetName="PART_EasyPanel" Property="Clip">
                                 <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                    <MultiBinding
+                                        Converter="{StaticResource MultiValueToClipConverter}"
+                                        Mode="OneWay">
                                         <Binding
                                             Mode="OneWay"
                                             Path="ActualWidth"
@@ -315,7 +323,8 @@
 
     </Style>
 
-    <Style x:Key="TextButton" TargetType="{x:Type Button}">
+    <Style x:Key="TextButton"
+        TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -365,7 +374,8 @@
 
     </Style>
 
-    <Style x:Key="LeeTextBox" TargetType="{x:Type TextBox}">
+    <Style x:Key="LeeTextBox"
+        TargetType="{x:Type TextBox}">
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}" />
         <Setter Property="leedep:TextBoxManager.ActiveBackground" Value="{DynamicResource LeeBrush_ForgroundActive}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -383,19 +393,31 @@
         <Setter Property="ContextMenu">
             <Setter.Value>
                 <ContextMenu>
-                    <MenuItem Header="剪切(_T) - Ctrl+X" Command="ApplicationCommands.Cut">
+                    <MenuItem
+                        Header="剪切(_T) - Ctrl+X"
+                        Command="ApplicationCommands.Cut">
                         <MenuItem.Icon>
-                            <TextBlock FontFamily="{DynamicResource IconFontFamily}" Text="&#xE8C6;" />
+                            <TextBlock
+                                FontFamily="{DynamicResource IconFontFamily}"
+                                Text="&#xE8C6;" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="复制(_C) - Ctrl+C" Command="ApplicationCommands.Copy">
+                    <MenuItem
+                        Header="复制(_C) - Ctrl+C"
+                        Command="ApplicationCommands.Copy">
                         <MenuItem.Icon>
-                            <TextBlock FontFamily="{DynamicResource IconFontFamily}" Text="&#xE8C8;" />
+                            <TextBlock
+                                FontFamily="{DynamicResource IconFontFamily}"
+                                Text="&#xE8C8;" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="粘贴(_P) - Ctrl+V" Command="ApplicationCommands.Paste">
+                    <MenuItem
+                        Header="粘贴(_P) - Ctrl+V"
+                        Command="ApplicationCommands.Paste">
                         <MenuItem.Icon>
-                            <TextBlock FontFamily="{DynamicResource IconFontFamily}" Text="&#xE77F;" />
+                            <TextBlock
+                                FontFamily="{DynamicResource IconFontFamily}"
+                                Text="&#xE77F;" />
                         </MenuItem.Icon>
                     </MenuItem>
                 </ContextMenu>
@@ -434,7 +456,8 @@
         </Setter>
     </Style>
 
-    <Style x:Key="LeeToggleButton" TargetType="{x:Type ToggleButton}">
+    <Style x:Key="LeeToggleButton"
+        TargetType="{x:Type ToggleButton}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -467,7 +490,8 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}">
-                        <lee:EasyPanel x:Name="PART_EasyPanel" Background="Transparent">
+                        <lee:EasyPanel x:Name="PART_EasyPanel"
+                            Background="Transparent">
                             <ContentPresenter x:Name="contentPresenter"
                                 Margin="{TemplateBinding Padding}"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -494,7 +518,9 @@
                         <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
                             <Setter TargetName="PART_EasyPanel" Property="Clip">
                                 <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                    <MultiBinding
+                                        Converter="{StaticResource MultiValueToClipConverter}"
+                                        Mode="OneWay">
                                         <Binding
                                             Mode="OneWay"
                                             Path="ActualWidth"
@@ -549,7 +575,8 @@
 
     </Style>
 
-    <Style x:Key="RotateToggleButton" TargetType="{x:Type ToggleButton}">
+    <Style x:Key="RotateToggleButton"
+        TargetType="{x:Type ToggleButton}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -590,8 +617,12 @@
                             <MultiTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Angle" Storyboard.TargetProperty="Angle">
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="180">
+                                        <DoubleAnimationUsingKeyFrames
+                                            Storyboard.TargetName="PART_Angle"
+                                            Storyboard.TargetProperty="Angle">
+                                            <EasingDoubleKeyFrame
+                                                KeyTime="0:0:0.2"
+                                                Value="180">
                                                 <EasingDoubleKeyFrame.EasingFunction>
                                                     <SineEase EasingMode="EaseIn" />
                                                 </EasingDoubleKeyFrame.EasingFunction>
@@ -603,8 +634,12 @@
                             <MultiTrigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Angle" Storyboard.TargetProperty="Angle">
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0">
+                                        <DoubleAnimationUsingKeyFrames
+                                            Storyboard.TargetName="PART_Angle"
+                                            Storyboard.TargetProperty="Angle">
+                                            <EasingDoubleKeyFrame
+                                                KeyTime="0:0:0.2"
+                                                Value="0">
                                                 <EasingDoubleKeyFrame.EasingFunction>
                                                     <SineEase EasingMode="EaseIn" />
                                                 </EasingDoubleKeyFrame.EasingFunction>
@@ -623,8 +658,12 @@
                             <MultiTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Angle" Storyboard.TargetProperty="Angle">
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="90">
+                                        <DoubleAnimationUsingKeyFrames
+                                            Storyboard.TargetName="PART_Angle"
+                                            Storyboard.TargetProperty="Angle">
+                                            <EasingDoubleKeyFrame
+                                                KeyTime="0:0:0.2"
+                                                Value="90">
                                                 <EasingDoubleKeyFrame.EasingFunction>
                                                     <SineEase EasingMode="EaseIn" />
                                                 </EasingDoubleKeyFrame.EasingFunction>
@@ -636,8 +675,12 @@
                             <MultiTrigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Angle" Storyboard.TargetProperty="Angle">
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0">
+                                        <DoubleAnimationUsingKeyFrames
+                                            Storyboard.TargetName="PART_Angle"
+                                            Storyboard.TargetProperty="Angle">
+                                            <EasingDoubleKeyFrame
+                                                KeyTime="0:0:0.2"
+                                                Value="0">
                                                 <EasingDoubleKeyFrame.EasingFunction>
                                                     <SineEase EasingMode="EaseIn" />
                                                 </EasingDoubleKeyFrame.EasingFunction>
@@ -656,8 +699,12 @@
                             <MultiTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Angle" Storyboard.TargetProperty="Angle">
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-180">
+                                        <DoubleAnimationUsingKeyFrames
+                                            Storyboard.TargetName="PART_Angle"
+                                            Storyboard.TargetProperty="Angle">
+                                            <EasingDoubleKeyFrame
+                                                KeyTime="0:0:0.2"
+                                                Value="-180">
                                                 <EasingDoubleKeyFrame.EasingFunction>
                                                     <SineEase EasingMode="EaseIn" />
                                                 </EasingDoubleKeyFrame.EasingFunction>
@@ -669,8 +716,12 @@
                             <MultiTrigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Angle" Storyboard.TargetProperty="Angle">
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0">
+                                        <DoubleAnimationUsingKeyFrames
+                                            Storyboard.TargetName="PART_Angle"
+                                            Storyboard.TargetProperty="Angle">
+                                            <EasingDoubleKeyFrame
+                                                KeyTime="0:0:0.2"
+                                                Value="0">
                                                 <EasingDoubleKeyFrame.EasingFunction>
                                                     <SineEase EasingMode="EaseIn" />
                                                 </EasingDoubleKeyFrame.EasingFunction>
@@ -689,8 +740,12 @@
                             <MultiTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Angle" Storyboard.TargetProperty="Angle">
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-90">
+                                        <DoubleAnimationUsingKeyFrames
+                                            Storyboard.TargetName="PART_Angle"
+                                            Storyboard.TargetProperty="Angle">
+                                            <EasingDoubleKeyFrame
+                                                KeyTime="0:0:0.2"
+                                                Value="-90">
                                                 <EasingDoubleKeyFrame.EasingFunction>
                                                     <SineEase EasingMode="EaseIn" />
                                                 </EasingDoubleKeyFrame.EasingFunction>
@@ -702,8 +757,12 @@
                             <MultiTrigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Angle" Storyboard.TargetProperty="Angle">
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0">
+                                        <DoubleAnimationUsingKeyFrames
+                                            Storyboard.TargetName="PART_Angle"
+                                            Storyboard.TargetProperty="Angle">
+                                            <EasingDoubleKeyFrame
+                                                KeyTime="0:0:0.2"
+                                                Value="0">
                                                 <EasingDoubleKeyFrame.EasingFunction>
                                                     <SineEase EasingMode="EaseIn" />
                                                 </EasingDoubleKeyFrame.EasingFunction>
@@ -719,7 +778,8 @@
         </Setter>
     </Style>
 
-    <Style x:Key="LeeThumb" TargetType="{x:Type Thumb}">
+    <Style x:Key="LeeThumb"
+        TargetType="{x:Type Thumb}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
@@ -737,7 +797,8 @@
         </Setter>
     </Style>
 
-    <Style x:Key="LeeToolTip" TargetType="{x:Type ToolTip}">
+    <Style x:Key="LeeToolTip"
+        TargetType="{x:Type ToolTip}">
         <Setter Property="Background" Value="{DynamicResource LeeBrush_ForgroundActive}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
@@ -765,7 +826,9 @@
                         <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
                             <Setter TargetName="PART_Content" Property="Clip">
                                 <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                    <MultiBinding
+                                        Converter="{StaticResource MultiValueToClipConverter}"
+                                        Mode="OneWay">
                                         <Binding
                                             Mode="OneWay"
                                             Path="ActualWidth"
@@ -792,7 +855,8 @@
         </Setter>
     </Style>
 
-    <Style x:Key="LeePasswordBox" TargetType="{x:Type PasswordBox}">
+    <Style x:Key="LeePasswordBox"
+        TargetType="{x:Type PasswordBox}">
         <Setter Property="PasswordChar" Value="●" />
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}" />
         <Setter Property="leedep:TextBoxManager.ActiveBackground" Value="{DynamicResource LeeBrush_ForgroundActive}" />
@@ -815,9 +879,13 @@
         <Setter Property="ContextMenu">
             <Setter.Value>
                 <ContextMenu>
-                    <MenuItem Header="粘贴(_P) - Ctrl+V" Command="ApplicationCommands.Paste">
+                    <MenuItem
+                        Header="粘贴(_P) - Ctrl+V"
+                        Command="ApplicationCommands.Paste">
                         <MenuItem.Icon>
-                            <TextBlock FontFamily="{DynamicResource IconFontFamily}" Text="&#xE77F;" />
+                            <TextBlock
+                                FontFamily="{DynamicResource IconFontFamily}"
+                                Text="&#xE77F;" />
                         </MenuItem.Icon>
                     </MenuItem>
                 </ContextMenu>
@@ -856,7 +924,8 @@
 
     </Style>
 
-    <Style x:Key="LeeRadioButton" TargetType="{x:Type RadioButton}">
+    <Style x:Key="LeeRadioButton"
+        TargetType="{x:Type RadioButton}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -875,7 +944,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RadioButton}">
-                    <Grid x:Name="templateRoot" Background="Transparent">
+                    <Grid x:Name="templateRoot"
+                        Background="Transparent">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
@@ -977,7 +1047,8 @@
         </Setter>
     </Style>
 
-    <Style x:Key="SliderRepeatButton" TargetType="{x:Type RepeatButton}">
+    <Style x:Key="SliderRepeatButton"
+        TargetType="{x:Type RepeatButton}">
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
@@ -992,7 +1063,8 @@
         </Setter>
     </Style>
 
-    <Style x:Key="LeeSlider" TargetType="{x:Type Slider}">
+    <Style x:Key="LeeSlider"
+        TargetType="{x:Type Slider}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -1021,7 +1093,8 @@
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type Thumb}">
                                 <ControlTemplate.Resources>
-                                    <QuarticEase x:Key="Easing" EasingMode="EaseOut" />
+                                    <QuarticEase x:Key="Easing"
+                                        EasingMode="EaseOut" />
                                 </ControlTemplate.Resources>
                                 <Border x:Name="PART_Border"
                                     Width="18"
@@ -1047,13 +1120,17 @@
                                         <MultiTrigger.EnterActions>
                                             <BeginStoryboard>
                                                 <Storyboard>
-                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Ellipse" Storyboard.TargetProperty="Width">
+                                                    <DoubleAnimationUsingKeyFrames
+                                                        Storyboard.TargetName="PART_Ellipse"
+                                                        Storyboard.TargetProperty="Width">
                                                         <EasingDoubleKeyFrame
                                                             EasingFunction="{StaticResource Easing}"
                                                             KeyTime="0:0:0.2"
                                                             Value="14" />
                                                     </DoubleAnimationUsingKeyFrames>
-                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Ellipse" Storyboard.TargetProperty="Height">
+                                                    <DoubleAnimationUsingKeyFrames
+                                                        Storyboard.TargetName="PART_Ellipse"
+                                                        Storyboard.TargetProperty="Height">
                                                         <EasingDoubleKeyFrame
                                                             EasingFunction="{StaticResource Easing}"
                                                             KeyTime="0:0:0.2"
@@ -1066,13 +1143,17 @@
                                         <MultiTrigger.ExitActions>
                                             <BeginStoryboard>
                                                 <Storyboard>
-                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Ellipse" Storyboard.TargetProperty="Width">
+                                                    <DoubleAnimationUsingKeyFrames
+                                                        Storyboard.TargetName="PART_Ellipse"
+                                                        Storyboard.TargetProperty="Width">
                                                         <EasingDoubleKeyFrame
                                                             EasingFunction="{StaticResource Easing}"
                                                             KeyTime="0:0:0.2"
                                                             Value="10" />
                                                     </DoubleAnimationUsingKeyFrames>
-                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Ellipse" Storyboard.TargetProperty="Height">
+                                                    <DoubleAnimationUsingKeyFrames
+                                                        Storyboard.TargetName="PART_Ellipse"
+                                                        Storyboard.TargetProperty="Height">
                                                         <EasingDoubleKeyFrame
                                                             EasingFunction="{StaticResource Easing}"
                                                             KeyTime="0:0:0.2"
@@ -1092,7 +1173,9 @@
         </Setter>
 
         <Style.Triggers>
-            <DataTrigger Binding="{Binding Orientation, RelativeSource={RelativeSource Mode=Self}}" Value="Horizontal">
+            <DataTrigger
+                Binding="{Binding Orientation, RelativeSource={RelativeSource Mode=Self}}"
+                Value="Horizontal">
                 <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}" />
                 <Setter Property="MinWidth" Value="{DynamicResource LeeControlMinWidth}" />
                 <Setter Property="Template">
@@ -1185,7 +1268,9 @@
                     </Setter.Value>
                 </Setter>
             </DataTrigger>
-            <DataTrigger Binding="{Binding Orientation, RelativeSource={RelativeSource Mode=Self}}" Value="Vertical">
+            <DataTrigger
+                Binding="{Binding Orientation, RelativeSource={RelativeSource Mode=Self}}"
+                Value="Vertical">
                 <Setter Property="MinWidth" Value="{DynamicResource LeeControlMinHeight}" />
                 <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinWidth}" />
                 <Setter Property="Template">
@@ -1281,7 +1366,8 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="LeeCalendarDayButton" TargetType="{x:Type CalendarDayButton}">
+    <Style x:Key="LeeCalendarDayButton"
+        TargetType="{x:Type CalendarDayButton}">
         <Setter Property="MinWidth" Value="10" />
         <Setter Property="MinHeight" Value="10" />
         <Setter Property="Width" Value="32" />
@@ -1343,7 +1429,8 @@
         </Setter>
     </Style>
 
-    <Style x:Key="LeeCalendarButton" TargetType="{x:Type CalendarButton}">
+    <Style x:Key="LeeCalendarButton"
+        TargetType="{x:Type CalendarButton}">
         <Setter Property="MinWidth" Value="10" />
         <Setter Property="MinHeight" Value="10" />
         <Setter Property="FontSize" Value="12" />
@@ -1394,7 +1481,8 @@
         </Setter>
     </Style>
 
-    <Style x:Key="LeeCalendarItem" TargetType="{x:Type CalendarItem}">
+    <Style x:Key="LeeCalendarItem"
+        TargetType="{x:Type CalendarItem}">
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="Margin" Value="0" />
@@ -1546,11 +1634,15 @@
                         </VisualStateManager.VisualStateGroups>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding DisplayMode, RelativeSource={RelativeSource AncestorType=Calendar}}" Value="Year">
+                        <DataTrigger
+                            Binding="{Binding DisplayMode, RelativeSource={RelativeSource AncestorType=Calendar}}"
+                            Value="Year">
                             <Setter TargetName="PART_MonthView" Property="Visibility" Value="Hidden" />
                             <Setter TargetName="PART_YearView" Property="Visibility" Value="Visible" />
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding DisplayMode, RelativeSource={RelativeSource AncestorType=Calendar}}" Value="Decade">
+                        <DataTrigger
+                            Binding="{Binding DisplayMode, RelativeSource={RelativeSource AncestorType=Calendar}}"
+                            Value="Decade">
                             <Setter TargetName="PART_MonthView" Property="Visibility" Value="Hidden" />
                             <Setter TargetName="PART_YearView" Property="Visibility" Value="Visible" />
                         </DataTrigger>
@@ -1560,7 +1652,8 @@
         </Setter>
     </Style>
 
-    <Style x:Key="LeeCalendar" TargetType="{x:Type Calendar}">
+    <Style x:Key="LeeCalendar"
+        TargetType="{x:Type Calendar}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -1587,14 +1680,17 @@
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}"
                             Effect="{StaticResource LeeShadow}" />
-                        <CalendarItem x:Name="PART_CalendarItem" Style="{TemplateBinding CalendarItemStyle}" />
+                        <CalendarItem x:Name="PART_CalendarItem"
+                            Style="{TemplateBinding CalendarItemStyle}" />
                     </lee:EasyPanel>
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
                             <Setter TargetName="PART_CalendarItem" Property="Clip">
                                 <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                    <MultiBinding
+                                        Converter="{StaticResource MultiValueToClipConverter}"
+                                        Mode="OneWay">
                                         <Binding
                                             Mode="OneWay"
                                             Path="ActualWidth"
@@ -1625,7 +1721,8 @@
     <sys:Double x:Key="ScrollViewerBarSize">8</sys:Double>
     <sys:Double x:Key="ScrollViewerMiniBarSize">2</sys:Double>
 
-    <Style x:Key="ScrollBarBaseRepeatButton" TargetType="RepeatButton">
+    <Style x:Key="ScrollBarBaseRepeatButton"
+        TargetType="RepeatButton">
         <Setter Property="OverridesDefaultStyle" Value="true" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Focusable" Value="false" />
@@ -1642,7 +1739,8 @@
         </Setter>
     </Style>
 
-    <Style x:Key="LeeScrollBar" TargetType="{x:Type ScrollBar}">
+    <Style x:Key="LeeScrollBar"
+        TargetType="{x:Type ScrollBar}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false" />
@@ -1659,10 +1757,14 @@
                         IsDirectionReversed="true"
                         IsEnabled="{TemplateBinding IsMouseOver}">
                         <Track.DecreaseRepeatButton>
-                            <RepeatButton Style="{StaticResource ScrollBarBaseRepeatButton}" Command="{x:Static ScrollBar.PageUpCommand}" />
+                            <RepeatButton
+                                Style="{StaticResource ScrollBarBaseRepeatButton}"
+                                Command="{x:Static ScrollBar.PageUpCommand}" />
                         </Track.DecreaseRepeatButton>
                         <Track.IncreaseRepeatButton>
-                            <RepeatButton Style="{StaticResource ScrollBarBaseRepeatButton}" Command="{x:Static ScrollBar.PageDownCommand}" />
+                            <RepeatButton
+                                Style="{StaticResource ScrollBarBaseRepeatButton}"
+                                Command="{x:Static ScrollBar.PageDownCommand}" />
                         </Track.IncreaseRepeatButton>
                         <Track.Thumb>
                             <Thumb>
@@ -1674,7 +1776,9 @@
                                             CornerRadius="{Binding Path=(leedep:ScrollViewerManager.ScrollBarCornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}"
                                             Effect="{Binding Path=(leedep:ScrollViewerManager.ScrollBarShadow), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}" />
                                         <ControlTemplate.Triggers>
-                                            <DataTrigger Binding="{Binding ElementName=PART_Border, Path=ActualWidth, Converter={StaticResource DoubleComparisonConverter}, ConverterParameter=Less_4}" Value="True">
+                                            <DataTrigger
+                                                Binding="{Binding ElementName=PART_Border, Path=ActualWidth, Converter={StaticResource DoubleComparisonConverter}, ConverterParameter=Less_4}"
+                                                Value="True">
                                                 <Setter TargetName="PART_Border" Property="CornerRadius" Value="2" />
                                             </DataTrigger>
 
@@ -1696,12 +1800,17 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ScrollBar}">
 
-                            <Track x:Name="PART_Track" IsEnabled="{TemplateBinding IsMouseOver}">
+                            <Track x:Name="PART_Track"
+                                IsEnabled="{TemplateBinding IsMouseOver}">
                                 <Track.DecreaseRepeatButton>
-                                    <RepeatButton Style="{StaticResource ScrollBarBaseRepeatButton}" Command="{x:Static ScrollBar.PageLeftCommand}" />
+                                    <RepeatButton
+                                        Style="{StaticResource ScrollBarBaseRepeatButton}"
+                                        Command="{x:Static ScrollBar.PageLeftCommand}" />
                                 </Track.DecreaseRepeatButton>
                                 <Track.IncreaseRepeatButton>
-                                    <RepeatButton Style="{StaticResource ScrollBarBaseRepeatButton}" Command="{x:Static ScrollBar.PageRightCommand}" />
+                                    <RepeatButton
+                                        Style="{StaticResource ScrollBarBaseRepeatButton}"
+                                        Command="{x:Static ScrollBar.PageRightCommand}" />
                                 </Track.IncreaseRepeatButton>
                                 <Track.Thumb>
                                     <Thumb>
@@ -1713,7 +1822,9 @@
                                                     CornerRadius="{Binding Path=(leedep:ScrollViewerManager.ScrollBarCornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}"
                                                     Effect="{Binding Path=(leedep:ScrollViewerManager.ScrollBarShadow), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}" />
                                                 <ControlTemplate.Triggers>
-                                                    <DataTrigger Binding="{Binding ElementName=PART_Border, Path=ActualWidth, Converter={StaticResource DoubleComparisonConverter}, ConverterParameter=Less_4}" Value="True">
+                                                    <DataTrigger
+                                                        Binding="{Binding ElementName=PART_Border, Path=ActualWidth, Converter={StaticResource DoubleComparisonConverter}, ConverterParameter=Less_4}"
+                                                        Value="True">
                                                         <Setter TargetName="PART_Border" Property="CornerRadius" Value="2" />
                                                     </DataTrigger>
 
@@ -1732,7 +1843,8 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="LeeScrollViewer" TargetType="{x:Type ScrollViewer}">
+    <Style x:Key="LeeScrollViewer"
+        TargetType="{x:Type ScrollViewer}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -1765,8 +1877,12 @@
                                 <RowDefinition Height="auto" />
                                 <RowDefinition />
                             </Grid.RowDefinitions>
-                            <ContentPresenter Grid.Column="1" Content="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.TopContent), Mode=OneWay}" />
-                            <ContentPresenter Grid.Row="1" Content="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.LeftContent), Mode=OneWay}" />
+                            <ContentPresenter
+                                Grid.Column="1"
+                                Content="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.TopContent), Mode=OneWay}" />
+                            <ContentPresenter
+                                Grid.Row="1"
+                                Content="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.LeftContent), Mode=OneWay}" />
                             <ScrollContentPresenter
                                 Grid.Row="1"
                                 Grid.Column="1"
@@ -1817,10 +1933,18 @@
                         <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
                             <Setter TargetName="PART_Grid" Property="Clip">
                                 <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
-                                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource Mode=Self}" />
-                                        <Binding Path="ActualHeight" RelativeSource="{RelativeSource Mode=Self}" />
-                                        <Binding ElementName="PART_Border" Path="CornerRadius" />
+                                    <MultiBinding
+                                        Converter="{StaticResource MultiValueToClipConverter}"
+                                        Mode="OneWay">
+                                        <Binding
+                                            Path="ActualWidth"
+                                            RelativeSource="{RelativeSource Mode=Self}" />
+                                        <Binding
+                                            Path="ActualHeight"
+                                            RelativeSource="{RelativeSource Mode=Self}" />
+                                        <Binding
+                                            ElementName="PART_Border"
+                                            Path="CornerRadius" />
                                         <Binding
                                             ElementName="PART_Border"
                                             Mode="OneWay"
@@ -1856,7 +1980,9 @@
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseEnter" SourceName="PART_VerticalGrid">
+                        <EventTrigger
+                            RoutedEvent="MouseEnter"
+                            SourceName="PART_VerticalGrid">
                             <BeginStoryboard>
                                 <Storyboard>
                                     <DoubleAnimation
@@ -1868,7 +1994,9 @@
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseLeave" SourceName="PART_VerticalGrid">
+                        <EventTrigger
+                            RoutedEvent="MouseLeave"
+                            SourceName="PART_VerticalGrid">
                             <BeginStoryboard>
                                 <Storyboard>
                                     <DoubleAnimation
@@ -1880,7 +2008,9 @@
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseEnter" SourceName="PART_HorizontalGrid">
+                        <EventTrigger
+                            RoutedEvent="MouseEnter"
+                            SourceName="PART_HorizontalGrid">
                             <BeginStoryboard>
                                 <Storyboard>
                                     <DoubleAnimation
@@ -1892,7 +2022,9 @@
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseLeave" SourceName="PART_HorizontalGrid">
+                        <EventTrigger
+                            RoutedEvent="MouseLeave"
+                            SourceName="PART_HorizontalGrid">
                             <BeginStoryboard>
                                 <Storyboard>
                                     <DoubleAnimation
@@ -1947,7 +2079,8 @@
         </Setter>
     </Style>
 
-    <Style x:Key="LeeCheckBox" TargetType="{x:Type CheckBox}">
+    <Style x:Key="LeeCheckBox"
+        TargetType="{x:Type CheckBox}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -1968,13 +2101,21 @@
                 <ControlTemplate TargetType="{x:Type CheckBox}">
                     <ControlTemplate.Resources>
                         <Storyboard x:Key="StoryboardCheckedTrue">
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="(Shape.StrokeDashOffset)">
-                                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0" />
+                            <DoubleAnimationUsingKeyFrames
+                                Storyboard.TargetName="path"
+                                Storyboard.TargetProperty="(Shape.StrokeDashOffset)">
+                                <EasingDoubleKeyFrame
+                                    KeyTime="0:0:0.1"
+                                    Value="0" />
                             </DoubleAnimationUsingKeyFrames>
                         </Storyboard>
                         <Storyboard x:Key="StoryboardCheckedFalse">
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="(Shape.StrokeDashOffset)">
-                                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="8" />
+                            <DoubleAnimationUsingKeyFrames
+                                Storyboard.TargetName="path"
+                                Storyboard.TargetProperty="(Shape.StrokeDashOffset)">
+                                <EasingDoubleKeyFrame
+                                    KeyTime="0:0:0.1"
+                                    Value="8" />
                             </DoubleAnimationUsingKeyFrames>
                         </Storyboard>
                     </ControlTemplate.Resources>
@@ -2013,7 +2154,9 @@
                                     Fill="{DynamicResource LeeBrush_Theme}"
                                     Visibility="Collapsed">
                                     <Rectangle.Clip>
-                                        <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                        <MultiBinding
+                                            Converter="{StaticResource MultiValueToClipConverter}"
+                                            Mode="OneWay">
                                             <Binding
                                                 Mode="OneWay"
                                                 Path="ActualWidth"
@@ -2103,8 +2246,10 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <QuarticEase x:Key="SwitchEasingFunction" EasingMode="EaseOut" />
-    <Style x:Key="SwitchCheckBox" TargetType="{x:Type CheckBox}">
+    <QuarticEase x:Key="SwitchEasingFunction"
+        EasingMode="EaseOut" />
+    <Style x:Key="SwitchCheckBox"
+        TargetType="{x:Type CheckBox}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -2124,20 +2269,26 @@
                 <ControlTemplate TargetType="{x:Type CheckBox}">
                     <ControlTemplate.Resources>
                         <Storyboard x:Key="StoryboardCheckedTrue">
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_EllipseTT" Storyboard.TargetProperty="X">
+                            <DoubleAnimationUsingKeyFrames
+                                Storyboard.TargetName="PART_EllipseTT"
+                                Storyboard.TargetProperty="X">
                                 <EasingDoubleKeyFrame
                                     EasingFunction="{StaticResource SwitchEasingFunction}"
                                     KeyTime="0:0:0.3"
                                     Value="20" />
                             </DoubleAnimationUsingKeyFrames>
 
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_CheckedFalseST" Storyboard.TargetProperty="ScaleX">
+                            <DoubleAnimationUsingKeyFrames
+                                Storyboard.TargetName="PART_CheckedFalseST"
+                                Storyboard.TargetProperty="ScaleX">
                                 <EasingDoubleKeyFrame
                                     EasingFunction="{StaticResource SwitchEasingFunction}"
                                     KeyTime="0:0:0.3"
                                     Value="0" />
                             </DoubleAnimationUsingKeyFrames>
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_CheckedFalseST" Storyboard.TargetProperty="ScaleY">
+                            <DoubleAnimationUsingKeyFrames
+                                Storyboard.TargetName="PART_CheckedFalseST"
+                                Storyboard.TargetProperty="ScaleY">
                                 <EasingDoubleKeyFrame
                                     EasingFunction="{StaticResource SwitchEasingFunction}"
                                     KeyTime="0:0:0.3"
@@ -2146,20 +2297,26 @@
 
                         </Storyboard>
                         <Storyboard x:Key="StoryboardCheckedFalse">
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_EllipseTT" Storyboard.TargetProperty="X">
+                            <DoubleAnimationUsingKeyFrames
+                                Storyboard.TargetName="PART_EllipseTT"
+                                Storyboard.TargetProperty="X">
                                 <EasingDoubleKeyFrame
                                     EasingFunction="{StaticResource SwitchEasingFunction}"
                                     KeyTime="0:0:0.3"
                                     Value="0" />
                             </DoubleAnimationUsingKeyFrames>
 
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_CheckedFalseST" Storyboard.TargetProperty="ScaleX">
+                            <DoubleAnimationUsingKeyFrames
+                                Storyboard.TargetName="PART_CheckedFalseST"
+                                Storyboard.TargetProperty="ScaleX">
                                 <EasingDoubleKeyFrame
                                     EasingFunction="{StaticResource SwitchEasingFunction}"
                                     KeyTime="0:0:0.3"
                                     Value="1" />
                             </DoubleAnimationUsingKeyFrames>
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_CheckedFalseST" Storyboard.TargetProperty="ScaleY">
+                            <DoubleAnimationUsingKeyFrames
+                                Storyboard.TargetName="PART_CheckedFalseST"
+                                Storyboard.TargetProperty="ScaleY">
                                 <EasingDoubleKeyFrame
                                     EasingFunction="{StaticResource SwitchEasingFunction}"
                                     KeyTime="0:0:0.3"
@@ -2288,7 +2445,8 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ComboBoxEditableTextBox" TargetType="{x:Type TextBox}">
+    <Style x:Key="ComboBoxEditableTextBox"
+        TargetType="{x:Type TextBox}">
         <Setter Property="AllowDrop" Value="true" />
         <Setter Property="MinWidth" Value="0" />
         <Setter Property="MinHeight" Value="0" />
@@ -2313,7 +2471,8 @@
         </Setter>
     </Style>
 
-    <Style x:Key="LeeComboBoxItem" TargetType="{x:Type ComboBoxItem}">
+    <Style x:Key="LeeComboBoxItem"
+        TargetType="{x:Type ComboBoxItem}">
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
@@ -2338,7 +2497,9 @@
                                 Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}, Path=(leedep:ComboBoxManager.MarkBrush), Mode=OneWay}"
                                 Visibility="{Binding RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}, Path=(leedep:ComboBoxManager.MarkShow), Mode=OneWay, Converter={StaticResource VisibilityForBoolConverter}}">
                                 <Rectangle.Clip>
-                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                    <MultiBinding
+                                        Converter="{StaticResource MultiValueToClipConverter}"
+                                        Mode="OneWay">
                                         <Binding
                                             Mode="OneWay"
                                             Path="ActualWidth"
@@ -2362,10 +2523,14 @@
                         </DockPanel>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Path=(leedep:ListItemManager.IsClip), RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}, Mode=OneWay}" Value="True">
+                        <DataTrigger
+                            Binding="{Binding Path=(leedep:ListItemManager.IsClip), RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}, Mode=OneWay}"
+                            Value="True">
                             <Setter TargetName="contentPresenter" Property="Clip">
                                 <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                    <MultiBinding
+                                        Converter="{StaticResource MultiValueToClipConverter}"
+                                        Mode="OneWay">
                                         <Binding
                                             Mode="OneWay"
                                             Path="ActualWidth"
@@ -2386,19 +2551,27 @@
                                 </Setter.Value>
                             </Setter>
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=(leedep:ComboBoxManager.MarkSite), RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}, Mode=OneWay}" Value="Left">
+                        <DataTrigger
+                            Binding="{Binding Path=(leedep:ComboBoxManager.MarkSite), RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}, Mode=OneWay}"
+                            Value="Left">
                             <Setter TargetName="PART_Mark" Property="Width" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}, Path=(leedep:ComboBoxManager.MarkSize), Mode=OneWay}" />
                         </DataTrigger>
 
-                        <DataTrigger Binding="{Binding Path=(leedep:ComboBoxManager.MarkSite), RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}, Mode=OneWay}" Value="Right">
+                        <DataTrigger
+                            Binding="{Binding Path=(leedep:ComboBoxManager.MarkSite), RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}, Mode=OneWay}"
+                            Value="Right">
                             <Setter TargetName="PART_Mark" Property="Width" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}, Path=(leedep:ComboBoxManager.MarkSize), Mode=OneWay}" />
                         </DataTrigger>
 
-                        <DataTrigger Binding="{Binding Path=(leedep:ComboBoxManager.MarkSite), RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}, Mode=OneWay}" Value="Top">
+                        <DataTrigger
+                            Binding="{Binding Path=(leedep:ComboBoxManager.MarkSite), RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}, Mode=OneWay}"
+                            Value="Top">
                             <Setter TargetName="PART_Mark" Property="Height" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}, Path=(leedep:ComboBoxManager.MarkSize), Mode=OneWay}" />
                         </DataTrigger>
 
-                        <DataTrigger Binding="{Binding Path=(leedep:ComboBoxManager.MarkSite), RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}, Mode=OneWay}" Value="Bottom">
+                        <DataTrigger
+                            Binding="{Binding Path=(leedep:ComboBoxManager.MarkSite), RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}, Mode=OneWay}"
+                            Value="Bottom">
                             <Setter TargetName="PART_Mark" Property="Height" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}, Path=(leedep:ComboBoxManager.MarkSize), Mode=OneWay}" />
                         </DataTrigger>
 
@@ -2459,7 +2632,8 @@
 
     </Style>
 
-    <Style x:Key="LeeComboBox" TargetType="{x:Type ComboBox}">
+    <Style x:Key="LeeComboBox"
+        TargetType="{x:Type ComboBox}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -2487,8 +2661,8 @@
 
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}" />
         <Setter Property="leedep:ComboBoxManager.EscToEmpty" Value="True" />
-        <Setter Property="leedep:ComboBoxManager.ShowPreviewText" Value="True" />
-        <Setter Property="leedep:ComboBoxManager.PreviewText" Value="--请选择--" />
+        <Setter Property="leedep:ComboBoxManager.PlaceholderVisibility" Value="True" />
+        <Setter Property="leedep:ComboBoxManager.Placeholder" Value="--请选择--" />
         <Setter Property="leedep:ComboBoxManager.ItemHeight" Value="{DynamicResource LeeItemMinHeight}" />
         <Setter Property="leedep:ComboBoxManager.IsDropCenterOnControl" Value="False" />
         <Setter Property="leedep:ComboBoxManager.DropBackground" Value="{DynamicResource LeeBrush_Forground}" />
@@ -2620,12 +2794,12 @@
                                 leedep:TextBoxManager.EnterCommand="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.EnterCommand), Mode=OneWay}"
                                 leedep:TextBoxManager.EscToEmpty="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.EscToEmpty), Mode=OneWay}" />
 
-                            <TextBlock x:Name="prviewText"
+                            <ContentPresenter x:Name="PART_Placeholder"
                                 MinHeight="0"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
+                                Content="{Binding Path=(leedep:ComboBoxManager.Placeholder), RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}, Mode=OneWay}"
                                 IsHitTestVisible="False"
-                                Text="{Binding Path=(leedep:ComboBoxManager.PreviewText), RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}, Mode=OneWay}"
                                 Visibility="Collapsed" />
 
                         </lee:EasyPanel>
@@ -2635,7 +2809,9 @@
                         <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
                             <Setter TargetName="templateRoot" Property="Clip">
                                 <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                    <MultiBinding
+                                        Converter="{StaticResource MultiValueToClipConverter}"
+                                        Mode="OneWay">
                                         <Binding
                                             Mode="OneWay"
                                             Path="ActualWidth"
@@ -2661,10 +2837,16 @@
                         <Trigger Property="leedep:ComboBoxManager.IsDropCenterOnControl" Value="True">
                             <Setter TargetName="PART_Popup" Property="VerticalOffset">
                                 <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource MultiValueToCenterConverter}" ConverterParameter="*-0.5">
+                                    <MultiBinding
+                                        Converter="{StaticResource MultiValueToCenterConverter}"
+                                        ConverterParameter="*-0.5">
                                         <MultiBinding.Bindings>
-                                            <Binding Path="ActualHeight" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
-                                            <Binding ElementName="PART_DropPabnel" Path="ActualHeight" />
+                                            <Binding
+                                                Path="ActualHeight"
+                                                RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                            <Binding
+                                                ElementName="PART_DropPabnel"
+                                                Path="ActualHeight" />
                                         </MultiBinding.Bindings>
                                     </MultiBinding>
                                 </Setter.Value>
@@ -2675,10 +2857,10 @@
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding ElementName=PART_EditableTextBox, Path=IsFocused}" Value="False" />
                                 <Condition Binding="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}" Value="{x:Null}" />
-                                <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(leedep:ComboBoxManager.ShowPreviewText)}" Value="True" />
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(leedep:ComboBoxManager.PlaceholderVisibility)}" Value="True" />
                                 <Condition Binding="{Binding ElementName=PART_EditableTextBox, Path=Text, Converter={StaticResource StringIsNullConverter}}" Value="True" />
                             </MultiDataTrigger.Conditions>
-                            <Setter TargetName="prviewText" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_Placeholder" Property="Visibility" Value="Visible" />
                         </MultiDataTrigger>
 
                         <!--<MultiTrigger>
@@ -2690,12 +2872,14 @@
                            <Setter TargetName="prviewText" Property="Visibility" Value="Visible" />
                         </MultiTrigger>-->
 
-                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=SelectedItem, Converter={StaticResource IsNotNullConverter}}" Value="True">
-                            <Setter TargetName="prviewText" Property="Visibility" Value="Collapsed" />
+                        <DataTrigger
+                            Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=SelectedItem, Converter={StaticResource IsNotNullConverter}}"
+                            Value="True">
+                            <Setter TargetName="PART_Placeholder" Property="Visibility" Value="Collapsed" />
                         </DataTrigger>
 
                         <Trigger SourceName="PART_EditableTextBox" Property="IsFocused" Value="True">
-                            <Setter TargetName="prviewText" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_Placeholder" Property="Visibility" Value="Collapsed" />
                         </Trigger>
 
                         <Trigger Property="IsEditable" Value="True">
@@ -2720,7 +2904,8 @@
 
     </Style>
 
-    <Style x:Key="LeeSeparator" TargetType="{x:Type Separator}">
+    <Style x:Key="LeeSeparator"
+        TargetType="{x:Type Separator}">
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="Background" Value="{DynamicResource LeeBrush_BorderBrush}" />
@@ -2740,7 +2925,8 @@
         </Setter>
     </Style>
 
-    <Style x:Key="LeeMenuItem" TargetType="{x:Type MenuItem}">
+    <Style x:Key="LeeMenuItem"
+        TargetType="{x:Type MenuItem}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -2820,7 +3006,9 @@
                                 Placement="Bottom"
                                 PopupAnimation="Fade"
                                 VerticalOffset="-20">
-                                <Border Padding="20" Background="Transparent">
+                                <Border
+                                    Padding="20"
+                                    Background="Transparent">
                                     <ScrollViewer x:Name="PART_Scroll"
                                         MaxHeight="600"
                                         Padding="{Binding Path=(leedep:MenuItemManager.SubPadding), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
@@ -2833,7 +3021,9 @@
                                         VirtualizingPanel.VirtualizationMode="Recycling"
                                         leedep:CornerRadiusManager.CornerRadius="{Binding Path=(leedep:MenuItemManager.SubCornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                                         leedep:CornerRadiusManager.IsClip="{Binding Path=(leedep:MenuItemManager.SubIsClip), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}">
-                                        <ItemsPresenter Grid.IsSharedSizeScope="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
+                                        <ItemsPresenter
+                                            Grid.IsSharedSizeScope="True"
+                                            KeyboardNavigation.DirectionalNavigation="Cycle" />
                                     </ScrollViewer>
                                 </Border>
                             </Popup>
@@ -2887,7 +3077,9 @@
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="{DynamicResource UnEnableOpacity}" />
                         </Trigger>
-                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(leedep:MenuItemManager.SubScrollViewerStyle), Converter={StaticResource IsNullConverter}, Mode=OneWay}" Value="False">
+                        <DataTrigger
+                            Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(leedep:MenuItemManager.SubScrollViewerStyle), Converter={StaticResource IsNullConverter}, Mode=OneWay}"
+                            Value="False">
                             <Setter TargetName="PART_Scroll" Property="Style" Value="{Binding RelativeSource={RelativeSource AncestorType=MenuItem}, Path=(leedep:MenuItemManager.SubScrollViewerStyle), Converter={StaticResource IsNullConverter}, Mode=OneWay}" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
@@ -2896,7 +3088,8 @@
         </Setter>
     </Style>
 
-    <Style x:Key="LeeContextMenu" TargetType="{x:Type ContextMenu}">
+    <Style x:Key="LeeContextMenu"
+        TargetType="{x:Type ContextMenu}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -2950,9 +3143,13 @@
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}" />
                         <DockPanel x:Name="contentDock">
-                            <ContentPresenter Content="{Binding Path=(leedep:ContextMenuManager.Content), RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}" DockPanel.Dock="{Binding Path=(leedep:ContextMenuManager.ContentDock), RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}" />
+                            <ContentPresenter
+                                Content="{Binding Path=(leedep:ContextMenuManager.Content), RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}"
+                                DockPanel.Dock="{Binding Path=(leedep:ContextMenuManager.ContentDock), RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}" />
                             <ScrollViewer Padding="{TemplateBinding Padding}">
-                                <ItemsPresenter Grid.IsSharedSizeScope="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
+                                <ItemsPresenter
+                                    Grid.IsSharedSizeScope="True"
+                                    KeyboardNavigation.DirectionalNavigation="Cycle" />
                             </ScrollViewer>
                         </DockPanel>
                     </lee:EasyPanel>
@@ -2961,7 +3158,9 @@
                         <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
                             <Setter TargetName="contentDock" Property="Clip">
                                 <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                    <MultiBinding
+                                        Converter="{StaticResource MultiValueToClipConverter}"
+                                        Mode="OneWay">
                                         <Binding
                                             Mode="OneWay"
                                             Path="ActualWidth"
@@ -2989,7 +3188,9 @@
         </Setter>
 
         <Style.Resources>
-            <Style BasedOn="{StaticResource LeeMenuItem}" TargetType="{x:Type MenuItem}">
+            <Style
+                BasedOn="{StaticResource LeeMenuItem}"
+                TargetType="{x:Type MenuItem}">
                 <Setter Property="Background" Value="{Binding Path=(leedep:MenuItemManager.Background), RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Mode=OneWay}" />
                 <Setter Property="BorderBrush" Value="{Binding Path=(leedep:MenuItemManager.BorderBrush), RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Mode=OneWay}" />
                 <Setter Property="BorderThickness" Value="{Binding Path=(leedep:MenuItemManager.BorderThickness), RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Mode=OneWay}" />
@@ -3031,7 +3232,8 @@
                 <Setter Property="leedep:MenuItemManager.SubScrollViewerStyle" Value="{Binding Path=(leedep:MenuItemManager.SubScrollViewerStyle), RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Mode=OneWay}" />
 
             </Style>
-            <Style x:Key="{x:Static MenuItem.SeparatorStyleKey}" TargetType="{x:Type Separator}">
+            <Style x:Key="{x:Static MenuItem.SeparatorStyleKey}"
+                TargetType="{x:Type Separator}">
                 <Setter Property="OverridesDefaultStyle" Value="true" />
                 <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
                 <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -3047,7 +3249,9 @@
                     </Setter.Value>
                 </Setter>
                 <Style.Triggers>
-                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=(leedep:MenuItemManager.SeparatorContent), Mode=OneWay, Converter={StaticResource IsNullConverter}}" Value="False">
+                    <DataTrigger
+                        Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=(leedep:MenuItemManager.SeparatorContent), Mode=OneWay, Converter={StaticResource IsNullConverter}}"
+                        Value="False">
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type Separator}">
@@ -3062,7 +3266,8 @@
         </Style.Resources>
     </Style>
 
-    <Style x:Key="LeeMenu" TargetType="{x:Type Menu}">
+    <Style x:Key="LeeMenu"
+        TargetType="{x:Type Menu}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="Background" Value="Transparent" />
@@ -3115,7 +3320,9 @@
             </Setter.Value>
         </Setter>
         <Style.Resources>
-            <Style BasedOn="{StaticResource LeeMenuItem}" TargetType="{x:Type MenuItem}">
+            <Style
+                BasedOn="{StaticResource LeeMenuItem}"
+                TargetType="{x:Type MenuItem}">
                 <Setter Property="Background" Value="{Binding Path=(leedep:MenuItemManager.Background), RelativeSource={RelativeSource AncestorType={x:Type Menu}}, Mode=OneWay}" />
                 <Setter Property="BorderBrush" Value="{Binding Path=(leedep:MenuItemManager.BorderBrush), RelativeSource={RelativeSource AncestorType={x:Type Menu}}, Mode=OneWay}" />
                 <Setter Property="BorderThickness" Value="{Binding Path=(leedep:MenuItemManager.BorderThickness), RelativeSource={RelativeSource AncestorType={x:Type Menu}}, Mode=OneWay}" />
@@ -3169,7 +3376,8 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            <Style x:Key="{x:Static MenuItem.SeparatorStyleKey}" TargetType="{x:Type Separator}">
+            <Style x:Key="{x:Static MenuItem.SeparatorStyleKey}"
+                TargetType="{x:Type Separator}">
                 <Setter Property="OverridesDefaultStyle" Value="true" />
                 <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
                 <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -3185,7 +3393,9 @@
                     </Setter.Value>
                 </Setter>
                 <Style.Triggers>
-                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type Menu}}, Path=(leedep:MenuItemManager.SeparatorContent), Mode=OneWay, Converter={StaticResource IsNullConverter}}" Value="False">
+                    <DataTrigger
+                        Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type Menu}}, Path=(leedep:MenuItemManager.SeparatorContent), Mode=OneWay, Converter={StaticResource IsNullConverter}}"
+                        Value="False">
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type Separator}">
@@ -3200,7 +3410,8 @@
         </Style.Resources>
     </Style>
 
-    <Style x:Key="LeeDataGridColumnHeader" TargetType="{x:Type DataGridColumnHeader}">
+    <Style x:Key="LeeDataGridColumnHeader"
+        TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -3257,7 +3468,9 @@
                             <Setter TargetName="PART_Sort" Property="IsChecked" Value="True" />
 
                         </MultiDataTrigger>
-                        <DataTrigger Binding="{Binding CanUserSortColumns, RelativeSource={RelativeSource AncestorType=DataGrid}, Mode=OneWay}" Value="False">
+                        <DataTrigger
+                            Binding="{Binding CanUserSortColumns, RelativeSource={RelativeSource AncestorType=DataGrid}, Mode=OneWay}"
+                            Value="False">
                             <Setter TargetName="PART_Sort" Property="Visibility" Value="Collapsed" />
                         </DataTrigger>
                         <MultiDataTrigger>
@@ -3291,7 +3504,8 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style x:Key="LeeDataGridCell" TargetType="{x:Type DataGridCell}">
+    <Style x:Key="LeeDataGridCell"
+        TargetType="{x:Type DataGridCell}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -3348,7 +3562,8 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="LeeDataGridRow" TargetType="{x:Type DataGridRow}">
+    <Style x:Key="LeeDataGridRow"
+        TargetType="{x:Type DataGridRow}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -3365,7 +3580,8 @@
                         BorderThickness="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.RowBorderThickness), Mode=OneWay}"
                         CornerRadius="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.RowCornerRadius), Mode=OneWay}">
 
-                        <SelectiveScrollingGrid x:Name="PART_Grid" Margin="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.RowPadding), Mode=OneWay}">
+                        <SelectiveScrollingGrid x:Name="PART_Grid"
+                            Margin="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.RowPadding), Mode=OneWay}">
                             <SelectiveScrollingGrid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
@@ -3374,7 +3590,9 @@
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="Auto" />
                             </SelectiveScrollingGrid.RowDefinitions>
-                            <DataGridCellsPresenter Grid.Column="1" ItemsPanel="{TemplateBinding ItemsPanel}" />
+                            <DataGridCellsPresenter
+                                Grid.Column="1"
+                                ItemsPanel="{TemplateBinding ItemsPanel}" />
                             <DataGridDetailsPresenter
                                 Grid.Row="1"
                                 Grid.Column="1"
@@ -3388,10 +3606,14 @@
 
                     </Border>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.RowIsClip), Mode=OneWay}" Value="True">
+                        <DataTrigger
+                            Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.RowIsClip), Mode=OneWay}"
+                            Value="True">
                             <Setter TargetName="PART_Grid" Property="Clip">
                                 <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                    <MultiBinding
+                                        Converter="{StaticResource MultiValueToClipConverter}"
+                                        Mode="OneWay">
                                         <Binding
                                             Mode="OneWay"
                                             Path="ActualWidth"
@@ -3442,7 +3664,8 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="LeeDataGridRowHeader" TargetType="{x:Type DataGridRowHeader}">
+    <Style x:Key="LeeDataGridRowHeader"
+        TargetType="{x:Type DataGridRowHeader}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -3468,7 +3691,9 @@
 
 
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" Value="True">
+                        <DataTrigger
+                            Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}"
+                            Value="True">
                             <Setter TargetName="PART_Content" Property="TextElement.Foreground" Value="{Binding Path=(leedep:DataGridManager.SelectedForeground), RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Mode=OneWay}" />
                         </DataTrigger>
 
@@ -3478,7 +3703,8 @@
         </Setter>
     </Style>
 
-    <Style x:Key="LeeDataGrid" TargetType="{x:Type DataGrid}">
+    <Style x:Key="LeeDataGrid"
+        TargetType="{x:Type DataGrid}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -3536,7 +3762,9 @@
         </Setter>
         <Setter Property="leedep:DataGridManager.EditingTextColumnStyle">
             <Setter.Value>
-                <Style BasedOn="{StaticResource LeeTextBox}" TargetType="{x:Type TextBox}">
+                <Style
+                    BasedOn="{StaticResource LeeTextBox}"
+                    TargetType="{x:Type TextBox}">
                     <Setter Property="BorderThickness" Value="0" />
                     <Setter Property="MinHeight" Value="0" />
                 </Style>
@@ -3562,7 +3790,9 @@
         </Setter>
         <Setter Property="leedep:DataGridManager.EditingComboBoxColumnStyle">
             <Setter.Value>
-                <Style BasedOn="{StaticResource LeeComboBox}" TargetType="{x:Type ComboBox}">
+                <Style
+                    BasedOn="{StaticResource LeeComboBox}"
+                    TargetType="{x:Type ComboBox}">
                     <Setter Property="leedep:ComboBoxManager.IsDropCenterOnControl" Value="True" />
                     <Setter Property="MinHeight" Value="0" />
                 </Style>
@@ -3571,7 +3801,9 @@
 
         <Setter Property="leedep:DataGridManager.CheckBoxColumnStyle">
             <Setter.Value>
-                <Style BasedOn="{StaticResource LeeCheckBox}" TargetType="{x:Type CheckBox}">
+                <Style
+                    BasedOn="{StaticResource LeeCheckBox}"
+                    TargetType="{x:Type CheckBox}">
                     <Setter Property="IsEnabled" Value="False" />
                 </Style>
             </Setter.Value>
@@ -3704,7 +3936,9 @@
                                                     ViewportSize="{TemplateBinding ViewportHeight}"
                                                     Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
                                                     Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
-                                                <Grid Grid.Row="1" Grid.Column="1">
+                                                <Grid
+                                                    Grid.Row="1"
+                                                    Grid.Column="1">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="{Binding NonFrozenColumnsViewportHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
                                                         <ColumnDefinition Width="*" />
@@ -3724,13 +3958,19 @@
                                     </Grid>
 
                                     <ControlTemplate.Triggers>
-                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=SelectionMode}" Value="Single">
+                                        <DataTrigger
+                                            Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=SelectionMode}"
+                                            Value="Single">
                                             <Setter TargetName="PART_CheckBox" Property="Visibility" Value="Collapsed" />
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderIsClip)}" Value="True">
+                                        <DataTrigger
+                                            Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.HeaderIsClip)}"
+                                            Value="True">
                                             <Setter TargetName="PART_HPanel" Property="Clip">
                                                 <Setter.Value>
-                                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                                    <MultiBinding
+                                                        Converter="{StaticResource MultiValueToClipConverter}"
+                                                        Mode="OneWay">
                                                         <Binding
                                                             Mode="OneWay"
                                                             Path="ActualWidth"
@@ -3752,10 +3992,14 @@
                                             </Setter>
                                         </DataTrigger>
 
-                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.MainIsClip)}" Value="True">
+                                        <DataTrigger
+                                            Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=(leedep:DataGridManager.MainIsClip)}"
+                                            Value="True">
                                             <Setter TargetName="PART_MPanel" Property="Clip">
                                                 <Setter.Value>
-                                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                                    <MultiBinding
+                                                        Converter="{StaticResource MultiValueToClipConverter}"
+                                                        Mode="OneWay">
                                                         <Binding
                                                             Mode="OneWay"
                                                             Path="ActualWidth"
@@ -3786,7 +4030,9 @@
                         <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
                             <Setter TargetName="PART_Border" Property="Clip">
                                 <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                    <MultiBinding
+                                        Converter="{StaticResource MultiValueToClipConverter}"
+                                        Mode="OneWay">
                                         <Binding
                                             Mode="OneWay"
                                             Path="ActualWidth"
@@ -3823,7 +4069,8 @@
         </Style.Triggers>
     </Style>
 
-    <ControlTemplate x:Key="LeeDatePickerTextBoxTemplate" TargetType="{x:Type DatePickerTextBox}">
+    <ControlTemplate x:Key="LeeDatePickerTextBoxTemplate"
+        TargetType="{x:Type DatePickerTextBox}">
         <Grid>
             <Border x:Name="Border"
                 Padding="{TemplateBinding Padding}"
@@ -3888,7 +4135,8 @@
             </VisualStateManager.VisualStateGroups>
         </Grid>
     </ControlTemplate>
-    <Style x:Key="LeeDatePicker" TargetType="{x:Type DatePicker}">
+    <Style x:Key="LeeDatePicker"
+        TargetType="{x:Type DatePicker}">
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
@@ -3907,7 +4155,9 @@
         <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}" />
         <Setter Property="CalendarStyle">
             <Setter.Value>
-                <Style BasedOn="{StaticResource LeeCalendar}" TargetType="{x:Type Calendar}">
+                <Style
+                    BasedOn="{StaticResource LeeCalendar}"
+                    TargetType="{x:Type Calendar}">
                     <Setter Property="Margin" Value="8,0,8,8" />
                 </Style>
             </Setter.Value>
@@ -3972,7 +4222,9 @@
                         <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
                             <Setter TargetName="PART_Root" Property="Clip">
                                 <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                    <MultiBinding
+                                        Converter="{StaticResource MultiValueToClipConverter}"
+                                        Mode="OneWay">
                                         <Binding
                                             Mode="OneWay"
                                             Path="ActualWidth"
@@ -4003,7 +4255,8 @@
         </Setter>
     </Style>
 
-    <ControlTemplate x:Key="ExpanderDownTemplate" TargetType="{x:Type Expander}">
+    <ControlTemplate x:Key="ExpanderDownTemplate"
+        TargetType="{x:Type Expander}">
         <Border x:Name="PART_Border"
             VerticalAlignment="Stretch"
             BorderBrush="{TemplateBinding BorderBrush}"
@@ -4014,7 +4267,9 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Grid Height="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
+                <Grid
+                    Height="{TemplateBinding MinHeight}"
+                    Background="{TemplateBinding Background}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition Width="25" />
@@ -4046,7 +4301,9 @@
             <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
                 <Setter TargetName="PART_Grid" Property="Clip">
                     <Setter.Value>
-                        <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                        <MultiBinding
+                            Converter="{StaticResource MultiValueToClipConverter}"
+                            Mode="OneWay">
                             <Binding
                                 Mode="OneWay"
                                 Path="ActualWidth"
@@ -4076,7 +4333,8 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    <ControlTemplate x:Key="ExpanderUpTemplate" TargetType="{x:Type Expander}">
+    <ControlTemplate x:Key="ExpanderUpTemplate"
+        TargetType="{x:Type Expander}">
         <Border x:Name="PART_Border"
             VerticalAlignment="Bottom"
             BorderBrush="{TemplateBinding BorderBrush}"
@@ -4125,7 +4383,9 @@
             <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
                 <Setter TargetName="PART_Grid" Property="Clip">
                     <Setter.Value>
-                        <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                        <MultiBinding
+                            Converter="{StaticResource MultiValueToClipConverter}"
+                            Mode="OneWay">
                             <Binding
                                 Mode="OneWay"
                                 Path="ActualWidth"
@@ -4155,7 +4415,8 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    <ControlTemplate x:Key="ExpanderLeftTemplate" TargetType="{x:Type Expander}">
+    <ControlTemplate x:Key="ExpanderLeftTemplate"
+        TargetType="{x:Type Expander}">
         <Border x:Name="PART_Border"
             HorizontalAlignment="Left"
             BorderBrush="{TemplateBinding BorderBrush}"
@@ -4166,7 +4427,9 @@
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Grid Width="{TemplateBinding MinWidth}" Background="{TemplateBinding Background}">
+                <Grid
+                    Width="{TemplateBinding MinWidth}"
+                    Background="{TemplateBinding Background}">
                     <Grid.RowDefinitions>
                         <RowDefinition />
                         <RowDefinition Height="25" />
@@ -4199,7 +4462,9 @@
             <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
                 <Setter TargetName="PART_Grid" Property="Clip">
                     <Setter.Value>
-                        <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                        <MultiBinding
+                            Converter="{StaticResource MultiValueToClipConverter}"
+                            Mode="OneWay">
                             <Binding
                                 Mode="OneWay"
                                 Path="ActualWidth"
@@ -4229,7 +4494,8 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    <ControlTemplate x:Key="ExpanderRightTemplate" TargetType="{x:Type Expander}">
+    <ControlTemplate x:Key="ExpanderRightTemplate"
+        TargetType="{x:Type Expander}">
         <Border x:Name="PART_Border"
             BorderBrush="{TemplateBinding BorderBrush}"
             BorderThickness="{TemplateBinding BorderThickness}"
@@ -4242,7 +4508,8 @@
 
 
 
-                <ContentPresenter x:Name="PART_Content" Visibility="Collapsed" />
+                <ContentPresenter x:Name="PART_Content"
+                    Visibility="Collapsed" />
 
                 <Grid
                     Grid.Column="1"
@@ -4275,7 +4542,9 @@
             <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
                 <Setter TargetName="PART_Grid" Property="Clip">
                     <Setter.Value>
-                        <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                        <MultiBinding
+                            Converter="{StaticResource MultiValueToClipConverter}"
+                            Mode="OneWay">
                             <Binding
                                 Mode="OneWay"
                                 Path="ActualWidth"
@@ -4305,7 +4574,8 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    <Style x:Key="LeeExpander" TargetType="{x:Type Expander}">
+    <Style x:Key="LeeExpander"
+        TargetType="{x:Type Expander}">
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
@@ -4341,7 +4611,8 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="LeeGroupBox" TargetType="{x:Type GroupBox}">
+    <Style x:Key="LeeGroupBox"
+        TargetType="{x:Type GroupBox}">
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
@@ -4362,7 +4633,9 @@
         <Setter Property="leedep:GroupBoxManager.SplitLineVisibility" Value="Collapsed" />
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeCornerRadius}" />
         <Style.Triggers>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(leedep:GroupBoxManager.BorderMode), Mode=OneWay}" Value="External">
+            <DataTrigger
+                Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(leedep:GroupBoxManager.BorderMode), Mode=OneWay}"
+                Value="External">
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type GroupBox}">
@@ -4406,7 +4679,9 @@
                                 <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
                                     <Setter TargetName="PART_Grid" Property="Clip">
                                         <Setter.Value>
-                                            <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                            <MultiBinding
+                                                Converter="{StaticResource MultiValueToClipConverter}"
+                                                Mode="OneWay">
                                                 <Binding
                                                     Mode="OneWay"
                                                     Path="ActualWidth"
@@ -4428,7 +4703,9 @@
                                     </Setter>
                                 </Trigger>
 
-                                <DataTrigger Binding="{Binding Header, Converter={StaticResource IsNullConverter}, RelativeSource={RelativeSource Self}}" Value="True">
+                                <DataTrigger
+                                    Binding="{Binding Header, Converter={StaticResource IsNullConverter}, RelativeSource={RelativeSource Self}}"
+                                    Value="True">
                                     <Setter TargetName="Header" Property="Visibility" Value="Collapsed" />
                                 </DataTrigger>
 
@@ -4439,7 +4716,9 @@
                 </Setter>
             </DataTrigger>
 
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(leedep:GroupBoxManager.BorderMode), Mode=OneWay}" Value="Internal">
+            <DataTrigger
+                Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(leedep:GroupBoxManager.BorderMode), Mode=OneWay}"
+                Value="Internal">
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type GroupBox}">
@@ -4480,7 +4759,9 @@
                                 <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
                                     <Setter TargetName="PART_Content" Property="Clip">
                                         <Setter.Value>
-                                            <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                            <MultiBinding
+                                                Converter="{StaticResource MultiValueToClipConverter}"
+                                                Mode="OneWay">
                                                 <Binding
                                                     Mode="OneWay"
                                                     Path="ActualWidth"
@@ -4502,7 +4783,9 @@
                                     </Setter>
                                 </Trigger>
 
-                                <DataTrigger Binding="{Binding Header, Converter={StaticResource IsNullConverter}, RelativeSource={RelativeSource Self}}" Value="True">
+                                <DataTrigger
+                                    Binding="{Binding Header, Converter={StaticResource IsNullConverter}, RelativeSource={RelativeSource Self}}"
+                                    Value="True">
                                     <Setter TargetName="Header" Property="Visibility" Value="Collapsed" />
                                 </DataTrigger>
                             </ControlTemplate.Triggers>
@@ -4514,13 +4797,16 @@
 
     </Style>
 
-    <Style x:Key="LeeListBoxItem" TargetType="{x:Type ListBoxItem}">
+    <Style x:Key="LeeListBoxItem"
+        TargetType="{x:Type ListBoxItem}">
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Style.Triggers>
 
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=(leedep:ListBoxItemManager.MarkShow)}" Value="False">
+            <DataTrigger
+                Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=(leedep:ListBoxItemManager.MarkShow)}"
+                Value="False">
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ListBoxItem}">
@@ -4539,10 +4825,14 @@
                                     VerticalAlignment="{Binding Path=VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Mode=OneWay}" />
                             </Border>
                             <ControlTemplate.Triggers>
-                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=(leedep:ListItemManager.IsClip)}" Value="True">
+                                <DataTrigger
+                                    Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=(leedep:ListItemManager.IsClip)}"
+                                    Value="True">
                                     <Setter TargetName="contentPresenter" Property="Clip">
                                         <Setter.Value>
-                                            <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                            <MultiBinding
+                                                Converter="{StaticResource MultiValueToClipConverter}"
+                                                Mode="OneWay">
                                                 <Binding
                                                     Mode="OneWay"
                                                     Path="ActualWidth"
@@ -4617,7 +4907,9 @@
                 </Setter>
 
             </DataTrigger>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=(leedep:ListBoxItemManager.MarkShow)}" Value="True">
+            <DataTrigger
+                Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=(leedep:ListBoxItemManager.MarkShow)}"
+                Value="True">
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ListBoxItem}">
@@ -4637,7 +4929,9 @@
                                         Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=(leedep:ListBoxItemManager.MarkBrush), Mode=OneWay}"
                                         Visibility="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=(leedep:ListBoxItemManager.MarkShow), Mode=OneWay, Converter={StaticResource VisibilityForBoolConverter}}">
                                         <Rectangle.Clip>
-                                            <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                            <MultiBinding
+                                                Converter="{StaticResource MultiValueToClipConverter}"
+                                                Mode="OneWay">
                                                 <Binding
                                                     Mode="OneWay"
                                                     Path="ActualWidth"
@@ -4661,10 +4955,14 @@
                             </Border>
 
                             <ControlTemplate.Triggers>
-                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=(leedep:ListItemManager.IsClip)}" Value="True">
+                                <DataTrigger
+                                    Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=(leedep:ListItemManager.IsClip)}"
+                                    Value="True">
                                     <Setter TargetName="contentPresenter" Property="Clip">
                                         <Setter.Value>
-                                            <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                            <MultiBinding
+                                                Converter="{StaticResource MultiValueToClipConverter}"
+                                                Mode="OneWay">
                                                 <Binding
                                                     Mode="OneWay"
                                                     Path="ActualWidth"
@@ -4686,19 +4984,27 @@
                                     </Setter>
                                 </DataTrigger>
 
-                                <DataTrigger Binding="{Binding Path=(leedep:ListBoxItemManager.MarkSite), RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Mode=OneWay}" Value="Left">
+                                <DataTrigger
+                                    Binding="{Binding Path=(leedep:ListBoxItemManager.MarkSite), RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Mode=OneWay}"
+                                    Value="Left">
                                     <Setter TargetName="PART_Mark" Property="Width" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=(leedep:ListBoxItemManager.MarkSize), Mode=OneWay}" />
                                 </DataTrigger>
 
-                                <DataTrigger Binding="{Binding Path=(leedep:ListBoxItemManager.MarkSite), RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Mode=OneWay}" Value="Right">
+                                <DataTrigger
+                                    Binding="{Binding Path=(leedep:ListBoxItemManager.MarkSite), RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Mode=OneWay}"
+                                    Value="Right">
                                     <Setter TargetName="PART_Mark" Property="Width" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=(leedep:ListBoxItemManager.MarkSize), Mode=OneWay}" />
                                 </DataTrigger>
 
-                                <DataTrigger Binding="{Binding Path=(leedep:ListBoxItemManager.MarkSite), RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Mode=OneWay}" Value="Top">
+                                <DataTrigger
+                                    Binding="{Binding Path=(leedep:ListBoxItemManager.MarkSite), RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Mode=OneWay}"
+                                    Value="Top">
                                     <Setter TargetName="PART_Mark" Property="Height" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=(leedep:ListBoxItemManager.MarkSize), Mode=OneWay}" />
                                 </DataTrigger>
 
-                                <DataTrigger Binding="{Binding Path=(leedep:ListBoxItemManager.MarkSite), RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Mode=OneWay}" Value="Bottom">
+                                <DataTrigger
+                                    Binding="{Binding Path=(leedep:ListBoxItemManager.MarkSite), RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Mode=OneWay}"
+                                    Value="Bottom">
                                     <Setter TargetName="PART_Mark" Property="Height" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=(leedep:ListBoxItemManager.MarkSize), Mode=OneWay}" />
                                 </DataTrigger>
 
@@ -4761,7 +5067,8 @@
         </Style.Triggers>
 
     </Style>
-    <Style x:Key="LeeListBox" TargetType="{x:Type ListBox}">
+    <Style x:Key="LeeListBox"
+        TargetType="{x:Type ListBox}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -4917,7 +5224,8 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="LeeGridViewColumnHeader" TargetType="{x:Type GridViewColumnHeader}">
+    <Style x:Key="LeeGridViewColumnHeader"
+        TargetType="{x:Type GridViewColumnHeader}">
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="VerticalContentAlignment" Value="{Binding Path=(leedep:ListViewManager.HeaderVerticalAlignment), RelativeSource={RelativeSource AncestorType={x:Type ListView}}, Mode=OneWay}" />
@@ -4951,7 +5259,8 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="LeeListViewItem" TargetType="{x:Type ListViewItem}">
+    <Style x:Key="LeeListViewItem"
+        TargetType="{x:Type ListViewItem}">
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
@@ -4976,10 +5285,14 @@
 
                     </Border>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListView}}, Path=(leedep:ListItemManager.IsClip)}" Value="True">
+                        <DataTrigger
+                            Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListView}}, Path=(leedep:ListItemManager.IsClip)}"
+                            Value="True">
                             <Setter TargetName="contentPresenter" Property="Clip">
                                 <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                    <MultiBinding
+                                        Converter="{StaticResource MultiValueToClipConverter}"
+                                        Mode="OneWay">
                                         <Binding
                                             Mode="OneWay"
                                             Path="ActualWidth"
@@ -5051,7 +5364,9 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListView}}, Path=View, Converter={StaticResource IsNullConverter}}" Value="true">
+            <DataTrigger
+                Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListView}}, Path=View, Converter={StaticResource IsNullConverter}}"
+                Value="true">
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ListViewItem}">
@@ -5072,10 +5387,14 @@
                                     Content="{TemplateBinding Content}" />
                             </Border>
                             <ControlTemplate.Triggers>
-                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListView}}, Path=(leedep:ListItemManager.IsClip)}" Value="True">
+                                <DataTrigger
+                                    Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListView}}, Path=(leedep:ListItemManager.IsClip)}"
+                                    Value="True">
                                     <Setter TargetName="contentPresenter" Property="Clip">
                                         <Setter.Value>
-                                            <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                            <MultiBinding
+                                                Converter="{StaticResource MultiValueToClipConverter}"
+                                                Mode="OneWay">
                                                 <Binding
                                                     Mode="OneWay"
                                                     Path="ActualWidth"
@@ -5150,7 +5469,8 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="LeeListView" TargetType="{x:Type ListView}">
+    <Style x:Key="LeeListView"
+        TargetType="{x:Type ListView}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -5290,7 +5610,9 @@
                                 <Trigger Property="leedep:ListViewManager.HeaderIsClip" Value="True">
                                     <Setter TargetName="PART_Header" Property="Clip">
                                         <Setter.Value>
-                                            <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                            <MultiBinding
+                                                Converter="{StaticResource MultiValueToClipConverter}"
+                                                Mode="OneWay">
                                                 <Binding
                                                     Mode="OneWay"
                                                     Path="ActualWidth"
@@ -5382,7 +5704,9 @@
                                 <Trigger Property="leedep:ListViewManager.HeaderIsClip" Value="True">
                                     <Setter TargetName="PART_Header" Property="Clip">
                                         <Setter.Value>
-                                            <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                            <MultiBinding
+                                                Converter="{StaticResource MultiValueToClipConverter}"
+                                                Mode="OneWay">
                                                 <Binding
                                                     Mode="OneWay"
                                                     Path="ActualWidth"
@@ -5412,7 +5736,8 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="LeeTreeViewItem" TargetType="{x:Type TreeViewItem}">
+    <Style x:Key="LeeTreeViewItem"
+        TargetType="{x:Type TreeViewItem}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -5448,7 +5773,9 @@
                             CornerRadius="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeView}}, Path=(leedep:TreeViewItemManager.CornerRadius), Mode=OneWay}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto" MinWidth="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={StaticResource TreeViewItemSeparateConverter}}" />
+                                    <ColumnDefinition
+                                        Width="auto"
+                                        MinWidth="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={StaticResource TreeViewItemSeparateConverter}}" />
                                     <ColumnDefinition Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:TreeViewItemManager.SwitchWidth), Mode=OneWay}" />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
@@ -5460,7 +5787,9 @@
                                     Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeView}}, Path=(leedep:TreeViewItemManager.MarkBrush), Mode=OneWay}"
                                     Visibility="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeView}}, Path=(leedep:TreeViewItemManager.MarkShow), Mode=OneWay, Converter={StaticResource VisibilityForBoolConverter}}">
                                     <Rectangle.Clip>
-                                        <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                        <MultiBinding
+                                            Converter="{StaticResource MultiValueToClipConverter}"
+                                            Mode="OneWay">
                                             <Binding
                                                 Mode="OneWay"
                                                 Path="ActualWidth"
@@ -5584,7 +5913,8 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style x:Key="LeeTreeView" TargetType="{x:Type TreeView}">
+    <Style x:Key="LeeTreeView"
+        TargetType="{x:Type TreeView}">
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
@@ -5681,7 +6011,8 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="LeeTabItem" TargetType="{x:Type TabItem}">
+    <Style x:Key="LeeTabItem"
+        TargetType="{x:Type TabItem}">
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
@@ -5708,7 +6039,9 @@
                                 Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Path=(leedep:TabItemManager.MarkBrush), Mode=OneWay}"
                                 Visibility="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Path=(leedep:TabItemManager.MarkShow), Mode=OneWay, Converter={StaticResource VisibilityForBoolConverter}}">
                                 <Rectangle.Clip>
-                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                    <MultiBinding
+                                        Converter="{StaticResource MultiValueToClipConverter}"
+                                        Mode="OneWay">
                                         <Binding
                                             Mode="OneWay"
                                             Path="ActualWidth"
@@ -5732,10 +6065,14 @@
                         </DockPanel>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Path=(leedep:ListItemManager.IsClip)}" Value="True">
+                        <DataTrigger
+                            Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Path=(leedep:ListItemManager.IsClip)}"
+                            Value="True">
                             <Setter TargetName="contentPresenter" Property="Clip">
                                 <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                    <MultiBinding
+                                        Converter="{StaticResource MultiValueToClipConverter}"
+                                        Mode="OneWay">
                                         <Binding
                                             Mode="OneWay"
                                             Path="ActualWidth"
@@ -5757,19 +6094,27 @@
                             </Setter>
                         </DataTrigger>
 
-                        <DataTrigger Binding="{Binding Path=(leedep:TabItemManager.MarkSite), RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Mode=OneWay}" Value="Left">
+                        <DataTrigger
+                            Binding="{Binding Path=(leedep:TabItemManager.MarkSite), RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Mode=OneWay}"
+                            Value="Left">
                             <Setter TargetName="PART_Mark" Property="Width" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Path=(leedep:TabItemManager.MarkSize), Mode=OneWay}" />
                         </DataTrigger>
 
-                        <DataTrigger Binding="{Binding Path=(leedep:TabItemManager.MarkSite), RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Mode=OneWay}" Value="Right">
+                        <DataTrigger
+                            Binding="{Binding Path=(leedep:TabItemManager.MarkSite), RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Mode=OneWay}"
+                            Value="Right">
                             <Setter TargetName="PART_Mark" Property="Width" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Path=(leedep:TabItemManager.MarkSize), Mode=OneWay}" />
                         </DataTrigger>
 
-                        <DataTrigger Binding="{Binding Path=(leedep:TabItemManager.MarkSite), RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Mode=OneWay}" Value="Top">
+                        <DataTrigger
+                            Binding="{Binding Path=(leedep:TabItemManager.MarkSite), RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Mode=OneWay}"
+                            Value="Top">
                             <Setter TargetName="PART_Mark" Property="Height" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Path=(leedep:TabItemManager.MarkSize), Mode=OneWay}" />
                         </DataTrigger>
 
-                        <DataTrigger Binding="{Binding Path=(leedep:TabItemManager.MarkSite), RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Mode=OneWay}" Value="Bottom">
+                        <DataTrigger
+                            Binding="{Binding Path=(leedep:TabItemManager.MarkSite), RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Mode=OneWay}"
+                            Value="Bottom">
                             <Setter TargetName="PART_Mark" Property="Height" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabControl}}, Path=(leedep:TabItemManager.MarkSize), Mode=OneWay}" />
                         </DataTrigger>
 
@@ -5832,7 +6177,8 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="LeeTabControl" TargetType="{x:Type TabControl}">
+    <Style x:Key="LeeTabControl"
+        TargetType="{x:Type TabControl}">
 
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
@@ -5937,7 +6283,9 @@
                         <Trigger Property="leedep:ListViewManager.HeaderIsClip" Value="True">
                             <Setter TargetName="PART_Border" Property="Clip">
                                 <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                    <MultiBinding
+                                        Converter="{StaticResource MultiValueToClipConverter}"
+                                        Mode="OneWay">
                                         <Binding
                                             Mode="OneWay"
                                             Path="ActualWidth"
@@ -5965,44 +6313,96 @@
         </Setter>
     </Style>
     <!--  默认替换  -->
-    <Style BasedOn="{StaticResource LeeButton}" TargetType="Button" />
-    <Style BasedOn="{StaticResource LeeCheckBox}" TargetType="CheckBox" />
-    <Style BasedOn="{StaticResource LeeScrollViewer}" TargetType="ScrollViewer" />
-    <Style BasedOn="{StaticResource LeeScrollBar}" TargetType="ScrollBar" />
+    <Style
+        BasedOn="{StaticResource LeeButton}"
+        TargetType="Button" />
+    <Style
+        BasedOn="{StaticResource LeeCheckBox}"
+        TargetType="CheckBox" />
+    <Style
+        BasedOn="{StaticResource LeeScrollViewer}"
+        TargetType="ScrollViewer" />
+    <Style
+        BasedOn="{StaticResource LeeScrollBar}"
+        TargetType="ScrollBar" />
 
 
-    <Style BasedOn="{StaticResource LeeSeparator}" TargetType="Separator" />
+    <Style
+        BasedOn="{StaticResource LeeSeparator}"
+        TargetType="Separator" />
 
-    <Style BasedOn="{StaticResource LeeMenuItem}" TargetType="MenuItem" />
+    <Style
+        BasedOn="{StaticResource LeeMenuItem}"
+        TargetType="MenuItem" />
 
-    <Style BasedOn="{StaticResource LeeMenu}" TargetType="Menu" />
-    <Style BasedOn="{StaticResource LeeContextMenu}" TargetType="ContextMenu" />
+    <Style
+        BasedOn="{StaticResource LeeMenu}"
+        TargetType="Menu" />
+    <Style
+        BasedOn="{StaticResource LeeContextMenu}"
+        TargetType="ContextMenu" />
 
-    <Style BasedOn="{StaticResource LeeToggleButton}" TargetType="ToggleButton" />
-    <Style BasedOn="{StaticResource LeeComboBox}" TargetType="ComboBox" />
-    <Style BasedOn="{StaticResource LeeRadioButton}" TargetType="RadioButton" />
+    <Style
+        BasedOn="{StaticResource LeeToggleButton}"
+        TargetType="ToggleButton" />
+    <Style
+        BasedOn="{StaticResource LeeComboBox}"
+        TargetType="ComboBox" />
+    <Style
+        BasedOn="{StaticResource LeeRadioButton}"
+        TargetType="RadioButton" />
 
-    <Style BasedOn="{StaticResource LeeListBox}" TargetType="ListBox" />
+    <Style
+        BasedOn="{StaticResource LeeListBox}"
+        TargetType="ListBox" />
 
-    <Style BasedOn="{StaticResource LeeGridViewColumnHeader}" TargetType="GridViewColumnHeader" />
+    <Style
+        BasedOn="{StaticResource LeeGridViewColumnHeader}"
+        TargetType="GridViewColumnHeader" />
 
-    <Style BasedOn="{StaticResource LeeListView}" TargetType="ListView" />
+    <Style
+        BasedOn="{StaticResource LeeListView}"
+        TargetType="ListView" />
 
-    <Style BasedOn="{StaticResource LeeDataGrid}" TargetType="DataGrid" />
+    <Style
+        BasedOn="{StaticResource LeeDataGrid}"
+        TargetType="DataGrid" />
 
-    <Style BasedOn="{StaticResource LeeSlider}" TargetType="Slider" />
-    <Style BasedOn="{StaticResource LeeGroupBox}" TargetType="GroupBox" />
-    <Style BasedOn="{StaticResource LeeTextBox}" TargetType="TextBox" />
-    <Style BasedOn="{StaticResource LeePasswordBox}" TargetType="PasswordBox" />
-    <Style BasedOn="{StaticResource LeeCalendar}" TargetType="Calendar" />
-    <Style BasedOn="{StaticResource LeeDatePicker}" TargetType="DatePicker" />
-    <Style BasedOn="{StaticResource LeeToolTip}" TargetType="ToolTip" />
-    <Style BasedOn="{StaticResource LeeThumb}" TargetType="Thumb" />
-    <Style BasedOn="{StaticResource LeeExpander}" TargetType="Expander" />
+    <Style
+        BasedOn="{StaticResource LeeSlider}"
+        TargetType="Slider" />
+    <Style
+        BasedOn="{StaticResource LeeGroupBox}"
+        TargetType="GroupBox" />
+    <Style
+        BasedOn="{StaticResource LeeTextBox}"
+        TargetType="TextBox" />
+    <Style
+        BasedOn="{StaticResource LeePasswordBox}"
+        TargetType="PasswordBox" />
+    <Style
+        BasedOn="{StaticResource LeeCalendar}"
+        TargetType="Calendar" />
+    <Style
+        BasedOn="{StaticResource LeeDatePicker}"
+        TargetType="DatePicker" />
+    <Style
+        BasedOn="{StaticResource LeeToolTip}"
+        TargetType="ToolTip" />
+    <Style
+        BasedOn="{StaticResource LeeThumb}"
+        TargetType="Thumb" />
+    <Style
+        BasedOn="{StaticResource LeeExpander}"
+        TargetType="Expander" />
 
-    <Style BasedOn="{StaticResource LeeTreeView}" TargetType="TreeView" />
+    <Style
+        BasedOn="{StaticResource LeeTreeView}"
+        TargetType="TreeView" />
 
-    <Style BasedOn="{StaticResource LeeTabControl}" TargetType="TabControl" />
+    <Style
+        BasedOn="{StaticResource LeeTabControl}"
+        TargetType="TabControl" />
 
 
 
