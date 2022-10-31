@@ -4,7 +4,8 @@
     xmlns:lee="clr-namespace:LeeTeke.WpfControl.Controls"
     xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies"
     xmlns:local="clr-namespace:LeeTeke.WpfControl.Controls">
-    <Style x:Key="BaseMaskPanel" TargetType="{x:Type local:MaskPanel}">
+    <Style x:Key="BaseMaskPanel"
+        TargetType="{x:Type local:MaskPanel}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
@@ -14,7 +15,6 @@
         <Setter Property="MinWidth" Value="200" />
         <Setter Property="MinHeight" Value="150" />
         <Setter Property="ClipToBounds" Value="True" />
-        <Setter Property="FontSize" Value="15" />
         <Setter Property="TitleHeight" Value="35" />
         <Setter Property="TitleMargin" Value="5,0,0,0" />
         <Setter Property="ShowAnimationEasingFunction" Value="{StaticResource LeeScrollViewerSlideEasingFuncion}" />
@@ -71,7 +71,7 @@
                                         HorizontalAlignment="{TemplateBinding TitleHorizontalAlignment}"
                                         VerticalAlignment="{TemplateBinding TitleVerticalAlignment}"
                                         Content="{TemplateBinding Title}"
-                                        TextElement.FontStyle="{TemplateBinding FontStyle}" />
+                                        TextElement.FontSize="14" />
                                     <Button x:Name="PART_Full"
                                         Grid.Column="1"
                                         Width="35"
@@ -91,7 +91,9 @@
                                         Visibility="{TemplateBinding ShowClose,
                                                                      Converter={StaticResource VisibilityForBoolConverter}}" />
                                 </Grid>
-                                <ScrollViewer Grid.Row="1" Padding="{TemplateBinding Padding}">
+                                <ScrollViewer
+                                    Grid.Row="1"
+                                    Padding="{TemplateBinding Padding}">
                                     <ContentPresenter Content="{TemplateBinding Content}" />
                                 </ScrollViewer>
                                 <Rectangle x:Name="PART_Rectangle"
@@ -113,7 +115,9 @@
                         <Trigger Property="IsClip" Value="True">
                             <Setter TargetName="PART_Grid" Property="Clip">
                                 <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                    <MultiBinding
+                                        Converter="{StaticResource MultiValueToClipConverter}"
+                                        Mode="OneWay">
                                         <Binding
                                             Mode="OneWay"
                                             Path="ActualWidth"
