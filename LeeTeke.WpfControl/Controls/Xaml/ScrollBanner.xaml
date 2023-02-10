@@ -13,8 +13,8 @@
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource LeeValue_BorderThickness}"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource LeeValue_CornerRadius}"/>
         <Setter Property="Orientation" Value="Horizontal"/>
         <Setter Property="MinHeight" Value="{DynamicResource LeeItemMinHeight}"/>
         <Setter Property="Speed" Value="1"/>
@@ -53,8 +53,8 @@
                                             Margin="0,0,3,0"
                                             Visibility="Collapsed"
                                             leedep:CornerRadiusManager.CornerRadius="11"
-                                            FontFamily="{DynamicResource IconFontFamily}"
-                                            Style="{DynamicResource ColorButton}"
+                                            FontFamily="{StaticResource IconFontFamily}"
+                                            Style="{StaticResource LeeColorButton}"
                                             BorderThickness="0"
                                             Background="{DynamicResource LeeBrush_Mark}"
                                             Tag="1"

@@ -186,7 +186,8 @@ namespace LeeTeke.WPFTest.ViewModels
         private void SlideChangedCommandExecute()
         {
             _slide = !_slide;
-            StaticMethods.SetScrollViewerSlide(_slide);
+
+            Config.ScrollViewerSlideEnabled = _slide;
         }
 
         private void Init()
@@ -301,7 +302,8 @@ namespace LeeTeke.WPFTest.ViewModels
         {
 
             _switch = !_switch;
-            StaticMethods.ChangeTheme(_switch);
+
+            Config.ThemeMode = _switch ? WpfControl.Models.ThemeMode.Light : WpfControl.Models.ThemeMode.Dark;
      
         }
 

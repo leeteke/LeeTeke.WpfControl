@@ -49,6 +49,7 @@
 
     <BlurEffect x:Key="LeeBlurEffect" />
 
+
     <Style x:Key="LeeFocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
@@ -63,6 +64,12 @@
         </Setter>
     </Style>
 
+    <Style TargetType="FrameworkElement">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource LeeFocusVisual}" />
+    </Style>
+    
+    
     <sys:Boolean x:Key="LeeValue_ScrollViewerSlideEnabled">False</sys:Boolean>
     <CubicEase x:Key="LeeValue_ScrollViewerSlideEasingFuncion"
         EasingMode="EaseOut" />
@@ -72,13 +79,24 @@
 
     <CornerRadius x:Key="LeeValue_CornerRadius">4</CornerRadius>
     <sys:Double x:Key="LeeValue_FontSize">13</sys:Double>
+    <sys:Double x:Key="LeeValue_FontSize_Icon">12</sys:Double>
     <sys:Double x:Key="LeeValue_MinHeight">26</sys:Double>
     <sys:Double x:Key="LeeValue_MinWidth">80</sys:Double>
+    <sys:Double x:Key="LeeValue_MinWidth_Icon">30</sys:Double>
+    <sys:Double x:Key="LeeValue_MinHeight_Item">24</sys:Double>
+    <sys:Double x:Key="LeeValue_MinWidth_Item">120</sys:Double>
+
+    <!--  默认scrollviewbar的大小  -->
+    <sys:Double x:Key="LeeValue_ScrollViewerBarSize">8</sys:Double>
+    <sys:Double x:Key="LeeValue_ScrollViewerBarMinSize">2</sys:Double>
+
     <sys:Double x:Key="LeeValue_DisableOpacity">0.6</sys:Double>
     <Thickness x:Key="LeeValue_Padding">2</Thickness>
     <Thickness x:Key="LeeValue_BorderThickness">1</Thickness>
     <QuarticEase x:Key="LeeValue_SwitchEasingFunction"
         EasingMode="EaseOut" />
+
+
 
 
 

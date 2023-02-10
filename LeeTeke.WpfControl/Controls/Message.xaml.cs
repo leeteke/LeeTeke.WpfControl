@@ -257,9 +257,9 @@ namespace LeeTeke.WpfControl.Controls
                 Height = 30,
             };
              
-            if (StaticMethods.MessageBoxExBtnCR != null)
+            if (Config.MessageBoxExButtonCornerRadius != null)
             {
-                Dependencies.CornerRadiusManager.SetCornerRadius(theButton, (CornerRadius)StaticMethods.MessageBoxExBtnCR);
+                Dependencies.CornerRadiusManager.SetCornerRadius(theButton, (CornerRadius)Config.MessageBoxExButtonCornerRadius);
             }
 
             if (cornerRadius != null)

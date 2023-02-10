@@ -44,7 +44,7 @@ namespace LeeTeke.WpfControl.Converters
                     }
                 }
 
-                var geometry = StaticMethods.GetRoundRectangle(new Rect(0, 0, width, height), borderThickness, cornerRadius);
+                var geometry = Helper.GetRoundRectangle(new Rect(0, 0, width, height), borderThickness, cornerRadius);
                 geometry.Freeze();
 
                 return geometry;

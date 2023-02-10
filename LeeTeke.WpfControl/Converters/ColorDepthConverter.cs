@@ -15,8 +15,8 @@ namespace LeeTeke.WpfControl.Converters
             {
                 return value switch
                 {
-                    Color color => color == Colors.Transparent ? (depth > 0 ? Color.FromArgb((byte)(255 * depth), (byte)255, (byte)255, (byte)255) : Color.FromArgb((byte)(255 * Math.Abs(depth)), (byte)0, (byte)0, (byte)0)) : StaticMethods.ChangeColorDepth(color, depth),
-                    SolidColorBrush scbrush => scbrush.Color == Colors.Transparent ? (depth > 0 ? new SolidColorBrush(Color.FromArgb((byte)(255 * depth), (byte)255, (byte)255, (byte)255)) : new SolidColorBrush(Color.FromArgb((byte)(255 * Math.Abs(depth)), (byte)0, (byte)0, (byte)0))) : new SolidColorBrush(StaticMethods.ChangeColorDepth(scbrush.Color, depth)),
+                    Color color => color == Colors.Transparent ? (depth > 0 ? Color.FromArgb((byte)(255 * depth), (byte)255, (byte)255, (byte)255) : Color.FromArgb((byte)(255 * Math.Abs(depth)), (byte)0, (byte)0, (byte)0)) : Helper.ChangeColorDepth(color, depth),
+                    SolidColorBrush scbrush => scbrush.Color == Colors.Transparent ? (depth > 0 ? new SolidColorBrush(Color.FromArgb((byte)(255 * depth), (byte)255, (byte)255, (byte)255)) : new SolidColorBrush(Color.FromArgb((byte)(255 * Math.Abs(depth)), (byte)0, (byte)0, (byte)0))) : new SolidColorBrush(Helper.ChangeColorDepth(scbrush.Color, depth)),
                     _ => depth > 0 ? new SolidColorBrush(Color.FromArgb((byte)(255 * depth), (byte)255, (byte)255, (byte)255)) : new SolidColorBrush(Color.FromArgb((byte)(255 * Math.Abs(depth)), (byte)0, (byte)0, (byte)0)),
                 };
             }
@@ -29,8 +29,8 @@ namespace LeeTeke.WpfControl.Converters
             {
                 return value switch
                 {
-                    Color color => StaticMethods.ChangeColorDepth(color, Math.Abs(depth)),
-                    SolidColorBrush scbrush => new SolidColorBrush(StaticMethods.ChangeColorDepth(scbrush.Color, Math.Abs(depth))),
+                    Color color => Helper.ChangeColorDepth(color, Math.Abs(depth)),
+                    SolidColorBrush scbrush => new SolidColorBrush(Helper.ChangeColorDepth(scbrush.Color, Math.Abs(depth))),
                     _ => value,
                 };
             }

@@ -335,7 +335,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
                 }
             }
-            else if (e.Source is FrameworkElement contentItem && StaticMethods.IsInControl(_control, contentItem))
+            else if (e.Source is FrameworkElement contentItem && Helper.IsInControl(_control, contentItem))
             {
 
                 var oldIndex = _control.Items.IndexOf(contentItem);
@@ -447,7 +447,7 @@ namespace LeeTeke.WpfControl.Dependencies
             if (this._canInitiateDrag)
             {
                 // Remember the location and index of the ListViewItem the user clicked on for later.
-                this._ptMouseDown = StaticMethods.GetMousePosition(_control);
+                this._ptMouseDown = Helper.GetMousePosition(_control);
                 this._indexToSelect = index;
             }
             else
@@ -512,7 +512,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
                 Rect rect = new Rect(this._ptMouseDown, szThreshold);
                 rect.Offset(szThreshold.Width / -2, szThreshold.Height / -2);
-                Point ptInListView = StaticMethods.GetMousePosition(_control);
+                Point ptInListView = Helper.GetMousePosition(_control);
                 return !rect.Contains(ptInListView);
             }
         }
@@ -528,7 +528,7 @@ namespace LeeTeke.WpfControl.Dependencies
         {
             get
             {
-                Point ptMouse = StaticMethods.GetMousePosition(_control);
+                Point ptMouse = Helper.GetMousePosition(_control);
                 HitTestResult res = VisualTreeHelper.HitTest(_control, ptMouse);
                 if (res == null)
                     return false;
@@ -611,7 +611,7 @@ namespace LeeTeke.WpfControl.Dependencies
             // coordinates because, during a drag-drop operation, the WPF
             // mechanisms for getting the coordinates behave strangely.
             Rect bounds = VisualTreeHelper.GetDescendantBounds(target);
-            Point mousePos = StaticMethods.GetMousePosition(target);
+            Point mousePos = Helper.GetMousePosition(target);
             return bounds.Contains(mousePos);
         }
 
@@ -635,7 +635,7 @@ namespace LeeTeke.WpfControl.Dependencies
             layer.Add(_dragAdorner);
 
             // Save the location of the cursor when the left mouse button was pressed.
-            _ptMouseDown = StaticMethods.GetMousePosition(_control);
+            _ptMouseDown = Helper.GetMousePosition(_control);
 
             return layer;
         }
@@ -740,7 +740,7 @@ namespace LeeTeke.WpfControl.Dependencies
         {
             if (this._dragAdorner != null)
             {
-                Point ptCursor = StaticMethods.GetMousePosition(_control);
+                Point ptCursor = Helper.GetMousePosition(_control);
                 // 4/13/2007 - Made the top offset relative to the item being dragged.
                 var itemBeingDragged = this.GetItem(_indexToSelect);
                 if (itemBeingDragged != null)

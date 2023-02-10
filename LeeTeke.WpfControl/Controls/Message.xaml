@@ -12,7 +12,6 @@
     Closing="Window_Closing"
     ResizeMode="NoResize"
     TitleBackground="{DynamicResource LeeBrush_Background}"
-    UseLayoutRounding="{DynamicResource LeeUseLayoutRounding}"
     WindowStartupLocation="CenterOwner"
     mc:Ignorable="d">
     <Grid>
@@ -42,7 +41,7 @@
                 Margin="10"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                FontFamily="{DynamicResource IconFontFamily}"
+                FontFamily="{StaticResource IconFontFamily}"
                 FontSize="50"
                 Foreground="{DynamicResource LeeBrush_YellowMicrosoft}"
                 Visibility="Collapsed" />

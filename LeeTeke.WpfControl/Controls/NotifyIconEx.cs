@@ -166,7 +166,7 @@ namespace LeeTeke.WpfControl.Controls
             {
                 try
                 {
-                    using var bitmap = StaticMethods.ImageSourceToBitmap(source);
+                    using var bitmap = Helper.ImageSourceToBitmap(source);
                     if (bitmap != null)
                     {
                         notifyIconEx._icon = System.Drawing.Icon.FromHandle(bitmap.GetHicon());

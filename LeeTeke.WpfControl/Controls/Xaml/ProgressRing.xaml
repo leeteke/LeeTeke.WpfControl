@@ -6,9 +6,7 @@
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <Style x:Key="BaseProgressRing" TargetType="{x:Type local:ProgressRing}">
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
-        <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
+
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Thickness" Value="8" />

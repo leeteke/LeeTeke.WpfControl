@@ -12,7 +12,7 @@ namespace LeeTeke.WpfControl
 {
     public class MessageBoxEx
     {
-        public static bool IsDefaultShowMsgCR = true;
+       
         /// <summary>
         /// 显示并返回
         /// </summary>
@@ -22,7 +22,7 @@ namespace LeeTeke.WpfControl
         public static bool Show(string content, MessageStatus status = MessageStatus.None)
         {
             IMessageWin message;
-            if (IsDefaultShowMsgCR)
+            if (Config.MessageBoxExShowCornerRadius)
             {
                 message = new CRMessage();
             }
@@ -67,7 +67,7 @@ namespace LeeTeke.WpfControl
         public static bool Show(string title, string content, MessageStatus status = MessageStatus.None)
         {
             IMessageWin message;
-            if (IsDefaultShowMsgCR)
+            if (Config.MessageBoxExShowCornerRadius)
             {
                 message = new CRMessage();
             }
@@ -120,7 +120,7 @@ namespace LeeTeke.WpfControl
         public MessageBoxEx(CornerRadius cornerRadius = default)
         {
 
-            if (IsDefaultShowMsgCR)
+            if (Config.MessageBoxExShowCornerRadius)
             {
                 _msg = new CRMessage(cornerRadius);
             }

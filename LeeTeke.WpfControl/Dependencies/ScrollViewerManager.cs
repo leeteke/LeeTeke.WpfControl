@@ -79,7 +79,6 @@ namespace LeeTeke.WpfControl.Dependencies
 
         #endregion
 
-
         #region SlideEnabled
         public static bool GetSlideEnabled(DependencyObject obj)
         {
@@ -117,7 +116,7 @@ namespace LeeTeke.WpfControl.Dependencies
             var mm = GetSlideMonitorMode(scrollViewer);
             if (mm != ScrollViewerSlideMonitorMode.Both)
             {
-                var ps = StaticMethods.FindVisualParent<ScrollViewer>(e.OriginalSource as DependencyObject);
+                var ps = Helper.FindVisualParent<ScrollViewer>(e.OriginalSource as DependencyObject);
                 if (ps != null && ps != scrollViewer && CanScoolViewerHandled(mm, ps, e.Delta))
                 {
                     return;
@@ -168,7 +167,6 @@ namespace LeeTeke.WpfControl.Dependencies
 
         #endregion
 
-
         #region SlideMonitorMode
         public static ScrollViewerSlideMonitorMode GetSlideMonitorMode(DependencyObject obj)
         {
@@ -185,8 +183,6 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("SlideMonitorMode", typeof(ScrollViewerSlideMonitorMode), typeof(ScrollViewerManager), new PropertyMetadata(ScrollViewerSlideMonitorMode.Auto));
         #endregion
 
-
-
         #region SlideEasingFunction
         public static IEasingFunction GetSlideEasingFunction(DependencyObject obj)
         {
@@ -202,7 +198,6 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty SlideEasingFunctionProperty =
             DependencyProperty.RegisterAttached("SlideEasingFunction", typeof(IEasingFunction), typeof(ScrollViewerManager), new PropertyMetadata(new CubicEase { EasingMode = EasingMode.EaseOut }));
         #endregion
-
 
         #region SlideDuration
         public static Duration GetSlideDuration(DependencyObject obj)

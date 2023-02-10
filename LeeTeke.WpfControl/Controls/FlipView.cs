@@ -519,7 +519,7 @@ namespace LeeTeke.WpfControl.Controls
 
         private void ItemMouseLeftButtonUpEvent(object sender, RoutedEventArgs e)
         {
-            if (sender is FlipViewItem content && StaticMethods.IsInControl(this, content))
+            if (sender is FlipViewItem content && Helper.IsInControl(this, content))
             {
                 try
                 {

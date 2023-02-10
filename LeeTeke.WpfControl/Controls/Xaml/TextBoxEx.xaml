@@ -12,15 +12,15 @@
     <Style x:Key="BaseTextBoxEx"
         TargetType="{x:Type local:TextBoxEx}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
+
         <Setter Property="IsTabStop" Value="False" />
 
         <Setter Property="Mode" Value="General" />
         <Setter Property="Placeholder" Value="" />
         <Setter Property="PasswordChar" Value="●" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}" />
+        <Setter Property="FontSize" Value="{StaticResource LeeValue_FontSize}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource LeeValue_BorderThickness}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LeeValue_CornerRadius}" />
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
         <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}" />
         <Setter Property="Padding" Value="2" />
@@ -35,7 +35,7 @@
         <Setter Property="IconDock" Value="Left" />
         <Setter Property="Icon" Value="&#xe700;" />
         <Setter Property="IconFontSize" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=FontSize}" />
-        <Setter Property="IconFontFamily" Value="{DynamicResource IconFontFamily}" />
+        <Setter Property="IconFontFamily" Value="{StaticResource IconFontFamily}" />
         <Setter Property="IconCanClick" Value="False" />
         <Setter Property="IconVisible" Value="False" />
         <Setter Property="IconMargin" Value="2,0" />
@@ -237,7 +237,7 @@
                         </MultiDataTrigger>
 
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="{DynamicResource UnEnableOpacity}" />
+                            <Setter Property="Opacity" Value="{StaticResource LeeValue_DisableOpacity}" />
                         </Trigger>
 
                     </ControlTemplate.Triggers>

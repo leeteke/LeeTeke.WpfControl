@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -16,13 +17,25 @@ namespace LeeTeke.WpfControl
     {
 
 
-
+        private static bool _initialized = false;
         static Config()
         {
 
+
+        }
+
+
+        public static void Initialize()
+        {
+            if (_initialized)
+                return;
+            _initialized = true;
+
             //复写程序的某些设置
             //复写
-            System.Windows.FrameworkElement.FocusVisualStyleProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(Application.Current.Resources["LeeFocusVisual"], FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.Inherits));
+            System.Windows.FrameworkElement.FocusVisualStyleProperty.OverrideMetadata(typeof(Control), new FrameworkPropertyMetadata(Application.Current.Resources["LeeFocusVisual"], FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.Inherits));
+            System.Windows.FrameworkElement.FocusVisualStyleProperty.OverrideMetadata(typeof(ContentControl), new FrameworkPropertyMetadata(Application.Current.Resources["LeeFocusVisual"], FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.Inherits));
+
 
 
             Application.Current.Resources["LeeBrush_SystemTheme"] = SystemParameters.WindowGlassBrush as SolidColorBrush;
@@ -114,8 +127,8 @@ namespace LeeTeke.WpfControl
         /// </summary>
         public static CornerRadius DefaultCornerRadius
         {
-            get => (CornerRadius)Application.Current.Resources["LeeCornerRadius"];
-            set => Application.Current.Resources["LeeCornerRadius"] = value;
+            get => (CornerRadius)Application.Current.Resources["LeeValue_CornerRadius"];
+            set => Application.Current.Resources["LeeValue_CornerRadius"] = value;
         }
 
 
@@ -156,6 +169,8 @@ namespace LeeTeke.WpfControl
         /// MessageBoxEx的按钮圆角
         /// </summary>
         public static CornerRadius? MessageBoxExButtonCornerRadius { get; set; }
+
+        public static bool MessageBoxExShowCornerRadius { get; set; } = true;
 
         #endregion
 

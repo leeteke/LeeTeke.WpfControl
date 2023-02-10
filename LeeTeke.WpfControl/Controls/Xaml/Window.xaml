@@ -9,8 +9,7 @@
 
 
     <Style x:Key="BaseWindow" TargetType="{x:Type local:Window}">
-        <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
+
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Background}" />
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
@@ -35,15 +34,12 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         ClipToBounds="True"
-                        CornerRadius="{TemplateBinding CornerRadius}"
-                        >
+                        CornerRadius="{TemplateBinding CornerRadius}">
 
                         <Border.Resources>
-                            <Style x:Key="TitleButton"
-                                BasedOn="{StaticResource ColorButton}"
-                                TargetType="{x:Type Button}">
+                            <Style x:Key="TitleButton" BasedOn="{StaticResource LeeColorButton}" TargetType="{x:Type Button}">
                                 <Setter Property="FontSize" Value="10" />
-                                <Setter Property="FontFamily" Value="{DynamicResource IconFontFamily}" />
+                                <Setter Property="FontFamily" Value="{StaticResource IconFontFamily}" />
                                 <Setter Property="BorderThickness" Value="0" />
                                 <Setter Property="Background" Value="Transparent" />
                                 <Setter Property="IsTabStop" Value="False" />
@@ -58,7 +54,8 @@
                                 <RowDefinition Height="auto" />
                                 <RowDefinition />
                             </Grid.RowDefinitions>
-                            <AdornerDecorator x:Name="WIN_Client" Grid.Row="1">
+                            <AdornerDecorator x:Name="WIN_Client"
+                                Grid.Row="1">
                                 <ContentPresenter ClipToBounds="True" />
                             </AdornerDecorator>
 
@@ -143,14 +140,14 @@
 
                                     <Button x:Name="WIN_Close"
                                         Width="{TemplateBinding TitleButtonWidth}"
-                                        leedep:ButtonManager.MouseOverBackground="{DynamicResource LeeBrush_RedOffice}"
-                                        leedep:ButtonManager.MouseOverForeground="White"
                                         Content="&#xE8BB;"
                                         Foreground="{TemplateBinding TitleForeground}"
                                         IsEnabled="{TemplateBinding CloseButtonIsEnable}"
                                         Style="{StaticResource TitleButton}"
                                         ToolTip="关闭"
                                         Visibility="{TemplateBinding CloseButtonVisibility}"
+                                        leedep:ButtonManager.MouseOverBackground="{DynamicResource LeeBrush_RedOffice}"
+                                        leedep:ButtonManager.MouseOverForeground="White"
                                         Command="SystemCommands.CloseWindowCommand" />
                                 </StackPanel>
                             </Grid>
@@ -175,10 +172,7 @@
                                         <Binding Path="ActualWidth" RelativeSource="{RelativeSource Mode=Self}" />
                                         <Binding Path="ActualHeight" RelativeSource="{RelativeSource Mode=Self}" />
                                         <Binding ElementName="WIN_Border" Path="CornerRadius" />
-                                        <Binding
-                                            ElementName="WIN_Border"
-                                            Mode="OneWay"
-                                            Path="BorderThickness" />
+                                        <Binding ElementName="WIN_Border" Mode="OneWay" Path="BorderThickness" />
                                     </MultiBinding>
                                 </Setter.Value>
                             </Setter>

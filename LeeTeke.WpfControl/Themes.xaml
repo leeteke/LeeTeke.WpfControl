@@ -9,7 +9,523 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
     </ResourceDictionary.MergedDictionaries>
+    <Style x:Key="LeeScrollBarBaseRepeatButton" TargetType="{x:Type RepeatButton}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="IsTabStop" Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RepeatButton">
+                    <Rectangle
+                        Width="{TemplateBinding Width}"
+                        Height="{TemplateBinding Height}"
+                        Fill="{TemplateBinding Background}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
+    <Style x:Key="LeeScrollBar" TargetType="{x:Type ScrollBar}">
+
+        <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false" />
+        <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
+        <Setter Property="Background" Value="{Binding Path=(leedep:ScrollViewerManager.TrackBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}" />
+        <Setter Property="MinWidth" Value="0" />
+        <Setter Property="Height" Value="Auto" />
+        <Setter Property="Cursor" Value="Arrow" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ScrollBar}">
+
+                    <Track x:Name="PART_Track"
+                        IsDirectionReversed="true"
+                        IsEnabled="{TemplateBinding IsMouseOver}">
+                        <Track.DecreaseRepeatButton>
+                            <RepeatButton
+                                Style="{StaticResource LeeScrollBarBaseRepeatButton}"
+                                Command="{x:Static ScrollBar.PageUpCommand}" />
+                        </Track.DecreaseRepeatButton>
+                        <Track.IncreaseRepeatButton>
+                            <RepeatButton
+                                Style="{StaticResource LeeScrollBarBaseRepeatButton}"
+                                Command="{x:Static ScrollBar.PageDownCommand}" />
+                        </Track.IncreaseRepeatButton>
+                        <Track.Thumb>
+                            <Thumb>
+                                <Thumb.Template>
+                                    <ControlTemplate TargetType="Thumb">
+                                        <Border x:Name="PART_Border"
+                                            Background="{Binding Path=(leedep:ScrollViewerManager.ThumbBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}"
+                                            BorderThickness="0"
+                                            CornerRadius="{Binding Path=(leedep:ScrollViewerManager.ScrollBarCornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}"
+                                            Effect="{Binding Path=(leedep:ScrollViewerManager.ScrollBarShadow), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}" />
+                                        <ControlTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=PART_Border, Path=ActualWidth, Converter={StaticResource DoubleComparisonConverter}, ConverterParameter=Less_4}" Value="True">
+                                                <Setter TargetName="PART_Border" Property="CornerRadius" Value="2" />
+                                            </DataTrigger>
+
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Thumb.Template>
+                            </Thumb>
+                        </Track.Thumb>
+                    </Track>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Horizontal">
+                <Setter Property="MinHeight" Value="0" />
+                <Setter Property="Width" Value="Auto" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ScrollBar}">
+
+                            <Track x:Name="PART_Track"
+                                IsEnabled="{TemplateBinding IsMouseOver}">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton
+                                        Style="{StaticResource LeeScrollBarBaseRepeatButton}"
+                                        Command="{x:Static ScrollBar.PageLeftCommand}" />
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton
+                                        Style="{StaticResource LeeScrollBarBaseRepeatButton}"
+                                        Command="{x:Static ScrollBar.PageRightCommand}" />
+                                </Track.IncreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb>
+                                        <Thumb.Template>
+                                            <ControlTemplate TargetType="Thumb">
+                                                <Border x:Name="PART_Border"
+                                                    Background="{Binding Path=(leedep:ScrollViewerManager.ThumbBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}"
+                                                    BorderThickness="0"
+                                                    CornerRadius="{Binding Path=(leedep:ScrollViewerManager.ScrollBarCornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}"
+                                                    Effect="{Binding Path=(leedep:ScrollViewerManager.ScrollBarShadow), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}" />
+                                                <ControlTemplate.Triggers>
+                                                    <DataTrigger Binding="{Binding ElementName=PART_Border, Path=ActualWidth, Converter={StaticResource DoubleComparisonConverter}, ConverterParameter=Less_4}" Value="True">
+                                                        <Setter TargetName="PART_Border" Property="CornerRadius" Value="2" />
+                                                    </DataTrigger>
+
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+
+                                        </Thumb.Template>
+                                    </Thumb>
+                                </Track.Thumb>
+                            </Track>
+
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="LeeScrollViewerBase" TargetType="{x:Type ScrollViewer}">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="leedep:ScrollViewerManager.TrackBrush" Value="Transparent" />
+        <Setter Property="leedep:ScrollViewerManager.ThumbBrush" Value="{DynamicResource LeeBrush_Theme}" />
+        <Setter Property="leedep:ScrollViewerManager.ScrollBarCornerRadius" Value="{DynamicResource LeeValue_CornerRadius}" />
+        <Setter Property="leedep:ScrollViewerManager.SlideEasingFunction" Value="{DynamicResource LeeValue_ScrollViewerSlideEasingFuncion}" />
+        <Setter Property="leedep:ScrollViewerManager.SlideDuration" Value="{DynamicResource LeeValue_ScrollViewerSlideDuration}" />
+        <Setter Property="leedep:ScrollViewerManager.SlideEnabled" Value="{DynamicResource LeeValue_ScrollViewerSlideEnabled}" />
+    </Style>
+
+    <Style x:Key="LeeScrollViewerEx" BasedOn="{StaticResource LeeScrollViewerBase}" TargetType="{x:Type ScrollViewer}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                    <Border x:Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}">
+                        <Grid x:Name="PART_Grid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <Rectangle x:Name="Corner"
+                                Grid.Row="2"
+                                Grid.Column="2"
+                                Fill="{Binding Path=(leedep:ScrollViewerManager.TrackBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}" />
+                            <ContentPresenter
+                                Grid.Column="1"
+                                Content="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.TopContent), Mode=OneWay}" />
+                            <ContentPresenter
+                                Grid.Row="1"
+                                Content="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.LeftContent), Mode=OneWay}" />
+                            <ScrollContentPresenter
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Margin="{TemplateBinding Padding}"
+                                CanContentScroll="{TemplateBinding CanContentScroll}"
+                                VirtualizingStackPanel.IsVirtualizing="{Binding Path=(VirtualizingStackPanel.IsVirtualizing), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}"
+                                VirtualizingStackPanel.VirtualizationMode="{Binding Path=(VirtualizingStackPanel.VirtualizationMode), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}" />
+                            <lee:EasyPanel x:Name="PART_HorizontalBarPanel"
+                                Grid.Row="2"
+                                Height="{StaticResource LeeValue_ScrollViewerBarSize}"
+                                Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}">
+                                <ScrollBar x:Name="PART_HorizontalScrollBar"
+                                    Height="{StaticResource LeeValue_ScrollViewerBarMinSize}"
+                                    VerticalAlignment="Bottom"
+                                    Maximum="{TemplateBinding ScrollableWidth}"
+                                    Opacity="0"
+                                    Orientation="Horizontal"
+                                    Style="{StaticResource LeeScrollBar}"
+                                    ViewportSize="{TemplateBinding ViewportWidth}"
+                                    Value="{TemplateBinding HorizontalOffset}" />
+                            </lee:EasyPanel>
+
+                            <lee:EasyPanel x:Name="PART_VerticalBarPanel"
+                                Grid.Column="2"
+                                Width="{StaticResource LeeValue_ScrollViewerBarSize}"
+                                Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}">
+                                <ScrollBar x:Name="PART_VerticalScrollBar"
+                                    Width="{StaticResource LeeValue_ScrollViewerBarMinSize}"
+                                    HorizontalAlignment="Right"
+                                    Maximum="{TemplateBinding ScrollableHeight}"
+                                    Opacity="0"
+                                    Style="{StaticResource LeeScrollBar}"
+                                    ViewportSize="{TemplateBinding ViewportHeight}"
+                                    Value="{TemplateBinding VerticalOffset}" />
+                            </lee:EasyPanel>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
+                            <Setter TargetName="PART_Grid" Property="Clip">
+                                <Setter.Value>
+                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource Mode=Self}" />
+                                        <Binding Path="ActualHeight" RelativeSource="{RelativeSource Mode=Self}" />
+                                        <Binding ElementName="PART_Border" Path="CornerRadius" />
+                                        <Binding ElementName="PART_Border" Mode="OneWay" Path="BorderThickness" />
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <EventTrigger RoutedEvent="ScrollChanged">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        BeginTime="0:0:1"
+                                        Storyboard.TargetName="PART_HorizontalScrollBar"
+                                        Storyboard.TargetProperty="Opacity"
+                                        To="1"
+                                        Duration="0:0:0.15" />
+                                    <DoubleAnimation
+                                        BeginTime="0:0:1"
+                                        Storyboard.TargetName="PART_VerticalScrollBar"
+                                        Storyboard.TargetProperty="Opacity"
+                                        To="1"
+                                        Duration="0:0:0.15" />
+
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger
+                            RoutedEvent="MouseEnter"
+                            SourceName="PART_VerticalBarPanel">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="PART_VerticalScrollBar"
+                                        Storyboard.TargetProperty="Width"
+                                        To="{StaticResource LeeValue_ScrollViewerBarSize}"
+                                        Duration="0:0:0.15" />
+
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger
+                            RoutedEvent="MouseLeave"
+                            SourceName="PART_VerticalBarPanel">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        BeginTime="0:0:2"
+                                        Storyboard.TargetName="PART_VerticalScrollBar"
+                                        Storyboard.TargetProperty="Width"
+                                        To="{StaticResource LeeValue_ScrollViewerBarMinSize}"
+                                        Duration="0:0:0.15" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger
+                            RoutedEvent="MouseEnter"
+                            SourceName="PART_HorizontalBarPanel">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="PART_HorizontalScrollBar"
+                                        Storyboard.TargetProperty="Height"
+                                        To="{StaticResource LeeValue_ScrollViewerBarSize}"
+                                        Duration="0:0:0.15" />
+
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger
+                            RoutedEvent="MouseLeave"
+                            SourceName="PART_HorizontalBarPanel">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        BeginTime="0:0:2"
+                                        Storyboard.TargetName="PART_HorizontalScrollBar"
+                                        Storyboard.TargetProperty="Height"
+                                        To="{StaticResource LeeValue_ScrollViewerBarMinSize}"
+                                        Duration="0:0:0.15" />
+
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="PART_VerticalScrollBar"
+                                        Storyboard.TargetProperty="Opacity"
+                                        To="1"
+                                        Duration="0:0:0.15" />
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="PART_HorizontalScrollBar"
+                                        Storyboard.TargetProperty="Opacity"
+                                        To="1"
+                                        Duration="0:0:0.15" />
+
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        BeginTime="0:0:2"
+                                        Storyboard.TargetName="PART_VerticalScrollBar"
+                                        Storyboard.TargetProperty="Opacity"
+                                        To="0"
+                                        Duration="0:0:0.15" />
+                                    <DoubleAnimation
+                                        BeginTime="0:0:2"
+                                        Storyboard.TargetName="PART_HorizontalScrollBar"
+                                        Storyboard.TargetProperty="Opacity"
+                                        To="0"
+                                        Duration="0:0:0.15" />
+
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="LeeScrollViewer" BasedOn="{StaticResource LeeScrollViewerBase}" TargetType="{x:Type ScrollViewer}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                    <Border x:Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}">
+                        <Grid x:Name="PART_Grid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+
+                            <Rectangle x:Name="Corner"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Fill="{Binding Path=(leedep:ScrollViewerManager.TrackBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}" />
+                            <ScrollContentPresenter
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Margin="{TemplateBinding Padding}"
+                                CanContentScroll="{TemplateBinding CanContentScroll}"
+                                VirtualizingStackPanel.IsVirtualizing="{Binding Path=(VirtualizingStackPanel.IsVirtualizing), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}"
+                                VirtualizingStackPanel.VirtualizationMode="{Binding Path=(VirtualizingStackPanel.VirtualizationMode), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}" />
+
+                            <lee:EasyPanel x:Name="PART_HorizontalBarPanel"
+                                Grid.Row="1"
+                                Height="{StaticResource LeeValue_ScrollViewerBarSize}"
+                                Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}">
+                                <ScrollBar x:Name="PART_HorizontalScrollBar"
+                                    Height="{StaticResource LeeValue_ScrollViewerBarMinSize}"
+                                    VerticalAlignment="Bottom"
+                                    Maximum="{TemplateBinding ScrollableWidth}"
+                                    Opacity="0"
+                                    Orientation="Horizontal"
+                                    Style="{StaticResource LeeScrollBar}"
+                                    ViewportSize="{TemplateBinding ViewportWidth}"
+                                    Value="{TemplateBinding HorizontalOffset}" />
+                            </lee:EasyPanel>
+
+                            <lee:EasyPanel x:Name="PART_VerticalBarPanel"
+                                Grid.Column="1"
+                                Width="{StaticResource LeeValue_ScrollViewerBarSize}"
+                                Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}">
+                                <ScrollBar x:Name="PART_VerticalScrollBar"
+                                    Width="{StaticResource LeeValue_ScrollViewerBarMinSize}"
+                                    HorizontalAlignment="Right"
+                                    Maximum="{TemplateBinding ScrollableHeight}"
+                                    Opacity="0"
+                                    Style="{StaticResource LeeScrollBar}"
+                                    ViewportSize="{TemplateBinding ViewportHeight}"
+                                    Value="{TemplateBinding VerticalOffset}" />
+                            </lee:EasyPanel>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
+                            <Setter TargetName="PART_Grid" Property="Clip">
+                                <Setter.Value>
+                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource Mode=Self}" />
+                                        <Binding Path="ActualHeight" RelativeSource="{RelativeSource Mode=Self}" />
+                                        <Binding ElementName="PART_Border" Path="CornerRadius" />
+                                        <Binding ElementName="PART_Border" Mode="OneWay" Path="BorderThickness" />
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <EventTrigger RoutedEvent="ScrollChanged">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        BeginTime="0:0:1"
+                                        Storyboard.TargetName="PART_HorizontalScrollBar"
+                                        Storyboard.TargetProperty="Opacity"
+                                        To="1"
+                                        Duration="0:0:0.15" />
+                                    <DoubleAnimation
+                                        BeginTime="0:0:1"
+                                        Storyboard.TargetName="PART_VerticalScrollBar"
+                                        Storyboard.TargetProperty="Opacity"
+                                        To="1"
+                                        Duration="0:0:0.15" />
+
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger
+                            RoutedEvent="MouseEnter"
+                            SourceName="PART_VerticalBarPanel">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="PART_VerticalScrollBar"
+                                        Storyboard.TargetProperty="Width"
+                                        To="{StaticResource LeeValue_ScrollViewerBarSize}"
+                                        Duration="0:0:0.15" />
+
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger
+                            RoutedEvent="MouseLeave"
+                            SourceName="PART_VerticalBarPanel">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        BeginTime="0:0:2"
+                                        Storyboard.TargetName="PART_VerticalScrollBar"
+                                        Storyboard.TargetProperty="Width"
+                                        To="{StaticResource LeeValue_ScrollViewerBarMinSize}"
+                                        Duration="0:0:0.15" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger
+                            RoutedEvent="MouseEnter"
+                            SourceName="PART_HorizontalBarPanel">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="PART_HorizontalScrollBar"
+                                        Storyboard.TargetProperty="Height"
+                                        To="{StaticResource LeeValue_ScrollViewerBarSize}"
+                                        Duration="0:0:0.15" />
+
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger
+                            RoutedEvent="MouseLeave"
+                            SourceName="PART_HorizontalBarPanel">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        BeginTime="0:0:2"
+                                        Storyboard.TargetName="PART_HorizontalScrollBar"
+                                        Storyboard.TargetProperty="Height"
+                                        To="{StaticResource LeeValue_ScrollViewerBarMinSize}"
+                                        Duration="0:0:0.15" />
+
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="PART_VerticalScrollBar"
+                                        Storyboard.TargetProperty="Opacity"
+                                        To="1"
+                                        Duration="0:0:0.15" />
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="PART_HorizontalScrollBar"
+                                        Storyboard.TargetProperty="Opacity"
+                                        To="1"
+                                        Duration="0:0:0.15" />
+
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        BeginTime="0:0:2"
+                                        Storyboard.TargetName="PART_VerticalScrollBar"
+                                        Storyboard.TargetProperty="Opacity"
+                                        To="0"
+                                        Duration="0:0:0.15" />
+                                    <DoubleAnimation
+                                        BeginTime="0:0:2"
+                                        Storyboard.TargetName="PART_HorizontalScrollBar"
+                                        Storyboard.TargetProperty="Opacity"
+                                        To="0"
+                                        Duration="0:0:0.15" />
+
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style x:Key="LeeTextBlock" TargetType="{x:Type TextBlock}">
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
@@ -25,7 +541,6 @@
         <Setter Property="BorderThickness" Value="{StaticResource LeeValue_BorderThickness}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
     </Style>
-
 
     <Style x:Key="LeeButtonBase" TargetType="{x:Type Button}">
         <Setter Property="BorderThickness" Value="{DynamicResource LeeValue_BorderThickness}" />
@@ -197,6 +712,69 @@
 
     </Style>
 
+    <Style x:Key="LeeRepeatButton" TargetType="{x:Type RepeatButton}">
+        <Setter Property="Background" Value="{DynamicResource LeeBrush_Theme}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_ThemeForeground}" />
+        <Setter Property="leedep:ButtonManager.RippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}" />
+        <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeValue_CornerRadius}" />
+        <Setter Property="leedep:CornerRadiusManager.IsClip" Value="True" />
+        <Setter Property="leedep:ButtonManager.MouseOverBackground" Value="{DynamicResource LeeBrush_Mark}" />
+        <Setter Property="leedep:ButtonManager.MouseOverBorderBrush" Value="{DynamicResource LeeBrush_Mark}" />
+        <Setter Property="leedep:ButtonManager.MouseOverForeground" Value="{DynamicResource LeeBrush_ForgroundActive}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Border x:Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}">
+                        <lee:EasyPanel x:Name="PART_EasyPanel"
+                            Background="Transparent">
+                            <ContentPresenter x:Name="contentPresenter"
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Focusable="False"
+                                RecognizesAccessKey="True" />
+                            <controls:RippleMask
+                                CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
+                                IsOverflow="False"
+                                ParentElement="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                RippleBrush="{Binding Path=(leedep:ButtonManager.RippleBrush), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" />
+                        </lee:EasyPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
+                            <Setter TargetName="PART_EasyPanel" Property="Clip">
+                                <Setter.Value>
+                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                        <Binding Mode="OneWay" Path="ActualWidth" RelativeSource="{RelativeSource Mode=Self}" />
+                                        <Binding Mode="OneWay" Path="ActualHeight" RelativeSource="{RelativeSource Mode=Self}" />
+                                        <Binding ElementName="PART_Border" Mode="OneWay" Path="CornerRadius" />
+                                        <Binding ElementName="PART_Border" Mode="OneWay" Path="BorderThickness" />
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="PART_EasyPanel" Property="Background" Value="{Binding Path=(leedep:ButtonManager.MouseOverBackground), RelativeSource={RelativeSource AncestorType={x:Type Button}}, Mode=OneWay}" />
+                            <Setter TargetName="PART_Border" Property="BorderBrush" Value="{Binding Path=(leedep:ButtonManager.MouseOverBorderBrush), RelativeSource={RelativeSource AncestorType={x:Type Button}}, Mode=OneWay}" />
+                            <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{Binding Path=(leedep:ButtonManager.MouseOverForeground), RelativeSource={RelativeSource AncestorType={x:Type Button}}, Mode=OneWay}" />
+                        </Trigger>
+
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+
+
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
     <Style x:Key="LeeTextBox" TargetType="{x:Type TextBox}">
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeValue_CornerRadius}" />
         <Setter Property="leedep:TextBoxManager.ActiveBackground" Value="{DynamicResource LeeBrush_ForgroundActive}" />
@@ -253,6 +831,7 @@
                         BorderThickness="{TemplateBinding BorderThickness}"
                         Focusable="false"
                         HorizontalScrollBarVisibility="Hidden"
+                        Style="{StaticResource LeeScrollViewer}"
                         VerticalScrollBarVisibility="Hidden"
                         leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
                         leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}" />
@@ -679,6 +1258,7 @@
                         BorderThickness="{TemplateBinding BorderThickness}"
                         Focusable="false"
                         HorizontalScrollBarVisibility="Hidden"
+                        Style="{StaticResource LeeScrollViewer}"
                         VerticalScrollBarVisibility="Hidden"
                         leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
                         leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}" />
@@ -1453,352 +2033,9 @@
         </Setter>
     </Style>
 
-    <!--  默认scrollviewbar的大小  -->
-    <sys:Double x:Key="ScrollViewerBarSize">8</sys:Double>
-    <sys:Double x:Key="ScrollViewerMiniBarSize">2</sys:Double>
 
-    <Style x:Key="ScrollBarBaseRepeatButton" TargetType="RepeatButton">
-        <Setter Property="OverridesDefaultStyle" Value="true" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Focusable" Value="false" />
-        <Setter Property="IsTabStop" Value="false" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="RepeatButton">
-                    <Rectangle
-                        Width="{TemplateBinding Width}"
-                        Height="{TemplateBinding Height}"
-                        Fill="{TemplateBinding Background}" />
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="LeeScrollBar" TargetType="{x:Type ScrollBar}">
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
-        <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false" />
-        <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="MinWidth" Value="0" />
-        <Setter Property="Height" Value="Auto" />
-        <Setter Property="Cursor" Value="Arrow" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ScrollBar}">
-
-                    <Track x:Name="PART_Track"
-                        IsDirectionReversed="true"
-                        IsEnabled="{TemplateBinding IsMouseOver}">
-                        <Track.DecreaseRepeatButton>
-                            <RepeatButton
-                                Style="{StaticResource ScrollBarBaseRepeatButton}"
-                                Command="{x:Static ScrollBar.PageUpCommand}" />
-                        </Track.DecreaseRepeatButton>
-                        <Track.IncreaseRepeatButton>
-                            <RepeatButton
-                                Style="{StaticResource ScrollBarBaseRepeatButton}"
-                                Command="{x:Static ScrollBar.PageDownCommand}" />
-                        </Track.IncreaseRepeatButton>
-                        <Track.Thumb>
-                            <Thumb>
-                                <Thumb.Template>
-                                    <ControlTemplate TargetType="Thumb">
-                                        <Border x:Name="PART_Border"
-                                            Background="{Binding Path=(leedep:ScrollViewerManager.ThumbBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}"
-                                            BorderThickness="0"
-                                            CornerRadius="{Binding Path=(leedep:ScrollViewerManager.ScrollBarCornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}"
-                                            Effect="{Binding Path=(leedep:ScrollViewerManager.ScrollBarShadow), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}" />
-                                        <ControlTemplate.Triggers>
-                                            <DataTrigger Binding="{Binding ElementName=PART_Border, Path=ActualWidth, Converter={StaticResource DoubleComparisonConverter}, ConverterParameter=Less_4}" Value="True">
-                                                <Setter TargetName="PART_Border" Property="CornerRadius" Value="2" />
-                                            </DataTrigger>
-
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Thumb.Template>
-                            </Thumb>
-                        </Track.Thumb>
-                    </Track>
-
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <Trigger Property="Orientation" Value="Horizontal">
-                <Setter Property="MinHeight" Value="0" />
-                <Setter Property="Width" Value="Auto" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type ScrollBar}">
-
-                            <Track x:Name="PART_Track"
-                                IsEnabled="{TemplateBinding IsMouseOver}">
-                                <Track.DecreaseRepeatButton>
-                                    <RepeatButton
-                                        Style="{StaticResource ScrollBarBaseRepeatButton}"
-                                        Command="{x:Static ScrollBar.PageLeftCommand}" />
-                                </Track.DecreaseRepeatButton>
-                                <Track.IncreaseRepeatButton>
-                                    <RepeatButton
-                                        Style="{StaticResource ScrollBarBaseRepeatButton}"
-                                        Command="{x:Static ScrollBar.PageRightCommand}" />
-                                </Track.IncreaseRepeatButton>
-                                <Track.Thumb>
-                                    <Thumb>
-                                        <Thumb.Template>
-                                            <ControlTemplate TargetType="Thumb">
-                                                <Border x:Name="PART_Border"
-                                                    Background="{Binding Path=(leedep:ScrollViewerManager.ThumbBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}"
-                                                    BorderThickness="0"
-                                                    CornerRadius="{Binding Path=(leedep:ScrollViewerManager.ScrollBarCornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}"
-                                                    Effect="{Binding Path=(leedep:ScrollViewerManager.ScrollBarShadow), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}" />
-                                                <ControlTemplate.Triggers>
-                                                    <DataTrigger Binding="{Binding ElementName=PART_Border, Path=ActualWidth, Converter={StaticResource DoubleComparisonConverter}, ConverterParameter=Less_4}" Value="True">
-                                                        <Setter TargetName="PART_Border" Property="CornerRadius" Value="2" />
-                                                    </DataTrigger>
-
-                                                </ControlTemplate.Triggers>
-                                            </ControlTemplate>
-
-                                        </Thumb.Template>
-                                    </Thumb>
-                                </Track.Thumb>
-                            </Track>
-
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
-    <Style x:Key="LeeScrollViewer" TargetType="{x:Type ScrollViewer}">
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
-        <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
-        <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
-        <Setter Property="VerticalContentAlignment" Value="Stretch" />
-        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        <Setter Property="leedep:ScrollViewerManager.TrackBrush" Value="Transparent" />
-        <Setter Property="leedep:ScrollViewerManager.ThumbBrush" Value="{DynamicResource LeeBrush_Theme}" />
-        <Setter Property="leedep:ScrollViewerManager.ScrollBarCornerRadius" Value="{DynamicResource LeeValue_CornerRadius}" />
-        <Setter Property="leedep:ScrollViewerManager.SlideEasingFunction" Value="{DynamicResource LeeScrollViewerSlideEasingFuncion}" />
-        <Setter Property="leedep:ScrollViewerManager.SlideDuration" Value="{DynamicResource LeeScrollViewerSlideDuration}" />
-        <Setter Property="leedep:ScrollViewerManager.SlideEnabled" Value="{DynamicResource LeeScrollViewerSlideEnabled}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ScrollViewer}">
-                    <Border x:Name="PART_Border"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}">
-                        <Grid x:Name="PART_Grid">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto" />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-                            <ContentPresenter
-                                Grid.Column="1"
-                                Content="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.TopContent), Mode=OneWay}" />
-                            <ContentPresenter
-                                Grid.Row="1"
-                                Content="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.LeftContent), Mode=OneWay}" />
-                            <ScrollContentPresenter
-                                Grid.Row="1"
-                                Grid.Column="1"
-                                Margin="{TemplateBinding Padding}"
-                                CanContentScroll="{TemplateBinding CanContentScroll}"
-                                VirtualizingStackPanel.IsVirtualizing="{Binding Path=(VirtualizingStackPanel.IsVirtualizing), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}"
-                                VirtualizingStackPanel.VirtualizationMode="{Binding Path=(VirtualizingStackPanel.VirtualizationMode), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}" />
-                            <lee:EasyPanel x:Name="PART_HorizontalGrid"
-                                Grid.Row="1"
-                                Grid.Column="1"
-                                Height="{StaticResource ScrollViewerBarSize}"
-                                VerticalAlignment="Bottom"
-                                Background="Transparent"
-                                Opacity="0">
-                                <lee:EasyPanel.Margin>
-                                    <Thickness Right="{StaticResource ScrollViewerBarSize}" />
-                                </lee:EasyPanel.Margin>
-                                <ScrollBar x:Name="PART_HorizontalScrollBar"
-                                    Height="{DynamicResource ScrollViewerMiniBarSize}"
-                                    VerticalAlignment="Bottom"
-                                    Maximum="{TemplateBinding ScrollableWidth}"
-                                    Orientation="Horizontal"
-                                    ViewportSize="{TemplateBinding ViewportWidth}"
-                                    Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
-                                    Value="{TemplateBinding HorizontalOffset}" />
-                            </lee:EasyPanel>
-                            <lee:EasyPanel x:Name="PART_VerticalGrid"
-                                Grid.Row="1"
-                                Grid.Column="1"
-                                Width="{StaticResource ScrollViewerBarSize}"
-                                HorizontalAlignment="Right"
-                                Background="Transparent"
-                                Opacity="0">
-                                <lee:EasyPanel.Margin>
-                                    <Thickness Bottom="{StaticResource ScrollViewerBarSize}" />
-                                </lee:EasyPanel.Margin>
-                                <ScrollBar x:Name="PART_VerticalScrollBar"
-                                    Width="{DynamicResource ScrollViewerMiniBarSize}"
-                                    HorizontalAlignment="Right"
-                                    Maximum="{TemplateBinding ScrollableHeight}"
-                                    ViewportSize="{TemplateBinding ViewportHeight}"
-                                    Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
-                                    Value="{TemplateBinding VerticalOffset}" />
-                            </lee:EasyPanel>
-                        </Grid>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="leedep:CornerRadiusManager.IsClip" Value="True">
-                            <Setter TargetName="PART_Grid" Property="Clip">
-                                <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
-                                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource Mode=Self}" />
-                                        <Binding Path="ActualHeight" RelativeSource="{RelativeSource Mode=Self}" />
-                                        <Binding ElementName="PART_Border" Path="CornerRadius" />
-                                        <Binding ElementName="PART_Border" Mode="OneWay" Path="BorderThickness" />
-                                    </MultiBinding>
-                                </Setter.Value>
-                            </Setter>
-                        </Trigger>
-                        <Trigger SourceName="PART_HorizontalScrollBar" Property="IsVisible" Value="False">
-                            <Setter TargetName="PART_HorizontalGrid" Property="Height" Value="0" />
-                            <Setter TargetName="PART_VerticalGrid" Property="Margin" Value="0" />
-                        </Trigger>
-                        <Trigger SourceName="PART_VerticalScrollBar" Property="IsVisible" Value="False">
-                            <Setter TargetName="PART_VerticalGrid" Property="Width" Value="0" />
-                            <Setter TargetName="PART_HorizontalGrid" Property="Margin" Value="0" />
-                        </Trigger>
-                        <EventTrigger RoutedEvent="ScrollChanged">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation
-                                        BeginTime="0:0:1"
-                                        Storyboard.TargetName="PART_VerticalGrid"
-                                        Storyboard.TargetProperty="Opacity"
-                                        To="1"
-                                        Duration="0:0:0.15" />
-                                    <DoubleAnimation
-                                        BeginTime="0:0:1"
-                                        Storyboard.TargetName="PART_VerticalGrid"
-                                        Storyboard.TargetProperty="Opacity"
-                                        To="1"
-                                        Duration="0:0:0.15" />
-
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger
-                            RoutedEvent="MouseEnter"
-                            SourceName="PART_VerticalGrid">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation
-                                        Storyboard.TargetName="PART_VerticalScrollBar"
-                                        Storyboard.TargetProperty="Width"
-                                        To="{StaticResource ScrollViewerBarSize}"
-                                        Duration="0:0:0.15" />
-
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger
-                            RoutedEvent="MouseLeave"
-                            SourceName="PART_VerticalGrid">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation
-                                        BeginTime="0:0:2"
-                                        Storyboard.TargetName="PART_VerticalScrollBar"
-                                        Storyboard.TargetProperty="Width"
-                                        To="{StaticResource ScrollViewerMiniBarSize}"
-                                        Duration="0:0:0.15" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger
-                            RoutedEvent="MouseEnter"
-                            SourceName="PART_HorizontalGrid">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation
-                                        Storyboard.TargetName="PART_HorizontalScrollBar"
-                                        Storyboard.TargetProperty="Height"
-                                        To="{StaticResource ScrollViewerBarSize}"
-                                        Duration="0:0:0.15" />
-
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger
-                            RoutedEvent="MouseLeave"
-                            SourceName="PART_HorizontalGrid">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation
-                                        BeginTime="0:0:2"
-                                        Storyboard.TargetName="PART_HorizontalScrollBar"
-                                        Storyboard.TargetProperty="Height"
-                                        To="{StaticResource ScrollViewerMiniBarSize}"
-                                        Duration="0:0:0.15" />
-
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseEnter">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation
-                                        Storyboard.TargetName="PART_VerticalGrid"
-                                        Storyboard.TargetProperty="Opacity"
-                                        To="1"
-                                        Duration="0:0:0.15" />
-                                    <DoubleAnimation
-                                        Storyboard.TargetName="PART_HorizontalGrid"
-                                        Storyboard.TargetProperty="Opacity"
-                                        To="1"
-                                        Duration="0:0:0.15" />
-
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseLeave">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation
-                                        BeginTime="0:0:2"
-                                        Storyboard.TargetName="PART_VerticalGrid"
-                                        Storyboard.TargetProperty="Opacity"
-                                        To="0"
-                                        Duration="0:0:0.15" />
-                                    <DoubleAnimation
-                                        BeginTime="0:0:2"
-                                        Storyboard.TargetName="PART_HorizontalGrid"
-                                        Storyboard.TargetProperty="Opacity"
-                                        To="0"
-                                        Duration="0:0:0.15" />
-
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
 
     <Style x:Key="LeeCheckBox" TargetType="{x:Type CheckBox}">
-
         <Setter Property="Background" Value="{DynamicResource LeeBrush_ForgroundActive}" />
         <Setter Property="MinHeight" Value="{StaticResource LeeValue_MinHeight}" />
         <Setter Property="leedep:CheckBoxManager.RippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}" />
@@ -1978,7 +2215,7 @@
                                 Storyboard.TargetName="PART_CheckedFalseST"
                                 Storyboard.TargetProperty="ScaleX">
                                 <EasingDoubleKeyFrame
-                                    EasingFunction="{StaticResource SwitchEasingFunction}"
+                                    EasingFunction="{StaticResource LeeValue_SwitchEasingFunction}"
                                     KeyTime="0:0:0.3"
                                     Value="0" />
                             </DoubleAnimationUsingKeyFrames>
@@ -1986,7 +2223,7 @@
                                 Storyboard.TargetName="PART_CheckedFalseST"
                                 Storyboard.TargetProperty="ScaleY">
                                 <EasingDoubleKeyFrame
-                                    EasingFunction="{StaticResource SwitchEasingFunction}"
+                                    EasingFunction="{StaticResource LeeValue_SwitchEasingFunction}"
                                     KeyTime="0:0:0.3"
                                     Value="0" />
                             </DoubleAnimationUsingKeyFrames>
@@ -1997,7 +2234,7 @@
                                 Storyboard.TargetName="PART_EllipseTT"
                                 Storyboard.TargetProperty="X">
                                 <EasingDoubleKeyFrame
-                                    EasingFunction="{StaticResource SwitchEasingFunction}"
+                                    EasingFunction="{StaticResource LeeValue_SwitchEasingFunction}"
                                     KeyTime="0:0:0.3"
                                     Value="0" />
                             </DoubleAnimationUsingKeyFrames>
@@ -2006,7 +2243,7 @@
                                 Storyboard.TargetName="PART_CheckedFalseST"
                                 Storyboard.TargetProperty="ScaleX">
                                 <EasingDoubleKeyFrame
-                                    EasingFunction="{StaticResource SwitchEasingFunction}"
+                                    EasingFunction="{StaticResource LeeValue_SwitchEasingFunction}"
                                     KeyTime="0:0:0.3"
                                     Value="1" />
                             </DoubleAnimationUsingKeyFrames>
@@ -2014,7 +2251,7 @@
                                 Storyboard.TargetName="PART_CheckedFalseST"
                                 Storyboard.TargetProperty="ScaleY">
                                 <EasingDoubleKeyFrame
-                                    EasingFunction="{StaticResource SwitchEasingFunction}"
+                                    EasingFunction="{StaticResource LeeValue_SwitchEasingFunction}"
                                     KeyTime="0:0:0.3"
                                     Value="1" />
                             </DoubleAnimationUsingKeyFrames>
@@ -2155,6 +2392,7 @@
                         Background="Transparent"
                         Focusable="false"
                         HorizontalScrollBarVisibility="Hidden"
+                        Style="{StaticResource LeeScrollViewer}"
                         VerticalScrollBarVisibility="Hidden" />
 
 
@@ -2395,6 +2633,7 @@
                                         Effect="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ComboBoxManager.DropEffect), Mode=OneWay}"
                                         HorizontalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(ScrollViewer.HorizontalScrollBarVisibility), Mode=OneWay}"
                                         PanningMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(ScrollViewer.PanningMode), Mode=OneWay}"
+                                        Style="{StaticResource LeeScrollViewerEx}"
                                         VerticalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(ScrollViewer.VerticalScrollBarVisibility), Mode=OneWay}"
                                         VirtualizingStackPanel.IsVirtualizing="{Binding Path=(VirtualizingPanel.IsVirtualizing), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                                         VirtualizingStackPanel.VirtualizationMode="{Binding Path=(VirtualizingPanel.VirtualizationMode), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
@@ -2581,13 +2820,9 @@
                         CornerRadius="{Binding Path=(leedep:CornerRadiusManager.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}">
                         <Grid x:Name="PART_Grid">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition x:Name="iconColumn"
-                                    Width="auto"
-                                    MinWidth="{Binding Path=(leedep:MenuItemManager.IconMinWidth), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}" />
+                                <ColumnDefinition x:Name="iconColumn" Width="auto" MinWidth="{Binding Path=(leedep:MenuItemManager.IconMinWidth), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}" />
                                 <ColumnDefinition />
-                                <ColumnDefinition x:Name="tagColumn"
-                                    Width="auto"
-                                    MinWidth="{Binding Path=(leedep:MenuItemManager.SubTagMinWidth), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}" />
+                                <ColumnDefinition x:Name="tagColumn" Width="auto" MinWidth="{Binding Path=(leedep:MenuItemManager.SubTagMinWidth), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}" />
                             </Grid.ColumnDefinitions>
                             <controls:RippleMask
                                 Grid.ColumnSpan="3"
@@ -2639,6 +2874,7 @@
                                         BorderThickness="{Binding Path=(leedep:MenuItemManager.SubBorderThickness), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                                         CanContentScroll="True"
                                         Effect="{Binding Path=(leedep:MenuItemManager.SubEffect), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
+                                        Style="{StaticResource LeeScrollViewer}"
                                         VirtualizingPanel.IsVirtualizing="True"
                                         VirtualizingPanel.VirtualizationMode="Recycling"
                                         leedep:CornerRadiusManager.CornerRadius="{Binding Path=(leedep:MenuItemManager.SubCornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
@@ -2763,7 +2999,9 @@
                             <ContentPresenter
                                 Content="{Binding Path=(leedep:ContextMenuManager.Content), RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}"
                                 DockPanel.Dock="{Binding Path=(leedep:ContextMenuManager.ContentDock), RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}" />
-                            <ScrollViewer Padding="{TemplateBinding Padding}">
+                            <ScrollViewer
+                                Padding="{TemplateBinding Padding}"
+                                Style="{StaticResource LeeScrollViewer}">
                                 <ItemsPresenter
                                     Grid.IsSharedSizeScope="True"
                                     KeyboardNavigation.DirectionalNavigation="Cycle" />
@@ -3273,10 +3511,8 @@
 
     <Style x:Key="LeeDataGrid" TargetType="{x:Type DataGrid}">
 
-
-
         <Setter Property="SelectionUnit" Value="FullRow" />
-        <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontSize" Value="{StaticResource LeeValue_FontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
@@ -3379,8 +3615,8 @@
         <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True" />
         <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling" />
 
-        <Setter Property="leedep:ScrollViewerManager.SlideEasingFunction" Value="{DynamicResource LeeScrollViewerSlideEasingFuncion}" />
-        <Setter Property="leedep:ScrollViewerManager.SlideDuration" Value="{DynamicResource LeeScrollViewerSlideDuration}" />
+        <Setter Property="leedep:ScrollViewerManager.SlideEasingFunction" Value="{DynamicResource LeeValue_ScrollViewerSlideEasingFuncion}" />
+        <Setter Property="leedep:ScrollViewerManager.SlideDuration" Value="{DynamicResource LeeValue_ScrollViewerSlideDuration}" />
         <Setter Property="leedep:ScrollViewerManager.SlideEnabled" Value="False" />
 
 
@@ -3417,7 +3653,8 @@
 
                         <ScrollViewer x:Name="DG_ScrollViewer"
                             Margin="{TemplateBinding Padding}"
-                            Focusable="false">
+                            Focusable="false"
+                            Style="{StaticResource LeeScrollViewer}">
                             <ScrollViewer.Template>
                                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
                                     <Grid>
@@ -3609,7 +3846,8 @@
                     <ScrollViewer x:Name="PART_ContentHost"
                         Margin="0"
                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                        Style="{StaticResource LeeScrollViewer}" />
 
                 </lee:EasyPanel>
             </Border>
@@ -3699,7 +3937,7 @@
                                 FontFamily="{StaticResource IconFontFamily}"
                                 FontSize="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:DatePickerManager.ButtonFontSize), Mode=OneWay}"
                                 Foreground="{TemplateBinding Foreground}"
-                                Style="{StaticResource TextButton}" />
+                                Style="{StaticResource LeeTextButton}" />
                             <DatePickerTextBox x:Name="PART_TextBox"
                                 Grid.Row="0"
                                 Grid.Column="0"
@@ -4420,7 +4658,7 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontSize" Value="{StaticResource LeeValue_FontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="true" />
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
@@ -4477,9 +4715,9 @@
         <Setter Property="leedep:ListBoxItemManager.MarkSite" Value="Left" />
         <Setter Property="leedep:ListBoxItemManager.MarkSize" Value="4" />
 
-        <Setter Property="leedep:ScrollViewerManager.SlideEasingFunction" Value="{DynamicResource LeeScrollViewerSlideEasingFuncion}" />
-        <Setter Property="leedep:ScrollViewerManager.SlideDuration" Value="{DynamicResource LeeScrollViewerSlideDuration}" />
-        <Setter Property="leedep:ScrollViewerManager.SlideEnabled" Value="{DynamicResource LeeScrollViewerSlideEnabled}" />
+        <Setter Property="leedep:ScrollViewerManager.SlideEasingFunction" Value="{DynamicResource LeeValue_ScrollViewerSlideEasingFuncion}" />
+        <Setter Property="leedep:ScrollViewerManager.SlideDuration" Value="{DynamicResource LeeValue_ScrollViewerSlideDuration}" />
+        <Setter Property="leedep:ScrollViewerManager.SlideEnabled" Value="{DynamicResource LeeValue_ScrollViewerSlideEnabled}" />
 
         <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True" />
         <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Standard" />
@@ -4508,6 +4746,7 @@
                         HorizontalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(ScrollViewer.HorizontalScrollBarVisibility), Mode=OneWay}"
                         IsDeferredScrollingEnabled="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(ScrollViewer.IsDeferredScrollingEnabled), Mode=OneWay}"
                         PanningMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(ScrollViewer.PanningMode), Mode=OneWay}"
+                        Style="{StaticResource LeeScrollViewer}"
                         VerticalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(ScrollViewer.VerticalScrollBarVisibility), Mode=OneWay}"
                         VirtualizingPanel.IsVirtualizing="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(VirtualizingPanel.IsVirtualizing), Mode=OneWay}"
                         VirtualizingPanel.VirtualizationMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(VirtualizingPanel.VirtualizationMode), Mode=OneWay}"
@@ -4785,7 +5024,7 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontSize" Value="{StaticResource LeeValue_FontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="true" />
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
@@ -4838,9 +5077,9 @@
         <Setter Property="leedep:ListItemManager.CornerRadius" Value="{DynamicResource LeeValue_CornerRadius}" />
         <Setter Property="leedep:ListItemManager.IsClip" Value="False" />
 
-        <Setter Property="leedep:ScrollViewerManager.SlideEasingFunction" Value="{DynamicResource LeeScrollViewerSlideEasingFuncion}" />
-        <Setter Property="leedep:ScrollViewerManager.SlideDuration" Value="{DynamicResource LeeScrollViewerSlideDuration}" />
-        <Setter Property="leedep:ScrollViewerManager.SlideEnabled" Value="{DynamicResource LeeScrollViewerSlideEnabled}" />
+        <Setter Property="leedep:ScrollViewerManager.SlideEasingFunction" Value="{DynamicResource LeeValue_ScrollViewerSlideEasingFuncion}" />
+        <Setter Property="leedep:ScrollViewerManager.SlideDuration" Value="{DynamicResource LeeValue_ScrollViewerSlideDuration}" />
+        <Setter Property="leedep:ScrollViewerManager.SlideEnabled" Value="{DynamicResource LeeValue_ScrollViewerSlideEnabled}" />
 
         <Setter Property="ItemContainerStyle" Value="{StaticResource LeeListViewItem}" />
 
@@ -4882,6 +5121,7 @@
                                     CanContentScroll="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}, Path=(ScrollViewer.CanContentScroll), Mode=OneWay}"
                                     HorizontalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}, Path=(ScrollViewer.HorizontalScrollBarVisibility), Mode=OneWay}"
                                     PanningMode="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}, Path=(ScrollViewer.PanningMode), Mode=OneWay}"
+                                    Style="{StaticResource LeeScrollViewer}"
                                     VerticalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}, Path=(ScrollViewer.VerticalScrollBarVisibility), Mode=OneWay}"
                                     leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
                                     leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}"
@@ -4946,6 +5186,7 @@
                                 CanContentScroll="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}, Path=(ScrollViewer.CanContentScroll), Mode=OneWay}"
                                 HorizontalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}, Path=(ScrollViewer.HorizontalScrollBarVisibility), Mode=OneWay}"
                                 PanningMode="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}, Path=(ScrollViewer.PanningMode), Mode=OneWay}"
+                                Style="{StaticResource LeeScrollViewer}"
                                 VerticalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}, Path=(ScrollViewer.VerticalScrollBarVisibility), Mode=OneWay}"
                                 leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
                                 leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}"
@@ -5052,9 +5293,7 @@
                             CornerRadius="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeView}}, Path=(leedep:TreeViewItemManager.CornerRadius), Mode=OneWay}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition
-                                        Width="auto"
-                                        MinWidth="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={StaticResource TreeViewItemSeparateConverter}}" />
+                                    <ColumnDefinition Width="auto" MinWidth="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={StaticResource TreeViewItemSeparateConverter}}" />
                                     <ColumnDefinition Width="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:TreeViewItemManager.SwitchWidth), Mode=OneWay}" />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
@@ -5187,8 +5426,9 @@
 
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderThickness" Value="{StaticResource LeeValue_BorderThickness}" />
         <Setter Property="Padding" Value="0" />
+        <Setter Property="FontSize" Value="{StaticResource LeeValue_FontSize}" />
 
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
@@ -5228,9 +5468,9 @@
         <Setter Property="leedep:TreeViewItemManager.MarkSelectedBrush" Value="{DynamicResource LeeBrush_Theme}" />
         <Setter Property="leedep:TreeViewItemManager.MarkSize" Value="4" />
 
-        <Setter Property="leedep:ScrollViewerManager.SlideEasingFunction" Value="{DynamicResource LeeScrollViewerSlideEasingFuncion}" />
-        <Setter Property="leedep:ScrollViewerManager.SlideDuration" Value="{DynamicResource LeeScrollViewerSlideDuration}" />
-        <Setter Property="leedep:ScrollViewerManager.SlideEnabled" Value="{DynamicResource LeeScrollViewerSlideEnabled}" />
+        <Setter Property="leedep:ScrollViewerManager.SlideEasingFunction" Value="{DynamicResource LeeValue_ScrollViewerSlideEasingFuncion}" />
+        <Setter Property="leedep:ScrollViewerManager.SlideDuration" Value="{DynamicResource LeeValue_ScrollViewerSlideDuration}" />
+        <Setter Property="leedep:ScrollViewerManager.SlideEnabled" Value="{DynamicResource LeeValue_ScrollViewerSlideEnabled}" />
 
         <Setter Property="ItemContainerStyle" Value="{StaticResource LeeTreeViewItem}" />
         <Setter Property="Template">
@@ -5244,6 +5484,7 @@
                         CanContentScroll="false"
                         Focusable="false"
                         HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                        Style="{StaticResource LeeScrollViewer}"
                         VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
                         leedep:CornerRadiusManager.CornerRadius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.CornerRadius), Mode=OneWay}"
                         leedep:CornerRadiusManager.IsClip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CornerRadiusManager.IsClip), Mode=OneWay}"
@@ -5410,10 +5651,11 @@
     </Style>
     <Style x:Key="LeeTabControl" TargetType="{x:Type TabControl}">
 
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderThickness" Value="{StaticResource LeeValue_BorderThickness}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeValue_CornerRadius}" />
         <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
+        <Setter Property="FontSize" Value="{StaticResource LeeValue_FontSize}" />
         <Setter Property="TabStripPlacement" Value="Top" />
 
 
@@ -5530,9 +5772,11 @@
     </Style>
     <!--  默认替换  -->
     <Style BasedOn="{StaticResource LeeButton}" TargetType="Button" />
+    <Style BasedOn="{StaticResource LeeRepeatButton}" TargetType="RepeatButton" />
     <Style BasedOn="{StaticResource LeeCheckBox}" TargetType="CheckBox" />
+
+
     <Style BasedOn="{StaticResource LeeScrollViewer}" TargetType="ScrollViewer" />
-    <Style BasedOn="{StaticResource LeeScrollBar}" TargetType="ScrollBar" />
 
 
     <Style BasedOn="{StaticResource LeeSeparator}" TargetType="Separator" />

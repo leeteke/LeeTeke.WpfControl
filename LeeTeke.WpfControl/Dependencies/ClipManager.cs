@@ -52,7 +52,7 @@ namespace LeeTeke.WpfControl.Dependencies
                 var cr = GetCornerRadius(element);
                 if (cr != null)
                 {
-                    element.Clip = StaticMethods.GetRoundRectangle(new Rect(0, 0, element.ActualWidth, element.ActualHeight), cr.Value);
+                    element.Clip = Helper.GetRoundRectangle(new Rect(0, 0, element.ActualWidth, element.ActualHeight), cr.Value);
                 }
                 else
                 {

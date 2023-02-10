@@ -1280,49 +1280,49 @@
             多个
             </summary>
         </member>
-        <member name="M:LeeTeke.WpfControl.StaticMethods.SetThemeColor(System.Windows.Media.Brush)">
+        <member name="M:LeeTeke.WpfControl.Helper.SetThemeColor(System.Windows.Media.Brush)">
             <summary>
             改变主题色
             </summary>
             <param name="color"></param>
         </member>
-        <member name="M:LeeTeke.WpfControl.StaticMethods.SetThemeColorDefault">
+        <member name="M:LeeTeke.WpfControl.Helper.SetThemeColorDefault">
             <summary>
             改变主题色
             </summary>
             <param name="color"></param>
         </member>
-        <member name="M:LeeTeke.WpfControl.StaticMethods.SetDefaultTextBrush(System.Windows.Media.Color)">
+        <member name="M:LeeTeke.WpfControl.Helper.SetDefaultTextBrush(System.Windows.Media.Color)">
             <summary>
             改变默认文字颜色
             </summary>
             <param name="color"></param>
         </member>
-        <member name="M:LeeTeke.WpfControl.StaticMethods.SetDefaultTextBrushDefault">
+        <member name="M:LeeTeke.WpfControl.Helper.SetDefaultTextBrushDefault">
             <summary>
             改变默认文字颜色
             </summary>
             <param name="color"></param>
         </member>
-        <member name="M:LeeTeke.WpfControl.StaticMethods.SetDefaultCornerRadius(System.Windows.CornerRadius)">
+        <member name="M:LeeTeke.WpfControl.Helper.SetDefaultCornerRadius(System.Windows.CornerRadius)">
             <summary>
             改变圆角
             </summary>
             <param name="color"></param>
         </member>
-        <member name="M:LeeTeke.WpfControl.StaticMethods.SetBackground(System.Windows.Media.Brush)">
+        <member name="M:LeeTeke.WpfControl.Helper.SetBackground(System.Windows.Media.Brush)">
             <summary>
             改变页面背景色
             </summary>
             <param name="color"></param>
         </member>
-        <member name="M:LeeTeke.WpfControl.StaticMethods.SetDefaultDropShadowEffect(System.Windows.Media.Effects.DropShadowEffect)">
+        <member name="M:LeeTeke.WpfControl.Helper.SetDefaultDropShadowEffect(System.Windows.Media.Effects.DropShadowEffect)">
             <summary>
             设置默认的阴影效果
             </summary>
             <param name="dropShadow"></param>
         </member>
-        <member name="M:LeeTeke.WpfControl.StaticMethods.ChangeBrushDepth(System.Windows.Media.Brush,System.Single)">
+        <member name="M:LeeTeke.WpfControl.Helper.ChangeBrushDepth(System.Windows.Media.Brush,System.Single)">
             <summary>
             颜色加深或者变浅
             目前只支持 SolidColorBrush
@@ -1331,7 +1331,7 @@
             <param name="depth"></param>
             <returns></returns>
         </member>
-        <member name="M:LeeTeke.WpfControl.StaticMethods.ChangeColorDepth(System.Windows.Media.Color,System.Single)">
+        <member name="M:LeeTeke.WpfControl.Helper.ChangeColorDepth(System.Windows.Media.Color,System.Single)">
             <summary>
             颜色加深或者变浅
             </summary>
@@ -1339,7 +1339,7 @@
             <param name="depth"></param>
             <returns></returns>
         </member>
-        <member name="M:LeeTeke.WpfControl.StaticMethods.GetRoundRectangle(System.Windows.Rect,System.Windows.Thickness,System.Windows.CornerRadius)">
+        <member name="M:LeeTeke.WpfControl.Helper.GetRoundRectangle(System.Windows.Rect,System.Windows.Thickness,System.Windows.CornerRadius)">
             <summary>
             获取Clip (圆角矩形，圆形) 带board的
             https://wpfspark.wordpress.com/2011/06/08/clipborder-a-wpf-border-that-clips/
@@ -1349,7 +1349,7 @@
             <param name="cornerRadius"></param>
             <returns></returns>
         </member>
-        <member name="M:LeeTeke.WpfControl.StaticMethods.GetRoundRectangle(System.Windows.Rect,System.Windows.CornerRadius)">
+        <member name="M:LeeTeke.WpfControl.Helper.GetRoundRectangle(System.Windows.Rect,System.Windows.CornerRadius)">
             <summary>
             获取Clip (圆角矩形，圆形) 
             https://wpfspark.wordpress.com/2011/06/08/clipborder-a-wpf-border-that-clips/
@@ -1359,14 +1359,14 @@
             <param name="cornerRadius"></param>
             <returns></returns>
         </member>
-        <member name="M:LeeTeke.WpfControl.StaticMethods.ImageSourceToBitmap(System.Windows.Media.ImageSource)">
+        <member name="M:LeeTeke.WpfControl.Helper.ImageSourceToBitmap(System.Windows.Media.ImageSource)">
             <summary>
             ImageSource转换成Bitmap
             </summary>
             <param name="imageSource"></param>
             <returns></returns>
         </member>
-        <member name="M:LeeTeke.WpfControl.StaticMethods.FindVisualChild``1(System.Windows.DependencyObject)">
+        <member name="M:LeeTeke.WpfControl.Helper.FindVisualChild``1(System.Windows.DependencyObject)">
             <summary>
             寻找子控件
             </summary>
@@ -1374,7 +1374,7 @@
             <param name="obj"></param>
             <returns></returns>
         </member>
-        <member name="M:LeeTeke.WpfControl.StaticMethods.IsInControl(System.Windows.DependencyObject,System.Windows.DependencyObject,System.Int32)">
+        <member name="M:LeeTeke.WpfControl.Helper.IsInControl(System.Windows.DependencyObject,System.Windows.DependencyObject,System.Int32)">
             <summary>
             是否在控件里面
             </summary>
@@ -1383,27 +1383,27 @@
             <param name="outLevel"></param>
             <returns></returns>
         </member>
-        <member name="M:LeeTeke.WpfControl.StaticMethods.SetMessageboxExButtonCornerRadius(System.Windows.CornerRadius)">
+        <member name="M:LeeTeke.WpfControl.Helper.SetMessageboxExButtonCornerRadius(System.Windows.CornerRadius)">
             <summary>
             设置MessageBox全局按钮
             </summary>
             <param name="cornerRadius"></param>
         </member>
-        <member name="M:LeeTeke.WpfControl.StaticMethods.SetMessageboxExCornerRadius(System.Windows.CornerRadius)">
+        <member name="M:LeeTeke.WpfControl.Helper.SetMessageboxExCornerRadius(System.Windows.CornerRadius)">
             <summary>
             设置MessageBox全局CR
             </summary>
             <param name="cornerRadius"></param>
         </member>
-        <member name="M:LeeTeke.WpfControl.StaticMethods.EmptyWorkingSet(System.IntPtr)">
+        <member name="M:LeeTeke.WpfControl.Helper.EmptyWorkingSet(System.IntPtr)">
             建议使用此方法
         </member>
-        <member name="M:LeeTeke.WpfControl.StaticMethods.ClearMemory">
+        <member name="M:LeeTeke.WpfControl.Helper.ClearMemory">
             <summary>      
             释放内存      
             </summary>      
         </member>
-        <member name="M:LeeTeke.WpfControl.StaticMethods.ClearMemory(System.IntPtr)">
+        <member name="M:LeeTeke.WpfControl.Helper.ClearMemory(System.IntPtr)">
             <summary>      
             优化其它程序内存内存      
             </summary>      

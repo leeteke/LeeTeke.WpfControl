@@ -155,9 +155,9 @@ namespace LeeTeke.WpfControl.Controls
 
         public CRMessage(CornerRadius? cornerRadius = null)
         {
-            if (StaticMethods.MessageBoxExCR != null)
+            if (Config.MessageBoxExCornerRadius != null)
             {
-                Dependencies.CornerRadiusManager.SetCornerRadius(this, (CornerRadius)StaticMethods.MessageBoxExCR);
+                Dependencies.CornerRadiusManager.SetCornerRadius(this, (CornerRadius)Config.MessageBoxExCornerRadius);
             }
             else if (cornerRadius != null)
             {
@@ -268,9 +268,9 @@ namespace LeeTeke.WpfControl.Controls
 
 
 
-            if (StaticMethods.MessageBoxExBtnCR != null)
+            if (Config.MessageBoxExButtonCornerRadius != null)
             {
-                Dependencies.CornerRadiusManager.SetCornerRadius(theButton, (CornerRadius)StaticMethods.MessageBoxExBtnCR);
+                Dependencies.CornerRadiusManager.SetCornerRadius(theButton, (CornerRadius)Config.MessageBoxExButtonCornerRadius);
             }
 
             if (cornerRadius != null)

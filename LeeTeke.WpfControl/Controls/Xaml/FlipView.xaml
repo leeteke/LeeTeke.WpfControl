@@ -11,10 +11,8 @@
 
     <Style x:Key="BaseFlipViewItem" TargetType="{x:Type local:FlipViewItem}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-        <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="IsTabStop" Value="False"/>
-        <Setter Property="SnapsToDevicePixels"  Value="{DynamicResource LeeSnapsToDevicePixels}" />
+
 
         <Setter Property="Width"  Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:FlipView},AncestorLevel=1},Path=ItemWidth ,Mode=OneWay}"/>
         <Setter Property="Height" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type local:FlipView},AncestorLevel=1},Path=ItemHeight,Mode=OneWay}"/>
@@ -31,14 +29,12 @@
     </Style>
 
     <Style x:Key="BaseFlipView" TargetType="{x:Type local:FlipView}">
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
-        <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
-        <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}"/>
+
+        <Setter Property="CornerRadius" Value="{DynamicResource LeeValue_CornerRadius}"/>
         <Setter Property="IsClip" Value="True"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>
-        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderThickness" Value="{StaticResource LeeValue_BorderThickness }"/>
         <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}"/>
         <Setter Property="MinWidth" Value="{DynamicResource  LeeControlMinWidth}"/>
         <Setter Property="Orientation" Value="Horizontal"/>
@@ -73,7 +69,7 @@
                     </ScrollViewer>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="{DynamicResource UnEnableOpacity}"/>
+                            <Setter Property="Opacity" Value="{StaticResource LeeValue_DisableOpacity}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

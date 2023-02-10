@@ -19,13 +19,13 @@ namespace LeeTeke.WpfControl.Converters
                 var args = $"{parameter}".Split(',');
                 if (args.Length == 4)
                 {
-                    var left = StaticMethods.ValueConver(args[0]);
+                    var left = Helper.ValueConver(args[0]);
                     thickness.Left = left.Clear ? 0 : thickness.Left + left.Result;
-                    var top = StaticMethods.ValueConver(args[1]);
+                    var top = Helper.ValueConver(args[1]);
                     thickness.Top = top.Clear ? 0 : thickness.Top + top.Result;
-                    var right = StaticMethods.ValueConver(args[2]);
+                    var right = Helper.ValueConver(args[2]);
                     thickness.Right = right.Clear ? 0 : thickness.Right + right.Result;
-                    var bottom = StaticMethods.ValueConver(args[3]);
+                    var bottom = Helper.ValueConver(args[3]);
                     thickness.Bottom = bottom.Clear ? 0 : thickness.Bottom + bottom.Result;
                     return thickness;
                 }

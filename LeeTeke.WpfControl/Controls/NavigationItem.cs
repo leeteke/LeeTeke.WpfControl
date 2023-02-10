@@ -41,7 +41,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (d is FrameworkElement element && e.NewValue != null)
             {
-                var pd = StaticMethods.FindVisualParent<NavigationItem>(element);
+                var pd = Helper.FindVisualParent<NavigationItem>(element);
                 if (pd != null)
                 {
                     pd.SetBinding(CanCloseProperty, new Binding()

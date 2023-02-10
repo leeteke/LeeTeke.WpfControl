@@ -8,9 +8,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="BaseNavigationItem" TargetType="{x:Type local:NavigationItem}">
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
-        <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
+  
         <Setter Property="Margin" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}}, Path=ItemMargin, Mode=OneWay}" />
         <Setter Property="PinVisibly" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}}, Path=ItemPinVisibly, Mode=OneWay}" />
         <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}}, Path=Foreground, Mode=OneWay}" />
@@ -55,7 +53,7 @@
                             Grid.Column="1"
                             Margin="0,5,5,5"
                             VerticalAlignment="Center"
-                            FontFamily="{DynamicResource IconFontFamily}"
+                            FontFamily="{StaticResource IconFontFamily}"
                             Text="&#xE840;"
                             Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsPinned, Converter={StaticResource VisibilityForBoolConverter}, Mode=OneWay}" />
 
@@ -69,11 +67,11 @@
                             Background="Transparent"
                             BorderThickness="0"
                             Content="&#xE8BB;"
-                            FontFamily="{DynamicResource IconFontFamily}"
+                            FontFamily="{StaticResource IconFontFamily}"
                             FontSize="8"
                             Foreground="{TemplateBinding Foreground}"
                             IsTabStop="False"
-                            Style="{DynamicResource ColorButton}"
+                            Style="{StaticResource LeeColorButton}"
                             Tag="1"
                             Visibility="Collapsed" />
                         <ContentPresenter x:Name="PART_ContentPresenter"
@@ -143,7 +141,7 @@
                         </MultiTrigger>
 
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="{DynamicResource UnEnableOpacity}" />
+                            <Setter Property="Opacity" Value="{StaticResource LeeValue_DisableOpacity}" />
                         </Trigger>
 
                     </ControlTemplate.Triggers>
@@ -155,12 +153,12 @@
 
     <Style x:Key="BaseNavigation" TargetType="{x:Type local:Navigation}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
+
         <Setter Property="Orientation" Value="Horizontal" />
-        <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}" />
-        <Setter Property="MinWidth" Value="{DynamicResource LeeControlMinWidth}" />
-        <Setter Property="ItemWidth" Value="{DynamicResource LeeControlMinWidth}" />
-        <Setter Property="ItemHeight" Value="{DynamicResource LeeControlMinHeight}" />
+        <Setter Property="MinHeight" Value="{StaticResource LeeValue_MinHeight}" />
+        <Setter Property="MinWidth" Value="{StaticResource LeeValue_MinWidth}" />
+        <Setter Property="ItemWidth" Value="{StaticResource  LeeValue_MinWidth_Item}" />
+        <Setter Property="ItemHeight" Value="{StaticResource LeeValue_MinHeight_Item}" />
         <Setter Property="ItemPinVisibly" Value="True" />
         <Setter Property="ItemMargin" Value="0" />
         <Setter Property="ItemPadding" Value="10,5" />
@@ -180,7 +178,7 @@
 
         <Setter Property="LeftButtonStyle">
             <Setter.Value>
-                <Style BasedOn="{StaticResource TextButton}" TargetType="{x:Type Button}">
+                <Style BasedOn="{StaticResource LeeTextButton}" TargetType="{x:Type Button}">
                     <Setter Property="MinHeight" Value="0" />
                     <Setter Property="Margin" Value="2,0" />
                     <Setter Property="FontSize" Value="15" />
@@ -188,13 +186,13 @@
                     <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Theme}" />
                     <Setter Property="VerticalAlignment" Value="Center" />
                     <Setter Property="Content" Value="&#xe96f;" />
-                    <Setter Property="FontFamily" Value="{DynamicResource IconFontFamily}" />
+                    <Setter Property="FontFamily" Value="{StaticResource IconFontFamily}" />
                 </Style>
             </Setter.Value>
         </Setter>
         <Setter Property="RightButtonStyle">
             <Setter.Value>
-                <Style BasedOn="{StaticResource TextButton}" TargetType="{x:Type Button}">
+                <Style BasedOn="{StaticResource LeeTextButton}" TargetType="{x:Type Button}">
                     <Setter Property="MinHeight" Value="0" />
                     <Setter Property="Margin" Value="2,0" />
                     <Setter Property="FontSize" Value="15" />
@@ -202,14 +200,14 @@
                     <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Theme}" />
                     <Setter Property="VerticalAlignment" Value="Center" />
                     <Setter Property="Content" Value="&#xe970;" />
-                    <Setter Property="FontFamily" Value="{DynamicResource IconFontFamily}" />
+                    <Setter Property="FontFamily" Value="{StaticResource IconFontFamily}" />
                 </Style>
             </Setter.Value>
         </Setter>
 
-        <Setter Property="leedep:ScrollViewerManager.SlideEasingFunction" Value="{DynamicResource LeeScrollViewerSlideEasingFuncion}" />
-        <Setter Property="leedep:ScrollViewerManager.SlideDuration" Value="{DynamicResource LeeScrollViewerSlideDuration}" />
-        <Setter Property="leedep:ScrollViewerManager.SlideEnabled" Value="{DynamicResource LeeScrollViewerSlideEnabled}" />
+        <Setter Property="leedep:ScrollViewerManager.SlideEasingFunction" Value="{DynamicResource LeeValue_ScrollViewerSlideEasingFuncion}" />
+        <Setter Property="leedep:ScrollViewerManager.SlideDuration" Value="{DynamicResource LeeValue_ScrollViewerSlideDuration}" />
+        <Setter Property="leedep:ScrollViewerManager.SlideEnabled" Value="{DynamicResource LeeValue_ScrollViewerSlideEnabled}" />
 
         <Setter Property="Template">
             <Setter.Value>
@@ -248,7 +246,7 @@
                                                 Visibility="Collapsed" />
                                             <MenuItem x:Name="PART_MenuItem_Pin" Header="固定选项卡(_P)">
                                                 <MenuItem.Icon>
-                                                    <TextBlock FontFamily="{DynamicResource IconFontFamily}" Text="&#xE718;" />
+                                                    <TextBlock FontFamily="{StaticResource IconFontFamily}" Text="&#xE718;" />
                                                 </MenuItem.Icon>
                                             </MenuItem>
                                             <MenuItem x:Name="PART_MenuItem_CloseAll" Header="关闭所有选项卡(_A)" />
@@ -301,7 +299,7 @@
             </Trigger>
 
             <Trigger Property="Orientation" Value="Vertical">
-                <Setter Property="ItemCornerRadius" Value="{DynamicResource LeeCornerRadius}" />
+                <Setter Property="ItemCornerRadius" Value="{DynamicResource LeeValue_CornerRadius}" />
             </Trigger>
         </Style.Triggers>
 

@@ -9,16 +9,15 @@
     xmlns:syx="clr-namespace:System.Collections;assembly=System.Runtime"
     Width="330"
     Height="210"
+    Background="{DynamicResource LeeBrush_Background2}"
+    BorderThickness="0"
+    Closing="Window_Closing"
+    WindowStartupLocation="CenterScreen"
     leedep:CornerRadiusManager.CornerRadius="8"
     leedep:CornerRadiusManager.IsClip="True"
     leedep:WindowManager.DeactivatedEffect="{DynamicResource LeeShadow1}"
     leedep:WindowManager.Effect="{DynamicResource LeeShadow}"
     leedep:WindowManager.IsEnabled="True"
-    Background="{DynamicResource LeeBrush_Background2}"
-    BorderThickness="0"
-    Closing="Window_Closing"
-    WindowStartupLocation="CenterScreen"
-    UseLayoutRounding="{DynamicResource LeeUseLayoutRounding}"
     mc:Ignorable="d">
 
     <Grid>
@@ -56,7 +55,7 @@
                 Content="&#xE8BB;"
                 Cursor="Hand"
                 FontFamily="{StaticResource IconFontFamily}"
-                Style="{DynamicResource TextButton}" />
+                Style="{DynamicResource LeeTextButton}" />
         </Grid>
         <Grid x:Name="gridMain"
             Grid.Row="1"
@@ -75,7 +74,7 @@
                 Margin="10"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                FontFamily="{DynamicResource IconFontFamily}"
+                FontFamily="{StaticResource IconFontFamily}"
                 FontSize="50"
                 Foreground="{DynamicResource LeeBrush_YellowMicrosoft}"
                 Visibility="Collapsed" />

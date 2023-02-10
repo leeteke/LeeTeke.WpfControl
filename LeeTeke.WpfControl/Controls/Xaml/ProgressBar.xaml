@@ -7,9 +7,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="BaseProgressBar" TargetType="{x:Type local:ProgressBar}">
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
-        <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
+
         <Setter Property="FillBrush" Value="{DynamicResource LeeBrush_Theme}" />
         <Setter Property="MinHeight" Value="8" />
         <Setter Property="Maximum" Value="100" />
@@ -23,7 +21,7 @@
 
         <Setter Property="Mode" Value="Loading" />
         <Setter Property="Orientation" Value="Horizontal" />
-        <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LeeValue_CornerRadius}" />
         <Setter Property="Background" Value="{DynamicResource LeeBrush_ForgroundActive}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -107,7 +105,7 @@
                             </Setter>
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="{DynamicResource UnEnableOpacity}" />
+                            <Setter Property="Opacity" Value="{StaticResource LeeValue_DisableOpacity}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

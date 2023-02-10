@@ -381,7 +381,7 @@ namespace LeeTeke.WpfControl.Controls
                 Width = 8,
                 Height = 8,
                 RenderTransformOrigin = new Point(0.5, 0.5),
-                Data = StaticMethods.GetRoundRectangle(new Rect(0, 0, 8, 8), new Thickness(0), new CornerRadius(4))
+                Data = Helper.GetRoundRectangle(new Rect(0, 0, 8, 8), new Thickness(0), new CornerRadius(4))
             };
 
             _canvas.Children.Add(_ripplePath);

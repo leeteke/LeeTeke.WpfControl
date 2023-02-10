@@ -549,7 +549,7 @@ namespace LeeTeke.WpfControl.Controls
                 _notifyWindow.Closed += (cx, ce) =>
                 {
                     _notifyWindow = null;
-                    LeeTeke.WpfControl.StaticMethods.ClearMemory();
+                    LeeTeke.WpfControl.Helper.ClearMemory();
                 };
             }
             _notifyWindow.Show();

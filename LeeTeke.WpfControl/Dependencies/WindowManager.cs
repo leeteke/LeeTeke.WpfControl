@@ -202,7 +202,7 @@ namespace LeeTeke.WpfControl.Dependencies
         {
             if (sender is Window window)
             {
-                var border = StaticMethods.FindVisualChild<Border>(window);
+                var border = Helper.FindVisualChild<Border>(window);
                 if (border != null)
                 {
                     if (window.WindowState == WindowState.Maximized)
@@ -267,7 +267,7 @@ namespace LeeTeke.WpfControl.Dependencies
         {
             if (sender is Window window && window.IsLoaded)
             {
-                var border = StaticMethods.FindVisualChild<Border>(window.Content as FrameworkElement, "PART_WinBGBorder");
+                var border = Helper.FindVisualChild<Border>(window.Content as FrameworkElement, "PART_WinBGBorder");
                 if (border != null)
                 {
                     if (GetDeactivatedEffect(window) != null)
@@ -308,7 +308,7 @@ namespace LeeTeke.WpfControl.Dependencies
 
             if (sender is Window window && window.IsLoaded)
             {
-                var border = StaticMethods.FindVisualChild<Border>(window.Content as FrameworkElement, "PART_WinBGBorder");
+                var border = Helper.FindVisualChild<Border>(window.Content as FrameworkElement, "PART_WinBGBorder");
 
                 if (border != null)
                 {
@@ -342,7 +342,7 @@ namespace LeeTeke.WpfControl.Dependencies
         {
             if (sender is Window window && window.Content is FrameworkElement element)
             {
-                var border = StaticMethods.FindVisualChild<Border>(window);
+                var border = Helper.FindVisualChild<Border>(window);
                 if (border != null)
                 {
                     BindingOperations.ClearAllBindings(border);

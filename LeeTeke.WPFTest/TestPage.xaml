@@ -38,14 +38,14 @@
                         <MenuItem Header="ceshi">
                             <MenuItem.Icon>
                                 <TextBlock
-                                    FontFamily="{DynamicResource IconFontFamily}"
+                                    FontFamily="{StaticResource IconFontFamily}"
                                     Text="&#xE8C6;" />
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Header="ceshi">
                             <MenuItem.Icon>
                                 <TextBlock
-                                    FontFamily="{DynamicResource IconFontFamily}"
+                                    FontFamily="{StaticResource IconFontFamily}"
                                     Text="&#xE77F;" />
                             </MenuItem.Icon>
                         </MenuItem>
@@ -320,7 +320,7 @@
                 <CheckBox
                     Margin="5"
                     Content="你好"
-                    Style="{StaticResource SwitchCheckBox}"
+                    Style="{StaticResource LeeSwitchCheckBox}"
                     leedep:CheckBoxManager.CheckedContent="你选中了我" />
 
                 <CheckBox

@@ -10,13 +10,12 @@
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="MinHeight" Value="{DynamicResource LeeControlHeight}" />
         <Setter Property="MinWidth" Value="150" />
-        <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LeeValue_CornerRadius}" />
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Background}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Margin" Value="10" />
         <Setter Property="Effect" Value="{DynamicResource LeeShadow}" />
-        <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
+
     </Style>
 
 </ResourceDictionary>

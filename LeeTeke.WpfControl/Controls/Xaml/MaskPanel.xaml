@@ -7,8 +7,7 @@
     <Style x:Key="BaseMaskPanel"
         TargetType="{x:Type local:MaskPanel}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
-        <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
-        <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
+
         <Setter Property="Background" Value="{DynamicResource LeeBrush_Mark}" />
         <Setter Property="PanelBackground" Value="{DynamicResource LeeBrush_Background3}" />
         <Setter Property="IsClip" Value="True" />
@@ -17,11 +16,11 @@
         <Setter Property="ClipToBounds" Value="True" />
         <Setter Property="TitleHeight" Value="35" />
         <Setter Property="TitleMargin" Value="5,0,0,0" />
-        <Setter Property="ShowAnimationEasingFunction" Value="{StaticResource LeeScrollViewerSlideEasingFuncion}" />
-        <Setter Property="ShowAnimationDuration" Value="{StaticResource LeeScrollViewerSlideDuration}" />
+        <Setter Property="ShowAnimationEasingFunction" Value="{StaticResource LeeValue_ScrollViewerSlideEasingFuncion}" />
+        <Setter Property="ShowAnimationDuration" Value="{StaticResource LeeValue_ScrollViewerSlideDuration}" />
         <Setter Property="ShowAnimationMode" Value="FromTop,Grade_50" />
         <Setter Property="ShowAnimationRenderTransformOrigin" Value="0.5,0.5" />
-        <Setter Property="CloseAnimationEasingFunction" Value="{StaticResource LeeScrollViewerSlideEasingFuncion}" />
+        <Setter Property="CloseAnimationEasingFunction" Value="{StaticResource LeeValue_ScrollViewerSlideEasingFuncion}" />
         <Setter Property="CloseAnimationDuration" Value="0:0:0.2" />
         <Setter Property="CloseAnimationMode" Value="FadeOut,ToTop,Grade_50,Grabe_NoFade" />
         <Setter Property="CloseAnimationRenderTransformOrigin" Value="0.5,0.5" />
@@ -30,7 +29,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="TitleHorizontalAlignment" Value="Center" />
         <Setter Property="TitleVerticalAlignment" Value="Center" />
-        <Setter Property="CornerRadius" Value="{DynamicResource LeeCornerRadius}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LeeValue_CornerRadius}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
         <Setter Property="BorderThickness" Value="1" />
 
@@ -78,7 +77,7 @@
                                         Content="&#xe740;"
                                         FontFamily="{StaticResource IconFontFamily}"
                                         FontSize="12"
-                                        Style="{StaticResource TextButton}"
+                                        Style="{StaticResource LeeTextButton}"
                                         Visibility="{TemplateBinding CanResize,
                                                                      Converter={StaticResource VisibilityForBoolConverter}}" />
                                     <Button x:Name="PART_Close"
@@ -87,7 +86,7 @@
                                         Content="&#xe8bb;"
                                         FontFamily="{StaticResource IconFontFamily}"
                                         FontSize="11"
-                                        Style="{StaticResource TextButton}"
+                                        Style="{StaticResource LeeTextButton}"
                                         Visibility="{TemplateBinding ShowClose,
                                                                      Converter={StaticResource VisibilityForBoolConverter}}" />
                                 </Grid>

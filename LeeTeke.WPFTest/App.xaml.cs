@@ -15,23 +15,32 @@ namespace LeeTeke.WPFTest
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+
+           
+        }
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            
             base.OnStartup(e);
 
             #region 全局默认属性
 
+           
+
             //RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;
 
-         //   字体相关设置
-         //    TextOptions.TextFormattingModeProperty.OverrideMetadata(typeof(UIElement), new FrameworkPropertyMetadata(TextFormattingMode.Display, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.Inherits));
-         //        字体相关设置
-         //       TextOptions.TextRenderingModeProperty.OverrideMetadata(typeof(UIElement), new FrameworkPropertyMetadata(TextRenderingMode.ClearType, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.Inherits));
+            //   字体相关设置
+            //    TextOptions.TextFormattingModeProperty.OverrideMetadata(typeof(UIElement), new FrameworkPropertyMetadata(TextFormattingMode.Display, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.Inherits));
+            //        字体相关设置
+            //       TextOptions.TextRenderingModeProp-erty.OverrideMetadata(typeof(UIElement), new FrameworkPropertyMetadata(TextRenderingMode.ClearType, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.Inherits));
             #endregion
 
-            LeeTeke.WpfControl.StaticMethods.SetScrollViewerSlide(true);
-            LeeTeke.WpfControl.MessageBoxEx.IsDefaultShowMsgCR = false;
+            LeeTeke.WpfControl.Config.Initialize();
+
+    
 
         }
     }
