@@ -50,6 +50,8 @@
     <BlurEffect x:Key="LeeBlurEffect" />
 
 
+
+
     <Style x:Key="LeeFocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
@@ -57,19 +59,25 @@
                     <Rectangle
                         Margin="0"
                         Stroke="{DynamicResource LeeBrush_Theme}"
-                        StrokeDashArray="4 4"
-                        StrokeThickness="1" />
+                        StrokeThickness="1">
+                        <Rectangle.Effect>
+                            <DropShadowEffect
+                                BlurRadius="8"
+                                Direction="270"
+                                Opacity=".2"
+                                RenderingBias="Performance"
+                                ShadowDepth="1.5"
+                                Color="{DynamicResource LeeColor_Theme}" />
+                        </Rectangle.Effect>
+                    </Rectangle>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <Style TargetType="FrameworkElement">
-        <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="FocusVisualStyle" Value="{StaticResource LeeFocusVisual}" />
-    </Style>
-    
-    
+
+
+
     <sys:Boolean x:Key="LeeValue_ScrollViewerSlideEnabled">False</sys:Boolean>
     <CubicEase x:Key="LeeValue_ScrollViewerSlideEasingFuncion"
         EasingMode="EaseOut" />

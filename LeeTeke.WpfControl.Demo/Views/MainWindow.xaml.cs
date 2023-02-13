@@ -1,7 +1,5 @@
-﻿using LeeTeke.WPFTest.UserControls;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,17 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace LeeTeke.WPFTest
+namespace LeeTeke.WpfControl.Demo.Views
 {
     /// <summary>
-    /// TestWindow.xaml 的交互逻辑
+    /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class TestWindow : Window
+    public partial class MainWindow 
     {
-        public TestWindow()
+        public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new ViewModels.TestWindowViewModel();
         }
     }
 }

@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.32407.343
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeeTeke.WpfControl", "LeeTeke.WpfControl\LeeTeke.WpfControl.csproj", "{2F1E8C9A-B236-476C-B5C4-3099BC425223}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeeTeke.WPFTest", "LeeTeke.WPFTest\LeeTeke.WPFTest.csproj", "{8272BF7A-BF6F-4340-AA1A-032BC2786F37}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeeTeke.WpfControl.Demo", "LeeTeke.WpfControl.Demo\LeeTeke.WpfControl.Demo.csproj", "{37707905-6CA2-474B-894D-F84DC1A8D4E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{2F1E8C9A-B236-476C-B5C4-3099BC425223}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F1E8C9A-B236-476C-B5C4-3099BC425223}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F1E8C9A-B236-476C-B5C4-3099BC425223}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8272BF7A-BF6F-4340-AA1A-032BC2786F37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8272BF7A-BF6F-4340-AA1A-032BC2786F37}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8272BF7A-BF6F-4340-AA1A-032BC2786F37}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8272BF7A-BF6F-4340-AA1A-032BC2786F37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37707905-6CA2-474B-894D-F84DC1A8D4E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37707905-6CA2-474B-894D-F84DC1A8D4E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37707905-6CA2-474B-894D-F84DC1A8D4E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37707905-6CA2-474B-894D-F84DC1A8D4E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

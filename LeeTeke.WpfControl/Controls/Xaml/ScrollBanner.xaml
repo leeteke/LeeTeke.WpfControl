@@ -8,7 +8,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="BaseScrollBanner" TargetType="{x:Type local:ScrollBanner}">
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource LeeFocusVisual}" />
+   
         <Setter Property="SnapsToDevicePixels" Value="{DynamicResource LeeSnapsToDevicePixels}" />
         <Setter Property="UseLayoutRounding" Value="{DynamicResource LeeUseLayoutRounding}" />
         <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}"/>

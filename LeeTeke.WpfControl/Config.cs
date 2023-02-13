@@ -31,21 +31,17 @@ namespace LeeTeke.WpfControl
                 return;
             _initialized = true;
 
-            //复写程序的某些设置
-            //复写
-            System.Windows.FrameworkElement.FocusVisualStyleProperty.OverrideMetadata(typeof(Control), new FrameworkPropertyMetadata(Application.Current.Resources["LeeFocusVisual"], FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.Inherits));
-            System.Windows.FrameworkElement.FocusVisualStyleProperty.OverrideMetadata(typeof(ContentControl), new FrameworkPropertyMetadata(Application.Current.Resources["LeeFocusVisual"], FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.Inherits));
-
-
 
             Application.Current.Resources["LeeBrush_SystemTheme"] = SystemParameters.WindowGlassBrush as SolidColorBrush;
             //注意程序关闭要释放
-            SystemEvents.DisplaySettingsChanged += SystemEvents_DisplaySettingsChanged;
-            Application.Current.Exit += (_, _) => { SystemEvents.DisplaySettingsChanged -= SystemEvents_DisplaySettingsChanged; };
+            SystemEvents.UserPreferenceChanged += SystemEvents_UserPreferenceChanged; 
+            Application.Current.Exit += (_, _) => { SystemEvents.UserPreferenceChanged -= SystemEvents_UserPreferenceChanged; };
         }
 
-        private static void SystemEvents_DisplaySettingsChanged(object? sender, EventArgs e)
+        private static void SystemEvents_UserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
         {
+     
+     
             Application.Current.Resources["LeeBrush_SystemTheme"] = SystemParameters.WindowGlassBrush as SolidColorBrush;
 
             if (UseSystemThemeColor)

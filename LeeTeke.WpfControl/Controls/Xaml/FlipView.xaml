@@ -63,7 +63,7 @@
                                       leedep:ScrollViewerManager.SlideDuration="{TemplateBinding Duration}"
                                       leedep:ScrollViewerManager.SlideEnabled="True"
                                       Padding="{TemplateBinding Padding}"
-                                      FocusVisualStyle="{DynamicResource LeeFocusVisual}"
+                             
                                       IsTabStop="False">
                         <ItemsPresenter />
                     </ScrollViewer>

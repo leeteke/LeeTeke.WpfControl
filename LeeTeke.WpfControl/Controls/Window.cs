@@ -400,7 +400,6 @@ namespace LeeTeke.WpfControl.Controls
             CommandBindings.Add(new CommandBinding(SystemCommands.CloseWindowCommand, (s, e) => Close()));
             CommandBindings.Add(new CommandBinding(SystemCommands.ShowSystemMenuCommand, ShowSystemMenu));
 
-
         }
 
 

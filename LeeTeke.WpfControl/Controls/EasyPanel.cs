@@ -17,7 +17,7 @@ namespace LeeTeke.WpfControl.Controls
         public EasyPanel()
         {
             SetResourceReference(EasyPanel.SnapsToDevicePixelsProperty, "LeeSnapsToDevicePixels");
-            SetResourceReference(EasyPanel.FocusVisualStyleProperty, "LeeFocusVisual");
+     
         }
         protected override Size MeasureOverride(Size constraint)
         {

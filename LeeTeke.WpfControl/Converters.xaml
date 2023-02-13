@@ -9,9 +9,10 @@
     <conver:VisibilityForBoolConverter x:Key="VisibilityForBoolConverter" />
     <conver:VisibilityReverseConverter x:Key="VisibilityReverseConverter" />
     <conver:ColorDepthConverter x:Key="ColorDepthConverter" />
+    <conver:BrushDepthConverter x:Key="BrushDepthConverter" />
     <conver:BrushOpacityConverter x:Key="BrushOpacityConverter" />
-    <conver:BoolReverseConverter x:Key="BoolReverseConverter" />
     <conver:ColorOpactiyConverter x:Key="ColorOpactiyConverter" />
+    <conver:BoolReverseConverter x:Key="BoolReverseConverter" />
     <conver:IsNotNullConverter x:Key="IsNotNullConverter" />
     <conver:IsNullConverter x:Key="IsNullConverter" />
     <conver:NotAlignmentCenterConverter x:Key="NotAlignmentCenterConverter" />
