@@ -301,7 +301,7 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for TitleHeight.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TitleHeightProperty =
-            DependencyProperty.Register("TitleHeight", typeof(double), typeof(Window));
+            DependencyProperty.Register("TitleHeight", typeof(double), typeof(Window),new PropertyMetadata(30.0));
         #endregion
 
 

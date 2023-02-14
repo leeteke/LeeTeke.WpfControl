@@ -23,7 +23,6 @@ namespace LeeTeke.WpfControl.Demo
         protected override void OnStartup(StartupEventArgs e)
         {
             LeeTeke.WpfControl.Config.Initialize();
-            LeeTeke.WpfControl.Config.UseSystemThemeMode=true;
             base.OnStartup(e);
       
         }
