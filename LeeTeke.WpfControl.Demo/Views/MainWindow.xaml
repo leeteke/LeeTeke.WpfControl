@@ -16,10 +16,14 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="{Binding ElementName=window, Path=TitleHeight}" d:Height="30" />
-            <RowDefinition />
+            <RowDefinition  Height="*"/>
         </Grid.RowDefinitions>
         <!--  内容  -->
-        <Grid Grid.Row="1" />
+        <Grid Grid.Row="1"  >
+            <ComboBox VerticalAlignment="Center" >
+                <ComboBoxItem Content="123123"/>
+            </ComboBox>
+        </Grid>
 
         <lee:MaskPanel x:Name="maskPanel"
             Grid.RowSpan="2" />
