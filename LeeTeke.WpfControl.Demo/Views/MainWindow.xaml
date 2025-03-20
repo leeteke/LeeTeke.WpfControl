@@ -1,4 +1,4 @@
-﻿<lee:Window x:Name="window"
+﻿<lee:Window
     x:Class="LeeTeke.WpfControl.Demo.Views.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,6 +6,7 @@
     xmlns:lee="clr-namespace:LeeTeke.WpfControl.Controls;assembly=LeeTeke.WpfControl"
     xmlns:local="clr-namespace:LeeTeke.WpfControl.Demo.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="window"
     Title="LeeTeke.WpfControl DEMO"
     Width="1024"
     Height="720"
@@ -16,21 +17,24 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="{Binding ElementName=window, Path=TitleHeight}" d:Height="30" />
-            <RowDefinition  Height="*"/>
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <!--  内容  -->
-        <Grid Grid.Row="1"  >
-            <ComboBox VerticalAlignment="Center" >
-                <ComboBoxItem Content="123123"/>
-            </ComboBox>
+        <Grid Grid.Row="1">
+
+            <lee:TextBoxEx
+                Background="Yellow"
+                IsReadOnly="True"
+                Text="1" />
         </Grid>
 
-        <lee:MaskPanel x:Name="maskPanel"
-            Grid.RowSpan="2" />
-        <lee:NotifyBanner x:Name="notifyApp"
+        <lee:MaskPanel x:Name="maskPanel" Grid.RowSpan="2" />
+        <lee:NotifyBanner
+            x:Name="notifyApp"
             Grid.Row="1"
             NotifySite="TopRight" />
-        <lee:NotifyBanner x:Name="notifyDesktop"
+        <lee:NotifyBanner
+            x:Name="notifyDesktop"
             Grid.Row="1"
             NotifySite="BottomRight" />
 

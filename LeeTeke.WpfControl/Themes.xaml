@@ -897,11 +897,8 @@
         <Setter Property="MinWidth" Value="{StaticResource LeeValue_MinWidth}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-
         <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="{DynamicResource LeeValue_CornerRadius}" />
-
         <Setter Property="leedep:ToggleButtonManager.RippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}" />
-
         <Setter Property="leedep:ToggleButtonManager.MouseOverBackground" Value="{DynamicResource LeeBrush_Mark}" />
         <Setter Property="leedep:ToggleButtonManager.MouseOverBorderBrush" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=BorderBrush, Mode=OneWay}" />
         <Setter Property="leedep:ToggleButtonManager.MouseOverBorderThickness" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=BorderThickness, Mode=OneWay}" />
@@ -1013,6 +1010,7 @@
         <Setter Property="FontSize" Value="14" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Content" Value="&#xe70d;" />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="FontFamily" Value="{StaticResource IconFontFamily}" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -2084,7 +2082,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 
 
     <Style x:Key="LeeCheckBox" TargetType="{x:Type CheckBox}">
@@ -4067,6 +4064,7 @@
             </VisualStateManager.VisualStateGroups>
         </Grid>
     </ControlTemplate>
+
     <Style x:Key="LeeDatePicker" TargetType="{x:Type DatePicker}">
 
 
@@ -5158,6 +5156,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+
     <Style x:Key="LeeListViewItem" TargetType="{x:Type ListViewItem}">
 
 
@@ -5360,7 +5359,6 @@
             </DataTrigger>
         </Style.Triggers>
     </Style>
-
     <Style x:Key="LeeListView" TargetType="{x:Type ListView}">
 
 
@@ -6200,6 +6198,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+
     <!--  默认替换  -->
     <Style BasedOn="{StaticResource LeeButton}" TargetType="Button" />
     <Style BasedOn="{StaticResource LeeRepeatButton}" TargetType="RepeatButton" />
@@ -6208,26 +6207,28 @@
 
     <Style BasedOn="{StaticResource LeeScrollViewer}" TargetType="ScrollViewer" />
 
-
     <Style BasedOn="{StaticResource LeeSeparator}" TargetType="Separator" />
 
     <Style BasedOn="{StaticResource LeeMenuItem}" TargetType="MenuItem" />
-
     <Style BasedOn="{StaticResource LeeMenu}" TargetType="Menu" />
     <Style BasedOn="{StaticResource LeeContextMenu}" TargetType="ContextMenu" />
 
     <Style BasedOn="{StaticResource LeeToggleButton}" TargetType="ToggleButton" />
+
+    <Style BasedOn="{StaticResource LeeComboBoxItem}" TargetType="ComboBoxItem" />
     <Style BasedOn="{StaticResource LeeComboBox}" TargetType="ComboBox" />
+
     <Style BasedOn="{StaticResource LeeRadioButton}" TargetType="RadioButton" />
 
+    <Style BasedOn="{StaticResource LeeListBoxItem}" TargetType="ListBoxItem" />
     <Style BasedOn="{StaticResource LeeListBox}" TargetType="ListBox" />
 
     <Style BasedOn="{StaticResource LeeGridViewColumnHeader}" TargetType="GridViewColumnHeader" />
 
+    <Style BasedOn="{StaticResource LeeListViewItem}" TargetType="ListViewItem" />
     <Style BasedOn="{StaticResource LeeListView}" TargetType="ListView" />
 
     <Style BasedOn="{StaticResource LeeDataGrid}" TargetType="DataGrid" />
-
     <Style BasedOn="{StaticResource LeeSlider}" TargetType="Slider" />
     <Style BasedOn="{StaticResource LeeGroupBox}" TargetType="GroupBox" />
     <Style BasedOn="{StaticResource LeeTextBox}" TargetType="TextBox" />
@@ -6238,8 +6239,10 @@
     <Style BasedOn="{StaticResource LeeThumb}" TargetType="Thumb" />
     <Style BasedOn="{StaticResource LeeExpander}" TargetType="Expander" />
 
+    <Style BasedOn="{StaticResource LeeTreeViewItem}" TargetType="TreeViewItem" />
     <Style BasedOn="{StaticResource LeeTreeView}" TargetType="TreeView" />
 
+    <Style BasedOn="{StaticResource LeeTabItem}" TargetType="TabItem" />
     <Style BasedOn="{StaticResource LeeTabControl}" TargetType="TabControl" />
 
 
