@@ -49,6 +49,7 @@ namespace LeeTeke.WpfControl.Controls
     [TemplatePart(Name = ElementPassword, Type = typeof(PasswordBox))]
     [TemplatePart(Name = ElementMain, Type = typeof(TextBox))]
     [TemplatePart(Name = ElementICON, Type = typeof(ContentPresenter))]
+    [TemplatePart(Name = ElementPlaceholder, Type = typeof(ContentPresenter))]
     public class TextBoxEx : Control
     {
 
@@ -63,6 +64,7 @@ namespace LeeTeke.WpfControl.Controls
         private const string ElementPassword = "PART_Password";
         private const string ElementMain = "PART_Main";
         private const string ElementICON = "PART_ICON";
+        private const string ElementPlaceholder = "PART_Placeholder";
         #endregion
 
         public string? SelectedText { get => Mode switch { TextMode.Password => null, _ => _textBox?.SelectedText }; }
@@ -70,10 +72,16 @@ namespace LeeTeke.WpfControl.Controls
         private PasswordBox? _password;
         private TextBox? _textBox;
         private ContentPresenter? _icon;
+        private ContentPresenter? _placeholder;
         public TextBoxEx()
         {
             KeyDown += TextBoxEx_KeyDown;
+            LostFocus += TextBoxEx_LostFocus;
+            GotFocus += TextBoxEx_GotFocus;
         }
+
+    
+     
 
 
         #region 
@@ -81,13 +89,15 @@ namespace LeeTeke.WpfControl.Controls
         public override void OnApplyTemplate()
         {
             if (_icon != null)
-                _icon.MouseUp -= _icon_MouseUp;
+                _icon.MouseUp -= Icon_MouseUp;
+
             if (_password != null)
-                _password.PasswordChanged -= _password_PasswordChanged;
+                _password.PasswordChanged -= Password_PasswordChanged;
+
             if (_textBox != null)
             {
-                _textBox.PreviewTextInput -= _textBox_PreviewTextInput;
-                _textBox.TextChanged -= _textBox_TextChanged;
+                _textBox.PreviewTextInput -= TextBox_PreviewTextInput;
+                _textBox.TextChanged -= TextBox_TextChanged;
             }
 
 
@@ -95,28 +105,42 @@ namespace LeeTeke.WpfControl.Controls
             _password = GetTemplateChild(ElementPassword) as PasswordBox;
             _textBox = GetTemplateChild(ElementMain) as TextBox;
             _icon = GetTemplateChild(ElementICON) as ContentPresenter;
-
+            _placeholder = GetTemplateChild(ElementPlaceholder) as ContentPresenter;
             if (_password != null)
             {
-                _password.PasswordChanged += _password_PasswordChanged;
+                _password.PasswordChanged += Password_PasswordChanged;
                 _password.Password = Text;
             }
 
             if (_textBox != null)
             {
-                _textBox.PreviewTextInput += _textBox_PreviewTextInput;
-                _textBox.TextChanged += _textBox_TextChanged;
+                _textBox.PreviewTextInput += TextBox_PreviewTextInput;
+                _textBox.TextChanged += TextBox_TextChanged;
             }
 
             if (_icon != null)
             {
-                _icon.MouseUp += _icon_MouseUp;
+                _icon.MouseUp += Icon_MouseUp;
             }
 
+            PlaceholderVisibly();
 
         }
 
         #endregion
+
+        private void TextBoxEx_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (_placeholder != null && IsReadOnly == false)
+            {
+                _placeholder.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void TextBoxEx_LostFocus(object sender, RoutedEventArgs e)
+        {
+            PlaceholderVisibly();
+        }
 
         private void TextBoxEx_KeyDown(object sender, KeyEventArgs e)
         {
@@ -151,7 +175,7 @@ namespace LeeTeke.WpfControl.Controls
 
         }
 
-        private void _textBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             switch (Mode)
             {
@@ -170,7 +194,7 @@ namespace LeeTeke.WpfControl.Controls
 
         }
 
-        private void _textBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
 
             switch (Mode)
@@ -184,7 +208,7 @@ namespace LeeTeke.WpfControl.Controls
 
         }
 
-        private void _icon_MouseUp(object sender, MouseButtonEventArgs e)
+        private void Icon_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (IconCanClick)
             {
@@ -199,7 +223,7 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
 
-        private void _password_PasswordChanged(object sender, RoutedEventArgs e)
+        private void Password_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (_password != null && Text != _password.Password && Mode == TextMode.Password)
             {
@@ -207,7 +231,25 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
 
+        /// <summary>
+        /// 控制显示
+        /// </summary>
+        private void PlaceholderVisibly()
+        {
+            if (_placeholder != null)
+            {
 
+                if ((_password?.IsFocused==true|| _textBox?.IsFocused==true) &&!IsReadOnly)
+                {
+                    _placeholder.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    _placeholder.Visibility = string.IsNullOrEmpty(Text) ? Visibility.Visible : Visibility.Collapsed;
+                }
+
+            }
+        }
 
 
         #region 依赖属性
@@ -258,7 +300,15 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for Text.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register("Text", typeof(string), typeof(TextBoxEx), new FrameworkPropertyMetadata(default, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault) { DefaultUpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
+            DependencyProperty.Register("Text", typeof(string), typeof(TextBoxEx), new FrameworkPropertyMetadata(default,  FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(TextChanged)) { DefaultUpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged } );
+
+        private static void TextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is TextBoxEx ex)
+            {
+                ex.PlaceholderVisibly();
+            }
+        }
 
         #endregion
 
@@ -311,7 +361,6 @@ namespace LeeTeke.WpfControl.Controls
         public static readonly DependencyProperty IsClipProperty =
             DependencyProperty.Register("IsClip", typeof(bool), typeof(TextBoxEx));
         #endregion
-
 
 
         #region ActiveBackground

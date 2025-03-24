@@ -23,9 +23,10 @@
         <Grid Grid.Row="1">
 
             <lee:TextBoxEx
-                Background="Yellow"
-                IsReadOnly="True"
-                Text="1" />
+                VerticalAlignment="Center"
+                IsReadOnly="False"
+                Mode="Password"
+                Placeholder="你好" />
         </Grid>
 
         <lee:MaskPanel x:Name="maskPanel" Grid.RowSpan="2" />
