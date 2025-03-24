@@ -156,6 +156,7 @@ namespace LeeTeke.WpfControl.Controls
 
         public Message()
         {
+            this.Resources= Application.Current.Resources;
             InitializeComponent();
             this.DataContext = this;
             WindowStartupLocation = WindowStartupLocation.CenterScreen;

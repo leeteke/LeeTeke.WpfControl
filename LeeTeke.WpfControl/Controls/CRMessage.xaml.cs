@@ -155,6 +155,7 @@ namespace LeeTeke.WpfControl.Controls
 
         public CRMessage(CornerRadius? cornerRadius = null)
         {
+            this.Resources =  Application.Current.Resources;
             if (Config.MessageBoxExCornerRadius != null)
             {
                 Dependencies.CornerRadiusManager.SetCornerRadius(this, (CornerRadius)Config.MessageBoxExCornerRadius);
@@ -176,6 +177,7 @@ namespace LeeTeke.WpfControl.Controls
                     if (item is System.Windows.Window win && win.IsActive)
                     {
                         Owner = win;
+                        
                         WindowStartupLocation = WindowStartupLocation.CenterOwner;
                         break;
                     }

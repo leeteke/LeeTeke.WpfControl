@@ -23,5 +23,17 @@ namespace LeeTeke.WpfControl.Demo.Views
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+           
+            LeeTeke.WpfControl.MessageBoxEx.Show("123123",MessageStatus.Question);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Config.ThemeMode= Models.ThemeMode.Dark;
+        }
     }
 }

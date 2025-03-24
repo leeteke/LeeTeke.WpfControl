@@ -20,14 +20,16 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <!--  内容  -->
-        <Grid Grid.Row="1">
+        <StackPanel Grid.Row="1">
 
             <lee:TextBoxEx
                 VerticalAlignment="Center"
-                IsReadOnly="False"
-                Mode="Password"
-                Placeholder="你好" />
-        </Grid>
+                IsReadOnly="True"
+                Placeholder="你好"
+                Text="12313" />
+            <Button Content="切换" Click="Button_Click_1"/>
+            <Button Content="123" Click="Button_Click"/>
+        </StackPanel>
 
         <lee:MaskPanel x:Name="maskPanel" Grid.RowSpan="2" />
         <lee:NotifyBanner

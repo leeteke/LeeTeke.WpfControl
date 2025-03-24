@@ -23,6 +23,7 @@ namespace LeeTeke.WpfControl.Demo
         protected override void OnStartup(StartupEventArgs e)
         {
             LeeTeke.WpfControl.Config.Initialize();
+            //Config.MessageBoxExShowCornerRadius = true;
             base.OnStartup(e);
       
         }

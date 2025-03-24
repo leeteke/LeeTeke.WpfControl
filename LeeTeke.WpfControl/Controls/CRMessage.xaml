@@ -9,17 +9,16 @@
     xmlns:syx="clr-namespace:System.Collections;assembly=System.Runtime"
     Width="330"
     Height="210"
-    Background="{DynamicResource LeeBrush_Background2}"
-    BorderThickness="0"
-    Closing="Window_Closing"
-    WindowStartupLocation="CenterScreen"
     leedep:CornerRadiusManager.CornerRadius="8"
     leedep:CornerRadiusManager.IsClip="True"
     leedep:WindowManager.DeactivatedEffect="{DynamicResource LeeShadow1}"
     leedep:WindowManager.Effect="{DynamicResource LeeShadow}"
     leedep:WindowManager.IsEnabled="True"
+    Background="{DynamicResource LeeBrush_Background2}"
+    BorderThickness="0"
+    Closing="Window_Closing"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="35" />
@@ -39,25 +38,28 @@
                 <ColumnDefinition />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
-            <TextBlock x:Name="textTitle"
+            <TextBlock
+                x:Name="textTitle"
                 Grid.ColumnSpan="2"
                 Margin="10,0"
                 VerticalAlignment="Center"
                 FontSize="13"
                 Foreground="{DynamicResource LeeBrush_Text}" />
 
-            <Button x:Name="btnClose"
+            <Button
+                x:Name="btnClose"
                 Grid.Column="1"
                 Width="35"
                 HorizontalAlignment="Right"
-                VerticalAlignment="Top"
+                VerticalAlignment="Center"
                 Click="Button_Click"
                 Content="&#xE8BB;"
                 Cursor="Hand"
                 FontFamily="{StaticResource IconFontFamily}"
                 Style="{DynamicResource LeeTextButton}" />
         </Grid>
-        <Grid x:Name="gridMain"
+        <Grid
+            x:Name="gridMain"
             Grid.Row="1"
             Grid.ColumnSpan="2"
             Margin="10,0,10,10">
@@ -70,7 +72,8 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <TextBlock x:Name="icon"
+            <TextBlock
+                x:Name="icon"
                 Margin="10"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
@@ -78,20 +81,23 @@
                 FontSize="50"
                 Foreground="{DynamicResource LeeBrush_YellowMicrosoft}"
                 Visibility="Collapsed" />
-            <local:ProgressRing x:Name="ring"
+            <local:ProgressRing
+                x:Name="ring"
                 Width="100"
                 Height="40"
                 VerticalAlignment="Center"
                 Mode="Wating"
                 Thickness="6"
                 Visibility="Collapsed" />
-            <ContentPresenter x:Name="content"
+            <ContentPresenter
+                x:Name="content"
                 Grid.Column="1"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 TextElement.Foreground="{DynamicResource LeeBrush_Text}" />
 
-            <StackPanel x:Name="btnPanle"
+            <StackPanel
+                x:Name="btnPanle"
                 Grid.Row="2"
                 Grid.ColumnSpan="2"
                 HorizontalAlignment="Right"
@@ -100,7 +106,8 @@
         </Grid>
 
 
-        <local:ProgressBar x:Name="loading"
+        <local:ProgressBar
+            x:Name="loading"
             Grid.Row="2"
             Grid.Column="0"
             Height="8"

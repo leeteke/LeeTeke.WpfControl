@@ -9,6 +9,7 @@
     xmlns:syx="clr-namespace:System.Collections;assembly=System.Runtime"
     Width="330"
     Height="210"
+    Background="{DynamicResource LeeBrush_Background2}"
     Closing="Window_Closing"
     ResizeMode="NoResize"
     TitleBackground="{DynamicResource LeeBrush_Background}"
@@ -24,7 +25,8 @@
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
 
-        <Grid x:Name="gridMain"
+        <Grid
+            x:Name="gridMain"
             Grid.Row="0"
             Grid.ColumnSpan="2"
             Margin="10,0,10,10">
@@ -37,7 +39,8 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <TextBlock x:Name="icon"
+            <TextBlock
+                x:Name="icon"
                 Margin="10"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
@@ -46,20 +49,23 @@
                 Foreground="{DynamicResource LeeBrush_YellowMicrosoft}"
                 Visibility="Collapsed" />
 
-            <local:ProgressRing x:Name="ring"
+            <local:ProgressRing
+                x:Name="ring"
                 Width="100"
                 Height="40"
                 Mode="Wating"
                 Thickness="6"
                 Visibility="Collapsed" />
 
-            <ContentPresenter x:Name="content"
+            <ContentPresenter
+                x:Name="content"
                 Grid.Column="1"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 TextElement.Foreground="{DynamicResource LeeBrush_Text}" />
 
-            <StackPanel x:Name="btnPanle"
+            <StackPanel
+                x:Name="btnPanle"
                 Grid.Row="2"
                 Grid.ColumnSpan="2"
                 HorizontalAlignment="Right"
@@ -68,7 +74,8 @@
 
         </Grid>
 
-        <local:ProgressBar x:Name="loading"
+        <local:ProgressBar
+            x:Name="loading"
             Grid.Row="1"
             Grid.Column="0"
             Height="8"
