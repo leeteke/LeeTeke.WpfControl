@@ -8,7 +8,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="BaseNavigationItem" TargetType="{x:Type local:NavigationItem}">
-  
+
         <Setter Property="Margin" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}}, Path=ItemMargin, Mode=OneWay}" />
         <Setter Property="PinVisibly" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}}, Path=ItemPinVisibly, Mode=OneWay}" />
         <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}}, Path=Foreground, Mode=OneWay}" />
@@ -34,13 +34,15 @@
                             <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
 
-                        <Border x:Name="contentBorder"
+                        <Border
+                            x:Name="contentBorder"
                             Grid.ColumnSpan="3"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}" />
-                        <Rectangle x:Name="PART_Separator"
+                        <Rectangle
+                            x:Name="PART_Separator"
                             Width="1"
                             Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Navigation}}, Path=SeparatorSize, Mode=OneWay}"
                             Margin="-1,0,0,0"
@@ -57,7 +59,8 @@
                             Text="&#xE840;"
                             Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsPinned, Converter={StaticResource VisibilityForBoolConverter}, Mode=OneWay}" />
 
-                        <Button x:Name="PART_CloseButton"
+                        <Button
+                            x:Name="PART_CloseButton"
                             Grid.Column="2"
                             Width="22"
                             Height="22"
@@ -74,7 +77,8 @@
                             Style="{StaticResource LeeColorButton}"
                             Tag="1"
                             Visibility="Collapsed" />
-                        <ContentPresenter x:Name="PART_ContentPresenter"
+                        <ContentPresenter
+                            x:Name="PART_ContentPresenter"
                             Margin="{TemplateBinding Padding}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -157,7 +161,7 @@
         <Setter Property="Orientation" Value="Horizontal" />
         <Setter Property="MinHeight" Value="{StaticResource LeeValue_MinHeight}" />
         <Setter Property="MinWidth" Value="{StaticResource LeeValue_MinWidth}" />
-        <Setter Property="ItemWidth" Value="{StaticResource  LeeValue_MinWidth_Item}" />
+        <Setter Property="ItemWidth" Value="{StaticResource LeeValue_MinWidth_Item}" />
         <Setter Property="ItemHeight" Value="{StaticResource LeeValue_MinHeight_Item}" />
         <Setter Property="ItemPinVisibly" Value="True" />
         <Setter Property="ItemMargin" Value="0" />
@@ -176,6 +180,46 @@
         <Setter Property="SeparatorVisibly" Value="True" />
         <Setter Property="SeparatorFill" Value="{DynamicResource LeeBrush_BorderBrush}" />
 
+        <Setter Property="TopButtonStyle">
+            <Setter.Value>
+                <Style BasedOn="{StaticResource LeeTextButton}" TargetType="{x:Type Button}">
+                    <Setter Property="MinWidth" Value="0" />
+                    <Setter Property="Margin" Value="0,2" />
+                    <Setter Property="FontSize" Value="15" />
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Theme}" />
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                    <Setter Property="Content" Value="&#xe96d;" />
+                    <Setter Property="FontFamily" Value="{StaticResource IconFontFamily}" />
+                    <Style.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Gray}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="BottomButtonStyle">
+            <Setter.Value>
+                <Style BasedOn="{StaticResource LeeTextButton}" TargetType="{x:Type Button}">
+                    <Setter Property="MinWidth" Value="0" />
+                    <Setter Property="Margin" Value="0,2" />
+                    <Setter Property="FontSize" Value="15" />
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Theme}" />
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                    <Setter Property="Content" Value="&#xe96e;" />
+                    <Setter Property="FontFamily" Value="{StaticResource IconFontFamily}" />
+                    <Style.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Gray}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Setter.Value>
+        </Setter>
+
         <Setter Property="LeftButtonStyle">
             <Setter.Value>
                 <Style BasedOn="{StaticResource LeeTextButton}" TargetType="{x:Type Button}">
@@ -187,6 +231,11 @@
                     <Setter Property="VerticalAlignment" Value="Center" />
                     <Setter Property="Content" Value="&#xe96f;" />
                     <Setter Property="FontFamily" Value="{StaticResource IconFontFamily}" />
+                    <Style.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Gray}" />
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
             </Setter.Value>
         </Setter>
@@ -201,7 +250,13 @@
                     <Setter Property="VerticalAlignment" Value="Center" />
                     <Setter Property="Content" Value="&#xe970;" />
                     <Setter Property="FontFamily" Value="{StaticResource IconFontFamily}" />
+                    <Style.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Gray}" />
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
+
             </Setter.Value>
         </Setter>
 
@@ -212,62 +267,87 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:Navigation}">
-                    <Border
-                        Margin="{TemplateBinding Margin}"
+
+                    <ScrollViewer
+                        x:Name="PART_ScrollViewer"
+                        Grid.Column="1"
                         Padding="{TemplateBinding Padding}"
+                        leedep:ScrollViewerManager.SlideDuration="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideDuration), Mode=OneWay}"
+                        leedep:ScrollViewerManager.SlideEasingFunction="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEasingFunction), Mode=OneWay}"
+                        leedep:ScrollViewerManager.SlideEnabled="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEnabled), Mode=OneWay}"
+                        leedep:ScrollViewerManager.SlideMonitorMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideMonitorMode), Mode=OneWay}"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition />
-                                <ColumnDefinition Width="auto" />
-                            </Grid.ColumnDefinitions>
-                            <Button x:Name="PART_Left"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        HorizontalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(ScrollViewer.HorizontalScrollBarVisibility), Mode=OneWay}"
+                        Style="{DynamicResource LeeScrollViewerEx}"
+                        VerticalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(ScrollViewer.VerticalScrollBarVisibility), Mode=OneWay}">
+
+
+                        <ItemsPresenter x:Name="PART_ItemsPresenter">
+                            <ItemsPresenter.ContextMenu>
+                                <ContextMenu
+                                    x:Name="PART_ContextMenu"
+                                    leedep:ContextMenuManager.Content="{TemplateBinding ItemContxtMenuContent}"
+                                    leedep:ContextMenuManager.ContentDock="{TemplateBinding ItemContxtMenuContentDock}">
+                                    <MenuItem
+                                        x:Name="PART_MenuItem_Selected"
+                                        Header="选择此选项(_S)"
+                                        Visibility="Collapsed" />
+                                    <MenuItem x:Name="PART_MenuItem_Pin" Header="固定选项卡(_P)">
+                                        <MenuItem.Icon>
+                                            <TextBlock FontFamily="{StaticResource IconFontFamily}" Text="&#xE718;" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem x:Name="PART_MenuItem_CloseAll" Header="关闭所有选项卡(_A)" />
+                                    <MenuItem x:Name="PART_MenuItem_CloseOther" Header="关闭除此之外的选项卡(_O)" />
+                                    <MenuItem x:Name="PART_MenuItem_CloseSelf" Header="关闭(_X)" />
+                                </ContextMenu>
+                            </ItemsPresenter.ContextMenu>
+                        </ItemsPresenter>
+
+                        <leedep:ScrollViewerManager.TopContent>
+                            <Button
+                                x:Name="PART_Top"
+                                Style="{TemplateBinding TopButtonStyle}"
+                                Visibility="Collapsed" />
+                        </leedep:ScrollViewerManager.TopContent>
+
+                        <leedep:ScrollViewerManager.BottomContent>
+                            <Button
+                                x:Name="PART_Bottom"
+                                Style="{TemplateBinding BottomButtonStyle}"
+                                Visibility="Collapsed" />
+                        </leedep:ScrollViewerManager.BottomContent>
+
+                        <leedep:ScrollViewerManager.LeftContent>
+                            <Button
+                                x:Name="PART_Left"
                                 Style="{TemplateBinding LeftButtonStyle}"
                                 Visibility="Collapsed" />
-                            <ScrollViewer x:Name="PART_ScrollViewer"
-                                Grid.Column="1"
-                                leedep:ScrollViewerManager.SlideDuration="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideDuration), Mode=OneWay}"
-                                leedep:ScrollViewerManager.SlideEasingFunction="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEasingFunction), Mode=OneWay}"
-                                leedep:ScrollViewerManager.SlideEnabled="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEnabled), Mode=OneWay}"
-                                leedep:ScrollViewerManager.SlideMonitorMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideMonitorMode), Mode=OneWay}"
-                                HorizontalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(ScrollViewer.HorizontalScrollBarVisibility), Mode=OneWay}"
-                                Style="{DynamicResource LeeScrollViewer}"
-                                VerticalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(ScrollViewer.VerticalScrollBarVisibility), Mode=OneWay}">
-                                <ItemsPresenter x:Name="PART_ItemsPresenter">
-                                    <ItemsPresenter.ContextMenu>
-                                        <ContextMenu x:Name="PART_ContextMenu"
-                                            leedep:ContextMenuManager.Content="{TemplateBinding ItemContxtMenuContent}"
-                                            leedep:ContextMenuManager.ContentDock="{TemplateBinding ItemContxtMenuContentDock}">
-                                            <MenuItem x:Name="PART_MenuItem_Selected"
-                                                Header="选择此选项(_S)"
-                                                Visibility="Collapsed" />
-                                            <MenuItem x:Name="PART_MenuItem_Pin" Header="固定选项卡(_P)">
-                                                <MenuItem.Icon>
-                                                    <TextBlock FontFamily="{StaticResource IconFontFamily}" Text="&#xE718;" />
-                                                </MenuItem.Icon>
-                                            </MenuItem>
-                                            <MenuItem x:Name="PART_MenuItem_CloseAll" Header="关闭所有选项卡(_A)" />
-                                            <MenuItem x:Name="PART_MenuItem_CloseOther" Header="关闭除此之外的选项卡(_O)" />
-                                            <MenuItem x:Name="PART_MenuItem_CloseSelf" Header="关闭(_X)" />
-                                        </ContextMenu>
-                                    </ItemsPresenter.ContextMenu>
-                                </ItemsPresenter>
+                        </leedep:ScrollViewerManager.LeftContent>
 
-                            </ScrollViewer>
-                            <Button x:Name="PART_Right"
+                        <leedep:ScrollViewerManager.RightContent>
+                            <Button
+                                x:Name="PART_Right"
                                 Grid.Column="2"
                                 Style="{TemplateBinding RightButtonStyle}"
                                 Visibility="Collapsed" />
-                        </Grid>
-                    </Border>
+                        </leedep:ScrollViewerManager.RightContent>
+
+                    </ScrollViewer>
+
+
+
+
                     <ControlTemplate.Triggers>
+
+
                         <Trigger Property="Orientation" Value="Horizontal">
                             <Setter TargetName="PART_ScrollViewer" Property="HorizontalScrollBarVisibility" Value="Hidden" />
                             <Setter TargetName="PART_ScrollViewer" Property="VerticalScrollBarVisibility" Value="Disabled" />
                         </Trigger>
+
 
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -276,8 +356,8 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="PART_ScrollViewer" Property="HorizontalScrollBarVisibility" Value="Disabled" />
                             <Setter TargetName="PART_ScrollViewer" Property="VerticalScrollBarVisibility" Value="Hidden" />
-                        </MultiTrigger>
 
+                        </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="Orientation" Value="Vertical" />
@@ -285,6 +365,7 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="PART_ScrollViewer" Property="HorizontalScrollBarVisibility" Value="Disabled" />
                             <Setter TargetName="PART_ScrollViewer" Property="VerticalScrollBarVisibility" Value="Auto" />
+
                         </MultiTrigger>
 
                     </ControlTemplate.Triggers>

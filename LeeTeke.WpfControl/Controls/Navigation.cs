@@ -56,6 +56,8 @@ namespace LeeTeke.WpfControl.Controls
     [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(NavigationItem))]
     [TemplatePart(Name = ElementLeft, Type = typeof(Button))]
     [TemplatePart(Name = ElementRight, Type = typeof(Button))]
+    [TemplatePart(Name = ElementTop, Type = typeof(Button))]
+    [TemplatePart(Name = ElementBottom, Type = typeof(Button))]
     [TemplatePart(Name = ElementScrollViewer, Type = typeof(ScrollViewer))]
     [TemplatePart(Name = ElementContextMenu, Type = typeof(ContextMenu))]
     [TemplatePart(Name = ElementMenuItemCloseAll, Type = typeof(MenuItem))]
@@ -73,6 +75,8 @@ namespace LeeTeke.WpfControl.Controls
         #region Consts
         private const string ElementLeft = "PART_Left";
         private const string ElementRight = "PART_Right";
+        private const string ElementTop = "PART_Top";
+        private const string ElementBottom = "PART_Bottom";
         private const string ElementScrollViewer = "PART_ScrollViewer";
         private const string ElementContextMenu = "PART_ContextMenu";
         private const string ElementMenuItemCloseAll = "PART_MenuItem_CloseAll";
@@ -88,6 +92,8 @@ namespace LeeTeke.WpfControl.Controls
         private ScrollViewer? _scrollViewer;
         private Button? _leftBtn;
         private Button? _rightBtn;
+        private Button? _topBtn;
+        private Button? _bottomBtn;
         private ContextMenu? _contextMenu;
         private MenuItem? _selectedMenuItem;
         private MenuItem? _pinMenuItem;
@@ -287,7 +293,16 @@ namespace LeeTeke.WpfControl.Controls
             {
                 _rightBtn.Click -= _rightBtn_Click;
             }
-         
+
+            if (_topBtn != null)
+            {
+                _topBtn.Click -= _topBtn_Click;
+            }
+            if (_bottomBtn != null)
+            {
+                _bottomBtn.Click -= _bottomBtn_Click;
+            }
+
             if (_allMenuItem != null)
             {
                 _allMenuItem.Click -= _allMenuItem_Click;
@@ -318,6 +333,8 @@ namespace LeeTeke.WpfControl.Controls
 
             _leftBtn = GetTemplateChild(ElementLeft) as Button;
             _rightBtn = GetTemplateChild(ElementRight) as Button;
+            _topBtn = GetTemplateChild(ElementTop) as Button;
+            _bottomBtn = GetTemplateChild(ElementBottom) as Button;
             _contextMenu = GetTemplateChild(ElementContextMenu) as ContextMenu;
             _allMenuItem = GetTemplateChild(ElementMenuItemCloseAll) as MenuItem;
             _otherMenuItem = GetTemplateChild(ElementMenuItemCloseOther) as MenuItem;
@@ -335,7 +352,16 @@ namespace LeeTeke.WpfControl.Controls
             {
                 _rightBtn.Click += _rightBtn_Click;
             }
-         
+
+            if (_topBtn != null)
+            {
+                _topBtn.Click += _topBtn_Click;
+            }
+            if (_bottomBtn != null)
+            {
+                _bottomBtn.Click += _bottomBtn_Click;
+            }
+
             if (_allMenuItem != null)
             {
                 _allMenuItem.Click += _allMenuItem_Click;
@@ -510,9 +536,54 @@ namespace LeeTeke.WpfControl.Controls
 
         // Using a DependencyProperty as the backing store for Orientation.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty OrientationProperty =
-            DependencyProperty.Register("Orientation", typeof(Orientation), typeof(Navigation));
+            DependencyProperty.Register("Orientation", typeof(Orientation), typeof(Navigation), new PropertyMetadata(Orientation.Horizontal, OrientationChanged));
+
+        private static void OrientationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is Navigation tag && e.NewValue  is Orientation or)
+            {
+                tag.ChangeOrientation(or);
+            }
+        }
 
         #endregion
+
+
+
+
+        #region TopButtonStyle
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Style TopButtonStyle
+        {
+            get { return (Style)GetValue(TopButtonStyleProperty); }
+            set { SetValue(TopButtonStyleProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for TopButtonStyle.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TopButtonStyleProperty =
+            DependencyProperty.Register(nameof(TopButtonStyle), typeof(Style), typeof(Navigation));
+        #endregion
+
+
+
+        #region BottomButtonStyle
+        /// <summary>
+        /// 请添加描述
+        /// </summary>
+        public Style BottomButtonStyle
+        {
+            get { return (Style)GetValue(BottomButtonStyleProperty); }
+            set { SetValue(BottomButtonStyleProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for BottomButtonStyle.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty BottomButtonStyleProperty =
+            DependencyProperty.Register(nameof(BottomButtonStyle), typeof(Style), typeof(Navigation));
+        #endregion
+
+
 
 
         #region LeftButtonStyle
@@ -1008,7 +1079,7 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
 
-     
+
 
         private void _allMenuItem_Click(object? sender, RoutedEventArgs e)
         {
@@ -1036,25 +1107,74 @@ namespace LeeTeke.WpfControl.Controls
             }
         }
 
+
+        private void _topBtn_Click(object? sender, RoutedEventArgs e)
+        {
+            if (Orientation == Orientation.Vertical && _scrollViewer != null)
+            {
+                ScrollViewerManager.ScrollToVerticalOffset(_scrollViewer, -60);
+            }
+        }
+
+        private void _bottomBtn_Click(object? sender, RoutedEventArgs e)
+        {
+            if (Orientation == Orientation.Vertical && _scrollViewer != null)
+            {
+                ScrollViewerManager.ScrollToVerticalOffset(_scrollViewer, 60);
+            }
+        }
+
         private void _scrollViewer_ScrollChanged(object? sender, ScrollChangedEventArgs e)
         {
-            if (Orientation == Orientation.Horizontal && ShowScrollToButton && sender is ScrollViewer scrollViewer && _leftBtn != null && _rightBtn != null)
+            if (sender is ScrollViewer scrollViewer)
             {
-                if (scrollViewer.ScrollableWidth > 0)
+
+                if (ShowScrollToButton)
                 {
-                    _leftBtn.Visibility = Visibility.Visible;
-                    _rightBtn.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    _leftBtn.Visibility = Visibility.Collapsed;
-                    _rightBtn.Visibility = Visibility.Collapsed;
+
+
+                    if (Orientation == Orientation.Horizontal  && _leftBtn != null && _rightBtn != null)
+                    {
+                      
+                        if (scrollViewer.ScrollableWidth > 0)
+                        {
+                            _leftBtn.Visibility = Visibility.Visible;
+                            _rightBtn.Visibility = Visibility.Visible;
+                        }
+                        else
+                        {
+                            _leftBtn.Visibility = Visibility.Collapsed;
+                            _rightBtn.Visibility = Visibility.Collapsed;
+                        }
+
+                        _leftBtn.IsEnabled = e.HorizontalOffset != 0;
+
+                        _rightBtn.IsEnabled = e.HorizontalOffset! < scrollViewer.ScrollableWidth;
+                    }
+
+
+                    if (Orientation == Orientation.Vertical  && _topBtn != null && _bottomBtn != null)
+                    {
+                        if (scrollViewer.ScrollableHeight > 0)
+                        {
+                            _topBtn.Visibility = Visibility.Visible;
+                            _bottomBtn.Visibility = Visibility.Visible;
+                        }
+                        else
+                        {
+                            _topBtn.Visibility = Visibility.Collapsed;
+                            _bottomBtn.Visibility = Visibility.Collapsed;
+                        }
+
+                        _topBtn.IsEnabled = e.VerticalOffset != 0;
+
+                        _bottomBtn.IsEnabled = e.VerticalOffset! < scrollViewer.ScrollableHeight;
+                    }
                 }
 
-                _leftBtn.IsEnabled = e.HorizontalOffset != 0;
-
-                _rightBtn.IsEnabled = e.HorizontalOffset! < scrollViewer.ScrollableWidth;
             }
+
+
         }
 
         private void _scrollViewer_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -1445,6 +1565,37 @@ namespace LeeTeke.WpfControl.Controls
 
             ChangeSelectedItem(GetItemFormDataContext(vaule));
         }
+
+        private void ChangeOrientation(Orientation orientation)
+        {
+            if (orientation== Orientation.Horizontal)
+            {
+                if (_bottomBtn!=null)
+                {
+                    _bottomBtn.Visibility= Visibility.Collapsed;    
+                }
+
+                if (_topBtn != null)
+                {
+                    _topBtn.Visibility = Visibility.Collapsed;
+                }
+
+
+            }
+            else if(orientation== Orientation.Vertical)
+            {
+                if (_leftBtn != null)
+                {
+                    _leftBtn.Visibility = Visibility.Collapsed;
+                }
+
+                if (_rightBtn != null)
+                {
+                    _rightBtn.Visibility = Visibility.Collapsed;
+                }
+            }
+        }
+
         /// <summary>
         /// 选择Item
         /// </summary>

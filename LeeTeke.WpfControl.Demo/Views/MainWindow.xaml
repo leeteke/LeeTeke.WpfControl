@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:lee="clr-namespace:LeeTeke.WpfControl.Controls;assembly=LeeTeke.WpfControl"
+    xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies;assembly=LeeTeke.WpfControl"
     xmlns:local="clr-namespace:LeeTeke.WpfControl.Demo.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="window"
@@ -27,8 +28,50 @@
                 IsReadOnly="True"
                 Placeholder="你好"
                 Text="12313" />
-            <Button Content="切换" Click="Button_Click_1"/>
-            <Button Content="123" Click="Button_Click"/>
+            <Button Click="Button_Click_1" Content="切换" />
+            <Button Click="Button_Click" Content="123" />
+            <TabControl
+                leedep:ScrollViewerManager.BottomContent="111"
+                leedep:ScrollViewerManager.LeftContent="123123"
+                leedep:ScrollViewerManager.RightContent="111"
+                leedep:ScrollViewerManager.SlideEnabled="True"
+                leedep:TabItemManager.IsHeaderScroll="True"
+                TabStripPlacement="Bottom">
+                <TabItem Header="你好啊啊啊啊1" />
+                <TabItem Header="你好啊啊啊啊2" />
+                <TabItem Header="你好啊啊啊啊3" />
+                <TabItem Header="你好啊啊啊啊4" />
+                <TabItem Header="你好啊啊啊啊5" />
+                <TabItem Header="你好啊啊啊啊6" />
+                <TabItem Header="你好啊啊啊啊7" />
+                <TabItem Header="你好啊啊啊啊8" />
+                <TabItem Header="你好啊啊啊啊9" />
+                <TabItem Header="你好啊啊啊啊10" />
+                <TabItem Header="你好啊啊啊啊11" />
+                <TabItem Header="你好啊啊啊啊12" />
+            </TabControl>
+
+            <lee:Navigation
+                Height="150"
+                leedep:ScrollViewerManager.SlideEnabled="True"
+                Orientation="Horizontal"
+                ShowScrollToButton="True">
+                <lee:NavigationItem Content="111" />
+                <lee:NavigationItem Content="222" />
+                <lee:NavigationItem Content="333" />
+                <lee:NavigationItem Content="444" />
+                <lee:NavigationItem Content="555" />
+                <lee:NavigationItem Content="666" />
+                <lee:NavigationItem Content="777" />
+                <lee:NavigationItem Content="888" />
+                <lee:NavigationItem Content="999" />
+                <lee:NavigationItem Content="1010" />
+                <lee:NavigationItem Content="1212" />
+                <lee:NavigationItem Content="1313" />
+                <lee:NavigationItem Content="1414" />
+                <lee:NavigationItem Content="1514" />
+                <lee:NavigationItem Content="1616" />
+            </lee:Navigation>
         </StackPanel>
 
         <lee:MaskPanel x:Name="maskPanel" Grid.RowSpan="2" />

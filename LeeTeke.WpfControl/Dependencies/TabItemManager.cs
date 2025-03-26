@@ -12,6 +12,21 @@ namespace LeeTeke.WpfControl.Dependencies
     public class TabItemManager
     {
 
+        #region IsHeaderScroll
+        public static bool GetIsHeaderScroll(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(IsHeaderScrollProperty);
+        }
+
+        public static void SetIsHeaderScroll(DependencyObject obj, bool value)
+        {
+            obj.SetValue(IsHeaderScrollProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for IsHeaderScroll.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsHeaderScrollProperty =
+            DependencyProperty.RegisterAttached("IsHeaderScroll", typeof(bool), typeof(TabItemManager));
+        #endregion
 
         #region VerticalAlignment
         public static VerticalAlignment GetVerticalAlignment(DependencyObject obj)
@@ -29,7 +44,6 @@ namespace LeeTeke.WpfControl.Dependencies
             DependencyProperty.RegisterAttached("VerticalAlignment", typeof(VerticalAlignment), typeof(TabItemManager));
         #endregion
 
-
         #region HorizontalAlignment
         public static HorizontalAlignment GetHorizontalAlignment(DependencyObject obj)
         {
@@ -45,7 +59,6 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty HorizontalAlignmentProperty =
             DependencyProperty.RegisterAttached("HorizontalAlignment", typeof(HorizontalAlignment), typeof(TabItemManager));
         #endregion
-
 
         #region MarkShow
         public static bool GetMarkShow(DependencyObject obj)

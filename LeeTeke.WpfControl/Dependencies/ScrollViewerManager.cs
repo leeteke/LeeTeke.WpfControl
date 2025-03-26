@@ -216,6 +216,9 @@ namespace LeeTeke.WpfControl.Dependencies
         #endregion
 
 
+    
+
+
         #region TopContent
         public static object GetTopContent(DependencyObject obj)
         {
@@ -233,6 +236,22 @@ namespace LeeTeke.WpfControl.Dependencies
         #endregion
 
 
+        #region BottomContent
+        public static object GetBottomContent(DependencyObject obj)
+        {
+            return (object)obj.GetValue(BottomContentProperty);
+        }
+
+        public static void SetBottomContent(DependencyObject obj, object value)
+        {
+            obj.SetValue(BottomContentProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for BottomContent.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty BottomContentProperty =
+            DependencyProperty.RegisterAttached("BottomContent", typeof(object), typeof(ScrollViewerManager));
+        #endregion
+
         #region LeftContent
         public static object GetLeftContent(DependencyObject obj)
         {
@@ -247,6 +266,22 @@ namespace LeeTeke.WpfControl.Dependencies
         // Using a DependencyProperty as the backing store for LeftContent.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LeftContentProperty =
             DependencyProperty.RegisterAttached("LeftContent", typeof(object), typeof(ScrollViewerManager));
+        #endregion
+
+        #region RightContent
+        public static object GetRightContent(DependencyObject obj)
+        {
+            return (object)obj.GetValue(RightContentProperty);
+        }
+
+        public static void SetRightContent(DependencyObject obj, object value)
+        {
+            obj.SetValue(RightContentProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for RightContent.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RightContentProperty =
+            DependencyProperty.RegisterAttached("RightContent", typeof(object), typeof(ScrollViewerManager));
         #endregion
 
 
@@ -383,8 +418,6 @@ namespace LeeTeke.WpfControl.Dependencies
         #endregion
 
 
-
-
         #region CurrentVerticalOffset
         private static double GetCurrentVerticalOffset(DependencyObject obj)
         {
@@ -435,7 +468,6 @@ namespace LeeTeke.WpfControl.Dependencies
         #endregion
 
 
-
         #region ScrollRunning
         private static bool GetScrollRunning(DependencyObject obj)
         {
@@ -451,10 +483,6 @@ namespace LeeTeke.WpfControl.Dependencies
         public static readonly DependencyProperty ScrollRunningProperty =
             DependencyProperty.RegisterAttached("ScrollRunning", typeof(bool), typeof(ScrollViewerManager));
         #endregion
-
-
-
-
 
 
         #endregion

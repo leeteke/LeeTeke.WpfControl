@@ -168,19 +168,35 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition />
                                 <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto" />
                                 <RowDefinition />
                                 <RowDefinition Height="auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Rectangle
                                 x:Name="Corner"
                                 Grid.Row="2"
                                 Grid.Column="2"
                                 Fill="{Binding Path=(leedep:ScrollViewerManager.TrackBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}, Mode=OneWay}" />
-                            <ContentPresenter Grid.Column="1" Content="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.TopContent), Mode=OneWay}" />
-                            <ContentPresenter Grid.Row="1" Content="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.LeftContent), Mode=OneWay}" />
+                            <ContentPresenter
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Content="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.TopContent), Mode=OneWay}" />
+                            <ContentPresenter
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Content="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.BottomContent), Mode=OneWay}" />
+                            <ContentPresenter
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Content="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.LeftContent), Mode=OneWay}" />
+                            <ContentPresenter
+                                Grid.Row="1"
+                                Grid.Column="3"
+                                Content="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.RightContent), Mode=OneWay}" />
                             <ScrollContentPresenter
                                 Grid.Row="1"
                                 Grid.Column="1"
@@ -6090,8 +6106,6 @@
         <Setter Property="TabStripPlacement" Value="Top" />
 
 
-
-
         <!--  常规属性  -->
         <Setter Property="leedep:ListItemManager.MinHeight" Value="{StaticResource LeeValue_MinHeight_Item}" />
         <Setter Property="leedep:ListItemManager.MinWidth" Value="50" />
@@ -6130,6 +6144,7 @@
         <Setter Property="leedep:ListItemManager.IsClip" Value="False" />
 
 
+        <Setter Property="leedep:TabItemManager.IsHeaderScroll" Value="False" />
         <Setter Property="leedep:TabItemManager.HorizontalAlignment" Value="Center" />
         <Setter Property="leedep:TabItemManager.VerticalAlignment" Value="Center" />
         <Setter Property="leedep:TabItemManager.MarkShow" Value="False" />
@@ -6155,14 +6170,29 @@
             <Setter.Value>
                 <ControlTemplate TargetType="TabControl">
                     <DockPanel>
-                        <TabPanel
-                            x:Name="headerPanel"
-                            Grid.Row="0"
-                            Margin="0"
-                            Panel.ZIndex="1"
+                        <ScrollViewer
+                            x:Name="PART_ScrollViewer"
+                            leedep:ScrollViewerManager.BottomContent="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.BottomContent), Mode=OneWay}"
+                            leedep:ScrollViewerManager.LeftContent="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.LeftContent), Mode=OneWay}"
+                            leedep:ScrollViewerManager.RightContent="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.RightContent), Mode=OneWay}"
+                            leedep:ScrollViewerManager.SlideDuration="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideDuration), Mode=OneWay}"
+                            leedep:ScrollViewerManager.SlideEasingFunction="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEasingFunction), Mode=OneWay}"
+                            leedep:ScrollViewerManager.SlideEnabled="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEnabled), Mode=OneWay}"
+                            leedep:ScrollViewerManager.SlideMonitorMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideMonitorMode), Mode=OneWay}"
+                            leedep:ScrollViewerManager.TopContent="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.TopContent), Mode=OneWay}"
                             DockPanel.Dock="{TemplateBinding TabStripPlacement}"
-                            IsItemsHost="true"
-                            KeyboardNavigation.TabIndex="1" />
+                            HorizontalScrollBarVisibility="Disabled"
+                            Style="{StaticResource LeeScrollViewerEx}"
+                            VerticalScrollBarVisibility="Disabled">
+                            <TabPanel
+                                x:Name="headerPanel"
+                                Grid.Row="0"
+                                Margin="0"
+                                Panel.ZIndex="1"
+                                IsItemsHost="true"
+                                KeyboardNavigation.TabIndex="1" />
+                        </ScrollViewer>
+
                         <Border
                             x:Name="PART_Border"
                             Background="{TemplateBinding Background}"
@@ -6210,6 +6240,26 @@
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="TabStripPlacement" Value="Bottom" />
+                                <Condition Property="leedep:TabItemManager.IsHeaderScroll" Value="True" />
+
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_ScrollViewer" Property="HorizontalScrollBarVisibility" Value="Hidden" />
+                        </MultiTrigger>
+
+
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="TabStripPlacement" Value="Top" />
+                                <Condition Property="leedep:TabItemManager.IsHeaderScroll" Value="True" />
+
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_ScrollViewer" Property="HorizontalScrollBarVisibility" Value="Hidden" />
+                        </MultiTrigger>
 
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
