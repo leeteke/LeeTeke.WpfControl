@@ -48,12 +48,19 @@ namespace LeeTeke.WpfControl.Controls
     public class ImageEx : Control
     {
         #region 字段
-
-
+        private const string ElementDefaultContent = "PART_DefaultContent";
+        private const string ElementImage = "PART_Image";
+        private const string ElementFailedContent = "PART_FailedContent";
         #endregion
+
+        private ContentPresenter? _defaultContent;
+        private ContentPresenter? _failedContent;
+        private Image? _image;
+
+        public Image Image => _image!;
         public ImageEx()
         {
-        
+
         }
 
 
@@ -63,6 +70,40 @@ namespace LeeTeke.WpfControl.Controls
         }
 
 
+        #region Override
+
+        public override void OnApplyTemplate()
+        {
+
+            if (_image != null)
+            {
+                _image.ImageFailed -= _image_ImageFailed;
+            }
+
+            base.OnApplyTemplate();
+
+            _defaultContent = GetTemplateChild(ElementDefaultContent) as ContentPresenter;
+            _image = GetTemplateChild(ElementImage) as Image;
+            _failedContent = GetTemplateChild(ElementFailedContent) as ContentPresenter;
+
+            if (_image != null)
+            {
+                _image.ImageFailed += _image_ImageFailed;
+            }
+
+        }
+
+        private void _image_ImageFailed(object? sender, ExceptionRoutedEventArgs e)
+        {
+            if (_failedContent != null)
+            {
+                _failedContent.Visibility = Visibility.Visible;
+
+            }
+        }
+
+
+        #endregion
 
         #region 依赖属性
 
@@ -83,13 +124,32 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
+
+
+        #region FailedContent
+        /// <summary>
+        /// 图片加载失败的内容   
+        /// </summary>
+        public object FailedContent
+        {
+            get { return (object)GetValue(FailedContentProperty); }
+            set { SetValue(FailedContentProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for FailedContent.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty FailedContentProperty =
+            DependencyProperty.Register(nameof(FailedContent), typeof(object), typeof(ImageEx));
+        #endregion
+
+
+
         #region Source
         /// <summary>
         /// ImageSource
         /// </summary>
-        public ImageSource Source
+        public ImageSource? Source
         {
-            get { return (ImageSource)GetValue(SourceProperty); }
+            get { return (ImageSource?)GetValue(SourceProperty); }
             set { SetValue(SourceProperty, value); }
         }
 
@@ -101,7 +161,7 @@ namespace LeeTeke.WpfControl.Controls
         {
             if (d is ImageEx imageEX && e.OldValue != e.NewValue)
             {
-                imageEX.ChangeShowImage();
+                imageEX.ChangeShowImage(e.NewValue as ImageSource);
             }
         }
 
@@ -173,21 +233,6 @@ namespace LeeTeke.WpfControl.Controls
 
         #endregion
 
-        #region AnimationValue
-        /// <summary>
-        /// 请填写描述
-        /// </summary>
-        public double AnimationValue
-        {
-            get { return (double)GetValue(AnimationValueProperty); }
-            private set { SetValue(AnimationValueProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for AnimationValue.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty AnimationValueProperty =
-            DependencyProperty.Register("AnimationValue", typeof(double), typeof(ImageEx),new PropertyMetadata(0.0));
-
-        #endregion
 
         #endregion
 
@@ -197,14 +242,49 @@ namespace LeeTeke.WpfControl.Controls
         /// </summary>
         /// 改变显示图片
         /// </summary>
-        private  void ChangeShowImage()
+        private void ChangeShowImage(ImageSource? source)
         {
-            DoubleAnimation daV = new DoubleAnimation(0, 1, ShowDuration) { FillBehavior = FillBehavior.HoldEnd };
-            this.BeginAnimation(AnimationValueProperty, daV,HandoffBehavior.Compose);
+            if (_image != null)
+            {
+                if (source != null)
+                {
+                    _image.Visibility = Visibility.Visible;
+                    if (_defaultContent != null)
+                    {
+                        _defaultContent.Visibility = Visibility.Collapsed;
+                    }
+
+                    if (_failedContent != null)
+                    {
+                        _failedContent.Visibility = Visibility.Collapsed;
+                    }
+                    
+                    _image.Opacity = 0;
+                    _image.Source = source;
+                    DoubleAnimation daV = new DoubleAnimation(0, 1, ShowDuration) { FillBehavior = FillBehavior.HoldEnd };
+                    _image.BeginAnimation(OpacityProperty, daV, HandoffBehavior.Compose);
+
+                }
+                else
+                {
+                    _image.Source = null;
+                    _image.Visibility = Visibility.Collapsed;
+
+                    if (_defaultContent != null)
+                    {
+                        _defaultContent.Visibility = Visibility.Visible;
+                    }
+
+                    if (_failedContent != null)
+                    {
+                        _failedContent.Visibility = Visibility.Collapsed;
+                    }
+                }
+            }
+
+
+            #endregion
+
         }
-
-
-        #endregion
-
     }
 }
