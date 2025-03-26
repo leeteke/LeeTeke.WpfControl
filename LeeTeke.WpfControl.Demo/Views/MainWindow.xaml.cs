@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LeeTeke.WpfControl.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,6 +35,8 @@ namespace LeeTeke.WpfControl.Demo.Views
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Config.ThemeMode= Models.ThemeMode.Dark;
+            nav.Items.Add(new NavigationItem() { Content = "你好", IsSelected=true, CanClose = false, Tag = "123123" });
+
         }
     }
 }

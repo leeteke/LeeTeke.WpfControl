@@ -100,6 +100,7 @@ namespace LeeTeke.WpfControl.Controls
         public NavigationItem()
         {
             RenderTransform = new TranslateTransform();
+           
         }
 
 

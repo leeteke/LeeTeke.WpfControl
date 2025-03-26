@@ -167,6 +167,24 @@ namespace LeeTeke.WpfControl.Controls
 
         protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
         {
+            if (e.Action== NotifyCollectionChangedAction.Add || e.Action== NotifyCollectionChangedAction.Replace)
+            {
+                if (e.NewItems!=null)
+                {
+                    foreach (var item in e.NewItems)
+                    {
+                        if (item is NavigationItem navItem)
+                        {
+                            if (navItem.IsSelected)
+                            {
+                                SelectedItem = navItem;
+                            }
+                        }
+
+                    }
+                }
+               
+            }
             UpdateSelectedIndex();
             base.OnItemsChanged(e);
         }
@@ -1672,6 +1690,7 @@ namespace LeeTeke.WpfControl.Controls
                 }
 
             }
+
         }
 
         /// <summary>

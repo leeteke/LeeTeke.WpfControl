@@ -52,25 +52,13 @@
             </TabControl>
 
             <lee:Navigation
+                x:Name="nav"
                 Height="150"
                 leedep:ScrollViewerManager.SlideEnabled="True"
-                Orientation="Horizontal"
                 ShowScrollToButton="True">
-                <lee:NavigationItem Content="111" />
-                <lee:NavigationItem Content="222" />
-                <lee:NavigationItem Content="333" />
-                <lee:NavigationItem Content="444" />
-                <lee:NavigationItem Content="555" />
-                <lee:NavigationItem Content="666" />
-                <lee:NavigationItem Content="777" />
-                <lee:NavigationItem Content="888" />
-                <lee:NavigationItem Content="999" />
-                <lee:NavigationItem Content="1010" />
-                <lee:NavigationItem Content="1212" />
-                <lee:NavigationItem Content="1313" />
-                <lee:NavigationItem Content="1414" />
-                <lee:NavigationItem Content="1514" />
-                <lee:NavigationItem Content="1616" />
+                <lee:Navigation.ItemContxtMenuContent>
+                    <Grid Height="200" Background="Red" />
+                </lee:Navigation.ItemContxtMenuContent>
             </lee:Navigation>
         </StackPanel>
 

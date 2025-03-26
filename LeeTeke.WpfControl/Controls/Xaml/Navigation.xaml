@@ -284,12 +284,13 @@
                         VerticalScrollBarVisibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(ScrollViewer.VerticalScrollBarVisibility), Mode=OneWay}">
 
 
-                        <ItemsPresenter x:Name="PART_ItemsPresenter">
+                        <ItemsPresenter x:Name="PART_ItemsPresenter" >
                             <ItemsPresenter.ContextMenu>
                                 <ContextMenu
                                     x:Name="PART_ContextMenu"
                                     leedep:ContextMenuManager.Content="{TemplateBinding ItemContxtMenuContent}"
-                                    leedep:ContextMenuManager.ContentDock="{TemplateBinding ItemContxtMenuContentDock}">
+                                    leedep:ContextMenuManager.ContentDock="{TemplateBinding ItemContxtMenuContentDock}"
+                                    Style="{StaticResource LeeContextMenu}">
                                     <MenuItem
                                         x:Name="PART_MenuItem_Selected"
                                         Header="选择此选项(_S)"
