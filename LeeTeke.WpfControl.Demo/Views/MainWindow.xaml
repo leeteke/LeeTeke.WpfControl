@@ -51,6 +51,9 @@
                 <TabItem Header="你好啊啊啊啊12" />
             </TabControl>
 
+
+
+
             <lee:Navigation
                 x:Name="nav"
                 Height="150"
@@ -60,6 +63,13 @@
                     <Grid Height="200" Background="Red" />
                 </lee:Navigation.ItemContxtMenuContent>
             </lee:Navigation>
+
+
+            <lee:TextBoxEx
+                Width="300"
+                Height="35"
+                CornerRadius="10"
+                Mode="Password" />
         </StackPanel>
 
         <lee:MaskPanel x:Name="maskPanel" Grid.RowSpan="2" />
