@@ -1,0 +1,16 @@
+﻿<Application
+    x:Class="LeeTeke.WpfControl.Demo.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:lee="https://github.com/leeteke/LeeTeke.WpfControl"
+    StartupUri="Views/MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <lee:RegisterColors />
+                <lee:RegisterThemes />
+                <lee:RegisterControls />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

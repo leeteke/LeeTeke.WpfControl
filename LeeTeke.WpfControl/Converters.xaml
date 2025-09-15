@@ -1,0 +1,34 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:conver="clr-namespace:LeeTeke.WpfControl.Converters"
+    xmlns:local="clr-namespace:LeeTeke.WpfControl">
+    <conver:StringToCornerRadiusConverter x:Key="StringToCornerRadiusConverter" />
+    <conver:MultiValueToClipConverter x:Key="MultiValueToClipConverter" />
+    <conver:DoubleFollowConverter x:Key="DoubleFollowConverter" />
+    <conver:VisibilityForBoolConverter x:Key="VisibilityForBoolConverter" />
+    <conver:VisibilityReverseConverter x:Key="VisibilityReverseConverter" />
+    <conver:ColorDepthConverter x:Key="ColorDepthConverter" />
+    <conver:BrushDepthConverter x:Key="BrushDepthConverter" />
+    <conver:BrushOpacityConverter x:Key="BrushOpacityConverter" />
+    <conver:ColorOpactiyConverter x:Key="ColorOpactiyConverter" />
+    <conver:BoolReverseConverter x:Key="BoolReverseConverter" />
+    <conver:IsNotNullConverter x:Key="IsNotNullConverter" />
+    <conver:IsNullConverter x:Key="IsNullConverter" />
+    <conver:NotAlignmentCenterConverter x:Key="NotAlignmentCenterConverter" />
+    <conver:StringIsNullConverter x:Key="StringIsNullConverter" />
+    <conver:StringIsNotNullConverter x:Key="StringIsNotNullConverter" />
+    <conver:EnumBoolReverseConverter x:Key="EnumBoolReverseConverter" />
+    <conver:CornerRadiusIsZeroConverter x:Key="CornerRadiusIsZeroConverter" />
+    <conver:SiteToHorizontalAlignmentConverter x:Key="SiteToHorizontalAlignmentConverter" />
+    <conver:SiteToVerticalAlignmentConverter x:Key="SiteToVerticalAlignmentConverter" />
+    <conver:VisibilityForBoolReverseConverter x:Key="VisibilityForBoolReverseConverter" />
+    <conver:DoubleComparisonConverter x:Key="DoubleComparisonConverter" />
+    <conver:ThicknessForDoubleConverter x:Key="ThicknessForDoubleConverter" />
+    <conver:ThicknessConverter x:Key="ThicknessConverter" />
+    <conver:CornerRadiusConverter x:Key="CornerRadiusConverter" />
+    <conver:MultiValueToCenterConverter x:Key="MultiValueToCenterConverter" />
+    <conver:TreeViewItemSeparateConverter x:Key="TreeViewItemSeparateConverter" />
+    <conver:VisibilityForNulllConverter x:Key="VisibilityForNulllConverter" />
+    <conver:VisibilityForNullReverseConverter x:Key="VisibilityForNullReverseConverter" />
+</ResourceDictionary>

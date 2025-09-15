@@ -1,0 +1,43 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:LeeTeke.WpfControl.Controls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/GridView.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/ImageEx.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/ProgressBar.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/ProgressRing.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/NotifyIconEx.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/RippleMask.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/FlipView.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/TextBoxEx.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/NotifyBanner.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/ScrollBanner.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/Pagination.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/Navigation.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/MaskPanel.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls/Xaml/Window.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style BasedOn="{StaticResource BaseGridView}" TargetType="{x:Type local:GridView}" />
+    <Style BasedOn="{StaticResource BaseGridViewItem}" TargetType="{x:Type local:GridViewItem}" />
+    <Style BasedOn="{StaticResource BaseImageEx}" TargetType="{x:Type local:ImageEx}" />
+    <Style BasedOn="{StaticResource BaseNavigation}" TargetType="{x:Type local:Navigation}" />
+    <Style BasedOn="{StaticResource BaseNavigationItem}" TargetType="{x:Type local:NavigationItem}" />
+    <Style BasedOn="{StaticResource BaseNotifyBanner}" TargetType="{x:Type local:NotifyBanner}" />
+    <Style BasedOn="{StaticResource BaseNotifyBannerItem}" TargetType="{x:Type local:NotifyBannerItem}" />
+    <Style BasedOn="{StaticResource BaseNotifyIconEx}" TargetType="{x:Type local:NotifyIconEx}" />
+    <Style BasedOn="{StaticResource BasePagination}" TargetType="{x:Type local:Pagination}" />
+    <Style BasedOn="{StaticResource BaseProgressBar}" TargetType="{x:Type local:ProgressBar}" />
+    <Style BasedOn="{StaticResource BaseProgressRing}" TargetType="{x:Type local:ProgressRing}" />
+    <Style BasedOn="{StaticResource BaseRippleMask}" TargetType="{x:Type local:RippleMask}" />
+    <Style BasedOn="{StaticResource BaseScrollBanner}" TargetType="{x:Type local:ScrollBanner}" />
+    <Style BasedOn="{StaticResource BaseFlipView}" TargetType="{x:Type local:FlipView}" />
+    <Style BasedOn="{StaticResource BaseFlipViewItem}" TargetType="{x:Type local:FlipViewItem}" />
+    <Style BasedOn="{StaticResource BaseTextBoxEx}" TargetType="{x:Type local:TextBoxEx}" />
+
+    <Style BasedOn="{StaticResource BaseMaskPanel}" TargetType="{x:Type local:MaskPanel}" />
+    <Style BasedOn="{StaticResource BaseWindow}" TargetType="{x:Type local:Window}" />
+
+
+</ResourceDictionary>

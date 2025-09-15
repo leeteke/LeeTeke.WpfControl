@@ -1,0 +1,1442 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LeeTeke.WpfControl</name>
+    </assembly>
+    <members>
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.GridView" -->
+        <member name="P:LeeTeke.WpfControl.Controls.GridView.Orientation">
+            <summary>
+            位置顺序
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.GridView.HorizontalScrollBarVisibility">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.GridView.VerticalScrollBarVisibility">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.ImageEx" -->
+        <member name="P:LeeTeke.WpfControl.Controls.ImageEx.DefaultContent">
+            <summary>
+            默认内容
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ImageEx.Source">
+            <summary>
+            ImageSource
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ImageEx.Stretch">
+            <summary>
+            Stretch
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ImageEx.Watermark">
+            <summary>
+            水印系列
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ImageEx.ShowDuration">
+            <summary>
+            显示动作持续事件
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ImageEx.CornerRadius">
+            <summary>
+            CornerRadius
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ImageEx.AnimationValue">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:LeeTeke.WpfControl.Controls.ImageEx.ChangeShowImage" -->
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.LoadingBar" -->
+        <member name="P:LeeTeke.WpfControl.Controls.LoadingBar.ProgressLength">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.LoadingBar.RectangleSite">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.LoadingBar.WatingStop">
+            <summary>
+            WatingStop
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.LoadingBar.CornerRadius">
+            <summary>
+            CornerRadius
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.LoadingBar.Maximum">
+            <summary>
+            Maximum
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.LoadingBar.Value">
+            <summary>
+            Value
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.LoadingBar.FillBrush">
+            <summary>
+            FillBrsh
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.LoadingBar.Mode">
+            <summary>
+            Mode
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.LoadingBar.Orientation">
+            <summary>
+            Orientation
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.LoadingBar.EasingFunction">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="E:LeeTeke.WpfControl.Controls.LoadingBar.ValueChanged">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="T:LeeTeke.WpfControl.Controls.Message">
+            <summary>
+            MessageBoxEx.xaml 的交互逻辑
+            </summary>
+            <summary>
+            Message
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.Message.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.NotifyBanner" -->
+        <member name="F:LeeTeke.WpfControl.Controls.NotifyBanner._displacement">
+            <summary>
+            位移距离
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.Controls.NotifyBanner._stackPanel">
+            <summary>
+            界面的stackpanel
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.Controls.NotifyBanner._notifyWindow">
+            <summary>
+            通知窗口
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.BannerPath">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.EasingFunction">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.EasingDuration">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.IsKeepShow">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.ShowMode">
+            <summary>
+            展示模式
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.OnDesktopMargin">
+            <summary>
+            桌面模式下的Margin
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.ShowDuration">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.Effect">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.CornerRadius">
+            <summary>
+            CornerRadius
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyBanner.ClickedCommand">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="E:LeeTeke.WpfControl.Controls.NotifyBanner.Clicked">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.NotifyBanner.GenerateSB(LeeTeke.WpfControl.Controls.NotifybannerDataContext)">
+            <summary>
+            生成动画
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.NotifyBanner.CloseButton_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            关闭按钮
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.NotifyBanner.UXAdd(System.Windows.UIElement)">
+            <summary>
+            通知添加UI
+            </summary>
+            <param name="element"></param>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.NotifyBanner.UXRemove(System.Windows.UIElement)">
+            <summary>
+            
+            </summary>
+            <param name="element"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.NotifyBanner.GenerateWindow">
+            <summary>
+            生成通知
+            </summary>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.NotifyIconEx" -->
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyIconEx.Icon">
+            <summary>
+            Icon
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyIconEx.ContentMinHeight">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyIconEx.ContentMinWidth">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyIconEx.CornerRadius">
+            <summary>
+            CornerRadius
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyIconEx.Content">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyIconEx.BalloonTipData">
+            <summary>
+            BalloonTipModel
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyIconEx.ClickedThenClosing">
+            <summary>
+            点击后关闭
+            </summary>
+        </member>
+        <member name="E:LeeTeke.WpfControl.Controls.NotifyIconEx.MouseLeftClick">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="E:LeeTeke.WpfControl.Controls.NotifyIconEx.MouseRightClick">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="E:LeeTeke.WpfControl.Controls.NotifyIconEx.MouseDoubleClick">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="E:LeeTeke.WpfControl.Controls.NotifyIconEx.BalloonTipClicked">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.NotifyIconEx.ShowBalloonTip(System.Int32,System.String,System.String,LeeTeke.WpfControl.ToolTipIcon)">
+            <summary>
+            冒泡显示
+            </summary>
+            <param name="timeout">毫秒</param>
+            <param name="tipTitle">标题</param>
+            <param name="tipText">内容</param>
+            <param name="tipIcon">Icon</param>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyIconEx.MouseMoveCommand">
+            <summary>
+            MouseMoveCommand
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyIconEx.MouseLeftButtonClickCommand">
+            <summary>
+            MouseLeftButtonClickCommand
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyIconEx.MouseRightButtonClickCommand">
+            <summary>
+            MouseRightButtonClickCommand
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyIconEx.MouseDoubleClickCommand">
+            <summary>
+            MouseDoubleClickCommand
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.NotifyIconEx.BalloonTipClickedCommand">
+            <summary>
+            BalloonTipClickedCommand
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.NotifyIconEx.Finalize">
+            <summary>
+            析构
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.NotifyIconEx.Dispose">
+            <summary>
+            IDisposable接口
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.NotifyIconEx.Dispose(System.Boolean)">
+            <summary>
+            释放
+            </summary>
+            <param name="disposing">是否需要释放那些实现IDisposable接口的托管对象</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.RippleMask" -->
+        <member name="F:LeeTeke.WpfControl.Controls.RippleMask._mouseSite">
+            <summary>
+            鼠标当前再控件中的位置
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.Controls.RippleMask._maxRadius">
+            <summary>
+            最大半径
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.Controls.RippleMask._clickStates">
+            <summary>
+            点击状态 0-未点击 1按下 2-按下并松开
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.RippleMask.RippleBrush">
+            <summary>
+            涟漪颜色
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.RippleMask.Duration">
+            <summary>
+            动画延迟时间（此处为保持按下的时间，松开后时间将加速为8倍）
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.RippleMask.ParentElement">
+            <summary>
+            父级组件
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.RippleMask.IsOverflow">
+            <summary>
+            是否涟漪溢出
+            默认False
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.RippleMask.IsCustomSite">
+            <summary>
+            是否自定义位置
+            默认False
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.RippleMask.CustomSite">
+            <summary>
+            自定义位置
+            默认 0,0
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.RollingPanel" -->
+        <member name="P:LeeTeke.WpfControl.Controls.RollingPanel.Orientation">
+            <summary>
+            请添加描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.RollingPanel.CornerRadius">
+            <summary>
+            请添加描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.RollingPanel.Rolling">
+            <summary>
+            请添加描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.RollingPanel.IsRolling">
+            <summary>
+            请添加描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.RollingPanel.Duration">
+            <summary>
+            请添加描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.RollingPanel.Speed">
+            <summary>
+            请添加描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.RollingPanel.TransitionEasing">
+            <summary>
+            过度动画
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.ScrollBanner" -->
+        <member name="P:LeeTeke.WpfControl.Controls.ScrollBanner.IsScrolling">
+            <summary>
+            是否正在滚动
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ScrollBanner.AutoScrolling">
+            <summary>
+            请添加描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ScrollBanner.Orientation">
+            <summary>
+            Orientation
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ScrollBanner.CornerRadius">
+            <summary>
+            CornerRadius
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ScrollBanner.IsEnabled">
+            <summary>
+            请添加描述
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.FlipView" -->
+        <member name="P:LeeTeke.WpfControl.Controls.FlipView.Count">
+            <summary>
+            总数量
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.FlipView.Orientation">
+            <summary>
+            方向
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.FlipView.CurrentValue">
+            <summary>
+            当前值
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.FlipView.CurrentIndex">
+            <summary>
+            当前值下表
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.FlipView.Interval">
+            <summary>
+            自动轮播间隔时间
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.FlipView.TransitionDuration">
+            <summary>
+            过渡动画延迟
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.FlipView.TransitionEasing">
+            <summary>
+            过度动画
+            </summary>
+        </member>
+        <member name="E:LeeTeke.WpfControl.Controls.FlipView.ItemClicked">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.FlipView.ToIndex(System.Int32)">
+            <summary>
+            去选项
+            </summary>
+            <param name="index"></param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.FlipViewItem" -->
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.SwitchButton" -->
+        <member name="E:LeeTeke.WpfControl.Controls.SwitchButton.SwitchChanged">
+            <summary>
+            开关发生
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.SwitchButton.HasContent">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.SwitchButton.ButtonSite">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.SwitchButton.ButtonWidth">
+            <summary>
+            开关的宽度啊
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.SwitchButton.ButtonHeight">
+            <summary>
+            开关的高度
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.SwitchButton.Content">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.SwitchButton.CloseContent">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.SwitchButton.ContentDock">
+            <summary>
+            内容位置
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.SwitchButton.SwitchSite">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.SwitchButton.EasingFunction">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.TabView" -->
+        <member name="E:LeeTeke.WpfControl.Controls.TabView.ItemClosed">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="E:LeeTeke.WpfControl.Controls.TabView.ItemSelected">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TabView.ItemsSource">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TabView.SelectedIndex">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TabView.SelectedItem">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TabView.SelectedValue">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TabView.Orientation">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TabView.ItemCornerRadius">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TabView.ItemPinVisibly">
+            <summary>
+            固定显示
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TabView.ItemMargin">
+            <summary>
+            请添加描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TabView.ItemContentMiniWidth">
+            <summary>
+            请添加描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TabView.SelectedBrush">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TabView.ItemClosedCommand">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TabView.ItemSelectedCommand">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.TabView.CloseItemAsync(LeeTeke.WpfControl.Controls.TabViewItem)">
+            <summary>
+            关闭
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.TabView.ItemValueChanged(LeeTeke.WpfControl.Controls.TabViewItem)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.TabView.ItemRemoveChanged(LeeTeke.WpfControl.Controls.TabViewItem)">
+            <summary>
+            Item移动事件发生
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.TabView.ItemSelectedChanged(LeeTeke.WpfControl.Controls.TabViewItem)">
+            <summary>
+            Item选择事件发生
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.TabView.SelectedInit(System.Object)">
+            <summary>
+            清理选择
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TabViewItem.IsClosed">
+            <summary>
+            是否执行了关闭
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TabViewItem.CanClosed">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TabViewItem.IsSelected">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TabViewItem.CornerRadius">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TabViewItem.PinVisibly">
+            <summary>
+            是否显示固定按钮
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TabViewItem.Orientation">
+            <summary>
+            Orientation
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TabViewItem.IsFixed">
+            <summary>
+            是否固定
+            </summary>
+        </member>
+        <member name="E:LeeTeke.WpfControl.Controls.TabViewItem.Closed">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="E:LeeTeke.WpfControl.Controls.TabViewItem.Selected">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.TabViewItem.CloseAsync">
+            <summary>
+            关闭Item
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.TextBoxEx" -->
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.IsReadOnly">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.Mode">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.Text">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.TextAlignment">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.CornerRadius">
+            <summary>
+            CornerRadius
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.PasswordChar">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.PreviewText">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.AcceptsReturn">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.Icon">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.IconMargin">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.IconSize">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.IconFill">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.IconVisible">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.IconCanClick">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.IconDock">
+            <summary>
+            IconDock
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.SplitterVisible">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.SplitterFill">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.SplitterMargin">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.SplitterSize">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.EscToClear">
+            <summary>
+            清理
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.EnterCommand">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.TextBoxEx.IconCommand">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="E:LeeTeke.WpfControl.Controls.TextBoxEx.Entered">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="E:LeeTeke.WpfControl.Controls.TextBoxEx.IconClicked">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:LeeTeke.WpfControl.Controls.ToggleGroup" -->
+        <member name="P:LeeTeke.WpfControl.Controls.ToggleGroup.SelectedItem">
+            <summary>
+            选择的Item
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ToggleGroup.SelectedIndex">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ToggleGroup.SelectionMode">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ToggleGroup.ItemPadding">
+            <summary>
+            ItemPadding
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ToggleGroup.ItemMargin">
+            <summary>
+            ItemMargin
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ToggleGroup.ItemCorenerRadius">
+            <summary>
+            item的圆角
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ToggleGroup.ItemRippleBrush">
+            <summary>
+            item的涟漪颜色
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ToggleGroup.ItemBackground">
+            <summary>
+            Item的默认背景色
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ToggleGroup.ItemBorderBrush">
+            <summary>
+            Item边框刷
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ToggleGroup.ItemBorderThickness">
+            <summary>
+            Item的边框粗细
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ToggleGroup.ItemMouseOverBackground">
+            <summary>
+            Item鼠标移入的颜色
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ToggleGroup.ItemMouseOverBorderBrush">
+            <summary>
+            Item鼠标移入的变宽yanse
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ToggleGroup.ItemCheckedBackground">
+            <summary>
+            Item被选中的背景色
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ToggleGroup.ItemCheckedBorderBrush">
+            <summary>
+            Item被选中的边框颜色
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ToggleGroup.ItemCheckedForeground">
+            <summary>
+            Item被选中的字体颜色
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.Controls.ToggleGroup.SelectionChangedCommand">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="E:LeeTeke.WpfControl.Controls.ToggleGroup.SelectionChanged">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Controls.ToggleGroup.SelectedInit(System.Object)">
+            <summary>
+            清理选择
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.CheckBoxManager.GetCheckBoxSize(System.Windows.DependencyObject)">
+            <summary>
+            选择框大小
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.GroupBoxManager.GetHeaderPadding(System.Windows.DependencyObject)">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.GroupBoxManager.GetHeaderForeground(System.Windows.DependencyObject)">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.GroupBoxManager.GetHeaderFontWeight(System.Windows.DependencyObject)">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.GroupBoxManager.GetHeaderFontSize(System.Windows.DependencyObject)">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.GroupBoxManager.GetBorderMode(System.Windows.DependencyObject)">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.GroupBoxManager.GetSplitLineVisibility(System.Windows.DependencyObject)">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.GroupBoxManager.GetSplitLineSize(System.Windows.DependencyObject)">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.GroupBoxManager.GetSplitLineBrush(System.Windows.DependencyObject)">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.GroupBoxManager.GetSplitLineMargin(System.Windows.DependencyObject)">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.GroupBoxManager.GetCornerRadius(System.Windows.DependencyObject)">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.ObjectForBoolManager.GetProperty(System.Windows.DependencyObject)">
+            <summary>
+            属性名称
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.ObjectForBoolManager.GetBoolValue(System.Windows.DependencyObject)">
+            <summary>
+            BoolValue
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.ObjectForBoolManager.GetTrueObject(System.Windows.DependencyObject)">
+            <summary>
+            TrueObject
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.ObjectForBoolManager.GetFalseObject(System.Windows.DependencyObject)">
+            <summary>
+            FalseObject
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.ObjectForBoolManager.GetNullObject(System.Windows.DependencyObject)">
+            <summary>
+            NullObject
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.RadioButtonManager.GetRippleBrush(System.Windows.DependencyObject)">
+            <summary>
+            涟漪颜色
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.RadioButtonManager.GetMarkBrush(System.Windows.DependencyObject)">
+            <summary>
+            选中标记的颜色
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.RadioButtonManager.GetMarkSize(System.Windows.DependencyObject)">
+            <summary>
+            标记大小
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.RadioButtonManager.GetMarkMargin(System.Windows.DependencyObject)">
+            <summary>
+            Mark边距
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.SliderManager.GetHeader(System.Windows.DependencyObject)">
+            <summary>
+            Header
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.SliderManager.GetHeaderDock(System.Windows.DependencyObject)">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.SliderManager.GetTrackThumb(System.Windows.DependencyObject)">
+            <summary>
+            请填写描述
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.SliderManager.GetTrackSize(System.Windows.DependencyObject)">
+            <summary>
+            Track的大小
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.SliderManager.GetCornerRadius(System.Windows.DependencyObject)">
+            <summary>
+            CornerRadius
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.SliderManager.GetTrackBrush(System.Windows.DependencyObject)">
+            <summary>
+            TrackBrush
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.TimelineManager.GetCommand(System.Windows.DependencyObject)">
+            <summary>
+            Command
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Dependencies.WindowShaowManager.GetOpen(System.Windows.DependencyObject)">
+            <summary>
+            开关
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.MessageBoxEx.Show(System.String,LeeTeke.WpfControl.MessageBoxExEnum)">
+            <summary>
+            显示并返回
+            </summary>
+            <param name="content"></param>
+            <param name="status"></param>
+            <returns></returns>
+        </member>
+        <member name="P:LeeTeke.WpfControl.MessageBoxEx.CanClose">
+            <summary>
+            是否可以关闭
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.MessageBoxEx.Close">
+            <summary>
+            关闭
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.MessageBoxEx.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.MessageBoxEx.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.MessageBoxEx.SetContent(System.Windows.UIElement)">
+            <summary>
+            设置自定义内容
+            </summary>
+            <param name="element"></param>
+        </member>
+        <member name="P:LeeTeke.WpfControl.MessageBoxEx.LoadingBarModel">
+            <summary>
+            loadingbar模式
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.MessageBoxEx.LoadingBarValue">
+            <summary>
+            设置loadingVale 范围0-100;
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.MessageBoxEx.SetIcon(LeeTeke.WpfControl.MessageBoxExEnum)">
+            <summary>
+            设置图标
+            </summary>
+            <param name="icon"></param>
+        </member>
+        <member name="M:LeeTeke.WpfControl.MessageBoxEx.AddOptions(System.String,System.Object,System.Windows.CornerRadius)">
+            <summary>
+            设置选项
+            </summary>
+            <param name="name"></param>
+            <param name="vale"></param>
+            <param name="btnCornerRadius">圆角值</param>
+        </member>
+        <member name="M:LeeTeke.WpfControl.MessageBoxEx.SetSize(System.Double,System.Double)">
+            <summary>
+            设置大小
+            </summary>
+            <param name="width"></param>
+            <param name="height"></param>
+        </member>
+        <member name="P:LeeTeke.WpfControl.BalloonTipModel.Time">
+            <summary>
+            毫秒
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.BalloonTipModel.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.BalloonTipModel.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.BalloonTipModel.Icon">
+            <summary>
+            Icon
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.BannerPathMode.RightTop">
+            <summary>
+            右上角
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.BannerPathMode.RightCenter">
+            <summary>
+            右中间
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.BannerPathMode.RightBottom">
+            <summary>
+            右下角
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.BannerPathMode.LeftTop">
+            <summary>
+            左上角
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.BannerPathMode.LeftCenter">
+            <summary>
+            左中间
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.BannerPathMode.LeftBottom">
+            <summary>
+            左下角
+            </summary>
+        </member>
+        <member name="T:LeeTeke.WpfControl.NotifyBannerShowMode">
+            <summary>
+            通知显示模式
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.NotifyBannerShowMode.InApp">
+            <summary>
+            在App里
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.NotifyBannerShowMode.OnDesktop">
+            <summary>
+            在桌面上
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.NotifyBannerShowModel.Value">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.NotifyBannerShowModel.Background">
+            <summary>
+            背景色无则使用控件默认
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.NotifyBannerShowModel.Content">
+            <summary>
+            内容，默认文本可以是FE
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.NotifyBannerShowModel.Sound">
+            <summary>
+            背景音，默认没有
+            </summary>
+        </member>
+        <member name="P:LeeTeke.WpfControl.NotifyBannerShowModel.Duration">
+            <summary>
+            持续时间，可为空，毫秒
+            </summary>
+        </member>
+        <member name="T:LeeTeke.WpfControl.SiteMode">
+            <summary>
+            位置模式
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.SiteMode.Full">
+            <summary>
+            铺满
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.SiteMode.Start">
+            <summary>
+            开始的地方
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.SiteMode.Center">
+            <summary>
+            中心
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.SiteMode.End">
+            <summary>
+            尾部
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.TabViewItemClosedMode.Self">
+            <summary>
+            关闭自己
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.TabViewItemClosedMode.Other">
+            <summary>
+            关闭其他
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.TabViewItemClosedMode.All">
+            <summary>
+            关闭全部
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.TextMode.General">
+            <summary>
+            常规
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.TextMode.Password">
+            <summary>
+            密码行为
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.TextMode.Number">
+            <summary>
+            数字行为
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.TextMode.IMEDispaly">
+            <summary>
+            禁止IME
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.ToggleGroupMode.Single">
+            <summary>
+            单个
+            </summary>
+        </member>
+        <member name="F:LeeTeke.WpfControl.ToggleGroupMode.Multiple">
+            <summary>
+            多个
+            </summary>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Helper.SetThemeColor(System.Windows.Media.Brush)">
+            <summary>
+            改变主题色
+            </summary>
+            <param name="color"></param>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Helper.SetThemeColorDefault">
+            <summary>
+            改变主题色
+            </summary>
+            <param name="color"></param>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Helper.SetDefaultTextBrush(System.Windows.Media.Color)">
+            <summary>
+            改变默认文字颜色
+            </summary>
+            <param name="color"></param>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Helper.SetDefaultTextBrushDefault">
+            <summary>
+            改变默认文字颜色
+            </summary>
+            <param name="color"></param>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Helper.SetDefaultCornerRadius(System.Windows.CornerRadius)">
+            <summary>
+            改变圆角
+            </summary>
+            <param name="color"></param>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Helper.SetBackground(System.Windows.Media.Brush)">
+            <summary>
+            改变页面背景色
+            </summary>
+            <param name="color"></param>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Helper.SetDefaultDropShadowEffect(System.Windows.Media.Effects.DropShadowEffect)">
+            <summary>
+            设置默认的阴影效果
+            </summary>
+            <param name="dropShadow"></param>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Helper.ChangeBrushDepth(System.Windows.Media.Brush,System.Single)">
+            <summary>
+            颜色加深或者变浅
+            目前只支持 SolidColorBrush
+            </summary>
+            <param name="brush"></param>
+            <param name="depth"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Helper.ChangeColorDepth(System.Windows.Media.Color,System.Single)">
+            <summary>
+            颜色加深或者变浅
+            </summary>
+            <param name="color"></param>
+            <param name="depth"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Helper.GetRoundRectangle(System.Windows.Rect,System.Windows.Thickness,System.Windows.CornerRadius)">
+            <summary>
+            获取Clip (圆角矩形，圆形) 带board的
+            https://wpfspark.wordpress.com/2011/06/08/clipborder-a-wpf-border-that-clips/
+            </summary>
+            <param name="baseRect"></param>
+            <param name="borderThickness"></param>
+            <param name="cornerRadius"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Helper.GetRoundRectangle(System.Windows.Rect,System.Windows.CornerRadius)">
+            <summary>
+            获取Clip (圆角矩形，圆形) 
+            https://wpfspark.wordpress.com/2011/06/08/clipborder-a-wpf-border-that-clips/
+            </summary>
+            <param name="baseRect"></param>
+            <param name="borderThickness"></param>
+            <param name="cornerRadius"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Helper.ImageSourceToBitmap(System.Windows.Media.ImageSource)">
+            <summary>
+            ImageSource转换成Bitmap
+            </summary>
+            <param name="imageSource"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Helper.FindVisualChild``1(System.Windows.DependencyObject)">
+            <summary>
+            寻找子控件
+            </summary>
+            <typeparam name="childItem"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Helper.IsInControl(System.Windows.DependencyObject,System.Windows.DependencyObject,System.Int32)">
+            <summary>
+            是否在控件里面
+            </summary>
+            <param name="pardent"></param>
+            <param name="child"></param>
+            <param name="outLevel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Helper.SetMessageboxExButtonCornerRadius(System.Windows.CornerRadius)">
+            <summary>
+            设置MessageBox全局按钮
+            </summary>
+            <param name="cornerRadius"></param>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Helper.SetMessageboxExCornerRadius(System.Windows.CornerRadius)">
+            <summary>
+            设置MessageBox全局CR
+            </summary>
+            <param name="cornerRadius"></param>
+        </member>
+        <member name="M:LeeTeke.WpfControl.Helper.EmptyWorkingSet(System.IntPtr)">
+            建议使用此方法
+        </member>
+        <member name="M:LeeTeke.WpfControl.Helper.ClearMemory">
+            <summary>      
+            释放内存      
+            </summary>      
+        </member>
+        <member name="M:LeeTeke.WpfControl.Helper.ClearMemory(System.IntPtr)">
+            <summary>      
+            优化其它程序内存内存      
+            </summary>      
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
+            </summary>
+        </member>
+    </members>
+</doc>

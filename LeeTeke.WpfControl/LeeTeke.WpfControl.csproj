@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net9.0-windows;net8.0-windows;net7.0-windows;net6.0-windows;net48;net481</TargetFrameworks>
+		<UseWPF>true</UseWPF>
+		<UseWindowsForms>true</UseWindowsForms>
+		<Description></Description>
+		<Version>1.0.0-rc1</Version>
+		<Authors>LeeTeke</Authors>
+		<Nullable>enable</Nullable>
+		<PackageProjectUrl>https://github.com/leeteke/Leeteke.WpfControl</PackageProjectUrl>
+		<Copyright>https://github.com/leeteke/Leeteke.WpfControl/blob/master/LICENSE</Copyright>
+		<GenerateDocumentationFile>False</GenerateDocumentationFile>	
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<LangVersion>latest</LangVersion>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/leeteke/LeeTeke.WpfControl</RepositoryUrl>
+		<PackageTags>wpf,ui,control,theme</PackageTags>
+		<Title>Leeteke.WpfControl</Title>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="LeeTekeDatas\GreyEffect.ps" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="..\LICENSE">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	  <None Include="..\README.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	  <None Include="RegisterColors.cs" />
+	</ItemGroup>
+
+
+	
+	<ItemGroup>
+		<Resource Include="LeeTekeDatas\GreyEffect.ps" />
+		<Resource Include="LeeTekeDatas\Segoe Fluent Icons.ttf" />
+	</ItemGroup>
+
+</Project>

@@ -1,0 +1,90 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:LeeTeke.WpfControl.Controls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    <Style x:Key="BaseProgressRing" TargetType="{x:Type local:ProgressRing}">
+
+        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Thickness" Value="8" />
+        <Setter Property="ThicknessPadding" Value="0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Maximum" Value="100" />
+        <Setter Property="EasingFunction">
+            <Setter.Value>
+                <PowerEase EasingMode="EaseOut" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Duration" Value="0:0:0.300" />
+
+        <Setter Property="Stroke" Value="{DynamicResource LeeBrush_Theme}" />
+        <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}" />
+        <Setter Property="MinWidth" Value="{DynamicResource LeeControlMinHeight}" />
+        <Setter Property="Mode" Value="Loading" />
+        <Setter Property="IsClip" Value="True" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ProgressRing}">
+                    <local:EasyPanel>
+                        <Path x:Name="PART_OuterBorder"
+                            Stroke="{TemplateBinding BorderBrush}"
+                            StrokeThickness="{TemplateBinding BorderThickness}" />
+                        <Path x:Name="PART_OrbitBackgound" Stroke="{TemplateBinding Background}" />
+                        <Path x:Name="PART_Orbit"
+                            Effect="{TemplateBinding RingEffect}"
+                            RenderTransformOrigin="0.5,0.5"
+                            Stroke="{TemplateBinding Stroke}"
+                            StrokeDashArray="0"
+                            StrokeDashCap="Round"
+                            StrokeThickness="{TemplateBinding Thickness}" />
+                        <Border x:Name="PART_InnerBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}">
+                            <Border x:Name="PART_Content"
+                                Background="{x:Null}"
+                                BorderThickness="0">
+                                <ContentPresenter
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    Content="{TemplateBinding Content}" />
+                            </Border>
+
+                        </Border>
+                    </local:EasyPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsClip" Value="True">
+                            <Setter TargetName="PART_Content" Property="Clip">
+                                <Setter.Value>
+                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                        <Binding
+                                            Mode="OneWay"
+                                            Path="ActualWidth"
+                                            RelativeSource="{RelativeSource Mode=Self}" />
+                                        <Binding
+                                            Mode="OneWay"
+                                            Path="ActualHeight"
+                                            RelativeSource="{RelativeSource Mode=Self}" />
+                                        <Binding
+                                            ElementName="PART_InnerBorder"
+                                            Mode="OneWay"
+                                            Path="CornerRadius" />
+                                        <Binding
+                                            ElementName="PART_InnerBorder"
+                                            Mode="OneWay"
+                                            Path="BorderThickness" />
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

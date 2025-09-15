@@ -1,0 +1,39 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:LeeTeke.WpfControl.Controls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="BaseRippleMask" TargetType="{x:Type local:RippleMask}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="IsOverflow" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:RippleMask}">
+                    <Canvas x:Name="PART_Canvas" Visibility="Visible" />
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsOverflow" Value="False">
+                            <Setter TargetName="PART_Canvas" Property="Clip">
+                                <Setter.Value>
+                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource Mode=Self}" />
+                                        <Binding Path="ActualHeight" RelativeSource="{RelativeSource Mode=Self}" />
+                                        <Binding Path="CornerRadius" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+</ResourceDictionary>

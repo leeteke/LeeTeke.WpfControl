@@ -1,0 +1,261 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
+    xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies"
+    xmlns:local="clr-namespace:LeeTeke.WpfControl.Controls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+
+    <Style x:Key="BaseTextBoxEx" TargetType="{x:Type local:TextBoxEx}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+
+        <Setter Property="IsTabStop" Value="False" />
+
+        <Setter Property="Mode" Value="General" />
+        <Setter Property="Placeholder" Value="" />
+        <Setter Property="PasswordChar" Value="●" />
+        <Setter Property="FontSize" Value="{StaticResource LeeValue_FontSize}" />
+        <Setter Property="BorderThickness" Value="{StaticResource LeeValue_BorderThickness}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource LeeValue_CornerRadius}" />
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
+        <Setter Property="MinHeight" Value="{DynamicResource LeeControlMinHeight}" />
+        <Setter Property="Padding" Value="2" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
+        <Setter Property="Background" Value="{DynamicResource LeeBrush_Forground}" />
+        <Setter Property="ActiveBackground" Value="{DynamicResource LeeBrush_ForgroundActive}" />
+        <Setter Property="TextWrapping" Value="NoWrap" />
+
+        <Setter Property="IsReadOnly" Value="False" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="IconDock" Value="Left" />
+        <Setter Property="Icon" Value="&#xe700;" />
+        <Setter Property="IconFontSize" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=FontSize}" />
+        <Setter Property="IconFontFamily" Value="{StaticResource IconFontFamily}" />
+        <Setter Property="IconCanClick" Value="False" />
+        <Setter Property="IconVisible" Value="False" />
+        <Setter Property="IconMargin" Value="2,0" />
+        <Setter Property="IconForeground" Value="{DynamicResource LeeBrush_Theme}" />
+        <Setter Property="IconVerticalAlignment" Value="Center" />
+        <Setter Property="IconHorizontalAlignment" Value="Center" />
+
+        <Setter Property="SplitterFill" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=BorderBrush}" />
+        <Setter Property="SplitterMargin" Value="2" />
+        <Setter Property="SplitterVisible" Value="False" />
+        <Setter Property="SplitterSize" Value="1" />
+        <Setter Property="SelectionBrush" Value="{DynamicResource LeeBrush_Theme}" />
+        <Setter Property="SelectionOpacity" Value="0.5" />
+        <Setter Property="SelectionTextBrush" Value="{DynamicResource LeeBrush_Text}" />
+        <Setter Property="CaretBrush" Value="{DynamicResource LeeBrush_Text}" />
+
+        <Setter Property="EditBoxCursor" Value="IBeam" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:TextBoxEx}">
+                    <Border
+                        x:Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Effect="{TemplateBinding Effect}">
+
+                        <DockPanel x:Name="PART_Panel">
+                            <ContentPresenter
+                                x:Name="PART_ICON"
+                                Margin="{TemplateBinding IconMargin}"
+                                HorizontalAlignment="{TemplateBinding IconHorizontalAlignment}"
+                                VerticalAlignment="{TemplateBinding IconVerticalAlignment}"
+                                Content="{TemplateBinding Icon}"
+                                DockPanel.Dock="{TemplateBinding IconDock}"
+                                TextElement.FontFamily="{TemplateBinding IconFontFamily}"
+                                TextElement.FontSize="{TemplateBinding IconFontSize}"
+                                TextElement.Foreground="{TemplateBinding IconForeground}"
+                                Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IconVisible, Mode=OneWay, Converter={StaticResource VisibilityForBoolConverter}}" />
+                            <Rectangle
+                                MinWidth="{TemplateBinding SplitterSize}"
+                                MinHeight="{TemplateBinding SplitterSize}"
+                                Margin="{TemplateBinding SplitterMargin}"
+                                DockPanel.Dock="{TemplateBinding IconDock}"
+                                Fill="{TemplateBinding SplitterFill}"
+                                Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=SplitterVisible, Mode=OneWay, Converter={StaticResource VisibilityForBoolConverter}}" />
+
+                            <local:EasyPanel Cursor="IBeam">
+                                <TextBox
+                                    x:Name="PART_Main"
+                                    MinHeight="0"
+                                    Padding="{TemplateBinding Padding}"
+                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    input:InputMethod.IsInputMethodEnabled="False"
+                                    leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}"
+                                    leedep:TextBoxManager.ActiveBackground="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=ActiveBackground}"
+                                    AcceptsReturn="{TemplateBinding AcceptsReturn}"
+                                    AcceptsTab="{TemplateBinding AcceptsTab}"
+                                    AutoWordSelection="{TemplateBinding AutoWordSelection}"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    CaretBrush="{TemplateBinding CaretBrush}"
+                                    CharacterCasing="{TemplateBinding CharacterCasing}"
+                                    Cursor="{TemplateBinding EditBoxCursor}"
+                                    FocusVisualStyle="{x:Null}"
+                                    FontFamily="{TemplateBinding FontFamily}"
+                                    FontSize="{TemplateBinding FontSize}"
+                                    FontStretch="{TemplateBinding FontStretch}"
+                                    Foreground="{TemplateBinding Foreground}"
+                                    IsReadOnly="{TemplateBinding IsReadOnly}"
+                                    MaxLength="{TemplateBinding MaxLength}"
+                                    SelectionBrush="{TemplateBinding SelectionBrush}"
+                                    SelectionOpacity="{TemplateBinding SelectionOpacity}"
+                                    SelectionTextBrush="{TemplateBinding SelectionTextBrush}"
+                                    Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    TextAlignment="{TemplateBinding TextAlignment}"
+                                    TextWrapping="{TemplateBinding TextWrapping}" />
+                                <PasswordBox
+                                    x:Name="PART_Password"
+                                    MinHeight="0"
+                                    Padding="{TemplateBinding Padding}"
+                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    leedep:CornerRadiusManager.CornerRadius="{TemplateBinding CornerRadius}"
+                                    leedep:TextBoxManager.ActiveBackground="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=ActiveBackground}"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    CaretBrush="{TemplateBinding CaretBrush}"
+                                    Cursor="{TemplateBinding EditBoxCursor}"
+                                    FocusVisualStyle="{x:Null}"
+                                    FontFamily="{TemplateBinding FontFamily}"
+                                    FontSize="{TemplateBinding FontSize}"
+                                    FontStretch="{TemplateBinding FontStretch}"
+                                    Foreground="{TemplateBinding Foreground}"
+                                    IsEnabled="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsReadOnly, Mode=OneWay, Converter={StaticResource BoolReverseConverter}}"
+                                    MaxLength="{TemplateBinding MaxLength}"
+                                    PasswordChar="{TemplateBinding PasswordChar}"
+                                    SelectionBrush="{TemplateBinding SelectionBrush}"
+                                    SelectionOpacity="{TemplateBinding SelectionOpacity}"
+                                    SelectionTextBrush="{TemplateBinding SelectionTextBrush}"
+                                    TextBlock.TextAlignment="{TemplateBinding TextAlignment}"
+                                    Visibility="Collapsed" />
+
+                                <ContentPresenter
+                                    x:Name="PART_Placeholder"
+                                    MinHeight="0"
+                                    Margin="{TemplateBinding Padding}"
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    Content="{TemplateBinding Placeholder}"
+                                    Cursor="{TemplateBinding EditBoxCursor}"
+                                    IsHitTestVisible="False"
+                                    TextElement.Foreground="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Foreground, Converter={StaticResource BrushOpacityConverter}, ConverterParameter=0.5, Mode=OneWay}"
+                                    Visibility="Collapsed" />
+                            </local:EasyPanel>
+                        </DockPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="IsClip" Value="True">
+                            <Setter TargetName="PART_Panel" Property="Clip">
+                                <Setter.Value>
+                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                        <Binding
+                                            Mode="OneWay"
+                                            Path="ActualWidth"
+                                            RelativeSource="{RelativeSource Mode=Self}" />
+                                        <Binding
+                                            Mode="OneWay"
+                                            Path="ActualHeight"
+                                            RelativeSource="{RelativeSource Mode=Self}" />
+                                        <Binding
+                                            ElementName="PART_Border"
+                                            Mode="OneWay"
+                                            Path="CornerRadius" />
+                                        <Binding
+                                            ElementName="PART_Border"
+                                            Mode="OneWay"
+                                            Path="BorderThickness" />
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+
+                        <Trigger Property="Mode" Value="General">
+                            <Setter TargetName="PART_Main" Property="input:InputMethod.IsInputMethodEnabled" Value="True" />
+                        </Trigger>
+
+                        <Trigger Property="Mode" Value="Password">
+                            <Setter TargetName="PART_Main" Property="Visibility" Value="Hidden" />
+                            <Setter TargetName="PART_Password" Property="Visibility" Value="Visible" />
+                        </Trigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IconCanClick" Value="True" />
+                                <Condition SourceName="PART_ICON" Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_ICON" Property="Cursor" Value="Hand" />
+
+                        </MultiTrigger>
+
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsReadOnly" Value="False" />
+                                <Condition SourceName="PART_Main" Property="IsFocused" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <!--  删除对齐的控制  -->
+                            <!--<Setter TargetName="PART_Placeholder" Property="Visibility" Value="Collapsed" />-->
+                            <Setter TargetName="PART_Border" Property="Background" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=ActiveBackground}" />
+                        </MultiTrigger>
+
+                        <!--  该由代码控制  -->
+                        <!--<MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=PART_Main, Path=IsFocused, Mode=OneWay}" Value="False" />
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Text, Mode=OneWay, Converter={StaticResource StringIsNullConverter}}" Value="True" />
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Mode, Converter={StaticResource EnumBoolReverseConverter}, ConverterParameter=data:TextMode.Password}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="PART_Placeholder" Property="Visibility" Value="Visible" />
+                        </MultiDataTrigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsReadOnly}" Value="True" />
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Text, Converter={StaticResource StringIsNullConverter}}" Value="False" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="PART_Placeholder" Property="Visibility" Value="Collapsed" />
+                        </MultiDataTrigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=PART_Main, Path=IsFocused, Mode=OneWay}" Value="False" />
+                                <Condition Binding="{Binding ElementName=PART_Main, Path=Text, Mode=OneWay, Converter={StaticResource StringIsNullConverter}}" Value="True" />
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Mode, Converter={StaticResource EnumBoolReverseConverter}, ConverterParameter=data:TextMode.Password}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="PART_Placeholder" Property="Visibility" Value="Visible" />
+                        </MultiDataTrigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=PART_Main, Path=IsFocused, Mode=OneWay}" Value="False" />
+                                <Condition Binding="{Binding ElementName=PART_Main, Path=Text, Mode=OneWay, Converter={StaticResource StringIsNullConverter}}" Value="False" />
+                            </MultiDataTrigger.Conditions>
+
+                            <Setter TargetName="PART_Placeholder" Property="Visibility" Value="Collapsed" />
+
+                        </MultiDataTrigger>-->
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="{StaticResource LeeValue_DisableOpacity}" />
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+</ResourceDictionary>

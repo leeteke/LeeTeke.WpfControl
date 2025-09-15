@@ -1,0 +1,244 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies"
+    xmlns:leeeff="clr-namespace:LeeTeke.WpfControl.Effects"
+    xmlns:local="clr-namespace:LeeTeke.WpfControl.Controls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Converters.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+
+    <Style x:Key="BaseWindow" TargetType="{x:Type local:Window}">
+
+        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
+        <Setter Property="Background" Value="{DynamicResource LeeBrush_Background}" />
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
+        <Setter Property="TitleBackground" Value="{DynamicResource LeeBrush_Forground}" />
+        <Setter Property="WinTitlePanelVerticalAlignment" Value="Stretch" />
+        <Setter Property="WinButtonPanelVerticalAlignment" Value="Stretch" />
+        <Setter Property="TitleForeground" Value="{DynamicResource LeeBrush_Text}" />
+        <Setter Property="TitleHeight" Value="30" />
+        <Setter Property="WindowState" Value="Normal" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="MinHeight" Value="30" />
+        <Setter Property="TitleButtonWidth" Value="45" />
+        <Setter Property="MinWidth" Value="140" />
+        <Setter Property="CloseButtonVisibility" Value="Visible" />
+        <Setter Property="CloseButtonIsEnable" Value="True" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:Window}">
+                    <Border x:Name="WIN_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        ClipToBounds="True"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+
+                        <Border.Resources>
+                            <Style x:Key="TitleButton" BasedOn="{StaticResource LeeColorButton}" TargetType="{x:Type Button}">
+                                <Setter Property="FontSize" Value="10" />
+                                <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Window}}, Path=TitleForeground}" />
+                                <Setter Property="Width" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Window}}, Path=TitleButtonWidth}" />
+                                <Setter Property="FontFamily" Value="{StaticResource IconFontFamily}" />
+                                <Setter Property="BorderThickness" Value="0" />
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="IsTabStop" Value="False" />
+                                <Setter Property="MinHeight" Value="0" />
+                                <Setter Property="leedep:ButtonManager.MouseOverBackground" Value="{DynamicResource LeeBrush_Mark}" />
+                                <Setter Property="leedep:ButtonManager.MouseOverForeground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Window}}, Path=TitleForeground}" />
+                                <Setter Property="leedep:CornerRadiusManager.CornerRadius" Value="0" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Window}}, Path=IsActive}" Value="False">
+                                        <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Window}}, Path=TitleForeground, Converter={StaticResource BrushOpacityConverter}, ConverterParameter=0.4}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Resources>
+                        <Grid x:Name="WIN_Grid">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <AdornerDecorator x:Name="WIN_Client"
+                                Grid.Row="1">
+                                <ContentPresenter ClipToBounds="True" />
+                            </AdornerDecorator>
+
+                            <Grid x:Name="WIN_TitleGrid"
+                                Height="{TemplateBinding TitleHeight}"
+                                Background="{TemplateBinding TitleBackground}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel x:Name="WIN_TitlePanel"
+                                    Grid.Column="0"
+                                    MinHeight="30"
+                                    VerticalAlignment="{TemplateBinding WinTitlePanelVerticalAlignment}"
+                                    Background="{TemplateBinding WinTitlePanelBackground}"
+                                    Orientation="Horizontal">
+
+                                    <Button
+                                        Name="WIN_Icon"
+                                        MinHeight="0"
+                                        Margin="10,0,0,0"
+                                        VerticalAlignment="Center"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        WindowChrome.IsHitTestVisibleInChrome="True"
+                                        Command="{x:Static SystemCommands.ShowSystemMenuCommand}">
+                                        <Image
+                                            Width="16"
+                                            Height="16"
+                                            MinHeight="0"
+                                            VerticalAlignment="Center"
+                                            IsHitTestVisible="False"
+                                            Source="{TemplateBinding Icon}" />
+                                    </Button>
+                                    <TextBlock x:Name="WIN_Title"
+                                        Padding="10,0,0,0"
+                                        VerticalAlignment="Center"
+                                        Foreground="{TemplateBinding TitleForeground}"
+                                        Text="{TemplateBinding Title}" />
+
+                                </StackPanel>
+
+                                <ContentPresenter x:Name="ContentPresenterMain"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    Content="{TemplateBinding TitleContent}"
+                                    WindowChrome.IsHitTestVisibleInChrome="True" />
+                                <StackPanel x:Name="WIN_ButtonPanel"
+                                    Grid.Column="2"
+                                    MinHeight="30"
+                                    VerticalAlignment="{TemplateBinding WinButtonPanelVerticalAlignment}"
+                                    Background="{TemplateBinding WinButtonPanelBackground}"
+                                    Orientation="Horizontal"
+                                    UseLayoutRounding="True"
+                                    WindowChrome.IsHitTestVisibleInChrome="True">
+
+                                    <Button x:Name="WIN_Mini"
+                                        Content="&#xE921;"
+                                        Style="{StaticResource TitleButton}"
+                                        ToolTip="最小化"
+                                        Command="SystemCommands.MinimizeWindowCommand" />
+
+                                    <Button x:Name="WIN_Max"
+                                        Content="&#xE922;"
+                                        Style="{StaticResource TitleButton}"
+                                        ToolTip="最大化"
+                                        Command="SystemCommands.MaximizeWindowCommand" />
+
+                                    <Button x:Name="WIN_Restore"
+                                        Content="&#xE923;"
+                                        Style="{StaticResource TitleButton}"
+                                        ToolTip="向下还原"
+                                        Command="SystemCommands.RestoreWindowCommand" />
+
+                                    <Button x:Name="WIN_Close"
+                                        Content="&#xE8BB;"
+                                        IsEnabled="{TemplateBinding CloseButtonIsEnable}"
+                                        Style="{StaticResource TitleButton}"
+                                        ToolTip="关闭"
+                                        Visibility="{TemplateBinding CloseButtonVisibility}"
+                                        leedep:ButtonManager.MouseOverBackground="{DynamicResource LeeBrush_RedOffice}"
+                                        leedep:ButtonManager.MouseOverForeground="White"
+                                        Command="SystemCommands.CloseWindowCommand" />
+                                </StackPanel>
+                            </Grid>
+
+                            <ResizeGrip x:Name="WIN_ResizeGrip"
+                                Grid.Row="1"
+                                Width="10"
+                                Height="10"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                IsTabStop="False"
+                                Visibility="Collapsed"
+                                WindowChrome.ResizeGripDirection="BottomRight" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="IsClip" Value="True">
+                            <Setter TargetName="WIN_Grid" Property="Clip">
+                                <Setter.Value>
+                                    <MultiBinding Converter="{StaticResource MultiValueToClipConverter}" Mode="OneWay">
+                                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource Mode=Self}" />
+                                        <Binding Path="ActualHeight" RelativeSource="{RelativeSource Mode=Self}" />
+                                        <Binding ElementName="WIN_Border" Path="CornerRadius" />
+                                        <Binding ElementName="WIN_Border" Mode="OneWay" Path="BorderThickness" />
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+
+                        <Trigger Property="Icon" Value="{x:Null}">
+                            <Setter TargetName="WIN_Icon" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+
+                        <Trigger Property="IsActive" Value="False">
+                            <Setter TargetName="WIN_Title" Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:Window}}, Path=TitleForeground, Converter={StaticResource BrushOpacityConverter}, ConverterParameter=0.5}" />
+                        </Trigger>
+
+                        <Trigger Property="WindowState" Value="Maximized">
+                            <Setter TargetName="WIN_Max" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="WIN_Restore" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="WIN_Border" Property="Padding" Value="8" />
+                        </Trigger>
+
+                        <Trigger Property="WindowState" Value="Normal">
+                            <Setter TargetName="WIN_Max" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="WIN_Restore" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+
+                        <Trigger Property="ClientFull" Value="True">
+                            <Setter TargetName="WIN_Client" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="WIN_Client" Property="Grid.RowSpan" Value="2" />
+                            <Setter TargetName="WIN_Icon" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="WIN_Title" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="WIN_TitleGrid" Property="Background" Value="{x:Null}" />
+                        </Trigger>
+
+                        <Trigger Property="WindowStyle" Value="None">
+                            <Setter TargetName="WIN_ResizeGrip" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="WIN_TitleGrid" Property="Visibility" Value="Collapsed" />
+                            <Setter Property="TitleHeight" Value="0" />
+                        </Trigger>
+
+                        <Trigger Property="WindowStyle" Value="ToolWindow">
+                            <Setter Property="ResizeMode" Value="NoResize" />
+                        </Trigger>
+
+                        <Trigger Property="ResizeMode" Value="NoResize">
+                            <Setter TargetName="WIN_Mini" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="WIN_Max" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="WIN_Restore" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="ResizeMode" Value="CanMinimize">
+                            <Setter TargetName="WIN_Max" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="WIN_Restore" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ResizeMode" Value="CanResizeWithGrip" />
+                                <Condition Property="WindowState" Value="Normal" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="WIN_ResizeGrip" Property="Visibility" Value="Visible" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+
+
+    </Style>
+
+</ResourceDictionary>

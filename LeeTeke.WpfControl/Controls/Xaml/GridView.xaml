@@ -1,0 +1,109 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:leedep="clr-namespace:LeeTeke.WpfControl.Dependencies"
+    xmlns:local="clr-namespace:LeeTeke.WpfControl.Controls">
+
+    <Style x:Key="BaseGridViewItem" TargetType="{x:Type local:GridViewItem}">
+
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:GridViewItem}">
+                    <Border
+                        x:Name="PART_Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter x:Name="contentPresenter" TextElement.Foreground="{TemplateBinding Foreground}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="{StaticResource LeeValue_DisableOpacity}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+    <Style x:Key="BaseGridView" TargetType="{x:Type local:GridView}">
+
+        <Setter Property="leedep:ScrollViewerManager.SlideEasingFunction" Value="{DynamicResource LeeValue_ScrollViewerSlideEasingFuncion}" />
+        <Setter Property="leedep:ScrollViewerManager.SlideDuration" Value="{DynamicResource LeeValue_ScrollViewerSlideDuration}" />
+        <Setter Property="leedep:ScrollViewerManager.SlideEnabled" Value="{DynamicResource LeeValue_ScrollViewerSlideEnabled}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:GridView}">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ScrollViewer
+                            x:Name="PART_ScrollViewer"
+                            Padding="{TemplateBinding Padding}"
+                            Style="{StaticResource LeeScrollViewer}"
+                            leedep:ScrollViewerManager.SlideDuration="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideDuration), Mode=OneWay}"
+                            leedep:ScrollViewerManager.SlideEasingFunction="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEasingFunction), Mode=OneWay}"
+                            leedep:ScrollViewerManager.SlideEnabled="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideEnabled), Mode=OneWay}"
+                            leedep:ScrollViewerManager.SlideMonitorMode="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:ScrollViewerManager.SlideMonitorMode), Mode=OneWay}"
+                            HorizontalScrollBarVisibility="{TemplateBinding HorizontalScrollBarVisibility}"
+                            VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}">
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+                                <!--  背景  -->
+                                <ContentPresenter
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Content="{TemplateBinding NoItemsContent}"
+                                    Visibility="{TemplateBinding HasItems,
+                                                                 Converter={StaticResource VisibilityForBoolReverseConverter}}" />
+
+                                <ItemsPresenter Grid.Row="0"  />
+                                <!--  尾部  -->
+                                <ContentPresenter
+                                    x:Name="PART_ListEnd"
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Content="{TemplateBinding EndContent}"
+                                    Visibility="{TemplateBinding HasItems,
+                                                                 Converter={StaticResource VisibilityForBoolConverter}}" />
+                            </Grid>
+
+                        </ScrollViewer>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Orientation" Value="Horizontal">
+                            <Setter TargetName="PART_ListEnd" Property="Grid.Row" Value="1" />
+                            <Setter TargetName="PART_ListEnd" Property="Grid.Column" Value="0" />
+                        </Trigger>
+                        <Trigger Property="Orientation" Value="Vertical">
+                            <Setter TargetName="PART_ListEnd" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="PART_ListEnd" Property="Grid.Column" Value="1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <WrapPanel
+                        x:Name="PART_WrapPanell"
+                        FocusVisualStyle="{x:Null}"
+                        Orientation="{Binding RelativeSource={RelativeSource AncestorType=local:GridView}, Path=Orientation, Mode=OneWay}" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
