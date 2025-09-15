@@ -27,7 +27,10 @@
                 IsReadOnly="True"
                 Placeholder="你好"
                 Text="12313" />
-            <Button Click="Button_Click_1" Content="切换" />
+            <Button
+                Click="Button_Click_1"
+                Content="切换"
+                Style="{StaticResource LeeButton}" />
             <Button Click="Button_Click" Content="123" />
             <TabControl
                 lee:ScrollViewerManager.BottomContent="111"

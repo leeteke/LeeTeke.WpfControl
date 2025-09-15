@@ -7,14 +7,13 @@
 
 ``` xaml
 <Application
-    ...
-    xmlns:lee="https://github.com/leeteke/LeeTeke.WpfControl">
+    ...>
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <lee:RegisterColors /> 
-                <lee:RegisterThemes />
-                <lee:RegisterControls />
+                <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Themes.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/LeeTeke.WpfControl;component/Controls.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
