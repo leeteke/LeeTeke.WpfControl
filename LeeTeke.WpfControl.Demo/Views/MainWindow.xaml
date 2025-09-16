@@ -72,6 +72,17 @@
                 Height="35"
                 CornerRadius="10"
                 Mode="Password" />
+            <CheckBox
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="15"
+                Style="{StaticResource LeeSwitchTagCheckBox}">
+                <lee:CheckBoxManager.CheckedContent>
+                    <TextBlock FontFamily="{StaticResource IconFontFamily}" Text="&#xe708;" />
+                </lee:CheckBoxManager.CheckedContent>
+                <TextBlock FontFamily="{StaticResource IconFontFamily}" Text="&#xe706;" />
+
+            </CheckBox>
         </StackPanel>
 
         <lee:MaskPanel x:Name="maskPanel" Grid.RowSpan="2" />
@@ -83,6 +94,8 @@
             x:Name="notifyDesktop"
             Grid.Row="1"
             NotifySite="BottomRight" />
+
+
 
     </Grid>
 </lee:Window>

@@ -2301,6 +2301,7 @@
                                     Value="20" />
                             </DoubleAnimationUsingKeyFrames>
 
+
                             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_CheckedFalseST" Storyboard.TargetProperty="ScaleX">
                                 <EasingDoubleKeyFrame
                                     EasingFunction="{StaticResource LeeValue_SwitchEasingFunction}"
@@ -2322,6 +2323,7 @@
                                     KeyTime="0:0:0.3"
                                     Value="0" />
                             </DoubleAnimationUsingKeyFrames>
+
 
                             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_CheckedFalseST" Storyboard.TargetProperty="ScaleX">
                                 <EasingDoubleKeyFrame
@@ -2410,6 +2412,215 @@
 
 
                     </Grid>
+                    <ControlTemplate.Triggers>
+
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="False" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <!--<Setter TargetName="PART_Border" Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrushMouseOver}"/>-->
+                        </MultiTrigger>
+
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" Value="0.9" />
+                        </Trigger>
+
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter TargetName="PART_CheckedFalse" Property="BorderThickness" Value="1" />
+                            <Setter TargetName="PART_CheckedTrue" Property="BorderThickness" Value="4" />
+                            <Setter TargetName="PART_CheckedTrue" Property="BorderBrush" Value="{x:Null}" />
+                        </Trigger>
+
+                        <Trigger Property="IsChecked" Value="true">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource StoryboardCheckedTrue}" />
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource StoryboardCheckedFalse}" />
+                            </Trigger.ExitActions>
+                            <Setter TargetName="PART_CheckedFalse" Property="BorderThickness" Value="0" />
+                            <Setter TargetName="PART_CheckedTrue" Property="BorderThickness" Value="1" />
+                        </Trigger>
+
+                        <Trigger Property="IsChecked" Value="{x:Null}">
+                            <Setter TargetName="PART_CheckedFalse" Property="Background" Value="{DynamicResource LeeBrush_Theme}" />
+                            <Setter TargetName="PART_Ellipse" Property="Opacity" Value="0" />
+                        </Trigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True" />
+                                <Condition Property="leedep:CheckBoxManager.HaveCheckedContent" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="contentPresenter" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="Checked_ContentPresenter" Property="Visibility" Value="Visible" />
+                        </MultiTrigger>
+
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="LeeSwitchTagCheckBox" TargetType="{x:Type CheckBox}">
+        <Setter Property="Background" Value="{DynamicResource LeeBrush_ForgroundActive}" />
+        <Setter Property="MinHeight" Value="{StaticResource LeeValue_MinHeight}" />
+        <Setter Property="leedep:CheckBoxManager.RippleBrush" Value="{DynamicResource LeeBrush_RippleDefault}" />
+        <Setter Property="leedep:CheckBoxManager.CheckBoxSize" Value="18" />
+        <Setter Property="leedep:CheckBoxManager.SwtichFill" Value="{DynamicResource LeeBrush_Forground}" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LeeBrush_BorderBrush}" />
+        <Setter Property="BorderThickness" Value="{StaticResource LeeValue_BorderThickness}" />
+        <Setter Property="Padding" Value="{StaticResource LeeValue_Padding}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="StoryboardCheckedTrue">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_EllipseTT" Storyboard.TargetProperty="X">
+                                <EasingDoubleKeyFrame
+                                    EasingFunction="{StaticResource LeeValue_SwitchEasingFunction}"
+                                    KeyTime="0:0:0.3"
+                                    Value="20" />
+                            </DoubleAnimationUsingKeyFrames>
+
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_EasyPanelTT" Storyboard.TargetProperty="X">
+                                <EasingDoubleKeyFrame
+                                    EasingFunction="{StaticResource LeeValue_SwitchEasingFunction}"
+                                    KeyTime="0:0:0.3"
+                                    Value="20" />
+                            </DoubleAnimationUsingKeyFrames>
+
+
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_CheckedFalseST" Storyboard.TargetProperty="ScaleX">
+                                <EasingDoubleKeyFrame
+                                    EasingFunction="{StaticResource LeeValue_SwitchEasingFunction}"
+                                    KeyTime="0:0:0.3"
+                                    Value="0" />
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_CheckedFalseST" Storyboard.TargetProperty="ScaleY">
+                                <EasingDoubleKeyFrame
+                                    EasingFunction="{StaticResource LeeValue_SwitchEasingFunction}"
+                                    KeyTime="0:0:0.3"
+                                    Value="0" />
+                            </DoubleAnimationUsingKeyFrames>
+
+                        </Storyboard>
+                        <Storyboard x:Key="StoryboardCheckedFalse">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_EllipseTT" Storyboard.TargetProperty="X">
+                                <EasingDoubleKeyFrame
+                                    EasingFunction="{StaticResource LeeValue_SwitchEasingFunction}"
+                                    KeyTime="0:0:0.3"
+                                    Value="0" />
+                            </DoubleAnimationUsingKeyFrames>
+
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_EasyPanelTT" Storyboard.TargetProperty="X">
+                                <EasingDoubleKeyFrame
+                                    EasingFunction="{StaticResource LeeValue_SwitchEasingFunction}"
+                                    KeyTime="0:0:0.3"
+                                    Value="0" />
+                            </DoubleAnimationUsingKeyFrames>
+
+
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_CheckedFalseST" Storyboard.TargetProperty="ScaleX">
+                                <EasingDoubleKeyFrame
+                                    EasingFunction="{StaticResource LeeValue_SwitchEasingFunction}"
+                                    KeyTime="0:0:0.3"
+                                    Value="1" />
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_CheckedFalseST" Storyboard.TargetProperty="ScaleY">
+                                <EasingDoubleKeyFrame
+                                    EasingFunction="{StaticResource LeeValue_SwitchEasingFunction}"
+                                    KeyTime="0:0:0.3"
+                                    Value="1" />
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+
+                    <Viewbox
+                        Height="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(leedep:CheckBoxManager.CheckBoxSize), Mode=OneWay}"
+                        Margin="3"
+                        ClipToBounds="False">
+                        <lee:EasyPanel ClipToBounds="False">
+                            <Border
+                                x:Name="PART_CheckedTrue"
+                                Width="40"
+                                Height="20"
+                                VerticalAlignment="Center"
+                                Background="{DynamicResource LeeBrush_Theme}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10" />
+                            <Border
+                                x:Name="PART_CheckedFalse"
+                                Width="40"
+                                Height="20"
+                                VerticalAlignment="Center"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10"
+                                RenderTransformOrigin="1,0.5">
+                                <Border.RenderTransform>
+                                    <ScaleTransform x:Name="PART_CheckedFalseST" ScaleX="1" ScaleY="1" />
+                                </Border.RenderTransform>
+                            </Border>
+
+
+                            <Ellipse
+                                x:Name="PART_Ellipse"
+                                Width="22"
+                                Height="22"
+                                HorizontalAlignment="Left"
+                                Effect="{StaticResource LeeShadow2}"
+                                Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type CheckBox}}, Path=(leedep:CheckBoxManager.SwtichFill), Mode=OneWay}"
+                                RenderTransformOrigin="0.5,0.5">
+                                <Ellipse.RenderTransform>
+                                    <TranslateTransform x:Name="PART_EllipseTT" X="0" />
+                                </Ellipse.RenderTransform>
+                            </Ellipse>
+                            <lee:EasyPanel
+                                Width="22"
+                                Height="22"
+                                HorizontalAlignment="Left"
+                                leedep:ClipManager.CornerRadius="12"
+                                Background="{x:Null}"
+                                ClipToBounds="True"
+                                RenderTransformOrigin="0.5,0.5">
+                                <lee:EasyPanel.RenderTransform>
+                                    <TranslateTransform x:Name="PART_EasyPanelTT" X="0" />
+                                </lee:EasyPanel.RenderTransform>
+
+                                <ContentPresenter
+                                    x:Name="contentPresenter"
+                                    Grid.Column="1"
+                                    Margin="{TemplateBinding Padding}"
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    Focusable="False"
+                                    RecognizesAccessKey="True" />
+
+                                <ContentPresenter
+                                    x:Name="Checked_ContentPresenter"
+                                    Grid.Column="1"
+                                    Margin="{TemplateBinding Padding}"
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    Content="{Binding RelativeSource={RelativeSource AncestorType={x:Type CheckBox}}, Path=(leedep:CheckBoxManager.CheckedContent), Mode=OneWay}"
+                                    Focusable="False"
+                                    RecognizesAccessKey="True"
+                                    Visibility="Collapsed" />
+                            </lee:EasyPanel>
+                        </lee:EasyPanel>
+                    </Viewbox>
+
+
                     <ControlTemplate.Triggers>
 
 
