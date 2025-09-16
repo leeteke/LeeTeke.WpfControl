@@ -83,6 +83,16 @@
                 <TextBlock FontFamily="{StaticResource IconFontFamily}" Text="&#xe706;" />
 
             </CheckBox>
+
+            <ComboBox />
+
+            <Expander
+                ExpandDirection="Left"
+                Foreground="Red"
+                Header="11">
+                <TextBlock Text=" aaaaa" />
+            </Expander>
+
         </StackPanel>
 
         <lee:MaskPanel x:Name="maskPanel" Grid.RowSpan="2" />

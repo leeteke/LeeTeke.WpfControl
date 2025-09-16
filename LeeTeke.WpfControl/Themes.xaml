@@ -1045,6 +1045,7 @@
         <Setter Property="FontSize" Value="14" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Content" Value="&#xe70d;" />
+        <Setter Property="Foreground" Value="{DynamicResource LeeBrush_Text}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="FontFamily" Value="{StaticResource IconFontFamily}" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -2992,6 +2993,7 @@
                                 HorizontalContentAlignment="Right"
                                 Background="Transparent"
                                 ClickMode="Release"
+                                Foreground="{TemplateBinding Foreground}"
                                 IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                 Style="{StaticResource RotateToggleButton}" />
                             <TextBox
@@ -3616,6 +3618,7 @@
                             <ToggleButton
                                 x:Name="PART_Sort"
                                 Margin="2,0"
+                                Foreground="{TemplateBinding Foreground}"
                                 IsHitTestVisible="False"
                                 Style="{DynamicResource RotateToggleButton}" />
                         </StackPanel>
@@ -4458,6 +4461,7 @@
                         Padding="0,0,5,0"
                         HorizontalContentAlignment="Right"
                         Background="Transparent"
+                        Foreground="{TemplateBinding Foreground}"
                         IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                         Style="{StaticResource RotateToggleButton}" />
                 </Grid>
@@ -4545,6 +4549,7 @@
                         HorizontalContentAlignment="Right"
                         Background="Transparent"
                         Content="&#xE70E;"
+                        Foreground="{TemplateBinding Foreground}"
                         IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                         Style="{StaticResource RotateToggleButton}" />
                 </Grid>
@@ -4615,6 +4620,7 @@
                         VerticalContentAlignment="Bottom"
                         Background="Transparent"
                         Content="&#xE76C;"
+                        Foreground="{TemplateBinding Foreground}"
                         IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                         Style="{StaticResource RotateToggleButton}" />
                 </Grid>
@@ -4698,6 +4704,7 @@
                         VerticalContentAlignment="Bottom"
                         Background="Transparent"
                         Content="&#xE76D;"
+                        Foreground="{TemplateBinding Foreground}"
                         IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                         Style="{StaticResource RotateToggleButton}" />
                 </Grid>
@@ -5950,6 +5957,7 @@
                                     ClickMode="Press"
                                     Content="&#xE76C;"
                                     FontSize="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeView}}, Path=(leedep:TreeViewItemManager.SwitchSize), Mode=OneWay}"
+                                    Foreground="{TemplateBinding Foreground}"
                                     IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
                                     Style="{StaticResource RotateToggleButton}" />
                                 <ContentPresenter
