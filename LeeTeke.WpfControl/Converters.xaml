@@ -18,7 +18,8 @@
     <conver:NotAlignmentCenterConverter x:Key="NotAlignmentCenterConverter" />
     <conver:StringIsNullConverter x:Key="StringIsNullConverter" />
     <conver:StringIsNotNullConverter x:Key="StringIsNotNullConverter" />
-    <conver:EnumBoolReverseConverter x:Key="EnumBoolReverseConverter" />
+    <conver:EqualsConverter x:Key="EqualsConverter" />
+    <conver:EqualsReverseConverter x:Key="EqualsReverseConverter" />
     <conver:CornerRadiusIsZeroConverter x:Key="CornerRadiusIsZeroConverter" />
     <conver:SiteToHorizontalAlignmentConverter x:Key="SiteToHorizontalAlignmentConverter" />
     <conver:SiteToVerticalAlignmentConverter x:Key="SiteToVerticalAlignmentConverter" />
@@ -31,4 +32,6 @@
     <conver:TreeViewItemSeparateConverter x:Key="TreeViewItemSeparateConverter" />
     <conver:VisibilityForNulllConverter x:Key="VisibilityForNulllConverter" />
     <conver:VisibilityForNullReverseConverter x:Key="VisibilityForNullReverseConverter" />
+    <conver:VisibilityForEqualsConverter x:Key="VisibilityForEqualsConverter" />
+    <conver:VisibilityForEqualsReverseConverter x:Key="VisibilityForEqualsReverseConverter" />
 </ResourceDictionary>

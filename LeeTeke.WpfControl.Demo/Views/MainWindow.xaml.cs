@@ -1,4 +1,5 @@
 ﻿using LeeTeke.WpfControl.Controls;
+using LeeTeke.WpfControl.Demo.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace LeeTeke.WpfControl.Demo.Views
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new MainViewModel();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

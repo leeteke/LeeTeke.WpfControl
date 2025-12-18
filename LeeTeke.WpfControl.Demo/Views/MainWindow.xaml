@@ -1,15 +1,17 @@
-﻿<lee:Window
+﻿<lee:Window x:Name="window"
     x:Class="LeeTeke.WpfControl.Demo.Views.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:datas="clr-namespace:LeeTeke.WpfControl.Demo.TestDatas"
     xmlns:lee="https://github.com/leeteke/LeeTeke.WpfControl"
     xmlns:local="clr-namespace:LeeTeke.WpfControl.Demo.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    x:Name="window"
+    xmlns:vm="clr-namespace:LeeTeke.WpfControl.Demo.ViewModels"
     Title="LeeTeke.WpfControl DEMO"
     Width="1024"
     Height="720"
+    d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
     TitleHeight="30"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
@@ -20,7 +22,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <!--  内容  -->
-        <StackPanel Grid.Row="1" IsEnabled="False">
+        <StackPanel Grid.Row="1">
 
             <lee:TextBoxEx
                 VerticalAlignment="Center"
@@ -31,7 +33,8 @@
                 <Button
                     Click="Button_Click_1"
                     Content="切换"
-                    Style="{StaticResource LeeButton}" />
+                    Style="{StaticResource LeeButton}"
+                    Visibility="{Binding EnumData, Converter={StaticResource VisibilityForEqualsReverseConverter}, ConverterParameter={x:Static datas:TestEnum.B}}" />
             </lee:KeepIsEnabled>
 
             <Button
@@ -62,8 +65,7 @@
 
 
 
-            <lee:Navigation
-                x:Name="nav"
+            <lee:Navigation x:Name="nav"
                 Height="150"
                 lee:ScrollViewerManager.SlideEnabled="True"
                 ShowScrollToButton="True">
@@ -102,12 +104,10 @@
         </StackPanel>
 
         <lee:MaskPanel x:Name="maskPanel" Grid.RowSpan="2" />
-        <lee:NotifyBanner
-            x:Name="notifyApp"
+        <lee:NotifyBanner x:Name="notifyApp"
             Grid.Row="1"
             NotifySite="TopRight" />
-        <lee:NotifyBanner
-            x:Name="notifyDesktop"
+        <lee:NotifyBanner x:Name="notifyDesktop"
             Grid.Row="1"
             NotifySite="BottomRight" />
 
