@@ -5,7 +5,7 @@
 		<UseWPF>true</UseWPF>
 		<UseWindowsForms>true</UseWindowsForms>
 		<Description></Description>
-		<Version>1.0.0-rc1.4</Version>
+		<Version>1.0.0-rc1.5</Version>
 		<Authors>LeeTeke</Authors>
 		<Nullable>enable</Nullable>
 		<PackageProjectUrl>https://github.com/leeteke/Leeteke.WpfControl</PackageProjectUrl>

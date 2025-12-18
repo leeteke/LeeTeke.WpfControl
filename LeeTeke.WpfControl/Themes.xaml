@@ -560,8 +560,6 @@
 
     <Style x:Key="LeeButtonBase" TargetType="{x:Type Button}">
         <Setter Property="BorderThickness" Value="{DynamicResource LeeValue_BorderThickness}" />
-        <Setter Property="MinHeight" Value="{StaticResource LeeValue_MinHeight}" />
-        <Setter Property="MinWidth" Value="{StaticResource LeeValue_MinWidth}" />
         <Setter Property="FontSize" Value="{StaticResource LeeValue_FontSize}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
