@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net9.0-windows;net8.0-windows;net7.0-windows;net6.0-windows;net48;net481</TargetFrameworks>
+		<TargetFrameworks>net10.0-windows;net9.0-windows;net8.0-windows;net7.0-windows;net6.0-windows;net48;net481</TargetFrameworks>
 		<UseWPF>true</UseWPF>
 		<UseWindowsForms>true</UseWindowsForms>
 		<Description></Description>
-		<Version>1.0.0-rc1.2</Version>
+		<Version>1.0.0-rc1.3</Version>
 		<Authors>LeeTeke</Authors>
 		<Nullable>enable</Nullable>
 		<PackageProjectUrl>https://github.com/leeteke/Leeteke.WpfControl</PackageProjectUrl>

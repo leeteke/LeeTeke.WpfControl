@@ -20,18 +20,24 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <!--  内容  -->
-        <StackPanel Grid.Row="1">
+        <StackPanel Grid.Row="1" IsEnabled="False">
 
             <lee:TextBoxEx
                 VerticalAlignment="Center"
                 IsReadOnly="True"
                 Placeholder="你好"
                 Text="12313" />
+            <lee:KeepIsEnabled>
+                <Button
+                    Click="Button_Click_1"
+                    Content="切换"
+                    Style="{StaticResource LeeButton}" />
+            </lee:KeepIsEnabled>
+
             <Button
-                Click="Button_Click_1"
-                Content="切换"
-                Style="{StaticResource LeeButton}" />
-            <Button Click="Button_Click" Content="123" />
+                Click="Button_Click"
+                Content="123"
+                Style="{StaticResource LeeColorButton}" />
             <TabControl
                 lee:ScrollViewerManager.BottomContent="111"
                 lee:ScrollViewerManager.LeftContent="123123"
